@@ -1,0 +1,62 @@
+"""Format execution output for the console panel."""
+
+from __future__ import annotations
+
+import html
+
+from pylearn.executor.sandbox import ExecutionResult
+
+
+class OutputHandler:
+    """Format stdout/stderr for display in the console panel."""
+
+    def format_result(self, result: ExecutionResult) -> str:
+        """Format an execution result as styled HTML for the console."""
+        parts = []
+
+        if result.stdout:
+            escaped = html.escape(result.stdout)
+            parts.append(
+                f'<pre style="color:#d4d4d4; margin:0; white-space:pre-wrap; '
+                f'font-family:Consolas, monospace;">{escaped}</pre>'
+            )
+
+        if result.stderr:
+            escaped = html.escape(result.stderr)
+            color = "#ff6b6b" if result.return_code != 0 else "#ffa07a"
+            parts.append(
+                f'<pre style="color:{color}; margin:0; white-space:pre-wrap; '
+                f'font-family:Consolas, monospace;">{escaped}</pre>'
+            )
+
+        if result.timed_out:
+            parts.append(
+                '<p style="color:#ff6b6b; font-family:Consolas, monospace; '
+                'font-weight:bold;">Execution timed out.</p>'
+            )
+
+        if result.killed:
+            parts.append(
+                '<p style="color:#ffa500; font-family:Consolas, monospace; '
+                'font-weight:bold;">Execution stopped by user.</p>'
+            )
+
+        if not parts:
+            parts.append(
+                '<p style="color:#888; font-family:Consolas, monospace; '
+                'font-style:italic;">(No output)</p>'
+            )
+
+        return "\n".join(parts)
+
+    def format_status(self, message: str, color: str = "#888") -> str:
+        """Format a status message."""
+        escaped = html.escape(message)
+        return (
+            f'<p style="color:{color}; font-family:Consolas, monospace; '
+            f'font-style:italic; margin:4px 0;">{escaped}</p>'
+        )
+
+    def format_separator(self) -> str:
+        """Format a visual separator between runs."""
+        return '<hr style="border:none; border-top:1px solid #444; margin:8px 0;">'

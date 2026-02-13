@@ -1,0 +1,107 @@
+"""Per-book parsing configuration profiles.
+
+Each book has different font names, sizes, and structural patterns.
+Run scripts/analyze_pdf_fonts.py on each book to discover these values.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+
+
+@dataclass
+class BookProfile:
+    """Configuration for parsing a specific book's PDF."""
+    name: str
+    # Font size thresholds
+    heading1_min_size: float = 18.0
+    heading2_min_size: float = 14.0
+    heading3_min_size: float = 12.0
+    body_size: float = 10.0
+    code_size: float = 9.0
+
+    # Font name patterns (substrings to match)
+    monospace_fonts: list[str] = field(default_factory=lambda: [
+        "Courier", "Mono", "Consolas", "Menlo", "DejaVuSansMono",
+        "LucidaConsole", "Ubuntu Mono", "SourceCodePro",
+    ])
+    heading_fonts: list[str] = field(default_factory=list)
+
+    # Chapter detection
+    chapter_pattern: str = r"^Chapter\s+(\d+)\."
+    part_pattern: str = r"^Part\s+([IVXLC]+)\."
+
+    # Page range to skip (front matter, index)
+    skip_pages_start: int = 0
+    skip_pages_end: int = 0
+
+    # Exercise patterns
+    exercise_start_pattern: str = ""
+    exercise_answer_pattern: str = ""
+
+    # Content area margins (to skip headers/footers)
+    margin_top: float = 72.0      # ~1 inch
+    margin_bottom: float = 72.0
+    margin_left: float = 54.0
+    margin_right: float = 54.0
+
+    def is_monospace(self, font_name: str) -> bool:
+        """Check if a font name indicates monospace."""
+        name_lower = font_name.lower()
+        return any(m.lower() in name_lower for m in self.monospace_fonts)
+
+
+# Pre-configured profiles for the three O'Reilly books
+
+LEARNING_PYTHON = BookProfile(
+    name="learning_python",
+    heading1_min_size=20.0,
+    heading2_min_size=15.0,
+    heading3_min_size=12.5,
+    body_size=10.0,
+    code_size=8.5,
+    chapter_pattern=r"^Chapter\s+(\d+)\s*[\.:]",
+    part_pattern=r"^Part\s+([IVXLCDM]+)\s*[\.:]",
+    skip_pages_start=20,   # Front matter
+    skip_pages_end=30,     # Index
+    exercise_start_pattern=r"Test Your Knowledge:\s*Quiz",
+    exercise_answer_pattern=r"Test Your Knowledge:\s*Answers",
+)
+
+PYTHON_COOKBOOK = BookProfile(
+    name="python_cookbook",
+    heading1_min_size=20.0,
+    heading2_min_size=14.0,
+    heading3_min_size=11.5,
+    body_size=10.0,
+    code_size=8.5,
+    chapter_pattern=r"^Chapter\s+(\d+)\s*[\.:]",
+    skip_pages_start=15,
+    skip_pages_end=15,
+    exercise_start_pattern=r"^(\d+\.\d+)\.\s+",  # Recipe pattern: "1.1. "
+)
+
+PROGRAMMING_PYTHON = BookProfile(
+    name="programming_python",
+    heading1_min_size=20.0,
+    heading2_min_size=15.0,
+    heading3_min_size=12.0,
+    body_size=10.0,
+    code_size=8.5,
+    chapter_pattern=r"^Chapter\s+(\d+)\s*[\.:]",
+    part_pattern=r"^Part\s+([IVXLCDM]+)\s*[\.:]",
+    skip_pages_start=20,
+    skip_pages_end=30,
+)
+
+
+PROFILES: dict[str, BookProfile] = {
+    "learning_python": LEARNING_PYTHON,
+    "python_cookbook": PYTHON_COOKBOOK,
+    "programming_python": PROGRAMMING_PYTHON,
+}
+
+
+def get_profile(name: str) -> BookProfile:
+    """Get a book profile by name, or return a default profile."""
+    return PROFILES.get(name, BookProfile(name=name))

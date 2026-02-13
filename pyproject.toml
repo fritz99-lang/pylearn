@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "pylearn"
+version = "0.1.0"
+description = "Interactive Python learning desktop app with PDF book reader and code editor"
+requires-python = ">=3.11"
+dependencies = [
+    "PyQt6>=6.6.0",
+    "PyQt6-QScintilla>=2.14.0",
+    "PyMuPDF>=1.23.0",
+    "Pygments>=2.17.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-qt>=4.2.0",
+]
+
+[project.scripts]
+pylearn = "pylearn.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
