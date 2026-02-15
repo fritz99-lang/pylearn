@@ -17,6 +17,7 @@ class MainToolBar(QToolBar):
     clear_console_requested = pyqtSignal()
     font_size_changed = pyqtSignal(int)
     theme_changed = pyqtSignal(str)
+    external_editor_requested = pyqtSignal()
 
     def __init__(self, parent=None) -> None:
         super().__init__("Main Toolbar", parent)
@@ -45,6 +46,15 @@ class MainToolBar(QToolBar):
 
         self.addSeparator()
 
+        # External editor (Notepad++)
+        self._external_editor_action = QAction("Notepad++", self)
+        self._external_editor_action.setShortcut(QKeySequence("Ctrl+E"))
+        self._external_editor_action.setToolTip("Edit in Notepad++ (Ctrl+E)")
+        self._external_editor_action.triggered.connect(self.external_editor_requested.emit)
+        self.addAction(self._external_editor_action)
+
+        self.addSeparator()
+
         # Font size control
         font_widget = QWidget()
         font_layout = QHBoxLayout(font_widget)
@@ -69,7 +79,7 @@ class MainToolBar(QToolBar):
         theme_layout.addWidget(QLabel("Theme:"))
 
         self._theme_combo = QComboBox()
-        self._theme_combo.addItems(["Light", "Dark"])
+        self._theme_combo.addItems(["Light", "Dark", "Sepia"])
         self._theme_combo.currentTextChanged.connect(
             lambda text: self.theme_changed.emit(text.lower())
         )

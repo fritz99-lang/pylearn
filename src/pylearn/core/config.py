@@ -161,17 +161,20 @@ class BooksConfig:
     def books(self) -> list[dict]:
         return self._data.get("books", [])
 
-    def add_book(self, book_id: str, title: str, pdf_path: str, profile_name: str) -> None:
+    def add_book(self, book_id: str, title: str, pdf_path: str,
+                 language: str = "python", profile_name: str = "") -> None:
         books = self.books
         for b in books:
             if b["book_id"] == book_id:
-                b.update(title=title, pdf_path=pdf_path, profile_name=profile_name)
+                b.update(title=title, pdf_path=pdf_path,
+                         language=language, profile_name=profile_name)
                 self._data["books"] = books
                 return
         books.append({
             "book_id": book_id,
             "title": title,
             "pdf_path": pdf_path,
+            "language": language,
             "profile_name": profile_name,
         })
         self._data["books"] = books
@@ -246,3 +249,19 @@ class EditorConfig:
     @execution_timeout.setter
     def execution_timeout(self, value: int) -> None:
         self._data["execution_timeout"] = value
+
+    @property
+    def external_editor_path(self) -> str:
+        return self._data.get("external_editor_path", "notepad++.exe")
+
+    @external_editor_path.setter
+    def external_editor_path(self, value: str) -> None:
+        self._data["external_editor_path"] = value
+
+    @property
+    def external_editor_enabled(self) -> bool:
+        return self._data.get("external_editor_enabled", True)
+
+    @external_editor_enabled.setter
+    def external_editor_enabled(self, value: bool) -> None:
+        self._data["external_editor_enabled"] = value

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import logging
+import subprocess
+import sys
 from pathlib import Path
 
 from PyQt6.QtWidgets import (
@@ -10,17 +12,17 @@ from PyQt6.QtWidgets import (
     QMenuBar, QMenu, QStatusBar, QLabel, QApplication, QMessageBox,
     QFileDialog, QProgressDialog,
 )
-from PyQt6.QtCore import Qt, QThread, pyqtSignal
+from PyQt6.QtCore import Qt, QThread, QProcess, QTimer, pyqtSignal
 from PyQt6.QtGui import QAction, QKeySequence, QCloseEvent
 
 from pylearn.core.config import AppConfig, BooksConfig, EditorConfig
 from pylearn.core.constants import (
     APP_NAME, APP_VERSION, READER_SPLITTER_RATIO,
     EDITOR_CONSOLE_RATIO, TOC_WIDTH, STATUS_IN_PROGRESS,
+    _FROZEN,
 )
 from pylearn.core.database import Database
 from pylearn.core.models import Book, ContentBlock, BlockType
-from pylearn.parser.book_profiles import get_profile
 from pylearn.parser.cache_manager import CacheManager
 from pylearn.parser.pdf_parser import PDFParser
 from pylearn.parser.content_classifier import ContentClassifier
@@ -37,6 +39,7 @@ from pylearn.ui.editor_panel import EditorPanel
 from pylearn.ui.console_panel import ConsolePanel
 from pylearn.ui.library_panel import LibraryPanel
 from pylearn.ui.toolbar import MainToolBar
+from pylearn.ui.external_editor import ExternalEditorManager
 from pylearn.ui.styles import get_stylesheet
 from pylearn.ui.bookmark_dialog import BookmarkDialog, add_bookmark_dialog
 from pylearn.ui.notes_dialog import NotesDialog
@@ -47,62 +50,70 @@ from pylearn.ui.exercise_panel import ExercisePanel
 logger = logging.getLogger("pylearn.ui")
 
 
-class ParseWorker(QThread):
-    """Background thread for parsing a book PDF."""
-    progress = pyqtSignal(str)
-    finished = pyqtSignal(object)  # Book or None
-    error = pyqtSignal(str)
+class ParseProcess:
+    """Run book parsing in a separate process via QProcess.
 
-    def __init__(self, pdf_path: str, profile_name: str, book_id: str, title: str) -> None:
-        super().__init__()
-        self.pdf_path = pdf_path
-        self.profile_name = profile_name
-        self.book_id = book_id
-        self.title = title
+    QProcess integrates with the Qt event loop natively — no threads needed.
+    The UI stays fully responsive while PyMuPDF does heavy work in the child process.
+    """
 
-    def run(self) -> None:
-        try:
-            profile = get_profile(self.profile_name)
-            self.progress.emit("Opening PDF...")
-            parser = PDFParser(self.pdf_path, profile)
-            parser.open()
-            total_pages = parser.total_pages
+    def __init__(self, parent: QWidget) -> None:
+        self._process = QProcess(parent)
+        self._process.setProcessChannelMode(QProcess.ProcessChannelMode.MergedChannels)
+        self._book_id: str = ""
+        self._parent = parent
 
-            self.progress.emit(f"Extracting text from {total_pages} pages...")
-            all_page_spans = parser.extract_all()
-            parser.close()
+        # Wire QProcess signals
+        self._process.readyReadStandardOutput.connect(self._on_output)
+        self._process.finished.connect(self._on_finished)
+        self._process.errorOccurred.connect(self._on_error)
 
-            self.progress.emit("Classifying content...")
-            classifier = ContentClassifier(profile)
-            blocks = classifier.classify_all_pages(
-                all_page_spans, start_page_offset=profile.skip_pages_start
-            )
+        # Callbacks (set by MainWindow)
+        self.on_progress: callable = lambda msg: None
+        self.on_finished: callable = lambda book: None
+        self.on_error: callable = lambda msg: None
 
-            self.progress.emit("Processing code blocks...")
-            extractor = CodeExtractor()
-            blocks = extractor.process(blocks)
+    def start(self, book_id: str) -> None:
+        if self._process.state() != QProcess.ProcessState.NotRunning:
+            return
+        self._book_id = book_id
+        if _FROZEN:
+            # Frozen mode: re-invoke the exe itself with --parse flag
+            self._process.start(sys.executable, ["--parse", "--book", book_id, "--force"])
+        else:
+            # Dev mode: run the parse script directly
+            script = str(Path(__file__).resolve().parent.parent.parent.parent / "scripts" / "parse_books.py")
+            self._process.start(sys.executable, [script, "--book", book_id, "--force"])
 
-            self.progress.emit("Detecting chapter structure...")
-            detector = StructureDetector(profile)
-            chapters = detector.detect_chapters(blocks)
+    def stop(self) -> None:
+        if self._process.state() != QProcess.ProcessState.NotRunning:
+            self._process.kill()
 
-            book = Book(
-                book_id=self.book_id,
-                title=self.title,
-                pdf_path=self.pdf_path,
-                profile_name=self.profile_name,
-                total_pages=total_pages,
-                chapters=chapters,
-            )
+    def is_running(self) -> bool:
+        return self._process.state() != QProcess.ProcessState.NotRunning
 
-            self.progress.emit("Caching parsed content...")
-            cache = CacheManager()
-            cache.save(book)
+    def _on_output(self) -> None:
+        data = self._process.readAllStandardOutput().data().decode("utf-8", errors="replace")
+        for line in data.splitlines():
+            line = line.strip()
+            if line:
+                self.on_progress(line)
 
-            self.finished.emit(book)
-        except Exception as e:
-            logger.exception("Parse error")
-            self.error.emit(str(e))
+    def _on_finished(self, exit_code: int, exit_status: QProcess.ExitStatus) -> None:
+        if exit_code != 0:
+            self.on_error(f"Parsing process exited with code {exit_code}")
+            return
+
+        self.on_progress("Loading parsed content...")
+        cache = CacheManager()
+        book = cache.load(self._book_id)
+        if book:
+            self.on_finished(book)
+        else:
+            self.on_error("Parsing completed but cache file not found.")
+
+    def _on_error(self, error: QProcess.ProcessError) -> None:
+        self.on_error(f"Process error: {error}")
 
 
 class ExecuteWorker(QThread):
@@ -136,10 +147,13 @@ class MainWindow(QMainWindow):
         self._session = Session(timeout=self._editor_config.execution_timeout)
         self._output = OutputHandler()
 
+        # External editor
+        self._external_editor = ExternalEditorManager(self)
+
         # State
         self._current_book: Book | None = None
         self._current_chapter_num: int = 0
-        self._parse_worker: ParseWorker | None = None
+        self._parse_process: ParseProcess | None = None
         self._exec_worker: ExecuteWorker | None = None
 
         self._setup_ui()
@@ -296,6 +310,7 @@ class MainWindow(QMainWindow):
         # Reader
         self._reader.code_copy_requested.connect(self._copy_code_block)
         self._reader.code_tryit_requested.connect(self._try_code_block)
+        self._reader.visible_heading_changed.connect(self._on_visible_heading_changed)
 
         # Toolbar
         self._toolbar.run_requested.connect(self._run_code)
@@ -303,6 +318,10 @@ class MainWindow(QMainWindow):
         self._toolbar.clear_console_requested.connect(self._console.clear_console)
         self._toolbar.font_size_changed.connect(self._on_font_size_changed)
         self._toolbar.theme_changed.connect(self._on_theme_changed)
+        self._toolbar.external_editor_requested.connect(self._open_external_editor)
+
+        # External editor
+        self._external_editor.code_changed.connect(self._editor.set_code)
 
     def _restore_state(self) -> None:
         """Restore window geometry and last session."""
@@ -400,6 +419,12 @@ class MainWindow(QMainWindow):
         self._current_book = book
         self._status_book.setText(f"Book: {book.title}")
 
+        # Set language directly from book model
+        self._current_language = book.language
+        self._editor.set_language(book.language)
+        self._session.language = book.language
+        self._reader.set_language(book.language)
+
         # Register in database
         self._db.upsert_book(
             book.book_id, book.title, book.pdf_path,
@@ -425,6 +450,9 @@ class MainWindow(QMainWindow):
         last_pos = self._db.get_last_position(book.book_id)
         if last_pos:
             self._navigate_to_chapter(last_pos["chapter_num"])
+            scroll_pos = last_pos.get("scroll_position", 0)
+            if scroll_pos:
+                QTimer.singleShot(0, lambda: self._reader.verticalScrollBar().setValue(scroll_pos))
         elif book.chapters:
             self._navigate_to_chapter(book.chapters[0].chapter_num)
 
@@ -447,23 +475,18 @@ class MainWindow(QMainWindow):
             self._parse_current_book()
 
     def _start_parse(self, book_info: dict) -> None:
-        """Start parsing a book in a background thread."""
-        if self._parse_worker and self._parse_worker.isRunning():
+        """Start parsing a book in a separate process via QProcess."""
+        if self._parse_process and self._parse_process.is_running():
             QMessageBox.warning(self, "Busy", "A book is already being parsed.")
             return
 
-        self._status_state.setText("Parsing...")
+        self._status_state.setText("Parsing (background process)...")
 
-        self._parse_worker = ParseWorker(
-            book_info["pdf_path"], book_info["profile_name"],
-            book_info["book_id"], book_info["title"],
-        )
-        self._parse_worker.progress.connect(
-            lambda msg: self._status_state.setText(msg)
-        )
-        self._parse_worker.finished.connect(self._on_parse_finished)
-        self._parse_worker.error.connect(self._on_parse_error)
-        self._parse_worker.start()
+        self._parse_process = ParseProcess(self)
+        self._parse_process.on_progress = lambda msg: self._status_state.setText(msg)
+        self._parse_process.on_finished = self._on_parse_finished
+        self._parse_process.on_error = self._on_parse_error
+        self._parse_process.start(book_info["book_id"])
 
     def _on_parse_finished(self, book: Book) -> None:
         self._status_state.setText("Ready")
@@ -545,6 +568,32 @@ class MainWindow(QMainWindow):
                 self._navigate_to_chapter(chapters[i + 1].chapter_num)
                 return
 
+    def _on_visible_heading_changed(self, block_index: int) -> None:
+        """Sync TOC highlight as the user scrolls through the reader."""
+        if self._current_chapter_num > 0:
+            self._toc.highlight_section(self._current_chapter_num, block_index)
+
+    # --- External Editor ---
+
+    def _open_external_editor(self) -> None:
+        """Open current editor code in the external editor (Notepad++)."""
+        if not self._editor_config.external_editor_enabled:
+            QMessageBox.information(
+                self, "Disabled",
+                "External editor is disabled in editor_config.json."
+            )
+            return
+
+        code = self._editor.get_code()
+        language = getattr(self, "_current_language", "python")
+        error = self._external_editor.open(
+            code, language, self._editor_config.external_editor_path
+        )
+        if error:
+            QMessageBox.warning(self, "External Editor", error)
+        else:
+            self._status_state.setText("Opened in external editor")
+
     # --- Code Operations ---
 
     def _copy_code_block(self, block_id: str) -> None:
@@ -574,7 +623,13 @@ class MainWindow(QMainWindow):
 
         self._toolbar.set_running(True)
         self._console.show_running()
-        self._status_state.setText("Running...")
+        lang = getattr(self, "_current_language", "python")
+        if lang == "html":
+            self._status_state.setText("Opening in browser...")
+        elif lang in ("cpp", "c"):
+            self._status_state.setText("Compiling and running...")
+        else:
+            self._status_state.setText("Running...")
 
         self._exec_worker = ExecuteWorker(code, self._session)
         self._exec_worker.finished.connect(self._on_execution_finished)
@@ -605,16 +660,30 @@ class MainWindow(QMainWindow):
     # --- File Operations ---
 
     def _save_code_to_file(self) -> None:
+        lang = getattr(self, "_current_language", "python")
+        if lang == "html":
+            file_filter = "HTML Files (*.html *.htm);;CSS Files (*.css);;All Files (*)"
+        elif lang in ("cpp", "c"):
+            file_filter = "C++ Files (*.cpp *.cc *.h);;All Files (*)"
+        else:
+            file_filter = "Python Files (*.py);;All Files (*)"
         path, _ = QFileDialog.getSaveFileName(
-            self, "Save Code", "", "Python Files (*.py);;All Files (*)"
+            self, "Save Code", "", file_filter
         )
         if path:
             Path(path).write_text(self._editor.get_code(), encoding="utf-8")
             self._status_state.setText(f"Saved to {Path(path).name}")
 
     def _load_code_from_file(self) -> None:
+        lang = getattr(self, "_current_language", "python")
+        if lang == "html":
+            file_filter = "HTML Files (*.html *.htm);;CSS Files (*.css);;All Files (*)"
+        elif lang in ("cpp", "c"):
+            file_filter = "C++ Files (*.cpp *.cc *.h);;All Files (*)"
+        else:
+            file_filter = "Python Files (*.py);;All Files (*)"
         path, _ = QFileDialog.getOpenFileName(
-            self, "Load Code", "", "Python Files (*.py);;All Files (*)"
+            self, "Load Code", "", file_filter
         )
         if path:
             code = Path(path).read_text(encoding="utf-8")
@@ -690,7 +759,8 @@ class MainWindow(QMainWindow):
     def _on_theme_changed(self, theme_name: str) -> None:
         self.setStyleSheet(get_stylesheet(theme_name))
         self._reader.set_theme(theme_name)
-        self._editor.set_dark_theme(theme_name == "dark")
+        self._editor.set_theme(theme_name)
+        self._console.set_theme(theme_name)
         self._app_config.theme = theme_name
 
     # --- Search ---
@@ -729,11 +799,12 @@ class MainWindow(QMainWindow):
     def closeEvent(self, event: QCloseEvent) -> None:
         """Save state on close."""
         self._save_state()
+        # Clean up external editor temp files
+        self._external_editor.cleanup()
         # Stop any running processes
         self._session.stop()
-        if self._parse_worker and self._parse_worker.isRunning():
-            self._parse_worker.quit()
-            self._parse_worker.wait(3000)
+        if self._parse_process and self._parse_process.is_running():
+            self._parse_process.stop()
         if self._exec_worker and self._exec_worker.isRunning():
             self._exec_worker.quit()
             self._exec_worker.wait(3000)
