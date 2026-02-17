@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 from PyQt6.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QSplitter,
+    QDialog, QVBoxLayout, QHBoxLayout, QSplitter, QWidget,
     QTreeWidget, QTreeWidgetItem, QTextEdit,
     QPushButton, QLabel, QMessageBox,
 )

@@ -10,12 +10,13 @@ from PyQt6.QtGui import QFont
 
 from pylearn.core.constants import APP_NAME
 from pylearn.ui.main_window import MainWindow
-from pylearn.utils.error_handler import setup_logging
+from pylearn.utils.error_handler import setup_logging, install_global_exception_handler
 
 
 def create_app(debug: bool = False) -> tuple[QApplication, MainWindow]:
     """Create and configure the application."""
     setup_logging(debug=debug)
+    install_global_exception_handler()
 
     app = QApplication(sys.argv)
     app.setApplicationName(APP_NAME)

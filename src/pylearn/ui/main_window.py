@@ -43,6 +43,7 @@ from pylearn.ui.progress_dialog import ProgressDialog
 from pylearn.ui.search_dialog import SearchDialog
 from pylearn.ui.exercise_panel import ExercisePanel
 from pylearn.ui.book_controller import BookController
+from pylearn.utils.error_handler import safe_slot
 
 logger = logging.getLogger("pylearn.ui")
 
@@ -453,6 +454,7 @@ class MainWindow(QMainWindow):
 
     # --- Parsing (UI-side, uses ParseProcess) ---
 
+    @safe_slot
     def _parse_current_book(self) -> None:
         """Parse (or re-parse) the currently selected book."""
         book_id = self._library.current_book_id()
@@ -463,6 +465,7 @@ class MainWindow(QMainWindow):
         if book_info:
             self._start_parse(book_info)
 
+    @safe_slot
     def _reparse_book(self) -> None:
         """Clear cache and re-parse the current book."""
         book_id = self._library.current_book_id()
@@ -499,6 +502,7 @@ class MainWindow(QMainWindow):
 
     # --- External Editor ---
 
+    @safe_slot
     def _open_external_editor(self) -> None:
         """Open current editor code in the external editor (Notepad++)."""
         if not self._editor_config.external_editor_enabled:
@@ -520,6 +524,7 @@ class MainWindow(QMainWindow):
 
     # --- Code Operations ---
 
+    @safe_slot
     def _copy_code_block(self, block_id: str) -> None:
         """Copy a code block to clipboard."""
         block = self._reader.get_block(block_id)
@@ -528,6 +533,7 @@ class MainWindow(QMainWindow):
             clipboard.setText(block.text)
             self._status_state.setText("Code copied to clipboard")
 
+    @safe_slot
     def _try_code_block(self, block_id: str) -> None:
         """Load a code block into the editor."""
         block = self._reader.get_block(block_id)
@@ -539,6 +545,7 @@ class MainWindow(QMainWindow):
             self._editor.append_code(code)
             self._status_state.setText("Code loaded into editor")
 
+    @safe_slot
     def _run_code(self) -> None:
         """Execute the code in the editor."""
         if self._exec_worker and self._exec_worker.isRunning():
@@ -581,6 +588,7 @@ class MainWindow(QMainWindow):
         self._exec_worker.finished.connect(self._on_execution_finished)
         self._exec_worker.start()
 
+    @safe_slot
     def _on_execution_finished(self, result) -> None:
         self._toolbar.set_running(False)
         self._status_state.setText("Ready")
@@ -588,6 +596,7 @@ class MainWindow(QMainWindow):
         self._console.append_html(self._output.format_separator())
         self._console.append_html(output_html)
 
+    @safe_slot
     def _stop_code(self) -> None:
         """Stop the currently running code."""
         if self._session.stop():
@@ -605,6 +614,7 @@ class MainWindow(QMainWindow):
 
     # --- File Operations ---
 
+    @safe_slot
     def _save_code_to_file(self) -> None:
         lang = self._book.current_language
         if lang == "html":
@@ -620,6 +630,7 @@ class MainWindow(QMainWindow):
             Path(path).write_text(self._editor.get_code(), encoding="utf-8")
             self._status_state.setText(f"Saved to {Path(path).name}")
 
+    @safe_slot
     def _load_code_from_file(self) -> None:
         lang = self._book.current_language
         if lang == "html":
@@ -643,6 +654,7 @@ class MainWindow(QMainWindow):
 
     # --- Bookmarks & Notes ---
 
+    @safe_slot
     def _add_bookmark(self) -> None:
         if not self._book.current_book:
             return
@@ -652,18 +664,21 @@ class MainWindow(QMainWindow):
             self._book.current_chapter_num, scroll_pos,
         )
 
+    @safe_slot
     def _show_bookmarks(self) -> None:
         book_id = self._book.current_book.book_id if self._book.current_book else None
         dialog = BookmarkDialog(self._db, book_id, self)
         dialog.bookmark_selected.connect(self._goto_bookmark)
         dialog.exec()
 
+    @safe_slot
     def _goto_bookmark(self, book_id: str, chapter_num: int, scroll_pos: int) -> None:
         if self._book.current_book and self._book.current_book.book_id != book_id:
             self._library.select_book(book_id)
         self._book.navigate_to_chapter(chapter_num)
         self._reader.verticalScrollBar().setValue(scroll_pos)
 
+    @safe_slot
     def _add_note(self) -> None:
         if not self._book.current_book:
             return
@@ -675,6 +690,7 @@ class MainWindow(QMainWindow):
         )
         dialog.exec()
 
+    @safe_slot
     def _show_notes(self) -> None:
         book_id = self._book.current_book.book_id if self._book.current_book else None
         dialog = NotesDialog(self._db, book_id, parent=self)
@@ -682,6 +698,7 @@ class MainWindow(QMainWindow):
 
     # --- Exercises ---
 
+    @safe_slot
     def _show_exercises(self) -> None:
         if not self._book.current_book:
             QMessageBox.information(self, "No Book", "Please select a book first.")
@@ -742,12 +759,14 @@ class MainWindow(QMainWindow):
         """Show the inline find bar in the reader panel."""
         self._reader.show_find_bar()
 
+    @safe_slot
     def _show_search(self) -> None:
         book_ids = [b["book_id"] for b in self._books_config.books]
         dialog = SearchDialog(self._cache, book_ids, self)
         dialog.navigate_requested.connect(self._search_navigate)
         dialog.exec()
 
+    @safe_slot
     def _search_navigate(self, book_id: str, chapter_num: int) -> None:
         if self._book.current_book and self._book.current_book.book_id != book_id:
             self._library.select_book(book_id)
@@ -755,6 +774,7 @@ class MainWindow(QMainWindow):
 
     # --- Progress ---
 
+    @safe_slot
     def _show_progress(self) -> None:
         dialog = ProgressDialog(self._db, self)
         dialog.exec()
