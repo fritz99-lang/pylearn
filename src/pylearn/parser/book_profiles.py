@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Per-book parsing configuration profiles.
 
 Each book has different font names, sizes, and structural patterns.

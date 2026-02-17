@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """QSS themes for the application, generated from the centralized palette."""
 
 from pylearn.ui.theme_registry import get_palette, ThemePalette

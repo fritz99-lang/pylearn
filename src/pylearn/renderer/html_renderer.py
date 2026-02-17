@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Convert parsed content blocks to styled HTML for the reader panel.
 
 QTextBrowser uses Qt's rich text engine, NOT a real browser engine.

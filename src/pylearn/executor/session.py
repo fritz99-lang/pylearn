@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Persistent execution session where variables carry over between runs.
 
 Uses a long-running subprocess with a custom REPL protocol so that

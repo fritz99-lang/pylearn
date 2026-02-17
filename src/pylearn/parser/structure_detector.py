@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Detect chapter and section structure from content blocks."""
 
 from __future__ import annotations

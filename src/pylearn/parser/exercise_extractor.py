@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Extract exercises, quizzes, and recipes from parsed content."""
 
 from __future__ import annotations

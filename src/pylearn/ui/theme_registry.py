@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Consolidated theme system — single source of truth for all color values.
 
 Each ThemePalette defines base colors that are used to generate:

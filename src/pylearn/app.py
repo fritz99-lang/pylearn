@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """QApplication setup and configuration."""
 
 from __future__ import annotations

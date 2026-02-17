@@ -9,11 +9,23 @@ build/
 .venv/
 venv/
 env/
-data/pylearn.db
-data/cache/*.json
 *.pdf
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+
+# User-specific config (defaults committed as *.json.example)
+config/*.json
+
+# Database and cache
+data/
+
+# Build artifacts
+*.spec
+*.bat
+
+# Misc
+.claude/
+src/data/

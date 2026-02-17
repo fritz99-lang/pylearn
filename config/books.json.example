@@ -1,0 +1,10 @@
+{
+  "books": [
+    {
+      "book_id": "example_book",
+      "title": "Example Book Title",
+      "pdf_path": "/path/to/your/book.pdf",
+      "profile_name": "learning_python"
+    }
+  ]
+}

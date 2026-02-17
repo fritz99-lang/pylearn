@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Full-text search dialog across book content."""
 
 from __future__ import annotations

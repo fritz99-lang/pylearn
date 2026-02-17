@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """External editor integration (Notepad++ or user-configured editor)."""
 
 from __future__ import annotations

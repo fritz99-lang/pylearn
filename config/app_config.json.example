@@ -1,0 +1,12 @@
+{
+  "window_width": 1400,
+  "window_height": 900,
+  "theme": "light",
+  "reader_font_size": 11,
+  "splitter_sizes": [700, 500],
+  "editor_console_sizes": [400, 400],
+  "toc_width": 220,
+  "toc_visible": true,
+  "window_maximized": false,
+  "last_book_id": ""
+}

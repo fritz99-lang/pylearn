@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """PDF text cleanup utilities."""
 
 from __future__ import annotations

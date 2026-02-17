@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Reader panel: displays book content as styled HTML with inline find bar."""
 
 from __future__ import annotations

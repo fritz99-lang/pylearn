@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """PDF text extraction using PyMuPDF with font metadata."""
 
 from __future__ import annotations

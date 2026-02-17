@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Classify font spans into content block types."""
 
 from __future__ import annotations

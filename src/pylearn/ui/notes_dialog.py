@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Notes manager dialog."""
 
 from __future__ import annotations

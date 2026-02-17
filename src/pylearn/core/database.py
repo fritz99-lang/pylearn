@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """SQLite database manager with context manager pattern."""
 
 from __future__ import annotations

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Cache parsed book content to JSON for fast loading."""
 
 from __future__ import annotations

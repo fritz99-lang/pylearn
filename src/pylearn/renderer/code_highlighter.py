@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Syntax highlighting for code blocks using Pygments."""
 
 from __future__ import annotations

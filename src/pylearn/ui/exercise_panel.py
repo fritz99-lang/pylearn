@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Exercise browser with completion tracking."""
 
 from __future__ import annotations

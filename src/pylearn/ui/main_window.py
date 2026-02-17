@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Main application window with splitters, menus, and status bar."""
 
 from __future__ import annotations

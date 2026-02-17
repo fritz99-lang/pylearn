@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Console panel: displays code execution output."""
 
 from __future__ import annotations

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Book state management extracted from MainWindow.
 
 Owns book loading, parsing, navigation, and progress tracking.

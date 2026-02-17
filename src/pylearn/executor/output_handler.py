@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Format execution output for the console panel."""
 
 from __future__ import annotations

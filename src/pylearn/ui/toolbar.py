@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Main toolbar with run/stop/font/theme controls."""
 
 from __future__ import annotations

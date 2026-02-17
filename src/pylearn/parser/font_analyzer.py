@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Auto-detect PDF font structure and build a BookProfile without manual tuning.
 
 Samples pages from the PDF, builds a font histogram, and computes parsing

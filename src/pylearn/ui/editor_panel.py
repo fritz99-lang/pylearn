@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Code editor panel using QScintilla."""
 
 from __future__ import annotations

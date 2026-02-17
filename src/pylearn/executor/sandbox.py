@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Subprocess-based code execution with timeout and kill."""
 
 from __future__ import annotations

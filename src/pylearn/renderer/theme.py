@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Reader display theme configuration.
 
 Colors are derived from the centralized ThemePalette in theme_registry.py.

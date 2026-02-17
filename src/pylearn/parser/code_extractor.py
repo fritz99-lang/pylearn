@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """Extract and merge code blocks from classified content."""
 
 from __future__ import annotations
