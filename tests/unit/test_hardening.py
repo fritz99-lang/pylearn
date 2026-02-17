@@ -8,7 +8,7 @@ from pylearn.core.models import (
     BlockType, ContentBlock, Section, Chapter, Book,
 )
 from pylearn.core.config import EditorConfig, AppConfig
-from pylearn.executor.sandbox import check_dangerous_code, _MAX_OUTPUT_BYTES
+from pylearn.executor.sandbox import check_dangerous_code, _MAX_OUTPUT_CHARS
 
 
 # ---------------------------------------------------------------------------
@@ -246,10 +246,10 @@ class TestDangerPatterns:
 
 class TestOutputLimit:
     def test_limit_constant_is_2mb(self):
-        assert _MAX_OUTPUT_BYTES == 2 * 1024 * 1024
+        assert _MAX_OUTPUT_CHARS == 2 * 1024 * 1024
 
     def test_session_limit_matches(self):
-        from pylearn.executor.session import _MAX_OUTPUT_BYTES as session_limit
+        from pylearn.executor.session import _MAX_OUTPUT_CHARS as session_limit
         assert session_limit == 2 * 1024 * 1024
 
 
@@ -425,7 +425,7 @@ class TestDatabaseExceptionType:
         db = Database(db_path=tmp_path / "test.db")
         # Attempt to insert with wrong types should raise and rollback
         try:
-            with db._connect() as conn:
+            with db._transaction() as conn:
                 conn.execute("INSERT INTO books (book_id) VALUES (?)", (None,))
         except sqlite3.Error:
             pass  # Expected — rollback should have occurred

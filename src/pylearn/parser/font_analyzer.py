@@ -59,7 +59,7 @@ class FontAnalyzer:
         try:
             return self._analyze(doc, language)
         except Exception as e:
-            logger.error("Font analysis failed, returning default profile: %s", e)
+            logger.error("Font analysis of %s failed, returning default profile: %s", self.pdf_path, e)
             return BookProfile(name="auto", language=language)
         finally:
             doc.close()

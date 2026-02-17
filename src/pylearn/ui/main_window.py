@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import logging
 import sys
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 from PyQt6.QtWidgets import (
     QMainWindow, QSplitter, QWidget, QVBoxLayout,
@@ -20,10 +22,6 @@ from pylearn.core.constants import APP_NAME, APP_VERSION, TOC_WIDTH, IS_FROZEN
 from pylearn.core.database import Database
 from pylearn.core.models import Book
 from pylearn.parser.cache_manager import CacheManager
-from pylearn.parser.pdf_parser import PDFParser
-from pylearn.parser.content_classifier import ContentClassifier
-from pylearn.parser.code_extractor import CodeExtractor
-from pylearn.parser.structure_detector import StructureDetector
 from pylearn.renderer.html_renderer import HTMLRenderer
 from pylearn.executor.sandbox import Sandbox, check_dangerous_code
 from pylearn.executor.session import Session
@@ -67,9 +65,9 @@ class ParseProcess:
         self._process.errorOccurred.connect(self._on_error)
 
         # Callbacks (set by MainWindow)
-        self.on_progress: callable = lambda msg: None
-        self.on_finished: callable = lambda book: None
-        self.on_error: callable = lambda msg: None
+        self.on_progress: Callable[[str], None] = lambda msg: None
+        self.on_finished: Callable[[Book], None] = lambda book: None
+        self.on_error: Callable[[str], None] = lambda msg: None
 
     def start(self, book_id: str) -> None:
         if self._process.state() != QProcess.ProcessState.NotRunning:
@@ -91,27 +89,39 @@ class ParseProcess:
         return self._process.state() != QProcess.ProcessState.NotRunning
 
     def _on_output(self) -> None:
-        data = self._process.readAllStandardOutput().data().decode("utf-8", errors="replace")
-        for line in data.splitlines():
-            line = line.strip()
-            if line:
-                self.on_progress(line)
+        try:
+            data = self._process.readAllStandardOutput().data().decode("utf-8", errors="replace")
+            for line in data.splitlines():
+                line = line.strip()
+                if line:
+                    self.on_progress(line)
+        except Exception as e:
+            logging.getLogger("pylearn.ui").exception("Error in _on_output")
+            self.on_error(f"Parse output error: {e}")
 
     def _on_finished(self, exit_code: int, exit_status: QProcess.ExitStatus) -> None:
-        if exit_code != 0:
-            self.on_error(f"Parsing process exited with code {exit_code}")
-            return
+        try:
+            if exit_code != 0:
+                self.on_error(f"Parsing process exited with code {exit_code}")
+                return
 
-        self.on_progress("Loading parsed content...")
-        cache = CacheManager()
-        book = cache.load(self._book_id)
-        if book:
-            self.on_finished(book)
-        else:
-            self.on_error("Parsing completed but cache file not found.")
+            self.on_progress("Loading parsed content...")
+            cache = CacheManager()
+            book = cache.load(self._book_id)
+            if book:
+                self.on_finished(book)
+            else:
+                self.on_error("Parsing completed but cache file not found.")
+        except Exception as e:
+            logging.getLogger("pylearn.ui").exception("Error in _on_finished")
+            self.on_error(f"Parse finish error: {e}")
 
     def _on_error(self, error: QProcess.ProcessError) -> None:
-        self.on_error(f"Process error: {error}")
+        try:
+            self.on_error(f"Process error: {error}")
+        except Exception as e:
+            logging.getLogger("pylearn.ui").exception("Error in _on_error")
+            self.on_error(f"Parse error handler error: {e}")
 
 
 class ExecuteWorker(QThread):
@@ -239,7 +249,7 @@ class MainWindow(QMainWindow):
         # Show welcome
         self._reader.display_welcome()
 
-    def _add_menu_action(self, menu: QMenu, text: str, slot, shortcut: str | None = None) -> QAction:
+    def _add_menu_action(self, menu: QMenu, text: str, slot: Callable[..., Any], shortcut: str | None = None) -> QAction:
         """Helper to add a menu action with optional shortcut (PyQt6-compatible)."""
         action = QAction(text, self)
         action.triggered.connect(slot)
@@ -408,6 +418,7 @@ class MainWindow(QMainWindow):
 
     # --- BookController UI Handlers ---
 
+    @safe_slot
     def _on_book_loaded(self, book: Book) -> None:
         """UI response to BookController.book_loaded signal."""
         self._status_book.setText(f"Book: {book.title}")
@@ -416,6 +427,7 @@ class MainWindow(QMainWindow):
         progress_data = self._book.get_progress_data()
         self._toc.load_chapters(book.chapters, progress_data)
 
+    @safe_slot
     def _on_chapter_changed(self, chapter_num: int, content_blocks: list) -> None:
         """UI response to BookController.chapter_changed signal."""
         self._reader.display_blocks(content_blocks)
@@ -424,18 +436,21 @@ class MainWindow(QMainWindow):
         total = len(book.chapters) if book else 0
         self._status_chapter.setText(f"Chapter {chapter_num} of {total}")
 
+    @safe_slot
     def _on_language_changed(self, language: str) -> None:
         """UI response to BookController.language_changed signal."""
         self._editor.set_language(language)
         self._session.language = language
         self._reader.set_language(language)
 
+    @safe_slot
     def _on_section_selected(self, chapter_num: int, block_index: int) -> None:
         """Handle TOC section click — delegate to controller, then scroll."""
         block_id = self._book.navigate_to_section(chapter_num, block_index)
         if block_id:
             self._reader.scroll_to_block(block_id)
 
+    @safe_slot
     def _on_visible_heading_changed(self, block_index: int) -> None:
         """Sync TOC highlight as the user scrolls through the reader."""
         if self._book.current_chapter_num > 0:
@@ -486,6 +501,7 @@ class MainWindow(QMainWindow):
         self._parse_process.on_error = self._on_parse_error
         self._parse_process.start(book_info["book_id"])
 
+    @safe_slot
     def _on_parse_finished(self, book: Book) -> None:
         self._status_state.setText("Ready")
         if book:
@@ -496,6 +512,7 @@ class MainWindow(QMainWindow):
                 f'{len(book.chapters)} chapters found.',
             )
 
+    @safe_slot
     def _on_parse_error(self, error_msg: str) -> None:
         self._status_state.setText("Ready")
         QMessageBox.critical(self, "Parse Error", f"Error parsing book:\n{error_msg}")
@@ -606,6 +623,7 @@ class MainWindow(QMainWindow):
                 self._output.format_status("Execution stopped by user.", "#ffa500")
             )
 
+    @safe_slot
     def _reset_session(self) -> None:
         """Reset the execution session."""
         self._session.reset()
@@ -614,17 +632,20 @@ class MainWindow(QMainWindow):
 
     # --- File Operations ---
 
-    @safe_slot
-    def _save_code_to_file(self) -> None:
+    def _file_filter_for_language(self) -> str:
+        """Return a file-dialog filter string appropriate for the current language."""
         lang = self._book.current_language
         if lang == "html":
-            file_filter = "HTML Files (*.html *.htm);;CSS Files (*.css);;All Files (*)"
+            return "HTML Files (*.html *.htm);;CSS Files (*.css);;All Files (*)"
         elif lang in ("cpp", "c"):
-            file_filter = "C++ Files (*.cpp *.cc *.h);;All Files (*)"
+            return "C++ Files (*.cpp *.cc *.h);;All Files (*)"
         else:
-            file_filter = "Python Files (*.py);;All Files (*)"
+            return "Python Files (*.py);;All Files (*)"
+
+    @safe_slot
+    def _save_code_to_file(self) -> None:
         path, _ = QFileDialog.getSaveFileName(
-            self, "Save Code", "", file_filter
+            self, "Save Code", "", self._file_filter_for_language()
         )
         if path:
             Path(path).write_text(self._editor.get_code(), encoding="utf-8")
@@ -632,15 +653,8 @@ class MainWindow(QMainWindow):
 
     @safe_slot
     def _load_code_from_file(self) -> None:
-        lang = self._book.current_language
-        if lang == "html":
-            file_filter = "HTML Files (*.html *.htm);;CSS Files (*.css);;All Files (*)"
-        elif lang in ("cpp", "c"):
-            file_filter = "C++ Files (*.cpp *.cc *.h);;All Files (*)"
-        else:
-            file_filter = "Python Files (*.py);;All Files (*)"
         path, _ = QFileDialog.getOpenFileName(
-            self, "Load Code", "", file_filter
+            self, "Load Code", "", self._file_filter_for_language()
         )
         if path:
             file_size = Path(path).stat().st_size
@@ -716,36 +730,44 @@ class MainWindow(QMainWindow):
 
     # --- View ---
 
+    @safe_slot
     def _toggle_toc(self) -> None:
         self._toc.setVisible(not self._toc.isVisible())
 
+    @safe_slot
     def _increase_font(self) -> None:
         size = min(self._app_config.reader_font_size + 1, 30)
         self._on_font_size_changed(size)
         self._toolbar.set_font_size(size)
 
+    @safe_slot
     def _decrease_font(self) -> None:
         size = max(self._app_config.reader_font_size - 1, 6)
         self._on_font_size_changed(size)
         self._toolbar.set_font_size(size)
 
+    @safe_slot
     def _focus_toc(self) -> None:
         if not self._toc.isVisible():
             self._toc.setVisible(True)
         self._toc.setFocus()
 
+    @safe_slot
     def _focus_reader(self) -> None:
         self._reader.setFocus()
 
+    @safe_slot
     def _focus_editor(self) -> None:
         self._editor.setFocus()
 
+    @safe_slot
     def _on_font_size_changed(self, size: int) -> None:
         self._reader.set_font_size(size)
         self._editor.set_font_size(size)
         self._app_config.reader_font_size = size
         self._editor_config.font_size = size
 
+    @safe_slot
     def _on_theme_changed(self, theme_name: str) -> None:
         self.setStyleSheet(get_stylesheet(theme_name))
         self._reader.set_theme(theme_name)
@@ -755,6 +777,7 @@ class MainWindow(QMainWindow):
 
     # --- Search ---
 
+    @safe_slot
     def _find_in_chapter(self) -> None:
         """Show the inline find bar in the reader panel."""
         self._reader.show_find_bar()
@@ -781,6 +804,7 @@ class MainWindow(QMainWindow):
 
     # --- Help ---
 
+    @safe_slot
     def _show_shortcuts(self) -> None:
         """Show keyboard shortcuts reference."""
         shortcuts_html = """
@@ -815,6 +839,7 @@ class MainWindow(QMainWindow):
         """
         QMessageBox.information(self, "Keyboard Shortcuts", shortcuts_html)
 
+    @safe_slot
     def _show_about(self) -> None:
         QMessageBox.about(
             self, f"About {APP_NAME}",

@@ -57,15 +57,10 @@ class ProgressDialog(QDialog):
             )
 
             # Exercise stats
-            exercises = self._db.get_exercises(book_id)
-            if exercises:
-                completed_ex = sum(
-                    1 for ex in exercises
-                    if (p := self._db.get_exercise_progress(ex["exercise_id"]))
-                    and p["completed"]
-                )
+            completed_ex, total_ex = self._db.get_exercise_completion_count(book_id)
+            if total_ex:
                 group_layout.addWidget(
-                    QLabel(f"Exercises: {completed_ex} / {len(exercises)} completed"),
+                    QLabel(f"Exercises: {completed_ex} / {total_ex} completed"),
                     2, 0, 1, 2,
                 )
 

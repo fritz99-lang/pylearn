@@ -3,18 +3,19 @@
 
 from __future__ import annotations
 
+import glob as _glob_mod
+import logging
 import os
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
 import threading
+import uuid
 import webbrowser
-import logging
 from dataclasses import dataclass
 from pathlib import Path
-
-import re
 
 from pylearn.core.constants import DEFAULT_EXECUTION_TIMEOUT, DATA_DIR, get_python_executable
 
@@ -23,8 +24,8 @@ logger = logging.getLogger("pylearn.executor")
 # _CREATE_NO_WINDOW only exists on Windows; default to 0 on other platforms.
 _CREATE_NO_WINDOW: int = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 
-# Maximum bytes of stdout/stderr to capture before truncating
-_MAX_OUTPUT_BYTES = 2 * 1024 * 1024  # 2 MB
+# Maximum chars of stdout/stderr to capture before truncating
+_MAX_OUTPUT_CHARS = 2 * 1024 * 1024  # 2M characters
 
 # Locate C++ compiler
 _CPP_COMPILER = shutil.which("g++") or shutil.which("clang++") or ""
@@ -42,7 +43,8 @@ _SENSITIVE_ENV_VARS = {
     "PRIVATE_KEY",
 }
 
-# Patterns that suggest potentially dangerous operations
+# Advisory warning patterns — NOT a security sandbox. User code runs with full privileges.
+# These patterns catch common dangerous operations to show a confirmation dialog.
 _DANGER_PATTERNS = [
     (re.compile(r'\bos\.system\b'), "os.system()"),
     (re.compile(r'\bos\.remove\b|\bos\.unlink\b'), "os.remove()/unlink()"),
@@ -59,6 +61,8 @@ _DANGER_PATTERNS = [
     (re.compile(r'\bexec\s*\('), "exec()"),
     (re.compile(r'\bctypes\b'), "ctypes (native code access)"),
     (re.compile(r'\bimportlib\b'), "importlib (dynamic import)"),
+    (re.compile(r'getattr\s*\('), "getattr() (attribute access bypass)"),
+    (re.compile(r'__builtins__'), "__builtins__ (builtin access)"),
 ]
 
 
@@ -164,8 +168,29 @@ class Sandbox:
     def _run_html(self, code: str, timeout: int | None = None) -> ExecutionResult:
         """Write HTML to a file and open it in the default browser."""
         try:
-            preview_path = Path(__file__).resolve().parent.parent.parent / "data" / "preview.html"
-            preview_path.parent.mkdir(parents=True, exist_ok=True)
+            DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+            # Clean up old preview files
+            for old in _glob_mod.glob(str(DATA_DIR / "preview_*.html")):
+                try:
+                    Path(old).unlink()
+                except OSError:
+                    pass
+
+            preview_path = DATA_DIR / f"preview_{uuid.uuid4().hex[:8]}.html"
+
+            # Inject a CSP meta tag into the HTML head for basic content policy
+            if "<head>" in code.lower():
+                csp_tag = (
+                    '<meta http-equiv="Content-Security-Policy" '
+                    'content="default-src \'self\' \'unsafe-inline\'; '
+                    'script-src \'unsafe-inline\';">'
+                )
+                # Insert CSP right after <head>
+                idx = code.lower().index("<head>")
+                insert_pos = idx + len("<head>")
+                code = code[:insert_pos] + "\n" + csp_tag + "\n" + code[insert_pos:]
+
             preview_path.write_text(code, encoding="utf-8")
 
             # Always open — on most browsers this refreshes the existing tab
@@ -253,10 +278,10 @@ class Sandbox:
         try:
             stdout, stderr = proc.communicate(timeout=timeout)
             # Truncate if output exceeds limit
-            if len(stdout) > _MAX_OUTPUT_BYTES:
-                stdout = stdout[:_MAX_OUTPUT_BYTES] + "\n[output truncated — exceeded 2 MB limit]"
-            if len(stderr) > _MAX_OUTPUT_BYTES:
-                stderr = stderr[:_MAX_OUTPUT_BYTES] + "\n[stderr truncated — exceeded 2 MB limit]"
+            if len(stdout) > _MAX_OUTPUT_CHARS:
+                stdout = stdout[:_MAX_OUTPUT_CHARS] + "\n[output truncated — exceeded 2 MB limit]"
+            if len(stderr) > _MAX_OUTPUT_CHARS:
+                stderr = stderr[:_MAX_OUTPUT_CHARS] + "\n[stderr truncated — exceeded 2 MB limit]"
             return ExecutionResult(
                 stdout=stdout,
                 stderr=stderr,
@@ -264,7 +289,14 @@ class Sandbox:
             )
         except subprocess.TimeoutExpired:
             _kill_tree(proc)
-            stdout, stderr = proc.communicate(timeout=5)
+            try:
+                stdout, stderr = proc.communicate(timeout=5)
+            except subprocess.TimeoutExpired:
+                stdout, stderr = "", "Process could not be terminated"
+                try:
+                    proc.kill()
+                except OSError:
+                    pass
             return ExecutionResult(
                 stdout=stdout or "",
                 stderr=stderr or f"Execution timed out after {timeout} seconds",

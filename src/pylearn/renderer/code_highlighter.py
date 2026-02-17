@@ -23,6 +23,8 @@ _lexers = {
     "text": TextLexer(),
 }
 
+_formatter = HtmlFormatter(nowrap=True, noclasses=True, style="monokai")
+
 
 def highlight_code(code: str, language: str = "python", is_repl: bool = False) -> str:
     """Highlight source code and return HTML."""
@@ -31,19 +33,10 @@ def highlight_code(code: str, language: str = "python", is_repl: bool = False) -
     else:
         lexer = _lexers.get(language, _lexers["text"])
 
-    formatter = HtmlFormatter(
-        nowrap=True,
-        noclasses=True,
-        style="monokai",
-    )
     try:
-        return str(highlight(code, lexer, formatter))
+        return str(highlight(code, lexer, _formatter))
     except Exception:
-        return str(highlight(code, _lexers["text"], formatter))
-
-
-# Keep old name as alias for compatibility
-highlight_python = highlight_code
+        return str(highlight(code, _lexers["text"], _formatter))
 
 
 def get_highlight_css(style: str = "monokai") -> str:

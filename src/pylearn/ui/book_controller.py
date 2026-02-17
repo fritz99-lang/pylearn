@@ -13,7 +13,7 @@ from pathlib import Path
 from PyQt6.QtCore import QObject, QTimer, pyqtSignal
 
 from pylearn.core.constants import STATUS_IN_PROGRESS, STATUS_COMPLETED
-from pylearn.core.models import Book, ContentBlock
+from pylearn.core.models import Book, Chapter, ContentBlock
 from pylearn.core.config import BooksConfig
 from pylearn.core.database import Database
 from pylearn.parser.cache_manager import CacheManager
@@ -50,6 +50,8 @@ class BookController(QObject):
         self._current_book: Book | None = None
         self._current_chapter_num: int = 0
         self._current_language: str = "python"
+        self._chapter_map: dict[int, Chapter] = {}
+        self._chapter_order: list[int] = []
 
     # --- Properties ---
 
@@ -106,11 +108,15 @@ class BookController(QObject):
             book.book_id, book.title, book.pdf_path,
             book.total_pages, len(book.chapters),
         )
-        for ch in book.chapters:
-            self._db.upsert_chapter(
-                book.book_id, ch.chapter_num, ch.title,
-                ch.start_page, ch.end_page,
-            )
+        self._db.upsert_chapters_batch(
+            book.book_id,
+            [(ch.chapter_num, ch.title, ch.start_page, ch.end_page)
+             for ch in book.chapters],
+        )
+
+        # Build chapter lookup map for O(1) access and ordered list for prev/next
+        self._chapter_map = {ch.chapter_num: ch for ch in book.chapters}
+        self._chapter_order = [ch.chapter_num for ch in book.chapters]
 
         self.language_changed.emit(book.language)
         self.book_loaded.emit(book)
@@ -136,12 +142,7 @@ class BookController(QObject):
         if not self._current_book:
             return
 
-        chapter = None
-        for ch in self._current_book.chapters:
-            if ch.chapter_num == chapter_num:
-                chapter = ch
-                break
-
+        chapter = self._chapter_map.get(chapter_num)
         if not chapter:
             return
 
@@ -162,30 +163,30 @@ class BookController(QObject):
         if self._current_chapter_num != chapter_num:
             self.navigate_to_chapter(chapter_num)
 
-        if self._current_book:
-            for ch in self._current_book.chapters:
-                if ch.chapter_num == chapter_num and block_index < len(ch.content_blocks):
-                    block = ch.content_blocks[block_index]
-                    return block.block_id
+        chapter = self._chapter_map.get(chapter_num)
+        if chapter and block_index < len(chapter.content_blocks):
+            return chapter.content_blocks[block_index].block_id
         return None
 
     def prev_chapter(self) -> None:
-        if not self._current_book:
+        if not self._current_book or not self._chapter_order:
             return
-        chapters = self._current_book.chapters
-        for i, ch in enumerate(chapters):
-            if ch.chapter_num == self._current_chapter_num and i > 0:
-                self.navigate_to_chapter(chapters[i - 1].chapter_num)
-                return
+        try:
+            idx = self._chapter_order.index(self._current_chapter_num)
+        except ValueError:
+            return
+        if idx > 0:
+            self.navigate_to_chapter(self._chapter_order[idx - 1])
 
     def next_chapter(self) -> None:
-        if not self._current_book:
+        if not self._current_book or not self._chapter_order:
             return
-        chapters = self._current_book.chapters
-        for i, ch in enumerate(chapters):
-            if ch.chapter_num == self._current_chapter_num and i < len(chapters) - 1:
-                self.navigate_to_chapter(chapters[i + 1].chapter_num)
-                return
+        try:
+            idx = self._chapter_order.index(self._current_chapter_num)
+        except ValueError:
+            return
+        if idx < len(self._chapter_order) - 1:
+            self.navigate_to_chapter(self._chapter_order[idx + 1])
 
     def mark_chapter_complete(self) -> None:
         """Mark the current chapter as completed."""
@@ -224,9 +225,5 @@ class BookController(QObject):
 
     def current_chapter_title(self) -> str:
         """Get the title of the current chapter."""
-        if not self._current_book:
-            return ""
-        for ch in self._current_book.chapters:
-            if ch.chapter_num == self._current_chapter_num:
-                return ch.title
-        return ""
+        chapter = self._chapter_map.get(self._current_chapter_num)
+        return chapter.title if chapter else ""

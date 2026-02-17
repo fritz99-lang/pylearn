@@ -141,9 +141,6 @@ class ReaderPanel(QWidget):
 
         self._browser.verticalScrollBar().valueChanged.connect(self._on_scroll)
 
-        # Find match counter
-        self._find_match_count = 0
-
         # Keyboard shortcut for Ctrl+F
         shortcut = QShortcut(QKeySequence("Ctrl+F"), self)
         shortcut.activated.connect(self.show_find_bar)

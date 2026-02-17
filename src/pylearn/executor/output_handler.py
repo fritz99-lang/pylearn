@@ -4,8 +4,11 @@
 from __future__ import annotations
 
 import html
+import re as _re
 
 from pylearn.executor.sandbox import ExecutionResult
+
+_COLOR_RE = _re.compile(r'^#[0-9a-fA-F]{3,8}$|^[a-zA-Z]+$')
 
 
 class OutputHandler:
@@ -52,6 +55,8 @@ class OutputHandler:
 
     def format_status(self, message: str, color: str = "#888") -> str:
         """Format a status message."""
+        if not _COLOR_RE.match(color):
+            color = "#888"  # fallback to default
         escaped = html.escape(message)
         return (
             f'<p style="color:{color}; font-family:Consolas, monospace; '

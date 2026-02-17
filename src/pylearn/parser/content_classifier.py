@@ -100,21 +100,14 @@ class ContentClassifier:
 
         _flush()
 
-        # Post-process: detect REPL code vs regular code
+        # Post-process: detect special block types
         for block in blocks:
             if block.block_type == BlockType.CODE and detect_repl_code(block.text):
                 block.block_type = BlockType.CODE_REPL
-
-        # Post-process: detect list items from body text
-        for block in blocks:
-            if block.block_type == BlockType.BODY:
+            elif block.block_type == BlockType.BODY:
                 if _LIST_BULLET_RE.match(block.text) or _LIST_NUMBER_RE.match(block.text):
                     block.block_type = BlockType.LIST_ITEM
-
-        # Post-process: detect Note/Warning/Tip callouts from body text
-        for block in blocks:
-            if block.block_type == BlockType.BODY:
-                if _NOTE_RE.match(block.text):
+                elif _NOTE_RE.match(block.text):
                     block.block_type = BlockType.NOTE
                     block.text = _NOTE_RE.sub("", block.text, count=1)
                 elif _WARNING_RE.match(block.text):

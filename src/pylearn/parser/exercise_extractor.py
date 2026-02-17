@@ -14,14 +14,12 @@ logger = logging.getLogger("pylearn.parser")
 class ExerciseExtractor:
     """Extract exercises from different book formats."""
 
-    def extract_from_chapters(self, book_id: str, chapters: list[Chapter],
-                              book_type: str = "generic") -> list[Exercise]:
+    def extract_from_chapters(self, book_id: str, chapters: list[Chapter]) -> list[Exercise]:
         """Extract exercises from all chapters by trying all extractors.
 
         Runs the generic extractor first, then tries specialized patterns
         (Learning Python quizzes, cookbook recipes, Programming Python exercises).
-        Uses whichever finds results for each chapter. The book_type parameter
-        is kept for backward compatibility but is no longer used for dispatch.
+        Uses whichever finds results for each chapter.
         """
         # Try all extractors and merge results
         generic = self._extract_generic(book_id, chapters)

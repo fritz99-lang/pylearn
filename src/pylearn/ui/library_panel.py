@@ -12,6 +12,7 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import pyqtSignal
 
 from pylearn.core.config import BooksConfig
+from pylearn.parser.cache_manager import sanitize_book_id
 
 
 class LibraryPanel(QWidget):
@@ -106,7 +107,7 @@ class LibraryPanel(QWidget):
         language = lang_map.get(lang_display, "python")
 
         # Generate book_id from title, with collision avoidance
-        base_id = title.lower().replace(" ", "_").replace(",", "").replace(".", "")[:30]
+        base_id = sanitize_book_id(title[:30])
         book_id = base_id
         suffix = 2
         while self._config.get_book(book_id) is not None:

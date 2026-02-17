@@ -19,8 +19,8 @@ from pylearn.executor.sandbox import ExecutionResult, get_safe_env, _kill_tree, 
 
 logger = logging.getLogger("pylearn.executor")
 
-# Maximum bytes of stdout/stderr to capture before truncating
-_MAX_OUTPUT_BYTES = 2 * 1024 * 1024  # 2 MB
+# Maximum chars of stdout/stderr to capture before truncating
+_MAX_OUTPUT_CHARS = 2 * 1024 * 1024  # 2M characters
 
 def _new_sentinel() -> str:
     """Generate a unique sentinel per process spawn."""
@@ -131,7 +131,9 @@ class Session:
 
         try:
             # Send code + sentinel to the subprocess
-            assert proc.stdin is not None
+            if proc.stdin is None:
+                self._kill_process()
+                return ExecutionResult(stderr="Session stdin unavailable", return_code=-1)
             proc.stdin.write(code + "\n" + self._sentinel + "\n")
             proc.stdin.flush()
         except (OSError, BrokenPipeError) as e:
@@ -152,13 +154,14 @@ class Session:
         def _read_stdout() -> None:
             nonlocal stdout_bytes, stdout_truncated
             try:
-                assert proc.stdout is not None
+                if proc.stdout is None:
+                    return
                 for line in proc.stdout:
                     if line.rstrip("\n") == sentinel:
                         break
                     if not stdout_truncated:
                         stdout_bytes += len(line)
-                        if stdout_bytes > _MAX_OUTPUT_BYTES:
+                        if stdout_bytes > _MAX_OUTPUT_CHARS:
                             stdout_truncated = True
                             stdout_lines.append("\n[output truncated — exceeded 2 MB limit]\n")
                         else:
@@ -169,13 +172,14 @@ class Session:
         def _read_stderr() -> None:
             nonlocal stderr_bytes, stderr_truncated
             try:
-                assert proc.stderr is not None
+                if proc.stderr is None:
+                    return
                 for line in proc.stderr:
                     if line.rstrip("\n") == sentinel:
                         break
                     if not stderr_truncated:
                         stderr_bytes += len(line)
-                        if stderr_bytes > _MAX_OUTPUT_BYTES:
+                        if stderr_bytes > _MAX_OUTPUT_CHARS:
                             stderr_truncated = True
                             stderr_lines.append("\n[stderr truncated — exceeded 2 MB limit]\n")
                         else:
@@ -238,19 +242,9 @@ class Session:
 
     def stop(self) -> bool:
         """Kill the currently running process and clean up."""
-        with self._process_lock:
-            if self._process is not None:
-                try:
-                    _kill_tree(self._process)
-                    self._process.wait(timeout=3)
-                except Exception:
-                    try:
-                        self._process.kill()
-                    except Exception:
-                        pass
-                self._process = None
-                return True
-        return False
+        had_process = self._process is not None
+        self._kill_process()
+        return had_process
 
     def reset(self) -> None:
         """Reset the session by killing the subprocess.

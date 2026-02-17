@@ -6,31 +6,41 @@ from __future__ import annotations
 import re
 import unicodedata
 
+# Single-character replacements handled via str.translate() for speed
+_SINGLE_CHAR_TABLE = str.maketrans({
+    "\ufb01": "fi",
+    "\ufb02": "fl",
+    "\u2018": "'",
+    "\u2019": "'",
+    "\u201c": '"',
+    "\u201d": '"',
+    "\u2013": "-",
+    "\u00a0": " ",
+})
+
+# Multi-character replacements that str.translate() cannot handle
+_MULTI_CHAR_REPLACEMENTS = {
+    "\ufb03": "ffi",
+    "\ufb04": "ffl",
+    "\u2014": "--",
+    "\u2026": "...",
+}
+
 
 def clean_text(text: str) -> str:
     """Clean text extracted from PDF, fixing common encoding issues."""
     if not text:
         return ""
-    # Normalize unicode
-    text = unicodedata.normalize("NFKC", text)
-    # Fix common PDF ligatures
-    replacements = {
-        "\ufb01": "fi",
-        "\ufb02": "fl",
-        "\ufb03": "ffi",
-        "\ufb04": "ffl",
-        "\u2018": "'",
-        "\u2019": "'",
-        "\u201c": '"',
-        "\u201d": '"',
-        "\u2013": "-",
-        "\u2014": "--",
-        "\u2026": "...",
-        "\u00a0": " ",
-    }
-    for old, new in replacements.items():
+    # Normalize unicode and apply single-char translation table
+    text = unicodedata.normalize("NFKC", text).translate(_SINGLE_CHAR_TABLE)
+    # Apply multi-char replacements
+    for old, new in _MULTI_CHAR_REPLACEMENTS.items():
         text = text.replace(old, new)
     return text
+
+
+_LINE_NUMBER_RE = re.compile(r"^\d+$")
+_CHAPTER_HEADER_RE = re.compile(r"^Chapter \d+[:.]\s")
 
 
 def clean_code_text(text: str) -> str:
@@ -42,10 +52,10 @@ def clean_code_text(text: str) -> str:
     for line in lines:
         # Skip lines that look like page numbers
         stripped = line.strip()
-        if re.match(r"^\d+$", stripped) and len(stripped) <= 4:
+        if _LINE_NUMBER_RE.match(stripped) and len(stripped) <= 4:
             continue
         # Skip lines that look like chapter headers in code
-        if re.match(r"^Chapter \d+[:.]\s", stripped):
+        if _CHAPTER_HEADER_RE.match(stripped):
             continue
         cleaned.append(line)
     return "\n".join(cleaned)

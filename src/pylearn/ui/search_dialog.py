@@ -10,9 +10,9 @@ from PyQt6.QtWidgets import (
     QPushButton, QTreeWidget, QTreeWidgetItem, QLabel,
     QProgressBar,
 )
-from PyQt6.QtCore import pyqtSignal, Qt, QThread, pyqtSignal as Signal
+from PyQt6.QtCore import pyqtSignal, Qt, QThread
 
-from pylearn.core.models import Book, BlockType
+from pylearn.core.models import Book
 from pylearn.parser.cache_manager import CacheManager
 
 logger = logging.getLogger("pylearn.ui")
@@ -20,8 +20,8 @@ logger = logging.getLogger("pylearn.ui")
 
 class SearchWorker(QThread):
     """Background thread for searching book content."""
-    result_found = Signal(str, int, str, str)  # book_id, chapter_num, title, snippet
-    finished = Signal(int)  # total results
+    result_found = pyqtSignal(str, int, str, str)  # book_id, chapter_num, title, snippet
+    finished = pyqtSignal(int)  # total results
 
     def __init__(self, query: str, books: list[Book]) -> None:
         super().__init__()

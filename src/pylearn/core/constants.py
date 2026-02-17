@@ -30,9 +30,11 @@ CACHE_DIR = DATA_DIR / "cache"
 DB_PATH = DATA_DIR / "pylearn.db"
 
 # Ensure writable directories exist on first launch
-CONFIG_DIR.mkdir(parents=True, exist_ok=True)
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-CACHE_DIR.mkdir(parents=True, exist_ok=True)
+for _d in (CONFIG_DIR, DATA_DIR, CACHE_DIR):
+    try:
+        _d.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        pass  # Components will create as needed
 
 # Config files
 APP_CONFIG_PATH = CONFIG_DIR / "app_config.json"

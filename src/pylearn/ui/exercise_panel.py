@@ -106,12 +106,7 @@ class ExercisePanel(QWidget):
         self._try_btn.setEnabled(True)
 
         # Show exercise details from database
-        exercise = None
-        exercises = self._db.get_exercises(book_id=self._book_id)
-        for ex in exercises:
-            if ex["exercise_id"] == exercise_id:
-                exercise = ex
-                break
+        exercise = self._db.get_exercise(exercise_id)
 
         if exercise:
             title_esc = html_mod.escape(exercise["title"])
@@ -138,12 +133,8 @@ class ExercisePanel(QWidget):
     def _try_exercise(self) -> None:
         if self._current_exercise_id and self._book_id:
             # Find the exercise to get its description as starter code
-            exercises = self._db.get_exercises(book_id=self._book_id)
-            desc = ""
-            for ex in exercises:
-                if ex["exercise_id"] == self._current_exercise_id:
-                    desc = ex.get("description", "")
-                    break
+            exercise = self._db.get_exercise(self._current_exercise_id)
+            desc = exercise.get("description", "") if exercise else ""
             # Build starter code with exercise description as comments
             lines = [f"# Exercise: {self._current_exercise_id}"]
             if desc:

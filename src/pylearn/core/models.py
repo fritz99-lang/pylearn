@@ -6,7 +6,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Optional
+from typing import Any
 
 logger = logging.getLogger("pylearn.models")
 
@@ -203,6 +203,13 @@ class Book:
             from pylearn.parser.book_profiles import get_profile
             profile_name = data.get("profile_name", "")
             language = get_profile(profile_name).language if profile_name else "python"
+        chapters = []
+        for c in data.get("chapters", []):
+            try:
+                chapters.append(Chapter.from_dict(c))
+            except (ValueError, KeyError) as e:
+                logger.warning("Skipping malformed chapter: %s", e)
+
         return cls(
             book_id=book_id,
             title=title,
@@ -210,7 +217,7 @@ class Book:
             profile_name=data.get("profile_name", ""),
             language=language,
             total_pages=data.get("total_pages", 0),
-            chapters=[Chapter.from_dict(c) for c in data.get("chapters", [])],
+            chapters=chapters,
         )
 
 
@@ -223,7 +230,7 @@ class Exercise:
     title: str
     description: str
     exercise_type: str  # "quiz", "exercise", "recipe"
-    answer: Optional[str] = None
+    answer: str | None = None
     page_num: int = 0
 
     def to_dict(self) -> dict[str, Any]:

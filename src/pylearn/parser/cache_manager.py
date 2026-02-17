@@ -43,11 +43,14 @@ class CacheManager:
         path = self._cache_path(book.book_id)
         data = book.to_dict()
         tmp = path.with_suffix(".tmp")
-        tmp.write_text(
-            json.dumps(data, ensure_ascii=False, indent=1),
-            encoding="utf-8",
-        )
-        tmp.replace(path)
+        try:
+            tmp.write_text(
+                json.dumps(data, ensure_ascii=False, separators=(",", ":")),
+                encoding="utf-8",
+            )
+            tmp.replace(path)
+        finally:
+            tmp.unlink(missing_ok=True)
         logger.info(f"Cached {book.book_id} to {path} ({path.stat().st_size / 1024:.0f} KB)")
 
     def load(self, book_id: str) -> Book | None:
@@ -58,7 +61,12 @@ class CacheManager:
             return None
 
         try:
-            data = json.loads(path.read_text(encoding="utf-8"))
+            if path.stat().st_size > 200 * 1024 * 1024:
+                logger.warning("Cache file too large, skipping: %s", path)
+                return None
+
+            with open(path, "r", encoding="utf-8") as f:
+                data = json.load(f)
             book = Book.from_dict(data)
             logger.info(f"Loaded {book_id} from cache ({len(book.chapters)} chapters)")
             return book
@@ -76,16 +84,20 @@ class CacheManager:
     def invalidate_all(self) -> None:
         """Delete all cached data."""
         for path in self.cache_dir.glob("*.json"):
-            path.unlink()
+            try:
+                path.unlink()
+            except OSError as e:
+                logger.warning("Could not delete cache file %s: %s", path, e)
         logger.info("Invalidated all caches")
 
     def get_cache_info(self) -> list[dict]:
         """Get info about cached books."""
         info = []
         for path in self.cache_dir.glob("*.json"):
+            st = path.stat()
             info.append({
                 "book_id": path.stem,
-                "size_kb": round(path.stat().st_size / 1024),
-                "modified": path.stat().st_mtime,
+                "size_kb": round(st.st_size / 1024),
+                "modified": st.st_mtime,
             })
         return info

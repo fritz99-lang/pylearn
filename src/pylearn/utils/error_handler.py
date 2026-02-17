@@ -9,8 +9,11 @@ import sys
 import traceback
 from pathlib import Path
 from types import TracebackType
+from typing import Any, Callable, TypeVar
 
 from pylearn.core.constants import DATA_DIR
+
+F = TypeVar("F", bound=Callable[..., Any])
 
 
 class PyLearnError(Exception):
@@ -110,11 +113,6 @@ def install_global_exception_handler() -> None:
             traceback.print_exception(exc_type, exc_value, exc_tb)
 
     sys.excepthook = _handle_exception
-
-
-from typing import Any, Callable, TypeVar
-
-F = TypeVar("F", bound=Callable[..., Any])
 
 
 def safe_slot(func: F) -> F:

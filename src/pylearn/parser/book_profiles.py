@@ -55,13 +55,18 @@ class BookProfile:
             sizes = sorted([self.heading1_min_size, self.heading2_min_size,
                             self.heading3_min_size], reverse=True)
             self.heading1_min_size, self.heading2_min_size, self.heading3_min_size = sizes
+        # Pre-lowercase monospace font names and initialize lookup cache
+        self._mono_lower: list[str] = [m.lower() for m in self.monospace_fonts]
+        self._mono_cache: dict[str, bool] = {}
 
     def is_monospace(self, font_name: str) -> bool:
         """Check if a font name indicates monospace."""
         if not font_name:
             return False
-        name_lower = font_name.lower()
-        return any(m.lower() in name_lower for m in self.monospace_fonts)
+        if font_name not in self._mono_cache:
+            name_lower = font_name.lower()
+            self._mono_cache[font_name] = any(m in name_lower for m in self._mono_lower)
+        return self._mono_cache[font_name]
 
 
 # Pre-configured profiles for the three O'Reilly books

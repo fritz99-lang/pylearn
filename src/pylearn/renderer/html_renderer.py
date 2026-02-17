@@ -103,6 +103,9 @@ class HTMLRenderer:
 
         if block.block_type == BlockType.FIGURE:
             if self.image_dir:
+                # Validate filename contains no path separators (prevent path traversal)
+                if '..' in text or '/' in text or '\\' in text:
+                    return ''  # skip suspect filename
                 # text field contains the image filename — escape for HTML attribute
                 safe_name = html.escape(text)
                 img_path = f"{self.image_dir}/{safe_name}".replace("\\", "/")

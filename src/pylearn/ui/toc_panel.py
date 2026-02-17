@@ -7,7 +7,8 @@ from PyQt6.QtWidgets import QTreeWidget, QTreeWidgetItem
 from PyQt6.QtCore import pyqtSignal, Qt
 from PyQt6.QtGui import QFont
 
-from pylearn.core.models import Chapter, Section, ReadStatus
+from pylearn.core.models import Chapter, Section
+from pylearn.core.constants import STATUS_NOT_STARTED, STATUS_IN_PROGRESS, STATUS_COMPLETED
 
 
 class TOCPanel(QTreeWidget):
@@ -35,7 +36,7 @@ class TOCPanel(QTreeWidget):
         progress = progress or {}
 
         for chapter in chapters:
-            status = progress.get(chapter.chapter_num, "not_started")
+            status = progress.get(chapter.chapter_num, STATUS_NOT_STARTED)
             icon = self._status_icon(status)
 
             item = QTreeWidgetItem(self)
@@ -48,7 +49,7 @@ class TOCPanel(QTreeWidget):
             })
 
             font = item.font(0)
-            if status == "in_progress":
+            if status == STATUS_IN_PROGRESS:
                 font.setBold(True)
             item.setFont(0, font)
 
@@ -89,7 +90,7 @@ class TOCPanel(QTreeWidget):
             item.setText(0, f"{icon} Ch {ch_num}: {title}")
 
             font = item.font(0)
-            font.setBold(status == "in_progress")
+            font.setBold(status == STATUS_IN_PROGRESS)
             item.setFont(0, font)
 
     def highlight_chapter(self, chapter_num: int) -> None:
@@ -156,8 +157,8 @@ class TOCPanel(QTreeWidget):
 
     @staticmethod
     def _status_icon(status: str) -> str:
-        if status == "completed":
+        if status == STATUS_COMPLETED:
             return "[done]"
-        elif status == "in_progress":
+        elif status == STATUS_IN_PROGRESS:
             return "[>>]"
         return "[  ]"
