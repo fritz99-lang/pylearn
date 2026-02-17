@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Optional
+from typing import Any, Optional
 
 logger = logging.getLogger("pylearn.models")
 
@@ -67,7 +67,7 @@ class ContentBlock:
     block_id: str = ""
     language: str = "python"
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "block_type": self.block_type.value,
             "text": self.text,
@@ -80,7 +80,7 @@ class ContentBlock:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> ContentBlock:
+    def from_dict(cls, data: dict[str, Any]) -> ContentBlock:
         try:
             block_type = BlockType(data["block_type"])
         except (ValueError, KeyError):
@@ -107,7 +107,7 @@ class Section:
     block_index: int  # index into chapter's content_blocks list
     children: list[Section] = field(default_factory=list)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "title": self.title,
             "level": self.level,
@@ -117,7 +117,7 @@ class Section:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Section:
+    def from_dict(cls, data: dict[str, Any]) -> Section:
         try:
             return cls(
                 title=data["title"],
@@ -140,7 +140,7 @@ class Chapter:
     content_blocks: list[ContentBlock] = field(default_factory=list)
     sections: list[Section] = field(default_factory=list)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "chapter_num": self.chapter_num,
             "title": self.title,
@@ -151,7 +151,7 @@ class Chapter:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Chapter:
+    def from_dict(cls, data: dict[str, Any]) -> Chapter:
         try:
             return cls(
                 chapter_num=data["chapter_num"],
@@ -176,7 +176,7 @@ class Book:
     total_pages: int = 0
     chapters: list[Chapter] = field(default_factory=list)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "book_id": self.book_id,
             "title": self.title,
@@ -188,7 +188,7 @@ class Book:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Book:
+    def from_dict(cls, data: dict[str, Any]) -> Book:
         try:
             book_id = data["book_id"]
             title = data["title"]
@@ -225,7 +225,7 @@ class Exercise:
     answer: Optional[str] = None
     page_num: int = 0
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "exercise_id": self.exercise_id,
             "book_id": self.book_id,
@@ -238,7 +238,7 @@ class Exercise:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> Exercise:
+    def from_dict(cls, data: dict[str, Any]) -> Exercise:
         return cls(
             exercise_id=data["exercise_id"],
             book_id=data["book_id"],

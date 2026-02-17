@@ -165,7 +165,7 @@ class Database:
                    VALUES (?, ?, ?, ?, ?)""",
                 (book_id, chapter_num, scroll_position, label, datetime.now().isoformat()),
             )
-            return cursor.lastrowid
+            return cursor.lastrowid or 0
 
     def get_bookmarks(self, book_id: str | None = None) -> list[dict]:
         with self._connect() as conn:
@@ -195,7 +195,7 @@ class Database:
                    VALUES (?, ?, ?, ?, ?, ?)""",
                 (book_id, chapter_num, section_title, content, now, now),
             )
-            return cursor.lastrowid
+            return cursor.lastrowid or 0
 
     def update_note(self, note_id: int, content: str) -> None:
         with self._connect() as conn:
@@ -283,7 +283,7 @@ class Database:
                    VALUES (?, ?, ?, ?, ?)""",
                 (book_id, chapter_num, code, label, datetime.now().isoformat()),
             )
-            return cursor.lastrowid
+            return cursor.lastrowid or 0
 
     def get_saved_code(self, book_id: str, chapter_num: int | None = None) -> list[dict]:
         with self._connect() as conn:

@@ -18,6 +18,7 @@ dependencies = [
 dev = [
     "pytest>=7.4.0",
     "pytest-qt>=4.2.0",
+    "mypy>=1.8.0",
 ]
 
 [project.scripts]
@@ -29,3 +30,34 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "pylearn.ui.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+warn_return_any = false
+disable_error_code = ["union-attr", "arg-type", "override", "name-defined", "assignment", "valid-type", "misc", "operator"]
+
+[[tool.mypy.overrides]]
+module = [
+    "fitz",
+    "fitz.*",
+    "PyQt6.Qsci",
+    "PyQt6.Qsci.*",
+    "pygments",
+    "pygments.*",
+]
+ignore_missing_imports = true

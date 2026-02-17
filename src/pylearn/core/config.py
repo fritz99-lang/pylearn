@@ -27,10 +27,12 @@ from pylearn.core.constants import (
 logger = logging.getLogger("pylearn.config")
 
 
-def _load_json(path: Path) -> dict:
+def _load_json(path: Path) -> dict[str, Any]:
     if path.exists():
         try:
-            return json.loads(path.read_text(encoding="utf-8"))
+            data = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                return data
         except (json.JSONDecodeError, UnicodeDecodeError) as e:
             logger.error(f"Corrupt config file {path}: {e} — using defaults")
     return {}
@@ -64,7 +66,7 @@ class AppConfig:
 
     @property
     def window_width(self) -> int:
-        return self._data.get("window_width", DEFAULT_WINDOW_WIDTH)
+        return int(self._data.get("window_width", DEFAULT_WINDOW_WIDTH))
 
     @window_width.setter
     def window_width(self, value: int) -> None:
@@ -72,7 +74,7 @@ class AppConfig:
 
     @property
     def window_height(self) -> int:
-        return self._data.get("window_height", DEFAULT_WINDOW_HEIGHT)
+        return int(self._data.get("window_height", DEFAULT_WINDOW_HEIGHT))
 
     @window_height.setter
     def window_height(self, value: int) -> None:
@@ -96,7 +98,7 @@ class AppConfig:
 
     @property
     def window_maximized(self) -> bool:
-        return self._data.get("window_maximized", False)
+        return bool(self._data.get("window_maximized", False))
 
     @window_maximized.setter
     def window_maximized(self, value: bool) -> None:
@@ -104,7 +106,7 @@ class AppConfig:
 
     @property
     def theme(self) -> str:
-        return self._data.get("theme", DEFAULT_THEME)
+        return str(self._data.get("theme", DEFAULT_THEME))
 
     @theme.setter
     def theme(self, value: str) -> None:
@@ -112,7 +114,7 @@ class AppConfig:
 
     @property
     def reader_font_size(self) -> int:
-        val = self._data.get("reader_font_size", DEFAULT_FONT_SIZE)
+        val = int(self._data.get("reader_font_size", DEFAULT_FONT_SIZE))
         return max(6, min(72, val))
 
     @reader_font_size.setter
@@ -129,7 +131,7 @@ class AppConfig:
 
     @property
     def splitter_sizes(self) -> list[int]:
-        return self._data.get("splitter_sizes", READER_SPLITTER_RATIO)
+        return list(self._data.get("splitter_sizes", READER_SPLITTER_RATIO))
 
     @splitter_sizes.setter
     def splitter_sizes(self, value: list[int]) -> None:
@@ -137,7 +139,7 @@ class AppConfig:
 
     @property
     def editor_console_sizes(self) -> list[int]:
-        return self._data.get("editor_console_sizes", EDITOR_CONSOLE_RATIO)
+        return list(self._data.get("editor_console_sizes", EDITOR_CONSOLE_RATIO))
 
     @editor_console_sizes.setter
     def editor_console_sizes(self, value: list[int]) -> None:
@@ -145,7 +147,7 @@ class AppConfig:
 
     @property
     def toc_width(self) -> int:
-        return self._data.get("toc_width", TOC_WIDTH)
+        return int(self._data.get("toc_width", TOC_WIDTH))
 
     @toc_width.setter
     def toc_width(self, value: int) -> None:
@@ -153,7 +155,7 @@ class AppConfig:
 
     @property
     def toc_visible(self) -> bool:
-        return self._data.get("toc_visible", True)
+        return bool(self._data.get("toc_visible", True))
 
     @toc_visible.setter
     def toc_visible(self, value: bool) -> None:
@@ -181,8 +183,8 @@ class BooksConfig:
         _save_json(BOOKS_CONFIG_PATH, self._data)
 
     @property
-    def books(self) -> list[dict]:
-        return self._data.get("books", [])
+    def books(self) -> list[dict[str, Any]]:
+        return list(self._data.get("books", []))
 
     def add_book(self, book_id: str, title: str, pdf_path: str,
                  language: str = "python", profile_name: str = "") -> None:
@@ -227,7 +229,7 @@ class EditorConfig:
 
     @property
     def font_size(self) -> int:
-        val = self._data.get("font_size", DEFAULT_EDITOR_FONT_SIZE)
+        val = int(self._data.get("font_size", DEFAULT_EDITOR_FONT_SIZE))
         return max(6, min(72, val))
 
     @font_size.setter
@@ -236,7 +238,7 @@ class EditorConfig:
 
     @property
     def tab_width(self) -> int:
-        val = self._data.get("tab_width", DEFAULT_TAB_WIDTH)
+        val = int(self._data.get("tab_width", DEFAULT_TAB_WIDTH))
         return max(1, min(16, val))
 
     @tab_width.setter
@@ -245,7 +247,7 @@ class EditorConfig:
 
     @property
     def show_line_numbers(self) -> bool:
-        return self._data.get("show_line_numbers", True)
+        return bool(self._data.get("show_line_numbers", True))
 
     @show_line_numbers.setter
     def show_line_numbers(self, value: bool) -> None:
@@ -253,7 +255,7 @@ class EditorConfig:
 
     @property
     def auto_indent(self) -> bool:
-        return self._data.get("auto_indent", True)
+        return bool(self._data.get("auto_indent", True))
 
     @auto_indent.setter
     def auto_indent(self, value: bool) -> None:
@@ -261,7 +263,7 @@ class EditorConfig:
 
     @property
     def word_wrap(self) -> bool:
-        return self._data.get("word_wrap", False)
+        return bool(self._data.get("word_wrap", False))
 
     @word_wrap.setter
     def word_wrap(self, value: bool) -> None:
@@ -269,7 +271,7 @@ class EditorConfig:
 
     @property
     def execution_timeout(self) -> int:
-        val = self._data.get("execution_timeout", DEFAULT_EXECUTION_TIMEOUT)
+        val = int(self._data.get("execution_timeout", DEFAULT_EXECUTION_TIMEOUT))
         return max(5, min(300, val))
 
     @execution_timeout.setter
@@ -278,7 +280,7 @@ class EditorConfig:
 
     @property
     def external_editor_path(self) -> str:
-        return self._data.get("external_editor_path", "notepad++.exe")
+        return str(self._data.get("external_editor_path", "notepad++.exe"))
 
     @external_editor_path.setter
     def external_editor_path(self, value: str) -> None:
@@ -286,7 +288,7 @@ class EditorConfig:
 
     @property
     def external_editor_enabled(self) -> bool:
-        return self._data.get("external_editor_enabled", True)
+        return bool(self._data.get("external_editor_enabled", True))
 
     @external_editor_enabled.setter
     def external_editor_enabled(self, value: bool) -> None:

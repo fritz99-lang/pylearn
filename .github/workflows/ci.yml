@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libegl1 libxkbcommon0
+
+      - name: Install package and dev dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run tests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: pytest tests/ -v
+
+  typecheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install package and dev dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run mypy
+        run: mypy src/pylearn/

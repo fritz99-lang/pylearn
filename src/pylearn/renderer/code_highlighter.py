@@ -36,9 +36,9 @@ def highlight_code(code: str, language: str = "python", is_repl: bool = False) -
         style="monokai",
     )
     try:
-        return highlight(code, lexer, formatter)
+        return str(highlight(code, lexer, formatter))
     except Exception:
-        return highlight(code, _lexers["text"], formatter)
+        return str(highlight(code, _lexers["text"], formatter))
 
 
 # Keep old name as alias for compatibility
@@ -48,4 +48,4 @@ highlight_python = highlight_code
 def get_highlight_css(style: str = "monokai") -> str:
     """Get CSS for Pygments syntax highlighting."""
     formatter = HtmlFormatter(style=style, noclasses=False)
-    return formatter.get_style_defs(".highlight")
+    return str(formatter.get_style_defs(".highlight"))

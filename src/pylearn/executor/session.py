@@ -130,6 +130,7 @@ class Session:
 
         try:
             # Send code + sentinel to the subprocess
+            assert proc.stdin is not None
             proc.stdin.write(code + "\n" + self._sentinel + "\n")
             proc.stdin.flush()
         except (OSError, BrokenPipeError) as e:
@@ -147,9 +148,10 @@ class Session:
         stderr_truncated = False
         timed_out = False
 
-        def _read_stdout():
+        def _read_stdout() -> None:
             nonlocal stdout_bytes, stdout_truncated
             try:
+                assert proc.stdout is not None
                 for line in proc.stdout:
                     if line.rstrip("\n") == sentinel:
                         break
@@ -163,9 +165,10 @@ class Session:
             except Exception:
                 pass
 
-        def _read_stderr():
+        def _read_stderr() -> None:
             nonlocal stderr_bytes, stderr_truncated
             try:
+                assert proc.stderr is not None
                 for line in proc.stderr:
                     if line.rstrip("\n") == sentinel:
                         break

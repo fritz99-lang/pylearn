@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import logging
 from pathlib import Path
+from typing import Any
 
 import fitz  # PyMuPDF
 
@@ -42,29 +43,33 @@ class PDFParser:
             self._doc.close()
             self._doc = None
 
-    def __enter__(self):
+    def __enter__(self) -> PDFParser:
         self.open()
         return self
 
-    def __exit__(self, *exc):
+    def __exit__(self, *exc: object) -> None:
         self.close()
-        return False
+
+    def _get_doc(self) -> fitz.Document:
+        """Return the open document, raising if not opened."""
+        if self._doc is None:
+            raise RuntimeError("PDFParser not opened. Use 'with PDFParser(...) as p:' or call .open()")
+        return self._doc
 
     @property
     def total_pages(self) -> int:
-        if self._doc is None:
-            raise RuntimeError("PDFParser not opened. Use 'with PDFParser(...) as p:' or call .open()")
-        return len(self._doc)
+        return len(self._get_doc())
 
     def extract_page_spans(self, page_num: int) -> list[FontSpan]:
         """Extract all text spans from a single page with font metadata."""
         if self._doc is None:
             self.open()
+        doc = self._get_doc()
 
-        if page_num < 0 or page_num >= len(self._doc):
+        if page_num < 0 or page_num >= len(doc):
             return []
 
-        page = self._doc[page_num]
+        page = doc[page_num]
         try:
             raw = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
         except Exception as e:
@@ -132,12 +137,13 @@ class PDFParser:
         """
         if self._doc is None:
             self.open()
-        if page_num < 0 or page_num >= len(self._doc):
+        doc = self._get_doc()
+        if page_num < 0 or page_num >= len(doc):
             return []
 
         save_dir.mkdir(parents=True, exist_ok=True)
-        page = self._doc[page_num]
-        images = []
+        page = doc[page_num]
+        images: list[dict[str, Any]] = []
 
         for img_info in page.get_images(full=True):
             if image_count + len(images) >= _MAX_IMAGES_PER_BOOK:
@@ -145,7 +151,7 @@ class PDFParser:
                 break
             xref = img_info[0]
             try:
-                base_image = self._doc.extract_image(xref)
+                base_image = doc.extract_image(xref)
                 if not base_image or not base_image.get("image"):
                     continue
 
@@ -187,9 +193,10 @@ class PDFParser:
         """Extract spans from a range of pages."""
         if self._doc is None:
             self.open()
+        doc = self._get_doc()
 
         pages = []
-        end = min(end_page, len(self._doc))
+        end = min(end_page, len(doc))
         for page_num in range(start_page, end):
             try:
                 spans = self.extract_page_spans(page_num)
@@ -203,8 +210,9 @@ class PDFParser:
         """Extract spans from all content pages (skipping front/back matter)."""
         if self._doc is None:
             self.open()
+        doc = self._get_doc()
 
-        total = len(self._doc)
+        total = len(doc)
         start = min(self.profile.skip_pages_start, total)
         end = max(start, total - self.profile.skip_pages_end)
         if start >= end:
@@ -218,12 +226,13 @@ class PDFParser:
         """Analyze font usage across the document for profiling."""
         if self._doc is None:
             self.open()
+        doc = self._get_doc()
 
-        font_stats: dict[str, dict] = {}
-        sample_pages = list(range(0, len(self._doc), max(1, len(self._doc) // 20)))
+        font_stats: dict[str, dict[str, Any]] = {}
+        sample_pages = list(range(0, len(doc), max(1, len(doc) // 20)))
 
         for page_num in sample_pages:
-            page = self._doc[page_num]
+            page = doc[page_num]
             blocks = page.get_text("dict")["blocks"]
             for block in blocks:
                 if block.get("type") != 0:
