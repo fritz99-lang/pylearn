@@ -22,48 +22,46 @@ class SearchWorker(QThread):
     result_found = Signal(str, int, str, str)  # book_id, chapter_num, title, snippet
     finished = Signal(int)  # total results
 
-    def __init__(self, query: str, cache_manager: CacheManager,
-                 book_ids: list[str]) -> None:
+    def __init__(self, query: str, books: list[Book]) -> None:
         super().__init__()
         self.query = query.lower()
-        self.cache = cache_manager
-        self.book_ids = book_ids
+        self.books = books
         self._stop = False
 
     def run(self) -> None:
         total = 0
-        for book_id in self.book_ids:
-            if self._stop:
-                break
-            book = self.cache.load(book_id)
-            if not book:
-                continue
-
-            for chapter in book.chapters:
+        try:
+            for book in self.books:
                 if self._stop:
                     break
-                for block in chapter.content_blocks:
-                    if self.query in block.text.lower():
-                        # Create a snippet around the match
-                        idx = block.text.lower().index(self.query)
-                        start = max(0, idx - 40)
-                        end = min(len(block.text), idx + len(self.query) + 40)
-                        snippet = block.text[start:end]
-                        if start > 0:
-                            snippet = "..." + snippet
-                        if end < len(block.text):
-                            snippet = snippet + "..."
 
-                        self.result_found.emit(
-                            book_id, chapter.chapter_num,
-                            chapter.title, snippet
-                        )
-                        total += 1
-                        if total >= 200:  # cap results
-                            self.finished.emit(total)
-                            return
+                book_id = book.book_id
+                for chapter in book.chapters:
+                    if self._stop:
+                        break
+                    for block in chapter.content_blocks:
+                        if self.query in block.text.lower():
+                            # Create a snippet around the match
+                            idx = block.text.lower().index(self.query)
+                            start = max(0, idx - 40)
+                            end = min(len(block.text), idx + len(self.query) + 40)
+                            snippet = block.text[start:end]
+                            if start > 0:
+                                snippet = "..." + snippet
+                            if end < len(block.text):
+                                snippet = snippet + "..."
 
-        self.finished.emit(total)
+                            self.result_found.emit(
+                                book_id, chapter.chapter_num,
+                                chapter.title, snippet
+                            )
+                            total += 1
+                            if total >= 200:  # cap results
+                                return
+        except Exception:
+            logger.exception("SearchWorker encountered an error")
+        finally:
+            self.finished.emit(total)
 
     def stop(self) -> None:
         self._stop = True
@@ -80,6 +78,13 @@ class SearchDialog(QDialog):
         self._cache = cache_manager
         self._book_ids = book_ids
         self._worker: SearchWorker | None = None
+
+        # Pre-load all books once instead of re-parsing JSON per search
+        self._books: list[Book] = []
+        for bid in book_ids:
+            book = cache_manager.load(bid)
+            if book:
+                self._books.append(book)
 
         self.setWindowTitle("Search Books")
         self.setMinimumSize(600, 500)
@@ -138,7 +143,7 @@ class SearchDialog(QDialog):
             self._worker.stop()
             self._worker.wait()
 
-        self._worker = SearchWorker(query, self._cache, self._book_ids)
+        self._worker = SearchWorker(query, self._books)
         self._worker.result_found.connect(self._add_result)
         self._worker.finished.connect(self._search_done)
         self._worker.start()

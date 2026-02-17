@@ -6,6 +6,8 @@ from PyQt6.QtWidgets import QWidget, QVBoxLayout
 from PyQt6.QtGui import QColor, QFont
 from PyQt6.Qsci import QsciScintilla, QsciLexerPython, QsciLexerCPP, QsciLexerHTML
 
+from pylearn.ui.theme_registry import get_palette
+
 
 class EditorPanel(QWidget):
     """Right-top panel: QScintilla-based Python code editor."""
@@ -111,102 +113,63 @@ class EditorPanel(QWidget):
         editor = self._editor
         lexer = editor.lexer()
 
-        if theme_name == "dark":
-            editor.setMarginsBackgroundColor(QColor("#1e1e2e"))
-            editor.setMarginsForegroundColor(QColor("#6c7086"))
-            editor.setCaretLineBackgroundColor(QColor("#313244"))
-            editor.setEdgeColor(QColor("#45475a"))
-            editor.setPaper(QColor("#1e1e2e"))
-            editor.setColor(QColor("#cdd6f4"))
-            if lexer:
-                lexer.setPaper(QColor("#1e1e2e"))
-                lexer.setColor(QColor("#cdd6f4"))  # Default
-                if isinstance(lexer, (QsciLexerPython, QsciLexerCPP)):
-                    lexer.setColor(QColor("#6c7086"), QsciLexerPython.Comment)
-                    lexer.setColor(QColor("#a6e3a1"), QsciLexerPython.Keyword)
-                    lexer.setColor(QColor("#f38ba8"), QsciLexerPython.Number)
-                    lexer.setColor(QColor("#fab387"), QsciLexerPython.DoubleQuotedString)
-                    lexer.setColor(QColor("#fab387"), QsciLexerPython.SingleQuotedString)
-                    lexer.setColor(QColor("#fab387"), QsciLexerPython.TripleSingleQuotedString)
-                    lexer.setColor(QColor("#fab387"), QsciLexerPython.TripleDoubleQuotedString)
-                    lexer.setColor(QColor("#89b4fa"), QsciLexerPython.ClassName)
-                    lexer.setColor(QColor("#89b4fa"), QsciLexerPython.FunctionMethodName)
-                    lexer.setColor(QColor("#cba6f7"), QsciLexerPython.Decorator)
-                elif isinstance(lexer, QsciLexerHTML):
-                    lexer.setColor(QColor("#89b4fa"), QsciLexerHTML.Tag)
-                    lexer.setColor(QColor("#89b4fa"), QsciLexerHTML.UnknownTag)
-                    lexer.setColor(QColor("#a6e3a1"), QsciLexerHTML.Attribute)
-                    lexer.setColor(QColor("#a6e3a1"), QsciLexerHTML.UnknownAttribute)
-                    lexer.setColor(QColor("#f38ba8"), QsciLexerHTML.HTMLNumber)
-                    lexer.setColor(QColor("#fab387"), QsciLexerHTML.HTMLDoubleQuotedString)
-                    lexer.setColor(QColor("#fab387"), QsciLexerHTML.HTMLSingleQuotedString)
-                    lexer.setColor(QColor("#89b4fa"), QsciLexerHTML.OtherInTag)
-                    lexer.setColor(QColor("#6c7086"), QsciLexerHTML.HTMLComment)
-                    lexer.setColor(QColor("#cba6f7"), QsciLexerHTML.Entity)
-        elif theme_name == "sepia":
-            editor.setMarginsBackgroundColor(QColor("#efe6d0"))
-            editor.setMarginsForegroundColor(QColor("#9c8b74"))
-            editor.setCaretLineBackgroundColor(QColor("#e8ddc4"))
-            editor.setEdgeColor(QColor("#d4c5a9"))
-            editor.setPaper(QColor("#f4ecd8"))
-            editor.setColor(QColor("#5b4636"))
-            if lexer:
-                lexer.setPaper(QColor("#f4ecd8"))
-                lexer.setColor(QColor("#5b4636"))  # Default
-                if isinstance(lexer, (QsciLexerPython, QsciLexerCPP)):
-                    lexer.setColor(QColor("#9c8b74"), QsciLexerPython.Comment)
-                    lexer.setColor(QColor("#8b6914"), QsciLexerPython.Keyword)
-                    lexer.setColor(QColor("#b85c3c"), QsciLexerPython.Number)
-                    lexer.setColor(QColor("#a0522d"), QsciLexerPython.DoubleQuotedString)
-                    lexer.setColor(QColor("#a0522d"), QsciLexerPython.SingleQuotedString)
-                    lexer.setColor(QColor("#a0522d"), QsciLexerPython.TripleSingleQuotedString)
-                    lexer.setColor(QColor("#a0522d"), QsciLexerPython.TripleDoubleQuotedString)
-                    lexer.setColor(QColor("#6b3a2a"), QsciLexerPython.ClassName)
-                    lexer.setColor(QColor("#6b3a2a"), QsciLexerPython.FunctionMethodName)
-                    lexer.setColor(QColor("#7a5230"), QsciLexerPython.Decorator)
-                elif isinstance(lexer, QsciLexerHTML):
-                    lexer.setColor(QColor("#6b3a2a"), QsciLexerHTML.Tag)
-                    lexer.setColor(QColor("#6b3a2a"), QsciLexerHTML.UnknownTag)
-                    lexer.setColor(QColor("#8b6914"), QsciLexerHTML.Attribute)
-                    lexer.setColor(QColor("#8b6914"), QsciLexerHTML.UnknownAttribute)
-                    lexer.setColor(QColor("#b85c3c"), QsciLexerHTML.HTMLNumber)
-                    lexer.setColor(QColor("#a0522d"), QsciLexerHTML.HTMLDoubleQuotedString)
-                    lexer.setColor(QColor("#a0522d"), QsciLexerHTML.HTMLSingleQuotedString)
-                    lexer.setColor(QColor("#6b3a2a"), QsciLexerHTML.OtherInTag)
-                    lexer.setColor(QColor("#9c8b74"), QsciLexerHTML.HTMLComment)
-                    lexer.setColor(QColor("#7a5230"), QsciLexerHTML.Entity)
-        else:
-            editor.setMarginsBackgroundColor(QColor("#f0f0f0"))
-            editor.setMarginsForegroundColor(QColor("#888888"))
-            editor.setCaretLineBackgroundColor(QColor("#e8f4f8"))
-            editor.setEdgeColor(QColor("#e0e0e0"))
-            editor.setPaper(QColor("#ffffff"))
-            editor.setColor(QColor("#000000"))
-            if lexer:
-                lexer.setPaper(QColor("#ffffff"))
-                lexer.setColor(QColor("#000000"))  # Default
-                if isinstance(lexer, (QsciLexerPython, QsciLexerCPP)):
-                    lexer.setColor(QColor("#008000"), QsciLexerPython.Comment)
-                    lexer.setColor(QColor("#0000ff"), QsciLexerPython.Keyword)
-                    lexer.setColor(QColor("#ff0000"), QsciLexerPython.Number)
-                    lexer.setColor(QColor("#ba2121"), QsciLexerPython.DoubleQuotedString)
-                    lexer.setColor(QColor("#ba2121"), QsciLexerPython.SingleQuotedString)
-                    lexer.setColor(QColor("#ba2121"), QsciLexerPython.TripleSingleQuotedString)
-                    lexer.setColor(QColor("#ba2121"), QsciLexerPython.TripleDoubleQuotedString)
-                    lexer.setColor(QColor("#0000ff"), QsciLexerPython.ClassName)
-                    lexer.setColor(QColor("#0000ff"), QsciLexerPython.FunctionMethodName)
-                    lexer.setColor(QColor("#aa22ff"), QsciLexerPython.Decorator)
-                elif isinstance(lexer, QsciLexerHTML):
-                    lexer.setColor(QColor("#0000ff"), QsciLexerHTML.Tag)
-                    lexer.setColor(QColor("#0000ff"), QsciLexerHTML.UnknownTag)
-                    lexer.setColor(QColor("#008000"), QsciLexerHTML.Attribute)
-                    lexer.setColor(QColor("#008000"), QsciLexerHTML.UnknownAttribute)
-                    lexer.setColor(QColor("#ff0000"), QsciLexerHTML.HTMLNumber)
-                    lexer.setColor(QColor("#ba2121"), QsciLexerHTML.HTMLDoubleQuotedString)
-                    lexer.setColor(QColor("#ba2121"), QsciLexerHTML.HTMLSingleQuotedString)
-                    lexer.setColor(QColor("#0000ff"), QsciLexerHTML.OtherInTag)
-                    lexer.setColor(QColor("#008000"), QsciLexerHTML.HTMLComment)
-                    lexer.setColor(QColor("#aa22ff"), QsciLexerHTML.Entity)
+        p = get_palette(theme_name)
+        editor.setMarginsBackgroundColor(QColor(p.bg_alt))
+        editor.setMarginsForegroundColor(QColor(p.text_muted))
+        editor.setCaretLineBackgroundColor(QColor(p.border))
+        editor.setEdgeColor(QColor(p.border))
+        editor.setPaper(QColor(p.bg))
+        editor.setColor(QColor(p.text))
+        if lexer:
+            lexer.setPaper(QColor(p.bg))
+            lexer.setColor(QColor(p.text))
+            if isinstance(lexer, QsciLexerCPP):
+                self._apply_cpp_theme(lexer, theme_name)
+            elif isinstance(lexer, QsciLexerPython):
+                self._apply_python_theme(lexer, theme_name)
+            elif isinstance(lexer, QsciLexerHTML):
+                self._apply_html_theme(lexer, theme_name)
+
+    # --- Per-lexer theme helpers (correct style IDs for each lexer) ---
+
+    def _apply_python_theme(self, lexer: QsciLexerPython, theme: str) -> None:
+        p = get_palette(theme)
+        lexer.setColor(QColor(p.syn_comment), QsciLexerPython.Comment)
+        lexer.setColor(QColor(p.syn_keyword), QsciLexerPython.Keyword)
+        lexer.setColor(QColor(p.syn_number), QsciLexerPython.Number)
+        lexer.setColor(QColor(p.syn_string), QsciLexerPython.DoubleQuotedString)
+        lexer.setColor(QColor(p.syn_string), QsciLexerPython.SingleQuotedString)
+        lexer.setColor(QColor(p.syn_string), QsciLexerPython.TripleSingleQuotedString)
+        lexer.setColor(QColor(p.syn_string), QsciLexerPython.TripleDoubleQuotedString)
+        lexer.setColor(QColor(p.syn_class), QsciLexerPython.ClassName)
+        lexer.setColor(QColor(p.syn_func), QsciLexerPython.FunctionMethodName)
+        lexer.setColor(QColor(p.syn_decorator), QsciLexerPython.Decorator)
+
+    def _apply_cpp_theme(self, lexer: QsciLexerCPP, theme: str) -> None:
+        p = get_palette(theme)
+        lexer.setColor(QColor(p.syn_comment), QsciLexerCPP.Comment)
+        lexer.setColor(QColor(p.syn_comment), QsciLexerCPP.CommentLine)
+        lexer.setColor(QColor(p.text_muted), QsciLexerCPP.CommentDoc)
+        lexer.setColor(QColor(p.syn_keyword), QsciLexerCPP.Keyword)
+        lexer.setColor(QColor(p.syn_number), QsciLexerCPP.Number)
+        lexer.setColor(QColor(p.syn_string), QsciLexerCPP.DoubleQuotedString)
+        lexer.setColor(QColor(p.syn_string), QsciLexerCPP.SingleQuotedString)
+        lexer.setColor(QColor(p.syn_decorator), QsciLexerCPP.PreProcessor)
+        lexer.setColor(QColor(p.syn_operator), QsciLexerCPP.Operator)
+        lexer.setColor(QColor(p.syn_class), QsciLexerCPP.GlobalClass)
+
+    def _apply_html_theme(self, lexer: QsciLexerHTML, theme: str) -> None:
+        p = get_palette(theme)
+        lexer.setColor(QColor(p.syn_class), QsciLexerHTML.Tag)
+        lexer.setColor(QColor(p.syn_class), QsciLexerHTML.UnknownTag)
+        lexer.setColor(QColor(p.syn_keyword), QsciLexerHTML.Attribute)
+        lexer.setColor(QColor(p.syn_keyword), QsciLexerHTML.UnknownAttribute)
+        lexer.setColor(QColor(p.syn_number), QsciLexerHTML.HTMLNumber)
+        lexer.setColor(QColor(p.syn_string), QsciLexerHTML.HTMLDoubleQuotedString)
+        lexer.setColor(QColor(p.syn_string), QsciLexerHTML.HTMLSingleQuotedString)
+        lexer.setColor(QColor(p.syn_class), QsciLexerHTML.OtherInTag)
+        lexer.setColor(QColor(p.syn_comment), QsciLexerHTML.HTMLComment)
+        lexer.setColor(QColor(p.syn_decorator), QsciLexerHTML.Entity)
 
     def set_language(self, language: str) -> None:
         """Switch the editor lexer between Python and C++."""

@@ -5,6 +5,8 @@ from __future__ import annotations
 from PyQt6.QtWidgets import QTextBrowser
 from PyQt6.QtGui import QFont
 
+from pylearn.ui.theme_registry import get_palette
+
 
 class ConsolePanel(QTextBrowser):
     """Right-bottom panel: displays stdout/stderr from code execution."""
@@ -13,16 +15,6 @@ class ConsolePanel(QTextBrowser):
         super().__init__(parent)
         self.setOpenLinks(False)
         self.setFont(QFont("Consolas", 11))
-
-        # Dark background for console feel
-        self.setStyleSheet("""
-            QTextBrowser {
-                background-color: #1e1e1e;
-                color: #d4d4d4;
-                border: 1px solid #333;
-                padding: 8px;
-            }
-        """)
 
         self.show_ready()
 
@@ -46,6 +38,18 @@ class ConsolePanel(QTextBrowser):
             '<p style="color:#89b4fa; font-family:Consolas, monospace;">'
             'Running...</p>'
         )
+
+    def set_theme(self, theme_name: str) -> None:
+        """Switch console theme, derived from the centralized palette."""
+        p = get_palette(theme_name)
+        self.setStyleSheet(f"""
+            QTextBrowser {{
+                background-color: {p.bg};
+                color: {p.text};
+                border: 1px solid {p.border};
+                padding: 8px;
+            }}
+        """)
 
     def clear_console(self) -> None:
         """Clear all output."""

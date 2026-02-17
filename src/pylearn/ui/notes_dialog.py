@@ -16,11 +16,13 @@ class NotesDialog(QDialog):
     """Dialog for viewing and editing notes."""
 
     def __init__(self, database: Database, book_id: str | None = None,
-                 chapter_num: int | None = None, parent=None) -> None:
+                 chapter_num: int | None = None, parent=None,
+                 section_title: str = "") -> None:
         super().__init__(parent)
         self._db = database
         self._book_id = book_id
         self._chapter_num = chapter_num
+        self._section_title = section_title
         self._current_note_id: int | None = None
 
         self.setWindowTitle("Notes")
@@ -107,7 +109,8 @@ class NotesDialog(QDialog):
             self._db.update_note(self._current_note_id, content)
         elif self._book_id:
             self._current_note_id = self._db.add_note(
-                self._book_id, self._chapter_num or 0, "", content
+                self._book_id, self._chapter_num or 0,
+                self._section_title, content,
             )
         self._load_notes()
 

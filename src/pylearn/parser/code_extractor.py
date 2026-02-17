@@ -60,12 +60,16 @@ class CodeExtractor:
         return result
 
     def _assign_block_ids(self, blocks: list[ContentBlock]) -> None:
-        """Assign unique IDs to code blocks for "Try in Editor" buttons."""
+        """Assign unique IDs to code and heading blocks."""
         code_index = 0
+        heading_index = 0
         for block in blocks:
             if block.block_type in (BlockType.CODE, BlockType.CODE_REPL):
                 block.block_id = f"code_{code_index}"
                 code_index += 1
+            elif block.block_type in (BlockType.HEADING1, BlockType.HEADING2, BlockType.HEADING3):
+                block.block_id = f"heading_{heading_index}"
+                heading_index += 1
 
     def extract_runnable_code(self, blocks: list[ContentBlock]) -> list[ContentBlock]:
         """Extract only code blocks that appear runnable."""

@@ -1,274 +1,156 @@
-"""QSS themes for the application (light and dark)."""
+"""QSS themes for the application, generated from the centralized palette."""
 
-LIGHT_THEME = """
-QMainWindow {
-    background-color: #f5f5f5;
-}
-QSplitter::handle {
-    background-color: #ddd;
+from pylearn.ui.theme_registry import get_palette, ThemePalette
+
+
+def _generate_qss(p: ThemePalette) -> str:
+    """Generate a complete QSS stylesheet from a theme palette."""
+    return f"""
+QMainWindow {{
+    background-color: {p.bg_alt};
+    color: {p.text};
+}}
+QWidget {{
+    color: {p.text};
+}}
+QSplitter::handle {{
+    background-color: {p.border};
     width: 3px;
     height: 3px;
-}
-QSplitter::handle:hover {
-    background-color: #3498db;
-}
-QTreeWidget {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
+}}
+QSplitter::handle:hover {{
+    background-color: {p.accent};
+}}
+QTreeWidget {{
+    background-color: {p.bg};
+    color: {p.text};
+    border: 1px solid {p.border};
     font-size: 13px;
     padding: 4px;
-}
-QTreeWidget::item {
+}}
+QTreeWidget::item {{
     padding: 4px 6px;
     border-radius: 3px;
-}
-QTreeWidget::item:selected {
-    background-color: #3498db;
-    color: white;
-}
-QTreeWidget::item:hover {
-    background-color: #e8f4f8;
-}
-QTextBrowser {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-}
-QMenuBar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
+}}
+QTreeWidget::item:selected {{
+    background-color: {p.accent};
+    color: {p.accent_text};
+}}
+QTreeWidget::item:hover {{
+    background-color: {p.bg_alt};
+}}
+QTextBrowser {{
+    background-color: {p.bg};
+    color: {p.text};
+    border: 1px solid {p.border};
+}}
+QMenuBar {{
+    background-color: {p.bg_alt if p.name != 'light' else p.bg};
+    color: {p.text};
+    border-bottom: 1px solid {p.border};
     padding: 2px;
-}
-QMenuBar::item:selected {
-    background-color: #3498db;
-    color: white;
+}}
+QMenuBar::item:selected {{
+    background-color: {p.accent};
+    color: {p.accent_text};
     border-radius: 4px;
-}
-QMenu {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
+}}
+QMenu {{
+    background-color: {p.bg};
+    color: {p.text};
+    border: 1px solid {p.border};
     padding: 4px;
-}
-QMenu::item:selected {
-    background-color: #3498db;
-    color: white;
+}}
+QMenu::item:selected {{
+    background-color: {p.accent};
+    color: {p.accent_text};
     border-radius: 3px;
-}
-QToolBar {
-    background-color: #ffffff;
-    border-bottom: 1px solid #ddd;
+}}
+QToolBar {{
+    background-color: {p.bg_alt if p.name != 'light' else p.bg};
+    border-bottom: 1px solid {p.border};
     spacing: 6px;
     padding: 3px;
-}
-QToolButton {
+}}
+QToolButton {{
+    color: {p.text};
     border: 1px solid transparent;
     border-radius: 4px;
     padding: 4px 8px;
     font-size: 13px;
-}
-QToolButton:hover {
-    background-color: #e8f4f8;
-    border-color: #3498db;
-}
-QToolButton:pressed {
-    background-color: #3498db;
-    color: white;
-}
-QStatusBar {
-    background-color: #ffffff;
-    border-top: 1px solid #ddd;
+}}
+QToolButton:hover {{
+    background-color: {p.bg_alt};
+    border-color: {p.accent};
+}}
+QToolButton:pressed {{
+    background-color: {p.accent};
+    color: {p.accent_text};
+}}
+QStatusBar {{
+    background-color: {p.bg_alt if p.name != 'light' else p.bg};
+    color: {p.text_muted};
+    border-top: 1px solid {p.border};
     font-size: 12px;
-    color: #666;
-}
-QComboBox {
-    border: 1px solid #ddd;
+}}
+QComboBox {{
+    border: 1px solid {p.border};
     border-radius: 4px;
     padding: 4px 8px;
-    background-color: #ffffff;
+    background-color: {p.bg};
+    color: {p.text};
     min-width: 120px;
-}
-QComboBox:hover {
-    border-color: #3498db;
-}
-QComboBox::drop-down {
+}}
+QComboBox:hover {{
+    border-color: {p.accent};
+}}
+QComboBox::drop-down {{
     border: none;
     padding-right: 8px;
-}
-QPushButton {
-    border: 1px solid #ddd;
+}}
+QComboBox QAbstractItemView {{
+    background-color: {p.bg};
+    color: {p.text};
+    border: 1px solid {p.border};
+    selection-background-color: {p.accent};
+    selection-color: {p.accent_text};
+}}
+QPushButton {{
+    border: 1px solid {p.border};
     border-radius: 4px;
     padding: 6px 16px;
-    background-color: #ffffff;
+    background-color: {p.bg};
+    color: {p.text};
     font-size: 13px;
-}
-QPushButton:hover {
-    background-color: #e8f4f8;
-    border-color: #3498db;
-}
-QPushButton:pressed {
-    background-color: #3498db;
-    color: white;
-}
-QDialog {
-    background-color: #f5f5f5;
-}
-QLineEdit, QTextEdit {
-    border: 1px solid #ddd;
+}}
+QPushButton:hover {{
+    background-color: {p.bg_alt};
+    border-color: {p.accent};
+}}
+QPushButton:pressed {{
+    background-color: {p.accent};
+    color: {p.accent_text};
+}}
+QDialog {{
+    background-color: {p.bg_alt if p.name != 'light' else p.bg_alt};
+    color: {p.text};
+}}
+QLabel {{
+    color: {p.text};
+}}
+QLineEdit, QTextEdit {{
+    border: 1px solid {p.border};
     border-radius: 4px;
     padding: 6px;
-    background-color: #ffffff;
-}
-QLineEdit:focus, QTextEdit:focus {
-    border-color: #3498db;
-}
+    background-color: {p.bg_alt if p.name != 'light' else p.bg};
+    color: {p.text};
+}}
+QLineEdit:focus, QTextEdit:focus {{
+    border-color: {p.accent};
+}}
 """
-
-DARK_THEME = """
-QMainWindow {
-    background-color: #1e1e2e;
-}
-QSplitter::handle {
-    background-color: #45475a;
-    width: 3px;
-    height: 3px;
-}
-QSplitter::handle:hover {
-    background-color: #89b4fa;
-}
-QTreeWidget {
-    background-color: #181825;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
-    font-size: 13px;
-    padding: 4px;
-}
-QTreeWidget::item {
-    padding: 4px 6px;
-    border-radius: 3px;
-}
-QTreeWidget::item:selected {
-    background-color: #89b4fa;
-    color: #1e1e2e;
-}
-QTreeWidget::item:hover {
-    background-color: #313244;
-}
-QTextBrowser {
-    background-color: #1e1e2e;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
-}
-QMenuBar {
-    background-color: #181825;
-    color: #cdd6f4;
-    border-bottom: 1px solid #45475a;
-    padding: 2px;
-}
-QMenuBar::item:selected {
-    background-color: #89b4fa;
-    color: #1e1e2e;
-    border-radius: 4px;
-}
-QMenu {
-    background-color: #1e1e2e;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
-    padding: 4px;
-}
-QMenu::item:selected {
-    background-color: #89b4fa;
-    color: #1e1e2e;
-    border-radius: 3px;
-}
-QToolBar {
-    background-color: #181825;
-    border-bottom: 1px solid #45475a;
-    spacing: 6px;
-    padding: 3px;
-}
-QToolButton {
-    color: #cdd6f4;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 13px;
-}
-QToolButton:hover {
-    background-color: #313244;
-    border-color: #89b4fa;
-}
-QToolButton:pressed {
-    background-color: #89b4fa;
-    color: #1e1e2e;
-}
-QStatusBar {
-    background-color: #181825;
-    color: #a6adc8;
-    border-top: 1px solid #45475a;
-    font-size: 12px;
-}
-QComboBox {
-    border: 1px solid #45475a;
-    border-radius: 4px;
-    padding: 4px 8px;
-    background-color: #1e1e2e;
-    color: #cdd6f4;
-    min-width: 120px;
-}
-QComboBox:hover {
-    border-color: #89b4fa;
-}
-QComboBox::drop-down {
-    border: none;
-    padding-right: 8px;
-}
-QComboBox QAbstractItemView {
-    background-color: #1e1e2e;
-    color: #cdd6f4;
-    border: 1px solid #45475a;
-    selection-background-color: #89b4fa;
-    selection-color: #1e1e2e;
-}
-QPushButton {
-    border: 1px solid #45475a;
-    border-radius: 4px;
-    padding: 6px 16px;
-    background-color: #1e1e2e;
-    color: #cdd6f4;
-    font-size: 13px;
-}
-QPushButton:hover {
-    background-color: #313244;
-    border-color: #89b4fa;
-}
-QPushButton:pressed {
-    background-color: #89b4fa;
-    color: #1e1e2e;
-}
-QDialog {
-    background-color: #1e1e2e;
-    color: #cdd6f4;
-}
-QLineEdit, QTextEdit {
-    border: 1px solid #45475a;
-    border-radius: 4px;
-    padding: 6px;
-    background-color: #181825;
-    color: #cdd6f4;
-}
-QLineEdit:focus, QTextEdit:focus {
-    border-color: #89b4fa;
-}
-QLabel {
-    color: #cdd6f4;
-}
-"""
-
-THEMES = {
-    "light": LIGHT_THEME,
-    "dark": DARK_THEME,
-}
 
 
 def get_stylesheet(theme_name: str) -> str:
-    """Get QSS stylesheet for a theme."""
-    return THEMES.get(theme_name, LIGHT_THEME)
+    """Get QSS stylesheet for a theme, generated from the centralized palette."""
+    return _generate_qss(get_palette(theme_name))

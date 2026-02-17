@@ -3,12 +3,20 @@
 from __future__ import annotations
 
 import logging
+import re
 
 from pylearn.core.models import BlockType, ContentBlock, FontSpan
 from pylearn.parser.book_profiles import BookProfile
 from pylearn.utils.text_utils import is_page_header_or_footer, detect_repl_code
 
 logger = logging.getLogger("pylearn.parser")
+
+
+_LIST_BULLET_RE = re.compile(r"^[\s]*[•●○■▪\u2022\u2023\u25E6\u2043\-\*]\s")
+_LIST_NUMBER_RE = re.compile(r"^[\s]*\d{1,3}[.)]\s")
+_NOTE_RE = re.compile(r"^Note\b[:\.\s]*", re.IGNORECASE)
+_WARNING_RE = re.compile(r"^(?:Warning|Caution)\b[:\.\s]*", re.IGNORECASE)
+_TIP_RE = re.compile(r"^Tip\b[:\.\s]*", re.IGNORECASE)
 
 
 class ContentClassifier:
@@ -51,6 +59,11 @@ class ContentClassifier:
             nonlocal current_type, current_text_parts, current_font_size
             if current_type is not None and current_text_parts:
                 text = " ".join(current_text_parts)
+                # Rejoin words hyphenated across PDF lines (e.g. "com- municate" → "communicate")
+                # Only for prose blocks — the space after the hyphen distinguishes these from
+                # real hyphens like "well-known" which have no space.
+                if current_type not in (BlockType.CODE, BlockType.CODE_REPL):
+                    text = re.sub(r"([a-z])-\s+([a-z])", r"\1\2", text)
                 # Skip headers/footers
                 if is_page_header_or_footer(text, page_num):
                     current_text_parts = []
@@ -91,14 +104,87 @@ class ContentClassifier:
             if block.block_type == BlockType.CODE and detect_repl_code(block.text):
                 block.block_type = BlockType.CODE_REPL
 
+        # Post-process: detect list items from body text
+        for block in blocks:
+            if block.block_type == BlockType.BODY:
+                if _LIST_BULLET_RE.match(block.text) or _LIST_NUMBER_RE.match(block.text):
+                    block.block_type = BlockType.LIST_ITEM
+
+        # Post-process: detect Note/Warning/Tip callouts from body text
+        for block in blocks:
+            if block.block_type == BlockType.BODY:
+                if _NOTE_RE.match(block.text):
+                    block.block_type = BlockType.NOTE
+                    block.text = _NOTE_RE.sub("", block.text, count=1)
+                elif _WARNING_RE.match(block.text):
+                    block.block_type = BlockType.WARNING
+                    block.text = _WARNING_RE.sub("", block.text, count=1)
+                elif _TIP_RE.match(block.text):
+                    block.block_type = BlockType.TIP
+                    block.text = _TIP_RE.sub("", block.text, count=1)
+
         return blocks
 
     def classify_all_pages(self, pages: list[list[FontSpan]],
-                           start_page_offset: int = 0) -> list[ContentBlock]:
-        """Classify spans from multiple pages into a flat list of content blocks."""
+                           start_page_offset: int = 0,
+                           page_images: dict[int, list[dict]] | None = None) -> list[ContentBlock]:
+        """Classify spans from multiple pages into a flat list of content blocks.
+
+        Args:
+            pages: List of per-page FontSpan lists.
+            start_page_offset: PDF page number of the first page in the list.
+            page_images: Optional dict mapping page_num → list of image metadata
+                         dicts (from PDFParser.extract_page_images). Each dict
+                         has keys: filename, y0, page_num, width, height.
+        """
         all_blocks: list[ContentBlock] = []
         for i, page_spans in enumerate(pages):
             page_num = start_page_offset + i
             page_blocks = self.classify_page_spans(page_spans, page_num)
+
+            # Interleave images by vertical position
+            if page_images and page_num in page_images:
+                page_blocks = self._interleave_images(page_blocks, page_images[page_num], page_num)
+
             all_blocks.extend(page_blocks)
         return all_blocks
+
+    @staticmethod
+    def _interleave_images(blocks: list[ContentBlock], images: list[dict],
+                           page_num: int) -> list[ContentBlock]:
+        """Insert FIGURE blocks among text blocks based on y-position."""
+        if not images:
+            return blocks
+
+        # Build image blocks sorted by vertical position
+        img_blocks = []
+        for img in sorted(images, key=lambda x: x.get("y0", 0)):
+            img_blocks.append((
+                img.get("y0", 0),
+                ContentBlock(
+                    block_type=BlockType.FIGURE,
+                    text=img["filename"],
+                    page_num=page_num,
+                ),
+            ))
+
+        # Merge: walk text blocks (which have no y0 — use insertion order as proxy)
+        # Insert images between blocks, grouping at end if no good position found
+        result: list[ContentBlock] = []
+        img_idx = 0
+        # Estimate text block positions as evenly spaced on page
+        n = len(blocks) or 1
+        for i, block in enumerate(blocks):
+            # Insert any images whose y0 is before this block's estimated position
+            est_y = (i / n) * 800  # rough page height proxy
+            while img_idx < len(img_blocks) and img_blocks[img_idx][0] <= est_y:
+                result.append(img_blocks[img_idx][1])
+                img_idx += 1
+            result.append(block)
+
+        # Append remaining images at end
+        while img_idx < len(img_blocks):
+            result.append(img_blocks[img_idx][1])
+            img_idx += 1
+
+        return result

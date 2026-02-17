@@ -3,33 +3,28 @@
 from __future__ import annotations
 
 import logging
-import subprocess
 import sys
 from pathlib import Path
 
 from PyQt6.QtWidgets import (
-    QMainWindow, QSplitter, QWidget, QVBoxLayout, QHBoxLayout,
-    QMenuBar, QMenu, QStatusBar, QLabel, QApplication, QMessageBox,
-    QFileDialog, QProgressDialog,
+    QMainWindow, QSplitter, QWidget, QVBoxLayout,
+    QMenu, QStatusBar, QLabel, QApplication, QMessageBox,
+    QFileDialog,
 )
 from PyQt6.QtCore import Qt, QThread, QProcess, QTimer, pyqtSignal
 from PyQt6.QtGui import QAction, QKeySequence, QCloseEvent
 
 from pylearn.core.config import AppConfig, BooksConfig, EditorConfig
-from pylearn.core.constants import (
-    APP_NAME, APP_VERSION, READER_SPLITTER_RATIO,
-    EDITOR_CONSOLE_RATIO, TOC_WIDTH, STATUS_IN_PROGRESS,
-    _FROZEN,
-)
+from pylearn.core.constants import APP_NAME, APP_VERSION, TOC_WIDTH, IS_FROZEN
 from pylearn.core.database import Database
-from pylearn.core.models import Book, ContentBlock, BlockType
+from pylearn.core.models import Book
 from pylearn.parser.cache_manager import CacheManager
 from pylearn.parser.pdf_parser import PDFParser
 from pylearn.parser.content_classifier import ContentClassifier
 from pylearn.parser.code_extractor import CodeExtractor
 from pylearn.parser.structure_detector import StructureDetector
 from pylearn.renderer.html_renderer import HTMLRenderer
-from pylearn.executor.sandbox import Sandbox
+from pylearn.executor.sandbox import Sandbox, check_dangerous_code
 from pylearn.executor.session import Session
 from pylearn.executor.output_handler import OutputHandler
 from pylearn.utils.text_utils import strip_repl_prompts, detect_repl_code
@@ -46,6 +41,7 @@ from pylearn.ui.notes_dialog import NotesDialog
 from pylearn.ui.progress_dialog import ProgressDialog
 from pylearn.ui.search_dialog import SearchDialog
 from pylearn.ui.exercise_panel import ExercisePanel
+from pylearn.ui.book_controller import BookController
 
 logger = logging.getLogger("pylearn.ui")
 
@@ -77,7 +73,7 @@ class ParseProcess:
         if self._process.state() != QProcess.ProcessState.NotRunning:
             return
         self._book_id = book_id
-        if _FROZEN:
+        if IS_FROZEN:
             # Frozen mode: re-invoke the exe itself with --parse flag
             self._process.start(sys.executable, ["--parse", "--book", book_id, "--force"])
         else:
@@ -147,12 +143,15 @@ class MainWindow(QMainWindow):
         self._session = Session(timeout=self._editor_config.execution_timeout)
         self._output = OutputHandler()
 
+        # Book controller (owns book state, navigation, progress)
+        self._book = BookController(
+            self._db, self._cache, self._books_config, parent=self,
+        )
+
         # External editor
         self._external_editor = ExternalEditorManager(self)
 
-        # State
-        self._current_book: Book | None = None
-        self._current_chapter_num: int = 0
+        # State (non-book)
         self._parse_process: ParseProcess | None = None
         self._exec_worker: ExecuteWorker | None = None
 
@@ -273,6 +272,13 @@ class MainWindow(QMainWindow):
         self._add_menu_action(view_menu, "Notes...", self._show_notes)
         self._add_menu_action(view_menu, "Exercises...", self._show_exercises)
         view_menu.addSeparator()
+        self._add_menu_action(view_menu, "Increase Font Size", self._increase_font, "Ctrl+=")
+        self._add_menu_action(view_menu, "Decrease Font Size", self._decrease_font, "Ctrl+-")
+        view_menu.addSeparator()
+        self._add_menu_action(view_menu, "Focus TOC", self._focus_toc, "Ctrl+1")
+        self._add_menu_action(view_menu, "Focus Reader", self._focus_reader, "Ctrl+2")
+        self._add_menu_action(view_menu, "Focus Editor", self._focus_editor, "Ctrl+3")
+        view_menu.addSeparator()
         self._add_menu_action(view_menu, "Progress...", self._show_progress)
 
         # Book menu
@@ -280,8 +286,10 @@ class MainWindow(QMainWindow):
         self._add_menu_action(book_menu, "Parse Current Book", self._parse_current_book)
         self._add_menu_action(book_menu, "Re-parse (clear cache)", self._reparse_book)
         book_menu.addSeparator()
-        self._add_menu_action(book_menu, "Previous Chapter", self._prev_chapter, "Alt+Left")
-        self._add_menu_action(book_menu, "Next Chapter", self._next_chapter, "Alt+Right")
+        self._add_menu_action(book_menu, "Previous Chapter", self._book.prev_chapter, "Alt+Left")
+        self._add_menu_action(book_menu, "Next Chapter", self._book.next_chapter, "Alt+Right")
+        book_menu.addSeparator()
+        self._add_menu_action(book_menu, "Mark Chapter Complete", self._book.mark_chapter_complete, "Ctrl+M")
 
         # Run menu
         run_menu = menubar.addMenu("&Run")
@@ -292,20 +300,42 @@ class MainWindow(QMainWindow):
 
         # Search menu
         search_menu = menubar.addMenu("&Search")
-        self._add_menu_action(search_menu, "Search Books...", self._show_search, "Ctrl+F")
+        self._add_menu_action(search_menu, "Find in Chapter", self._find_in_chapter, "Ctrl+F")
+        self._add_menu_action(search_menu, "Search All Books...", self._show_search, "Ctrl+Shift+F")
 
         # Help menu
         help_menu = menubar.addMenu("&Help")
+        self._add_menu_action(help_menu, "Keyboard Shortcuts", self._show_shortcuts, "Ctrl+/")
+        help_menu.addSeparator()
         self._add_menu_action(help_menu, "About", self._show_about)
 
     def _connect_signals(self) -> None:
         """Wire up all signals between components."""
-        # Library
-        self._library.book_selected.connect(self._on_book_selected)
+        # Library → BookController
+        self._library.book_selected.connect(self._book.on_book_selected)
 
-        # TOC
-        self._toc.chapter_selected.connect(self._navigate_to_chapter)
-        self._toc.section_selected.connect(self._navigate_to_section)
+        # TOC → BookController
+        self._toc.chapter_selected.connect(self._book.navigate_to_chapter)
+        self._toc.section_selected.connect(self._on_section_selected)
+
+        # BookController → UI
+        self._book.book_loaded.connect(self._on_book_loaded)
+        self._book.chapter_changed.connect(self._on_chapter_changed)
+        self._book.language_changed.connect(self._on_language_changed)
+        self._book.status_message.connect(self._status_state.setText)
+        self._book.error_message.connect(
+            lambda title, msg: QMessageBox.warning(self, title, msg)
+        )
+        self._book.progress_updated.connect(self._status_progress.setText)
+        self._book.chapter_status_changed.connect(
+            self._toc.update_chapter_status
+        )
+        self._book.parse_requested.connect(self._on_parse_requested)
+        self._book.scroll_to_position.connect(
+            lambda pos: QTimer.singleShot(
+                0, lambda: self._reader.verticalScrollBar().setValue(pos)
+            )
+        )
 
         # Reader
         self._reader.code_copy_requested.connect(self._copy_code_block)
@@ -338,7 +368,7 @@ class MainWindow(QMainWindow):
         self._on_theme_changed(cfg.theme)
         self._toolbar.set_theme(cfg.theme)
 
-        # Font
+        # Editor font (reader font is applied via toolbar signal)
         self._toolbar.set_font_size(cfg.reader_font_size)
         self._editor.set_font_size(self._editor_config.font_size)
 
@@ -346,7 +376,7 @@ class MainWindow(QMainWindow):
         if not cfg.toc_visible:
             self._toc.hide()
 
-        # Load last book
+        # Load last book (triggers library → BookController pipeline)
         if cfg.last_book_id:
             self._library.select_book(cfg.last_book_id)
 
@@ -366,95 +396,61 @@ class MainWindow(QMainWindow):
         cfg.editor_console_sizes = self._right_splitter.sizes()
         cfg.toc_visible = self._toc.isVisible()
 
-        if self._current_book:
-            cfg.last_book_id = self._current_book.book_id
-            # Save scroll position
+        if self._book.current_book:
+            cfg.last_book_id = self._book.current_book.book_id
             scroll_pos = self._reader.verticalScrollBar().value()
-            self._db.save_last_position(
-                self._current_book.book_id, self._current_chapter_num, scroll_pos
-            )
-            # Update reading progress
-            if self._current_chapter_num > 0:
-                self._db.update_reading_progress(
-                    self._current_book.book_id, self._current_chapter_num,
-                    STATUS_IN_PROGRESS, scroll_pos,
-                )
+            self._book.save_position(scroll_pos)
 
         cfg.save()
         self._editor_config.save()
 
-    # --- Book Management ---
+    # --- BookController UI Handlers ---
 
-    def _on_book_selected(self, book_id: str) -> None:
-        """Handle book selection from the library panel."""
-        book_info = self._books_config.get_book(book_id)
-        if not book_info:
-            return
-
-        # Try loading from cache
-        book = self._cache.load(book_id)
-        if book:
-            self._load_book(book)
-        else:
-            # Check if PDF exists
-            if not Path(book_info["pdf_path"]).exists():
-                QMessageBox.warning(
-                    self, "PDF Not Found",
-                    f'PDF not found at: {book_info["pdf_path"]}\n'
-                    f'Please update the book path in the library.'
-                )
-                return
-
-            reply = QMessageBox.question(
-                self, "Parse Book",
-                f'"{book_info["title"]}" has not been parsed yet.\n'
-                f'Parse it now? (This may take a few minutes)',
-                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            )
-            if reply == QMessageBox.StandardButton.Yes:
-                self._start_parse(book_info)
-
-    def _load_book(self, book: Book) -> None:
-        """Load a parsed book into the UI."""
-        self._current_book = book
+    def _on_book_loaded(self, book: Book) -> None:
+        """UI response to BookController.book_loaded signal."""
         self._status_book.setText(f"Book: {book.title}")
+        self._reader.set_image_dir(self._book.image_dir)
 
-        # Set language directly from book model
-        self._current_language = book.language
-        self._editor.set_language(book.language)
-        self._session.language = book.language
-        self._reader.set_language(book.language)
-
-        # Register in database
-        self._db.upsert_book(
-            book.book_id, book.title, book.pdf_path,
-            book.total_pages, len(book.chapters),
-        )
-        for ch in book.chapters:
-            self._db.upsert_chapter(
-                book.book_id, ch.chapter_num, ch.title,
-                ch.start_page, ch.end_page,
-            )
-
-        # Load TOC
-        progress_data = {}
-        for p in self._db.get_all_progress(book.book_id):
-            progress_data[p["chapter_num"]] = p["status"]
+        progress_data = self._book.get_progress_data()
         self._toc.load_chapters(book.chapters, progress_data)
 
-        # Update status
-        stats = self._db.get_completion_stats(book.book_id)
-        self._status_progress.setText(f"{stats['percent']}% complete")
+    def _on_chapter_changed(self, chapter_num: int, content_blocks: list) -> None:
+        """UI response to BookController.chapter_changed signal."""
+        self._reader.display_blocks(content_blocks)
+        self._toc.highlight_chapter(chapter_num)
+        book = self._book.current_book
+        total = len(book.chapters) if book else 0
+        self._status_chapter.setText(f"Chapter {chapter_num} of {total}")
 
-        # Navigate to last position or first chapter
-        last_pos = self._db.get_last_position(book.book_id)
-        if last_pos:
-            self._navigate_to_chapter(last_pos["chapter_num"])
-            scroll_pos = last_pos.get("scroll_position", 0)
-            if scroll_pos:
-                QTimer.singleShot(0, lambda: self._reader.verticalScrollBar().setValue(scroll_pos))
-        elif book.chapters:
-            self._navigate_to_chapter(book.chapters[0].chapter_num)
+    def _on_language_changed(self, language: str) -> None:
+        """UI response to BookController.language_changed signal."""
+        self._editor.set_language(language)
+        self._session.language = language
+        self._reader.set_language(language)
+
+    def _on_section_selected(self, chapter_num: int, block_index: int) -> None:
+        """Handle TOC section click — delegate to controller, then scroll."""
+        block_id = self._book.navigate_to_section(chapter_num, block_index)
+        if block_id:
+            self._reader.scroll_to_block(block_id)
+
+    def _on_visible_heading_changed(self, block_index: int) -> None:
+        """Sync TOC highlight as the user scrolls through the reader."""
+        if self._book.current_chapter_num > 0:
+            self._toc.highlight_section(self._book.current_chapter_num, block_index)
+
+    def _on_parse_requested(self, book_info: dict) -> None:
+        """BookController couldn't find cache — ask user to parse."""
+        reply = QMessageBox.question(
+            self, "Parse Book",
+            f'"{book_info["title"]}" has not been parsed yet.\n'
+            f'Parse it now? (This may take a few minutes)',
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        )
+        if reply == QMessageBox.StandardButton.Yes:
+            self._start_parse(book_info)
+
+    # --- Parsing (UI-side, uses ParseProcess) ---
 
     def _parse_current_book(self) -> None:
         """Parse (or re-parse) the currently selected book."""
@@ -462,7 +458,6 @@ class MainWindow(QMainWindow):
         if not book_id:
             QMessageBox.information(self, "No Book", "Please select a book first.")
             return
-
         book_info = self._books_config.get_book(book_id)
         if book_info:
             self._start_parse(book_info)
@@ -481,7 +476,6 @@ class MainWindow(QMainWindow):
             return
 
         self._status_state.setText("Parsing (background process)...")
-
         self._parse_process = ParseProcess(self)
         self._parse_process.on_progress = lambda msg: self._status_state.setText(msg)
         self._parse_process.on_finished = self._on_parse_finished
@@ -491,7 +485,7 @@ class MainWindow(QMainWindow):
     def _on_parse_finished(self, book: Book) -> None:
         self._status_state.setText("Ready")
         if book:
-            self._load_book(book)
+            self._book.load_book(book)
             QMessageBox.information(
                 self, "Parse Complete",
                 f'"{book.title}" parsed successfully.\n'
@@ -501,77 +495,6 @@ class MainWindow(QMainWindow):
     def _on_parse_error(self, error_msg: str) -> None:
         self._status_state.setText("Ready")
         QMessageBox.critical(self, "Parse Error", f"Error parsing book:\n{error_msg}")
-
-    # --- Navigation ---
-
-    def _navigate_to_chapter(self, chapter_num: int) -> None:
-        """Load and display a chapter."""
-        if not self._current_book:
-            return
-
-        chapter = None
-        for ch in self._current_book.chapters:
-            if ch.chapter_num == chapter_num:
-                chapter = ch
-                break
-
-        if not chapter:
-            return
-
-        self._current_chapter_num = chapter_num
-        self._reader.display_blocks(chapter.content_blocks)
-        self._toc.highlight_chapter(chapter_num)
-
-        # Update status
-        total = len(self._current_book.chapters)
-        idx = next(
-            (i for i, ch in enumerate(self._current_book.chapters)
-             if ch.chapter_num == chapter_num), 0
-        )
-        self._status_chapter.setText(f"Chapter {chapter_num} of {total}")
-
-        # Mark as in progress
-        self._db.update_reading_progress(
-            self._current_book.book_id, chapter_num, STATUS_IN_PROGRESS
-        )
-        self._toc.update_chapter_status(chapter_num, STATUS_IN_PROGRESS)
-
-    def _navigate_to_section(self, chapter_num: int, block_index: int) -> None:
-        """Navigate to a specific section within a chapter."""
-        if self._current_chapter_num != chapter_num:
-            self._navigate_to_chapter(chapter_num)
-
-        # Find the block_id for scrolling
-        if self._current_book:
-            for ch in self._current_book.chapters:
-                if ch.chapter_num == chapter_num and block_index < len(ch.content_blocks):
-                    block = ch.content_blocks[block_index]
-                    if block.block_id:
-                        self._reader.scroll_to_block(block.block_id)
-                    break
-
-    def _prev_chapter(self) -> None:
-        if not self._current_book:
-            return
-        chapters = self._current_book.chapters
-        for i, ch in enumerate(chapters):
-            if ch.chapter_num == self._current_chapter_num and i > 0:
-                self._navigate_to_chapter(chapters[i - 1].chapter_num)
-                return
-
-    def _next_chapter(self) -> None:
-        if not self._current_book:
-            return
-        chapters = self._current_book.chapters
-        for i, ch in enumerate(chapters):
-            if ch.chapter_num == self._current_chapter_num and i < len(chapters) - 1:
-                self._navigate_to_chapter(chapters[i + 1].chapter_num)
-                return
-
-    def _on_visible_heading_changed(self, block_index: int) -> None:
-        """Sync TOC highlight as the user scrolls through the reader."""
-        if self._current_chapter_num > 0:
-            self._toc.highlight_section(self._current_chapter_num, block_index)
 
     # --- External Editor ---
 
@@ -585,7 +508,7 @@ class MainWindow(QMainWindow):
             return
 
         code = self._editor.get_code()
-        language = getattr(self, "_current_language", "python")
+        language = self._book.current_language
         error = self._external_editor.open(
             code, language, self._editor_config.external_editor_path
         )
@@ -617,13 +540,31 @@ class MainWindow(QMainWindow):
 
     def _run_code(self) -> None:
         """Execute the code in the editor."""
+        if self._exec_worker and self._exec_worker.isRunning():
+            return  # Already running — prevent overlapping workers
+
         code = self._editor.get_code().strip()
         if not code:
             return
 
+        # Warn about potentially dangerous code
+        warnings = check_dangerous_code(code)
+        if warnings:
+            detail = "\n".join(f"  - {w}" for w in warnings)
+            reply = QMessageBox.warning(
+                self, "Potentially Dangerous Code",
+                f"This code contains operations that could modify your system:\n\n"
+                f"{detail}\n\n"
+                f"Run anyway?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No,
+            )
+            if reply != QMessageBox.StandardButton.Yes:
+                return
+
         self._toolbar.set_running(True)
         self._console.show_running()
-        lang = getattr(self, "_current_language", "python")
+        lang = self._book.current_language
         if lang == "html":
             self._status_state.setText("Opening in browser...")
         elif lang in ("cpp", "c"):
@@ -660,7 +601,7 @@ class MainWindow(QMainWindow):
     # --- File Operations ---
 
     def _save_code_to_file(self) -> None:
-        lang = getattr(self, "_current_language", "python")
+        lang = self._book.current_language
         if lang == "html":
             file_filter = "HTML Files (*.html *.htm);;CSS Files (*.css);;All Files (*)"
         elif lang in ("cpp", "c"):
@@ -675,7 +616,7 @@ class MainWindow(QMainWindow):
             self._status_state.setText(f"Saved to {Path(path).name}")
 
     def _load_code_from_file(self) -> None:
-        lang = getattr(self, "_current_language", "python")
+        lang = self._book.current_language
         if lang == "html":
             file_filter = "HTML Files (*.html *.htm);;CSS Files (*.css);;All Files (*)"
         elif lang in ("cpp", "c"):
@@ -693,54 +634,55 @@ class MainWindow(QMainWindow):
     # --- Bookmarks & Notes ---
 
     def _add_bookmark(self) -> None:
-        if not self._current_book:
+        if not self._book.current_book:
             return
         scroll_pos = self._reader.verticalScrollBar().value()
         add_bookmark_dialog(
-            self, self._db, self._current_book.book_id,
-            self._current_chapter_num, scroll_pos,
+            self, self._db, self._book.current_book.book_id,
+            self._book.current_chapter_num, scroll_pos,
         )
 
     def _show_bookmarks(self) -> None:
-        book_id = self._current_book.book_id if self._current_book else None
+        book_id = self._book.current_book.book_id if self._book.current_book else None
         dialog = BookmarkDialog(self._db, book_id, self)
         dialog.bookmark_selected.connect(self._goto_bookmark)
         dialog.exec()
 
     def _goto_bookmark(self, book_id: str, chapter_num: int, scroll_pos: int) -> None:
-        if self._current_book and self._current_book.book_id != book_id:
+        if self._book.current_book and self._book.current_book.book_id != book_id:
             self._library.select_book(book_id)
-        self._navigate_to_chapter(chapter_num)
+        self._book.navigate_to_chapter(chapter_num)
         self._reader.verticalScrollBar().setValue(scroll_pos)
 
     def _add_note(self) -> None:
-        if not self._current_book:
+        if not self._book.current_book:
             return
+        section_title = self._book.current_chapter_title()
         dialog = NotesDialog(
-            self._db, self._current_book.book_id,
-            self._current_chapter_num, self,
+            self._db, self._book.current_book.book_id,
+            self._book.current_chapter_num, self,
+            section_title=section_title,
         )
         dialog.exec()
 
     def _show_notes(self) -> None:
-        book_id = self._current_book.book_id if self._current_book else None
+        book_id = self._book.current_book.book_id if self._book.current_book else None
         dialog = NotesDialog(self._db, book_id, parent=self)
         dialog.exec()
 
     # --- Exercises ---
 
     def _show_exercises(self) -> None:
-        if not self._current_book:
+        if not self._book.current_book:
             QMessageBox.information(self, "No Book", "Please select a book first.")
             return
-        # Show exercises in a dialog-like panel
         from PyQt6.QtWidgets import QDialog, QVBoxLayout
         dialog = QDialog(self)
         dialog.setWindowTitle("Exercises")
         dialog.setMinimumSize(500, 500)
         layout = QVBoxLayout(dialog)
         panel = ExercisePanel(self._db, dialog)
-        panel.load_exercises(self._current_book.book_id)
+        panel.load_exercises(self._book.current_book.book_id)
         panel.load_code_requested.connect(self._editor.set_code)
         layout.addWidget(panel)
         dialog.exec()
@@ -749,6 +691,27 @@ class MainWindow(QMainWindow):
 
     def _toggle_toc(self) -> None:
         self._toc.setVisible(not self._toc.isVisible())
+
+    def _increase_font(self) -> None:
+        size = min(self._app_config.reader_font_size + 1, 30)
+        self._on_font_size_changed(size)
+        self._toolbar.set_font_size(size)
+
+    def _decrease_font(self) -> None:
+        size = max(self._app_config.reader_font_size - 1, 6)
+        self._on_font_size_changed(size)
+        self._toolbar.set_font_size(size)
+
+    def _focus_toc(self) -> None:
+        if not self._toc.isVisible():
+            self._toc.setVisible(True)
+        self._toc.setFocus()
+
+    def _focus_reader(self) -> None:
+        self._reader.setFocus()
+
+    def _focus_editor(self) -> None:
+        self._editor.setFocus()
 
     def _on_font_size_changed(self, size: int) -> None:
         self._reader.set_font_size(size)
@@ -765,6 +728,10 @@ class MainWindow(QMainWindow):
 
     # --- Search ---
 
+    def _find_in_chapter(self) -> None:
+        """Show the inline find bar in the reader panel."""
+        self._reader.show_find_bar()
+
     def _show_search(self) -> None:
         book_ids = [b["book_id"] for b in self._books_config.books]
         dialog = SearchDialog(self._cache, book_ids, self)
@@ -772,9 +739,9 @@ class MainWindow(QMainWindow):
         dialog.exec()
 
     def _search_navigate(self, book_id: str, chapter_num: int) -> None:
-        if self._current_book and self._current_book.book_id != book_id:
+        if self._book.current_book and self._book.current_book.book_id != book_id:
             self._library.select_book(book_id)
-        self._navigate_to_chapter(chapter_num)
+        self._book.navigate_to_chapter(chapter_num)
 
     # --- Progress ---
 
@@ -782,7 +749,41 @@ class MainWindow(QMainWindow):
         dialog = ProgressDialog(self._db, self)
         dialog.exec()
 
-    # --- About ---
+    # --- Help ---
+
+    def _show_shortcuts(self) -> None:
+        """Show keyboard shortcuts reference."""
+        shortcuts_html = """
+        <h2>Keyboard Shortcuts</h2>
+        <table cellpadding="4" cellspacing="0" style="border-collapse:collapse;">
+        <tr><td colspan="2"><b>Navigation</b></td></tr>
+        <tr><td><code>Alt+Left</code></td><td>Previous chapter</td></tr>
+        <tr><td><code>Alt+Right</code></td><td>Next chapter</td></tr>
+        <tr><td><code>Ctrl+M</code></td><td>Mark chapter complete</td></tr>
+        <tr><td><code>Ctrl+T</code></td><td>Toggle TOC panel</td></tr>
+        <tr><td colspan="2"><b>Search</b></td></tr>
+        <tr><td><code>Ctrl+F</code></td><td>Find in current chapter</td></tr>
+        <tr><td><code>Ctrl+Shift+F</code></td><td>Search all books</td></tr>
+        <tr><td colspan="2"><b>Code</b></td></tr>
+        <tr><td><code>F5</code></td><td>Run code</td></tr>
+        <tr><td><code>Shift+F5</code></td><td>Stop execution</td></tr>
+        <tr><td><code>Ctrl+S</code></td><td>Save code to file</td></tr>
+        <tr><td><code>Ctrl+O</code></td><td>Load code from file</td></tr>
+        <tr><td><code>Ctrl+E</code></td><td>Open in external editor</td></tr>
+        <tr><td colspan="2"><b>View</b></td></tr>
+        <tr><td><code>Ctrl+=</code></td><td>Increase font size</td></tr>
+        <tr><td><code>Ctrl+-</code></td><td>Decrease font size</td></tr>
+        <tr><td><code>Ctrl+1</code></td><td>Focus TOC panel</td></tr>
+        <tr><td><code>Ctrl+2</code></td><td>Focus reader panel</td></tr>
+        <tr><td><code>Ctrl+3</code></td><td>Focus code editor</td></tr>
+        <tr><td colspan="2"><b>Notes &amp; Bookmarks</b></td></tr>
+        <tr><td><code>Ctrl+B</code></td><td>Add bookmark</td></tr>
+        <tr><td><code>Ctrl+N</code></td><td>Add note</td></tr>
+        <tr><td colspan="2"><b>Other</b></td></tr>
+        <tr><td><code>Ctrl+/</code></td><td>Show this dialog</td></tr>
+        </table>
+        """
+        QMessageBox.information(self, "Keyboard Shortcuts", shortcuts_html)
 
     def _show_about(self) -> None:
         QMessageBox.about(
@@ -801,11 +802,10 @@ class MainWindow(QMainWindow):
         self._save_state()
         # Clean up external editor temp files
         self._external_editor.cleanup()
-        # Stop any running processes
+        # Stop any running processes — kill subprocess first so thread exits
         self._session.stop()
         if self._parse_process and self._parse_process.is_running():
             self._parse_process.stop()
         if self._exec_worker and self._exec_worker.isRunning():
-            self._exec_worker.quit()
-            self._exec_worker.wait(3000)
+            self._exec_worker.wait(5000)
         super().closeEvent(event)

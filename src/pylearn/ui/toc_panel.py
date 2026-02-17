@@ -22,6 +22,7 @@ class TOCPanel(QTreeWidget):
         self.setAnimated(True)
         self.setMinimumWidth(180)
         self.itemClicked.connect(self._on_item_clicked)
+        self.itemDoubleClicked.connect(self._on_item_double_clicked)
 
         self._chapter_items: dict[int, QTreeWidgetItem] = {}
 
@@ -39,6 +40,11 @@ class TOCPanel(QTreeWidget):
             item = QTreeWidgetItem(self)
             item.setText(0, f"{icon} Ch {chapter.chapter_num}: {chapter.title}")
             item.setData(0, Qt.ItemDataRole.UserRole, ("chapter", chapter.chapter_num))
+            item.setData(0, Qt.ItemDataRole.UserRole + 1, {
+                "status": status,
+                "chapter_num": chapter.chapter_num,
+                "title": chapter.title,
+            })
 
             font = item.font(0)
             if status == "in_progress":
@@ -71,12 +77,16 @@ class TOCPanel(QTreeWidget):
         """Update the icon/style for a chapter."""
         item = self._chapter_items.get(chapter_num)
         if item:
+            # Read stored metadata and rebuild text cleanly
+            meta = item.data(0, Qt.ItemDataRole.UserRole + 1) or {}
+            meta["status"] = status
+            item.setData(0, Qt.ItemDataRole.UserRole + 1, meta)
+
             icon = self._status_icon(status)
-            text = item.text(0)
-            # Replace the icon prefix
-            parts = text.split(" ", 1)
-            if len(parts) > 1:
-                item.setText(0, f"{icon} {parts[1]}")
+            title = meta.get("title", "")
+            ch_num = meta.get("chapter_num", chapter_num)
+            item.setText(0, f"{icon} Ch {ch_num}: {title}")
+
             font = item.font(0)
             font.setBold(status == "in_progress")
             item.setFont(0, font)
@@ -87,9 +97,53 @@ class TOCPanel(QTreeWidget):
         if item:
             self.setCurrentItem(item)
             self.scrollToItem(item)
+            item.setExpanded(True)
+
+    def highlight_section(self, chapter_num: int, block_index: int) -> None:
+        """Highlight the section closest to block_index as the user scrolls.
+
+        Finds the section item with the largest block_index <= the given index,
+        i.e. the section the reader is currently inside.
+        """
+        chapter_item = self._chapter_items.get(chapter_num)
+        if not chapter_item:
+            return
+
+        best_item: QTreeWidgetItem | None = None
+
+        def _search(parent: QTreeWidgetItem) -> None:
+            nonlocal best_item
+            for i in range(parent.childCount()):
+                child = parent.child(i)
+                data = child.data(0, Qt.ItemDataRole.UserRole)
+                if data and data[0] == "section":
+                    if data[2] <= block_index:
+                        best_item = child
+                        _search(child)
+
+        _search(chapter_item)
+
+        target = best_item or chapter_item
+        if target != self.currentItem():
+            # Avoid triggering navigation signals — this is just visual tracking
+            self.blockSignals(True)
+            self.setCurrentItem(target)
+            self.scrollToItem(target)
+            self.blockSignals(False)
 
     def _on_item_clicked(self, item: QTreeWidgetItem, column: int) -> None:
-        """Handle tree item clicks."""
+        """Handle tree item single-clicks — navigate to chapters and sections."""
+        data = item.data(0, Qt.ItemDataRole.UserRole)
+        if not data:
+            return
+
+        if data[0] == "chapter":
+            self.chapter_selected.emit(data[1])
+        elif data[0] == "section":
+            self.section_selected.emit(data[1], data[2])
+
+    def _on_item_double_clicked(self, item: QTreeWidgetItem, column: int) -> None:
+        """Handle tree item double-clicks — scroll to sections."""
         data = item.data(0, Qt.ItemDataRole.UserRole)
         if not data:
             return

@@ -1,8 +1,13 @@
-"""Reader display theme configuration."""
+"""Reader display theme configuration.
+
+Colors are derived from the centralized ThemePalette in theme_registry.py.
+"""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
+
+from pylearn.ui.theme_registry import get_palette, ThemePalette
 
 
 @dataclass
@@ -49,31 +54,19 @@ class ReaderTheme:
     button_hover: str = "#2980b9"
 
 
-LIGHT_THEME = ReaderTheme()
-
-DARK_THEME = ReaderTheme(
-    bg_color="#1e1e2e",
-    text_color="#cdd6f4",
-    h1_color="#cba6f7",
-    h2_color="#89b4fa",
-    h3_color="#74c7ec",
-    code_bg="#181825",
-    code_text="#cdd6f4",
-    code_border="#45475a",
-    note_bg="#1e1e2e",
-    note_border="#89b4fa",
-    warning_bg="#1e1e2e",
-    warning_border="#fab387",
-    tip_bg="#1e1e2e",
-    tip_border="#a6e3a1",
-    button_bg="#89b4fa",
-    button_text="#1e1e2e",
-    button_hover="#74c7ec",
-)
+def _theme_from_palette(p: ThemePalette) -> ReaderTheme:
+    """Generate a ReaderTheme from a centralized palette."""
+    return ReaderTheme(
+        bg_color=p.bg, text_color=p.text,
+        h1_color=p.h1, h2_color=p.h2, h3_color=p.h3,
+        code_bg=p.code_bg, code_text=p.code_text, code_border=p.code_border,
+        note_bg=p.note_bg, note_border=p.note_border,
+        warning_bg=p.warning_bg, warning_border=p.warning_border,
+        tip_bg=p.tip_bg, tip_border=p.tip_border,
+        button_bg=p.accent, button_text=p.accent_text, button_hover=p.accent_hover,
+    )
 
 
 def get_theme(name: str = "light") -> ReaderTheme:
-    """Get a reader theme by name."""
-    if name == "dark":
-        return DARK_THEME
-    return LIGHT_THEME
+    """Get a reader theme by name, derived from the centralized palette."""
+    return _theme_from_palette(get_palette(name))

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import logging
 from pathlib import Path
 
@@ -12,6 +13,12 @@ from pylearn.parser.book_profiles import BookProfile
 from pylearn.utils.text_utils import clean_text
 
 logger = logging.getLogger("pylearn.parser")
+
+# Allowed image file extensions from PyMuPDF extraction
+_VALID_IMAGE_EXTENSIONS = {"png", "jpg", "jpeg", "bmp", "gif", "tiff"}
+
+# Maximum number of images to extract per book
+_MAX_IMAGES_PER_BOOK = 500
 
 
 class PDFParser:
@@ -29,6 +36,14 @@ class PDFParser:
         if self._doc:
             self._doc.close()
             self._doc = None
+
+    def __enter__(self):
+        self.open()
+        return self
+
+    def __exit__(self, *exc):
+        self.close()
+        return False
 
     @property
     def total_pages(self) -> int:
@@ -63,9 +78,12 @@ class PDFParser:
                     color = span.get("color", 0)
                     bbox = span.get("bbox", (0, 0, 0, 0))
 
-                    # Skip if outside content margins
-                    if bbox[1] < self.profile.margin_top or bbox[3] > page.rect.height - self.profile.margin_bottom:
-                        continue
+                    # Skip if outside content margins — but exempt large text
+                    # that is likely a chapter heading, not a running header.
+                    is_heading_sized = font_size >= self.profile.heading2_min_size
+                    if not is_heading_sized:
+                        if bbox[1] < self.profile.margin_top or bbox[3] > page.rect.height - self.profile.margin_bottom:
+                            continue
 
                     is_bold = bool(flags & 2 ** 4)  # bit 4 = bold
                     is_italic = bool(flags & 2 ** 1)  # bit 1 = italic
@@ -87,6 +105,69 @@ class PDFParser:
                     ))
 
         return spans
+
+    def extract_page_images(self, page_num: int, save_dir: Path,
+                             min_width: int = 50, min_height: int = 50,
+                             image_count: int = 0) -> list[dict]:
+        """Extract images from a page, save to disk, return metadata.
+
+        Returns list of dicts with keys: filename, y0, page_num, width, height.
+        Small images (icons, bullets) are skipped via min_width/min_height.
+        image_count is the running total across pages; extraction stops at
+        _MAX_IMAGES_PER_BOOK to prevent disk-fill from image-heavy PDFs.
+        """
+        if self._doc is None:
+            self.open()
+        if page_num < 0 or page_num >= len(self._doc):
+            return []
+
+        save_dir.mkdir(parents=True, exist_ok=True)
+        page = self._doc[page_num]
+        images = []
+
+        for img_info in page.get_images(full=True):
+            if image_count + len(images) >= _MAX_IMAGES_PER_BOOK:
+                logger.warning("Image extraction cap (%d) reached", _MAX_IMAGES_PER_BOOK)
+                break
+            xref = img_info[0]
+            try:
+                base_image = self._doc.extract_image(xref)
+                if not base_image or not base_image.get("image"):
+                    continue
+
+                width = base_image.get("width", 0)
+                height = base_image.get("height", 0)
+                if width < min_width or height < min_height:
+                    continue
+
+                ext = base_image.get("ext", "png")
+                if ext not in _VALID_IMAGE_EXTENSIONS:
+                    ext = "png"
+                image_bytes = base_image["image"]
+
+                # Deduplicate by content hash
+                img_hash = hashlib.md5(image_bytes).hexdigest()[:12]
+                filename = f"p{page_num}_{img_hash}.{ext}"
+                filepath = save_dir / filename
+
+                if not filepath.exists():
+                    filepath.write_bytes(image_bytes)
+
+                # Get vertical position from image rect on page
+                img_rects = page.get_image_rects(xref)
+                y0 = img_rects[0].y0 if img_rects else 0.0
+
+                images.append({
+                    "filename": filename,
+                    "y0": y0,
+                    "page_num": page_num,
+                    "width": width,
+                    "height": height,
+                })
+            except Exception as e:
+                logger.debug(f"Skipping image xref={xref} on page {page_num}: {e}")
+
+        return images
 
     def extract_pages(self, start_page: int, end_page: int) -> list[list[FontSpan]]:
         """Extract spans from a range of pages."""

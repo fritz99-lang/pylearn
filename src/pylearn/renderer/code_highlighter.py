@@ -4,17 +4,32 @@ from __future__ import annotations
 
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
-from pygments.lexers import PythonLexer, PythonConsoleLexer, TextLexer
+from pygments.lexers import (
+    PythonLexer, PythonConsoleLexer,
+    CppLexer, CLexer,
+    HtmlLexer, CssLexer,
+    TextLexer,
+)
 
 
-_python_lexer = PythonLexer()
-_console_lexer = PythonConsoleLexer()
-_text_lexer = TextLexer()
+_lexers = {
+    "python": PythonLexer(),
+    "python_repl": PythonConsoleLexer(),
+    "cpp": CppLexer(),
+    "c": CLexer(),
+    "html": HtmlLexer(),
+    "css": CssLexer(),
+    "text": TextLexer(),
+}
 
 
-def highlight_python(code: str, is_repl: bool = False) -> str:
-    """Highlight Python code and return HTML."""
-    lexer = _console_lexer if is_repl else _python_lexer
+def highlight_code(code: str, language: str = "python", is_repl: bool = False) -> str:
+    """Highlight source code and return HTML."""
+    if is_repl and language == "python":
+        lexer = _lexers["python_repl"]
+    else:
+        lexer = _lexers.get(language, _lexers["text"])
+
     formatter = HtmlFormatter(
         nowrap=True,
         noclasses=True,
@@ -23,7 +38,11 @@ def highlight_python(code: str, is_repl: bool = False) -> str:
     try:
         return highlight(code, lexer, formatter)
     except Exception:
-        return highlight(code, _text_lexer, formatter)
+        return highlight(code, _lexers["text"], formatter)
+
+
+# Keep old name as alias for compatibility
+highlight_python = highlight_code
 
 
 def get_highlight_css(style: str = "monokai") -> str:

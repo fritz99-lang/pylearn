@@ -65,9 +65,11 @@ class ExercisePanel(QWidget):
         layout.addWidget(splitter)
 
         self._current_exercise_id: str | None = None
+        self._book_id: str = ""
 
     def load_exercises(self, book_id: str) -> None:
         """Load exercises for a book from the database."""
+        self._book_id = book_id
         self._tree.clear()
         exercises = self._db.get_exercises(book_id)
 
@@ -100,13 +102,25 @@ class ExercisePanel(QWidget):
         self._mark_done_btn.setEnabled(True)
         self._try_btn.setEnabled(True)
 
-        # Show exercise details
-        exercises = self._db.get_exercises(book_id="")  # Need book_id context
-        # For now, just show the exercise ID
-        self._detail.setHtml(
-            f'<p><b>{item.text(0)}</b></p>'
-            f'<p style="color:#666;">Exercise ID: {exercise_id}</p>'
-        )
+        # Show exercise details from database
+        exercise = None
+        exercises = self._db.get_exercises(book_id=self._book_id)
+        for ex in exercises:
+            if ex["exercise_id"] == exercise_id:
+                exercise = ex
+                break
+
+        if exercise:
+            desc = exercise.get("description", "").replace("\n", "<br>")
+            self._detail.setHtml(
+                f'<p><b>{exercise["title"]}</b></p>'
+                f'<p>{desc}</p>'
+            )
+        else:
+            self._detail.setHtml(
+                f'<p><b>{item.text(0)}</b></p>'
+                f'<p style="color:#666;">Exercise ID: {exercise_id}</p>'
+            )
         self.exercise_selected.emit(exercise_id)
 
     def _mark_complete(self) -> None:
@@ -118,8 +132,18 @@ class ExercisePanel(QWidget):
                 current_item.setText(1, "Done")
 
     def _try_exercise(self) -> None:
-        if self._current_exercise_id:
-            # Emit signal to load starter code
-            self.load_code_requested.emit(
-                f"# Exercise: {self._current_exercise_id}\n# Write your solution below\n\n"
-            )
+        if self._current_exercise_id and self._book_id:
+            # Find the exercise to get its description as starter code
+            exercises = self._db.get_exercises(book_id=self._book_id)
+            desc = ""
+            for ex in exercises:
+                if ex["exercise_id"] == self._current_exercise_id:
+                    desc = ex.get("description", "")
+                    break
+            # Build starter code with exercise description as comments
+            lines = [f"# Exercise: {self._current_exercise_id}"]
+            if desc:
+                for line in desc.splitlines():
+                    lines.append(f"# {line}")
+            lines.append("# Write your solution below\n\n")
+            self.load_code_requested.emit("\n".join(lines))

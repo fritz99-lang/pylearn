@@ -1,19 +1,28 @@
-"""Convert parsed content blocks to styled HTML for the reader panel."""
+"""Convert parsed content blocks to styled HTML for the reader panel.
+
+QTextBrowser uses Qt's rich text engine, NOT a real browser engine.
+Supported: <h1>-<h6>, <p>, <b>, <i>, <font>, <pre>, <table>, <br>, <hr>,
+           <a>, <img>, <ul>/<ol>/<li>, basic CSS in <style> blocks.
+Unsupported: border-bottom, border-radius, most CSS layout, flexbox, etc.
+"""
 
 from __future__ import annotations
 
 import html
 
 from pylearn.core.models import BlockType, ContentBlock
-from pylearn.renderer.code_highlighter import highlight_python
+from pylearn.renderer.code_highlighter import highlight_code
 from pylearn.renderer.theme import ReaderTheme, get_theme
 
 
 class HTMLRenderer:
     """Render ContentBlocks as styled HTML for QTextBrowser."""
 
-    def __init__(self, theme: ReaderTheme | None = None) -> None:
+    def __init__(self, theme: ReaderTheme | None = None, language: str = "python",
+                 image_dir: str = "") -> None:
         self.theme = theme or get_theme()
+        self.language = language
+        self.image_dir = image_dir  # absolute path to image cache directory
 
     def render_blocks(self, blocks: list[ContentBlock]) -> str:
         """Render a list of content blocks to a full HTML document."""
@@ -27,95 +36,96 @@ class HTMLRenderer:
         """Render a single content block to HTML."""
         t = self.theme
         text = block.text
+        escaped = html.escape(text)
+        # Use <a name=""> anchors for headings so QTextDocument can discover them
+        anchor_tag = f'<a name="{html.escape(block.block_id)}"></a>' if block.block_id else ""
 
         if block.block_type == BlockType.HEADING1:
             return (
-                f'<h1 id="{html.escape(block.block_id)}" style="color:{t.h1_color}; '
-                f'font-family:{t.heading_font}; font-size:{t.h1_font_size}px; '
-                f'margin-top:30px; margin-bottom:15px; border-bottom:2px solid {t.h1_color}; '
-                f'padding-bottom:8px;">{html.escape(text)}</h1>'
+                f'<br>{anchor_tag}<h1><font color="{t.h1_color}" size="6">'
+                f'{escaped}</font></h1><hr>'
             )
 
         if block.block_type == BlockType.HEADING2:
             return (
-                f'<h2 id="{html.escape(block.block_id)}" style="color:{t.h2_color}; '
-                f'font-family:{t.heading_font}; font-size:{t.h2_font_size}px; '
-                f'margin-top:25px; margin-bottom:10px;">{html.escape(text)}</h2>'
+                f'<br>{anchor_tag}<h2><font color="{t.h2_color}" size="5">'
+                f'{escaped}</font></h2>'
             )
 
         if block.block_type == BlockType.HEADING3:
             return (
-                f'<h3 id="{html.escape(block.block_id)}" style="color:{t.h3_color}; '
-                f'font-family:{t.heading_font}; font-size:{t.h3_font_size}px; '
-                f'margin-top:20px; margin-bottom:8px;">{html.escape(text)}</h3>'
+                f'{anchor_tag}<h3><font color="{t.h3_color}" size="4">'
+                f'{escaped}</font></h3>'
             )
 
         if block.block_type in (BlockType.CODE, BlockType.CODE_REPL):
             is_repl = block.block_type == BlockType.CODE_REPL
-            highlighted = highlight_python(text, is_repl=is_repl)
+            highlighted = highlight_code(text, language=self.language, is_repl=is_repl)
             block_id = html.escape(block.block_id) if block.block_id else ""
             return (
-                f'<div id="{block_id}" style="margin:15px 0; position:relative;">'
-                f'<div style="background:{t.code_bg}; color:{t.code_text}; '
-                f'border:1px solid {t.code_border}; border-radius:6px; '
-                f'padding:12px 15px; font-family:{t.code_font}; '
-                f'font-size:{t.code_font_size}px; line-height:1.5; '
-                f'overflow-x:auto; white-space:pre;">{highlighted}</div>'
-                f'<div style="margin-top:4px; text-align:right;">'
-                f'<a href="copy:{block_id}" style="color:{t.button_bg}; text-decoration:none; '
-                f'font-size:12px; margin-right:12px;">Copy</a>'
-                f'<a href="tryit:{block_id}" style="color:{t.button_bg}; text-decoration:none; '
-                f'font-size:12px;">Try in Editor &rarr;</a>'
-                f'</div></div>'
+                f'<a name="{block_id}"></a>'
+                f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
+                f'<tr><td bgcolor="{t.code_bg}">'
+                f'<pre><font face="{t.code_font}" color="{t.code_text}">'
+                f'{highlighted}</font></pre>'
+                f'</td></tr></table>'
+                f'<p align="right">'
+                f'<a href="copy:{block_id}"><font size="2" color="{t.button_bg}">Copy</font></a>'
+                f'&nbsp;&nbsp;&nbsp;'
+                f'<a href="tryit:{block_id}"><font size="2" color="{t.button_bg}">Try in Editor</font></a>'
+                f'</p>'
             )
 
         if block.block_type == BlockType.NOTE:
             return (
-                f'<div style="background:{t.note_bg}; border-left:4px solid {t.note_border}; '
-                f'padding:12px 15px; margin:12px 0; border-radius:0 4px 4px 0; '
-                f'font-family:{t.body_font}; font-size:{t.body_font_size - 1}px;">'
-                f'<strong>Note:</strong> {html.escape(text)}</div>'
+                f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
+                f'<tr><td bgcolor="{t.note_bg}" width="4" style="background:{t.note_border};"></td>'
+                f'<td bgcolor="{t.note_bg}">'
+                f'<b>Note:</b> {escaped}</td></tr></table>'
             )
 
         if block.block_type == BlockType.WARNING:
             return (
-                f'<div style="background:{t.warning_bg}; border-left:4px solid {t.warning_border}; '
-                f'padding:12px 15px; margin:12px 0; border-radius:0 4px 4px 0; '
-                f'font-family:{t.body_font}; font-size:{t.body_font_size - 1}px;">'
-                f'<strong>Warning:</strong> {html.escape(text)}</div>'
+                f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
+                f'<tr><td bgcolor="{t.warning_bg}" width="4" style="background:{t.warning_border};"></td>'
+                f'<td bgcolor="{t.warning_bg}">'
+                f'<b>Warning:</b> {escaped}</td></tr></table>'
             )
 
         if block.block_type == BlockType.TIP:
             return (
-                f'<div style="background:{t.tip_bg}; border-left:4px solid {t.tip_border}; '
-                f'padding:12px 15px; margin:12px 0; border-radius:0 4px 4px 0; '
-                f'font-family:{t.body_font}; font-size:{t.body_font_size - 1}px;">'
-                f'<strong>Tip:</strong> {html.escape(text)}</div>'
+                f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
+                f'<tr><td bgcolor="{t.tip_bg}" width="4" style="background:{t.tip_border};"></td>'
+                f'<td bgcolor="{t.tip_bg}">'
+                f'<b>Tip:</b> {escaped}</td></tr></table>'
             )
 
+        if block.block_type == BlockType.FIGURE:
+            if self.image_dir:
+                # text field contains the image filename — escape for HTML attribute
+                safe_name = html.escape(text)
+                img_path = f"{self.image_dir}/{safe_name}".replace("\\", "/")
+                return (
+                    f'<p align="center">'
+                    f'<img src="file:///{img_path}" width="90%">'
+                    f'</p>'
+                )
+            return ""  # no image dir configured, skip
+
         if block.block_type == BlockType.LIST_ITEM:
-            return (
-                f'<div style="font-family:{t.body_font}; font-size:{t.body_font_size}px; '
-                f'color:{t.text_color}; line-height:{t.line_height}; '
-                f'margin:4px 0 4px 25px; padding-left:10px; '
-                f'border-left:2px solid #ddd;">{html.escape(text)}</div>'
-            )
+            return f'<p>&nbsp;&nbsp;&nbsp;&bull;&nbsp;{escaped}</p>'
 
         if block.block_type == BlockType.EXERCISE:
             return (
-                f'<div style="background:{t.tip_bg}; border:2px solid {t.tip_border}; '
-                f'padding:15px; margin:15px 0; border-radius:6px; '
-                f'font-family:{t.body_font}; font-size:{t.body_font_size}px;">'
-                f'<strong style="color:{t.tip_border};">Exercise:</strong><br>'
-                f'{html.escape(text)}</div>'
+                f'<table width="100%" cellpadding="10" cellspacing="0" border="1"'
+                f' bordercolor="{t.tip_border}">'
+                f'<tr><td bgcolor="{t.tip_bg}">'
+                f'<b><font color="{t.tip_border}">Exercise:</font></b><br>'
+                f'{escaped}</td></tr></table>'
             )
 
         # Default: body text
-        return (
-            f'<p style="font-family:{t.body_font}; font-size:{t.body_font_size}px; '
-            f'color:{t.text_color}; line-height:{t.line_height}; '
-            f'margin:8px 0;">{html.escape(text)}</p>'
-        )
+        return f'<p>{escaped}</p>'
 
     def _wrap_html(self, body: str) -> str:
         """Wrap content in a full HTML document with base styles."""
@@ -127,15 +137,45 @@ class HTMLRenderer:
 body {{
     background-color: {t.bg_color};
     color: {t.text_color};
-    padding: 20px 30px;
+    font-family: {t.body_font};
+    font-size: {t.body_font_size}px;
+    line-height: {t.line_height};
+    padding: 15px 25px;
     margin: 0;
-    max-width: 100%;
 }}
-a {{ color: {t.button_bg}; }}
-a:hover {{ color: {t.button_hover}; }}
-::selection {{
-    background: {t.button_bg};
-    color: white;
+h1 {{
+    color: {t.h1_color};
+    font-size: {t.h1_font_size}px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+}}
+h2 {{
+    color: {t.h2_color};
+    font-size: {t.h2_font_size}px;
+    margin-top: 20px;
+    margin-bottom: 6px;
+}}
+h3 {{
+    color: {t.h3_color};
+    font-size: {t.h3_font_size}px;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}}
+hr {{
+    color: {t.h1_color};
+}}
+pre {{
+    font-family: {t.code_font};
+    font-size: {t.code_font_size}px;
+    white-space: pre-wrap;
+    margin: 0;
+}}
+a {{
+    color: {t.button_bg};
+}}
+p {{
+    margin-top: 4px;
+    margin-bottom: 4px;
 }}
 </style>
 </head>
@@ -143,6 +183,23 @@ a:hover {{ color: {t.button_hover}; }}
 {body}
 </body>
 </html>"""
+
+    def render_welcome(self) -> str:
+        """Render the welcome screen HTML."""
+        return self._wrap_html("""
+            <div style="text-align:center; margin-top:80px;">
+                <h1 style="color:#3498db; font-size:36px; margin-bottom:10px;">
+                    PyLearn
+                </h1>
+                <p style="font-size:18px; color:#666; margin-bottom:30px;">
+                    Interactive Python Learning
+                </p>
+                <p style="font-size:15px; color:#888;">
+                    Select a book from the library to get started,<br>
+                    or add books via Book &gt; Manage Library.
+                </p>
+            </div>
+        """)
 
     def update_theme(self, theme_name: str) -> None:
         """Switch the rendering theme."""

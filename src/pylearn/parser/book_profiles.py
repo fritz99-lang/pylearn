@@ -13,6 +13,8 @@ from dataclasses import dataclass, field
 class BookProfile:
     """Configuration for parsing a specific book's PDF."""
     name: str
+    language: str = "python"  # "python", "cpp", "c"
+
     # Font size thresholds
     heading1_min_size: float = 18.0
     heading2_min_size: float = 14.0
@@ -28,7 +30,7 @@ class BookProfile:
     heading_fonts: list[str] = field(default_factory=list)
 
     # Chapter detection
-    chapter_pattern: str = r"^Chapter\s+(\d+)\."
+    chapter_pattern: str = r"^Chapter\s+(\d+)\s*[\.:]"
     part_pattern: str = r"^Part\s+([IVXLC]+)\."
 
     # Page range to skip (front matter, index)
@@ -95,13 +97,64 @@ PROGRAMMING_PYTHON = BookProfile(
 )
 
 
+# Generic C++ profile — adjust after running analyze_pdf_fonts.py on your books
+CPP_GENERIC = BookProfile(
+    name="cpp_generic",
+    language="cpp",
+    heading1_min_size=18.0,
+    heading2_min_size=14.0,
+    heading3_min_size=12.0,
+    body_size=10.0,
+    code_size=8.5,
+    chapter_pattern=r"^Chapter\s+(\d+)\s*[\.:]",
+    skip_pages_start=15,
+    skip_pages_end=15,
+)
+
+CPP_PRIMER = BookProfile(
+    name="cpp_primer",
+    language="cpp",
+    heading1_min_size=20.0,
+    heading2_min_size=14.0,
+    heading3_min_size=12.0,
+    body_size=10.0,
+    code_size=8.5,
+    chapter_pattern=r"^Chapter\s+(\d+)\s*[\.:]",
+    skip_pages_start=20,
+    skip_pages_end=30,
+)
+
+EFFECTIVE_CPP = BookProfile(
+    name="effective_cpp",
+    language="cpp",
+    heading1_min_size=18.0,
+    heading2_min_size=14.0,
+    heading3_min_size=12.0,
+    body_size=10.0,
+    code_size=8.5,
+    chapter_pattern=r"^(?:Item|Chapter)\s+(\d+)",
+    skip_pages_start=15,
+    skip_pages_end=15,
+)
+
+
 PROFILES: dict[str, BookProfile] = {
     "learning_python": LEARNING_PYTHON,
     "python_cookbook": PYTHON_COOKBOOK,
     "programming_python": PROGRAMMING_PYTHON,
+    "cpp_generic": CPP_GENERIC,
+    "cpp_primer": CPP_PRIMER,
+    "effective_cpp": EFFECTIVE_CPP,
 }
 
 
 def get_profile(name: str) -> BookProfile:
     """Get a book profile by name, or return a default profile."""
     return PROFILES.get(name, BookProfile(name=name))
+
+
+def get_auto_profile(pdf_path: str, language: str = "python") -> BookProfile:
+    """Auto-detect font thresholds from a PDF and return a BookProfile."""
+    from pylearn.parser.font_analyzer import FontAnalyzer
+    analyzer = FontAnalyzer(pdf_path)
+    return analyzer.build_profile(language)

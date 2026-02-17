@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional
+
+logger = logging.getLogger("pylearn.models")
 
 
 class BlockType(Enum):
@@ -22,6 +25,7 @@ class BlockType(Enum):
     EXERCISE_ANSWER = "exercise_answer"
     TABLE = "table"
     LIST_ITEM = "list_item"
+    FIGURE = "figure"
     FIGURE_CAPTION = "figure_caption"
     PAGE_HEADER = "page_header"
     PAGE_FOOTER = "page_footer"
@@ -77,9 +81,14 @@ class ContentBlock:
 
     @classmethod
     def from_dict(cls, data: dict) -> ContentBlock:
+        try:
+            block_type = BlockType(data["block_type"])
+        except (ValueError, KeyError):
+            logger.warning("Unknown block_type %r, defaulting to BODY", data.get("block_type"))
+            block_type = BlockType.BODY
         return cls(
-            block_type=BlockType(data["block_type"]),
-            text=data["text"],
+            block_type=block_type,
+            text=data.get("text", ""),
             page_num=data.get("page_num", 0),
             font_size=data.get("font_size", 0.0),
             is_bold=data.get("is_bold", False),
@@ -109,13 +118,16 @@ class Section:
 
     @classmethod
     def from_dict(cls, data: dict) -> Section:
-        return cls(
-            title=data["title"],
-            level=data["level"],
-            page_num=data["page_num"],
-            block_index=data["block_index"],
-            children=[Section.from_dict(c) for c in data.get("children", [])],
-        )
+        try:
+            return cls(
+                title=data["title"],
+                level=data["level"],
+                page_num=data["page_num"],
+                block_index=data["block_index"],
+                children=[Section.from_dict(c) for c in data.get("children", [])],
+            )
+        except KeyError as e:
+            raise ValueError(f"Section missing required key: {e}") from e
 
 
 @dataclass
@@ -140,14 +152,17 @@ class Chapter:
 
     @classmethod
     def from_dict(cls, data: dict) -> Chapter:
-        return cls(
-            chapter_num=data["chapter_num"],
-            title=data["title"],
-            start_page=data["start_page"],
-            end_page=data["end_page"],
-            content_blocks=[ContentBlock.from_dict(b) for b in data.get("content_blocks", [])],
-            sections=[Section.from_dict(s) for s in data.get("sections", [])],
-        )
+        try:
+            return cls(
+                chapter_num=data["chapter_num"],
+                title=data["title"],
+                start_page=data["start_page"],
+                end_page=data["end_page"],
+                content_blocks=[ContentBlock.from_dict(b) for b in data.get("content_blocks", [])],
+                sections=[Section.from_dict(s) for s in data.get("sections", [])],
+            )
+        except KeyError as e:
+            raise ValueError(f"Chapter missing required key: {e}") from e
 
 
 @dataclass
@@ -156,7 +171,8 @@ class Book:
     book_id: str
     title: str
     pdf_path: str
-    profile_name: str
+    profile_name: str = ""
+    language: str = "python"
     total_pages: int = 0
     chapters: list[Chapter] = field(default_factory=list)
 
@@ -166,17 +182,32 @@ class Book:
             "title": self.title,
             "pdf_path": self.pdf_path,
             "profile_name": self.profile_name,
+            "language": self.language,
             "total_pages": self.total_pages,
             "chapters": [c.to_dict() for c in self.chapters],
         }
 
     @classmethod
     def from_dict(cls, data: dict) -> Book:
+        try:
+            book_id = data["book_id"]
+            title = data["title"]
+            pdf_path = data["pdf_path"]
+        except KeyError as e:
+            raise ValueError(f"Book missing required key: {e}") from e
+
+        language = data.get("language", "")
+        if not language:
+            # Migrate old caches: derive language from profile_name
+            from pylearn.parser.book_profiles import get_profile
+            profile_name = data.get("profile_name", "")
+            language = get_profile(profile_name).language if profile_name else "python"
         return cls(
-            book_id=data["book_id"],
-            title=data["title"],
-            pdf_path=data["pdf_path"],
-            profile_name=data["profile_name"],
+            book_id=book_id,
+            title=title,
+            pdf_path=pdf_path,
+            profile_name=data.get("profile_name", ""),
+            language=language,
             total_pages=data.get("total_pages", 0),
             chapters=[Chapter.from_dict(c) for c in data.get("chapters", [])],
         )

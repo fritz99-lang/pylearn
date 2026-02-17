@@ -73,13 +73,10 @@ def is_page_header_or_footer(text: str, page_num: int = 0) -> bool:
     # Pipe-separated header: "123 | Chapter 5: Title"
     if re.match(r"^\d+\s*\|\s*(Chapter|Part)", stripped):
         return True
-    # Book title fragments that appear as running headers
+    # Generic running header/footer patterns (book-specific titles removed —
+    # margin-based spatial filtering in PDFParser handles those)
     header_patterns = [
-        r"^Python Cookbook",
-        r"^Learning Python",
-        r"^Programming Python",
-        r"^O'Reilly",
-        r"www\.it-ebooks\.info",
+        r"www\.\S+\.\w+",  # URLs
     ]
     for pattern in header_patterns:
         if re.match(pattern, stripped, re.IGNORECASE):

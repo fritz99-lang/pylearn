@@ -36,6 +36,10 @@ class ExecutionTimeoutError(ExecutionError):
 def setup_logging(debug: bool = False) -> logging.Logger:
     """Configure application logging."""
     logger = logging.getLogger("pylearn")
+    # Guard against duplicate handlers on repeated calls
+    if logger.handlers:
+        return logger
+
     logger.setLevel(logging.DEBUG if debug else logging.INFO)
 
     # Console handler
@@ -47,10 +51,14 @@ def setup_logging(debug: bool = False) -> logging.Logger:
     ))
     logger.addHandler(console)
 
-    # File handler
+    # File handler with rotation (5 MB max, 3 backups)
+    from logging.handlers import RotatingFileHandler
     log_dir = DATA_DIR
     log_dir.mkdir(parents=True, exist_ok=True)
-    file_handler = logging.FileHandler(log_dir / "pylearn.log", encoding="utf-8")
+    file_handler = RotatingFileHandler(
+        log_dir / "pylearn.log", maxBytes=5 * 1024 * 1024,
+        backupCount=3, encoding="utf-8",
+    )
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(logging.Formatter(
         "%(asctime)s [%(levelname)s] %(name)s: %(message)s",

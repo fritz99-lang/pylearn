@@ -91,7 +91,12 @@ class ExternalEditorManager(QObject):
         self._current_file = temp_file
         self._watcher.addPath(str(temp_file))
 
-        # Launch the editor
+        # Clean up any previous process
+        self._reap_process()
+
+        # Launch the editor.
+        # Note: list-mode Popen is not vulnerable to shell injection.
+        # The editor path comes from user config (by-design user choice).
         try:
             self._process = subprocess.Popen([exe, str(temp_file)])
         except OSError as e:
@@ -99,6 +104,14 @@ class ExternalEditorManager(QObject):
             return f"Failed to launch editor: {e}"
 
         return None
+
+    def _reap_process(self) -> None:
+        """Poll and discard a finished process, or leave a running one alone."""
+        if self._process is None:
+            return
+        if self._process.poll() is not None:
+            # Process already exited — discard the reference
+            self._process = None
 
     def _on_file_changed(self, path: str) -> None:
         """Called when the watched file is modified externally."""
@@ -118,7 +131,7 @@ class ExternalEditorManager(QObject):
             self._watcher.addPath(path)
 
     def cleanup(self) -> None:
-        """Remove temp files and stop watching."""
+        """Remove temp files, stop watching, and reap the editor process."""
         if self._current_file:
             self._watcher.removePath(str(self._current_file))
             try:
@@ -126,3 +139,4 @@ class ExternalEditorManager(QObject):
             except OSError:
                 pass
             self._current_file = None
+        self._reap_process()

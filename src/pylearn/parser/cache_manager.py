@@ -4,12 +4,18 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from pathlib import Path
 
 from pylearn.core.constants import CACHE_DIR
 from pylearn.core.models import Book
 
 logger = logging.getLogger("pylearn.parser")
+
+
+def sanitize_book_id(book_id: str) -> str:
+    """Sanitize book_id to prevent path traversal — alphanumeric + underscore only."""
+    return re.sub(r"[^a-z0-9_]", "", book_id.lower())[:60]
 
 
 class CacheManager:
@@ -20,19 +26,27 @@ class CacheManager:
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
     def _cache_path(self, book_id: str) -> Path:
-        return self.cache_dir / f"{book_id}.json"
+        return self.cache_dir / f"{sanitize_book_id(book_id)}.json"
+
+    def image_dir(self, book_id: str) -> Path:
+        """Return (and create) the image cache directory for a book."""
+        d = self.cache_dir / f"{sanitize_book_id(book_id)}_images"
+        d.mkdir(parents=True, exist_ok=True)
+        return d
 
     def has_cache(self, book_id: str) -> bool:
         return self._cache_path(book_id).exists()
 
     def save(self, book: Book) -> None:
-        """Save parsed book to JSON cache."""
+        """Save parsed book to JSON cache (atomic write-then-rename)."""
         path = self._cache_path(book.book_id)
         data = book.to_dict()
-        path.write_text(
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(
             json.dumps(data, ensure_ascii=False, indent=1),
             encoding="utf-8",
         )
+        tmp.replace(path)
         logger.info(f"Cached {book.book_id} to {path} ({path.stat().st_size / 1024:.0f} KB)")
 
     def load(self, book_id: str) -> Book | None:
@@ -48,7 +62,7 @@ class CacheManager:
             logger.info(f"Loaded {book_id} from cache ({len(book.chapters)} chapters)")
             return book
         except Exception as e:
-            logger.error(f"Error loading cache for {book_id}: {e}")
+            logger.error(f"Error loading cache for {book_id}: {e}", exc_info=True)
             return None
 
     def invalidate(self, book_id: str) -> None:

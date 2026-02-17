@@ -13,7 +13,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
 from pylearn.core.config import BooksConfig
-from pylearn.parser.book_profiles import get_profile
+from pylearn.parser.book_profiles import get_profile, get_auto_profile, PROFILES
 from pylearn.parser.pdf_parser import PDFParser
 from pylearn.parser.content_classifier import ContentClassifier
 from pylearn.parser.code_extractor import CodeExtractor
@@ -27,30 +27,65 @@ from pylearn.utils.error_handler import setup_logging
 def parse_book(book_info: dict) -> Book | None:
     book_id = book_info["book_id"]
     pdf_path = book_info["pdf_path"]
-    profile_name = book_info["profile_name"]
+    profile_name = book_info.get("profile_name", "")
+    language = book_info.get("language", "")
+    if not language:
+        # Migrate: derive language from named profile if available
+        if profile_name and profile_name in PROFILES:
+            language = PROFILES[profile_name].language
+        else:
+            language = "python"
     title = book_info["title"]
 
     if not Path(pdf_path).exists():
         print(f"  ERROR: PDF not found at {pdf_path}")
         return None
 
-    profile = get_profile(profile_name)
+    # Dual-path: use named profile if it exists, otherwise auto-detect
+    if profile_name and profile_name in PROFILES:
+        profile = get_profile(profile_name)
+        print(f"  Using named profile: {profile_name}")
+    else:
+        print(f"  Auto-detecting font thresholds...")
+        profile = get_auto_profile(pdf_path, language)
+        print(f"  Detected: body={profile.body_size}, code={profile.code_size}, "
+              f"h1>={profile.heading1_min_size}, h2>={profile.heading2_min_size}, "
+              f"h3>={profile.heading3_min_size}")
+        print(f"  Margins: top={profile.margin_top:.0f}, bottom={profile.margin_bottom:.0f}")
+        print(f"  Skip pages: start={profile.skip_pages_start}, end={profile.skip_pages_end}")
+
+    cache = CacheManager()
+    image_dir = cache.image_dir(book_id)
+
     print(f"  Opening PDF ({pdf_path})...")
 
     start = time.time()
-    parser = PDFParser(pdf_path, profile)
-    parser.open()
-    total_pages = parser.total_pages
-    print(f"  Total pages: {total_pages}")
+    with PDFParser(pdf_path, profile) as parser:
+        total_pages = parser.total_pages
+        print(f"  Total pages: {total_pages}")
 
-    print("  Extracting text...")
-    all_page_spans = parser.extract_all()
-    parser.close()
+        print("  Extracting text...")
+        all_page_spans = parser.extract_all()
+
+        print("  Extracting images...")
+        page_images: dict[int, list[dict]] = {}
+        start_pg = profile.skip_pages_start
+        end_pg = total_pages - profile.skip_pages_end
+        for pg in range(start_pg, end_pg):
+            imgs = parser.extract_page_images(pg, image_dir)
+            if imgs:
+                page_images[pg] = imgs
+        img_count = sum(len(v) for v in page_images.values())
+        print(f"  {img_count} images extracted from {len(page_images)} pages")
+
     print(f"  Extracted {sum(len(p) for p in all_page_spans)} spans from {len(all_page_spans)} pages")
 
     print("  Classifying content...")
     classifier = ContentClassifier(profile)
-    blocks = classifier.classify_all_pages(all_page_spans, start_page_offset=profile.skip_pages_start)
+    blocks = classifier.classify_all_pages(
+        all_page_spans, start_page_offset=profile.skip_pages_start,
+        page_images=page_images if page_images else None,
+    )
     print(f"  {len(blocks)} content blocks")
 
     print("  Processing code blocks...")
@@ -66,7 +101,7 @@ def parse_book(book_info: dict) -> Book | None:
 
     print("  Extracting exercises...")
     ex_extractor = ExerciseExtractor()
-    exercises = ex_extractor.extract_from_chapters(book_id, chapters, profile_name)
+    exercises = ex_extractor.extract_from_chapters(book_id, chapters)
     print(f"  {len(exercises)} exercises found")
 
     book = Book(
@@ -74,6 +109,7 @@ def parse_book(book_info: dict) -> Book | None:
         title=title,
         pdf_path=pdf_path,
         profile_name=profile_name,
+        language=language,
         total_pages=total_pages,
         chapters=chapters,
     )

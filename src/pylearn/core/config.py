@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Any
 
@@ -23,15 +24,23 @@ from pylearn.core.constants import (
 )
 
 
+logger = logging.getLogger("pylearn.config")
+
+
 def _load_json(path: Path) -> dict:
     if path.exists():
-        return json.loads(path.read_text(encoding="utf-8"))
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            logger.error(f"Corrupt config file {path}: {e} — using defaults")
     return {}
 
 
 def _save_json(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    tmp.replace(path)
 
 
 class AppConfig:
@@ -97,11 +106,12 @@ class AppConfig:
 
     @property
     def reader_font_size(self) -> int:
-        return self._data.get("reader_font_size", DEFAULT_FONT_SIZE)
+        val = self._data.get("reader_font_size", DEFAULT_FONT_SIZE)
+        return max(6, min(72, val))
 
     @reader_font_size.setter
     def reader_font_size(self, value: int) -> None:
-        self._data["reader_font_size"] = value
+        self._data["reader_font_size"] = max(6, min(72, value))
 
     @property
     def last_book_id(self) -> str | None:
@@ -153,6 +163,10 @@ class BooksConfig:
 
     def load(self) -> None:
         self._data = _load_json(BOOKS_CONFIG_PATH)
+        # Migrate: ensure all entries have required keys
+        for book in self._data.get("books", []):
+            book.setdefault("language", "python")
+            book.setdefault("profile_name", "")
 
     def save(self) -> None:
         _save_json(BOOKS_CONFIG_PATH, self._data)
@@ -204,19 +218,21 @@ class EditorConfig:
 
     @property
     def font_size(self) -> int:
-        return self._data.get("font_size", DEFAULT_EDITOR_FONT_SIZE)
+        val = self._data.get("font_size", DEFAULT_EDITOR_FONT_SIZE)
+        return max(6, min(72, val))
 
     @font_size.setter
     def font_size(self, value: int) -> None:
-        self._data["font_size"] = value
+        self._data["font_size"] = max(6, min(72, value))
 
     @property
     def tab_width(self) -> int:
-        return self._data.get("tab_width", DEFAULT_TAB_WIDTH)
+        val = self._data.get("tab_width", DEFAULT_TAB_WIDTH)
+        return max(1, min(16, val))
 
     @tab_width.setter
     def tab_width(self, value: int) -> None:
-        self._data["tab_width"] = value
+        self._data["tab_width"] = max(1, min(16, value))
 
     @property
     def show_line_numbers(self) -> bool:
@@ -244,11 +260,12 @@ class EditorConfig:
 
     @property
     def execution_timeout(self) -> int:
-        return self._data.get("execution_timeout", DEFAULT_EXECUTION_TIMEOUT)
+        val = self._data.get("execution_timeout", DEFAULT_EXECUTION_TIMEOUT)
+        return max(5, min(300, val))
 
     @execution_timeout.setter
     def execution_timeout(self, value: int) -> None:
-        self._data["execution_timeout"] = value
+        self._data["execution_timeout"] = max(5, min(300, value))
 
     @property
     def external_editor_path(self) -> str:

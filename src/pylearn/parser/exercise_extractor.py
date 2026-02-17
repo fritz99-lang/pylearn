@@ -15,14 +15,36 @@ class ExerciseExtractor:
 
     def extract_from_chapters(self, book_id: str, chapters: list[Chapter],
                               book_type: str = "generic") -> list[Exercise]:
-        """Extract exercises from all chapters based on book type."""
-        if book_type == "learning_python":
-            return self._extract_learning_python(book_id, chapters)
-        elif book_type == "python_cookbook":
-            return self._extract_cookbook(book_id, chapters)
-        elif book_type == "programming_python":
-            return self._extract_programming_python(book_id, chapters)
-        return self._extract_generic(book_id, chapters)
+        """Extract exercises from all chapters by trying all extractors.
+
+        Runs the generic extractor first, then tries specialized patterns
+        (Learning Python quizzes, cookbook recipes, Programming Python exercises).
+        Uses whichever finds results for each chapter. The book_type parameter
+        is kept for backward compatibility but is no longer used for dispatch.
+        """
+        # Try all extractors and merge results
+        generic = self._extract_generic(book_id, chapters)
+        quiz = self._extract_learning_python(book_id, chapters)
+        recipes = self._extract_cookbook(book_id, chapters)
+        prog_ex = self._extract_programming_python(book_id, chapters)
+
+        # Collect chapters covered by each extractor
+        generic_chapters = {e.chapter_num for e in generic}
+        all_exercises: list[Exercise] = []
+
+        # Prefer specialized results over generic when both find content
+        specialized_chapters: set[int] = set()
+        for specialized in (quiz, recipes, prog_ex):
+            if specialized:
+                all_exercises.extend(specialized)
+                specialized_chapters.update(e.chapter_num for e in specialized)
+
+        # Add generic results for chapters not covered by specialized extractors
+        for e in generic:
+            if e.chapter_num not in specialized_chapters:
+                all_exercises.append(e)
+
+        return all_exercises
 
     def _extract_learning_python(self, book_id: str, chapters: list[Chapter]) -> list[Exercise]:
         """Learning Python has 'Test Your Knowledge: Quiz' and 'Answers' sections."""
