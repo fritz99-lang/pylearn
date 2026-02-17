@@ -14,7 +14,7 @@ import logging
 import uuid
 
 from pylearn.core.constants import get_python_executable, DATA_DIR
-from pylearn.executor.sandbox import ExecutionResult, get_safe_env, _kill_tree
+from pylearn.executor.sandbox import ExecutionResult, get_safe_env, _kill_tree, _CREATE_NO_WINDOW
 
 logger = logging.getLogger("pylearn.executor")
 
@@ -104,7 +104,7 @@ class Session:
                 text=True,
                 cwd=str(self._scratch_dir),
                 env=get_safe_env(),
-                creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
+                creationflags=_CREATE_NO_WINDOW if sys.platform == "win32" else 0,
             )
             return self._process
 

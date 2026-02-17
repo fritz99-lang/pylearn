@@ -19,6 +19,9 @@ from pylearn.core.constants import DEFAULT_EXECUTION_TIMEOUT, DATA_DIR, get_pyth
 
 logger = logging.getLogger("pylearn.executor")
 
+# _CREATE_NO_WINDOW only exists on Windows; default to 0 on other platforms.
+_CREATE_NO_WINDOW: int = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+
 # Maximum bytes of stdout/stderr to capture before truncating
 _MAX_OUTPUT_BYTES = 2 * 1024 * 1024  # 2 MB
 
@@ -85,7 +88,7 @@ def _kill_tree(proc: subprocess.Popen) -> None:
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 timeout=5,
-                creationflags=subprocess.CREATE_NO_WINDOW,
+                creationflags=_CREATE_NO_WINDOW,
             )
         else:
             proc.kill()
@@ -147,7 +150,7 @@ class Sandbox:
                     text=True,
                     cwd=str(_SCRATCH_DIR),
                     env=get_safe_env(),
-                    creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
+                    creationflags=_CREATE_NO_WINDOW if sys.platform == "win32" else 0,
                 )
             return self._wait(self._process, timeout)
         except Exception as e:
@@ -202,7 +205,7 @@ class Sandbox:
                  "-std=c++17", "-Wall"],
                 capture_output=True, text=True, timeout=30,
                 env=get_safe_env(),
-                creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
+                creationflags=_CREATE_NO_WINDOW if sys.platform == "win32" else 0,
             )
 
             if compile_result.returncode != 0:
@@ -220,7 +223,7 @@ class Sandbox:
                     text=True,
                     cwd=str(tmp_dir),
                     env=get_safe_env(),
-                    creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
+                    creationflags=_CREATE_NO_WINDOW if sys.platform == "win32" else 0,
                 )
             result = self._wait(self._process, timeout)
 
