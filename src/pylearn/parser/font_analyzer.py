@@ -49,85 +49,95 @@ class FontAnalyzer:
         self.pdf_path = Path(pdf_path)
 
     def build_profile(self, language: str = "python") -> BookProfile:
-        """Sample the PDF and return a fully populated BookProfile."""
+        """Sample the PDF and return a fully populated BookProfile.
+
+        If analysis fails partway through, returns a safe default profile
+        rather than a half-populated one.
+        """
         doc = fitz.open(str(self.pdf_path))
         try:
-            total = len(doc)
-            sample_indices = self._pick_sample_pages(total)
-
-            # --- 1. Build font histogram ---
-            histogram: Counter[tuple[str, float, bool, bool]] = Counter()
-            y_positions: list[list[float]] = []  # per-page list of y0 values
-
-            for pg in sample_indices:
-                page = doc[pg]
-                page_ys: list[float] = []
-                blocks = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)["blocks"]
-                for block in blocks:
-                    if block.get("type") != 0:
-                        continue
-                    for line in block.get("lines", []):
-                        for span in line.get("spans", []):
-                            text = clean_text(span.get("text", "")).strip()
-                            if not text:
-                                continue
-                            font = span.get("font", "")
-                            size = round(span.get("size", 0.0), 1)
-                            flags = span.get("flags", 0)
-                            bold = bool(flags & 16)
-                            mono = _is_mono(font)
-                            # Weight by character count so body text dominates
-                            histogram[(font, size, bold, mono)] += len(text)
-                            bbox = span.get("bbox", (0, 0, 0, 0))
-                            page_ys.append(bbox[1])
-                y_positions.append(page_ys)
-
-            if not histogram:
-                logger.warning("No text found in sampled pages — returning default profile")
-                return BookProfile(name="auto", language=language)
-
-            # --- 2. Identify body font (most frequent non-mono) ---
-            body_font, body_size = self._find_body_font(histogram)
-
-            # --- 3. Identify code font (most frequent mono) ---
-            code_size = self._find_code_size(histogram, body_size)
-
-            # --- 4. Heading tiers ---
-            h1_min, h2_min, h3_min = self._compute_heading_thresholds(
-                histogram, body_size
-            )
-
-            # --- 5. Margin detection ---
-            margin_top, margin_bottom = self._detect_margins(
-                y_positions, doc, sample_indices
-            )
-
-            # --- 6. Skip pages ---
-            skip_start, skip_end = self._detect_skip_pages(doc)
-
-            logger.info(
-                f"Auto-detect: body={body_size}, code={code_size}, "
-                f"h1>={h1_min}, h2>={h2_min}, h3>={h3_min}, "
-                f"margins=({margin_top:.0f}, {margin_bottom:.0f}), "
-                f"skip=({skip_start}, {skip_end})"
-            )
-
-            return BookProfile(
-                name="auto",
-                language=language,
-                heading1_min_size=h1_min,
-                heading2_min_size=h2_min,
-                heading3_min_size=h3_min,
-                body_size=body_size,
-                code_size=code_size,
-                margin_top=margin_top,
-                margin_bottom=margin_bottom,
-                skip_pages_start=skip_start,
-                skip_pages_end=skip_end,
-            )
-
+            return self._analyze(doc, language)
+        except Exception as e:
+            logger.error("Font analysis failed, returning default profile: %s", e)
+            return BookProfile(name="auto", language=language)
         finally:
             doc.close()
+
+    def _analyze(self, doc: fitz.Document, language: str) -> BookProfile:
+        """Internal: perform the actual analysis (may raise)."""
+        total = len(doc)
+        sample_indices = self._pick_sample_pages(total)
+
+        # --- 1. Build font histogram ---
+        histogram: Counter[tuple[str, float, bool, bool]] = Counter()
+        y_positions: list[list[float]] = []  # per-page list of y0 values
+
+        for pg in sample_indices:
+            page = doc[pg]
+            page_ys: list[float] = []
+            blocks = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)["blocks"]
+            for block in blocks:
+                if block.get("type") != 0:
+                    continue
+                for line in block.get("lines", []):
+                    for span in line.get("spans", []):
+                        text = clean_text(span.get("text", "")).strip()
+                        if not text:
+                            continue
+                        font = span.get("font", "")
+                        size = round(span.get("size", 0.0), 1)
+                        flags = span.get("flags", 0)
+                        bold = bool(flags & 16)
+                        mono = _is_mono(font)
+                        # Weight by character count so body text dominates
+                        histogram[(font, size, bold, mono)] += len(text)
+                        bbox = span.get("bbox", (0, 0, 0, 0))
+                        page_ys.append(bbox[1])
+            y_positions.append(page_ys)
+
+        if not histogram:
+            logger.warning("No text found in sampled pages — returning default profile")
+            return BookProfile(name="auto", language=language)
+
+        # --- 2. Identify body font (most frequent non-mono) ---
+        body_font, body_size = self._find_body_font(histogram)
+
+        # --- 3. Identify code font (most frequent mono) ---
+        code_size = self._find_code_size(histogram, body_size)
+
+        # --- 4. Heading tiers ---
+        h1_min, h2_min, h3_min = self._compute_heading_thresholds(
+            histogram, body_size
+        )
+
+        # --- 5. Margin detection ---
+        margin_top, margin_bottom = self._detect_margins(
+            y_positions, doc, sample_indices
+        )
+
+        # --- 6. Skip pages ---
+        skip_start, skip_end = self._detect_skip_pages(doc)
+
+        logger.info(
+            f"Auto-detect: body={body_size}, code={code_size}, "
+            f"h1>={h1_min}, h2>={h2_min}, h3>={h3_min}, "
+            f"margins=({margin_top:.0f}, {margin_bottom:.0f}), "
+            f"skip=({skip_start}, {skip_end})"
+        )
+
+        return BookProfile(
+            name="auto",
+            language=language,
+            heading1_min_size=h1_min,
+            heading2_min_size=h2_min,
+            heading3_min_size=h3_min,
+            body_size=body_size,
+            code_size=code_size,
+            margin_top=margin_top,
+            margin_bottom=margin_bottom,
+            skip_pages_start=skip_start,
+            skip_pages_end=skip_end,
+        )
 
     # ------------------------------------------------------------------
     # Internal helpers
@@ -154,8 +164,10 @@ class FontAnalyzer:
             (font, size), _ = non_mono.most_common(1)[0]
             return font, size
         # Fallback: just use the most common anything
-        (font, size, _, _), _ = histogram.most_common(1)[0]
-        return font, size
+        if histogram:
+            (font, size, _, _), _ = histogram.most_common(1)[0]
+            return font, size
+        return ("unknown", 10.0)
 
     @staticmethod
     def _find_code_size(
@@ -193,9 +205,10 @@ class FontAnalyzer:
         # Real chapter headings have substantial total text across the book.
         min_chars = 50
         filtered = {s: c for s, c in large_sizes.items() if c >= min_chars}
-        if not filtered:
+        if not filtered and large_sizes:
             # All sizes are rare — relax to the most common one
-            filtered = {large_sizes.most_common(1)[0][0]: large_sizes.most_common(1)[0][1]}
+            top = large_sizes.most_common(1)[0]
+            filtered = {top[0]: top[1]}
 
         # Group sizes within 1pt to avoid bold/regular duplicates
         sorted_sizes = sorted(filtered.keys(), reverse=True)

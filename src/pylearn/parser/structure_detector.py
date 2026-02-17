@@ -17,7 +17,12 @@ class StructureDetector:
 
     def __init__(self, profile: BookProfile) -> None:
         self.profile = profile
-        self._chapter_re = re.compile(profile.chapter_pattern, re.IGNORECASE)
+        try:
+            self._chapter_re = re.compile(profile.chapter_pattern, re.IGNORECASE)
+        except re.error as e:
+            logger.warning("Invalid chapter_pattern %r: %s — using default",
+                           profile.chapter_pattern, e)
+            self._chapter_re = re.compile(r"^Chapter\s+(\d+)\s*[\.:]", re.IGNORECASE)
 
     def detect_chapters(self, blocks: list[ContentBlock]) -> list[Chapter]:
         """Split a flat list of blocks into chapters."""
@@ -56,8 +61,8 @@ class StructureDetector:
             return [Chapter(
                 chapter_num=1,
                 title="Content",
-                start_page=blocks[0].page_num,
-                end_page=blocks[-1].page_num,
+                start_page=blocks[0].page_num if blocks else 0,
+                end_page=blocks[-1].page_num if blocks else 0,
                 content_blocks=blocks,
                 sections=self._detect_sections(blocks),
             )]
@@ -92,7 +97,10 @@ class StructureDetector:
             if block.block_type in (BlockType.HEADING1, BlockType.HEADING2):
                 match = self._chapter_re.match(block.text.strip())
                 if match:
-                    chapter_num = int(match.group(1))
+                    try:
+                        chapter_num = int(match.group(1))
+                    except (IndexError, ValueError):
+                        continue
                     starts.append((i, chapter_num, block.text.strip()))
 
         return starts

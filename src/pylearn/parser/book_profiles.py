@@ -47,8 +47,18 @@ class BookProfile:
     margin_left: float = 54.0
     margin_right: float = 54.0
 
+    def __post_init__(self) -> None:
+        """Validate that heading thresholds are ordered correctly."""
+        if not (self.heading1_min_size >= self.heading2_min_size >= self.heading3_min_size):
+            # Auto-fix reversed thresholds
+            sizes = sorted([self.heading1_min_size, self.heading2_min_size,
+                            self.heading3_min_size], reverse=True)
+            self.heading1_min_size, self.heading2_min_size, self.heading3_min_size = sizes
+
     def is_monospace(self, font_name: str) -> bool:
         """Check if a font name indicates monospace."""
+        if not font_name:
+            return False
         name_lower = font_name.lower()
         return any(m.lower() in name_lower for m in self.monospace_fonts)
 

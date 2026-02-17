@@ -149,7 +149,7 @@ class Sandbox:
                     env=get_safe_env(),
                     creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
                 )
-            return self._wait(timeout)
+            return self._wait(self._process, timeout)
         except Exception as e:
             logger.error(f"Python execution error: {e}")
             return ExecutionResult(stderr=str(e), return_code=-1)
@@ -222,7 +222,7 @@ class Sandbox:
                     env=get_safe_env(),
                     creationflags=subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0,
                 )
-            result = self._wait(timeout)
+            result = self._wait(self._process, timeout)
 
             # Prepend compilation success note if there were warnings
             if compile_result.stderr.strip():
@@ -244,9 +244,8 @@ class Sandbox:
             # Clean up temp directory and all contents
             shutil.rmtree(tmp_dir, ignore_errors=True)
 
-    def _wait(self, timeout: int) -> ExecutionResult:
-        """Wait for the current process to finish, capping output size."""
-        proc = self._process
+    def _wait(self, proc: subprocess.Popen, timeout: int) -> ExecutionResult:
+        """Wait for a process to finish, capping output size."""
         try:
             stdout, stderr = proc.communicate(timeout=timeout)
             # Truncate if output exceeds limit
@@ -282,7 +281,8 @@ class Sandbox:
 
     @property
     def is_running(self) -> bool:
-        return self._process is not None and self._process.poll() is None
+        with self._process_lock:
+            return self._process is not None and self._process.poll() is None
 
     @staticmethod
     def has_cpp_compiler() -> bool:

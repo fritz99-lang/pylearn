@@ -86,7 +86,10 @@ def is_page_header_or_footer(text: str, page_num: int = 0) -> bool:
 
 def detect_repl_code(text: str) -> bool:
     """Check if code text looks like Python REPL (interactive) output."""
-    lines = text.strip().split("\n")
+    stripped = text.strip()
+    if not stripped:
+        return False
+    lines = stripped.split("\n")
     prompt_count = sum(1 for line in lines if line.startswith(">>> ") or line.startswith("... "))
     return prompt_count >= 1 and prompt_count / len(lines) > 0.2
 

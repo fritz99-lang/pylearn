@@ -21,9 +21,9 @@ logger = logging.getLogger("pylearn.executor")
 # Maximum bytes of stdout/stderr to capture before truncating
 _MAX_OUTPUT_BYTES = 2 * 1024 * 1024  # 2 MB
 
-# Sentinel that marks end of output — chosen to be unique enough to never
-# appear in normal program output.
-_SENTINEL = f"__PYLEARN_DONE_{uuid.uuid4().hex[:8]}__"
+def _new_sentinel() -> str:
+    """Generate a unique sentinel per process spawn."""
+    return f"__PYLEARN_DONE_{uuid.uuid4().hex}__"
 
 # Script injected into the persistent subprocess.  It reads code blocks
 # from stdin delimited by the sentinel, exec()s them, and prints the
@@ -80,6 +80,7 @@ class Session:
         self.timeout = timeout
         self.language = language
         self._process: subprocess.Popen | None = None
+        self._sentinel: str = ""
         self._process_lock = threading.Lock()
         self._scratch_dir = DATA_DIR / "scratch"
         self._scratch_dir.mkdir(parents=True, exist_ok=True)
@@ -93,7 +94,8 @@ class Session:
             python = get_python_executable()
             if not python:
                 return None
-            bootstrap = _REPL_BOOTSTRAP.format(sentinel=_SENTINEL)
+            self._sentinel = _new_sentinel()
+            bootstrap = _REPL_BOOTSTRAP.format(sentinel=self._sentinel)
             self._process = subprocess.Popen(
                 [python, "-u", "-c", bootstrap],
                 stdin=subprocess.PIPE,
@@ -128,7 +130,7 @@ class Session:
 
         try:
             # Send code + sentinel to the subprocess
-            proc.stdin.write(code + "\n" + _SENTINEL + "\n")
+            proc.stdin.write(code + "\n" + self._sentinel + "\n")
             proc.stdin.flush()
         except (OSError, BrokenPipeError) as e:
             logger.error(f"Failed to send code to session: {e}")
@@ -136,6 +138,7 @@ class Session:
             return ExecutionResult(stderr=f"Session process died: {e}", return_code=-1)
 
         # Collect stdout and stderr until we see the sentinel on each
+        sentinel = self._sentinel
         stdout_lines: list[str] = []
         stderr_lines: list[str] = []
         stdout_bytes = 0
@@ -148,7 +151,7 @@ class Session:
             nonlocal stdout_bytes, stdout_truncated
             try:
                 for line in proc.stdout:
-                    if line.rstrip("\n") == _SENTINEL:
+                    if line.rstrip("\n") == sentinel:
                         break
                     if not stdout_truncated:
                         stdout_bytes += len(line)
@@ -164,7 +167,7 @@ class Session:
             nonlocal stderr_bytes, stderr_truncated
             try:
                 for line in proc.stderr:
-                    if line.rstrip("\n") == _SENTINEL:
+                    if line.rstrip("\n") == sentinel:
                         break
                     if not stderr_truncated:
                         stderr_bytes += len(line)

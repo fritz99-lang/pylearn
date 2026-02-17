@@ -40,7 +40,13 @@ def _save_json(path: Path, data: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_suffix(".tmp")
     tmp.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
-    tmp.replace(path)
+    try:
+        tmp.replace(path)
+    except OSError:
+        # Fallback: write directly if atomic replace fails (e.g. file locked on Windows)
+        path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    finally:
+        tmp.unlink(missing_ok=True)
 
 
 class AppConfig:
@@ -163,6 +169,9 @@ class BooksConfig:
 
     def load(self) -> None:
         self._data = _load_json(BOOKS_CONFIG_PATH)
+        # Ensure "books" is a list (guard against corrupted JSON)
+        if not isinstance(self._data.get("books"), list):
+            self._data["books"] = []
         # Migrate: ensure all entries have required keys
         for book in self._data.get("books", []):
             book.setdefault("language", "python")

@@ -30,7 +30,12 @@ class PDFParser:
         self._doc: fitz.Document | None = None
 
     def open(self) -> None:
-        self._doc = fitz.open(str(self.pdf_path))
+        if not self.pdf_path.exists():
+            raise FileNotFoundError(f"PDF not found: {self.pdf_path}")
+        try:
+            self._doc = fitz.open(str(self.pdf_path))
+        except Exception as e:
+            raise RuntimeError(f"Failed to open PDF {self.pdf_path}: {e}") from e
 
     def close(self) -> None:
         if self._doc:
@@ -48,7 +53,7 @@ class PDFParser:
     @property
     def total_pages(self) -> int:
         if self._doc is None:
-            self.open()
+            raise RuntimeError("PDFParser not opened. Use 'with PDFParser(...) as p:' or call .open()")
         return len(self._doc)
 
     def extract_page_spans(self, page_num: int) -> list[FontSpan]:
@@ -60,7 +65,12 @@ class PDFParser:
             return []
 
         page = self._doc[page_num]
-        blocks = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)["blocks"]
+        try:
+            raw = page.get_text("dict", flags=fitz.TEXT_PRESERVE_WHITESPACE)
+        except Exception as e:
+            logger.warning("Failed to extract text from page %d: %s", page_num, e)
+            return []
+        blocks = raw.get("blocks", [])
         spans = []
 
         for block in blocks:
@@ -74,9 +84,13 @@ class PDFParser:
 
                     font_name = span.get("font", "")
                     font_size = span.get("size", 0.0)
+                    if font_size <= 0:
+                        continue
                     flags = span.get("flags", 0)
                     color = span.get("color", 0)
                     bbox = span.get("bbox", (0, 0, 0, 0))
+                    if len(bbox) < 4 or bbox[0] > bbox[2] or bbox[1] > bbox[3]:
+                        continue  # invalid bounding box
 
                     # Skip if outside content margins — but exempt large text
                     # that is likely a chapter heading, not a running header.
@@ -146,7 +160,7 @@ class PDFParser:
                 image_bytes = base_image["image"]
 
                 # Deduplicate by content hash
-                img_hash = hashlib.md5(image_bytes).hexdigest()[:12]
+                img_hash = hashlib.sha256(image_bytes).hexdigest()[:12]
                 filename = f"p{page_num}_{img_hash}.{ext}"
                 filepath = save_dir / filename
 
@@ -190,8 +204,14 @@ class PDFParser:
         if self._doc is None:
             self.open()
 
-        start = self.profile.skip_pages_start
-        end = len(self._doc) - self.profile.skip_pages_end
+        total = len(self._doc)
+        start = min(self.profile.skip_pages_start, total)
+        end = max(start, total - self.profile.skip_pages_end)
+        if start >= end:
+            logger.warning(
+                "skip_pages (%d start, %d end) leaves no pages in a %d-page PDF",
+                self.profile.skip_pages_start, self.profile.skip_pages_end, total,
+            )
         return self.extract_pages(start, end)
 
     def get_font_statistics(self) -> dict[str, dict]:

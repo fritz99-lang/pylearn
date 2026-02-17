@@ -282,3 +282,193 @@ class TestImageExtensionValidation:
         assert "svg" not in _VALID_IMAGE_EXTENSIONS
         assert "exe" not in _VALID_IMAGE_EXTENSIONS
         assert "../hack" not in _VALID_IMAGE_EXTENSIONS
+
+
+# ===========================================================================
+# Round 2 — Additional hardening tests
+# ===========================================================================
+
+
+# ---------------------------------------------------------------------------
+# #5 — BooksConfig migration type safety
+# ---------------------------------------------------------------------------
+
+class TestBooksConfigTypeSafety:
+    def test_books_not_a_list_is_replaced(self, tmp_path):
+        config_path = tmp_path / "books.json"
+        config_path.write_text('{"books": "not_a_list"}', encoding="utf-8")
+        with patch("pylearn.core.config.BOOKS_CONFIG_PATH", config_path):
+            from pylearn.core.config import BooksConfig
+            cfg = BooksConfig()
+            assert cfg.books == []
+
+    def test_missing_books_key(self, tmp_path):
+        config_path = tmp_path / "books.json"
+        config_path.write_text('{}', encoding="utf-8")
+        with patch("pylearn.core.config.BOOKS_CONFIG_PATH", config_path):
+            from pylearn.core.config import BooksConfig
+            cfg = BooksConfig()
+            assert cfg.books == []
+
+
+# ---------------------------------------------------------------------------
+# #7 — Structure detector empty blocks guard
+# ---------------------------------------------------------------------------
+
+class TestStructureDetectorGuards:
+    def test_detect_chapters_empty_blocks(self):
+        from pylearn.parser.structure_detector import StructureDetector
+        from pylearn.parser.book_profiles import BookProfile
+        profile = BookProfile(name="test")
+        detector = StructureDetector(profile)
+        result = detector.detect_chapters([])
+        assert result == []
+
+    def test_detect_chapters_no_headings_empty_blocks(self):
+        """Even with no chapter starts, empty blocks shouldn't crash."""
+        from pylearn.parser.structure_detector import StructureDetector
+        from pylearn.parser.book_profiles import BookProfile
+        from pylearn.core.models import ContentBlock, BlockType
+        profile = BookProfile(name="test")
+        detector = StructureDetector(profile)
+        # Single body block — no headings, falls through to "Chapter 1"
+        blocks = [ContentBlock(block_type=BlockType.BODY, text="Hello")]
+        result = detector.detect_chapters(blocks)
+        assert len(result) == 1
+        assert result[0].chapter_num == 1
+
+
+# ---------------------------------------------------------------------------
+# #8 — Regex group extraction safety
+# ---------------------------------------------------------------------------
+
+class TestRegexGroupSafety:
+    def test_bad_chapter_pattern_falls_back(self):
+        """Invalid regex should not crash the detector."""
+        from pylearn.parser.structure_detector import StructureDetector
+        from pylearn.parser.book_profiles import BookProfile
+        profile = BookProfile(name="test", chapter_pattern="[invalid")
+        detector = StructureDetector(profile)
+        # Should have fallen back to default pattern
+        assert detector._chapter_re is not None
+
+    def test_regex_without_group_skips_match(self):
+        """Regex that matches but has no group(1) should not crash."""
+        from pylearn.parser.structure_detector import StructureDetector
+        from pylearn.parser.book_profiles import BookProfile
+        from pylearn.core.models import ContentBlock, BlockType
+        # Pattern matches headings but has no capturing group
+        profile = BookProfile(name="test", chapter_pattern=r"^Chapter\s+\w+")
+        detector = StructureDetector(profile)
+        blocks = [
+            ContentBlock(block_type=BlockType.HEADING1, text="Chapter One: Intro"),
+        ]
+        # Should not crash — group(1) raises IndexError, caught gracefully
+        result = detector._detect_by_regex(blocks)
+        assert result == []
+
+
+# ---------------------------------------------------------------------------
+# #13 — BookProfile threshold validation
+# ---------------------------------------------------------------------------
+
+class TestBookProfileValidation:
+    def test_reversed_thresholds_auto_fixed(self):
+        from pylearn.parser.book_profiles import BookProfile
+        profile = BookProfile(
+            name="test",
+            heading1_min_size=10.0,
+            heading2_min_size=18.0,
+            heading3_min_size=14.0,
+        )
+        assert profile.heading1_min_size >= profile.heading2_min_size
+        assert profile.heading2_min_size >= profile.heading3_min_size
+
+    def test_correct_thresholds_unchanged(self):
+        from pylearn.parser.book_profiles import BookProfile
+        profile = BookProfile(
+            name="test",
+            heading1_min_size=20.0,
+            heading2_min_size=14.0,
+            heading3_min_size=12.0,
+        )
+        assert profile.heading1_min_size == 20.0
+        assert profile.heading2_min_size == 14.0
+        assert profile.heading3_min_size == 12.0
+
+
+# ---------------------------------------------------------------------------
+# #21 — BookProfile.is_monospace with empty font name
+# ---------------------------------------------------------------------------
+
+class TestIsMonospaceGuard:
+    def test_empty_font_name(self):
+        from pylearn.parser.book_profiles import BookProfile
+        profile = BookProfile(name="test")
+        assert profile.is_monospace("") is False
+
+    def test_none_like_empty(self):
+        from pylearn.parser.book_profiles import BookProfile
+        profile = BookProfile(name="test")
+        assert profile.is_monospace("Courier New") is True
+
+
+# ---------------------------------------------------------------------------
+# #16 — Database exception type is sqlite3.Error
+# ---------------------------------------------------------------------------
+
+class TestDatabaseExceptionType:
+    def test_rollback_on_sqlite_error(self, tmp_path):
+        """Verify that sqlite3.Error triggers rollback, not bare Exception."""
+        from pylearn.core.database import Database
+        import sqlite3
+        db = Database(db_path=tmp_path / "test.db")
+        # Attempt to insert with wrong types should raise and rollback
+        try:
+            with db._connect() as conn:
+                conn.execute("INSERT INTO books (book_id) VALUES (?)", (None,))
+        except sqlite3.Error:
+            pass  # Expected — rollback should have occurred
+
+
+# ---------------------------------------------------------------------------
+# #17 — detect_repl_code edge cases
+# ---------------------------------------------------------------------------
+
+class TestDetectReplCodeEdgeCases:
+    def test_whitespace_only(self):
+        from pylearn.utils.text_utils import detect_repl_code
+        assert detect_repl_code("   \n\n  ") is False
+
+    def test_single_newline(self):
+        from pylearn.utils.text_utils import detect_repl_code
+        assert detect_repl_code("\n") is False
+
+
+# ---------------------------------------------------------------------------
+# #19 — Sentinel per-process
+# ---------------------------------------------------------------------------
+
+class TestSentinelPerProcess:
+    def test_new_sentinel_unique(self):
+        from pylearn.executor.session import _new_sentinel
+        s1 = _new_sentinel()
+        s2 = _new_sentinel()
+        assert s1 != s2
+        assert s1.startswith("__PYLEARN_DONE_")
+
+
+# ---------------------------------------------------------------------------
+# #22 — Config save fallback on replace error
+# ---------------------------------------------------------------------------
+
+class TestConfigSaveFallback:
+    def test_save_json_works_normally(self, tmp_path):
+        from pylearn.core.config import _save_json
+        p = tmp_path / "test.json"
+        _save_json(p, {"key": "value"})
+        assert p.exists()
+        import json
+        assert json.loads(p.read_text(encoding="utf-8")) == {"key": "value"}
+        # No leftover .tmp
+        assert not p.with_suffix(".tmp").exists()

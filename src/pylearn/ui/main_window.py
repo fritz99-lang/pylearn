@@ -572,6 +572,10 @@ class MainWindow(QMainWindow):
         else:
             self._status_state.setText("Running...")
 
+        # Clean up previous worker before creating a new one
+        if self._exec_worker is not None:
+            self._exec_worker.wait(1000)
+            self._exec_worker.deleteLater()
         self._exec_worker = ExecuteWorker(code, self._session)
         self._exec_worker.finished.connect(self._on_execution_finished)
         self._exec_worker.start()
@@ -627,6 +631,11 @@ class MainWindow(QMainWindow):
             self, "Load Code", "", file_filter
         )
         if path:
+            file_size = Path(path).stat().st_size
+            if file_size > 10 * 1024 * 1024:  # 10 MB
+                QMessageBox.warning(self, "File Too Large",
+                                    "File exceeds the 10 MB limit.")
+                return
             code = Path(path).read_text(encoding="utf-8")
             self._editor.set_code(code)
             self._status_state.setText(f"Loaded {Path(path).name}")
@@ -802,10 +811,12 @@ class MainWindow(QMainWindow):
         self._save_state()
         # Clean up external editor temp files
         self._external_editor.cleanup()
-        # Stop any running processes — kill subprocess first so thread exits
-        self._session.stop()
+        # Kill session subprocess and wait for it to be reaped
+        self._session.reset()
         if self._parse_process and self._parse_process.is_running():
             self._parse_process.stop()
         if self._exec_worker and self._exec_worker.isRunning():
-            self._exec_worker.wait(5000)
+            self._session.stop()  # ensure subprocess is dead so thread can exit
+            if not self._exec_worker.wait(5000):
+                self._exec_worker.terminate()
         super().closeEvent(event)
