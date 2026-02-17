@@ -24,7 +24,7 @@ An interactive desktop app for learning programming from PDF books. Split-pane i
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/pylearn.git
+git clone https://github.com/fritz99-lang/pylearn.git
 cd pylearn
 
 # Create a virtual environment
@@ -32,8 +32,17 @@ python -m venv .venv
 source .venv/bin/activate    # Linux/macOS
 .venv\Scripts\activate       # Windows
 
-# Install in development mode
+# Install the app
+pip install -e .
+
+# Or with dev tools (pytest, mypy)
 pip install -e ".[dev]"
+```
+
+You can also install directly from GitHub without cloning:
+
+```bash
+pip install git+https://github.com/fritz99-lang/pylearn.git
 ```
 
 ## Setup
