@@ -13,9 +13,35 @@ if str(src_dir) not in sys.path:
 
 
 def _run_parse() -> None:
-    """Handle --parse flag: run book parsing without GUI (for frozen subprocess)."""
+    """Handle --parse flag: run book parsing without GUI.
+
+    Exit codes:
+        0  — success
+        10 — config load failed
+        11 — cache init failed
+        12 — no matching books in config
+        13 — all books failed to parse
+    """
     import time
-    from pylearn.core.config import BooksConfig
+    from pylearn.utils.error_handler import setup_logging
+
+    setup_logging()
+
+    try:
+        from pylearn.core.config import BooksConfig
+        config = BooksConfig()
+    except Exception as e:
+        print(f"ERROR: Failed to load books config: {e}")
+        print("Hint: Ensure config/books.json exists and contains valid JSON.")
+        sys.exit(10)
+
+    try:
+        from pylearn.parser.cache_manager import CacheManager
+        cache = CacheManager()
+    except Exception as e:
+        print(f"ERROR: Failed to initialize cache: {e}")
+        sys.exit(11)
+
     from pylearn.core.models import Book
     from pylearn.parser.book_profiles import get_profile, get_auto_profile, PROFILES
     from pylearn.parser.pdf_parser import PDFParser
@@ -23,12 +49,6 @@ def _run_parse() -> None:
     from pylearn.parser.code_extractor import CodeExtractor
     from pylearn.parser.structure_detector import StructureDetector
     from pylearn.parser.exercise_extractor import ExerciseExtractor
-    from pylearn.parser.cache_manager import CacheManager
-    from pylearn.utils.error_handler import setup_logging
-
-    setup_logging()
-    config = BooksConfig()
-    cache = CacheManager()
 
     # Parse --book and --force flags
     target_book = None
@@ -43,9 +63,17 @@ def _run_parse() -> None:
         books = [b for b in books if b["book_id"] == target_book]
 
     if not books:
-        print("No books registered.")
-        return
+        if target_book:
+            print(f"ERROR: No book with id '{target_book}' found in config.")
+            print("Hint: Check config/books.json — registered book IDs are:")
+            for b in config.books:
+                print(f"  - {b['book_id']}: {b['title']}")
+        else:
+            print("ERROR: No books registered in config/books.json.")
+            print("Hint: Add a book entry to config/books.json with book_id, title, and pdf_path.")
+        sys.exit(12)
 
+    success_count = 0
     for book_info in books:
         try:
             book_id = book_info["book_id"]
@@ -53,6 +81,7 @@ def _run_parse() -> None:
 
             if cache.has_cache(book_id) and not force:
                 print("  Already cached (use --force to re-parse)")
+                success_count += 1
                 continue
 
             pdf_path = book_info["pdf_path"]
@@ -144,9 +173,14 @@ def _run_parse() -> None:
 
             cache.save(book)
             print(f"  Cached successfully")
+            success_count += 1
         except Exception as e:
             print(f"  ERROR parsing {book_info.get('title', '?')}: {e}")
             continue
+
+    if success_count == 0 and len(books) > 0:
+        print("\nERROR: All books failed to parse.")
+        sys.exit(13)
 
     print("\nDone!")
 

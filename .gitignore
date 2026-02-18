@@ -26,6 +26,11 @@ data/
 *.spec
 *.bat
 
+# Personal / project-management files
+TODO.md
+CLAUDE.md
+Code Review*.md
+
 # Misc
 .claude/
 src/data/

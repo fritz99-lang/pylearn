@@ -4,10 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pylearn-reader"
-version = "1.0.0"
+version = "1.0.1"
 description = "Interactive Python learning desktop app with PDF book reader and code editor"
 license = "MIT"
 authors = [{name = "Nate Tritle"}]
+readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "PyQt6>=6.6.0",

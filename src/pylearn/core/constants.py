@@ -7,25 +7,49 @@ import sys
 from pathlib import Path
 
 APP_NAME = "PyLearn"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 APP_AUTHOR = "Nathan Tritle"
 
 # Frozen-mode detection (PyInstaller sets sys.frozen)
 IS_FROZEN = getattr(sys, "frozen", False)
 
-# Directories — dual-mode resolution
-if IS_FROZEN:
-    # Frozen (PyInstaller): use %LOCALAPPDATA%\PyLearn for writable data
-    _LOCAL_APP_DATA = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local"))
-    APP_DIR = _LOCAL_APP_DATA / APP_NAME
-    CONFIG_DIR = APP_DIR / "config"
-    DATA_DIR = APP_DIR / "data"
-else:
-    # Dev mode: project root relative to this file
-    APP_DIR = Path(__file__).resolve().parent.parent.parent.parent
-    CONFIG_DIR = APP_DIR / "config"
-    DATA_DIR = APP_DIR / "data"
 
+def _user_data_dir() -> Path:
+    """Return the platform-appropriate user data directory for PyLearn."""
+    if sys.platform == "win32":
+        base = Path(os.environ.get("LOCALAPPDATA", Path.home() / "AppData" / "Local"))
+    elif sys.platform == "darwin":
+        base = Path.home() / "Library" / "Application Support"
+    else:
+        base = Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share"))
+    return base / APP_NAME.lower()
+
+
+def _detect_app_dir() -> Path:
+    """Resolve the application root directory (three modes).
+
+    1. Frozen (PyInstaller): user data dir (%LOCALAPPDATA%/pylearn etc.)
+    2. Dev (git clone): project root where pyproject.toml + scripts/ exist
+    3. Pip-installed (fallback): user data dir (same layout as frozen)
+    """
+    if IS_FROZEN:
+        return _user_data_dir()
+
+    # Check if we're in a dev checkout: 4 parents up from this file should
+    # contain pyproject.toml and scripts/
+    candidate = Path(__file__).resolve().parent.parent.parent.parent
+    if (candidate / "pyproject.toml").exists() and (candidate / "scripts").is_dir():
+        return candidate
+
+    # Pip-installed: __file__ is in site-packages, fall back to user data dir
+    return _user_data_dir()
+
+
+# Directories — three-mode resolution
+APP_DIR = _detect_app_dir()
+IS_DEV = not IS_FROZEN and (APP_DIR / "pyproject.toml").exists()
+CONFIG_DIR = APP_DIR / "config"
+DATA_DIR = APP_DIR / "data"
 CACHE_DIR = DATA_DIR / "cache"
 DB_PATH = DATA_DIR / "pylearn.db"
 
@@ -35,6 +59,16 @@ for _d in (CONFIG_DIR, DATA_DIR, CACHE_DIR):
         _d.mkdir(parents=True, exist_ok=True)
     except OSError:
         pass  # Components will create as needed
+
+# In dev mode, auto-copy config/*.json.example → config/*.json if missing
+if IS_DEV:
+    for _example in APP_DIR.glob("config/*.json.example"):
+        _target = _example.with_suffix("")  # strip .example
+        if not _target.exists():
+            try:
+                shutil.copy2(_example, _target)
+            except OSError:
+                pass
 
 # Config files
 APP_CONFIG_PATH = CONFIG_DIR / "app_config.json"

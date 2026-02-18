@@ -40,39 +40,8 @@ An interactive desktop app for learning programming from PDF books. Split-pane i
 
 ## Requirements
 
-- Python 3.12+
+- Python 3.12 or newer
 - Windows, macOS, or Linux
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/fritz99-lang/pylearn.git
-cd pylearn
-
-# Create a virtual environment
-python -m venv .venv
-source .venv/bin/activate    # Linux/macOS
-.venv\Scripts\activate       # Windows
-
-# Install the app
-pip install -e .
-
-# Or with dev tools (pytest, mypy)
-pip install -e ".[dev]"
-```
-
-Or install from PyPI:
-
-```bash
-pip install pylearn-reader
-```
-
-Or directly from GitHub:
-
-```bash
-pip install git+https://github.com/fritz99-lang/pylearn.git
-```
 
 ### Platform Notes
 
@@ -82,38 +51,107 @@ pip install git+https://github.com/fritz99-lang/pylearn.git
 | **Linux** | Install system deps first: `sudo apt-get install libegl1 libxkbcommon0` |
 | **macOS** | May need Xcode command line tools: `xcode-select --install` |
 
-## Setup
+## Installation
 
-1. **Copy the example config files:**
+Pick **one** of the methods below.
 
-   ```bash
-   cp config/app_config.json.example config/app_config.json
-   cp config/books.json.example config/books.json
-   cp config/editor_config.json.example config/editor_config.json
-   ```
+### Option A: Install from PyPI (simplest)
 
-2. **Register your books** by editing `config/books.json`:
+```bash
+pip install pylearn-reader
+```
 
-   ```json
-   {
-     "books": [
-       {
-         "book_id": "learning_python",
-         "title": "Learning Python",
-         "pdf_path": "/path/to/your/book.pdf",
-         "profile_name": "learning_python"
-       }
-     ]
-   }
-   ```
+### Option B: Install from GitHub (latest code)
 
-   Available `profile_name` values: `learning_python`, `cpp_generic`, or leave empty for auto-detection.
+```bash
+pip install git+https://github.com/fritz99-lang/pylearn.git
+```
 
-3. **Launch the app:**
+### Option C: Clone the repo (for development)
 
-   ```bash
-   python -m pylearn
-   ```
+```bash
+git clone https://github.com/fritz99-lang/pylearn.git
+cd pylearn
+
+# Create a virtual environment (recommended)
+python -m venv .venv
+source .venv/bin/activate    # Linux/macOS
+.venv\Scripts\activate       # Windows
+
+pip install -e .             # editable install
+pip install -e ".[dev]"      # or include pytest + mypy
+```
+
+## Registering a Book
+
+PyLearn reads PDF books, but it needs to know where your PDFs are. You do this by editing a single config file called `books.json`.
+
+### Step 1 — Find your config directory
+
+Where `books.json` lives depends on how you installed:
+
+| Install method | Config location |
+|----------------|-----------------|
+| **Git clone** (Option C) | `config/` folder inside the repo — configs are created automatically from the `.json.example` files on first launch |
+| **pip install** (Option A or B) | A `config/` folder inside your system's app-data directory (see table below) |
+
+**App-data directory by platform** (pip installs only):
+
+| Platform | Path |
+|----------|------|
+| Windows | `%LOCALAPPDATA%\pylearn\config\` (typically `C:\Users\<you>\AppData\Local\pylearn\config\`) |
+| macOS | `~/Library/Application Support/pylearn/config/` |
+| Linux | `~/.local/share/pylearn/config/` |
+
+> **Tip:** Launch the app once (`python -m pylearn`) and it will create the config directory for you. Then you just need to add your `books.json` file inside it.
+
+### Step 2 — Create (or edit) `books.json`
+
+If the file doesn't exist yet, create it. Add one entry per book:
+
+```json
+{
+  "books": [
+    {
+      "book_id": "learning_python",
+      "title": "Learning Python, 5th Edition",
+      "pdf_path": "C:/Users/you/Documents/Learning_Python.pdf",
+      "language": "python",
+      "profile_name": "learning_python"
+    }
+  ]
+}
+```
+
+**Field reference:**
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `book_id` | Yes | A short unique ID you make up — no spaces, lowercase with underscores (e.g. `"my_python_book"`) |
+| `title` | Yes | Display name shown in the app |
+| `pdf_path` | Yes | **Absolute path** to the PDF file on your computer. Use forward slashes even on Windows (`C:/Users/...`) |
+| `language` | No | `"python"` (default), `"cpp"`, or `"html"` — controls syntax highlighting in the editor |
+| `profile_name` | No | A named parsing profile that fine-tunes how PDF fonts are classified. Leave it as `""` (empty string) for auto-detection, which works well for most books |
+
+**Available named profiles** (only needed if auto-detection doesn't work well for your book):
+
+| `profile_name` | Best for |
+|-----------------|----------|
+| `learning_python` | *Learning Python* by Mark Lutz |
+| `python_cookbook` | *Python Cookbook* by Beazley & Jones |
+| `programming_python` | *Programming Python* by Mark Lutz |
+| `cpp_generic` | General C++ textbooks |
+| `cpp_primer` | *C++ Primer* by Lippman et al. |
+| `effective_cpp` | *Effective C++* by Scott Meyers |
+| *(empty string)* | Auto-detect from the PDF — **try this first** |
+
+### Step 3 — Launch and parse
+
+```bash
+python -m pylearn
+```
+
+On first launch for each book, the app will ask if you want to parse the PDF. Click **Yes** — this takes a minute or two depending on the book size. After parsing, the book content is cached so subsequent launches are instant.
 
 ## Usage
 
@@ -146,7 +184,7 @@ pip install git+https://github.com/fritz99-lang/pylearn.git
 
 ## Configuration
 
-All config files live in `config/` and are JSON:
+Config files are JSON. For git-clone installs they live in `config/` inside the repo. For pip installs they live in your app-data directory (see [Registering a Book](#registering-a-book) for the exact path).
 
 - **`app_config.json`** — Window size, theme, splitter positions, last opened book
 - **`books.json`** — Registered books with PDF paths and profile names
@@ -194,18 +232,25 @@ scripts/        Utility scripts for PDF analysis and book parsing
 - Verify Python 3.12+: `python --version`
 - On Linux, install system deps: `sudo apt-get install libegl1 libxkbcommon0`
 
-**PDF not found**
-- Check the `pdf_path` in `config/books.json` — use absolute paths
-- Verify the file exists at the specified path
+**"No books registered" or no books appear**
+- Make sure `books.json` exists in the correct config directory (see [Registering a Book](#registering-a-book) above)
+- Open the file and check for JSON syntax errors (missing commas, unclosed braces)
+- Make sure each entry has at least `book_id`, `title`, and `pdf_path`
+
+**"PDF not found" error during parsing**
+- The `pdf_path` in `books.json` must be an **absolute path** — relative paths won't work
+- Use forward slashes, even on Windows: `"C:/Users/you/Documents/book.pdf"`
+- Double-check the file actually exists at that path
 
 **Book not parsing correctly**
-- Delete the cached JSON in `data/` and re-launch to force a re-parse
-- Check if a matching `profile_name` exists in `book_profiles.py`
-- Run `python scripts/analyze_pdf_fonts.py path/to/book.pdf` to inspect font metadata
+- Try auto-detection first: set `"profile_name": ""` in your book entry
+- Use **Book > Re-parse (clear cache)** from the menu bar to force a fresh parse
+- If auto-detection gives poor results, try a named profile (see the profile table above)
+- For dev installs: run `python scripts/analyze_pdf_fonts.py path/to/book.pdf` to inspect font metadata
 
 **Code execution timeout**
 - Default timeout is 30 seconds
-- Increase it in `config/editor_config.json` by setting `"execution_timeout"` to a higher value
+- Increase it in `editor_config.json` by setting `"execution_timeout"` to a higher value (in seconds)
 
 ## Acknowledgments
 

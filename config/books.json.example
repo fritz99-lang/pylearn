@@ -1,10 +1,11 @@
 {
   "books": [
     {
-      "book_id": "example_book",
-      "title": "Example Book Title",
-      "pdf_path": "/path/to/your/book.pdf",
-      "profile_name": "learning_python"
+      "book_id": "my_python_book",
+      "title": "Learning Python, 5th Edition",
+      "pdf_path": "C:/Users/you/Documents/Learning_Python.pdf",
+      "language": "python",
+      "profile_name": ""
     }
   ]
 }

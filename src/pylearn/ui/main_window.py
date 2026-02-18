@@ -58,6 +58,7 @@ class ParseProcess:
         self._process.setProcessChannelMode(QProcess.ProcessChannelMode.MergedChannels)
         self._book_id: str = ""
         self._parent = parent
+        self._output_buffer: list[str] = []
 
         # Wire QProcess signals
         self._process.readyReadStandardOutput.connect(self._on_output)
@@ -73,13 +74,13 @@ class ParseProcess:
         if self._process.state() != QProcess.ProcessState.NotRunning:
             return
         self._book_id = book_id
+        self._output_buffer.clear()
         if IS_FROZEN:
             # Frozen mode: re-invoke the exe itself with --parse flag
             self._process.start(sys.executable, ["--parse", "--book", book_id, "--force"])
         else:
-            # Dev mode: run the parse script directly
-            script = str(Path(__file__).resolve().parent.parent.parent.parent / "scripts" / "parse_books.py")
-            self._process.start(sys.executable, [script, "--book", book_id, "--force"])
+            # Dev + pip-installed: use -m pylearn which works from any install mode
+            self._process.start(sys.executable, ["-m", "pylearn", "--parse", "--book", book_id, "--force"])
 
     def stop(self) -> None:
         if self._process.state() != QProcess.ProcessState.NotRunning:
@@ -94,6 +95,7 @@ class ParseProcess:
             for line in data.splitlines():
                 line = line.strip()
                 if line:
+                    self._output_buffer.append(line)
                     self.on_progress(line)
         except Exception as e:
             logging.getLogger("pylearn.ui").exception("Error in _on_output")
@@ -102,7 +104,13 @@ class ParseProcess:
     def _on_finished(self, exit_code: int, exit_status: QProcess.ExitStatus) -> None:
         try:
             if exit_code != 0:
-                self.on_error(f"Parsing process exited with code {exit_code}")
+                # Extract ERROR lines from output for a useful message
+                error_lines = [ln for ln in self._output_buffer if "ERROR" in ln]
+                if error_lines:
+                    detail = "\n".join(error_lines)
+                    self.on_error(f"Parsing failed:\n{detail}")
+                else:
+                    self.on_error(f"Parsing process exited with code {exit_code}")
                 return
 
             self.on_progress("Loading parsed content...")
