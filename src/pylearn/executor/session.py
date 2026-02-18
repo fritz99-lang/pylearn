@@ -103,6 +103,7 @@ class Session:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
+                encoding="utf-8",
                 cwd=str(self._scratch_dir),
                 env=get_safe_env(),
                 creationflags=_CREATE_NO_WINDOW if sys.platform == "win32" else 0,
@@ -166,8 +167,8 @@ class Session:
                             stdout_lines.append("\n[output truncated — exceeded 2 MB limit]\n")
                         else:
                             stdout_lines.append(line)
-            except Exception:
-                pass
+            except Exception as e:
+                logger.error("Error reading subprocess stdout: %s", e)
 
         def _read_stderr() -> None:
             nonlocal stderr_bytes, stderr_truncated
@@ -184,8 +185,8 @@ class Session:
                             stderr_lines.append("\n[stderr truncated — exceeded 2 MB limit]\n")
                         else:
                             stderr_lines.append(line)
-            except Exception:
-                pass
+            except Exception as e:
+                logger.error("Error reading subprocess stderr: %s", e)
 
         stdout_thread = threading.Thread(target=_read_stdout, daemon=True)
         stderr_thread = threading.Thread(target=_read_stderr, daemon=True)

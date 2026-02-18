@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
     QLineEdit, QPushButton, QLabel,
 )
 from PyQt6.QtCore import pyqtSignal, QUrl, QTimer, Qt
-from PyQt6.QtGui import QDesktopServices, QKeySequence, QShortcut, QTextDocument
+from PyQt6.QtGui import QColor, QDesktopServices, QKeySequence, QPalette, QShortcut, QTextDocument
 
 from pylearn.core.models import ContentBlock, BlockType
 from pylearn.renderer.html_renderer import HTMLRenderer
@@ -180,6 +180,13 @@ class ReaderPanel(QWidget):
     def set_theme(self, theme_name: str) -> None:
         """Update the rendering theme."""
         self._renderer.update_theme(theme_name)
+        # Set palette link color so QTextBrowser doesn't default to system blue
+        from pylearn.ui.theme_registry import get_palette
+        palette = self._browser.palette()
+        accent = QColor(get_palette(theme_name).accent)
+        palette.setColor(QPalette.ColorRole.Link, accent)
+        palette.setColor(QPalette.ColorRole.LinkVisited, accent)
+        self._browser.setPalette(palette)
         if self._current_blocks:
             pos = self._browser.verticalScrollBar().value()
             self.display_blocks(self._current_blocks)

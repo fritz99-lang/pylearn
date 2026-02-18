@@ -14,6 +14,15 @@ _COLOR_RE = _re.compile(r'^#[0-9a-fA-F]{3,8}$|^[a-zA-Z]+$')
 class OutputHandler:
     """Format stdout/stderr for display in the console panel."""
 
+    def __init__(self) -> None:
+        self._stdout_color = "#d4d4d4"
+
+    def set_theme(self, theme_name: str) -> None:
+        """Update output colors to match the active theme."""
+        from pylearn.ui.theme_registry import get_palette
+        p = get_palette(theme_name)
+        self._stdout_color = p.text
+
     def format_result(self, result: ExecutionResult) -> str:
         """Format an execution result as styled HTML for the console."""
         parts = []
@@ -21,7 +30,7 @@ class OutputHandler:
         if result.stdout:
             escaped = html.escape(result.stdout)
             parts.append(
-                f'<pre style="color:#d4d4d4; margin:0; white-space:pre-wrap; '
+                f'<pre style="color:{self._stdout_color}; margin:0; white-space:pre-wrap; '
                 f'font-family:Consolas, monospace;">{escaped}</pre>'
             )
 

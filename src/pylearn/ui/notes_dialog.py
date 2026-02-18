@@ -12,6 +12,9 @@ from PyQt6.QtCore import pyqtSignal, Qt
 
 from pylearn.core.database import Database
 
+import logging
+logger = logging.getLogger("pylearn.ui.notes_dialog")
+
 
 class NotesDialog(QDialog):
     """Dialog for viewing and editing notes."""
@@ -82,11 +85,15 @@ class NotesDialog(QDialog):
         close_layout.addWidget(close_btn)
         layout.addLayout(close_layout)
 
+        logger.debug("NotesDialog: constructor done, calling _load_notes")
         self._load_notes()
 
     def _load_notes(self) -> None:
         self._tree.clear()
+        logger.debug("_load_notes: querying db for book=%s chapter=%s",
+                      self._book_id, self._chapter_num)
         notes = self._db.get_notes(self._book_id, self._chapter_num)
+        logger.debug("_load_notes: got %d notes", len(notes))
 
         for note in notes:
             item = QTreeWidgetItem(self._tree)
@@ -94,6 +101,7 @@ class NotesDialog(QDialog):
             preview = note["content"][:50].replace("\n", " ")
             item.setText(1, preview)
             item.setData(0, Qt.ItemDataRole.UserRole, note)
+        logger.debug("_load_notes: tree populated")
 
     def _on_note_selected(self, item: QTreeWidgetItem, column: int) -> None:
         note = item.data(0, Qt.ItemDataRole.UserRole)

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pylearn"
-version = "0.1.0"
+version = "1.0.0"
 description = "Interactive Python learning desktop app with PDF book reader and code editor"
 license = "MIT"
 authors = [{name = "Nate Tritle"}]

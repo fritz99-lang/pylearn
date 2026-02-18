@@ -21,8 +21,8 @@ Desktop app for learning Python from O'Reilly PDF books. Split-pane UI: book rea
 - `config/` — JSON config files (user-specific, not committed)
 - `data/` — SQLite DB + parsed PDF cache (not committed)
 - `conftest.py` — shared pytest fixtures
-- `tests/unit/` — 167 unit tests
-- `tests/integration/` — 47 integration tests
+- `tests/unit/` — 500+ unit tests
+- `tests/integration/` — 150+ integration tests
 
 ## Running
 ```bash
@@ -32,7 +32,7 @@ python -m pylearn
 ## Commands
 - `python scripts/analyze_pdf_fonts.py <path.pdf>` — dump font info from a PDF
 - `python scripts/parse_books.py` — pre-parse all registered books to cache
-- `pytest tests/ -v` — run all 214 tests
+- `pytest tests/ -v` — run all 702 tests
 - `pytest tests/ -v -m "not slow"` — skip timeout tests (~5s vs ~14s)
 - `mypy src/pylearn/` — type check (should be 0 errors)
 
@@ -45,6 +45,6 @@ python -m pylearn
 - `subprocess.CREATE_NO_WINDOW` accessed via `_CREATE_NO_WINDOW` constant (cross-platform)
 
 ## Current State (Feb 2026)
-- 49 hardening fixes shipped, 214 tests passing, mypy clean, CI green
+- 49 hardening fixes shipped, 702 tests passing, mypy clean, CI green
 - Supports Python, C++, and HTML book profiles
 - Three themes: light, dark, sepia

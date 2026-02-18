@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 APP_NAME = "PyLearn"
-APP_VERSION = "0.1.0"
+APP_VERSION = "1.0.0"
 APP_AUTHOR = "Nathan Tritle"
 
 # Frozen-mode detection (PyInstaller sets sys.frozen)

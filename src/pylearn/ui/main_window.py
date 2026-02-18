@@ -252,9 +252,13 @@ class MainWindow(QMainWindow):
     def _add_menu_action(self, menu: QMenu, text: str, slot: Callable[..., Any], shortcut: str | None = None) -> QAction:
         """Helper to add a menu action with optional shortcut (PyQt6-compatible)."""
         action = QAction(text, self)
-        action.triggered.connect(slot)
+        # Lambda discards the 'checked' bool that triggered(bool) emits,
+        # so zero-arg slots don't get an unexpected argument.
+        action.triggered.connect(lambda checked=False, fn=slot: fn())
         if shortcut:
             action.setShortcut(QKeySequence(shortcut))
+            # Window context ensures shortcuts work even when QScintilla has focus
+            action.setShortcutContext(Qt.ShortcutContext.WindowShortcut)
         menu.addAction(action)
         return action
 
@@ -266,6 +270,7 @@ class MainWindow(QMainWindow):
         file_menu = menubar.addMenu("&File")
         self._add_menu_action(file_menu, "Save Code...", self._save_code_to_file, "Ctrl+S")
         self._add_menu_action(file_menu, "Load Code...", self._load_code_from_file, "Ctrl+O")
+        self._add_menu_action(file_menu, "Open in External Editor", self._open_external_editor, "Ctrl+E")
         file_menu.addSeparator()
         self._add_menu_action(file_menu, "E&xit", self.close, "Alt+F4")
 
@@ -648,8 +653,11 @@ class MainWindow(QMainWindow):
             self, "Save Code", "", self._file_filter_for_language()
         )
         if path:
-            Path(path).write_text(self._editor.get_code(), encoding="utf-8")
-            self._status_state.setText(f"Saved to {Path(path).name}")
+            try:
+                Path(path).write_text(self._editor.get_code(), encoding="utf-8")
+                self._status_state.setText(f"Saved to {Path(path).name}")
+            except OSError as e:
+                QMessageBox.warning(self, "Save Failed", f"Could not save file:\n{e}")
 
     @safe_slot
     def _load_code_from_file(self) -> None:
@@ -657,14 +665,17 @@ class MainWindow(QMainWindow):
             self, "Load Code", "", self._file_filter_for_language()
         )
         if path:
-            file_size = Path(path).stat().st_size
-            if file_size > 10 * 1024 * 1024:  # 10 MB
-                QMessageBox.warning(self, "File Too Large",
-                                    "File exceeds the 10 MB limit.")
-                return
-            code = Path(path).read_text(encoding="utf-8")
-            self._editor.set_code(code)
-            self._status_state.setText(f"Loaded {Path(path).name}")
+            try:
+                file_size = Path(path).stat().st_size
+                if file_size > 10 * 1024 * 1024:  # 10 MB
+                    QMessageBox.warning(self, "File Too Large",
+                                        "File exceeds the 10 MB limit.")
+                    return
+                code = Path(path).read_text(encoding="utf-8")
+                self._editor.set_code(code)
+                self._status_state.setText(f"Loaded {Path(path).name}")
+            except OSError as e:
+                QMessageBox.warning(self, "Load Failed", f"Could not read file:\n{e}")
 
     # --- Bookmarks & Notes ---
 
@@ -696,13 +707,19 @@ class MainWindow(QMainWindow):
     def _add_note(self) -> None:
         if not self._book.current_book:
             return
+        logger.debug("_add_note: book=%s chapter=%s",
+                      self._book.current_book.book_id,
+                      self._book.current_chapter_num)
         section_title = self._book.current_chapter_title()
+        logger.debug("_add_note: creating NotesDialog")
         dialog = NotesDialog(
             self._db, self._book.current_book.book_id,
             self._book.current_chapter_num, self,
             section_title=section_title,
         )
+        logger.debug("_add_note: calling dialog.exec()")
         dialog.exec()
+        logger.debug("_add_note: dialog closed")
 
     @safe_slot
     def _show_notes(self) -> None:
@@ -773,6 +790,7 @@ class MainWindow(QMainWindow):
         self._reader.set_theme(theme_name)
         self._editor.set_theme(theme_name)
         self._console.set_theme(theme_name)
+        self._output.set_theme(theme_name)
         self._app_config.theme = theme_name
 
     # --- Search ---

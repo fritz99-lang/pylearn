@@ -247,16 +247,19 @@ class Exercise:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> Exercise:
-        return cls(
-            exercise_id=data["exercise_id"],
-            book_id=data["book_id"],
-            chapter_num=data["chapter_num"],
-            title=data["title"],
-            description=data["description"],
-            exercise_type=data["exercise_type"],
-            answer=data.get("answer"),
-            page_num=data.get("page_num", 0),
-        )
+        try:
+            return cls(
+                exercise_id=data["exercise_id"],
+                book_id=data["book_id"],
+                chapter_num=data["chapter_num"],
+                title=data["title"],
+                description=data["description"],
+                exercise_type=data["exercise_type"],
+                answer=data.get("answer"),
+                page_num=data.get("page_num", 0),
+            )
+        except KeyError as e:
+            raise ValueError(f"Exercise missing required key: {e}") from e
 
 
 @dataclass

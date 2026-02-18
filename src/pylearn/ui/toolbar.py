@@ -24,16 +24,14 @@ class MainToolBar(QToolBar):
         super().__init__("Main Toolbar", parent)
         self.setMovable(False)
 
-        # Run button
+        # Run button (F5 shortcut is on the menu action to avoid ambiguity)
         self._run_action = QAction("Run", self)
-        self._run_action.setShortcut(QKeySequence("F5"))
         self._run_action.setToolTip("Run code (F5)")
         self._run_action.triggered.connect(self.run_requested.emit)
         self.addAction(self._run_action)
 
-        # Stop button
+        # Stop button (Shift+F5 shortcut is on the menu action)
         self._stop_action = QAction("Stop", self)
-        self._stop_action.setShortcut(QKeySequence("Shift+F5"))
         self._stop_action.setToolTip("Stop execution (Shift+F5)")
         self._stop_action.triggered.connect(self.stop_requested.emit)
         self._stop_action.setEnabled(False)
@@ -47,9 +45,8 @@ class MainToolBar(QToolBar):
 
         self.addSeparator()
 
-        # External editor (Notepad++)
+        # External editor (Ctrl+E shortcut is on the menu action)
         self._external_editor_action = QAction("Notepad++", self)
-        self._external_editor_action.setShortcut(QKeySequence("Ctrl+E"))
         self._external_editor_action.setToolTip("Edit in Notepad++ (Ctrl+E)")
         self._external_editor_action.triggered.connect(self.external_editor_requested.emit)
         self.addAction(self._external_editor_action)

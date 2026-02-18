@@ -28,13 +28,21 @@ from pylearn.core.constants import (
 logger = logging.getLogger("pylearn.config")
 
 
+def _safe_int(value: Any, default: int) -> int:
+    """Convert value to int, returning default on failure."""
+    try:
+        return int(value)
+    except (ValueError, TypeError):
+        return default
+
+
 def _load_json(path: Path) -> dict[str, Any]:
     if path.exists():
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
             if isinstance(data, dict):
                 return data
-        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        except (json.JSONDecodeError, UnicodeDecodeError, OSError) as e:
             logger.error(f"Corrupt config file {path}: {e} — using defaults")
     return {}
 
@@ -69,7 +77,7 @@ class AppConfig:
 
     @property
     def window_width(self) -> int:
-        return int(self._data.get("window_width", DEFAULT_WINDOW_WIDTH))
+        return _safe_int(self._data.get("window_width", DEFAULT_WINDOW_WIDTH), DEFAULT_WINDOW_WIDTH)
 
     @window_width.setter
     def window_width(self, value: int) -> None:
@@ -77,7 +85,7 @@ class AppConfig:
 
     @property
     def window_height(self) -> int:
-        return int(self._data.get("window_height", DEFAULT_WINDOW_HEIGHT))
+        return _safe_int(self._data.get("window_height", DEFAULT_WINDOW_HEIGHT), DEFAULT_WINDOW_HEIGHT)
 
     @window_height.setter
     def window_height(self, value: int) -> None:
@@ -117,7 +125,7 @@ class AppConfig:
 
     @property
     def reader_font_size(self) -> int:
-        val = int(self._data.get("reader_font_size", DEFAULT_FONT_SIZE))
+        val = _safe_int(self._data.get("reader_font_size", DEFAULT_FONT_SIZE), DEFAULT_FONT_SIZE)
         return max(6, min(72, val))
 
     @reader_font_size.setter
@@ -150,7 +158,7 @@ class AppConfig:
 
     @property
     def toc_width(self) -> int:
-        return int(self._data.get("toc_width", TOC_WIDTH))
+        return _safe_int(self._data.get("toc_width", TOC_WIDTH), TOC_WIDTH)
 
     @toc_width.setter
     def toc_width(self, value: int) -> None:
@@ -232,7 +240,7 @@ class EditorConfig:
 
     @property
     def font_size(self) -> int:
-        val = int(self._data.get("font_size", DEFAULT_EDITOR_FONT_SIZE))
+        val = _safe_int(self._data.get("font_size", DEFAULT_EDITOR_FONT_SIZE), DEFAULT_EDITOR_FONT_SIZE)
         return max(6, min(72, val))
 
     @font_size.setter
@@ -241,7 +249,7 @@ class EditorConfig:
 
     @property
     def tab_width(self) -> int:
-        val = int(self._data.get("tab_width", DEFAULT_TAB_WIDTH))
+        val = _safe_int(self._data.get("tab_width", DEFAULT_TAB_WIDTH), DEFAULT_TAB_WIDTH)
         return max(1, min(16, val))
 
     @tab_width.setter
@@ -274,7 +282,7 @@ class EditorConfig:
 
     @property
     def execution_timeout(self) -> int:
-        val = int(self._data.get("execution_timeout", DEFAULT_EXECUTION_TIMEOUT))
+        val = _safe_int(self._data.get("execution_timeout", DEFAULT_EXECUTION_TIMEOUT), DEFAULT_EXECUTION_TIMEOUT)
         return max(5, min(300, val))
 
     @execution_timeout.setter
