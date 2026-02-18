@@ -62,7 +62,13 @@ pip install -e .
 pip install -e ".[dev]"
 ```
 
-You can also install directly from GitHub without cloning:
+Or install from PyPI:
+
+```bash
+pip install pylearn-reader
+```
+
+Or directly from GitHub:
 
 ```bash
 pip install git+https://github.com/fritz99-lang/pylearn.git
