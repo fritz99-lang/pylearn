@@ -811,15 +811,23 @@ class MainWindow(QMainWindow):
     @safe_slot
     def _show_search(self) -> None:
         book_ids = [b["book_id"] for b in self._books_config.books]
-        dialog = SearchDialog(self._cache, book_ids, self)
+        current_bid = self._book.current_book.book_id if self._book.current_book else None
+        dialog = SearchDialog(
+            self._cache, book_ids,
+            current_book_id=current_bid,
+            theme_name=self._app_config.theme,
+            parent=self,
+        )
         dialog.navigate_requested.connect(self._search_navigate)
         dialog.exec()
 
     @safe_slot
-    def _search_navigate(self, book_id: str, chapter_num: int) -> None:
+    def _search_navigate(self, book_id: str, chapter_num: int, block_id: str) -> None:
         if self._book.current_book and self._book.current_book.book_id != book_id:
             self._library.select_book(book_id)
         self._book.navigate_to_chapter(chapter_num)
+        if block_id:
+            QTimer.singleShot(50, lambda: self._reader.scroll_to_block(block_id))
 
     # --- Progress ---
 
