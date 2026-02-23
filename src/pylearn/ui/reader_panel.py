@@ -111,6 +111,7 @@ class ReaderPanel(QWidget):
         self._renderer = HTMLRenderer()
         self._current_blocks: list[ContentBlock] = []
         self._block_map: dict[str, ContentBlock] = {}
+        self._showing_welcome: bool = False
 
         # Heading scroll tracking: [(doc_y_position, block_index)]
         self._heading_positions: list[tuple[float, int]] = []
@@ -152,6 +153,7 @@ class ReaderPanel(QWidget):
 
     def display_blocks(self, blocks: list[ContentBlock]) -> None:
         """Render and display a list of content blocks."""
+        self._showing_welcome = False
         self._current_blocks = blocks
         self._block_map = {b.block_id: b for b in blocks if b.block_id}
         self._last_heading_index = -1
@@ -166,6 +168,7 @@ class ReaderPanel(QWidget):
 
     def display_welcome(self) -> None:
         """Show a welcome message when no book is loaded."""
+        self._showing_welcome = True
         html = self._renderer.render_welcome()
         self._browser.setHtml(html)
 
@@ -191,6 +194,8 @@ class ReaderPanel(QWidget):
             pos = self._browser.verticalScrollBar().value()
             self.display_blocks(self._current_blocks)
             self._browser.verticalScrollBar().setValue(pos)
+        elif self._showing_welcome:
+            self.display_welcome()
 
     def set_font_size(self, size: int) -> None:
         """Update the reader font size."""

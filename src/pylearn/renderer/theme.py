@@ -49,6 +49,9 @@ class ReaderTheme:
     h3_font_size: int = 18
     line_height: float = 1.7
 
+    # Muted text (secondary UI text)
+    text_muted: str = "#888888"
+
     # Button
     button_bg: str = "#3498db"
     button_text: str = "#ffffff"
@@ -64,6 +67,7 @@ def _theme_from_palette(p: ThemePalette) -> ReaderTheme:
         note_bg=p.note_bg, note_border=p.note_border,
         warning_bg=p.warning_bg, warning_border=p.warning_border,
         tip_bg=p.tip_bg, tip_border=p.tip_border,
+        text_muted=p.text_muted,
         button_bg=p.accent, button_text=p.accent_text, button_hover=p.accent_hover,
     )
 

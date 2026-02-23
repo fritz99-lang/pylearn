@@ -190,15 +190,16 @@ p {{
 
     def render_welcome(self) -> str:
         """Render the welcome screen HTML."""
-        return self._wrap_html("""
+        t = self.theme
+        return self._wrap_html(f"""
             <div style="text-align:center; margin-top:80px;">
-                <h1 style="color:#3498db; font-size:36px; margin-bottom:10px;">
+                <h1 style="color:{t.button_bg}; font-size:36px; margin-bottom:10px;">
                     PyLearn
                 </h1>
-                <p style="font-size:18px; color:#666; margin-bottom:30px;">
+                <p style="font-size:18px; color:{t.text_color}; margin-bottom:30px;">
                     Interactive Python Learning
                 </p>
-                <p style="font-size:15px; color:#888;">
+                <p style="font-size:15px; color:{t.text_muted};">
                     Select a book from the library to get started,<br>
                     or add books via Book &gt; Manage Library.
                 </p>
