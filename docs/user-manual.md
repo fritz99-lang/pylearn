@@ -1,6 +1,6 @@
 # PyLearn User Manual
 
-**Version 0.1.0** | Last updated: February 2026
+**Version 1.0** | Last updated: February 2026
 
 ---
 
