@@ -30,6 +30,9 @@ data/
 TODO.md
 CLAUDE.md
 Code Review*.md
+docs/SESSION_HISTORY.md
+docs/SESSION_HANDOFF.md
+docs/CODE_PATTERNS.md
 
 # Misc
 .claude/
