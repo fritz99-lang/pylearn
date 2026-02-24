@@ -1,0 +1,89 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: PyLearn-Windows
+          - os: macos-latest
+            artifact: PyLearn-macOS
+          - os: ubuntu-latest
+            artifact: PyLearn-Linux
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/Library/Caches/pip
+            ~\AppData\Local\pip\Cache
+          key: ${{ runner.os }}-pip-build-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-build-
+
+      - name: Install system dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libegl1 libxkbcommon0
+
+      - name: Install package and build dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -e ".[dev]"
+          pip install pyinstaller
+
+      - name: Install Pillow and generate .icns (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          pip install Pillow
+          python scripts/generate_icns.py
+
+      - name: Build with PyInstaller
+        run: python scripts/build_exe.py
+
+      - name: Upload artifact (Windows)
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/PyLearn/
+          retention-days: 30
+
+      - name: Upload artifact (macOS)
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/PyLearn.app/
+          retention-days: 30
+
+      - name: Upload artifact (Linux)
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/PyLearn/
+          retention-days: 30

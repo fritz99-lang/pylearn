@@ -23,8 +23,8 @@ config/*.json
 data/
 
 # Build artifacts
-*.spec
 *.bat
+assets/pylearn.icns
 
 # Personal / project-management files
 TODO.md

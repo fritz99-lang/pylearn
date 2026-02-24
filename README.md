@@ -1,6 +1,7 @@
 # PyLearn
 
 [![CI](https://github.com/fritz99-lang/pylearn/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/fritz99-lang/pylearn/actions/workflows/ci.yml)
+[![Build](https://github.com/fritz99-lang/pylearn/actions/workflows/build.yml/badge.svg)](https://github.com/fritz99-lang/pylearn/actions/workflows/build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-green.svg)](https://www.python.org/)
 [![mypy](https://img.shields.io/badge/type--checked-mypy-blue.svg)](https://mypy-lang.org/)
@@ -38,9 +39,23 @@ An interactive desktop app for learning programming from PDF books. Split-pane i
 - **External Editor** — Launch code in Notepad++ or your preferred external editor
 - **Parsed Content Caching** — PDF parsing results cached as JSON for fast subsequent loads
 
+## Standalone Builds (no Python required)
+
+Pre-built executables for Windows, macOS, and Linux are available from [GitHub Actions](https://github.com/fritz99-lang/pylearn/actions/workflows/build.yml):
+
+1. Go to the latest successful build run
+2. Download the artifact for your platform: **PyLearn-Windows**, **PyLearn-macOS**, or **PyLearn-Linux**
+3. Extract and run
+
+| Platform | Output | Notes |
+|----------|--------|-------|
+| Windows | `PyLearn.exe` | Run directly |
+| macOS | `PyLearn.app` | May need: `xattr -cr PyLearn.app` (unsigned app) |
+| Linux | `PyLearn` | `chmod +x PyLearn` then run |
+
 ## Requirements
 
-- Python 3.12 or newer
+- Python 3.12 or newer (not needed for standalone builds above)
 - Windows, macOS, or Linux
 
 ### Platform Notes
@@ -193,7 +208,7 @@ Config files are JSON. For git-clone installs they live in `config/` inside the 
 ## Development
 
 ```bash
-# Run all tests (702 tests)
+# Run all tests (749 tests)
 pytest tests/ -v
 
 # Skip slow tests
@@ -207,6 +222,9 @@ python scripts/parse_books.py
 
 # Analyze PDF font metadata (useful for creating new book profiles)
 python scripts/analyze_pdf_fonts.py path/to/book.pdf
+
+# Build standalone executable (requires PyInstaller)
+python scripts/build_exe.py
 ```
 
 ## Project Structure
@@ -221,8 +239,8 @@ src/pylearn/
   utils/        Text utilities, error handling
 config/         User-specific JSON config (not committed; see *.json.example)
 data/           SQLite database + parsed PDF cache (not committed)
-tests/          702 tests (500+ unit + 150+ integration)
-scripts/        Utility scripts for PDF analysis and book parsing
+tests/          749 tests (500+ unit + 150+ integration)
+scripts/        Utility scripts for PDF analysis, book parsing, and builds
 ```
 
 ## Troubleshooting
