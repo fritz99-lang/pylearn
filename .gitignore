@@ -34,6 +34,11 @@ docs/SESSION_HISTORY.md
 docs/SESSION_HANDOFF.md
 docs/CODE_PATTERNS.md
 
+# Coverage
+.coverage
+.coverage.*
+htmlcov/
+
 # Misc
 .claude/
 src/data/
