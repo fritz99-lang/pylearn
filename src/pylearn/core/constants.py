@@ -70,6 +70,17 @@ if IS_DEV:
             except OSError:
                 pass
 
+# In frozen mode, seed config files from bundled examples in _MEIPASS
+if IS_FROZEN:
+    _bundle_dir = Path(sys._MEIPASS)  # type: ignore[attr-defined]
+    for _example in _bundle_dir.glob("config/*.json.example"):
+        _target = CONFIG_DIR / _example.stem  # e.g., "books.json"
+        if not _target.exists():
+            try:
+                shutil.copy2(_example, _target)
+            except OSError:
+                pass
+
 # Config files
 APP_CONFIG_PATH = CONFIG_DIR / "app_config.json"
 BOOKS_CONFIG_PATH = CONFIG_DIR / "books.json"
