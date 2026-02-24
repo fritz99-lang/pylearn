@@ -21,6 +21,7 @@ class EditorPanel(QWidget):
         self._editor = QsciScintilla(self)
         layout.addWidget(self._editor)
 
+        self._current_theme = "light"
         self._setup_editor()
 
     def _setup_editor(self) -> None:
@@ -37,12 +38,9 @@ class EditorPanel(QWidget):
         # Line numbers
         editor.setMarginType(0, QsciScintilla.MarginType.NumberMargin)
         editor.setMarginWidth(0, "0000")
-        editor.setMarginsForegroundColor(QColor("#888888"))
-        editor.setMarginsBackgroundColor(QColor("#f0f0f0"))
 
         # Current line highlight
         editor.setCaretLineVisible(True)
-        editor.setCaretLineBackgroundColor(QColor("#e8f4f8"))
 
         # Indentation
         editor.setIndentationsUseTabs(False)
@@ -52,8 +50,6 @@ class EditorPanel(QWidget):
 
         # Bracket matching
         editor.setBraceMatching(QsciScintilla.BraceMatch.SloppyBraceMatch)
-        editor.setMatchedBraceBackgroundColor(QColor("#b4d7ff"))
-        editor.setMatchedBraceForegroundColor(QColor("#000000"))
 
         # Code folding
         editor.setFolding(QsciScintilla.FoldStyle.BoxedTreeFoldStyle)
@@ -61,7 +57,6 @@ class EditorPanel(QWidget):
         # Edge column
         editor.setEdgeMode(QsciScintilla.EdgeMode.EdgeLine)
         editor.setEdgeColumn(88)
-        editor.setEdgeColor(QColor("#e0e0e0"))
 
         # Auto-completion (basic)
         editor.setAutoCompletionSource(QsciScintilla.AutoCompletionSource.AcsDocument)
@@ -109,16 +104,41 @@ class EditorPanel(QWidget):
 
     def set_theme(self, theme_name: str) -> None:
         """Switch editor theme between light, dark, and sepia."""
+        self._current_theme = theme_name
         editor = self._editor
         lexer = editor.lexer()
 
         p = get_palette(theme_name)
+
+        # Base colors
+        editor.setPaper(QColor(p.bg))
+        editor.setColor(QColor(p.text))
         editor.setMarginsBackgroundColor(QColor(p.bg_alt))
         editor.setMarginsForegroundColor(QColor(p.text_muted))
         editor.setCaretLineBackgroundColor(QColor(p.border))
         editor.setEdgeColor(QColor(p.border))
-        editor.setPaper(QColor(p.bg))
-        editor.setColor(QColor(p.text))
+
+        # Text cursor
+        editor.setCaretForegroundColor(QColor(p.text))
+
+        # Selection
+        sel_bg = QColor("#add6ff") if p.name == "light" else QColor(p.border)
+        editor.setSelectionBackgroundColor(sel_bg)
+        editor.setSelectionForegroundColor(QColor(p.text))
+
+        # Matched/unmatched braces
+        editor.setMatchedBraceBackgroundColor(QColor(p.bg_alt))
+        editor.setMatchedBraceForegroundColor(QColor(p.accent))
+        editor.setUnmatchedBraceBackgroundColor(QColor(p.warning_bg))
+        editor.setUnmatchedBraceForegroundColor(QColor(p.warning_border))
+
+        # Fold margin
+        editor.setFoldMarginColors(QColor(p.text_muted), QColor(p.bg_alt))
+
+        # Indent guides
+        editor.setIndentationGuidesForegroundColor(QColor(p.border))
+        editor.setIndentationGuidesBackgroundColor(QColor(p.bg))
+
         if lexer:
             lexer.setPaper(QColor(p.bg))
             lexer.setColor(QColor(p.text))
@@ -204,6 +224,9 @@ class EditorPanel(QWidget):
             or current.startswith("<!DOCTYPE html>")
         ):
             editor.setText(placeholder)
+
+        # Re-apply current theme so new lexer gets themed colors
+        self.set_theme(self._current_theme)
 
     @property
     def language(self) -> str:
