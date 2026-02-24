@@ -47,6 +47,7 @@ from pylearn.ui.styles import get_stylesheet
 from pylearn.ui.toc_panel import TOCPanel
 from pylearn.ui.toolbar import MainToolBar
 from pylearn.utils.error_handler import safe_slot
+from pylearn.utils.export import export_to_markdown
 from pylearn.utils.text_utils import detect_repl_code, strip_repl_prompts
 
 logger = logging.getLogger("pylearn.ui")
@@ -291,6 +292,7 @@ class MainWindow(QMainWindow):
         self._add_menu_action(file_menu, "Save Code...", self._save_code_to_file, "Ctrl+S")
         self._add_menu_action(file_menu, "Load Code...", self._load_code_from_file, "Ctrl+O")
         self._add_menu_action(file_menu, "Open in External Editor", self._open_external_editor, "Ctrl+E")
+        self._add_menu_action(file_menu, "Export Notes && Bookmarks...", self._export_notes_bookmarks)
         file_menu.addSeparator()
         self._add_menu_action(file_menu, "E&xit", self.close, "Alt+F4")
 
@@ -677,6 +679,46 @@ class MainWindow(QMainWindow):
                 self._status_state.setText(f"Loaded {Path(path).name}")
             except OSError as e:
                 QMessageBox.warning(self, "Load Failed", f"Could not read file:\n{e}")
+
+    @safe_slot
+    def _export_notes_bookmarks(self) -> None:
+        """Export notes and bookmarks to a Markdown file."""
+        book_id: str | None = None
+        suggested_name = "pylearn_notes.md"
+
+        if self._book.current_book:
+            msg = QMessageBox(self)
+            msg.setWindowTitle("Export Notes & Bookmarks")
+            msg.setText("Export notes and bookmarks for which books?")
+            current_btn = msg.addButton("Current Book", QMessageBox.ButtonRole.AcceptRole)
+            all_btn = msg.addButton("All Books", QMessageBox.ButtonRole.AcceptRole)
+            msg.addButton(QMessageBox.StandardButton.Cancel)
+            msg.exec()
+
+            clicked = msg.clickedButton()
+            if clicked == current_btn:
+                book_id = self._book.current_book.book_id
+                safe_title = self._book.current_book.title.replace(" ", "_")
+                suggested_name = f"{safe_title}_notes.md"
+            elif clicked == all_btn:
+                book_id = None
+            else:
+                return
+
+        result = export_to_markdown(self._db, book_id)
+        if result is None:
+            QMessageBox.information(self, "Nothing to Export", "No notes or bookmarks found.")
+            return
+
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Export Notes & Bookmarks", suggested_name, "Markdown Files (*.md);;All Files (*)"
+        )
+        if path:
+            try:
+                Path(path).write_text(result, encoding="utf-8")
+                self._status_state.setText(f"Exported to {Path(path).name}")
+            except OSError as e:
+                QMessageBox.warning(self, "Export Failed", f"Could not save file:\n{e}")
 
     # --- Bookmarks & Notes ---
 
