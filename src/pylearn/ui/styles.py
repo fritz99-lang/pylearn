@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Nate Tritle. Licensed under the MIT License.
 """QSS themes for the application, generated from the centralized palette."""
 
-from pylearn.ui.theme_registry import get_palette, ThemePalette
+from pylearn.ui.theme_registry import ThemePalette, get_palette
 
 
 def _generate_qss(p: ThemePalette) -> str:
@@ -46,7 +46,7 @@ QTextBrowser {{
     border: 1px solid {p.border};
 }}
 QMenuBar {{
-    background-color: {p.bg_alt if p.name != 'light' else p.bg};
+    background-color: {p.bg_alt if p.name != "light" else p.bg};
     color: {p.text};
     border-bottom: 1px solid {p.border};
     padding: 2px;
@@ -68,7 +68,7 @@ QMenu::item:selected {{
     border-radius: 3px;
 }}
 QToolBar {{
-    background-color: {p.bg_alt if p.name != 'light' else p.bg};
+    background-color: {p.bg_alt if p.name != "light" else p.bg};
     border-bottom: 1px solid {p.border};
     spacing: 6px;
     padding: 3px;
@@ -89,7 +89,7 @@ QToolButton:pressed {{
     color: {p.accent_text};
 }}
 QStatusBar {{
-    background-color: {p.bg_alt if p.name != 'light' else p.bg};
+    background-color: {p.bg_alt if p.name != "light" else p.bg};
     color: {p.text_muted};
     border-top: 1px solid {p.border};
     font-size: 12px;
@@ -133,7 +133,7 @@ QPushButton:pressed {{
     color: {p.accent_text};
 }}
 QDialog {{
-    background-color: {p.bg_alt if p.name != 'light' else p.bg_alt};
+    background-color: {p.bg_alt};
     color: {p.text};
 }}
 QLabel {{
@@ -143,7 +143,7 @@ QLineEdit, QTextEdit {{
     border: 1px solid {p.border};
     border-radius: 4px;
     padding: 6px;
-    background-color: {p.bg_alt if p.name != 'light' else p.bg};
+    background-color: {p.bg_alt if p.name != "light" else p.bg};
     color: {p.text};
 }}
 QLineEdit:focus, QTextEdit:focus {{

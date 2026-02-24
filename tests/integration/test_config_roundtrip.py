@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-import json
 from pathlib import Path
 
 import pytest
 
 from pylearn.core.config import AppConfig, BooksConfig, EditorConfig, _load_json, _save_json
 from pylearn.core.database import Database
-from pylearn.core.models import Book, BlockType, Chapter, ContentBlock
+from pylearn.core.models import Book
 from pylearn.parser.cache_manager import CacheManager
 
 

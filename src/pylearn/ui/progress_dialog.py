@@ -4,8 +4,14 @@
 from __future__ import annotations
 
 from PyQt6.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QLabel,
-    QProgressBar, QPushButton, QGroupBox, QGridLayout,
+    QDialog,
+    QGridLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QProgressBar,
+    QPushButton,
+    QVBoxLayout,
 )
 
 from pylearn.core.database import Database
@@ -49,11 +55,13 @@ class ProgressDialog(QDialog):
             # Stats
             group_layout.addWidget(
                 QLabel(f"Completed: {stats['completed']} / {stats['total']} chapters"),
-                1, 0,
+                1,
+                0,
             )
             group_layout.addWidget(
                 QLabel(f"In Progress: {stats['in_progress']}"),
-                1, 1,
+                1,
+                1,
             )
 
             # Exercise stats
@@ -61,15 +69,16 @@ class ProgressDialog(QDialog):
             if total_ex:
                 group_layout.addWidget(
                     QLabel(f"Exercises: {completed_ex} / {total_ex} completed"),
-                    2, 0, 1, 2,
+                    2,
+                    0,
+                    1,
+                    2,
                 )
 
             layout.addWidget(group)
 
         if not books:
-            layout.addWidget(QLabel(
-                "No books registered yet.\nAdd books via Book > Manage Library."
-            ))
+            layout.addWidget(QLabel("No books registered yet.\nAdd books via Book > Manage Library."))
 
         layout.addStretch()
 

@@ -3,11 +3,18 @@
 
 from __future__ import annotations
 
+from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QTreeWidget, QTreeWidgetItem,
-    QPushButton, QLabel, QInputDialog, QMessageBox,
+    QDialog,
+    QHBoxLayout,
+    QInputDialog,
+    QLabel,
+    QMessageBox,
+    QPushButton,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QVBoxLayout,
 )
-from PyQt6.QtCore import pyqtSignal, Qt
 
 from pylearn.core.database import Database
 
@@ -17,8 +24,7 @@ class BookmarkDialog(QDialog):
 
     bookmark_selected = pyqtSignal(str, int, int)  # book_id, chapter_num, scroll_pos
 
-    def __init__(self, database: Database, book_id: str | None = None,
-                 parent=None) -> None:
+    def __init__(self, database: Database, book_id: str | None = None, parent=None) -> None:
         super().__init__(parent)
         self._db = database
         self._book_id = book_id
@@ -87,7 +93,8 @@ class BookmarkDialog(QDialog):
             return
         bm = item.data(0, Qt.ItemDataRole.UserRole)
         reply = QMessageBox.question(
-            self, "Delete Bookmark",
+            self,
+            "Delete Bookmark",
             f'Delete bookmark "{bm["label"]}"?',
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
         )
@@ -96,12 +103,9 @@ class BookmarkDialog(QDialog):
             self._load_bookmarks()
 
 
-def add_bookmark_dialog(parent, database: Database, book_id: str,
-                        chapter_num: int, scroll_position: int) -> bool:
+def add_bookmark_dialog(parent, database: Database, book_id: str, chapter_num: int, scroll_position: int) -> bool:
     """Show a quick dialog to add a bookmark."""
-    label, ok = QInputDialog.getText(
-        parent, "Add Bookmark", "Bookmark label:"
-    )
+    label, ok = QInputDialog.getText(parent, "Add Bookmark", "Bookmark label:")
     if ok and label:
         database.add_bookmark(book_id, chapter_num, scroll_position, label)
         return True

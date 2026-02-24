@@ -19,8 +19,7 @@ from pylearn.renderer.theme import ReaderTheme, get_theme
 class HTMLRenderer:
     """Render ContentBlocks as styled HTML for QTextBrowser."""
 
-    def __init__(self, theme: ReaderTheme | None = None, language: str = "python",
-                 image_dir: str = "") -> None:
+    def __init__(self, theme: ReaderTheme | None = None, language: str = "python", image_dir: str = "") -> None:
         self.theme = theme or get_theme()
         self.language = language
         self.image_dir = image_dir  # absolute path to image cache directory
@@ -42,22 +41,13 @@ class HTMLRenderer:
         anchor_tag = f'<a name="{html.escape(block.block_id)}"></a>' if block.block_id else ""
 
         if block.block_type == BlockType.HEADING1:
-            return (
-                f'<br>{anchor_tag}<h1><font color="{t.h1_color}" size="6">'
-                f'{escaped}</font></h1><hr>'
-            )
+            return f'<br>{anchor_tag}<h1><font color="{t.h1_color}" size="6">{escaped}</font></h1><hr>'
 
         if block.block_type == BlockType.HEADING2:
-            return (
-                f'<br>{anchor_tag}<h2><font color="{t.h2_color}" size="5">'
-                f'{escaped}</font></h2>'
-            )
+            return f'<br>{anchor_tag}<h2><font color="{t.h2_color}" size="5">{escaped}</font></h2>'
 
         if block.block_type == BlockType.HEADING3:
-            return (
-                f'{anchor_tag}<h3><font color="{t.h3_color}" size="4">'
-                f'{escaped}</font></h3>'
-            )
+            return f'{anchor_tag}<h3><font color="{t.h3_color}" size="4">{escaped}</font></h3>'
 
         if block.block_type in (BlockType.CODE, BlockType.CODE_REPL):
             is_repl = block.block_type == BlockType.CODE_REPL
@@ -68,13 +58,13 @@ class HTMLRenderer:
                 f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
                 f'<tr><td bgcolor="{t.code_bg}">'
                 f'<pre><font face="{t.code_font}" color="{t.code_text}">'
-                f'{highlighted}</font></pre>'
-                f'</td></tr></table>'
+                f"{highlighted}</font></pre>"
+                f"</td></tr></table>"
                 f'<p align="right">'
                 f'<a href="copy:{block_id}"><font size="2" color="{t.button_bg}">Copy</font></a>'
-                f'&nbsp;&nbsp;&nbsp;'
+                f"&nbsp;&nbsp;&nbsp;"
                 f'<a href="tryit:{block_id}"><font size="2" color="{t.button_bg}">Try in Editor</font></a>'
-                f'</p>'
+                f"</p>"
             )
 
         if block.block_type == BlockType.NOTE:
@@ -82,7 +72,7 @@ class HTMLRenderer:
                 f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
                 f'<tr><td bgcolor="{t.note_bg}" width="4" style="background:{t.note_border};"></td>'
                 f'<td bgcolor="{t.note_bg}">'
-                f'<b>Note:</b> {escaped}</td></tr></table>'
+                f"<b>Note:</b> {escaped}</td></tr></table>"
             )
 
         if block.block_type == BlockType.WARNING:
@@ -90,7 +80,7 @@ class HTMLRenderer:
                 f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
                 f'<tr><td bgcolor="{t.warning_bg}" width="4" style="background:{t.warning_border};"></td>'
                 f'<td bgcolor="{t.warning_bg}">'
-                f'<b>Warning:</b> {escaped}</td></tr></table>'
+                f"<b>Warning:</b> {escaped}</td></tr></table>"
             )
 
         if block.block_type == BlockType.TIP:
@@ -98,26 +88,22 @@ class HTMLRenderer:
                 f'<table width="100%" cellpadding="8" cellspacing="0" border="0">'
                 f'<tr><td bgcolor="{t.tip_bg}" width="4" style="background:{t.tip_border};"></td>'
                 f'<td bgcolor="{t.tip_bg}">'
-                f'<b>Tip:</b> {escaped}</td></tr></table>'
+                f"<b>Tip:</b> {escaped}</td></tr></table>"
             )
 
         if block.block_type == BlockType.FIGURE:
             if self.image_dir:
                 # Validate filename contains no path separators (prevent path traversal)
-                if '..' in text or '/' in text or '\\' in text:
-                    return ''  # skip suspect filename
+                if ".." in text or "/" in text or "\\" in text:
+                    return ""  # skip suspect filename
                 # text field contains the image filename — escape for HTML attribute
                 safe_name = html.escape(text)
                 img_path = f"{self.image_dir}/{safe_name}".replace("\\", "/")
-                return (
-                    f'<p align="center">'
-                    f'<img src="file:///{img_path}" width="90%">'
-                    f'</p>'
-                )
+                return f'<p align="center"><img src="file:///{img_path}" width="90%"></p>'
             return ""  # no image dir configured, skip
 
         if block.block_type == BlockType.LIST_ITEM:
-            return f'<p>&nbsp;&nbsp;&nbsp;&bull;&nbsp;{escaped}</p>'
+            return f"<p>&nbsp;&nbsp;&nbsp;&bull;&nbsp;{escaped}</p>"
 
         if block.block_type == BlockType.EXERCISE:
             return (
@@ -125,11 +111,11 @@ class HTMLRenderer:
                 f' bordercolor="{t.tip_border}">'
                 f'<tr><td bgcolor="{t.tip_bg}">'
                 f'<b><font color="{t.tip_border}">Exercise:</font></b><br>'
-                f'{escaped}</td></tr></table>'
+                f"{escaped}</td></tr></table>"
             )
 
         # Default: body text
-        return f'<p>{escaped}</p>'
+        return f"<p>{escaped}</p>"
 
     def _wrap_html(self, body: str) -> str:
         """Wrap content in a full HTML document with base styles."""

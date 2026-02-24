@@ -4,10 +4,10 @@
 from __future__ import annotations
 
 import sqlite3
+from collections.abc import Generator
 from contextlib import contextmanager
 from datetime import datetime
 from pathlib import Path
-from typing import Generator
 
 from pylearn.core.constants import DB_PATH
 
@@ -46,8 +46,7 @@ class Database:
     def __enter__(self) -> Database:
         return self
 
-    def __exit__(self, exc_type: type | None, exc_val: BaseException | None,
-                 exc_tb: object) -> None:
+    def __exit__(self, exc_type: type | None, exc_val: BaseException | None, exc_tb: object) -> None:
         self.close()
 
     def close(self) -> None:
@@ -71,8 +70,7 @@ class Database:
 
     # --- Books ---
 
-    def upsert_book(self, book_id: str, title: str, pdf_path: str,
-                    total_pages: int, total_chapters: int) -> None:
+    def upsert_book(self, book_id: str, title: str, pdf_path: str, total_pages: int, total_chapters: int) -> None:
         with self._transaction() as conn:
             conn.execute(
                 """INSERT INTO books (book_id, title, pdf_path, total_pages, total_chapters)
@@ -90,8 +88,7 @@ class Database:
 
     # --- Chapters ---
 
-    def upsert_chapter(self, book_id: str, chapter_num: int, title: str,
-                       start_page: int, end_page: int) -> None:
+    def upsert_chapter(self, book_id: str, chapter_num: int, title: str, start_page: int, end_page: int) -> None:
         with self._transaction() as conn:
             conn.execute(
                 """INSERT INTO chapters (book_id, chapter_num, title, start_page, end_page)
@@ -102,8 +99,7 @@ class Database:
                 (book_id, chapter_num, title, start_page, end_page),
             )
 
-    def upsert_chapters_batch(self, book_id: str,
-                              chapters: list[tuple[int, str, int, int]]) -> None:
+    def upsert_chapters_batch(self, book_id: str, chapters: list[tuple[int, str, int, int]]) -> None:
         """Batch-upsert multiple chapters in a single transaction.
 
         Args:
@@ -117,8 +113,7 @@ class Database:
                    ON CONFLICT(book_id, chapter_num) DO UPDATE SET
                        title=excluded.title, start_page=excluded.start_page,
                        end_page=excluded.end_page""",
-                [(book_id, ch_num, title, start, end)
-                 for ch_num, title, start, end in chapters],
+                [(book_id, ch_num, title, start, end) for ch_num, title, start, end in chapters],
             )
 
     def get_chapters(self, book_id: str) -> list[dict]:
@@ -139,8 +134,7 @@ class Database:
             ).fetchone()
             return dict(row) if row else None
 
-    def update_reading_progress(self, book_id: str, chapter_num: int,
-                                status: str, scroll_position: int = 0) -> None:
+    def update_reading_progress(self, book_id: str, chapter_num: int, status: str, scroll_position: int = 0) -> None:
         now = datetime.now().isoformat()
         with self._transaction() as conn:
             conn.execute(
@@ -193,8 +187,7 @@ class Database:
 
     # --- Last Position ---
 
-    def save_last_position(self, book_id: str, chapter_num: int,
-                           scroll_position: int) -> None:
+    def save_last_position(self, book_id: str, chapter_num: int, scroll_position: int) -> None:
         with self._transaction() as conn:
             conn.execute(
                 """INSERT INTO last_position (book_id, chapter_num, scroll_position, updated_at)
@@ -208,15 +201,12 @@ class Database:
 
     def get_last_position(self, book_id: str) -> dict | None:
         with self._transaction() as conn:
-            row = conn.execute(
-                "SELECT * FROM last_position WHERE book_id = ?", (book_id,)
-            ).fetchone()
+            row = conn.execute("SELECT * FROM last_position WHERE book_id = ?", (book_id,)).fetchone()
             return dict(row) if row else None
 
     # --- Bookmarks ---
 
-    def add_bookmark(self, book_id: str, chapter_num: int,
-                     scroll_position: int, label: str) -> int:
+    def add_bookmark(self, book_id: str, chapter_num: int, scroll_position: int, label: str) -> int:
         with self._transaction() as conn:
             cursor = conn.execute(
                 """INSERT INTO bookmarks (book_id, chapter_num, scroll_position, label, created_at)
@@ -233,9 +223,7 @@ class Database:
                     (book_id,),
                 ).fetchall()
             else:
-                rows = conn.execute(
-                    "SELECT * FROM bookmarks ORDER BY created_at DESC"
-                ).fetchall()
+                rows = conn.execute("SELECT * FROM bookmarks ORDER BY created_at DESC").fetchall()
             return [dict(r) for r in rows]
 
     def delete_bookmark(self, bookmark_id: int) -> None:
@@ -244,8 +232,7 @@ class Database:
 
     # --- Notes ---
 
-    def add_note(self, book_id: str, chapter_num: int,
-                 section_title: str, content: str) -> int:
+    def add_note(self, book_id: str, chapter_num: int, section_title: str, content: str) -> int:
         now = datetime.now().isoformat()
         with self._transaction() as conn:
             cursor = conn.execute(
@@ -284,9 +271,16 @@ class Database:
 
     # --- Exercises ---
 
-    def upsert_exercise(self, exercise_id: str, book_id: str, chapter_num: int,
-                        title: str, description: str, exercise_type: str,
-                        answer: str | None = None) -> None:
+    def upsert_exercise(
+        self,
+        exercise_id: str,
+        book_id: str,
+        chapter_num: int,
+        title: str,
+        description: str,
+        exercise_type: str,
+        answer: str | None = None,
+    ) -> None:
         with self._transaction() as conn:
             conn.execute(
                 """INSERT INTO exercises (exercise_id, book_id, chapter_num, title, description, exercise_type, answer)
@@ -321,9 +315,7 @@ class Database:
             Exercise dict, or None if not found.
         """
         with self._transaction() as conn:
-            row = conn.execute(
-                "SELECT * FROM exercises WHERE exercise_id = ?", (exercise_id,)
-            ).fetchone()
+            row = conn.execute("SELECT * FROM exercises WHERE exercise_id = ?", (exercise_id,)).fetchone()
             return dict(row) if row else None
 
     def get_exercise_completion_count(self, book_id: str) -> tuple[int, int]:
@@ -351,8 +343,7 @@ class Database:
             completed = row[1] if row else 0
             return (completed, total)
 
-    def update_exercise_progress(self, exercise_id: str, completed: bool,
-                                 user_code: str = "") -> None:
+    def update_exercise_progress(self, exercise_id: str, completed: bool, user_code: str = "") -> None:
         now = datetime.now().isoformat()
         with self._transaction() as conn:
             conn.execute(
@@ -366,15 +357,12 @@ class Database:
 
     def get_exercise_progress(self, exercise_id: str) -> dict | None:
         with self._transaction() as conn:
-            row = conn.execute(
-                "SELECT * FROM exercise_progress WHERE exercise_id = ?", (exercise_id,)
-            ).fetchone()
+            row = conn.execute("SELECT * FROM exercise_progress WHERE exercise_id = ?", (exercise_id,)).fetchone()
             return dict(row) if row else None
 
     # --- Saved Code ---
 
-    def save_code(self, book_id: str, chapter_num: int, code: str,
-                  label: str = "") -> int:
+    def save_code(self, book_id: str, chapter_num: int, code: str, label: str = "") -> int:
         with self._transaction() as conn:
             cursor = conn.execute(
                 """INSERT INTO saved_code (book_id, chapter_num, code, label, created_at)

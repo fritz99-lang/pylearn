@@ -11,19 +11,18 @@ from typing import Any
 from pylearn.core.constants import (
     APP_CONFIG_PATH,
     BOOKS_CONFIG_PATH,
-    EDITOR_CONFIG_PATH,
-    DEFAULT_WINDOW_WIDTH,
-    DEFAULT_WINDOW_HEIGHT,
-    DEFAULT_FONT_SIZE,
     DEFAULT_EDITOR_FONT_SIZE,
-    DEFAULT_TAB_WIDTH,
     DEFAULT_EXECUTION_TIMEOUT,
+    DEFAULT_FONT_SIZE,
+    DEFAULT_TAB_WIDTH,
     DEFAULT_THEME,
-    READER_SPLITTER_RATIO,
+    DEFAULT_WINDOW_HEIGHT,
+    DEFAULT_WINDOW_WIDTH,
+    EDITOR_CONFIG_PATH,
     EDITOR_CONSOLE_RATIO,
+    READER_SPLITTER_RATIO,
     TOC_WIDTH,
 )
-
 
 logger = logging.getLogger("pylearn.config")
 
@@ -197,22 +196,24 @@ class BooksConfig:
     def books(self) -> list[dict[str, Any]]:
         return list(self._data.get("books", []))
 
-    def add_book(self, book_id: str, title: str, pdf_path: str,
-                 language: str = "python", profile_name: str = "") -> None:
+    def add_book(
+        self, book_id: str, title: str, pdf_path: str, language: str = "python", profile_name: str = ""
+    ) -> None:
         books = self.books
         for b in books:
             if b["book_id"] == book_id:
-                b.update(title=title, pdf_path=pdf_path,
-                         language=language, profile_name=profile_name)
+                b.update(title=title, pdf_path=pdf_path, language=language, profile_name=profile_name)
                 self._data["books"] = books
                 return
-        books.append({
-            "book_id": book_id,
-            "title": title,
-            "pdf_path": pdf_path,
-            "language": language,
-            "profile_name": profile_name,
-        })
+        books.append(
+            {
+                "book_id": book_id,
+                "title": title,
+                "pdf_path": pdf_path,
+                "language": language,
+                "profile_name": profile_name,
+            }
+        )
         self._data["books"] = books
 
     def get_book(self, book_id: str) -> dict | None:

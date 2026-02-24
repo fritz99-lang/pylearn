@@ -11,25 +11,23 @@ from __future__ import annotations
 import os
 import subprocess
 import sys
-import time
 from unittest.mock import MagicMock, patch
 
 import pytest
 
 from pylearn.executor.sandbox import (
+    _SENSITIVE_ENV_VARS,
     ExecutionResult,
-    Sandbox,
     _kill_tree,
     check_dangerous_code,
     get_safe_env,
-    _SENSITIVE_ENV_VARS,
 )
 from pylearn.executor.session import Session
-
 
 # ---------------------------------------------------------------------------
 # get_safe_env()
 # ---------------------------------------------------------------------------
+
 
 class TestGetSafeEnv:
     """Verify that get_safe_env() strips sensitive env vars and keeps safe ones."""
@@ -92,6 +90,7 @@ class TestGetSafeEnv:
 # ---------------------------------------------------------------------------
 # check_dangerous_code() — exhaustive pattern coverage
 # ---------------------------------------------------------------------------
+
 
 class TestCheckDangerousCodeExtended:
     """Cover every danger pattern defined in sandbox._DANGER_PATTERNS."""
@@ -176,6 +175,7 @@ class TestCheckDangerousCodeExtended:
 # Session language delegation
 # ---------------------------------------------------------------------------
 
+
 class TestSessionLanguageDelegation:
     """Session.run() delegates C++/HTML to Sandbox instead of the REPL."""
 
@@ -183,14 +183,16 @@ class TestSessionLanguageDelegation:
     def test_cpp_delegates_to_sandbox(self, MockSandbox: MagicMock) -> None:
         mock_sandbox_instance = MockSandbox.return_value
         mock_sandbox_instance.run.return_value = ExecutionResult(
-            stdout="Hello from C++", return_code=0,
+            stdout="Hello from C++",
+            return_code=0,
         )
         session = Session(timeout=10, language="python")
-        result = session.run('int main() { return 0; }', language="cpp")
+        result = session.run("int main() { return 0; }", language="cpp")
 
         MockSandbox.assert_called_once_with(timeout=10)
         mock_sandbox_instance.run.assert_called_once_with(
-            'int main() { return 0; }', language="cpp",
+            "int main() { return 0; }",
+            language="cpp",
         )
         assert result.stdout == "Hello from C++"
 
@@ -198,28 +200,32 @@ class TestSessionLanguageDelegation:
     def test_c_delegates_to_sandbox(self, MockSandbox: MagicMock) -> None:
         mock_sandbox_instance = MockSandbox.return_value
         mock_sandbox_instance.run.return_value = ExecutionResult(
-            stdout="Hello from C", return_code=0,
+            stdout="Hello from C",
+            return_code=0,
         )
         session = Session(timeout=10)
-        result = session.run('#include <stdio.h>', language="c")
+        session.run("#include <stdio.h>", language="c")
 
         MockSandbox.assert_called_once_with(timeout=10)
         mock_sandbox_instance.run.assert_called_once_with(
-            '#include <stdio.h>', language="c",
+            "#include <stdio.h>",
+            language="c",
         )
 
     @patch("pylearn.executor.sandbox.Sandbox")
     def test_html_delegates_to_sandbox(self, MockSandbox: MagicMock) -> None:
         mock_sandbox_instance = MockSandbox.return_value
         mock_sandbox_instance.run.return_value = ExecutionResult(
-            stdout="Opened in browser", return_code=0,
+            stdout="Opened in browser",
+            return_code=0,
         )
         session = Session(timeout=10)
         result = session.run("<html></html>", language="html")
 
         MockSandbox.assert_called_once_with(timeout=10)
         mock_sandbox_instance.run.assert_called_once_with(
-            "<html></html>", language="html",
+            "<html></html>",
+            language="html",
         )
         assert result.stdout == "Opened in browser"
 
@@ -237,21 +243,24 @@ class TestSessionLanguageDelegation:
         """If Session.language is 'cpp', run() without explicit language delegates."""
         mock_sandbox_instance = MockSandbox.return_value
         mock_sandbox_instance.run.return_value = ExecutionResult(
-            stdout="cpp output", return_code=0,
+            stdout="cpp output",
+            return_code=0,
         )
         session = Session(timeout=10, language="cpp")
-        result = session.run("int main() {}")
+        session.run("int main() {}")
 
         # language=None means use self.language="cpp"
         MockSandbox.assert_called_once_with(timeout=10)
         mock_sandbox_instance.run.assert_called_once_with(
-            "int main() {}", language="cpp",
+            "int main() {}",
+            language="cpp",
         )
 
 
 # ---------------------------------------------------------------------------
 # Session edge cases
 # ---------------------------------------------------------------------------
+
 
 class TestSessionEdgeCases:
     """Edge cases for Session: stop, reset, empty code, properties."""
@@ -334,6 +343,7 @@ class TestSessionEdgeCases:
 # _kill_tree()
 # ---------------------------------------------------------------------------
 
+
 class TestKillTree:
     """Test _kill_tree() terminates a subprocess."""
 
@@ -372,6 +382,7 @@ class TestKillTree:
 # ---------------------------------------------------------------------------
 # ExecutionResult edge cases
 # ---------------------------------------------------------------------------
+
 
 class TestExecutionResultExtended:
     """Additional coverage for ExecutionResult."""

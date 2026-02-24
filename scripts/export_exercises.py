@@ -11,9 +11,9 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
+from pylearn.core.config import BooksConfig
 from pylearn.parser.cache_manager import CacheManager
 from pylearn.parser.exercise_extractor import ExerciseExtractor
-from pylearn.core.config import BooksConfig
 
 
 def main() -> None:
@@ -48,9 +48,7 @@ def main() -> None:
             print(f"No cache for {book_info['book_id']}, skipping")
             continue
 
-        exercises = extractor.extract_from_chapters(
-            book.book_id, book.chapters, book_info["profile_name"]
-        )
+        exercises = extractor.extract_from_chapters(book.book_id, book.chapters, book_info["profile_name"])
 
         if not exercises:
             continue

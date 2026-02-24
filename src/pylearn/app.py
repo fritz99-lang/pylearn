@@ -5,12 +5,12 @@ from __future__ import annotations
 
 import sys
 
-from PyQt6.QtWidgets import QApplication
 from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import QApplication
 
 from pylearn.core.constants import APP_NAME
 from pylearn.ui.main_window import MainWindow
-from pylearn.utils.error_handler import setup_logging, install_global_exception_handler
+from pylearn.utils.error_handler import install_global_exception_handler, setup_logging
 
 
 def create_app(debug: bool = False) -> tuple[QApplication, MainWindow]:

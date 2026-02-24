@@ -3,22 +3,27 @@
 
 from __future__ import annotations
 
-from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QTextBrowser,
-    QLineEdit, QPushButton, QLabel,
-)
-from PyQt6.QtCore import pyqtSignal, QUrl, QTimer, Qt
+from PyQt6.QtCore import Qt, QTimer, QUrl, pyqtSignal
 from PyQt6.QtGui import QColor, QDesktopServices, QKeySequence, QPalette, QShortcut, QTextDocument
+from PyQt6.QtWidgets import (
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QTextBrowser,
+    QVBoxLayout,
+    QWidget,
+)
 
-from pylearn.core.models import ContentBlock, BlockType
+from pylearn.core.models import BlockType, ContentBlock
 from pylearn.renderer.html_renderer import HTMLRenderer
 
 
 class FindBar(QWidget):
     """Inline find bar for searching within the current chapter."""
 
-    find_next = pyqtSignal(str, bool)   # (text, case_sensitive)
-    find_prev = pyqtSignal(str, bool)   # (text, case_sensitive)
+    find_next = pyqtSignal(str, bool)  # (text, case_sensitive)
+    find_prev = pyqtSignal(str, bool)  # (text, case_sensitive)
     closed = pyqtSignal()
 
     def __init__(self, parent=None) -> None:
@@ -102,7 +107,7 @@ class FindBar(QWidget):
 class ReaderPanel(QWidget):
     """Left panel: displays parsed book content with syntax-highlighted code blocks."""
 
-    code_copy_requested = pyqtSignal(str)   # block_id
+    code_copy_requested = pyqtSignal(str)  # block_id
     code_tryit_requested = pyqtSignal(str)  # block_id
     visible_heading_changed = pyqtSignal(int)  # block_index into current chapter blocks
 
@@ -185,6 +190,7 @@ class ReaderPanel(QWidget):
         self._renderer.update_theme(theme_name)
         # Set palette link color so QTextBrowser doesn't default to system blue
         from pylearn.ui.theme_registry import get_palette
+
         palette = self._browser.palette()
         accent = QColor(get_palette(theme_name).accent)
         palette.setColor(QPalette.ColorRole.Link, accent)
@@ -291,9 +297,7 @@ class ReaderPanel(QWidget):
                         for name in fmt.anchorNames():
                             if name in heading_ids:
                                 rect = layout.blockBoundingRect(text_block)
-                                self._heading_positions.append(
-                                    (rect.y(), heading_ids[name])
-                                )
+                                self._heading_positions.append((rect.y(), heading_ids[name]))
                 it += 1
             text_block = text_block.next()
 

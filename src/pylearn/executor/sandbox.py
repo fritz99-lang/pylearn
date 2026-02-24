@@ -17,7 +17,7 @@ import webbrowser
 from dataclasses import dataclass
 from pathlib import Path
 
-from pylearn.core.constants import DEFAULT_EXECUTION_TIMEOUT, DATA_DIR, get_python_executable
+from pylearn.core.constants import DATA_DIR, DEFAULT_EXECUTION_TIMEOUT, get_python_executable
 
 logger = logging.getLogger("pylearn.executor")
 
@@ -36,33 +36,42 @@ _SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
 
 # Environment variables to strip from child processes
 _SENSITIVE_ENV_VARS = {
-    "AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_SESSION_TOKEN",
-    "AZURE_CLIENT_SECRET", "GCP_SERVICE_ACCOUNT_KEY",
-    "DATABASE_URL", "DB_PASSWORD", "GITHUB_TOKEN", "GH_TOKEN",
-    "OPENAI_API_KEY", "ANTHROPIC_API_KEY", "API_KEY", "SECRET_KEY",
+    "AWS_ACCESS_KEY_ID",
+    "AWS_SECRET_ACCESS_KEY",
+    "AWS_SESSION_TOKEN",
+    "AZURE_CLIENT_SECRET",
+    "GCP_SERVICE_ACCOUNT_KEY",
+    "DATABASE_URL",
+    "DB_PASSWORD",
+    "GITHUB_TOKEN",
+    "GH_TOKEN",
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "API_KEY",
+    "SECRET_KEY",
     "PRIVATE_KEY",
 }
 
 # Advisory warning patterns — NOT a security sandbox. User code runs with full privileges.
 # These patterns catch common dangerous operations to show a confirmation dialog.
 _DANGER_PATTERNS = [
-    (re.compile(r'\bos\.system\b'), "os.system()"),
-    (re.compile(r'\bos\.remove\b|\bos\.unlink\b'), "os.remove()/unlink()"),
-    (re.compile(r'\bshutil\.rmtree\b'), "shutil.rmtree()"),
-    (re.compile(r'\bsubprocess\.(call|run|Popen)\b'), "subprocess execution"),
-    (re.compile(r'\b__import__\b'), "__import__()"),
-    (re.compile(r'\bos\.rmdir\b'), "os.rmdir()"),
-    (re.compile(r'\bos\.rename\b'), "os.rename()"),
+    (re.compile(r"\bos\.system\b"), "os.system()"),
+    (re.compile(r"\bos\.remove\b|\bos\.unlink\b"), "os.remove()/unlink()"),
+    (re.compile(r"\bshutil\.rmtree\b"), "shutil.rmtree()"),
+    (re.compile(r"\bsubprocess\.(call|run|Popen)\b"), "subprocess execution"),
+    (re.compile(r"\b__import__\b"), "__import__()"),
+    (re.compile(r"\bos\.rmdir\b"), "os.rmdir()"),
+    (re.compile(r"\bos\.rename\b"), "os.rename()"),
     (re.compile(r"\bopen\s*\(.*['\"]w['\"]"), "file write via open()"),
-    (re.compile(r'\bpathlib\.Path.*\.unlink\b|\bPath.*\.unlink\b'), "Path.unlink()"),
-    (re.compile(r'\bsocket\b'), "socket (network access)"),
-    (re.compile(r'\bhttp\.client\b|\burllib\.request\b'), "HTTP network access"),
-    (re.compile(r'\beval\s*\('), "eval()"),
-    (re.compile(r'\bexec\s*\('), "exec()"),
-    (re.compile(r'\bctypes\b'), "ctypes (native code access)"),
-    (re.compile(r'\bimportlib\b'), "importlib (dynamic import)"),
-    (re.compile(r'getattr\s*\('), "getattr() (attribute access bypass)"),
-    (re.compile(r'__builtins__'), "__builtins__ (builtin access)"),
+    (re.compile(r"\bpathlib\.Path.*\.unlink\b|\bPath.*\.unlink\b"), "Path.unlink()"),
+    (re.compile(r"\bsocket\b"), "socket (network access)"),
+    (re.compile(r"\bhttp\.client\b|\burllib\.request\b"), "HTTP network access"),
+    (re.compile(r"\beval\s*\("), "eval()"),
+    (re.compile(r"\bexec\s*\("), "exec()"),
+    (re.compile(r"\bctypes\b"), "ctypes (native code access)"),
+    (re.compile(r"\bimportlib\b"), "importlib (dynamic import)"),
+    (re.compile(r"getattr\s*\("), "getattr() (attribute access bypass)"),
+    (re.compile(r"__builtins__"), "__builtins__ (builtin access)"),
 ]
 
 
@@ -107,6 +116,7 @@ def _kill_tree(proc: subprocess.Popen) -> None:
 @dataclass
 class ExecutionResult:
     """Result of running user code."""
+
     stdout: str = ""
     stderr: str = ""
     return_code: int = 0
@@ -128,8 +138,7 @@ class Sandbox:
         self._process: subprocess.Popen | None = None
         self._process_lock = threading.Lock()
 
-    def run(self, code: str, language: str = "python",
-            timeout: int | None = None) -> ExecutionResult:
+    def run(self, code: str, language: str = "python", timeout: int | None = None) -> ExecutionResult:
         """Execute code in a subprocess."""
         if language == "html":
             return self._run_html(code, timeout)
@@ -183,8 +192,8 @@ class Sandbox:
             if "<head>" in code.lower():
                 csp_tag = (
                     '<meta http-equiv="Content-Security-Policy" '
-                    'content="default-src \'self\' \'unsafe-inline\'; '
-                    'script-src \'unsafe-inline\';">'
+                    "content=\"default-src 'self' 'unsafe-inline'; "
+                    "script-src 'unsafe-inline';\">"
                 )
                 # Insert CSP right after <head>
                 idx = code.lower().index("<head>")
@@ -227,9 +236,10 @@ class Sandbox:
 
             # Compile
             compile_result = subprocess.run(
-                [_CPP_COMPILER, str(src_file), "-o", str(exe_file),
-                 "-std=c++17", "-Wall"],
-                capture_output=True, text=True, timeout=30,
+                [_CPP_COMPILER, str(src_file), "-o", str(exe_file), "-std=c++17", "-Wall"],
+                capture_output=True,
+                text=True,
+                timeout=30,
                 env=get_safe_env(),
                 creationflags=_CREATE_NO_WINDOW if sys.platform == "win32" else 0,
             )
@@ -262,7 +272,8 @@ class Sandbox:
         except subprocess.TimeoutExpired:
             return ExecutionResult(
                 stderr="Compilation timed out after 30 seconds",
-                return_code=-1, timed_out=True,
+                return_code=-1,
+                timed_out=True,
             )
         except Exception as e:
             logger.error(f"C++ execution error: {e}")

@@ -5,13 +5,19 @@ from __future__ import annotations
 
 import logging
 
+from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QLineEdit,
-    QPushButton, QTreeWidget, QTreeWidgetItem, QLabel,
-    QProgressBar, QComboBox,
+    QComboBox,
+    QDialog,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QProgressBar,
+    QPushButton,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QVBoxLayout,
 )
-from PyQt6.QtCore import pyqtSignal, Qt, QThread
-from PyQt6.QtGui import QFont
 
 from pylearn.core.models import BlockType, Book
 from pylearn.parser.cache_manager import CacheManager
@@ -46,6 +52,7 @@ def _block_type_label(block_type: BlockType) -> str:
 
 class SearchWorker(QThread):
     """Background thread for searching book content."""
+
     # book_id, chapter_num, title, snippet, block_id, block_type_label
     result_found = pyqtSignal(str, int, str, str, str, str)
     finished = pyqtSignal(int)  # total results
@@ -80,8 +87,10 @@ class SearchWorker(QThread):
                                 snippet = snippet + "..."
 
                             self.result_found.emit(
-                                book_id, chapter.chapter_num,
-                                chapter.title, snippet,
+                                book_id,
+                                chapter.chapter_num,
+                                chapter.title,
+                                snippet,
                                 block.block_id,
                                 _block_type_label(block.block_type),
                             )
@@ -102,10 +111,14 @@ class SearchDialog(QDialog):
 
     navigate_requested = pyqtSignal(str, int, str)  # book_id, chapter_num, block_id
 
-    def __init__(self, cache_manager: CacheManager, book_ids: list[str],
-                 current_book_id: str | None = None,
-                 theme_name: str = "light",
-                 parent: object = None) -> None:
+    def __init__(
+        self,
+        cache_manager: CacheManager,
+        book_ids: list[str],
+        current_book_id: str | None = None,
+        theme_name: str = "light",
+        parent: object = None,
+    ) -> None:
         super().__init__(parent)
         self._cache = cache_manager
         self._book_ids = book_ids
@@ -204,9 +217,9 @@ class SearchDialog(QDialog):
         self._worker.finished.connect(self._search_done)
         self._worker.start()
 
-    def _add_result(self, book_id: str, chapter_num: int,
-                    title: str, snippet: str,
-                    block_id: str, block_type: str) -> None:
+    def _add_result(
+        self, book_id: str, chapter_num: int, title: str, snippet: str, block_id: str, block_type: str
+    ) -> None:
         # Create or reuse a chapter-level parent item
         chapter_key = f"{book_id}:{chapter_num}"
         if chapter_key not in self._chapter_items:
@@ -239,6 +252,7 @@ class SearchDialog(QDialog):
     def _highlight_snippet(snippet: str, query: str, accent_color: str) -> str:
         """Return HTML with the matched term bold+colored."""
         import html as html_mod
+
         escaped = html_mod.escape(snippet)
         query_lower = query.lower()
 
@@ -248,11 +262,9 @@ class SearchDialog(QDialog):
         if idx == -1:
             return escaped
 
-        matched_text = escaped[idx:idx + len(query)]
+        matched_text = escaped[idx : idx + len(query)]
         highlighted = (
-            escaped[:idx]
-            + f'<b style="color:{accent_color}">{matched_text}</b>'
-            + escaped[idx + len(query):]
+            escaped[:idx] + f'<b style="color:{accent_color}">{matched_text}</b>' + escaped[idx + len(query) :]
         )
         return highlighted
 

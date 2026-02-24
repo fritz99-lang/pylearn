@@ -14,8 +14,8 @@ Usage: python restore_context.py
 
 import json
 import subprocess
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 
 def run_command(cmd, cwd=None):

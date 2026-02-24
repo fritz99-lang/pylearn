@@ -1,8 +1,12 @@
 """Tests for data model serialization round-trips."""
 
-import pytest
 from pylearn.core.models import (
-    BlockType, ContentBlock, Section, Chapter, Book, Exercise, FontSpan,
+    BlockType,
+    Book,
+    Chapter,
+    ContentBlock,
+    Exercise,
+    Section,
 )
 
 
@@ -204,8 +208,12 @@ class TestExercise:
 
     def test_no_answer(self):
         ex = Exercise(
-            exercise_id="q1", book_id="b", chapter_num=1,
-            title="Q1", description="What is...", exercise_type="quiz",
+            exercise_id="q1",
+            book_id="b",
+            chapter_num=1,
+            title="Q1",
+            description="What is...",
+            exercise_type="quiz",
         )
         restored = Exercise.from_dict(ex.to_dict())
         assert restored.answer is None

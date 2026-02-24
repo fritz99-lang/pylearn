@@ -9,21 +9,25 @@ exercising the full load-navigate-complete lifecycle without a Qt event loop.
 from __future__ import annotations
 
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 
-from pylearn.core.constants import STATUS_IN_PROGRESS, STATUS_COMPLETED
+from pylearn.core.constants import STATUS_COMPLETED, STATUS_IN_PROGRESS
 from pylearn.core.database import Database
 from pylearn.core.models import (
-    BlockType, Book, Chapter, ContentBlock, Section,
+    BlockType,
+    Book,
+    Chapter,
+    ContentBlock,
+    Section,
 )
 from pylearn.ui.book_controller import BookController
-
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def make_test_book(
     book_id: str = "test_book",
@@ -110,11 +114,14 @@ def controller(db: Database, cache: MagicMock, books_config: MagicMock) -> BookC
 # Book loading
 # ---------------------------------------------------------------------------
 
+
 class TestLoadBook:
     """Tests for BookController.load_book()."""
 
     def test_load_book_sets_current_book(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -150,7 +157,9 @@ class TestLoadBook:
         assert "0% complete" in received[0]
 
     def test_load_book_registers_book_in_db(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -160,7 +169,9 @@ class TestLoadBook:
         assert rows[0]["total_chapters"] == 3
 
     def test_load_book_registers_chapters_in_db(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -170,7 +181,8 @@ class TestLoadBook:
         assert titles == ["Chapter 1", "Chapter 2", "Chapter 3"]
 
     def test_load_book_navigates_to_first_chapter(
-        self, controller: BookController,
+        self,
+        controller: BookController,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -178,13 +190,14 @@ class TestLoadBook:
         assert controller.current_chapter_num == 1
 
     def test_load_book_restores_last_position(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         """When a last_position exists in DB, load_book navigates there."""
         book = make_test_book()
         # Pre-register book so we can save a position
-        db.upsert_book(book.book_id, book.title, book.pdf_path,
-                        book.total_pages, len(book.chapters))
+        db.upsert_book(book.book_id, book.title, book.pdf_path, book.total_pages, len(book.chapters))
         db.save_last_position(book.book_id, 2, 500)
 
         scroll_positions: list[int] = []
@@ -196,7 +209,8 @@ class TestLoadBook:
         assert scroll_positions == [500]
 
     def test_load_book_builds_chapter_map(
-        self, controller: BookController,
+        self,
+        controller: BookController,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -204,7 +218,8 @@ class TestLoadBook:
         assert set(controller._chapter_map.keys()) == {1, 2, 3}
 
     def test_load_book_builds_chapter_order(
-        self, controller: BookController,
+        self,
+        controller: BookController,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -214,6 +229,7 @@ class TestLoadBook:
 # ---------------------------------------------------------------------------
 # Navigation
 # ---------------------------------------------------------------------------
+
 
 class TestNavigation:
     """Tests for navigate_to_chapter, next_chapter, prev_chapter."""
@@ -248,7 +264,9 @@ class TestNavigation:
         assert any("Chapter 2 of 3" in m for m in messages)
 
     def test_navigate_marks_chapter_in_progress(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -312,6 +330,7 @@ class TestNavigation:
 # Section navigation
 # ---------------------------------------------------------------------------
 
+
 class TestSectionNavigation:
     """Tests for navigate_to_section."""
 
@@ -343,11 +362,14 @@ class TestSectionNavigation:
 # Progress tracking
 # ---------------------------------------------------------------------------
 
+
 class TestProgress:
     """Tests for mark_chapter_complete, save_position, get_progress_data."""
 
     def test_mark_chapter_complete(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -359,22 +381,22 @@ class TestProgress:
         assert progress["status"] == STATUS_COMPLETED
 
     def test_mark_complete_emits_chapter_status_changed(
-        self, controller: BookController,
+        self,
+        controller: BookController,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
         controller.navigate_to_chapter(2)
 
         received: list[tuple[int, str]] = []
-        controller.chapter_status_changed.connect(
-            lambda num, status: received.append((num, status))
-        )
+        controller.chapter_status_changed.connect(lambda num, status: received.append((num, status)))
         controller.mark_chapter_complete()
 
         assert (2, STATUS_COMPLETED) in received
 
     def test_mark_complete_emits_progress_updated(
-        self, controller: BookController,
+        self,
+        controller: BookController,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -388,7 +410,8 @@ class TestProgress:
         assert any("33% complete" in m for m in messages)
 
     def test_mark_complete_emits_status_message(
-        self, controller: BookController,
+        self,
+        controller: BookController,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -405,7 +428,9 @@ class TestProgress:
         controller.mark_chapter_complete()  # should not raise
 
     def test_save_position(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -418,7 +443,9 @@ class TestProgress:
         assert pos["scroll_position"] == 750
 
     def test_save_position_updates_reading_progress(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -430,7 +457,9 @@ class TestProgress:
         assert progress["scroll_position"] == 300
 
     def test_save_position_without_book(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         # No book loaded — should be no-op, not crash
         controller.save_position(100)
@@ -438,7 +467,9 @@ class TestProgress:
         assert db.get_last_position("test_book") is None
 
     def test_get_progress_data(
-        self, controller: BookController, db: Database,
+        self,
+        controller: BookController,
+        db: Database,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -458,6 +489,7 @@ class TestProgress:
 # Properties and misc
 # ---------------------------------------------------------------------------
 
+
 class TestProperties:
     """Tests for properties and helper methods."""
 
@@ -474,7 +506,9 @@ class TestProperties:
         assert controller.current_language == "python"
 
     def test_image_dir_with_book(
-        self, controller: BookController, cache: MagicMock,
+        self,
+        controller: BookController,
+        cache: MagicMock,
     ) -> None:
         book = make_test_book()
         controller.load_book(book)
@@ -499,11 +533,14 @@ class TestProperties:
 # on_book_selected (integration with cache/config mocks)
 # ---------------------------------------------------------------------------
 
+
 class TestOnBookSelected:
     """Tests for on_book_selected — the entry point from UI book picker."""
 
     def test_book_not_in_config(
-        self, controller: BookController, books_config: MagicMock,
+        self,
+        controller: BookController,
+        books_config: MagicMock,
     ) -> None:
         books_config.get_book.return_value = None
         # Should not crash or emit anything
@@ -511,7 +548,9 @@ class TestOnBookSelected:
         assert controller.current_book is None
 
     def test_book_cached_loads_immediately(
-        self, controller: BookController, books_config: MagicMock,
+        self,
+        controller: BookController,
+        books_config: MagicMock,
         cache: MagicMock,
     ) -> None:
         book_info = {
@@ -530,7 +569,9 @@ class TestOnBookSelected:
         assert controller.current_book is book
 
     def test_book_not_cached_pdf_missing_emits_error(
-        self, controller: BookController, books_config: MagicMock,
+        self,
+        controller: BookController,
+        books_config: MagicMock,
         cache: MagicMock,
     ) -> None:
         book_info = {
@@ -544,17 +585,18 @@ class TestOnBookSelected:
         cache.load.return_value = None
 
         errors: list[tuple[str, str]] = []
-        controller.error_message.connect(
-            lambda title, msg: errors.append((title, msg))
-        )
+        controller.error_message.connect(lambda title, msg: errors.append((title, msg)))
 
         controller.on_book_selected("missing_pdf")
         assert len(errors) == 1
         assert "PDF Not Found" in errors[0][0]
 
     def test_book_not_cached_pdf_exists_requests_parse(
-        self, controller: BookController, books_config: MagicMock,
-        cache: MagicMock, tmp_path: Path,
+        self,
+        controller: BookController,
+        books_config: MagicMock,
+        cache: MagicMock,
+        tmp_path: Path,
     ) -> None:
         pdf_path = tmp_path / "real.pdf"
         pdf_path.write_bytes(b"%PDF-1.4 fake")

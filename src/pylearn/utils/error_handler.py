@@ -7,9 +7,9 @@ import functools
 import logging
 import sys
 import traceback
-from pathlib import Path
+from collections.abc import Callable
 from types import TracebackType
-from typing import Any, Callable, TypeVar
+from typing import Any, TypeVar
 
 from pylearn.core.constants import DATA_DIR
 
@@ -52,24 +52,31 @@ def setup_logging(debug: bool = False) -> logging.Logger:
     # Console handler
     console = logging.StreamHandler(sys.stdout)
     console.setLevel(logging.DEBUG if debug else logging.INFO)
-    console.setFormatter(logging.Formatter(
-        "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-        datefmt="%H:%M:%S",
-    ))
+    console.setFormatter(
+        logging.Formatter(
+            "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            datefmt="%H:%M:%S",
+        )
+    )
     logger.addHandler(console)
 
     # File handler with rotation (5 MB max, 3 backups)
     from logging.handlers import RotatingFileHandler
+
     log_dir = DATA_DIR
     log_dir.mkdir(parents=True, exist_ok=True)
     file_handler = RotatingFileHandler(
-        log_dir / "pylearn.log", maxBytes=5 * 1024 * 1024,
-        backupCount=3, encoding="utf-8",
+        log_dir / "pylearn.log",
+        maxBytes=5 * 1024 * 1024,
+        backupCount=3,
+        encoding="utf-8",
     )
     file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(logging.Formatter(
-        "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
-    ))
+    file_handler.setFormatter(
+        logging.Formatter(
+            "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+        )
+    )
     logger.addHandler(file_handler)
 
     return logger
@@ -95,12 +102,14 @@ def install_global_exception_handler() -> None:
             return
 
         logger.critical(
-            "Unhandled exception", exc_info=(exc_type, exc_value, exc_tb),
+            "Unhandled exception",
+            exc_info=(exc_type, exc_value, exc_tb),
         )
 
         # Show error dialog (import here to avoid circular imports at module level)
         try:
             from PyQt6.QtWidgets import QMessageBox
+
             tb_text = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
             dialog = QMessageBox()
             dialog.setIcon(QMessageBox.Icon.Critical)
@@ -115,12 +124,13 @@ def install_global_exception_handler() -> None:
     sys.excepthook = _handle_exception
 
 
-def safe_slot(func: F) -> F:
+def safe_slot[F: Callable[..., Any]](func: F) -> F:
     """Decorator for Qt slot methods — catches exceptions and shows an error dialog.
 
     Use on any method connected to a Qt signal (menu actions, button clicks, etc.)
     so that a bug in one handler doesn't silently kill the app.
     """
+
     @functools.wraps(func)
     def wrapper(self: Any, *args: Any, **kwargs: Any) -> Any:
         try:
@@ -130,11 +140,13 @@ def safe_slot(func: F) -> F:
             _logger.exception("Error in %s", func.__name__)
             try:
                 from PyQt6.QtWidgets import QMessageBox
+
                 QMessageBox.warning(
-                    self, "Error",
-                    f"An error occurred in {func.__name__}:\n\n"
-                    f"{type(exc).__name__}: {exc}",
+                    self,
+                    "Error",
+                    f"An error occurred in {func.__name__}:\n\n{type(exc).__name__}: {exc}",
                 )
             except Exception:
                 pass  # Last resort — already logged above
+
     return wrapper  # type: ignore[return-value]

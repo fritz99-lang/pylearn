@@ -8,7 +8,7 @@ import re
 
 from pylearn.core.models import BlockType, ContentBlock, FontSpan
 from pylearn.parser.book_profiles import BookProfile
-from pylearn.utils.text_utils import is_page_header_or_footer, detect_repl_code
+from pylearn.utils.text_utils import detect_repl_code, is_page_header_or_footer
 
 logger = logging.getLogger("pylearn.parser")
 
@@ -70,14 +70,16 @@ class ContentClassifier:
                     current_text_parts = []
                     current_type = None
                     return
-                blocks.append(ContentBlock(
-                    block_type=current_type,
-                    text=text,
-                    page_num=page_num,
-                    font_size=current_font_size,
-                    is_bold=current_is_bold,
-                    is_monospace=current_is_mono,
-                ))
+                blocks.append(
+                    ContentBlock(
+                        block_type=current_type,
+                        text=text,
+                        page_num=page_num,
+                        font_size=current_font_size,
+                        is_bold=current_is_bold,
+                        is_monospace=current_is_mono,
+                    )
+                )
             current_text_parts = []
             current_type = None
 
@@ -119,9 +121,9 @@ class ContentClassifier:
 
         return blocks
 
-    def classify_all_pages(self, pages: list[list[FontSpan]],
-                           start_page_offset: int = 0,
-                           page_images: dict[int, list[dict]] | None = None) -> list[ContentBlock]:
+    def classify_all_pages(
+        self, pages: list[list[FontSpan]], start_page_offset: int = 0, page_images: dict[int, list[dict]] | None = None
+    ) -> list[ContentBlock]:
         """Classify spans from multiple pages into a flat list of content blocks.
 
         Args:
@@ -144,8 +146,7 @@ class ContentClassifier:
         return all_blocks
 
     @staticmethod
-    def _interleave_images(blocks: list[ContentBlock], images: list[dict],
-                           page_num: int) -> list[ContentBlock]:
+    def _interleave_images(blocks: list[ContentBlock], images: list[dict], page_num: int) -> list[ContentBlock]:
         """Insert FIGURE blocks among text blocks based on y-position."""
         if not images:
             return blocks
@@ -153,14 +154,16 @@ class ContentClassifier:
         # Build image blocks sorted by vertical position
         img_blocks = []
         for img in sorted(images, key=lambda x: x.get("y0", 0)):
-            img_blocks.append((
-                img.get("y0", 0),
-                ContentBlock(
-                    block_type=BlockType.FIGURE,
-                    text=img["filename"],
-                    page_num=page_num,
-                ),
-            ))
+            img_blocks.append(
+                (
+                    img.get("y0", 0),
+                    ContentBlock(
+                        block_type=BlockType.FIGURE,
+                        text=img["filename"],
+                        page_num=page_num,
+                    ),
+                )
+            )
 
         # Merge: walk text blocks (which have no y0 — use insertion order as proxy)
         # Insert images between blocks, grouping at end if no good position found

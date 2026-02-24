@@ -6,12 +6,14 @@ from __future__ import annotations
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import (
-    PythonLexer, PythonConsoleLexer,
-    CppLexer, CLexer,
-    HtmlLexer, CssLexer,
+    CLexer,
+    CppLexer,
+    CssLexer,
+    HtmlLexer,
+    PythonConsoleLexer,
+    PythonLexer,
     TextLexer,
 )
-
 
 _lexers = {
     "python": PythonLexer(),

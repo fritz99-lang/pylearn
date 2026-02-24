@@ -3,11 +3,11 @@
 
 from __future__ import annotations
 
-import re
 import logging
+import re
 from collections import Counter
 
-from pylearn.core.models import BlockType, ContentBlock, Chapter, Section
+from pylearn.core.models import BlockType, Chapter, ContentBlock, Section
 from pylearn.parser.book_profiles import BookProfile
 
 logger = logging.getLogger("pylearn.parser")
@@ -21,8 +21,7 @@ class StructureDetector:
         try:
             self._chapter_re = re.compile(profile.chapter_pattern, re.IGNORECASE)
         except re.error as e:
-            logger.warning("Invalid chapter_pattern %r: %s — using default",
-                           profile.chapter_pattern, e)
+            logger.warning("Invalid chapter_pattern %r: %s — using default", profile.chapter_pattern, e)
             self._chapter_re = re.compile(r"^Chapter\s+(\d+)\s*[\.:]", re.IGNORECASE)
 
     def detect_chapters(self, blocks: list[ContentBlock]) -> list[Chapter]:
@@ -43,8 +42,7 @@ class StructureDetector:
             if abs(len(regex_starts) - len(font_starts)) <= 3:
                 chapter_starts = regex_starts
                 logger.info(
-                    f"Using regex detection ({len(regex_starts)} chapters) — "
-                    f"similar to font-size ({len(font_starts)})"
+                    f"Using regex detection ({len(regex_starts)} chapters) — similar to font-size ({len(font_starts)})"
                 )
             else:
                 chapter_starts = font_starts
@@ -59,14 +57,16 @@ class StructureDetector:
 
         if not chapter_starts:
             logger.warning("No chapters detected, treating all content as Chapter 1")
-            return [Chapter(
-                chapter_num=1,
-                title="Content",
-                start_page=blocks[0].page_num if blocks else 0,
-                end_page=blocks[-1].page_num if blocks else 0,
-                content_blocks=blocks,
-                sections=self._detect_sections(blocks),
-            )]
+            return [
+                Chapter(
+                    chapter_num=1,
+                    title="Content",
+                    start_page=blocks[0].page_num if blocks else 0,
+                    end_page=blocks[-1].page_num if blocks else 0,
+                    content_blocks=blocks,
+                    sections=self._detect_sections(blocks),
+                )
+            ]
 
         chapters: list[Chapter] = []
         for idx, (block_i, chapter_num, title) in enumerate(chapter_starts):
@@ -79,14 +79,16 @@ class StructureDetector:
             start_page = chapter_blocks[0].page_num if chapter_blocks else 0
             end_page = chapter_blocks[-1].page_num if chapter_blocks else 0
 
-            chapters.append(Chapter(
-                chapter_num=chapter_num,
-                title=title,
-                start_page=start_page,
-                end_page=end_page,
-                content_blocks=chapter_blocks,
-                sections=self._detect_sections(chapter_blocks),
-            ))
+            chapters.append(
+                Chapter(
+                    chapter_num=chapter_num,
+                    title=title,
+                    start_page=start_page,
+                    end_page=end_page,
+                    content_blocks=chapter_blocks,
+                    sections=self._detect_sections(chapter_blocks),
+                )
+            )
 
         return chapters
 
@@ -117,9 +119,9 @@ class StructureDetector:
         If there's only one large heading size, use that as chapters.
         """
         heading_blocks = [
-            (i, b) for i, b in enumerate(blocks)
-            if b.block_type in (BlockType.HEADING1, BlockType.HEADING2)
-            and b.font_size > 0
+            (i, b)
+            for i, b in enumerate(blocks)
+            if b.block_type in (BlockType.HEADING1, BlockType.HEADING2) and b.font_size > 0
         ]
 
         if not heading_blocks:

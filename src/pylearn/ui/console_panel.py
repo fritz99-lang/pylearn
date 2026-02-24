@@ -3,8 +3,8 @@
 
 from __future__ import annotations
 
-from PyQt6.QtWidgets import QTextBrowser
 from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import QTextBrowser
 
 from pylearn.ui.theme_registry import get_palette
 
@@ -28,17 +28,11 @@ class ConsolePanel(QTextBrowser):
 
     def show_ready(self) -> None:
         """Show the ready message."""
-        self.setHtml(
-            '<p style="color:#888; font-family:Consolas, monospace; '
-            'font-style:italic;">Ready.</p>'
-        )
+        self.setHtml('<p style="color:#888; font-family:Consolas, monospace; font-style:italic;">Ready.</p>')
 
     def show_running(self) -> None:
         """Show a running indicator."""
-        self.append(
-            '<p style="color:#89b4fa; font-family:Consolas, monospace;">'
-            'Running...</p>'
-        )
+        self.append('<p style="color:#89b4fa; font-family:Consolas, monospace;">Running...</p>')
 
     def set_theme(self, theme_name: str) -> None:
         """Switch console theme, derived from the centralized palette."""

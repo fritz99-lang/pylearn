@@ -12,7 +12,7 @@ from unittest.mock import patch
 
 import pytest
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QMessageBox, QTreeWidgetItem
+from PyQt6.QtWidgets import QMessageBox
 
 from pylearn.core.database import Database
 from pylearn.ui.bookmark_dialog import BookmarkDialog, add_bookmark_dialog
@@ -20,10 +20,10 @@ from pylearn.ui.exercise_panel import ExercisePanel
 from pylearn.ui.notes_dialog import NotesDialog
 from pylearn.ui.progress_dialog import ProgressDialog
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture
 def db(tmp_path):
@@ -96,8 +96,7 @@ class TestNotesDialogConstruction:
 
     def test_construct_with_section_title(self, qtbot, seeded_db):
         """Section title is stored for use when creating new notes."""
-        dialog = NotesDialog(seeded_db, book_id="b1", chapter_num=1,
-                             section_title="My Section")
+        dialog = NotesDialog(seeded_db, book_id="b1", chapter_num=1, section_title="My Section")
         qtbot.addWidget(dialog)
         assert dialog._section_title == "My Section"
 
@@ -198,8 +197,7 @@ class TestNotesDialogSave:
 
     def test_save_new_note(self, qtbot, seeded_db):
         """Saving with no current note creates a new note in the database."""
-        dialog = NotesDialog(seeded_db, book_id="b1", chapter_num=1,
-                             section_title="New Section")
+        dialog = NotesDialog(seeded_db, book_id="b1", chapter_num=1, section_title="New Section")
         qtbot.addWidget(dialog)
 
         # Clear current note and type new content
@@ -529,8 +527,7 @@ class TestBookmarkDialogSignal:
 class TestAddBookmarkDialog:
     """Test the add_bookmark_dialog standalone function."""
 
-    @patch("pylearn.ui.bookmark_dialog.QInputDialog.getText",
-           return_value=("My Bookmark", True))
+    @patch("pylearn.ui.bookmark_dialog.QInputDialog.getText", return_value=("My Bookmark", True))
     def test_add_bookmark_success(self, mock_input, qtbot, seeded_db):
         """When user enters a label and clicks OK, bookmark should be added."""
         result = add_bookmark_dialog(None, seeded_db, "b1", 2, 500)
@@ -540,8 +537,7 @@ class TestAddBookmarkDialog:
         labels = [bm["label"] for bm in bookmarks]
         assert "My Bookmark" in labels
 
-    @patch("pylearn.ui.bookmark_dialog.QInputDialog.getText",
-           return_value=("", False))
+    @patch("pylearn.ui.bookmark_dialog.QInputDialog.getText", return_value=("", False))
     def test_add_bookmark_cancelled(self, mock_input, qtbot, seeded_db):
         """When user cancels the input dialog, no bookmark should be added."""
         initial_count = len(seeded_db.get_bookmarks("b1"))
@@ -550,8 +546,7 @@ class TestAddBookmarkDialog:
         assert result is False
         assert len(seeded_db.get_bookmarks("b1")) == initial_count
 
-    @patch("pylearn.ui.bookmark_dialog.QInputDialog.getText",
-           return_value=("", True))
+    @patch("pylearn.ui.bookmark_dialog.QInputDialog.getText", return_value=("", True))
     def test_add_bookmark_empty_label_ignored(self, mock_input, qtbot, seeded_db):
         """Pressing OK with empty label should not add a bookmark."""
         initial_count = len(seeded_db.get_bookmarks("b1"))
@@ -614,6 +609,7 @@ class TestProgressDialogContent:
         qtbot.addWidget(dialog)
 
         from PyQt6.QtWidgets import QGroupBox
+
         group_boxes = dialog.findChildren(QGroupBox)
         # seeded_db has 2 books
         assert len(group_boxes) == 2
@@ -624,6 +620,7 @@ class TestProgressDialogContent:
         qtbot.addWidget(dialog)
 
         from PyQt6.QtWidgets import QGroupBox
+
         group_boxes = dialog.findChildren(QGroupBox)
         titles = {gb.title() for gb in group_boxes}
         assert "Learning Python" in titles
@@ -635,6 +632,7 @@ class TestProgressDialogContent:
         qtbot.addWidget(dialog)
 
         from PyQt6.QtWidgets import QProgressBar
+
         progress_bars = dialog.findChildren(QProgressBar)
         assert len(progress_bars) == 2
 
@@ -644,6 +642,7 @@ class TestProgressDialogContent:
         qtbot.addWidget(dialog)
 
         from PyQt6.QtWidgets import QProgressBar
+
         progress_bars = dialog.findChildren(QProgressBar)
         values = {pb.value() for pb in progress_bars}
 
@@ -657,6 +656,7 @@ class TestProgressDialogContent:
         qtbot.addWidget(dialog)
 
         from PyQt6.QtWidgets import QLabel
+
         labels = dialog.findChildren(QLabel)
         label_texts = [lbl.text() for lbl in labels]
 
@@ -671,6 +671,7 @@ class TestProgressDialogContent:
         qtbot.addWidget(dialog)
 
         from PyQt6.QtWidgets import QLabel
+
         labels = dialog.findChildren(QLabel)
         label_texts = [lbl.text() for lbl in labels]
 
@@ -683,6 +684,7 @@ class TestProgressDialogContent:
         qtbot.addWidget(dialog)
 
         from PyQt6.QtWidgets import QLabel
+
         labels = dialog.findChildren(QLabel)
         label_texts = [lbl.text() for lbl in labels]
 
@@ -698,6 +700,7 @@ class TestProgressDialogContent:
         qtbot.addWidget(dialog)
 
         from PyQt6.QtWidgets import QLabel
+
         labels = dialog.findChildren(QLabel)
         label_texts = [lbl.text() for lbl in labels]
         assert not any("Exercises" in t for t in label_texts)
@@ -1073,22 +1076,26 @@ class TestImports:
     def test_notes_dialog_imports(self):
         """notes_dialog module should import without error."""
         from pylearn.ui import notes_dialog
+
         assert hasattr(notes_dialog, "NotesDialog")
 
     def test_bookmark_dialog_imports(self):
         """bookmark_dialog module should import without error."""
         from pylearn.ui import bookmark_dialog
+
         assert hasattr(bookmark_dialog, "BookmarkDialog")
         assert hasattr(bookmark_dialog, "add_bookmark_dialog")
 
     def test_progress_dialog_imports(self):
         """progress_dialog module should import without error."""
         from pylearn.ui import progress_dialog
+
         assert hasattr(progress_dialog, "ProgressDialog")
 
     def test_exercise_panel_imports(self):
         """exercise_panel module should import without error."""
         from pylearn.ui import exercise_panel
+
         assert hasattr(exercise_panel, "ExercisePanel")
 
     def test_notes_dialog_uses_qwidget(self):
@@ -1098,19 +1105,23 @@ class TestImports:
     def test_notes_dialog_is_qdialog_subclass(self):
         """NotesDialog should be a subclass of QDialog."""
         from PyQt6.QtWidgets import QDialog
+
         assert issubclass(NotesDialog, QDialog)
 
     def test_bookmark_dialog_is_qdialog_subclass(self):
         """BookmarkDialog should be a subclass of QDialog."""
         from PyQt6.QtWidgets import QDialog
+
         assert issubclass(BookmarkDialog, QDialog)
 
     def test_progress_dialog_is_qdialog_subclass(self):
         """ProgressDialog should be a subclass of QDialog."""
         from PyQt6.QtWidgets import QDialog
+
         assert issubclass(ProgressDialog, QDialog)
 
     def test_exercise_panel_is_qwidget_subclass(self):
         """ExercisePanel should be a subclass of QWidget."""
         from PyQt6.QtWidgets import QWidget
+
         assert issubclass(ExercisePanel, QWidget)

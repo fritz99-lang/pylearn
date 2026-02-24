@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import re
 from pylearn.core.models import BlockType, ContentBlock
 from pylearn.utils.text_utils import clean_code_text, detect_repl_code
 
@@ -49,13 +48,15 @@ class CodeExtractor:
             if detect_repl_code(merged_text):
                 code_type = BlockType.CODE_REPL
 
-            result.append(ContentBlock(
-                block_type=code_type,
-                text=merged_text,
-                page_num=start_page,
-                font_size=block.font_size,
-                is_monospace=True,
-            ))
+            result.append(
+                ContentBlock(
+                    block_type=code_type,
+                    text=merged_text,
+                    page_num=start_page,
+                    font_size=block.font_size,
+                    is_monospace=True,
+                )
+            )
             i = j
 
         return result
@@ -83,10 +84,12 @@ class CodeExtractor:
             if len(text) < 10 or "\n" not in text:
                 continue
             # Skip blocks that are just output
-            if not any(line.strip().startswith((">>>", "import", "def ", "class ",
-                                                 "for ", "while ", "if ", "print",
-                                                 "from ", "with ", "#"))
-                       for line in text.split("\n")):
+            if not any(
+                line.strip().startswith(
+                    (">>>", "import", "def ", "class ", "for ", "while ", "if ", "print", "from ", "with ", "#")
+                )
+                for line in text.split("\n")
+            ):
                 continue
             runnable.append(block)
         return runnable

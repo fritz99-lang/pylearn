@@ -105,30 +105,32 @@ class PDFParser:
                         if bbox[1] < self.profile.margin_top or bbox[3] > page.rect.height - self.profile.margin_bottom:
                             continue
 
-                    is_bold = bool(flags & 2 ** 4)  # bit 4 = bold
-                    is_italic = bool(flags & 2 ** 1)  # bit 1 = italic
+                    is_bold = bool(flags & 2**4)  # bit 4 = bold
+                    is_italic = bool(flags & 2**1)  # bit 1 = italic
                     is_mono = self.profile.is_monospace(font_name)
 
-                    spans.append(FontSpan(
-                        text=text,
-                        font_name=font_name,
-                        font_size=round(font_size, 1),
-                        is_bold=is_bold,
-                        is_italic=is_italic,
-                        is_monospace=is_mono,
-                        color=color,
-                        page_num=page_num,
-                        x0=bbox[0],
-                        y0=bbox[1],
-                        x1=bbox[2],
-                        y1=bbox[3],
-                    ))
+                    spans.append(
+                        FontSpan(
+                            text=text,
+                            font_name=font_name,
+                            font_size=round(font_size, 1),
+                            is_bold=is_bold,
+                            is_italic=is_italic,
+                            is_monospace=is_mono,
+                            color=color,
+                            page_num=page_num,
+                            x0=bbox[0],
+                            y0=bbox[1],
+                            x1=bbox[2],
+                            y1=bbox[3],
+                        )
+                    )
 
         return spans
 
-    def extract_page_images(self, page_num: int, save_dir: Path,
-                             min_width: int = 50, min_height: int = 50,
-                             image_count: int = 0) -> list[dict]:
+    def extract_page_images(
+        self, page_num: int, save_dir: Path, min_width: int = 50, min_height: int = 50, image_count: int = 0
+    ) -> list[dict]:
         """Extract images from a page, save to disk, return metadata.
 
         Returns list of dicts with keys: filename, y0, page_num, width, height.
@@ -178,13 +180,15 @@ class PDFParser:
                 img_rects = page.get_image_rects(xref)
                 y0 = img_rects[0].y0 if img_rects else 0.0
 
-                images.append({
-                    "filename": filename,
-                    "y0": y0,
-                    "page_num": page_num,
-                    "width": width,
-                    "height": height,
-                })
+                images.append(
+                    {
+                        "filename": filename,
+                        "y0": y0,
+                        "page_num": page_num,
+                        "width": width,
+                        "height": height,
+                    }
+                )
             except Exception as e:
                 logger.debug(f"Skipping image xref={xref} on page {page_num}: {e}")
 
@@ -219,7 +223,9 @@ class PDFParser:
         if start >= end:
             logger.warning(
                 "skip_pages (%d start, %d end) leaves no pages in a %d-page PDF",
-                self.profile.skip_pages_start, self.profile.skip_pages_end, total,
+                self.profile.skip_pages_start,
+                self.profile.skip_pages_end,
+                total,
             )
         return self.extract_pages(start, end)
 

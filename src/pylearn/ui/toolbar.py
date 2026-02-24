@@ -3,11 +3,16 @@
 
 from __future__ import annotations
 
-from PyQt6.QtWidgets import (
-    QToolBar, QToolButton, QSpinBox, QComboBox, QLabel, QWidget, QHBoxLayout,
-)
 from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtGui import QAction, QKeySequence
+from PyQt6.QtGui import QAction
+from PyQt6.QtWidgets import (
+    QComboBox,
+    QHBoxLayout,
+    QLabel,
+    QSpinBox,
+    QToolBar,
+    QWidget,
+)
 
 
 class MainToolBar(QToolBar):
@@ -78,9 +83,7 @@ class MainToolBar(QToolBar):
 
         self._theme_combo = QComboBox()
         self._theme_combo.addItems(["Light", "Dark", "Sepia"])
-        self._theme_combo.currentTextChanged.connect(
-            lambda text: self.theme_changed.emit(text.lower())
-        )
+        self._theme_combo.currentTextChanged.connect(lambda text: self.theme_changed.emit(text.lower()))
         theme_layout.addWidget(self._theme_combo)
 
         self.addWidget(theme_widget)

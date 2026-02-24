@@ -13,6 +13,7 @@ logger = logging.getLogger("pylearn.models")
 
 class BlockType(Enum):
     """Types of content blocks extracted from PDFs."""
+
     HEADING1 = "heading1"
     HEADING2 = "heading2"
     HEADING3 = "heading3"
@@ -34,6 +35,7 @@ class BlockType(Enum):
 
 class ReadStatus(Enum):
     """Chapter reading status."""
+
     NOT_STARTED = "not_started"
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
@@ -42,6 +44,7 @@ class ReadStatus(Enum):
 @dataclass
 class FontSpan:
     """A span of text with font metadata from PDF extraction."""
+
     text: str
     font_name: str
     font_size: float
@@ -59,6 +62,7 @@ class FontSpan:
 @dataclass
 class ContentBlock:
     """A classified block of content (heading, body text, code, etc.)."""
+
     block_type: BlockType
     text: str
     page_num: int = 0
@@ -102,6 +106,7 @@ class ContentBlock:
 @dataclass
 class Section:
     """A section within a chapter."""
+
     title: str
     level: int  # 1=chapter, 2=section, 3=subsection
     page_num: int
@@ -134,6 +139,7 @@ class Section:
 @dataclass
 class Chapter:
     """A chapter from a book."""
+
     chapter_num: int
     title: str
     start_page: int
@@ -169,6 +175,7 @@ class Chapter:
 @dataclass
 class Book:
     """A parsed book."""
+
     book_id: str
     title: str
     pdf_path: str
@@ -201,6 +208,7 @@ class Book:
         if not language:
             # Migrate old caches: derive language from profile_name
             from pylearn.parser.book_profiles import get_profile
+
             profile_name = data.get("profile_name", "")
             language = get_profile(profile_name).language if profile_name else "python"
         chapters = []
@@ -224,6 +232,7 @@ class Book:
 @dataclass
 class Exercise:
     """An exercise or quiz question from a book."""
+
     exercise_id: str
     book_id: str
     chapter_num: int
@@ -265,6 +274,7 @@ class Exercise:
 @dataclass
 class Bookmark:
     """A user bookmark."""
+
     bookmark_id: int
     book_id: str
     chapter_num: int
@@ -276,6 +286,7 @@ class Bookmark:
 @dataclass
 class Note:
     """A user note."""
+
     note_id: int
     book_id: str
     chapter_num: int

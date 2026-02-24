@@ -8,28 +8,30 @@ replay needed.
 
 from __future__ import annotations
 
+import logging
 import subprocess
 import sys
 import threading
-import logging
 import uuid
 
-from pylearn.core.constants import get_python_executable, DATA_DIR
-from pylearn.executor.sandbox import ExecutionResult, get_safe_env, _kill_tree, _CREATE_NO_WINDOW
+from pylearn.core.constants import DATA_DIR, get_python_executable
+from pylearn.executor.sandbox import _CREATE_NO_WINDOW, ExecutionResult, _kill_tree, get_safe_env
 
 logger = logging.getLogger("pylearn.executor")
 
 # Maximum chars of stdout/stderr to capture before truncating
 _MAX_OUTPUT_CHARS = 2 * 1024 * 1024  # 2M characters
 
+
 def _new_sentinel() -> str:
     """Generate a unique sentinel per process spawn."""
     return f"__PYLEARN_DONE_{uuid.uuid4().hex}__"
 
+
 # Script injected into the persistent subprocess.  It reads code blocks
 # from stdin delimited by the sentinel, exec()s them, and prints the
 # sentinel back so the parent knows when output is complete.
-_REPL_BOOTSTRAP = r'''
+_REPL_BOOTSTRAP = r"""
 import sys, traceback, io
 
 _SENTINEL = {sentinel!r}
@@ -67,7 +69,7 @@ while True:
     sys.stderr.flush()
     print(_SENTINEL, flush=True)
     print(_SENTINEL, file=sys.stderr, flush=True)
-'''
+"""
 
 
 class Session:
@@ -120,6 +122,7 @@ class Session:
         # C++/HTML don't support session persistence — delegate to Sandbox
         if lang in ("cpp", "c", "html"):
             from pylearn.executor.sandbox import Sandbox
+
             sandbox = Sandbox(timeout=self.timeout)
             return sandbox.run(code, language=lang)
 
@@ -150,7 +153,6 @@ class Session:
         stderr_bytes = 0
         stdout_truncated = False
         stderr_truncated = False
-        timed_out = False
 
         def _read_stdout() -> None:
             nonlocal stdout_bytes, stdout_truncated
@@ -198,7 +200,6 @@ class Session:
 
         if stdout_thread.is_alive() or stderr_thread.is_alive():
             # Timed out — kill the process (it will be restarted on next run)
-            timed_out = True
             self._kill_process()
             return ExecutionResult(
                 stdout="".join(stdout_lines),

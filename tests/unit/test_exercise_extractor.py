@@ -5,13 +5,13 @@ from __future__ import annotations
 
 import pytest
 
-from pylearn.core.models import BlockType, ContentBlock, Chapter, Exercise, Section
+from pylearn.core.models import BlockType, Chapter, ContentBlock, Section
 from pylearn.parser.exercise_extractor import ExerciseExtractor
-
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def make_block(
     block_type: BlockType,
@@ -43,6 +43,7 @@ def make_chapter(
 # Fixture: shared extractor instance
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture
 def extractor() -> ExerciseExtractor:
     return ExerciseExtractor()
@@ -55,6 +56,7 @@ BOOK_ID = "test_book"
 # extract_from_chapters — top-level integration
 # ===========================================================================
 
+
 class TestExtractFromChapters:
     """Tests for the public extract_from_chapters() entry point."""
 
@@ -66,11 +68,14 @@ class TestExtractFromChapters:
     def test_chapters_with_no_exercise_content(self, extractor: ExerciseExtractor) -> None:
         """Chapters containing only body text should yield no exercises."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING1, "Introduction"),
-                make_block(BlockType.BODY, "This is body text."),
-                make_block(BlockType.CODE, "x = 1"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING1, "Introduction"),
+                    make_block(BlockType.BODY, "This is body text."),
+                    make_block(BlockType.CODE, "x = 1"),
+                ],
+            ),
         ]
         result = extractor.extract_from_chapters(BOOK_ID, chapters)
         assert result == []
@@ -78,10 +83,13 @@ class TestExtractFromChapters:
     def test_generic_exercise_detected(self, extractor: ExerciseExtractor) -> None:
         """A heading matching the generic pattern should produce an exercise."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Exercise 1"),
-                make_block(BlockType.BODY, "Write a function."),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Exercise 1"),
+                    make_block(BlockType.BODY, "Write a function."),
+                ],
+            ),
         ]
         result = extractor.extract_from_chapters(BOOK_ID, chapters)
         assert len(result) == 1
@@ -101,23 +109,24 @@ class TestExtractFromChapters:
         assert BOOK_ID in result[0].exercise_id
         assert "ch5" in result[0].exercise_id
 
-    def test_specialized_overrides_generic_for_same_chapter(
-        self, extractor: ExerciseExtractor
-    ) -> None:
+    def test_specialized_overrides_generic_for_same_chapter(self, extractor: ExerciseExtractor) -> None:
         """When a specialized extractor finds exercises in a chapter, generic
         results for that same chapter are discarded."""
         # Build a chapter that triggers BOTH the Learning Python quiz extractor
         # AND the generic extractor (heading "Exercise 1").
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, "Q1: What is Python?"),
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Answers"),
-                make_block(BlockType.BODY, "A1: A programming language."),
-                make_block(BlockType.HEADING1, "Next Section"),
-                # Also a generic exercise heading in the same chapter
-                make_block(BlockType.HEADING2, "Exercise 1"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, "Q1: What is Python?"),
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Answers"),
+                    make_block(BlockType.BODY, "A1: A programming language."),
+                    make_block(BlockType.HEADING1, "Next Section"),
+                    # Also a generic exercise heading in the same chapter
+                    make_block(BlockType.HEADING2, "Exercise 1"),
+                ],
+            ),
         ]
         result = extractor.extract_from_chapters(BOOK_ID, chapters)
         # Specialized quiz extractor finds chapter 1 -> generic chapter-1 results dropped
@@ -127,21 +136,25 @@ class TestExtractFromChapters:
         generic_titles = [e.title for e in result if e.exercise_type == "exercise"]
         assert generic_titles == []
 
-    def test_generic_kept_for_chapters_without_specialized(
-        self, extractor: ExerciseExtractor
-    ) -> None:
+    def test_generic_kept_for_chapters_without_specialized(self, extractor: ExerciseExtractor) -> None:
         """Generic results are kept for chapters where no specialized extractor matched."""
         chapters = [
             # Chapter 1: quiz (specialized)
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, "Q1: What is a list?"),
-                make_block(BlockType.HEADING1, "End"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, "Q1: What is a list?"),
+                    make_block(BlockType.HEADING1, "End"),
+                ],
+            ),
             # Chapter 2: generic exercise only
-            make_chapter(2, [
-                make_block(BlockType.HEADING2, "Challenge 7"),
-            ]),
+            make_chapter(
+                2,
+                [
+                    make_block(BlockType.HEADING2, "Challenge 7"),
+                ],
+            ),
         ]
         result = extractor.extract_from_chapters(BOOK_ID, chapters)
         ch1 = [e for e in result if e.chapter_num == 1]
@@ -151,10 +164,7 @@ class TestExtractFromChapters:
 
     def test_multiple_chapters_accumulate(self, extractor: ExerciseExtractor) -> None:
         """Exercises across many chapters are collected together."""
-        chapters = [
-            make_chapter(i, [make_block(BlockType.HEADING2, f"Exercise {i}")])
-            for i in range(1, 6)
-        ]
+        chapters = [make_chapter(i, [make_block(BlockType.HEADING2, f"Exercise {i}")]) for i in range(1, 6)]
         result = extractor.extract_from_chapters(BOOK_ID, chapters)
         assert len(result) == 5
         assert {e.chapter_num for e in result} == {1, 2, 3, 4, 5}
@@ -163,6 +173,7 @@ class TestExtractFromChapters:
 # ===========================================================================
 # _extract_generic — pattern: "Exercise N", "Problem N", "Challenge N"
 # ===========================================================================
+
 
 class TestGenericExtractor:
     """Tests for the _extract_generic strategy."""
@@ -211,12 +222,15 @@ class TestGenericExtractor:
 
     def test_multiple_exercises_same_chapter(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(3, [
-                make_block(BlockType.HEADING2, "Exercise 1"),
-                make_block(BlockType.BODY, "Do this."),
-                make_block(BlockType.HEADING2, "Exercise 2"),
-                make_block(BlockType.BODY, "Do that."),
-            ]),
+            make_chapter(
+                3,
+                [
+                    make_block(BlockType.HEADING2, "Exercise 1"),
+                    make_block(BlockType.BODY, "Do this."),
+                    make_block(BlockType.HEADING2, "Exercise 2"),
+                    make_block(BlockType.BODY, "Do that."),
+                ],
+            ),
         ]
         result = extractor._extract_generic(BOOK_ID, chapters)
         assert len(result) == 2
@@ -235,17 +249,21 @@ class TestGenericExtractor:
 # _extract_learning_python — "Test Your Knowledge: Quiz / Answers"
 # ===========================================================================
 
+
 class TestLearningPythonExtractor:
     """Tests for the quiz/answer Learning Python strategy."""
 
     def test_quiz_section_creates_exercise(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, "Q1: What is a variable?"),
-                make_block(BlockType.BODY, "Q2: What is a loop?"),
-                make_block(BlockType.HEADING1, "Next Chapter"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, "Q1: What is a variable?"),
+                    make_block(BlockType.BODY, "Q2: What is a loop?"),
+                    make_block(BlockType.HEADING1, "Next Chapter"),
+                ],
+            ),
         ]
         result = extractor._extract_learning_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -257,13 +275,16 @@ class TestLearningPythonExtractor:
 
     def test_quiz_with_answers(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(2, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, "Q1: Name three data types."),
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Answers"),
-                make_block(BlockType.BODY, "A1: int, str, list."),
-                make_block(BlockType.HEADING1, "Summary"),
-            ]),
+            make_chapter(
+                2,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, "Q1: Name three data types."),
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Answers"),
+                    make_block(BlockType.BODY, "A1: int, str, list."),
+                    make_block(BlockType.HEADING1, "Summary"),
+                ],
+            ),
         ]
         result = extractor._extract_learning_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -274,10 +295,13 @@ class TestLearningPythonExtractor:
         """If the quiz is the last section in a chapter (no trailing heading),
         it should still be captured by the flush logic."""
         chapters = [
-            make_chapter(3, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, "Q1: Explain scope."),
-            ]),
+            make_chapter(
+                3,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, "Q1: Explain scope."),
+                ],
+            ),
         ]
         result = extractor._extract_learning_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -286,12 +310,15 @@ class TestLearningPythonExtractor:
     def test_answers_flushed_at_end_of_chapter(self, extractor: ExerciseExtractor) -> None:
         """Quiz with answers at the very end of a chapter (no trailing heading)."""
         chapters = [
-            make_chapter(4, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, "Q1: What is immutability?"),
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Answers"),
-                make_block(BlockType.BODY, "A1: Objects that cannot change."),
-            ]),
+            make_chapter(
+                4,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, "Q1: What is immutability?"),
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Answers"),
+                    make_block(BlockType.BODY, "A1: Objects that cannot change."),
+                ],
+            ),
         ]
         result = extractor._extract_learning_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -300,10 +327,13 @@ class TestLearningPythonExtractor:
 
     def test_no_quiz_section_returns_empty(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Summary"),
-                make_block(BlockType.BODY, "This chapter covered..."),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Summary"),
+                    make_block(BlockType.BODY, "This chapter covered..."),
+                ],
+            ),
         ]
         result = extractor._extract_learning_python(BOOK_ID, chapters)
         assert result == []
@@ -311,22 +341,29 @@ class TestLearningPythonExtractor:
     def test_case_insensitive_quiz_header(self, extractor: ExerciseExtractor) -> None:
         """The regex uses re.IGNORECASE so mixed case should match."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "test your knowledge: quiz"),
-                make_block(BlockType.BODY, "Q1: Trivial."),
-                make_block(BlockType.HEADING1, "End"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "test your knowledge: quiz"),
+                    make_block(BlockType.BODY, "Q1: Trivial."),
+                    make_block(BlockType.HEADING1, "End"),
+                ],
+            ),
         ]
         result = extractor._extract_learning_python(BOOK_ID, chapters)
         assert len(result) == 1
 
     def test_page_num_uses_chapter_start_page(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, "Q1"),
-                make_block(BlockType.HEADING1, "End"),
-            ], start_page=55),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, "Q1"),
+                    make_block(BlockType.HEADING1, "End"),
+                ],
+                start_page=55,
+            ),
         ]
         result = extractor._extract_learning_python(BOOK_ID, chapters)
         assert result[0].page_num == 55
@@ -336,14 +373,18 @@ class TestLearningPythonExtractor:
 # _extract_cookbook — recipe pattern "N.N. Title"
 # ===========================================================================
 
+
 class TestCookbookExtractor:
     """Tests for the Python Cookbook recipe strategy."""
 
     def test_recipe_heading2(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "1.1. Unpacking a Sequence"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "1.1. Unpacking a Sequence"),
+                ],
+            ),
         ]
         result = extractor._extract_cookbook(BOOK_ID, chapters)
         assert len(result) == 1
@@ -353,9 +394,12 @@ class TestCookbookExtractor:
 
     def test_recipe_heading3(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(4, [
-                make_block(BlockType.HEADING3, "4.12. Iterating Over Multiple Sequences"),
-            ]),
+            make_chapter(
+                4,
+                [
+                    make_block(BlockType.HEADING3, "4.12. Iterating Over Multiple Sequences"),
+                ],
+            ),
         ]
         result = extractor._extract_cookbook(BOOK_ID, chapters)
         assert len(result) == 1
@@ -364,31 +408,40 @@ class TestCookbookExtractor:
     def test_non_recipe_heading_ignored(self, extractor: ExerciseExtractor) -> None:
         """A heading without the N.N. pattern should not match."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Introduction to Recipes"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Introduction to Recipes"),
+                ],
+            ),
         ]
         result = extractor._extract_cookbook(BOOK_ID, chapters)
         assert result == []
 
     def test_body_block_type_ignored(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.BODY, "1.1. This is body text, not heading"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.BODY, "1.1. This is body text, not heading"),
+                ],
+            ),
         ]
         result = extractor._extract_cookbook(BOOK_ID, chapters)
         assert result == []
 
     def test_multiple_recipes_in_chapter(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(2, [
-                make_block(BlockType.HEADING2, "2.1. Splitting Strings"),
-                make_block(BlockType.BODY, "Discussion about splitting."),
-                make_block(BlockType.HEADING2, "2.2. Matching Text"),
-                make_block(BlockType.BODY, "Discussion about matching."),
-                make_block(BlockType.HEADING2, "2.3. Searching and Replacing"),
-            ]),
+            make_chapter(
+                2,
+                [
+                    make_block(BlockType.HEADING2, "2.1. Splitting Strings"),
+                    make_block(BlockType.BODY, "Discussion about splitting."),
+                    make_block(BlockType.HEADING2, "2.2. Matching Text"),
+                    make_block(BlockType.BODY, "Discussion about matching."),
+                    make_block(BlockType.HEADING2, "2.3. Searching and Replacing"),
+                ],
+            ),
         ]
         result = extractor._extract_cookbook(BOOK_ID, chapters)
         assert len(result) == 3
@@ -396,18 +449,24 @@ class TestCookbookExtractor:
 
     def test_recipe_page_num_from_block(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "5.9. Serializing Objects", page_num=120),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "5.9. Serializing Objects", page_num=120),
+                ],
+            ),
         ]
         result = extractor._extract_cookbook(BOOK_ID, chapters)
         assert result[0].page_num == 120
 
     def test_description_contains_title(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "3.4. Working with Decimals"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "3.4. Working with Decimals"),
+                ],
+            ),
         ]
         result = extractor._extract_cookbook(BOOK_ID, chapters)
         assert "Working with Decimals" in result[0].description
@@ -417,17 +476,21 @@ class TestCookbookExtractor:
 # _extract_programming_python — explicit "Exercises" heading section
 # ===========================================================================
 
+
 class TestProgrammingPythonExtractor:
     """Tests for the Programming Python exercise-section strategy."""
 
     def test_exercises_section_heading2(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Exercises"),
-                make_block(BlockType.BODY, "1. Write a script that..."),
-                make_block(BlockType.BODY, "2. Modify the program..."),
-                make_block(BlockType.HEADING1, "Chapter 2"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Exercises"),
+                    make_block(BlockType.BODY, "1. Write a script that..."),
+                    make_block(BlockType.BODY, "2. Modify the program..."),
+                    make_block(BlockType.HEADING1, "Chapter 2"),
+                ],
+            ),
         ]
         result = extractor._extract_programming_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -437,11 +500,14 @@ class TestProgrammingPythonExtractor:
 
     def test_exercises_section_heading3(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING3, "Exercise"),
-                make_block(BlockType.BODY, "Try this at home."),
-                make_block(BlockType.HEADING2, "Summary"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING3, "Exercise"),
+                    make_block(BlockType.BODY, "Try this at home."),
+                    make_block(BlockType.HEADING2, "Summary"),
+                ],
+            ),
         ]
         result = extractor._extract_programming_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -449,10 +515,13 @@ class TestProgrammingPythonExtractor:
     def test_exercises_flushed_at_end_of_chapter(self, extractor: ExerciseExtractor) -> None:
         """If exercises are the last section, they should still be captured."""
         chapters = [
-            make_chapter(7, [
-                make_block(BlockType.HEADING2, "Exercises"),
-                make_block(BlockType.BODY, "1. Implement a class."),
-            ]),
+            make_chapter(
+                7,
+                [
+                    make_block(BlockType.HEADING2, "Exercises"),
+                    make_block(BlockType.BODY, "1. Implement a class."),
+                ],
+            ),
         ]
         result = extractor._extract_programming_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -461,10 +530,13 @@ class TestProgrammingPythonExtractor:
     def test_body_text_excluded_from_trigger(self, extractor: ExerciseExtractor) -> None:
         """The word 'Exercises' in body text should NOT start capture."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.BODY, "The following exercises are optional."),
-                make_block(BlockType.BODY, "1. Do something."),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.BODY, "The following exercises are optional."),
+                    make_block(BlockType.BODY, "1. Do something."),
+                ],
+            ),
         ]
         result = extractor._extract_programming_python(BOOK_ID, chapters)
         assert result == []
@@ -472,12 +544,15 @@ class TestProgrammingPythonExtractor:
     def test_heading1_terminates_capture(self, extractor: ExerciseExtractor) -> None:
         """A HEADING1 block should end the exercise section."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING3, "Exercises"),
-                make_block(BlockType.BODY, "Task 1."),
-                make_block(BlockType.HEADING1, "New Chapter"),
-                make_block(BlockType.BODY, "This should not be captured."),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING3, "Exercises"),
+                    make_block(BlockType.BODY, "Task 1."),
+                    make_block(BlockType.HEADING1, "New Chapter"),
+                    make_block(BlockType.BODY, "This should not be captured."),
+                ],
+            ),
         ]
         result = extractor._extract_programming_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -486,12 +561,15 @@ class TestProgrammingPythonExtractor:
     def test_heading2_terminates_capture(self, extractor: ExerciseExtractor) -> None:
         """A HEADING2 block should also end the exercise section."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING3, "Exercises"),
-                make_block(BlockType.BODY, "Task A."),
-                make_block(BlockType.HEADING2, "Answers"),
-                make_block(BlockType.BODY, "Answer A."),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING3, "Exercises"),
+                    make_block(BlockType.BODY, "Task A."),
+                    make_block(BlockType.HEADING2, "Answers"),
+                    make_block(BlockType.BODY, "Answer A."),
+                ],
+            ),
         ]
         result = extractor._extract_programming_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -499,11 +577,15 @@ class TestProgrammingPythonExtractor:
 
     def test_page_num_uses_chapter_start(self, extractor: ExerciseExtractor) -> None:
         chapters = [
-            make_chapter(3, [
-                make_block(BlockType.HEADING2, "Exercises"),
-                make_block(BlockType.BODY, "Do it."),
-                make_block(BlockType.HEADING1, "End"),
-            ], start_page=200),
+            make_chapter(
+                3,
+                [
+                    make_block(BlockType.HEADING2, "Exercises"),
+                    make_block(BlockType.BODY, "Do it."),
+                    make_block(BlockType.HEADING1, "End"),
+                ],
+                start_page=200,
+            ),
         ]
         result = extractor._extract_programming_python(BOOK_ID, chapters)
         assert result[0].page_num == 200
@@ -512,6 +594,7 @@ class TestProgrammingPythonExtractor:
 # ===========================================================================
 # Edge cases
 # ===========================================================================
+
 
 class TestEdgeCases:
     """Edge cases and boundary conditions."""
@@ -525,10 +608,13 @@ class TestEdgeCases:
     def test_exercise_at_end_of_chapter_last_block(self, extractor: ExerciseExtractor) -> None:
         """An exercise heading as the very last block."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.BODY, "Some content."),
-                make_block(BlockType.HEADING3, "Problem 10"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.BODY, "Some content."),
+                    make_block(BlockType.HEADING3, "Problem 10"),
+                ],
+            ),
         ]
         result = extractor.extract_from_chapters(BOOK_ID, chapters)
         assert len(result) == 1
@@ -537,11 +623,14 @@ class TestEdgeCases:
         """A quiz with a long description should be stored without truncation."""
         long_text = "Q1: " + "x" * 5000
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, long_text),
-                make_block(BlockType.HEADING1, "End"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, long_text),
+                    make_block(BlockType.HEADING1, "End"),
+                ],
+            ),
         ]
         result = extractor._extract_learning_python(BOOK_ID, chapters)
         assert len(result) == 1
@@ -556,34 +645,44 @@ class TestEdgeCases:
     def test_whitespace_only_text_in_block(self, extractor: ExerciseExtractor) -> None:
         """Blocks with whitespace-only text should not match patterns."""
         chapters = [
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "   "),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "   "),
+                ],
+            ),
         ]
         result = extractor.extract_from_chapters(BOOK_ID, chapters)
         assert result == []
 
-    def test_all_three_specialized_extractors_merge(
-        self, extractor: ExerciseExtractor
-    ) -> None:
+    def test_all_three_specialized_extractors_merge(self, extractor: ExerciseExtractor) -> None:
         """All specialized extractors finding results in different chapters."""
         chapters = [
             # Ch1: quiz
-            make_chapter(1, [
-                make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
-                make_block(BlockType.BODY, "Q1"),
-                make_block(BlockType.HEADING1, "End"),
-            ]),
+            make_chapter(
+                1,
+                [
+                    make_block(BlockType.HEADING2, "Test Your Knowledge: Quiz"),
+                    make_block(BlockType.BODY, "Q1"),
+                    make_block(BlockType.HEADING1, "End"),
+                ],
+            ),
             # Ch2: recipe
-            make_chapter(2, [
-                make_block(BlockType.HEADING2, "2.1. Some Recipe"),
-            ]),
+            make_chapter(
+                2,
+                [
+                    make_block(BlockType.HEADING2, "2.1. Some Recipe"),
+                ],
+            ),
             # Ch3: programming python exercises
-            make_chapter(3, [
-                make_block(BlockType.HEADING2, "Exercises"),
-                make_block(BlockType.BODY, "Do stuff."),
-                make_block(BlockType.HEADING1, "End"),
-            ]),
+            make_chapter(
+                3,
+                [
+                    make_block(BlockType.HEADING2, "Exercises"),
+                    make_block(BlockType.BODY, "Do stuff."),
+                    make_block(BlockType.HEADING1, "End"),
+                ],
+            ),
         ]
         result = extractor.extract_from_chapters(BOOK_ID, chapters)
         types = {e.exercise_type for e in result}

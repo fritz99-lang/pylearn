@@ -5,26 +5,26 @@ from __future__ import annotations
 
 import logging
 import sys
-from unittest.mock import MagicMock, patch, call
+from unittest.mock import MagicMock, patch
 
 import pytest
 
 from pylearn.utils.error_handler import (
-    setup_logging,
-    install_global_exception_handler,
-    safe_slot,
-    PyLearnError,
-    PDFParseError,
     BookNotFoundError,
     CacheError,
     ExecutionError,
     ExecutionTimeoutError,
+    PDFParseError,
+    PyLearnError,
+    install_global_exception_handler,
+    safe_slot,
+    setup_logging,
 )
-
 
 # ---------------------------------------------------------------------------
 # Custom exception hierarchy
 # ---------------------------------------------------------------------------
+
 
 class TestExceptionHierarchy:
     """Verify the custom exception classes inherit correctly."""
@@ -59,6 +59,7 @@ class TestExceptionHierarchy:
 # ---------------------------------------------------------------------------
 # setup_logging()
 # ---------------------------------------------------------------------------
+
 
 class TestSetupLogging:
     """Test the logging configuration function."""
@@ -125,6 +126,7 @@ class TestSetupLogging:
 # ---------------------------------------------------------------------------
 # install_global_exception_handler()
 # ---------------------------------------------------------------------------
+
 
 class TestInstallGlobalExceptionHandler:
     """Test the sys.excepthook replacement."""
@@ -218,6 +220,7 @@ class TestInstallGlobalExceptionHandler:
 # ---------------------------------------------------------------------------
 # safe_slot()
 # ---------------------------------------------------------------------------
+
 
 class FakeWidget:
     """Minimal stand-in for a QWidget to test safe_slot."""

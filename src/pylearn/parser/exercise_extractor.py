@@ -3,10 +3,10 @@
 
 from __future__ import annotations
 
-import re
 import logging
+import re
 
-from pylearn.core.models import BlockType, ContentBlock, Exercise, Chapter
+from pylearn.core.models import BlockType, Chapter, Exercise
 
 logger = logging.getLogger("pylearn.parser")
 
@@ -28,7 +28,7 @@ class ExerciseExtractor:
         prog_ex = self._extract_programming_python(book_id, chapters)
 
         # Collect chapters covered by each extractor
-        generic_chapters = {e.chapter_num for e in generic}
+        {e.chapter_num for e in generic}
         all_exercises: list[Exercise] = []
 
         # Prefer specialized results over generic when both find content
@@ -72,16 +72,18 @@ class ExerciseExtractor:
                         # End of quiz/answer section
                         if quiz_text_parts:
                             exercise_id = f"{book_id}_ch{chapter.chapter_num}_q{exercise_idx}"
-                            exercises.append(Exercise(
-                                exercise_id=exercise_id,
-                                book_id=book_id,
-                                chapter_num=chapter.chapter_num,
-                                title=f"Chapter {chapter.chapter_num} Quiz",
-                                description="\n".join(quiz_text_parts),
-                                exercise_type="quiz",
-                                answer="\n".join(answer_text_parts) if answer_text_parts else None,
-                                page_num=chapter.start_page,
-                            ))
+                            exercises.append(
+                                Exercise(
+                                    exercise_id=exercise_id,
+                                    book_id=book_id,
+                                    chapter_num=chapter.chapter_num,
+                                    title=f"Chapter {chapter.chapter_num} Quiz",
+                                    description="\n".join(quiz_text_parts),
+                                    exercise_type="quiz",
+                                    answer="\n".join(answer_text_parts) if answer_text_parts else None,
+                                    page_num=chapter.start_page,
+                                )
+                            )
                             exercise_idx += 1
                             quiz_text_parts = []
                             answer_text_parts = []
@@ -96,16 +98,18 @@ class ExerciseExtractor:
             # Flush any remaining quiz
             if quiz_text_parts:
                 exercise_id = f"{book_id}_ch{chapter.chapter_num}_q{exercise_idx}"
-                exercises.append(Exercise(
-                    exercise_id=exercise_id,
-                    book_id=book_id,
-                    chapter_num=chapter.chapter_num,
-                    title=f"Chapter {chapter.chapter_num} Quiz",
-                    description="\n".join(quiz_text_parts),
-                    exercise_type="quiz",
-                    answer="\n".join(answer_text_parts) if answer_text_parts else None,
-                    page_num=chapter.start_page,
-                ))
+                exercises.append(
+                    Exercise(
+                        exercise_id=exercise_id,
+                        book_id=book_id,
+                        chapter_num=chapter.chapter_num,
+                        title=f"Chapter {chapter.chapter_num} Quiz",
+                        description="\n".join(quiz_text_parts),
+                        exercise_type="quiz",
+                        answer="\n".join(answer_text_parts) if answer_text_parts else None,
+                        page_num=chapter.start_page,
+                    )
+                )
                 exercise_idx += 1
 
         return exercises
@@ -123,15 +127,17 @@ class ExerciseExtractor:
                         recipe_num = match.group(1)
                         recipe_title = match.group(2)
                         exercise_id = f"{book_id}_recipe_{recipe_num}"
-                        exercises.append(Exercise(
-                            exercise_id=exercise_id,
-                            book_id=book_id,
-                            chapter_num=chapter.chapter_num,
-                            title=f"Recipe {recipe_num}: {recipe_title}",
-                            description=f"Implement the solution for: {recipe_title}",
-                            exercise_type="recipe",
-                            page_num=block.page_num,
-                        ))
+                        exercises.append(
+                            Exercise(
+                                exercise_id=exercise_id,
+                                book_id=book_id,
+                                chapter_num=chapter.chapter_num,
+                                title=f"Recipe {recipe_num}: {recipe_title}",
+                                description=f"Implement the solution for: {recipe_title}",
+                                exercise_type="recipe",
+                                page_num=block.page_num,
+                            )
+                        )
 
         return exercises
 
@@ -147,7 +153,10 @@ class ExerciseExtractor:
             for block in chapter.content_blocks:
                 text = block.text.strip()
 
-                if re.search(r"Exercise[s]?\s*$", text, re.IGNORECASE) and block.block_type in (BlockType.HEADING2, BlockType.HEADING3):
+                if re.search(r"Exercise[s]?\s*$", text, re.IGNORECASE) and block.block_type in (
+                    BlockType.HEADING2,
+                    BlockType.HEADING3,
+                ):
                     in_exercises = True
                     continue
 
@@ -156,15 +165,17 @@ class ExerciseExtractor:
                         # End of exercises
                         if current_parts:
                             exercise_id = f"{book_id}_ch{chapter.chapter_num}_ex{exercise_idx}"
-                            exercises.append(Exercise(
-                                exercise_id=exercise_id,
-                                book_id=book_id,
-                                chapter_num=chapter.chapter_num,
-                                title=f"Chapter {chapter.chapter_num} Exercises",
-                                description="\n".join(current_parts),
-                                exercise_type="exercise",
-                                page_num=chapter.start_page,
-                            ))
+                            exercises.append(
+                                Exercise(
+                                    exercise_id=exercise_id,
+                                    book_id=book_id,
+                                    chapter_num=chapter.chapter_num,
+                                    title=f"Chapter {chapter.chapter_num} Exercises",
+                                    description="\n".join(current_parts),
+                                    exercise_type="exercise",
+                                    page_num=chapter.start_page,
+                                )
+                            )
                             exercise_idx += 1
                             current_parts = []
                         in_exercises = False
@@ -173,15 +184,17 @@ class ExerciseExtractor:
 
             if current_parts:
                 exercise_id = f"{book_id}_ch{chapter.chapter_num}_ex{exercise_idx}"
-                exercises.append(Exercise(
-                    exercise_id=exercise_id,
-                    book_id=book_id,
-                    chapter_num=chapter.chapter_num,
-                    title=f"Chapter {chapter.chapter_num} Exercises",
-                    description="\n".join(current_parts),
-                    exercise_type="exercise",
-                    page_num=chapter.start_page,
-                ))
+                exercises.append(
+                    Exercise(
+                        exercise_id=exercise_id,
+                        book_id=book_id,
+                        chapter_num=chapter.chapter_num,
+                        title=f"Chapter {chapter.chapter_num} Exercises",
+                        description="\n".join(current_parts),
+                        exercise_type="exercise",
+                        page_num=chapter.start_page,
+                    )
+                )
                 exercise_idx += 1
 
         return exercises
@@ -198,15 +211,17 @@ class ExerciseExtractor:
                     match = exercise_pattern.search(block.text)
                     if match:
                         exercise_id = f"{book_id}_ch{chapter.chapter_num}_ex{exercise_idx}"
-                        exercises.append(Exercise(
-                            exercise_id=exercise_id,
-                            book_id=book_id,
-                            chapter_num=chapter.chapter_num,
-                            title=block.text.strip(),
-                            description="",
-                            exercise_type="exercise",
-                            page_num=block.page_num,
-                        ))
+                        exercises.append(
+                            Exercise(
+                                exercise_id=exercise_id,
+                                book_id=book_id,
+                                chapter_num=chapter.chapter_num,
+                                title=block.text.strip(),
+                                description="",
+                                exercise_type="exercise",
+                                page_num=block.page_num,
+                            )
+                        )
                         exercise_idx += 1
 
         return exercises

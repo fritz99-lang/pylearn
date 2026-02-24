@@ -6,19 +6,17 @@ from __future__ import annotations
 import os
 from unittest.mock import patch
 
-import pytest
-
-from pylearn.parser.cache_manager import sanitize_book_id
 from pylearn.executor.sandbox import (
-    get_safe_env,
-    check_dangerous_code,
     _SENSITIVE_ENV_VARS,
+    check_dangerous_code,
+    get_safe_env,
 )
-
+from pylearn.parser.cache_manager import sanitize_book_id
 
 # ---------------------------------------------------------------------------
 # sanitize_book_id()
 # ---------------------------------------------------------------------------
+
 
 class TestSanitizeBookId:
     """Test the book ID sanitizer for path traversal and injection prevention."""
@@ -102,7 +100,7 @@ class TestSanitizeBookId:
         dangerous_inputs = [
             "../../../etc/shadow",
             "CON",  # Windows reserved name
-            "book<>:\"|?*name",
+            'book<>:"|?*name',
             "a" * 300,
             "\t\n\r",
         ]
@@ -117,6 +115,7 @@ class TestSanitizeBookId:
 # ---------------------------------------------------------------------------
 # get_safe_env()
 # ---------------------------------------------------------------------------
+
 
 class TestGetSafeEnv:
     """Test environment variable sanitization for child processes."""
@@ -196,6 +195,7 @@ class TestGetSafeEnv:
 # ---------------------------------------------------------------------------
 # check_dangerous_code()
 # ---------------------------------------------------------------------------
+
 
 class TestCheckDangerousCode:
     """Test the advisory danger-pattern scanner."""

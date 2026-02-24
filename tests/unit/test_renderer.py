@@ -14,12 +14,12 @@ import pytest
 
 from pylearn.core.models import BlockType, ContentBlock
 from pylearn.renderer.html_renderer import HTMLRenderer
-from pylearn.renderer.theme import ReaderTheme, get_theme
-
+from pylearn.renderer.theme import get_theme
 
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture
 def renderer() -> HTMLRenderer:
@@ -49,6 +49,7 @@ def _make_block(
 # ---------------------------------------------------------------------------
 # Individual BlockType rendering
 # ---------------------------------------------------------------------------
+
 
 class TestBodyRendering:
     def test_body_produces_paragraph(self, renderer: HTMLRenderer) -> None:
@@ -217,23 +218,17 @@ class TestFigureRendering:
         result = renderer._render_block(block)
         assert result == ""
 
-    def test_figure_rejects_path_traversal_dotdot(
-        self, renderer_with_images: HTMLRenderer
-    ) -> None:
+    def test_figure_rejects_path_traversal_dotdot(self, renderer_with_images: HTMLRenderer) -> None:
         block = _make_block(BlockType.FIGURE, "../../etc/passwd")
         result = renderer_with_images._render_block(block)
         assert result == ""
 
-    def test_figure_rejects_forward_slash(
-        self, renderer_with_images: HTMLRenderer
-    ) -> None:
+    def test_figure_rejects_forward_slash(self, renderer_with_images: HTMLRenderer) -> None:
         block = _make_block(BlockType.FIGURE, "images/hidden.png")
         result = renderer_with_images._render_block(block)
         assert result == ""
 
-    def test_figure_rejects_backslash(
-        self, renderer_with_images: HTMLRenderer
-    ) -> None:
+    def test_figure_rejects_backslash(self, renderer_with_images: HTMLRenderer) -> None:
         block = _make_block(BlockType.FIGURE, r"images\hidden.png")
         result = renderer_with_images._render_block(block)
         assert result == ""
@@ -262,6 +257,7 @@ class TestDefaultFallback:
 # ---------------------------------------------------------------------------
 # HTML escaping / XSS prevention
 # ---------------------------------------------------------------------------
+
 
 class TestHTMLEscaping:
     def test_script_tag_escaped_in_body(self, renderer: HTMLRenderer) -> None:
@@ -297,6 +293,7 @@ class TestHTMLEscaping:
 # ---------------------------------------------------------------------------
 # render_blocks (full document)
 # ---------------------------------------------------------------------------
+
 
 class TestRenderBlocks:
     def test_empty_list_returns_valid_html(self, renderer: HTMLRenderer) -> None:
@@ -337,6 +334,7 @@ class TestRenderBlocks:
 # render_welcome
 # ---------------------------------------------------------------------------
 
+
 class TestRenderWelcome:
     def test_welcome_returns_nonempty(self, renderer: HTMLRenderer) -> None:
         result = renderer.render_welcome()
@@ -355,6 +353,7 @@ class TestRenderWelcome:
 # ---------------------------------------------------------------------------
 # update_font_size
 # ---------------------------------------------------------------------------
+
 
 class TestUpdateFontSize:
     def test_body_size_updated(self, renderer: HTMLRenderer) -> None:
@@ -385,6 +384,7 @@ class TestUpdateFontSize:
 # ---------------------------------------------------------------------------
 # Theme variations
 # ---------------------------------------------------------------------------
+
 
 class TestThemeVariations:
     @pytest.mark.parametrize("theme_name", ["light", "dark", "sepia"])

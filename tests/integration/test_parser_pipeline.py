@@ -6,8 +6,8 @@ import pytest
 
 from pylearn.core.models import BlockType, Book, ContentBlock, FontSpan
 from pylearn.parser.book_profiles import BookProfile
-from pylearn.parser.content_classifier import ContentClassifier
 from pylearn.parser.code_extractor import CodeExtractor
+from pylearn.parser.content_classifier import ContentClassifier
 from pylearn.parser.structure_detector import StructureDetector
 from pylearn.renderer.html_renderer import HTMLRenderer
 from pylearn.renderer.theme import get_theme
@@ -16,22 +16,18 @@ from pylearn.renderer.theme import get_theme
 class TestFullPipeline:
     """Run the full pipeline: classify → extract → structure → render."""
 
-    def test_spans_to_html_all_block_types(
-        self, sample_profile: BookProfile, sample_spans: list[FontSpan]
-    ) -> None:
+    def test_spans_to_html_all_block_types(self, sample_profile: BookProfile, sample_spans: list[FontSpan]) -> None:
         """Verify all expected block types survive the full pipeline."""
         classifier = ContentClassifier(sample_profile)
         extractor = CodeExtractor()
         detector = StructureDetector(sample_profile)
 
         # Step 1: Classify spans into blocks
-        blocks = classifier.classify_page_spans(sample_spans, page_num=10)
+        classifier.classify_page_spans(sample_spans, page_num=10)
         # Also classify page 11 spans
         page11_spans = [s for s in sample_spans if s.page_num == 11]
         page10_spans = [s for s in sample_spans if s.page_num == 10]
-        all_blocks = classifier.classify_all_pages(
-            [page10_spans, page11_spans], start_page_offset=10
-        )
+        all_blocks = classifier.classify_all_pages([page10_spans, page11_spans], start_page_offset=10)
         assert len(all_blocks) > 0
 
         # Step 2: Extract/merge code and assign IDs
@@ -51,14 +47,13 @@ class TestFullPipeline:
         assert BlockType.CODE in types_present or BlockType.CODE_REPL in types_present
 
         # Verify code blocks have IDs
-        code_blocks = [b for b in processed
-                       if b.block_type in (BlockType.CODE, BlockType.CODE_REPL)]
+        code_blocks = [b for b in processed if b.block_type in (BlockType.CODE, BlockType.CODE_REPL)]
         assert all(b.block_id for b in code_blocks)
 
         # Verify heading blocks have IDs
-        heading_blocks = [b for b in processed
-                          if b.block_type in (BlockType.HEADING1, BlockType.HEADING2,
-                                              BlockType.HEADING3)]
+        heading_blocks = [
+            b for b in processed if b.block_type in (BlockType.HEADING1, BlockType.HEADING2, BlockType.HEADING3)
+        ]
         assert all(b.block_id for b in heading_blocks)
 
         # Step 3: Detect structure
@@ -75,9 +70,7 @@ class TestFullPipeline:
             assert "</html>" in html
             assert len(html) > 100  # non-trivial output
 
-    def test_empty_spans_produce_no_chapters(
-        self, sample_profile: BookProfile
-    ) -> None:
+    def test_empty_spans_produce_no_chapters(self, sample_profile: BookProfile) -> None:
         """Empty input should flow through without errors."""
         classifier = ContentClassifier(sample_profile)
         extractor = CodeExtractor()
@@ -99,8 +92,7 @@ class TestThemeRendering:
         classifier = ContentClassifier(sample_profile)
         extractor = CodeExtractor()
         blocks = classifier.classify_all_pages(
-            [[s for s in sample_spans if s.page_num == 10],
-             [s for s in sample_spans if s.page_num == 11]],
+            [[s for s in sample_spans if s.page_num == 10], [s for s in sample_spans if s.page_num == 11]],
             start_page_offset=10,
         )
         processed = extractor.process(blocks)
@@ -165,17 +157,17 @@ class TestBookSerialization:
                     start_page=i * 20,
                     end_page=(i + 1) * 20,
                     content_blocks=[
-                        ContentBlock(block_type=BlockType.HEADING1,
-                                     text=f"Chapter {i + 1}", page_num=i * 20),
-                        ContentBlock(block_type=BlockType.BODY,
-                                     text=f"Body text for chapter {i + 1}",
-                                     page_num=i * 20),
+                        ContentBlock(block_type=BlockType.HEADING1, text=f"Chapter {i + 1}", page_num=i * 20),
+                        ContentBlock(block_type=BlockType.BODY, text=f"Body text for chapter {i + 1}", page_num=i * 20),
                     ],
                 )
             )
         book = Book(
-            book_id="big_book", title="Big Book", pdf_path="/tmp/big.pdf",
-            total_pages=500, chapters=chapters,
+            book_id="big_book",
+            title="Big Book",
+            pdf_path="/tmp/big.pdf",
+            total_pages=500,
+            chapters=chapters,
         )
         data = book.to_dict()
         restored = Book.from_dict(data)

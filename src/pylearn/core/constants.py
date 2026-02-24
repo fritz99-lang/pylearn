@@ -89,6 +89,7 @@ def get_python_executable() -> str | None:
     python = shutil.which("python3") or shutil.which("python")
     return python
 
+
 # Defaults
 DEFAULT_WINDOW_WIDTH = 1400
 DEFAULT_WINDOW_HEIGHT = 900

@@ -1,11 +1,9 @@
 """Tests for configuration loading, saving, and migration."""
 
 import json
-import pytest
-from pathlib import Path
 from unittest.mock import patch
 
-from pylearn.core.config import _load_json, _save_json, BooksConfig
+from pylearn.core.config import BooksConfig, _load_json, _save_json
 
 
 class TestLoadJson:
@@ -79,26 +77,36 @@ class TestSaveJson:
 class TestBooksConfigMigration:
     def test_adds_missing_language(self, tmp_path):
         config_path = tmp_path / "books.json"
-        config_path.write_text(json.dumps({
-            "books": [
-                {"book_id": "b1", "title": "Book 1", "pdf_path": "/b1.pdf"},
-                {"book_id": "b2", "title": "Book 2", "pdf_path": "/b2.pdf", "language": "cpp"},
-            ]
-        }), encoding="utf-8")
+        config_path.write_text(
+            json.dumps(
+                {
+                    "books": [
+                        {"book_id": "b1", "title": "Book 1", "pdf_path": "/b1.pdf"},
+                        {"book_id": "b2", "title": "Book 2", "pdf_path": "/b2.pdf", "language": "cpp"},
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
 
         with patch("pylearn.core.config.BOOKS_CONFIG_PATH", config_path):
             cfg = BooksConfig()
             books = cfg.books
             assert books[0]["language"] == "python"  # default added
-            assert books[1]["language"] == "cpp"      # existing preserved
+            assert books[1]["language"] == "cpp"  # existing preserved
 
     def test_adds_missing_profile_name(self, tmp_path):
         config_path = tmp_path / "books.json"
-        config_path.write_text(json.dumps({
-            "books": [
-                {"book_id": "b1", "title": "B1", "pdf_path": "/b1.pdf"},
-            ]
-        }), encoding="utf-8")
+        config_path.write_text(
+            json.dumps(
+                {
+                    "books": [
+                        {"book_id": "b1", "title": "B1", "pdf_path": "/b1.pdf"},
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
 
         with patch("pylearn.core.config.BOOKS_CONFIG_PATH", config_path):
             cfg = BooksConfig()
@@ -116,9 +124,9 @@ class TestBooksConfigMigration:
 
     def test_remove_book(self, tmp_path):
         config_path = tmp_path / "books.json"
-        config_path.write_text(json.dumps({
-            "books": [{"book_id": "b1", "title": "B1", "pdf_path": "/b1.pdf"}]
-        }), encoding="utf-8")
+        config_path.write_text(
+            json.dumps({"books": [{"book_id": "b1", "title": "B1", "pdf_path": "/b1.pdf"}]}), encoding="utf-8"
+        )
 
         with patch("pylearn.core.config.BOOKS_CONFIG_PATH", config_path):
             cfg = BooksConfig()
@@ -127,12 +135,17 @@ class TestBooksConfigMigration:
 
     def test_get_book(self, tmp_path):
         config_path = tmp_path / "books.json"
-        config_path.write_text(json.dumps({
-            "books": [
-                {"book_id": "b1", "title": "Book One", "pdf_path": "/b1.pdf"},
-                {"book_id": "b2", "title": "Book Two", "pdf_path": "/b2.pdf"},
-            ]
-        }), encoding="utf-8")
+        config_path.write_text(
+            json.dumps(
+                {
+                    "books": [
+                        {"book_id": "b1", "title": "Book One", "pdf_path": "/b1.pdf"},
+                        {"book_id": "b2", "title": "Book Two", "pdf_path": "/b2.pdf"},
+                    ]
+                }
+            ),
+            encoding="utf-8",
+        )
 
         with patch("pylearn.core.config.BOOKS_CONFIG_PATH", config_path):
             cfg = BooksConfig()

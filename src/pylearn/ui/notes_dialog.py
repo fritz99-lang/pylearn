@@ -3,25 +3,39 @@
 
 from __future__ import annotations
 
+import logging
+
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QSplitter, QWidget,
-    QTreeWidget, QTreeWidgetItem, QTextEdit,
-    QPushButton, QLabel, QMessageBox,
+    QDialog,
+    QHBoxLayout,
+    QLabel,
+    QMessageBox,
+    QPushButton,
+    QSplitter,
+    QTextEdit,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt6.QtCore import pyqtSignal, Qt
 
 from pylearn.core.database import Database
 
-import logging
 logger = logging.getLogger("pylearn.ui.notes_dialog")
 
 
 class NotesDialog(QDialog):
     """Dialog for viewing and editing notes."""
 
-    def __init__(self, database: Database, book_id: str | None = None,
-                 chapter_num: int | None = None, parent=None,
-                 section_title: str = "") -> None:
+    def __init__(
+        self,
+        database: Database,
+        book_id: str | None = None,
+        chapter_num: int | None = None,
+        parent=None,
+        section_title: str = "",
+    ) -> None:
         super().__init__(parent)
         self._db = database
         self._book_id = book_id
@@ -90,8 +104,7 @@ class NotesDialog(QDialog):
 
     def _load_notes(self) -> None:
         self._tree.clear()
-        logger.debug("_load_notes: querying db for book=%s chapter=%s",
-                      self._book_id, self._chapter_num)
+        logger.debug("_load_notes: querying db for book=%s chapter=%s", self._book_id, self._chapter_num)
         notes = self._db.get_notes(self._book_id, self._chapter_num)
         logger.debug("_load_notes: got %d notes", len(notes))
 
@@ -118,8 +131,10 @@ class NotesDialog(QDialog):
             self._db.update_note(self._current_note_id, content)
         elif self._book_id:
             self._current_note_id = self._db.add_note(
-                self._book_id, self._chapter_num or 0,
-                self._section_title, content,
+                self._book_id,
+                self._chapter_num or 0,
+                self._section_title,
+                content,
             )
         self._load_notes()
 
@@ -132,7 +147,9 @@ class NotesDialog(QDialog):
         if not self._current_note_id:
             return
         reply = QMessageBox.question(
-            self, "Delete Note", "Delete this note?",
+            self,
+            "Delete Note",
+            "Delete this note?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
         )
         if reply == QMessageBox.StandardButton.Yes:

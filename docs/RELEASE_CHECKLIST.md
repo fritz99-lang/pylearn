@@ -166,4 +166,3 @@ Pre-launch verification for commercial projects. Keep in each project's `/docs` 
 | PyLearn | 100% | — | Released |
 | F1 | 60% | Freemium setup | Q2 2026 |
 | BoP | 50% | App strategy | Q3 2026 |
-

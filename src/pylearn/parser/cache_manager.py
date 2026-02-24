@@ -65,7 +65,7 @@ class CacheManager:
                 logger.warning("Cache file too large, skipping: %s", path)
                 return None
 
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, encoding="utf-8") as f:
                 data = json.load(f)
             book = Book.from_dict(data)
             logger.info(f"Loaded {book_id} from cache ({len(book.chapters)} chapters)")
@@ -95,9 +95,11 @@ class CacheManager:
         info = []
         for path in self.cache_dir.glob("*.json"):
             st = path.stat()
-            info.append({
-                "book_id": path.stem,
-                "size_kb": round(st.st_size / 1024),
-                "modified": st.st_mtime,
-            })
+            info.append(
+                {
+                    "book_id": path.stem,
+                    "size_kb": round(st.st_size / 1024),
+                    "modified": st.st_mtime,
+                }
+            )
         return info

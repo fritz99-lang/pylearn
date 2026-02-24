@@ -17,17 +17,14 @@ Testing approach:
 
 from __future__ import annotations
 
-from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 import pytest
-
-from pylearn.core.database import Database
-
 
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture()
 def isolated_main_window(qtbot, tmp_path, monkeypatch):
@@ -76,6 +73,7 @@ def isolated_main_window(qtbot, tmp_path, monkeypatch):
 # Helpers: suppress modal dialogs
 # ---------------------------------------------------------------------------
 
+
 def _noop_exec(self):
     """Replacement for QDialog.exec / QMessageBox.exec — returns immediately."""
     return 0
@@ -89,12 +87,14 @@ def _noop_messagebox(*args, **kwargs):
 def _noop_question(*args, **kwargs):
     """Replacement for QMessageBox.question — returns StandardButton.No."""
     from PyQt6.QtWidgets import QMessageBox
+
     return QMessageBox.StandardButton.No
 
 
 # ---------------------------------------------------------------------------
 # Tests: handlers that early-return when no book is loaded
 # ---------------------------------------------------------------------------
+
 
 class TestNoBookLoadedHandlers:
     """Handlers that should return early (silently) when no book is loaded."""
@@ -134,6 +134,7 @@ class TestNoBookLoadedHandlers:
 # ---------------------------------------------------------------------------
 # Tests: dialog-opening handlers (dialogs patched to no-op)
 # ---------------------------------------------------------------------------
+
 
 class TestDialogHandlers:
     """Handlers that open modal dialogs — dialogs are patched to return immediately."""
@@ -178,6 +179,7 @@ class TestDialogHandlers:
 # ---------------------------------------------------------------------------
 # Tests: view / focus handlers (no dialogs, just widget manipulation)
 # ---------------------------------------------------------------------------
+
 
 class TestViewHandlers:
     """Handlers that toggle visibility, change focus, or adjust font size."""
@@ -252,6 +254,7 @@ class TestViewHandlers:
 # Tests: session / execution handlers
 # ---------------------------------------------------------------------------
 
+
 class TestExecutionHandlers:
     """Handlers related to code execution and session management."""
 
@@ -278,6 +281,7 @@ class TestExecutionHandlers:
 # Tests: state save / restore
 # ---------------------------------------------------------------------------
 
+
 class TestStatePersistence:
     """_save_state and _restore_state do not crash with default state."""
 
@@ -302,6 +306,7 @@ class TestStatePersistence:
 # ---------------------------------------------------------------------------
 # Tests: file operations (dialog patched to cancel)
 # ---------------------------------------------------------------------------
+
 
 class TestFileOperations:
     """Save/load code handlers — file dialogs patched to simulate cancel."""
@@ -344,6 +349,7 @@ class TestFileOperations:
 # Tests: theme changes
 # ---------------------------------------------------------------------------
 
+
 class TestThemeHandlers:
     """Theme switching does not crash."""
 
@@ -358,6 +364,7 @@ class TestThemeHandlers:
 # ---------------------------------------------------------------------------
 # Tests: book controller navigation stubs (no book loaded)
 # ---------------------------------------------------------------------------
+
 
 class TestBookControllerNoBook:
     """BookController navigation methods are safe when no book is loaded."""
@@ -378,6 +385,7 @@ class TestBookControllerNoBook:
 # ---------------------------------------------------------------------------
 # Tests: close event
 # ---------------------------------------------------------------------------
+
 
 class TestCloseEvent:
     """closeEvent calls _save_state and cleans up without error."""

@@ -1,12 +1,11 @@
 """Tests for text utility functions."""
 
-import pytest
 from pylearn.utils.text_utils import (
-    clean_text,
     clean_code_text,
-    normalize_whitespace,
-    is_page_header_or_footer,
+    clean_text,
     detect_repl_code,
+    is_page_header_or_footer,
+    normalize_whitespace,
     strip_repl_prompts,
 )
 

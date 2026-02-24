@@ -7,16 +7,18 @@ import re
 import unicodedata
 
 # Single-character replacements handled via str.translate() for speed
-_SINGLE_CHAR_TABLE = str.maketrans({
-    "\ufb01": "fi",
-    "\ufb02": "fl",
-    "\u2018": "'",
-    "\u2019": "'",
-    "\u201c": '"',
-    "\u201d": '"',
-    "\u2013": "-",
-    "\u00a0": " ",
-})
+_SINGLE_CHAR_TABLE = str.maketrans(
+    {
+        "\ufb01": "fi",
+        "\ufb02": "fl",
+        "\u2018": "'",
+        "\u2019": "'",
+        "\u201c": '"',
+        "\u201d": '"',
+        "\u2013": "-",
+        "\u00a0": " ",
+    }
+)
 
 # Multi-character replacements that str.translate() cannot handle
 _MULTI_CHAR_REPLACEMENTS = {
@@ -89,10 +91,7 @@ def is_page_header_or_footer(text: str, page_num: int = 0) -> bool:
     header_patterns = [
         r"www\.\S+\.\w+",  # URLs
     ]
-    for pattern in header_patterns:
-        if re.match(pattern, stripped, re.IGNORECASE):
-            return True
-    return False
+    return any(re.match(pattern, stripped, re.IGNORECASE) for pattern in header_patterns)
 
 
 def detect_repl_code(text: str) -> bool:
@@ -110,13 +109,9 @@ def strip_repl_prompts(text: str) -> str:
     lines = text.strip().split("\n")
     code_lines = []
     for line in lines:
-        if line.startswith(">>> "):
+        if line.startswith(">>> ") or line.startswith("... "):
             code_lines.append(line[4:])
-        elif line.startswith("... "):
-            code_lines.append(line[4:])
-        elif line.startswith(">>>"):
-            code_lines.append(line[3:])
-        elif line.startswith("..."):
+        elif line.startswith(">>>") or line.startswith("..."):
             code_lines.append(line[3:])
         # Skip output lines (lines that don't start with prompts in REPL blocks)
     return "\n".join(code_lines)

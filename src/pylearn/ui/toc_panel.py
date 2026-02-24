@@ -3,18 +3,17 @@
 
 from __future__ import annotations
 
+from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtWidgets import QTreeWidget, QTreeWidgetItem
-from PyQt6.QtCore import pyqtSignal, Qt
-from PyQt6.QtGui import QFont
 
+from pylearn.core.constants import STATUS_COMPLETED, STATUS_IN_PROGRESS, STATUS_NOT_STARTED
 from pylearn.core.models import Chapter, Section
-from pylearn.core.constants import STATUS_NOT_STARTED, STATUS_IN_PROGRESS, STATUS_COMPLETED
 
 
 class TOCPanel(QTreeWidget):
     """Collapsible table of contents tree for book navigation."""
 
-    chapter_selected = pyqtSignal(int)   # chapter_num
+    chapter_selected = pyqtSignal(int)  # chapter_num
     section_selected = pyqtSignal(int, int)  # chapter_num, block_index
 
     def __init__(self, parent=None) -> None:
@@ -28,8 +27,7 @@ class TOCPanel(QTreeWidget):
 
         self._chapter_items: dict[int, QTreeWidgetItem] = {}
 
-    def load_chapters(self, chapters: list[Chapter],
-                      progress: dict[int, str] | None = None) -> None:
+    def load_chapters(self, chapters: list[Chapter], progress: dict[int, str] | None = None) -> None:
         """Populate the TOC tree from chapter data."""
         self.clear()
         self._chapter_items.clear()
@@ -42,11 +40,15 @@ class TOCPanel(QTreeWidget):
             item = QTreeWidgetItem(self)
             item.setText(0, f"{icon} Ch {chapter.chapter_num}: {chapter.title}")
             item.setData(0, Qt.ItemDataRole.UserRole, ("chapter", chapter.chapter_num))
-            item.setData(0, Qt.ItemDataRole.UserRole + 1, {
-                "status": status,
-                "chapter_num": chapter.chapter_num,
-                "title": chapter.title,
-            })
+            item.setData(
+                0,
+                Qt.ItemDataRole.UserRole + 1,
+                {
+                    "status": status,
+                    "chapter_num": chapter.chapter_num,
+                    "title": chapter.title,
+                },
+            )
 
             font = item.font(0)
             if status == STATUS_IN_PROGRESS:
@@ -59,8 +61,7 @@ class TOCPanel(QTreeWidget):
             for section in chapter.sections:
                 self._add_section_item(item, section, chapter.chapter_num)
 
-    def _add_section_item(self, parent: QTreeWidgetItem, section: Section,
-                          chapter_num: int) -> None:
+    def _add_section_item(self, parent: QTreeWidgetItem, section: Section, chapter_num: int) -> None:
         """Add a section (and its children) to the tree."""
         item = QTreeWidgetItem(parent)
 
@@ -69,8 +70,7 @@ class TOCPanel(QTreeWidget):
         if len(title) > 50:
             title = title[:47] + "..."
         item.setText(0, title)
-        item.setData(0, Qt.ItemDataRole.UserRole,
-                     ("section", chapter_num, section.block_index))
+        item.setData(0, Qt.ItemDataRole.UserRole, ("section", chapter_num, section.block_index))
 
         for child in section.children:
             self._add_section_item(item, child, chapter_num)

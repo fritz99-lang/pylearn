@@ -5,12 +5,18 @@ from __future__ import annotations
 
 import html as html_mod
 
+from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QTreeWidget, QTreeWidgetItem,
-    QLabel, QPushButton, QHBoxLayout, QTextBrowser,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
     QSplitter,
+    QTextBrowser,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt6.QtCore import pyqtSignal, Qt
 
 from pylearn.core.database import Database
 
@@ -111,13 +117,10 @@ class ExercisePanel(QWidget):
         if exercise:
             title_esc = html_mod.escape(exercise["title"])
             desc_esc = html_mod.escape(exercise.get("description", "")).replace("\n", "<br>")
-            self._detail.setHtml(
-                f'<p><b>{title_esc}</b></p>'
-                f'<p>{desc_esc}</p>'
-            )
+            self._detail.setHtml(f"<p><b>{title_esc}</b></p><p>{desc_esc}</p>")
         else:
             self._detail.setHtml(
-                f'<p><b>{html_mod.escape(item.text(0))}</b></p>'
+                f"<p><b>{html_mod.escape(item.text(0))}</b></p>"
                 f'<p style="color:#666;">Exercise ID: {html_mod.escape(exercise_id)}</p>'
             )
         self.exercise_selected.emit(exercise_id)

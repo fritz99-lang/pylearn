@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import pytest
 
+from pylearn.executor.sandbox import ExecutionResult, Sandbox, check_dangerous_code
 from pylearn.executor.session import Session
-from pylearn.executor.sandbox import Sandbox, ExecutionResult, check_dangerous_code
 
 
 class TestSessionLifecycle:

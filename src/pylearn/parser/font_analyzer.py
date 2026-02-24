@@ -20,20 +20,39 @@ logger = logging.getLogger("pylearn.parser")
 
 # Common monospace font substrings
 _MONO_HINTS = [
-    "courier", "mono", "consolas", "menlo", "dejavusansmono",
-    "lucidaconsole", "sourcecodepro", "inconsolata", "firacode",
-    "droidsansmono", "robotomono", "ubuntumono", "liberationmono",
+    "courier",
+    "mono",
+    "consolas",
+    "menlo",
+    "dejavusansmono",
+    "lucidaconsole",
+    "sourcecodepro",
+    "inconsolata",
+    "firacode",
+    "droidsansmono",
+    "robotomono",
+    "ubuntumono",
+    "liberationmono",
 ]
 
 # Front-matter keywords (case-insensitive)
 _FRONT_MATTER_KW = [
-    "copyright", "table of contents", "preface",
-    "foreword", "acknowledgment", "dedication", "about the author",
+    "copyright",
+    "table of contents",
+    "preface",
+    "foreword",
+    "acknowledgment",
+    "dedication",
+    "about the author",
 ]
 
 # Back-matter keywords (case-insensitive)
 _BACK_MATTER_KW = [
-    "index", "appendix", "glossary", "bibliography", "colophon",
+    "index",
+    "appendix",
+    "glossary",
+    "bibliography",
+    "colophon",
 ]
 
 
@@ -101,20 +120,16 @@ class FontAnalyzer:
             return BookProfile(name="auto", language=language)
 
         # --- 2. Identify body font (most frequent non-mono) ---
-        body_font, body_size = self._find_body_font(histogram)
+        _body_font, body_size = self._find_body_font(histogram)
 
         # --- 3. Identify code font (most frequent mono) ---
         code_size = self._find_code_size(histogram, body_size)
 
         # --- 4. Heading tiers ---
-        h1_min, h2_min, h3_min = self._compute_heading_thresholds(
-            histogram, body_size
-        )
+        h1_min, h2_min, h3_min = self._compute_heading_thresholds(histogram, body_size)
 
         # --- 5. Margin detection ---
-        margin_top, margin_bottom = self._detect_margins(
-            y_positions, doc, sample_indices
-        )
+        margin_top, margin_bottom = self._detect_margins(y_positions, doc, sample_indices)
 
         # --- 6. Skip pages ---
         skip_start, skip_end = self._detect_skip_pages(doc)
@@ -177,7 +192,7 @@ class FontAnalyzer:
     ) -> float:
         """Return the size of the most frequent monospace font."""
         mono_sizes: Counter[float] = Counter()
-        for (font, size, _bold, mono), count in histogram.items():
+        for (_font, size, _bold, mono), count in histogram.items():
             if mono:
                 mono_sizes[size] += count
         if mono_sizes:
@@ -193,7 +208,7 @@ class FontAnalyzer:
         """Identify heading tiers and return (h1_min, h2_min, h3_min)."""
         # Collect non-mono sizes larger than body
         large_sizes: Counter[float] = Counter()
-        for (font, size, _bold, mono), count in histogram.items():
+        for (_font, size, _bold, mono), count in histogram.items():
             if not mono and size > body_size + 0.5:
                 large_sizes[size] += count
 
@@ -256,7 +271,7 @@ class FontAnalyzer:
         page_height = doc[sample_indices[0]].rect.height
 
         # Bucket y-positions into 5pt bins
-        top_bins: Counter[int] = Counter()     # bins in top 15% of page
+        top_bins: Counter[int] = Counter()  # bins in top 15% of page
         bottom_bins: Counter[int] = Counter()  # bins in bottom 15% of page
 
         top_zone = page_height * 0.15

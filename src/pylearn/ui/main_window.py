@@ -9,39 +9,45 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+from PyQt6.QtCore import QProcess, Qt, QThread, QTimer, pyqtSignal
+from PyQt6.QtGui import QAction, QCloseEvent, QKeySequence
 from PyQt6.QtWidgets import (
-    QMainWindow, QSplitter, QWidget, QVBoxLayout,
-    QMenu, QStatusBar, QLabel, QApplication, QMessageBox,
+    QApplication,
     QFileDialog,
+    QLabel,
+    QMainWindow,
+    QMenu,
+    QMessageBox,
+    QSplitter,
+    QStatusBar,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt6.QtCore import Qt, QThread, QProcess, QTimer, pyqtSignal
-from PyQt6.QtGui import QAction, QKeySequence, QCloseEvent
 
 from pylearn.core.config import AppConfig, BooksConfig, EditorConfig
-from pylearn.core.constants import APP_NAME, APP_VERSION, TOC_WIDTH, IS_FROZEN
+from pylearn.core.constants import APP_NAME, APP_VERSION, IS_FROZEN, TOC_WIDTH
 from pylearn.core.database import Database
 from pylearn.core.models import Book
-from pylearn.parser.cache_manager import CacheManager
-from pylearn.renderer.html_renderer import HTMLRenderer
-from pylearn.executor.sandbox import Sandbox, check_dangerous_code
-from pylearn.executor.session import Session
 from pylearn.executor.output_handler import OutputHandler
-from pylearn.utils.text_utils import strip_repl_prompts, detect_repl_code
-from pylearn.ui.reader_panel import ReaderPanel
-from pylearn.ui.toc_panel import TOCPanel
-from pylearn.ui.editor_panel import EditorPanel
-from pylearn.ui.console_panel import ConsolePanel
-from pylearn.ui.library_panel import LibraryPanel
-from pylearn.ui.toolbar import MainToolBar
-from pylearn.ui.external_editor import ExternalEditorManager
-from pylearn.ui.styles import get_stylesheet
+from pylearn.executor.sandbox import check_dangerous_code
+from pylearn.executor.session import Session
+from pylearn.parser.cache_manager import CacheManager
+from pylearn.ui.book_controller import BookController
 from pylearn.ui.bookmark_dialog import BookmarkDialog, add_bookmark_dialog
+from pylearn.ui.console_panel import ConsolePanel
+from pylearn.ui.editor_panel import EditorPanel
+from pylearn.ui.exercise_panel import ExercisePanel
+from pylearn.ui.external_editor import ExternalEditorManager
+from pylearn.ui.library_panel import LibraryPanel
 from pylearn.ui.notes_dialog import NotesDialog
 from pylearn.ui.progress_dialog import ProgressDialog
+from pylearn.ui.reader_panel import ReaderPanel
 from pylearn.ui.search_dialog import SearchDialog
-from pylearn.ui.exercise_panel import ExercisePanel
-from pylearn.ui.book_controller import BookController
+from pylearn.ui.styles import get_stylesheet
+from pylearn.ui.toc_panel import TOCPanel
+from pylearn.ui.toolbar import MainToolBar
 from pylearn.utils.error_handler import safe_slot
+from pylearn.utils.text_utils import detect_repl_code, strip_repl_prompts
 
 logger = logging.getLogger("pylearn.ui")
 
@@ -134,6 +140,7 @@ class ParseProcess:
 
 class ExecuteWorker(QThread):
     """Background thread for code execution."""
+
     finished = pyqtSignal(object)  # ExecutionResult
 
     def __init__(self, code: str, session: Session) -> None:
@@ -165,7 +172,10 @@ class MainWindow(QMainWindow):
 
         # Book controller (owns book state, navigation, progress)
         self._book = BookController(
-            self._db, self._cache, self._books_config, parent=self,
+            self._db,
+            self._cache,
+            self._books_config,
+            parent=self,
         )
 
         # External editor
@@ -257,7 +267,9 @@ class MainWindow(QMainWindow):
         # Show welcome
         self._reader.display_welcome()
 
-    def _add_menu_action(self, menu: QMenu, text: str, slot: Callable[..., Any], shortcut: str | None = None) -> QAction:
+    def _add_menu_action(
+        self, menu: QMenu, text: str, slot: Callable[..., Any], shortcut: str | None = None
+    ) -> QAction:
         """Helper to add a menu action with optional shortcut (PyQt6-compatible)."""
         action = QAction(text, self)
         # Lambda discards the 'checked' bool that triggered(bool) emits,
@@ -348,18 +360,12 @@ class MainWindow(QMainWindow):
         self._book.chapter_changed.connect(self._on_chapter_changed)
         self._book.language_changed.connect(self._on_language_changed)
         self._book.status_message.connect(self._status_state.setText)
-        self._book.error_message.connect(
-            lambda title, msg: QMessageBox.warning(self, title, msg)
-        )
+        self._book.error_message.connect(lambda title, msg: QMessageBox.warning(self, title, msg))
         self._book.progress_updated.connect(self._status_progress.setText)
-        self._book.chapter_status_changed.connect(
-            self._toc.update_chapter_status
-        )
+        self._book.chapter_status_changed.connect(self._toc.update_chapter_status)
         self._book.parse_requested.connect(self._on_parse_requested)
         self._book.scroll_to_position.connect(
-            lambda pos: QTimer.singleShot(
-                0, lambda: self._reader.verticalScrollBar().setValue(pos)
-            )
+            lambda pos: QTimer.singleShot(0, lambda: self._reader.verticalScrollBar().setValue(pos))
         )
 
         # Reader
@@ -472,9 +478,9 @@ class MainWindow(QMainWindow):
     def _on_parse_requested(self, book_info: dict) -> None:
         """BookController couldn't find cache — ask user to parse."""
         reply = QMessageBox.question(
-            self, "Parse Book",
-            f'"{book_info["title"]}" has not been parsed yet.\n'
-            f'Parse it now? (This may take a few minutes)',
+            self,
+            "Parse Book",
+            f'"{book_info["title"]}" has not been parsed yet.\nParse it now? (This may take a few minutes)',
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
         )
         if reply == QMessageBox.StandardButton.Yes:
@@ -520,9 +526,9 @@ class MainWindow(QMainWindow):
         if book:
             self._book.load_book(book)
             QMessageBox.information(
-                self, "Parse Complete",
-                f'"{book.title}" parsed successfully.\n'
-                f'{len(book.chapters)} chapters found.',
+                self,
+                "Parse Complete",
+                f'"{book.title}" parsed successfully.\n{len(book.chapters)} chapters found.',
             )
 
     @safe_slot
@@ -536,17 +542,12 @@ class MainWindow(QMainWindow):
     def _open_external_editor(self) -> None:
         """Open current editor code in the external editor (Notepad++)."""
         if not self._editor_config.external_editor_enabled:
-            QMessageBox.information(
-                self, "Disabled",
-                "External editor is disabled in editor_config.json."
-            )
+            QMessageBox.information(self, "Disabled", "External editor is disabled in editor_config.json.")
             return
 
         code = self._editor.get_code()
         language = self._book.current_language
-        error = self._external_editor.open(
-            code, language, self._editor_config.external_editor_path
-        )
+        error = self._external_editor.open(code, language, self._editor_config.external_editor_path)
         if error:
             QMessageBox.warning(self, "External Editor", error)
         else:
@@ -590,10 +591,9 @@ class MainWindow(QMainWindow):
         if warnings:
             detail = "\n".join(f"  - {w}" for w in warnings)
             reply = QMessageBox.warning(
-                self, "Potentially Dangerous Code",
-                f"This code contains operations that could modify your system:\n\n"
-                f"{detail}\n\n"
-                f"Run anyway?",
+                self,
+                "Potentially Dangerous Code",
+                f"This code contains operations that could modify your system:\n\n{detail}\n\nRun anyway?",
                 QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                 QMessageBox.StandardButton.No,
             )
@@ -632,9 +632,7 @@ class MainWindow(QMainWindow):
         if self._session.stop():
             self._toolbar.set_running(False)
             self._status_state.setText("Stopped")
-            self._console.append_html(
-                self._output.format_status("Execution stopped by user.", "#ffa500")
-            )
+            self._console.append_html(self._output.format_status("Execution stopped by user.", "#ffa500"))
 
     @safe_slot
     def _reset_session(self) -> None:
@@ -657,9 +655,7 @@ class MainWindow(QMainWindow):
 
     @safe_slot
     def _save_code_to_file(self) -> None:
-        path, _ = QFileDialog.getSaveFileName(
-            self, "Save Code", "", self._file_filter_for_language()
-        )
+        path, _ = QFileDialog.getSaveFileName(self, "Save Code", "", self._file_filter_for_language())
         if path:
             try:
                 Path(path).write_text(self._editor.get_code(), encoding="utf-8")
@@ -669,15 +665,12 @@ class MainWindow(QMainWindow):
 
     @safe_slot
     def _load_code_from_file(self) -> None:
-        path, _ = QFileDialog.getOpenFileName(
-            self, "Load Code", "", self._file_filter_for_language()
-        )
+        path, _ = QFileDialog.getOpenFileName(self, "Load Code", "", self._file_filter_for_language())
         if path:
             try:
                 file_size = Path(path).stat().st_size
                 if file_size > 10 * 1024 * 1024:  # 10 MB
-                    QMessageBox.warning(self, "File Too Large",
-                                        "File exceeds the 10 MB limit.")
+                    QMessageBox.warning(self, "File Too Large", "File exceeds the 10 MB limit.")
                     return
                 code = Path(path).read_text(encoding="utf-8")
                 self._editor.set_code(code)
@@ -693,8 +686,11 @@ class MainWindow(QMainWindow):
             return
         scroll_pos = self._reader.verticalScrollBar().value()
         add_bookmark_dialog(
-            self, self._db, self._book.current_book.book_id,
-            self._book.current_chapter_num, scroll_pos,
+            self,
+            self._db,
+            self._book.current_book.book_id,
+            self._book.current_chapter_num,
+            scroll_pos,
         )
 
     @safe_slot
@@ -715,14 +711,14 @@ class MainWindow(QMainWindow):
     def _add_note(self) -> None:
         if not self._book.current_book:
             return
-        logger.debug("_add_note: book=%s chapter=%s",
-                      self._book.current_book.book_id,
-                      self._book.current_chapter_num)
+        logger.debug("_add_note: book=%s chapter=%s", self._book.current_book.book_id, self._book.current_chapter_num)
         section_title = self._book.current_chapter_title()
         logger.debug("_add_note: creating NotesDialog")
         dialog = NotesDialog(
-            self._db, self._book.current_book.book_id,
-            self._book.current_chapter_num, self,
+            self._db,
+            self._book.current_book.book_id,
+            self._book.current_chapter_num,
+            self,
             section_title=section_title,
         )
         logger.debug("_add_note: calling dialog.exec()")
@@ -743,6 +739,7 @@ class MainWindow(QMainWindow):
             QMessageBox.information(self, "No Book", "Please select a book first.")
             return
         from PyQt6.QtWidgets import QDialog, QVBoxLayout
+
         dialog = QDialog(self)
         dialog.setWindowTitle("Exercises")
         dialog.setMinimumSize(500, 500)
@@ -813,7 +810,8 @@ class MainWindow(QMainWindow):
         book_ids = [b["book_id"] for b in self._books_config.books]
         current_bid = self._book.current_book.book_id if self._book.current_book else None
         dialog = SearchDialog(
-            self._cache, book_ids,
+            self._cache,
+            book_ids,
             current_book_id=current_bid,
             theme_name=self._app_config.theme,
             parent=self,
@@ -876,12 +874,13 @@ class MainWindow(QMainWindow):
     @safe_slot
     def _show_about(self) -> None:
         QMessageBox.about(
-            self, f"About {APP_NAME}",
+            self,
+            f"About {APP_NAME}",
             f"<h2>{APP_NAME} v{APP_VERSION}</h2>"
             f"<p>Interactive Python Learning Desktop App</p>"
             f"<p>Read O'Reilly Python books with an integrated "
             f"code editor and execution console.</p>"
-            f"<p>Built with PyQt6, QScintilla, PyMuPDF, and Pygments.</p>"
+            f"<p>Built with PyQt6, QScintilla, PyMuPDF, and Pygments.</p>",
         )
 
     # --- Lifecycle ---

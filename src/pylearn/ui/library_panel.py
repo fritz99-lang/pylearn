@@ -5,11 +5,17 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QComboBox, QPushButton,
-    QLabel, QFileDialog, QInputDialog, QMessageBox,
-)
 from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtWidgets import (
+    QComboBox,
+    QFileDialog,
+    QHBoxLayout,
+    QInputDialog,
+    QLabel,
+    QMessageBox,
+    QPushButton,
+    QWidget,
+)
 
 from pylearn.core.config import BooksConfig
 from pylearn.parser.cache_manager import sanitize_book_id
@@ -80,25 +86,20 @@ class LibraryPanel(QWidget):
 
     def _add_book(self) -> None:
         """Add a new book via file dialog."""
-        pdf_path, _ = QFileDialog.getOpenFileName(
-            self, "Select PDF Book", "", "PDF Files (*.pdf)"
-        )
+        pdf_path, _ = QFileDialog.getOpenFileName(self, "Select PDF Book", "", "PDF Files (*.pdf)")
         if not pdf_path:
             return
 
         # Ask for book title
         filename = Path(pdf_path).stem
-        title, ok = QInputDialog.getText(
-            self, "Book Title", "Enter the book title:", text=filename
-        )
+        title, ok = QInputDialog.getText(self, "Book Title", "Enter the book title:", text=filename)
         if not ok or not title:
             return
 
         # Ask for language
         languages = ["Python", "C++", "C", "HTML/CSS"]
         lang_display, ok = QInputDialog.getItem(
-            self, "Book Language", "Select the book's programming language:",
-            languages, 0, False
+            self, "Book Language", "Select the book's programming language:", languages, 0, False
         )
         if not ok:
             return
@@ -120,8 +121,9 @@ class LibraryPanel(QWidget):
         self.select_book(book_id)
 
         QMessageBox.information(
-            self, "Book Added",
+            self,
+            "Book Added",
             f'"{title}" has been added to the library.\n'
-            f'Font thresholds will be auto-detected when parsing.\n'
-            f'Use Book > Parse Current Book to start.'
+            f"Font thresholds will be auto-detected when parsing.\n"
+            f"Use Book > Parse Current Book to start.",
         )

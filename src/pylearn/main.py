@@ -23,12 +23,14 @@ def _run_parse() -> None:
         13 — all books failed to parse
     """
     import time
+
     from pylearn.utils.error_handler import setup_logging
 
     setup_logging()
 
     try:
         from pylearn.core.config import BooksConfig
+
         config = BooksConfig()
     except Exception as e:
         print(f"ERROR: Failed to load books config: {e}")
@@ -37,18 +39,19 @@ def _run_parse() -> None:
 
     try:
         from pylearn.parser.cache_manager import CacheManager
+
         cache = CacheManager()
     except Exception as e:
         print(f"ERROR: Failed to initialize cache: {e}")
         sys.exit(11)
 
     from pylearn.core.models import Book
-    from pylearn.parser.book_profiles import get_profile, get_auto_profile, PROFILES
-    from pylearn.parser.pdf_parser import PDFParser
-    from pylearn.parser.content_classifier import ContentClassifier
+    from pylearn.parser.book_profiles import PROFILES, get_auto_profile, get_profile
     from pylearn.parser.code_extractor import CodeExtractor
-    from pylearn.parser.structure_detector import StructureDetector
+    from pylearn.parser.content_classifier import ContentClassifier
     from pylearn.parser.exercise_extractor import ExerciseExtractor
+    from pylearn.parser.pdf_parser import PDFParser
+    from pylearn.parser.structure_detector import StructureDetector
 
     # Parse --book and --force flags
     target_book = None
@@ -103,11 +106,13 @@ def _run_parse() -> None:
                 profile = get_profile(profile_name)
                 print(f"  Using named profile: {profile_name}")
             else:
-                print(f"  Auto-detecting font thresholds...")
+                print("  Auto-detecting font thresholds...")
                 profile = get_auto_profile(pdf_path, language)
-                print(f"  Detected: body={profile.body_size}, code={profile.code_size}, "
-                      f"h1>={profile.heading1_min_size}, h2>={profile.heading2_min_size}, "
-                      f"h3>={profile.heading3_min_size}")
+                print(
+                    f"  Detected: body={profile.body_size}, code={profile.code_size}, "
+                    f"h1>={profile.heading1_min_size}, h2>={profile.heading2_min_size}, "
+                    f"h3>={profile.heading3_min_size}"
+                )
 
             image_dir = cache.image_dir(book_id)
 
@@ -137,7 +142,8 @@ def _run_parse() -> None:
             print("  Classifying content...")
             classifier = ContentClassifier(profile)
             blocks = classifier.classify_all_pages(
-                all_page_spans, start_page_offset=profile.skip_pages_start,
+                all_page_spans,
+                start_page_offset=profile.skip_pages_start,
                 page_images=page_images if page_images else None,
             )
             print(f"  {len(blocks)} content blocks")
@@ -172,7 +178,7 @@ def _run_parse() -> None:
             print(f"  Parsed in {elapsed:.1f}s")
 
             cache.save(book)
-            print(f"  Cached successfully")
+            print("  Cached successfully")
             success_count += 1
         except Exception as e:
             print(f"  ERROR parsing {book_info.get('title', '?')}: {e}")
@@ -194,6 +200,7 @@ def main() -> None:
 
     debug = "--debug" in sys.argv
     from pylearn.app import run_app
+
     sys.exit(run_app(debug=debug))
 
 

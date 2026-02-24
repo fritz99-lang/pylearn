@@ -8,7 +8,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from PyQt6.QtCore import QObject, QFileSystemWatcher, pyqtSignal
+from PyQt6.QtCore import QFileSystemWatcher, QObject, pyqtSignal
 
 from pylearn.core.constants import DATA_DIR
 

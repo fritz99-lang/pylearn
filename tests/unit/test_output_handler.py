@@ -13,10 +13,10 @@ import pytest
 from pylearn.executor.output_handler import OutputHandler
 from pylearn.executor.sandbox import ExecutionResult
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture
 def handler() -> OutputHandler:
@@ -27,6 +27,7 @@ def handler() -> OutputHandler:
 # ---------------------------------------------------------------------------
 # format_result — stdout only
 # ---------------------------------------------------------------------------
+
 
 class TestFormatResultStdout:
     def test_stdout_only(self, handler: OutputHandler) -> None:
@@ -59,6 +60,7 @@ class TestFormatResultStdout:
 # format_result — stderr
 # ---------------------------------------------------------------------------
 
+
 class TestFormatResultStderr:
     def test_stderr_only_with_error_code(self, handler: OutputHandler) -> None:
         result = ExecutionResult(stderr="NameError: x", return_code=1)
@@ -85,6 +87,7 @@ class TestFormatResultStderr:
 # ---------------------------------------------------------------------------
 # format_result — both stdout and stderr
 # ---------------------------------------------------------------------------
+
 
 class TestFormatResultBoth:
     def test_both_stdout_and_stderr(self, handler: OutputHandler) -> None:
@@ -113,6 +116,7 @@ class TestFormatResultBoth:
 # format_result — timed_out
 # ---------------------------------------------------------------------------
 
+
 class TestFormatResultTimeout:
     def test_timed_out_message(self, handler: OutputHandler) -> None:
         result = ExecutionResult(timed_out=True, return_code=-1)
@@ -134,6 +138,7 @@ class TestFormatResultTimeout:
 # ---------------------------------------------------------------------------
 # format_result — killed
 # ---------------------------------------------------------------------------
+
 
 class TestFormatResultKilled:
     def test_killed_message(self, handler: OutputHandler) -> None:
@@ -157,6 +162,7 @@ class TestFormatResultKilled:
 # format_result — no output
 # ---------------------------------------------------------------------------
 
+
 class TestFormatResultEmpty:
     def test_no_output_at_all(self, handler: OutputHandler) -> None:
         result = ExecutionResult(return_code=0)
@@ -173,6 +179,7 @@ class TestFormatResultEmpty:
 # ---------------------------------------------------------------------------
 # format_status
 # ---------------------------------------------------------------------------
+
 
 class TestFormatStatus:
     def test_basic_status_message(self, handler: OutputHandler) -> None:
@@ -217,6 +224,7 @@ class TestFormatStatus:
 # ---------------------------------------------------------------------------
 # format_separator
 # ---------------------------------------------------------------------------
+
 
 class TestFormatSeparator:
     def test_separator_is_hr(self, handler: OutputHandler) -> None:

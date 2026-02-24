@@ -12,10 +12,10 @@ import pytest
 from pylearn.parser.book_profiles import BookProfile
 from pylearn.parser.font_analyzer import FontAnalyzer, _is_mono
 
-
 # ---------------------------------------------------------------------------
 # Helpers for building mock PDF data
 # ---------------------------------------------------------------------------
+
 
 def _make_span(
     text: str,
@@ -75,9 +75,7 @@ def _build_mock_doc(
             )
         elif back_texts and idx >= total - len(back_texts):
             offset = idx - (total - len(back_texts))
-            page.get_text = MagicMock(
-                side_effect=lambda fmt="text", **kw: {} if fmt == "dict" else back_texts[offset]
-            )
+            page.get_text = MagicMock(side_effect=lambda fmt="text", **kw: {} if fmt == "dict" else back_texts[offset])
 
         return page
 
@@ -89,22 +87,42 @@ def _build_mock_doc(
 # _is_mono module-level helper
 # ---------------------------------------------------------------------------
 
+
 class TestIsMono:
     """Tests for the _is_mono() free function."""
 
-    @pytest.mark.parametrize("font_name", [
-        "Courier", "CourierNew", "DejaVuSansMono", "Consolas",
-        "Menlo-Regular", "SourceCodePro-Bold", "Inconsolata",
-        "FiraCode-Retina", "UbuntuMono", "RobotoMono-Medium",
-        "LiberationMono", "DroidSansMono",
-    ])
+    @pytest.mark.parametrize(
+        "font_name",
+        [
+            "Courier",
+            "CourierNew",
+            "DejaVuSansMono",
+            "Consolas",
+            "Menlo-Regular",
+            "SourceCodePro-Bold",
+            "Inconsolata",
+            "FiraCode-Retina",
+            "UbuntuMono",
+            "RobotoMono-Medium",
+            "LiberationMono",
+            "DroidSansMono",
+        ],
+    )
     def test_monospace_fonts_detected(self, font_name: str) -> None:
         assert _is_mono(font_name) is True
 
-    @pytest.mark.parametrize("font_name", [
-        "TimesNewRoman", "Helvetica", "Arial", "Georgia",
-        "Palatino", "Garamond", "Cambria",
-    ])
+    @pytest.mark.parametrize(
+        "font_name",
+        [
+            "TimesNewRoman",
+            "Helvetica",
+            "Arial",
+            "Georgia",
+            "Palatino",
+            "Garamond",
+            "Cambria",
+        ],
+    )
     def test_proportional_fonts_rejected(self, font_name: str) -> None:
         assert _is_mono(font_name) is False
 
@@ -119,6 +137,7 @@ class TestIsMono:
 # ---------------------------------------------------------------------------
 # BookProfile.is_monospace — caching behavior
 # ---------------------------------------------------------------------------
+
 
 class TestBookProfileIsMonospace:
     """Tests for BookProfile.is_monospace() and its internal cache."""
@@ -171,6 +190,7 @@ class TestBookProfileIsMonospace:
 # FontAnalyzer._pick_sample_pages
 # ---------------------------------------------------------------------------
 
+
 class TestPickSamplePages:
     """Tests for the static _pick_sample_pages method."""
 
@@ -201,6 +221,7 @@ class TestPickSamplePages:
 # ---------------------------------------------------------------------------
 # FontAnalyzer._find_body_font
 # ---------------------------------------------------------------------------
+
 
 class TestFindBodyFont:
     """Tests for the static _find_body_font method."""
@@ -234,6 +255,7 @@ class TestFindBodyFont:
 # FontAnalyzer._find_code_size
 # ---------------------------------------------------------------------------
 
+
 class TestFindCodeSize:
     """Tests for the static _find_code_size method."""
 
@@ -264,6 +286,7 @@ class TestFindCodeSize:
 # FontAnalyzer._compute_heading_thresholds
 # ---------------------------------------------------------------------------
 
+
 class TestComputeHeadingThresholds:
     """Tests for the static heading threshold computation."""
 
@@ -271,9 +294,9 @@ class TestComputeHeadingThresholds:
         """Three distinct heading sizes produce three tiers."""
         histogram: Counter[tuple[str, float, bool, bool]] = Counter()
         histogram[("Serif", 10.0, False, False)] = 5000  # body
-        histogram[("Serif", 24.0, True, False)] = 200   # h1
-        histogram[("Serif", 16.0, True, False)] = 400   # h2
-        histogram[("Serif", 13.0, True, False)] = 300   # h3
+        histogram[("Serif", 24.0, True, False)] = 200  # h1
+        histogram[("Serif", 16.0, True, False)] = 400  # h2
+        histogram[("Serif", 13.0, True, False)] = 300  # h3
         h1_min, h2_min, h3_min = FontAnalyzer._compute_heading_thresholds(histogram, 10.0)
         # h1 threshold between 24 and 16
         assert 16.0 < h1_min < 24.0
@@ -316,9 +339,9 @@ class TestComputeHeadingThresholds:
         """Sizes with < 50 chars are filtered as decorative artifacts."""
         histogram: Counter[tuple[str, float, bool, bool]] = Counter()
         histogram[("Serif", 10.0, False, False)] = 5000
-        histogram[("Serif", 30.0, True, False)] = 20    # rare, should be filtered
-        histogram[("Serif", 16.0, True, False)] = 200   # real heading
-        h1_min, h2_min, h3_min = FontAnalyzer._compute_heading_thresholds(histogram, 10.0)
+        histogram[("Serif", 30.0, True, False)] = 20  # rare, should be filtered
+        histogram[("Serif", 16.0, True, False)] = 200  # real heading
+        h1_min, _h2_min, _h3_min = FontAnalyzer._compute_heading_thresholds(histogram, 10.0)
         # Only one real tier (16.0), size 30 was filtered.
         # With one tier: h1_min = (16 + 10) / 2 = 13.0
         assert h1_min == 13.0
@@ -329,7 +352,7 @@ class TestComputeHeadingThresholds:
         histogram[("Serif", 10.0, False, False)] = 5000
         histogram[("Serif", 16.0, True, False)] = 200
         histogram[("Serif", 15.5, False, False)] = 200  # within 1pt of 16.0
-        h1_min, h2_min, h3_min = FontAnalyzer._compute_heading_thresholds(histogram, 10.0)
+        h1_min, _h2_min, _h3_min = FontAnalyzer._compute_heading_thresholds(histogram, 10.0)
         # Should be treated as a single tier
         assert h1_min == 13.0  # (16 + 10) / 2
 
@@ -337,6 +360,7 @@ class TestComputeHeadingThresholds:
 # ---------------------------------------------------------------------------
 # FontAnalyzer._detect_margins
 # ---------------------------------------------------------------------------
+
 
 class TestDetectMargins:
     """Tests for the static _detect_margins method."""
@@ -391,6 +415,7 @@ class TestDetectMargins:
 # ---------------------------------------------------------------------------
 # FontAnalyzer._detect_skip_pages
 # ---------------------------------------------------------------------------
+
 
 class TestDetectSkipPages:
     """Tests for the static _detect_skip_pages method."""
@@ -480,6 +505,7 @@ class TestDetectSkipPages:
 # FontAnalyzer.build_profile — integration with mocked fitz
 # ---------------------------------------------------------------------------
 
+
 class TestBuildProfile:
     """Tests for the full build_profile flow with mocked PDF."""
 
@@ -547,9 +573,7 @@ class TestBuildProfile:
             page = MagicMock()
             page.rect.height = 792.0
             empty_page = {"blocks": []}
-            page.get_text = MagicMock(
-                side_effect=lambda fmt="text", **kw: empty_page if fmt == "dict" else ""
-            )
+            page.get_text = MagicMock(side_effect=lambda fmt="text", **kw: empty_page if fmt == "dict" else "")
             return page
 
         mock_doc.__getitem__ = MagicMock(side_effect=_getitem)
@@ -575,9 +599,7 @@ class TestBuildProfile:
         def _getitem(idx: int) -> MagicMock:
             page = MagicMock()
             page.rect.height = 792.0
-            page.get_text = MagicMock(
-                side_effect=lambda fmt="text", **kw: page_data if fmt == "dict" else "content"
-            )
+            page.get_text = MagicMock(side_effect=lambda fmt="text", **kw: page_data if fmt == "dict" else "content")
             return page
 
         mock_doc.__getitem__ = MagicMock(side_effect=_getitem)
@@ -606,6 +628,7 @@ class TestBuildProfile:
 # ---------------------------------------------------------------------------
 # BookProfile.__post_init__ — threshold reordering
 # ---------------------------------------------------------------------------
+
 
 class TestBookProfilePostInit:
     """Tests for BookProfile's __post_init__ validation."""

@@ -1,10 +1,9 @@
 """Tests for parser components with synthetic data."""
 
-import pytest
 from pylearn.core.models import BlockType, ContentBlock, FontSpan
 from pylearn.parser.book_profiles import BookProfile
-from pylearn.parser.content_classifier import ContentClassifier
 from pylearn.parser.code_extractor import CodeExtractor
+from pylearn.parser.content_classifier import ContentClassifier
 from pylearn.parser.structure_detector import StructureDetector
 
 
@@ -23,8 +22,7 @@ def make_profile(**overrides) -> BookProfile:
     return BookProfile(**defaults)
 
 
-def make_span(text, font_size=10.0, is_bold=False, is_monospace=False,
-              page_num=0, font_name="Serif") -> FontSpan:
+def make_span(text, font_size=10.0, is_bold=False, is_monospace=False, page_num=0, font_name="Serif") -> FontSpan:
     """Create a test FontSpan."""
     return FontSpan(
         text=text,
@@ -37,6 +35,7 @@ def make_span(text, font_size=10.0, is_bold=False, is_monospace=False,
 
 
 # --- ContentClassifier ---
+
 
 class TestContentClassifierSpan:
     def setup_method(self):
@@ -140,6 +139,7 @@ class TestContentClassifierPage:
 
 # --- List / Note / Warning / Tip Detection ---
 
+
 class TestListDetection:
     def setup_method(self):
         self.profile = make_profile()
@@ -216,6 +216,7 @@ class TestNoteWarningTipDetection:
 
 # --- CodeExtractor ---
 
+
 class TestCodeExtractor:
     def setup_method(self):
         self.extractor = CodeExtractor()
@@ -271,6 +272,7 @@ class TestCodeExtractor:
 
 
 # --- StructureDetector ---
+
 
 class TestStructureDetector:
     def setup_method(self):
@@ -345,6 +347,7 @@ class TestStructureDetector:
 
 
 # --- BookProfile ---
+
 
 class TestBookProfile:
     def test_is_monospace(self):

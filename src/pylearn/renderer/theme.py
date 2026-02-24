@@ -8,12 +8,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from pylearn.ui.theme_registry import get_palette, ThemePalette
+from pylearn.ui.theme_registry import ThemePalette, get_palette
 
 
 @dataclass
 class ReaderTheme:
     """Theme settings for the reader panel HTML rendering."""
+
     # Background
     bg_color: str = "#ffffff"
     text_color: str = "#333333"
@@ -61,14 +62,24 @@ class ReaderTheme:
 def _theme_from_palette(p: ThemePalette) -> ReaderTheme:
     """Generate a ReaderTheme from a centralized palette."""
     return ReaderTheme(
-        bg_color=p.bg, text_color=p.text,
-        h1_color=p.h1, h2_color=p.h2, h3_color=p.h3,
-        code_bg=p.code_bg, code_text=p.code_text, code_border=p.code_border,
-        note_bg=p.note_bg, note_border=p.note_border,
-        warning_bg=p.warning_bg, warning_border=p.warning_border,
-        tip_bg=p.tip_bg, tip_border=p.tip_border,
+        bg_color=p.bg,
+        text_color=p.text,
+        h1_color=p.h1,
+        h2_color=p.h2,
+        h3_color=p.h3,
+        code_bg=p.code_bg,
+        code_text=p.code_text,
+        code_border=p.code_border,
+        note_bg=p.note_bg,
+        note_border=p.note_border,
+        warning_bg=p.warning_bg,
+        warning_border=p.warning_border,
+        tip_bg=p.tip_bg,
+        tip_border=p.tip_border,
         text_muted=p.text_muted,
-        button_bg=p.accent, button_text=p.accent_text, button_hover=p.accent_hover,
+        button_bg=p.accent,
+        button_text=p.accent_text,
+        button_hover=p.accent_hover,
     )
 
 

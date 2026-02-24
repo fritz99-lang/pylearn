@@ -3,9 +3,9 @@
 
 from __future__ import annotations
 
-from PyQt6.QtWidgets import QWidget, QVBoxLayout
+from PyQt6.Qsci import QsciLexerCPP, QsciLexerHTML, QsciLexerPython, QsciScintilla
 from PyQt6.QtGui import QColor, QFont
-from PyQt6.Qsci import QsciScintilla, QsciLexerPython, QsciLexerCPP, QsciLexerHTML
+from PyQt6.QtWidgets import QVBoxLayout, QWidget
 
 from pylearn.ui.theme_registry import get_palette
 
@@ -89,9 +89,7 @@ class EditorPanel(QWidget):
         else:
             self._editor.setText(code)
         # Move cursor to end
-        self._editor.SendScintilla(
-            self._editor.SCI_DOCUMENTEND
-        )
+        self._editor.SendScintilla(self._editor.SCI_DOCUMENTEND)
 
     def clear(self) -> None:
         """Clear the editor."""
@@ -199,7 +197,12 @@ class EditorPanel(QWidget):
 
         # Only set placeholder if editor is empty or has old placeholder
         current = editor.text().strip()
-        if not current or current.startswith("# Try your") or current.startswith("// Try your") or current.startswith("<!DOCTYPE html>"):
+        if (
+            not current
+            or current.startswith("# Try your")
+            or current.startswith("// Try your")
+            or current.startswith("<!DOCTYPE html>")
+        ):
             editor.setText(placeholder)
 
     @property

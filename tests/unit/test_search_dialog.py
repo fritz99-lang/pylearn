@@ -15,10 +15,10 @@ from PyQt6.QtCore import Qt
 from pylearn.core.models import BlockType, Book, Chapter, ContentBlock
 from pylearn.ui.search_dialog import SearchDialog, SearchWorker, _block_type_label
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 def _make_book(book_id: str, chapters: list[Chapter] | None = None) -> Book:
     """Helper to create a minimal Book for testing."""
@@ -154,7 +154,7 @@ class TestSearchWorkerResults:
         worker.run()  # run synchronously (not .start())
 
         assert len(results) == 1
-        book_id, chapter_num, title, snippet, block_id, block_type = results[0]
+        book_id, chapter_num, _title, snippet, block_id, block_type = results[0]
         assert book_id == "book1"
         assert chapter_num == 1
         assert block_id == "code_0"
@@ -194,8 +194,10 @@ class TestSearchWorkerResults:
             for i in range(210)
         ]
         chapter = Chapter(
-            chapter_num=1, title="Big Chapter",
-            start_page=1, end_page=999,
+            chapter_num=1,
+            title="Big Chapter",
+            start_page=1,
+            end_page=999,
             content_blocks=blocks,
         )
         book = _make_book("big", chapters=[chapter])
@@ -272,7 +274,9 @@ class TestSearchDialogConstruction:
     def test_scope_shows_current_book_when_set(self, qtbot, mock_cache):
         """When current_book_id is provided, scope combo has 'Current Book' option."""
         dialog = SearchDialog(
-            mock_cache, ["book1", "book2"], current_book_id="book1",
+            mock_cache,
+            ["book1", "book2"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
         assert dialog._scope.count() == 2
@@ -297,16 +301,16 @@ class TestSearchDialogGrouping:
     def test_chapter_parent_items_created(self, qtbot, mock_cache):
         """Each chapter with results gets a bold parent item."""
         dialog = SearchDialog(
-            mock_cache, ["book1"], current_book_id="book1",
+            mock_cache,
+            ["book1"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
         # Simulate adding results from two chapters
         dialog._query = "python"
-        dialog._add_result("book1", 1, "Getting Started", "...Python is...",
-                           "body_0", "Body")
-        dialog._add_result("book1", 2, "Variables", "...Python is...",
-                           "body_1", "Body")
+        dialog._add_result("book1", 1, "Getting Started", "...Python is...", "body_0", "Body")
+        dialog._add_result("book1", 2, "Variables", "...Python is...", "body_1", "Body")
 
         # Two top-level chapter items
         assert dialog._results.topLevelItemCount() == 2
@@ -318,15 +322,15 @@ class TestSearchDialogGrouping:
     def test_matches_nested_under_chapter(self, qtbot, mock_cache):
         """Individual matches are children of their chapter item."""
         dialog = SearchDialog(
-            mock_cache, ["book1"], current_book_id="book1",
+            mock_cache,
+            ["book1"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
         dialog._query = "test"
-        dialog._add_result("book1", 1, "Getting Started", "test snippet",
-                           "code_0", "Code")
-        dialog._add_result("book1", 1, "Getting Started", "another test",
-                           "body_0", "Body")
+        dialog._add_result("book1", 1, "Getting Started", "test snippet", "code_0", "Code")
+        dialog._add_result("book1", 1, "Getting Started", "another test", "body_0", "Body")
 
         # One chapter parent with two children
         assert dialog._results.topLevelItemCount() == 1
@@ -336,13 +340,14 @@ class TestSearchDialogGrouping:
     def test_child_items_store_user_role_data(self, qtbot, mock_cache):
         """Child items store (book_id, chapter_num, block_id) in UserRole."""
         dialog = SearchDialog(
-            mock_cache, ["book1"], current_book_id="book1",
+            mock_cache,
+            ["book1"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
         dialog._query = "test"
-        dialog._add_result("book1", 1, "Getting Started", "test snippet",
-                           "code_0", "Code")
+        dialog._add_result("book1", 1, "Getting Started", "test snippet", "code_0", "Code")
 
         parent = dialog._results.topLevelItem(0)
         child = parent.child(0)
@@ -352,13 +357,14 @@ class TestSearchDialogGrouping:
     def test_chapter_parent_has_no_user_role(self, qtbot, mock_cache):
         """Chapter parent items should not have UserRole data (not clickable)."""
         dialog = SearchDialog(
-            mock_cache, ["book1"], current_book_id="book1",
+            mock_cache,
+            ["book1"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
         dialog._query = "test"
-        dialog._add_result("book1", 1, "Getting Started", "test snippet",
-                           "code_0", "Code")
+        dialog._add_result("book1", 1, "Getting Started", "test snippet", "code_0", "Code")
 
         parent = dialog._results.topLevelItem(0)
         assert parent.data(0, Qt.ItemDataRole.UserRole) is None
@@ -366,13 +372,14 @@ class TestSearchDialogGrouping:
     def test_block_type_shown_in_type_column(self, qtbot, mock_cache):
         """The type column shows the block type label."""
         dialog = SearchDialog(
-            mock_cache, ["book1"], current_book_id="book1",
+            mock_cache,
+            ["book1"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
         dialog._query = "test"
-        dialog._add_result("book1", 1, "Getting Started", "test snippet",
-                           "code_0", "Code")
+        dialog._add_result("book1", 1, "Getting Started", "test snippet", "code_0", "Code")
 
         parent = dialog._results.topLevelItem(0)
         child = parent.child(0)
@@ -390,7 +397,9 @@ class TestSearchDialogScope:
     def test_current_book_scope_filters(self, qtbot, mock_cache):
         """'Current Book' scope only returns the current book."""
         dialog = SearchDialog(
-            mock_cache, ["book1", "book2"], current_book_id="book1",
+            mock_cache,
+            ["book1", "book2"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
@@ -402,7 +411,9 @@ class TestSearchDialogScope:
     def test_all_books_scope_returns_all(self, qtbot, mock_cache):
         """'All Books' scope returns all loaded books."""
         dialog = SearchDialog(
-            mock_cache, ["book1", "book2"], current_book_id="book1",
+            mock_cache,
+            ["book1", "book2"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
@@ -430,7 +441,9 @@ class TestSearchDialogNavigation:
     def test_double_click_child_emits_signal(self, qtbot, mock_cache):
         """Double-clicking a match item emits navigate_requested with block_id."""
         dialog = SearchDialog(
-            mock_cache, ["book1"], current_book_id="book1",
+            mock_cache,
+            ["book1"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
@@ -438,8 +451,7 @@ class TestSearchDialogNavigation:
         dialog.navigate_requested.connect(lambda *args: signals.append(args))
 
         dialog._query = "test"
-        dialog._add_result("book1", 1, "Getting Started", "test snippet",
-                           "code_0", "Code")
+        dialog._add_result("book1", 1, "Getting Started", "test snippet", "code_0", "Code")
 
         parent = dialog._results.topLevelItem(0)
         child = parent.child(0)
@@ -451,7 +463,9 @@ class TestSearchDialogNavigation:
     def test_double_click_chapter_header_no_signal(self, qtbot, mock_cache):
         """Double-clicking a chapter header does not emit a signal."""
         dialog = SearchDialog(
-            mock_cache, ["book1"], current_book_id="book1",
+            mock_cache,
+            ["book1"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
@@ -459,8 +473,7 @@ class TestSearchDialogNavigation:
         dialog.navigate_requested.connect(lambda *args: signals.append(args))
 
         dialog._query = "test"
-        dialog._add_result("book1", 1, "Getting Started", "test snippet",
-                           "code_0", "Code")
+        dialog._add_result("book1", 1, "Getting Started", "test snippet", "code_0", "Code")
 
         parent = dialog._results.topLevelItem(0)
         dialog._on_result_clicked(parent, 0)
@@ -470,7 +483,9 @@ class TestSearchDialogNavigation:
     def test_navigate_signal_has_three_args(self, qtbot, mock_cache):
         """navigate_requested emits (book_id, chapter_num, block_id)."""
         dialog = SearchDialog(
-            mock_cache, ["book1"], current_book_id="book1",
+            mock_cache,
+            ["book1"],
+            current_book_id="book1",
         )
         qtbot.addWidget(dialog)
 
@@ -478,8 +493,7 @@ class TestSearchDialogNavigation:
         dialog.navigate_requested.connect(lambda *args: signals.append(args))
 
         dialog._query = "test"
-        dialog._add_result("book1", 2, "Variables", "test data",
-                           "note_0", "Note")
+        dialog._add_result("book1", 2, "Variables", "test data", "note_0", "Note")
 
         parent = dialog._results.topLevelItem(0)
         child = parent.child(0)

@@ -8,7 +8,7 @@ import re as _re
 
 from pylearn.executor.sandbox import ExecutionResult
 
-_COLOR_RE = _re.compile(r'^#[0-9a-fA-F]{3,8}$|^[a-zA-Z]+$')
+_COLOR_RE = _re.compile(r"^#[0-9a-fA-F]{3,8}$|^[a-zA-Z]+$")
 
 
 class OutputHandler:
@@ -20,6 +20,7 @@ class OutputHandler:
     def set_theme(self, theme_name: str) -> None:
         """Update output colors to match the active theme."""
         from pylearn.ui.theme_registry import get_palette
+
         p = get_palette(theme_name)
         self._stdout_color = p.text
 
@@ -44,8 +45,7 @@ class OutputHandler:
 
         if result.timed_out:
             parts.append(
-                '<p style="color:#ff6b6b; font-family:Consolas, monospace; '
-                'font-weight:bold;">Execution timed out.</p>'
+                '<p style="color:#ff6b6b; font-family:Consolas, monospace; font-weight:bold;">Execution timed out.</p>'
             )
 
         if result.killed:
@@ -55,10 +55,7 @@ class OutputHandler:
             )
 
         if not parts:
-            parts.append(
-                '<p style="color:#888; font-family:Consolas, monospace; '
-                'font-style:italic;">(No output)</p>'
-            )
+            parts.append('<p style="color:#888; font-family:Consolas, monospace; font-style:italic;">(No output)</p>')
 
         return "\n".join(parts)
 
@@ -68,8 +65,7 @@ class OutputHandler:
             color = "#888"  # fallback to default
         escaped = html.escape(message)
         return (
-            f'<p style="color:{color}; font-family:Consolas, monospace; '
-            f'font-style:italic; margin:4px 0;">{escaped}</p>'
+            f'<p style="color:{color}; font-family:Consolas, monospace; font-style:italic; margin:4px 0;">{escaped}</p>'
         )
 
     def format_separator(self) -> str:

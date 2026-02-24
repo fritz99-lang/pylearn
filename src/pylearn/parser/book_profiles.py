@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 @dataclass
 class BookProfile:
     """Configuration for parsing a specific book's PDF."""
+
     name: str
     language: str = "python"  # "python", "cpp", "c"
 
@@ -24,10 +25,18 @@ class BookProfile:
     code_size: float = 9.0
 
     # Font name patterns (substrings to match)
-    monospace_fonts: list[str] = field(default_factory=lambda: [
-        "Courier", "Mono", "Consolas", "Menlo", "DejaVuSansMono",
-        "LucidaConsole", "Ubuntu Mono", "SourceCodePro",
-    ])
+    monospace_fonts: list[str] = field(
+        default_factory=lambda: [
+            "Courier",
+            "Mono",
+            "Consolas",
+            "Menlo",
+            "DejaVuSansMono",
+            "LucidaConsole",
+            "Ubuntu Mono",
+            "SourceCodePro",
+        ]
+    )
     heading_fonts: list[str] = field(default_factory=list)
 
     # Chapter detection
@@ -43,7 +52,7 @@ class BookProfile:
     exercise_answer_pattern: str = ""
 
     # Content area margins (to skip headers/footers)
-    margin_top: float = 72.0      # ~1 inch
+    margin_top: float = 72.0  # ~1 inch
     margin_bottom: float = 72.0
     margin_left: float = 54.0
     margin_right: float = 54.0
@@ -52,8 +61,7 @@ class BookProfile:
         """Validate that heading thresholds are ordered correctly."""
         if not (self.heading1_min_size >= self.heading2_min_size >= self.heading3_min_size):
             # Auto-fix reversed thresholds
-            sizes = sorted([self.heading1_min_size, self.heading2_min_size,
-                            self.heading3_min_size], reverse=True)
+            sizes = sorted([self.heading1_min_size, self.heading2_min_size, self.heading3_min_size], reverse=True)
             self.heading1_min_size, self.heading2_min_size, self.heading3_min_size = sizes
         # Pre-lowercase monospace font names and initialize lookup cache
         self._mono_lower: list[str] = [m.lower() for m in self.monospace_fonts]
@@ -80,8 +88,8 @@ LEARNING_PYTHON = BookProfile(
     code_size=8.5,
     chapter_pattern=r"^Chapter\s+(\d+)\s*[\.:]",
     part_pattern=r"^Part\s+([IVXLCDM]+)\s*[\.:]",
-    skip_pages_start=20,   # Front matter
-    skip_pages_end=30,     # Index
+    skip_pages_start=20,  # Front matter
+    skip_pages_end=30,  # Index
     exercise_start_pattern=r"Test Your Knowledge:\s*Quiz",
     exercise_answer_pattern=r"Test Your Knowledge:\s*Answers",
 )
@@ -172,5 +180,6 @@ def get_profile(name: str) -> BookProfile:
 def get_auto_profile(pdf_path: str, language: str = "python") -> BookProfile:
     """Auto-detect font thresholds from a PDF and return a BookProfile."""
     from pylearn.parser.font_analyzer import FontAnalyzer
+
     analyzer = FontAnalyzer(pdf_path)
     return analyzer.build_profile(language)
