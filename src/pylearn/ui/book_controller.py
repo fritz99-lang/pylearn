@@ -13,7 +13,7 @@ from pathlib import Path
 from PyQt6.QtCore import QObject, pyqtSignal
 
 from pylearn.core.config import BooksConfig
-from pylearn.core.constants import STATUS_COMPLETED, STATUS_IN_PROGRESS
+from pylearn.core.constants import STATUS_COMPLETED, STATUS_IN_PROGRESS, STATUS_NOT_STARTED
 from pylearn.core.database import Database
 from pylearn.core.models import Book, Chapter
 from pylearn.parser.cache_manager import CacheManager
@@ -152,9 +152,12 @@ class BookController(QObject):
         total = len(self._current_book.chapters)
         self.status_message.emit(f"Chapter {chapter_num} of {total}")
 
-        # Mark as in progress
-        self._db.update_reading_progress(self._current_book.book_id, chapter_num, STATUS_IN_PROGRESS)
-        self.chapter_status_changed.emit(chapter_num, STATUS_IN_PROGRESS)
+        # Mark as in progress — but never downgrade a completed chapter
+        progress = self._db.get_reading_progress(self._current_book.book_id, chapter_num)
+        current_status = progress["status"] if progress else STATUS_NOT_STARTED
+        if current_status != STATUS_COMPLETED:
+            self._db.update_reading_progress(self._current_book.book_id, chapter_num, STATUS_IN_PROGRESS)
+            self.chapter_status_changed.emit(chapter_num, STATUS_IN_PROGRESS)
 
     def navigate_to_section(self, chapter_num: int, block_index: int) -> str | None:
         """Navigate to a section; returns block_id to scroll to, or None."""
@@ -216,12 +219,16 @@ class BookController(QObject):
         """Save current reading position to the database."""
         if self._current_book and self._current_chapter_num > 0:
             self._db.save_last_position(self._current_book.book_id, self._current_chapter_num, scroll_pos)
-            self._db.update_reading_progress(
-                self._current_book.book_id,
-                self._current_chapter_num,
-                STATUS_IN_PROGRESS,
-                scroll_pos,
-            )
+            # Only update progress if chapter isn't already completed
+            progress = self._db.get_reading_progress(self._current_book.book_id, self._current_chapter_num)
+            current_status = progress["status"] if progress else STATUS_NOT_STARTED
+            if current_status != STATUS_COMPLETED:
+                self._db.update_reading_progress(
+                    self._current_book.book_id,
+                    self._current_chapter_num,
+                    STATUS_IN_PROGRESS,
+                    scroll_pos,
+                )
 
     def current_chapter_title(self) -> str:
         """Get the title of the current chapter."""

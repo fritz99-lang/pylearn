@@ -19,10 +19,13 @@ from pylearn.renderer.theme import ReaderTheme, get_theme
 class HTMLRenderer:
     """Render ContentBlocks as styled HTML for QTextBrowser."""
 
-    def __init__(self, theme: ReaderTheme | None = None, language: str = "python", image_dir: str = "") -> None:
+    def __init__(
+        self, theme: ReaderTheme | None = None, language: str = "python", image_dir: str = "", theme_name: str = "light"
+    ) -> None:
         self.theme = theme or get_theme()
         self.language = language
         self.image_dir = image_dir  # absolute path to image cache directory
+        self.theme_name = theme_name  # app theme name for Pygments style selection
 
     def render_blocks(self, blocks: list[ContentBlock]) -> str:
         """Render a list of content blocks to a full HTML document."""
@@ -51,7 +54,7 @@ class HTMLRenderer:
 
         if block.block_type in (BlockType.CODE, BlockType.CODE_REPL):
             is_repl = block.block_type == BlockType.CODE_REPL
-            highlighted = highlight_code(text, language=self.language, is_repl=is_repl)
+            highlighted = highlight_code(text, language=self.language, is_repl=is_repl, theme=self.theme_name)
             block_id = html.escape(block.block_id) if block.block_id else ""
             return (
                 f'<a name="{block_id}"></a>'
@@ -195,6 +198,7 @@ p {{
     def update_theme(self, theme_name: str) -> None:
         """Switch the rendering theme."""
         self.theme = get_theme(theme_name)
+        self.theme_name = theme_name
 
     def update_font_size(self, size: int) -> None:
         """Update base font size."""

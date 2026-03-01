@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 from pathlib import Path
 
@@ -39,9 +40,18 @@ class CacheManager:
         return self._cache_path(book_id).exists()
 
     def save(self, book: Book) -> None:
-        """Save parsed book to JSON cache (atomic write-then-rename)."""
+        """Save parsed book to JSON cache (atomic write-then-rename).
+
+        Stores the PDF file's modification time so the cache can be
+        automatically invalidated when the source PDF changes.
+        """
         path = self._cache_path(book.book_id)
         data = book.to_dict()
+        # Record PDF mtime for staleness detection on load
+        try:
+            data["_pdf_mtime"] = os.path.getmtime(book.pdf_path)
+        except OSError:
+            data["_pdf_mtime"] = 0.0
         tmp = path.with_suffix(".tmp")
         try:
             tmp.write_text(
@@ -54,7 +64,11 @@ class CacheManager:
         logger.info(f"Cached {book.book_id} to {path} ({path.stat().st_size / 1024:.0f} KB)")
 
     def load(self, book_id: str) -> Book | None:
-        """Load parsed book from JSON cache."""
+        """Load parsed book from JSON cache.
+
+        Returns None (cache miss) if the source PDF has been modified
+        since the cache was written.
+        """
         path = self._cache_path(book_id)
         if not path.exists():
             logger.info(f"No cache found for {book_id}")
@@ -67,6 +81,20 @@ class CacheManager:
 
             with open(path, encoding="utf-8") as f:
                 data = json.load(f)
+
+            # Check if the source PDF has changed since the cache was written
+            cached_mtime = data.get("_pdf_mtime", 0.0)
+            pdf_path = data.get("pdf_path", "")
+            if cached_mtime and pdf_path:
+                try:
+                    current_mtime = os.path.getmtime(pdf_path)
+                    if abs(current_mtime - cached_mtime) > 1.0:
+                        logger.info(f"PDF changed since cache was written for {book_id}, invalidating")
+                        path.unlink(missing_ok=True)
+                        return None
+                except OSError:
+                    pass  # PDF not found — load cache anyway, error will surface later
+
             book = Book.from_dict(data)
             logger.info(f"Loaded {book_id} from cache ({len(book.chapters)} chapters)")
             return book

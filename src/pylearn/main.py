@@ -136,6 +136,7 @@ def _run_parse() -> None:
                         page_images[pg] = imgs
                 img_count = sum(len(v) for v in page_images.values())
                 print(f"  {img_count} images extracted")
+                pdf_page_height = parser.page_height
 
             print(f"  Extracted {sum(len(p) for p in all_page_spans)} spans from {len(all_page_spans)} pages")
 
@@ -145,6 +146,7 @@ def _run_parse() -> None:
                 all_page_spans,
                 start_page_offset=profile.skip_pages_start,
                 page_images=page_images if page_images else None,
+                page_height=pdf_page_height,
             )
             print(f"  {len(blocks)} content blocks")
 

@@ -61,6 +61,13 @@ class PDFParser:
     def total_pages(self) -> int:
         return len(self._get_doc())
 
+    @property
+    def page_height(self) -> float:
+        """Return the height (in points) of the first content page."""
+        doc = self._get_doc()
+        page_num = min(self.profile.skip_pages_start, len(doc) - 1)
+        return float(doc[page_num].rect.height)
+
     def extract_page_spans(self, page_num: int) -> list[FontSpan]:
         """Extract all text spans from a single page with font metadata."""
         if self._doc is None:

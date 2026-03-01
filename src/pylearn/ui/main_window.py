@@ -134,9 +134,8 @@ class ParseProcess:
     def _on_error(self, error: QProcess.ProcessError) -> None:
         try:
             self.on_error(f"Process error: {error}")
-        except Exception as e:
+        except Exception:
             logging.getLogger("pylearn.ui").exception("Error in _on_error")
-            self.on_error(f"Parse error handler error: {e}")
 
 
 class ExecuteWorker(QThread):
@@ -747,7 +746,8 @@ class MainWindow(QMainWindow):
         if self._book.current_book and self._book.current_book.book_id != book_id:
             self._library.select_book(book_id)
         self._book.navigate_to_chapter(chapter_num)
-        self._reader.verticalScrollBar().setValue(scroll_pos)
+        # Defer scroll so the new chapter's HTML has time to render
+        QTimer.singleShot(50, lambda: self._reader.verticalScrollBar().setValue(scroll_pos))
 
     @safe_slot
     def _add_note(self) -> None:

@@ -181,7 +181,7 @@ class Database:
                 "total": total,
                 "completed": completed,
                 "in_progress": in_progress,
-                "not_started": total - completed - in_progress,
+                "not_started": max(0, total - completed - in_progress),
                 "percent": round(completed / total * 100) if total > 0 else 0,
             }
 
@@ -406,17 +406,17 @@ CREATE TABLE IF NOT EXISTS chapters (
     start_page INTEGER NOT NULL,
     end_page INTEGER NOT NULL,
     PRIMARY KEY (book_id, chapter_num),
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS reading_progress (
     book_id TEXT NOT NULL,
     chapter_num INTEGER NOT NULL,
-    status TEXT NOT NULL DEFAULT 'not_started',
+    status TEXT NOT NULL DEFAULT 'not_started' CHECK(status IN ('not_started', 'in_progress', 'completed')),
     scroll_position INTEGER DEFAULT 0,
     updated_at TEXT,
     PRIMARY KEY (book_id, chapter_num),
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS last_position (
@@ -424,7 +424,7 @@ CREATE TABLE IF NOT EXISTS last_position (
     chapter_num INTEGER NOT NULL,
     scroll_position INTEGER DEFAULT 0,
     updated_at TEXT,
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS bookmarks (
@@ -434,7 +434,7 @@ CREATE TABLE IF NOT EXISTS bookmarks (
     scroll_position INTEGER DEFAULT 0,
     label TEXT NOT NULL,
     created_at TEXT,
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS notes (
@@ -445,7 +445,7 @@ CREATE TABLE IF NOT EXISTS notes (
     content TEXT NOT NULL,
     created_at TEXT,
     updated_at TEXT,
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS exercises (
@@ -456,7 +456,7 @@ CREATE TABLE IF NOT EXISTS exercises (
     description TEXT NOT NULL,
     exercise_type TEXT NOT NULL,
     answer TEXT,
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS exercise_progress (
@@ -465,7 +465,7 @@ CREATE TABLE IF NOT EXISTS exercise_progress (
     user_code TEXT DEFAULT '',
     attempts INTEGER DEFAULT 0,
     updated_at TEXT,
-    FOREIGN KEY (exercise_id) REFERENCES exercises(exercise_id)
+    FOREIGN KEY (exercise_id) REFERENCES exercises(exercise_id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS saved_code (
@@ -475,7 +475,7 @@ CREATE TABLE IF NOT EXISTS saved_code (
     code TEXT NOT NULL,
     label TEXT DEFAULT '',
     created_at TEXT,
-    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE
 );
 
 CREATE INDEX IF NOT EXISTS idx_bookmarks_book ON bookmarks(book_id);

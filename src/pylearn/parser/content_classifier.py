@@ -122,7 +122,11 @@ class ContentClassifier:
         return blocks
 
     def classify_all_pages(
-        self, pages: list[list[FontSpan]], start_page_offset: int = 0, page_images: dict[int, list[dict]] | None = None
+        self,
+        pages: list[list[FontSpan]],
+        start_page_offset: int = 0,
+        page_images: dict[int, list[dict]] | None = None,
+        page_height: float = 792.0,
     ) -> list[ContentBlock]:
         """Classify spans from multiple pages into a flat list of content blocks.
 
@@ -132,6 +136,7 @@ class ContentClassifier:
             page_images: Optional dict mapping page_num → list of image metadata
                          dicts (from PDFParser.extract_page_images). Each dict
                          has keys: filename, y0, page_num, width, height.
+            page_height: Page height in points (default 792 = US Letter).
         """
         all_blocks: list[ContentBlock] = []
         for i, page_spans in enumerate(pages):
@@ -140,13 +145,15 @@ class ContentClassifier:
 
             # Interleave images by vertical position
             if page_images and page_num in page_images:
-                page_blocks = self._interleave_images(page_blocks, page_images[page_num], page_num)
+                page_blocks = self._interleave_images(page_blocks, page_images[page_num], page_num, page_height)
 
             all_blocks.extend(page_blocks)
         return all_blocks
 
     @staticmethod
-    def _interleave_images(blocks: list[ContentBlock], images: list[dict], page_num: int) -> list[ContentBlock]:
+    def _interleave_images(
+        blocks: list[ContentBlock], images: list[dict], page_num: int, page_height: float = 792.0
+    ) -> list[ContentBlock]:
         """Insert FIGURE blocks among text blocks based on y-position."""
         if not images:
             return blocks
@@ -173,7 +180,7 @@ class ContentClassifier:
         n = len(blocks) or 1
         for i, block in enumerate(blocks):
             # Insert any images whose y0 is before this block's estimated position
-            est_y = (i / n) * 800  # rough page height proxy
+            est_y = (i / n) * page_height
             while img_idx < len(img_blocks) and img_blocks[img_idx][0] <= est_y:
                 result.append(img_blocks[img_idx][1])
                 img_idx += 1
