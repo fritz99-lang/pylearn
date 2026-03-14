@@ -1,0 +1,52 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 34,
+  "challenges": [
+    {
+      "id": "lp_ch34_c01",
+      "title": "Multi Handler",
+      "description": "Write a function `convert(value, target_type)` that attempts to convert `value` to the given `target_type` by calling `target_type(value)`.\n\n- If a TypeError or ValueError is raised during conversion, catch them and return None.\n- If conversion succeeds, return the converted value.",
+      "starter_code": "def convert(value, target_type):\n    \"\"\"Convert value to target_type, returning None on TypeError or ValueError.\"\"\"\n    # Try the conversion: target_type(value)\n    # Catch TypeError and ValueError, returning None for either\n    ...\n",
+      "test_code": "assert convert(\"42\", int) == 42, f\"Expected 42, got {convert('42', int)}\"\nassert convert(\"abc\", int) is None, \"Should return None for invalid int conversion\"\nassert convert(\"3.14\", float) == 3.14, f\"Expected 3.14, got {convert('3.14', float)}\"\nassert convert(None, int) is None, \"Should return None for TypeError\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "multiple except clauses",
+        "TypeError vs ValueError",
+        "type conversion exceptions"
+      ],
+      "concepts_review": [
+        "try/except statement",
+        "built-in type constructors",
+        "return values"
+      ],
+      "hints": [
+        "Call target_type(value) inside the try block to attempt conversion.",
+        "You can catch multiple exceptions in one except clause: 'except (TypeError, ValueError):'.",
+        "Return None in the except block, and the converted value in the try block."
+      ]
+    },
+    {
+      "id": "lp_ch34_c02",
+      "title": "Try All Clauses",
+      "description": "Write a function `process_data(data)` that demonstrates the full try/except/else/finally pattern.\n\n- In the try block, compute result = sum(data).\n- If a TypeError occurs, set result to -1.\n- In the else block (no exception), result stays as the computed sum.\n- In the finally block, set cleanup_done to True.\n- Return a tuple: (result, cleanup_done).",
+      "starter_code": "def process_data(data):\n    \"\"\"Process data using try/except/else/finally. Return (result, cleanup_done).\"\"\"\n    result = None\n    cleanup_done = False\n    # try: result = sum(data)\n    # except TypeError: result = -1\n    # else: result stays as the sum\n    # finally: cleanup_done = True\n    ...\n    return (result, cleanup_done)\n",
+      "test_code": "assert process_data([1, 2, 3]) == (6, True), f\"Expected (6, True), got {process_data([1, 2, 3])}\"\nassert process_data([1, \"a\", 3]) == (-1, True), f\"Expected (-1, True), got {process_data([1, 'a', 3])}\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "try/except/else/finally",
+        "else clause in exception handling",
+        "finally clause guarantees"
+      ],
+      "concepts_review": [
+        "try/except statement",
+        "sum() function",
+        "tuple return values"
+      ],
+      "hints": [
+        "The else block runs only if no exception was raised in the try block.",
+        "The finally block runs no matter what — whether an exception occurred or not.",
+        "Store the sum in result inside the try block; it stays if no exception occurs."
+      ]
+    }
+  ]
+}

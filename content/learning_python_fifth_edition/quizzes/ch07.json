@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 7,
+  "questions": [
+    {
+      "id": "lp_ch07_q01",
+      "type": "multiple_choice",
+      "question": "What does 'hello'[1:3] return?",
+      "choices": [
+        "'hel'",
+        "'el'",
+        "'ell'",
+        "'he'"
+      ],
+      "correct": 1,
+      "explanation": "Slicing s[1:3] extracts characters at index 1 and 2 (the end index is exclusive). 'hello'[1] is 'e' and 'hello'[2] is 'l', so the result is 'el'.",
+      "concepts": ["slicing", "string_indexing", "sequences"]
+    },
+    {
+      "id": "lp_ch07_q02",
+      "type": "fill_in_blank",
+      "question": "A string prefixed with r, such as r'\\n', is called a ___ string.",
+      "correct": "raw",
+      "explanation": "Raw strings (prefixed with r or R) treat backslashes as literal characters rather than escape sequences. r'\\n' is a two-character string containing a backslash and 'n', not a newline.",
+      "concepts": ["raw_strings", "escape_sequences", "string_literals"]
+    },
+    {
+      "id": "lp_ch07_q03",
+      "type": "multiple_choice",
+      "question": "Which string method returns a new string with all occurrences of a substring replaced?",
+      "choices": [
+        "s.find(old, new)",
+        "s.replace(old, new)",
+        "s.swap(old, new)",
+        "s.sub(old, new)"
+      ],
+      "correct": 1,
+      "explanation": "s.replace(old, new) returns a new string with all occurrences of 'old' replaced by 'new'. Since strings are immutable, the original string is unchanged.",
+      "concepts": ["string_methods", "replace", "immutability"]
+    },
+    {
+      "id": "lp_ch07_q04",
+      "type": "fill_in_blank",
+      "question": "In Python 3.6+, a string literal prefixed with f, such as f'Hello {name}', is called a(n) ___.",
+      "correct": "f-string",
+      "explanation": "f-strings (formatted string literals) allow embedding expressions directly inside string literals using curly braces. They were introduced in Python 3.6 and are generally the most readable formatting approach.",
+      "concepts": ["f_strings", "string_formatting", "string_literals"]
+    },
+    {
+      "id": "lp_ch07_q05",
+      "type": "multiple_choice",
+      "question": "What does 'hello world'.split() return?",
+      "choices": [
+        "['hello world']",
+        "['hello', 'world']",
+        "('hello', 'world')",
+        "['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']"
+      ],
+      "correct": 1,
+      "explanation": "split() with no arguments splits on whitespace and returns a list of substrings. 'hello world'.split() produces ['hello', 'world'].",
+      "concepts": ["string_methods", "split", "lists"]
+    },
+    {
+      "id": "lp_ch07_q06",
+      "type": "multiple_choice",
+      "question": "Which of the following correctly creates a multi-line string?",
+      "choices": [
+        "Using single quotes with \\n: 'line1\\nline2'",
+        "Using triple quotes: '''line1\\nline2'''",
+        "Both single quotes with \\n and triple quotes can create multi-line strings",
+        "Multi-line strings are not supported in Python"
+      ],
+      "correct": 2,
+      "explanation": "Both approaches work. You can embed \\n inside any string for newlines, or use triple quotes (''' or \"\"\") which allow the string to span multiple physical lines in your source code.",
+      "concepts": ["triple_quotes", "escape_sequences", "multiline_strings"]
+    },
+    {
+      "id": "lp_ch07_q07",
+      "type": "fill_in_blank",
+      "question": "The string method ___ removes leading and trailing whitespace from a string.",
+      "correct": "strip",
+      "explanation": "s.strip() returns a new string with leading and trailing whitespace removed. Related methods include lstrip() (left side only) and rstrip() (right side only). You can also pass a string of characters to strip.",
+      "concepts": ["string_methods", "strip", "whitespace"]
+    },
+    {
+      "id": "lp_ch07_q08",
+      "type": "multiple_choice",
+      "question": "What does ' '.join(['a', 'b', 'c']) return?",
+      "choices": [
+        "'abc'",
+        "'a b c'",
+        "['a', 'b', 'c']",
+        "'a, b, c'"
+      ],
+      "correct": 1,
+      "explanation": "The join() method concatenates the items of an iterable, placing the calling string between each item. ' '.join(['a', 'b', 'c']) inserts a space between each element, producing 'a b c'.",
+      "concepts": ["string_methods", "join", "sequences"]
+    }
+  ]
+}

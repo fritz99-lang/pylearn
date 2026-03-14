@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 32,
+  "questions": [
+    {
+      "id": "lp_ch32_q01",
+      "type": "multiple_choice",
+      "question": "What is the effect of defining __slots__ in a class?",
+      "choices": [
+        "It makes all attributes private",
+        "It restricts instances to only the named attributes, preventing a __dict__ from being created and saving memory",
+        "It speeds up method calls by caching them",
+        "It automatically generates __init__ for the listed attributes"
+      ],
+      "correct": 1,
+      "explanation": "__slots__ is a class-level sequence of attribute names. When defined, Python does not create a per-instance __dict__, saving memory. Instances can only have the attributes listed in __slots__; assigning other attributes raises an AttributeError.",
+      "concepts": ["__slots__", "memory_optimization"]
+    },
+    {
+      "id": "lp_ch32_q02",
+      "type": "fill_in_blank",
+      "question": "The ________ decorator allows you to define a method that is accessed like an attribute, without calling it with parentheses.",
+      "correct": "@property",
+      "explanation": "@property turns a method into a descriptor that is accessed like an attribute. When you access obj.x, the property's getter method is called automatically. You can also define setter and deleter methods using @x.setter and @x.deleter.",
+      "concepts": ["@property", "descriptors", "managed_attributes"]
+    },
+    {
+      "id": "lp_ch32_q03",
+      "type": "multiple_choice",
+      "question": "What does the super() function do in Python 3?",
+      "choices": [
+        "It creates a new superclass dynamically",
+        "It returns a proxy object that delegates method calls to the next class in the MRO",
+        "It prevents a class from being subclassed",
+        "It calls all parent class methods simultaneously"
+      ],
+      "correct": 1,
+      "explanation": "super() returns a proxy object that delegates method calls to the next class in the MRO (method resolution order). In Python 3, super() can be called with no arguments inside a method, and it automatically determines the class and instance.",
+      "concepts": ["super", "MRO", "cooperative_methods"]
+    },
+    {
+      "id": "lp_ch32_q04",
+      "type": "multiple_choice",
+      "question": "What is a class decorator in Python?",
+      "choices": [
+        "A decorator that can only be applied inside a class body",
+        "A function or callable that takes a class as an argument and returns a modified or new class",
+        "A special method that decorates instance attributes",
+        "A syntax for defining private methods"
+      ],
+      "correct": 1,
+      "explanation": "A class decorator is applied with @decorator syntax above a class definition. It receives the class object as its argument and typically returns the same class (possibly modified) or a wrapper. Class decorators run after the class body has been executed.",
+      "concepts": ["class_decorators", "metaprogramming"]
+    },
+    {
+      "id": "lp_ch32_q05",
+      "type": "fill_in_blank",
+      "question": "Python 3 computes the method resolution order using an algorithm called C3 ________.",
+      "correct": "linearization",
+      "explanation": "The C3 linearization algorithm computes a deterministic, consistent MRO for classes with multiple inheritance. It ensures that each class appears before its parents and that the local precedence order specified in class definitions is preserved.",
+      "concepts": ["C3_linearization", "MRO", "multiple_inheritance"]
+    },
+    {
+      "id": "lp_ch32_q06",
+      "type": "multiple_choice",
+      "question": "When extending a built-in type like list or dict by subclassing, what should you be aware of?",
+      "choices": [
+        "Built-in types cannot be subclassed in Python 3",
+        "You may need to override multiple methods to fully customize behavior, and some internal operations may not call your overridden methods",
+        "Subclassing built-in types automatically copies all data",
+        "You must always use __slots__ when subclassing built-in types"
+      ],
+      "correct": 1,
+      "explanation": "Built-in types can be subclassed, but their C-level implementations may bypass your Python-level method overrides for internal operations. For more predictable behavior, you can sometimes subclass from collections module classes (like UserDict, UserList) instead.",
+      "concepts": ["extending_builtins", "UserDict", "UserList"]
+    },
+    {
+      "id": "lp_ch32_q07",
+      "type": "multiple_choice",
+      "question": "What happens if a class defines __slots__ but one of its parent classes does not?",
+      "choices": [
+        "A TypeError is raised at class creation time",
+        "The subclass still has a __dict__ because the parent without __slots__ provides one",
+        "__slots__ in the subclass overrides the parent and removes __dict__",
+        "The parent class is automatically updated to include __slots__"
+      ],
+      "correct": 1,
+      "explanation": "If any class in the hierarchy does not define __slots__, instances will still have a __dict__ (inherited from that class). For __slots__ to fully prevent __dict__ creation, every class in the chain must define __slots__.",
+      "concepts": ["__slots__", "inheritance", "memory_optimization"]
+    }
+  ]
+}

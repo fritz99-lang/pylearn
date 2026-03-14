@@ -1,0 +1,52 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 35,
+  "challenges": [
+    {
+      "id": "lp_ch35_c01",
+      "title": "Custom Exception",
+      "description": "Create an exception class `ValidationError` that inherits from ValueError.\n\nIts __init__ should accept two parameters: `field` and `message`. Store both as instance attributes.\n\nIts __str__ method should return the string \"{field}: {message}\".",
+      "starter_code": "class ValidationError(ValueError):\n    \"\"\"Custom exception for validation failures.\"\"\"\n\n    def __init__(self, field, message):\n        # Store field and message as attributes\n        # Don't forget to call the parent __init__\n        ...\n\n    def __str__(self):\n        # Return \"{field}: {message}\"\n        ...\n",
+      "test_code": "e = ValidationError(\"email\", \"invalid format\")\nassert e.field == \"email\", f\"Expected field='email', got '{e.field}'\"\nassert e.message == \"invalid format\", f\"Expected message='invalid format', got '{e.message}'\"\nassert str(e) == \"email: invalid format\", f\"Expected 'email: invalid format', got '{str(e)}'\"\nassert isinstance(e, ValueError), \"ValidationError should inherit from ValueError\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "custom exception classes",
+        "exception inheritance",
+        "__str__ on exceptions"
+      ],
+      "concepts_review": [
+        "class definition",
+        "__init__ method",
+        "inheritance basics"
+      ],
+      "hints": [
+        "Use super().__init__(message) to call ValueError's __init__.",
+        "Store field and message with self.field = field and self.message = message.",
+        "Return an f-string from __str__: f\"{self.field}: {self.message}\""
+      ]
+    },
+    {
+      "id": "lp_ch35_c02",
+      "title": "Exception Hierarchy",
+      "description": "Create a base exception class `AppError` that inherits from Exception.\n\nCreate two subclasses:\n- `NotFoundError(AppError)` — takes a `resource` parameter, stores it as an attribute\n- `AccessDeniedError(AppError)` — takes a `resource` parameter, stores it as an attribute\n\nWrite a function `check_access(resource, exists, allowed)` that:\n- Raises NotFoundError(resource) if exists is False\n- Raises AccessDeniedError(resource) if allowed is False\n- Returns True if both exist and allowed",
+      "starter_code": "class AppError(Exception):\n    \"\"\"Base exception for the application.\"\"\"\n    pass\n\n\nclass NotFoundError(AppError):\n    \"\"\"Raised when a resource is not found.\"\"\"\n    def __init__(self, resource):\n        ...\n\n\nclass AccessDeniedError(AppError):\n    \"\"\"Raised when access to a resource is denied.\"\"\"\n    def __init__(self, resource):\n        ...\n\n\ndef check_access(resource, exists, allowed):\n    \"\"\"Check resource access. Raise NotFoundError or AccessDeniedError as needed.\"\"\"\n    ...\n",
+      "test_code": "assert check_access(\"file.txt\", True, True) is True, \"Should return True when exists and allowed\"\ntry:\n    check_access(\"x\", False, True)\n    assert False, \"Should have raised NotFoundError\"\nexcept NotFoundError as e:\n    assert e.resource == \"x\", f\"Expected resource='x', got '{e.resource}'\"\n    assert isinstance(e, AppError), \"NotFoundError should inherit from AppError\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "hard",
+      "concepts_new": [
+        "exception hierarchy design",
+        "base exception classes",
+        "choosing which exception to raise"
+      ],
+      "concepts_review": [
+        "custom exception classes",
+        "inheritance",
+        "conditional logic"
+      ],
+      "hints": [
+        "In each subclass __init__, store self.resource = resource and call super().__init__(resource).",
+        "In check_access, check exists first (before allowed) — order matters.",
+        "Use 'raise NotFoundError(resource)' to raise with the resource argument."
+      ]
+    }
+  ]
+}

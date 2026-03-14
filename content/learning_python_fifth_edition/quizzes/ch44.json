@@ -1,0 +1,56 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 44,
+  "questions": [
+    {
+      "id": "lp_ch44_q01",
+      "type": "multiple_choice",
+      "question": "In Python 3, print is a function. How was print used differently in Python 2?",
+      "choices": [
+        "print was a method of the str class",
+        "print was a statement, not a function",
+        "print did not exist in Python 2",
+        "print required importing from __future__"
+      ],
+      "correct": 1,
+      "explanation": "In Python 2, print was a statement (e.g., 'print \"hello\"'). Python 3 changed it to a built-in function requiring parentheses: print(\"hello\"). This made it more consistent and flexible, supporting keyword arguments like end and sep.",
+      "concepts": ["print_function", "python2_vs_3"]
+    },
+    {
+      "id": "lp_ch44_q02",
+      "type": "fill_in_blank",
+      "question": "In Python 3, the / operator performs ___ division, always returning a float even for integer operands.",
+      "correct": "true",
+      "explanation": "Python 3 changed / to always perform true (float) division. So 5 / 2 returns 2.5, not 2. For integer (floor) division, Python 3 uses the // operator. In Python 2, / performed floor division when both operands were integers.",
+      "concepts": ["true_division", "operators"]
+    },
+    {
+      "id": "lp_ch44_q03",
+      "type": "multiple_choice",
+      "question": "What is the default string type in Python 3?",
+      "choices": [
+        "ASCII bytes",
+        "Unicode (str)",
+        "Raw strings",
+        "Byte arrays"
+      ],
+      "correct": 1,
+      "explanation": "In Python 3, the str type is Unicode by default. Python 2 had separate str (bytes) and unicode types, which was a common source of encoding bugs. Python 3 cleanly separates text (str) from binary data (bytes).",
+      "concepts": ["unicode", "string_types"]
+    },
+    {
+      "id": "lp_ch44_q04",
+      "type": "multiple_choice",
+      "question": "What happened to the xrange() function from Python 2 in Python 3?",
+      "choices": [
+        "It was removed with no replacement",
+        "It was renamed to xrange2()",
+        "range() in Python 3 behaves like Python 2's xrange(), and xrange() was removed",
+        "Both range() and xrange() still exist in Python 3"
+      ],
+      "correct": 2,
+      "explanation": "Python 3's range() returns a lazy iterator (like Python 2's xrange()), generating values on demand instead of building a full list in memory. The xrange() name was removed since range() now provides the efficient behavior by default.",
+      "concepts": ["range", "xrange", "python2_vs_3"]
+    }
+  ]
+}

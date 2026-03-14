@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 10,
+  "questions": [
+    {
+      "id": "lp_ch10_q01",
+      "type": "multiple_choice",
+      "question": "In Python, how are code blocks (such as the body of an if statement) delimited?",
+      "choices": [
+        "With curly braces { }",
+        "With begin/end keywords",
+        "By consistent indentation",
+        "With parentheses ( )"
+      ],
+      "correct": 2,
+      "explanation": "Python uses indentation (whitespace) to define code blocks. All statements at the same indentation level belong to the same block. This is unlike languages like C or Java that use curly braces.",
+      "concepts": ["indentation", "block_structure", "syntax"]
+    },
+    {
+      "id": "lp_ch10_q02",
+      "type": "fill_in_blank",
+      "question": "The ___ statement is a placeholder that does nothing and is used where a statement is syntactically required but no action is needed.",
+      "correct": "pass",
+      "explanation": "pass is a no-operation statement. It is commonly used as a placeholder in empty function bodies, empty class definitions, or as a stub in if/else branches that you plan to fill in later.",
+      "concepts": ["pass_statement", "placeholders", "syntax"]
+    },
+    {
+      "id": "lp_ch10_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is the correct syntax for a Python if/elif/else chain?",
+      "choices": [
+        "if x > 0: print('pos') elif x == 0: print('zero') else: print('neg')",
+        "if (x > 0) then print('pos')",
+        "if x > 0:\\n    print('pos')\\nelif x == 0:\\n    print('zero')\\nelse:\\n    print('neg')",
+        "if x > 0 { print('pos') } else { print('neg') }"
+      ],
+      "correct": 2,
+      "explanation": "Python's if/elif/else uses colons after the condition and indented blocks for the body. Each clause (if, elif, else) ends with a colon, and the associated code is indented beneath it.",
+      "concepts": ["if_statement", "elif", "else", "syntax"]
+    },
+    {
+      "id": "lp_ch10_q04",
+      "type": "multiple_choice",
+      "question": "How can you split a long statement across multiple lines in Python?",
+      "choices": [
+        "Only by using a backslash (\\) at the end of a line",
+        "Only by enclosing the expression in parentheses, brackets, or braces",
+        "By using either a backslash continuation or enclosing in parentheses/brackets/braces",
+        "Long statements cannot be split across lines"
+      ],
+      "correct": 2,
+      "explanation": "Python supports two ways to span multiple lines: a backslash at the end of a line, or implicit continuation inside parentheses (), brackets [], or braces {}. The parentheses approach is generally preferred as it is cleaner.",
+      "concepts": ["multiline_statements", "line_continuation", "syntax"]
+    },
+    {
+      "id": "lp_ch10_q05",
+      "type": "fill_in_blank",
+      "question": "In Python, the ___ function is used to display output to the console.",
+      "correct": "print",
+      "explanation": "print() is a built-in function in Python 3 that writes its arguments to standard output. It was a statement in Python 2 but became a function in Python 3, allowing keyword arguments like sep, end, and file.",
+      "concepts": ["print_function", "output", "built_ins"]
+    },
+    {
+      "id": "lp_ch10_q06",
+      "type": "multiple_choice",
+      "question": "What is an expression statement in Python?",
+      "choices": [
+        "A statement that contains only an assignment",
+        "An expression used on a line by itself, typically for its side effect (like a function call)",
+        "A statement that always returns a value",
+        "An expression inside an if condition"
+      ],
+      "correct": 1,
+      "explanation": "An expression statement is an expression written on its own line. The most common example is a function call like print('hello'). The expression is evaluated, its return value (if any) is discarded, and any side effects occur.",
+      "concepts": ["expression_statements", "side_effects", "statements"]
+    },
+    {
+      "id": "lp_ch10_q07",
+      "type": "multiple_choice",
+      "question": "What does the assignment statement x = y = z = 0 do?",
+      "choices": [
+        "Creates a tuple (x, y, z) equal to 0",
+        "Assigns the value 0 to all three variables x, y, and z",
+        "Raises a SyntaxError",
+        "Assigns 0 only to z, and the others become None"
+      ],
+      "correct": 1,
+      "explanation": "This is a multiple-target assignment. Python assigns the value 0 to each of the named variables from left to right. All three variables end up referencing the same object (the integer 0).",
+      "concepts": ["assignment", "multiple_targets", "variables"]
+    },
+    {
+      "id": "lp_ch10_q08",
+      "type": "fill_in_blank",
+      "question": "Every compound statement in Python (if, while, for, def, class) has a header line that ends with a ___.",
+      "correct": "colon",
+      "explanation": "The colon (:) marks the end of a compound statement's header and the beginning of its indented body block. Forgetting the colon is one of the most common syntax errors for beginners.",
+      "concepts": ["compound_statements", "colon", "syntax"]
+    }
+  ]
+}

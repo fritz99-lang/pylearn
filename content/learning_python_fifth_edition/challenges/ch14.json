@@ -1,0 +1,74 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 14,
+  "challenges": [
+    {
+      "id": "lp_ch14_c01",
+      "title": "List Comprehension Filter",
+      "description": "Given `nums = range(1, 21)`, create three lists using list comprehensions: `evens` (all even numbers), `squares` (squares of all numbers), and `even_squares` (squares of only the even numbers).",
+      "starter_code": "nums = range(1, 21)\n\n# Create evens: all even numbers from nums\n\n# Create squares: square of every number in nums\n\n# Create even_squares: squares of only the even numbers\n",
+      "test_code": "assert evens == [2, 4, 6, 8, 10, 12, 14, 16, 18, 20], f'Expected even numbers 2-20, got {evens}'\nassert squares == [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400], f'Squares list incorrect: {squares}'\nassert even_squares == [4, 16, 36, 64, 100, 144, 196, 256, 324, 400], f'Even squares incorrect: {even_squares}'\nassert len(evens) == 10, f'Expected 10 even numbers, got {len(evens)}'\nassert len(squares) == 20, f'Expected 20 squares, got {len(squares)}'\nassert len(even_squares) == 10, f'Expected 10 even squares, got {len(even_squares)}'",
+      "difficulty": "easy",
+      "concepts_new": [
+        "list comprehensions",
+        "filtered comprehensions (if clause)"
+      ],
+      "concepts_review": [
+        "range()",
+        "modulo operator",
+        "arithmetic operators"
+      ],
+      "hints": [
+        "Basic comprehension: [expression for item in iterable]",
+        "Filtered comprehension: [expression for item in iterable if condition]",
+        "For squares, use the ** operator: n ** 2"
+      ]
+    },
+    {
+      "id": "lp_ch14_c02",
+      "title": "Zip and Enumerate",
+      "description": "Given `names = ['Alice', 'Bob', 'Charlie']` and `scores = [95, 87, 92]`, create a list called `ranked` containing formatted strings like '1. Alice: 95', '2. Bob: 87', '3. Charlie: 92'. Use both `enumerate` (starting at 1) and `zip` to combine the data.",
+      "starter_code": "names = ['Alice', 'Bob', 'Charlie']\nscores = [95, 87, 92]\n\n# Create ranked list using enumerate and zip\nranked = []\n",
+      "test_code": "assert ranked == ['1. Alice: 95', '2. Bob: 87', '3. Charlie: 92'], f'Expected ranked list with numbered entries, got {ranked}'\nassert len(ranked) == 3, f'Expected 3 entries, got {len(ranked)}'\nassert ranked[0] == '1. Alice: 95', f'First entry should be \"1. Alice: 95\", got {ranked[0]}'\nassert ranked[2] == '3. Charlie: 92', f'Third entry should be \"3. Charlie: 92\", got {ranked[2]}'",
+      "difficulty": "medium",
+      "concepts_new": [
+        "zip() function",
+        "enumerate() function",
+        "combining iteration tools"
+      ],
+      "concepts_review": [
+        "f-strings",
+        "list comprehensions",
+        "tuple unpacking in loops"
+      ],
+      "hints": [
+        "zip(names, scores) pairs up elements: ('Alice', 95), ('Bob', 87), ...",
+        "enumerate(iterable, start=1) gives (1, item), (2, item), ...",
+        "Combine them: enumerate(zip(names, scores), 1) gives (1, ('Alice', 95)), ...",
+        "Use an f-string like f'{i}. {name}: {score}' to format each entry."
+      ]
+    },
+    {
+      "id": "lp_ch14_c03",
+      "title": "Dict Comprehension",
+      "description": "Given `sentence = 'the quick brown fox jumps over the lazy dog'`, create a dictionary called `word_lengths` that maps each unique word to its length. Since 'the' appears twice, it should only appear once in the dict (duplicates are handled naturally by dict keys).",
+      "starter_code": "sentence = 'the quick brown fox jumps over the lazy dog'\n\n# Create word_lengths dict using a dict comprehension\n",
+      "test_code": "expected = {'the': 3, 'quick': 5, 'brown': 5, 'fox': 3, 'jumps': 5, 'over': 4, 'lazy': 4, 'dog': 3}\nassert isinstance(word_lengths, dict), 'word_lengths should be a dictionary'\nassert word_lengths == expected, f'Expected {expected}, got {word_lengths}'\nassert len(word_lengths) == 8, f'Expected 8 unique words, got {len(word_lengths)}'\nassert word_lengths['quick'] == 5, f'Expected quick to have length 5, got {word_lengths.get(\"quick\")}'\nassert word_lengths['the'] == 3, f'Expected the to have length 3, got {word_lengths.get(\"the\")}'\nassert word_lengths['dog'] == 3, f'Expected dog to have length 3, got {word_lengths.get(\"dog\")}'",
+      "difficulty": "hard",
+      "concepts_new": [
+        "dict comprehensions",
+        "str.split() method"
+      ],
+      "concepts_review": [
+        "list comprehensions",
+        "len() function",
+        "dictionaries"
+      ],
+      "hints": [
+        "Use sentence.split() to break the string into a list of words.",
+        "Dict comprehension syntax: {key: value for item in iterable}",
+        "Duplicate keys in a dict comprehension are automatically overwritten (last wins)."
+      ]
+    }
+  ]
+}

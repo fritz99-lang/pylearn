@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 26,
+  "questions": [
+    {
+      "id": "lp_ch26_q01",
+      "type": "multiple_choice",
+      "question": "In Python's OOP model, what is the relationship between a class and an instance?",
+      "choices": [
+        "A class is a copy of an instance",
+        "A class is a factory that generates instances",
+        "An instance is a blueprint for a class",
+        "Classes and instances are the same thing"
+      ],
+      "correct": 1,
+      "explanation": "Classes serve as factories for generating instances. Each instance is created from a class and inherits its attributes, but can also have its own unique data.",
+      "concepts": ["classes", "instances", "oop_basics"]
+    },
+    {
+      "id": "lp_ch26_q02",
+      "type": "fill_in_blank",
+      "question": "The process by which a subclass receives attributes from a superclass is called ___.",
+      "correct": "inheritance",
+      "explanation": "Inheritance allows subclasses to reuse and extend the behavior defined in their superclasses, forming a class tree hierarchy.",
+      "concepts": ["inheritance"]
+    },
+    {
+      "id": "lp_ch26_q03",
+      "type": "multiple_choice",
+      "question": "What does polymorphism mean in the context of Python OOP?",
+      "choices": [
+        "A variable can only hold one type of data",
+        "The same operation can behave differently depending on the object it acts upon",
+        "All classes must implement the same methods",
+        "Objects cannot change their type at runtime"
+      ],
+      "correct": 1,
+      "explanation": "Polymorphism means that the meaning of an operation depends on the object being operated on. Different objects can respond to the same method call in different ways.",
+      "concepts": ["polymorphism"]
+    },
+    {
+      "id": "lp_ch26_q04",
+      "type": "multiple_choice",
+      "question": "In a Python class tree, how does attribute lookup work when you access an attribute on an instance?",
+      "choices": [
+        "Python only looks at the instance itself",
+        "Python searches the instance first, then its class, then any superclasses from bottom to top",
+        "Python searches the superclass first, then the subclass, then the instance",
+        "Python searches all classes in alphabetical order"
+      ],
+      "correct": 1,
+      "explanation": "Python's attribute lookup follows the inheritance tree from bottom to top: it searches the instance first, then its class, then superclasses, stopping at the first place the attribute is found.",
+      "concepts": ["attribute_lookup", "class_tree", "inheritance"]
+    },
+    {
+      "id": "lp_ch26_q05",
+      "type": "fill_in_blank",
+      "question": "The OOP principle of bundling data and the methods that operate on that data into a single unit is called ___.",
+      "correct": "encapsulation",
+      "explanation": "Encapsulation wraps data and behavior together inside objects. In Python, this is achieved through classes, though Python does not enforce strict access control like some other languages.",
+      "concepts": ["encapsulation"]
+    },
+    {
+      "id": "lp_ch26_q06",
+      "type": "multiple_choice",
+      "question": "Why does Python use OOP?",
+      "choices": [
+        "It is the only programming paradigm Python supports",
+        "OOP enables code reuse through inheritance, reduces redundancy, and helps manage program complexity",
+        "OOP makes Python programs run faster than procedural code",
+        "Python requires all code to be inside classes"
+      ],
+      "correct": 1,
+      "explanation": "OOP's main benefits in Python are code reuse through inheritance, reduced redundancy by factoring common behavior into superclasses, and better management of program complexity through modular design.",
+      "concepts": ["oop_motivation", "code_reuse"]
+    },
+    {
+      "id": "lp_ch26_q07",
+      "type": "multiple_choice",
+      "question": "In a class tree, what is a superclass?",
+      "choices": [
+        "A class that has no parent classes",
+        "A class that is higher in the tree and provides attributes inherited by classes below it",
+        "A class that cannot be instantiated",
+        "A class that overrides all methods from its children"
+      ],
+      "correct": 1,
+      "explanation": "A superclass (also called a parent or base class) sits higher in the class tree. Classes below it (subclasses) inherit its attributes and can customize or extend them.",
+      "concepts": ["superclass", "class_tree"]
+    }
+  ]
+}

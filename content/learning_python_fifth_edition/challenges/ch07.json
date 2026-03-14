@@ -1,0 +1,39 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 7,
+  "challenges": [
+    {
+      "id": "lp_ch07_c01",
+      "title": "String Methods",
+      "description": "Given text = '  Hello, World!  ', create four variables: 'stripped' (whitespace removed from both ends), 'upper' (stripped text converted to uppercase), 'replaced' (in stripped text, replace 'Hello' with 'Python'), and 'words' (split the stripped text by spaces).",
+      "starter_code": "text = '  Hello, World!  '\n\n# Remove leading/trailing whitespace\nstripped = # your code here\n\n# Convert stripped to uppercase\nupper = # your code here\n\n# Replace 'Hello' with 'Python' in stripped\nreplaced = # your code here\n\n# Split stripped into a list of words\nwords = # your code here\n",
+      "test_code": "assert stripped == 'Hello, World!', f\"stripped should be 'Hello, World!', got '{stripped}'\"\nassert upper == 'HELLO, WORLD!', f\"upper should be 'HELLO, WORLD!', got '{upper}'\"\nassert replaced == 'Python, World!', f\"replaced should be 'Python, World!', got '{replaced}'\"\nassert words == ['Hello,', 'World!'], f\"words should be ['Hello,', 'World!'], got {words}\"",
+      "difficulty": "easy",
+      "concepts_new": ["string_methods", "strip", "upper", "replace", "split"],
+      "concepts_review": ["strings", "variables"],
+      "hints": ["Use .strip() to remove whitespace from both ends", "Call .upper() on the stripped result", "Use .replace('Hello', 'Python') on the stripped result", "Use .split() on the stripped result to split by whitespace"]
+    },
+    {
+      "id": "lp_ch07_c02",
+      "title": "F-String Formatter",
+      "description": "Given name = 'Alice', age = 30, and score = 95.5, create a formatted string called 'report' that reads exactly: 'Name: Alice | Age: 30 | Score: 95.50' (note: score must show exactly 2 decimal places).",
+      "starter_code": "name = 'Alice'\nage = 30\nscore = 95.5\n\n# Create the formatted report string\nreport = # your code here\n",
+      "test_code": "assert report == 'Name: Alice | Age: 30 | Score: 95.50', f\"Expected 'Name: Alice | Age: 30 | Score: 95.50', got '{report}'\"\nassert isinstance(report, str), 'report should be a string'",
+      "difficulty": "medium",
+      "concepts_new": ["f_strings", "format_specifiers", "decimal_formatting"],
+      "concepts_review": ["strings", "variables"],
+      "hints": ["Use an f-string: f\"Name: {name} | Age: {age} | Score: {score}\"", "To format score with 2 decimal places, use {score:.2f}", "The :.2f format specifier means 'float with 2 decimal places'"]
+    },
+    {
+      "id": "lp_ch07_c03",
+      "title": "String Slicer",
+      "description": "Given s = 'abcdefghij', create three variables using slicing: 'reversed_s' (the entire string reversed), 'every_other' (every other character starting from index 0), and 'middle' (characters at index 3 through 6 inclusive).",
+      "starter_code": "s = 'abcdefghij'\n\n# Reverse the entire string\nreversed_s = # your code here\n\n# Get every other character (index 0, 2, 4, ...)\nevery_other = # your code here\n\n# Get characters at index 3 through 6 inclusive\nmiddle = # your code here\n",
+      "test_code": "assert reversed_s == 'jihgfedcba', f\"reversed_s should be 'jihgfedcba', got '{reversed_s}'\"\nassert every_other == 'acegi', f\"every_other should be 'acegi', got '{every_other}'\"\nassert middle == 'defg', f\"middle should be 'defg', got '{middle}'\"",
+      "difficulty": "medium",
+      "concepts_new": ["string_slicing", "step_slicing", "reverse_slicing"],
+      "concepts_review": ["strings", "indexing"],
+      "hints": ["Reverse a string with s[::-1]", "Every other character uses a step of 2: s[::2]", "Remember s[3:7] gets indices 3, 4, 5, 6 (end index is exclusive)"]
+    }
+  ]
+}

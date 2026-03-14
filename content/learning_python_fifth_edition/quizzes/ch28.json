@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 28,
+  "questions": [
+    {
+      "id": "lp_ch28_q01",
+      "type": "multiple_choice",
+      "question": "When designing a class hierarchy, what is a good first step?",
+      "choices": [
+        "Write all the code in one large class and split it later",
+        "Identify the common behavior and place it in a superclass, then create subclasses for specialized behavior",
+        "Start with as many subclasses as possible and merge them later",
+        "Avoid using inheritance entirely and copy code between classes"
+      ],
+      "correct": 1,
+      "explanation": "Good class design starts by identifying shared behavior and putting it in a superclass. Subclasses then inherit this common behavior and only add or override what is unique to them, reducing code duplication.",
+      "concepts": ["class_design", "hierarchy"]
+    },
+    {
+      "id": "lp_ch28_q02",
+      "type": "fill_in_blank",
+      "question": "Testing classes interactively at the Python ___ prompt is a quick way to verify that methods and inheritance work correctly.",
+      "correct": "interactive",
+      "explanation": "The interactive Python prompt (REPL) lets you create instances, call methods, and inspect attributes immediately. This rapid feedback loop makes it an excellent tool for verifying class behavior during development.",
+      "concepts": ["interactive_testing", "repl"]
+    },
+    {
+      "id": "lp_ch28_q03",
+      "type": "multiple_choice",
+      "question": "In the book's realistic class example, what does the __repr__ (or __str__) method provide?",
+      "choices": [
+        "It prevents the object from being printed",
+        "It returns a custom string representation of the instance, making print output meaningful",
+        "It converts the object to an integer",
+        "It deletes the object from memory"
+      ],
+      "correct": 1,
+      "explanation": "Defining __repr__ or __str__ lets you control how an instance appears when printed or displayed. Instead of seeing a generic object reference, you get a meaningful string showing the object's key data.",
+      "concepts": ["__repr__", "__str__", "string_representation"]
+    },
+    {
+      "id": "lp_ch28_q04",
+      "type": "multiple_choice",
+      "question": "When a subclass needs to extend (not replace) a method from its superclass, what technique should it use?",
+      "choices": [
+        "Define the method with a completely different name",
+        "Call the superclass method explicitly (e.g., Super.method(self, ...)) and then add its own logic",
+        "Delete the superclass method first",
+        "Use a global function instead of a method"
+      ],
+      "correct": 1,
+      "explanation": "To extend a superclass method, the subclass overrides it but calls the superclass version explicitly using Super.method(self, ...) or super().method(...). This runs the original logic first, then the subclass adds its own customizations.",
+      "concepts": ["method_extension", "super_call"]
+    },
+    {
+      "id": "lp_ch28_q05",
+      "type": "fill_in_blank",
+      "question": "Storing object data in instance attributes (self.name = value) rather than global variables ensures each object maintains its own ___.",
+      "correct": "state",
+      "explanation": "Instance attributes let each object carry its own data (state) independently. Unlike global variables which are shared, self.name creates a separate copy of the attribute for each instance.",
+      "concepts": ["instance_state", "encapsulation"]
+    },
+    {
+      "id": "lp_ch28_q06",
+      "type": "multiple_choice",
+      "question": "What is the benefit of incremental testing during class development?",
+      "choices": [
+        "It makes the code run faster in production",
+        "It lets you catch errors early by testing each class and method as you write it, before the system grows too complex",
+        "It automatically generates documentation",
+        "It eliminates the need for unit tests later"
+      ],
+      "correct": 1,
+      "explanation": "Incremental testing means testing classes and methods as you build them, rather than waiting until the entire system is complete. This catches bugs early when they are easier to diagnose and fix.",
+      "concepts": ["incremental_testing", "development_process"]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 23,
+  "questions": [
+    {
+      "id": "lp_ch23_q01",
+      "type": "multiple_choice",
+      "question": "What is the key difference between 'import module' and 'from module import name'?",
+      "choices": [
+        "There is no difference; they are interchangeable",
+        "'import module' loads the whole module and you access names via module.name, while 'from module import name' copies specific names into the importing scope",
+        "'from module import name' only loads part of the module file for speed",
+        "'import module' only works with standard library modules"
+      ],
+      "correct": 1,
+      "explanation": "'import module' creates a module object in the caller's scope and you access attributes with dot notation. 'from module import name' also runs the entire module file but copies the specified names directly into the importing scope, so you use them without a prefix.",
+      "concepts": ["import_statement", "from_import", "module_namespaces"]
+    },
+    {
+      "id": "lp_ch23_q02",
+      "type": "fill_in_blank",
+      "question": "To give an imported module a shorter or different name, you use the syntax: import module as ___.",
+      "correct": "alias",
+      "explanation": "The 'import module as alias' syntax binds the imported module to a different name. For example, 'import numpy as np' lets you write np.array() instead of numpy.array(). The alias is any valid Python identifier.",
+      "concepts": ["import_as", "aliasing"]
+    },
+    {
+      "id": "lp_ch23_q03",
+      "type": "multiple_choice",
+      "question": "What does 'from module import *' do?",
+      "choices": [
+        "Imports only the module's classes",
+        "Copies all names from the module into the importing scope (except names starting with underscore, unless __all__ is defined)",
+        "Makes all the module's names private",
+        "Creates a copy of the module file in the current directory"
+      ],
+      "correct": 1,
+      "explanation": "'from module import *' copies all top-level names from the module into the caller's scope. By default it skips names starting with an underscore, but if __all__ is defined in the module, only the names listed there are imported.",
+      "concepts": ["from_star", "wildcard_import"]
+    },
+    {
+      "id": "lp_ch23_q04",
+      "type": "multiple_choice",
+      "question": "Which function forces Python to re-read and re-run a module's source code after it has already been imported?",
+      "choices": [
+        "reimport()",
+        "importlib.reload()",
+        "sys.reload()",
+        "module.refresh()"
+      ],
+      "correct": 1,
+      "explanation": "importlib.reload() forces Python to re-read and re-execute a previously imported module's source file. This is useful during interactive development to pick up code changes without restarting the interpreter.",
+      "concepts": ["importlib_reload", "reloading"]
+    },
+    {
+      "id": "lp_ch23_q05",
+      "type": "fill_in_blank",
+      "question": "Each module in Python has its own ___, which serves as an independent namespace for the names it defines.",
+      "correct": "global scope",
+      "explanation": "Every module file has its own global scope. Names assigned at the top level of a module become attributes of that module object, preventing them from clashing with identically named variables in other modules.",
+      "concepts": ["module_namespace", "global_scope"]
+    },
+    {
+      "id": "lp_ch23_q06",
+      "type": "multiple_choice",
+      "question": "What is a major risk of using 'from module import *' in production code?",
+      "choices": [
+        "It causes Python to run out of memory",
+        "It can silently overwrite existing names in the importing scope, leading to hard-to-find bugs",
+        "It prevents the module from being garbage collected",
+        "It only works with standard library modules"
+      ],
+      "correct": 1,
+      "explanation": "'from module import *' brings all exported names into the current scope, which can silently overwrite variables that already exist with the same name. This makes it harder to trace where names come from and can cause subtle bugs.",
+      "concepts": ["from_star", "namespace_pollution"]
+    }
+  ]
+}

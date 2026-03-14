@@ -272,6 +272,162 @@ class Exercise:
 
 
 @dataclass
+class QuizQuestion:
+    """A quiz question (multiple choice or fill-in-the-blank)."""
+
+    question_id: str
+    question_type: str  # "multiple_choice" or "fill_in_blank"
+    question: str
+    correct: str | int  # index for MC, string for fill-in
+    explanation: str = ""
+    choices: list[str] = field(default_factory=list)
+    concepts: list[str] = field(default_factory=list)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> QuizQuestion:
+        try:
+            return cls(
+                question_id=data["id"],
+                question_type=data["type"],
+                question=data["question"],
+                correct=data["correct"],
+                explanation=data.get("explanation", ""),
+                choices=data.get("choices", []),
+                concepts=data.get("concepts", []),
+            )
+        except KeyError as e:
+            raise ValueError(f"QuizQuestion missing required key: {e}") from e
+
+
+@dataclass
+class QuizSet:
+    """A set of quiz questions for a chapter."""
+
+    book_id: str
+    chapter_num: int
+    questions: list[QuizQuestion] = field(default_factory=list)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> QuizSet:
+        try:
+            return cls(
+                book_id=data["book_id"],
+                chapter_num=data["chapter_num"],
+                questions=[QuizQuestion.from_dict(q) for q in data.get("questions", [])],
+            )
+        except KeyError as e:
+            raise ValueError(f"QuizSet missing required key: {e}") from e
+
+
+@dataclass
+class ChallengeSpec:
+    """A code challenge specification."""
+
+    challenge_id: str
+    title: str
+    description: str
+    starter_code: str
+    test_code: str
+    difficulty: str = "easy"  # easy, medium, hard
+    concepts_new: list[str] = field(default_factory=list)
+    concepts_review: list[str] = field(default_factory=list)
+    hints: list[str] = field(default_factory=list)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> ChallengeSpec:
+        try:
+            return cls(
+                challenge_id=data["id"],
+                title=data["title"],
+                description=data["description"],
+                starter_code=data["starter_code"],
+                test_code=data["test_code"],
+                difficulty=data.get("difficulty", "easy"),
+                concepts_new=data.get("concepts_new", []),
+                concepts_review=data.get("concepts_review", []),
+                hints=data.get("hints", []),
+            )
+        except KeyError as e:
+            raise ValueError(f"ChallengeSpec missing required key: {e}") from e
+
+
+@dataclass
+class ChallengeSet:
+    """A set of code challenges for a chapter."""
+
+    book_id: str
+    chapter_num: int
+    challenges: list[ChallengeSpec] = field(default_factory=list)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> ChallengeSet:
+        try:
+            return cls(
+                book_id=data["book_id"],
+                chapter_num=data["chapter_num"],
+                challenges=[ChallengeSpec.from_dict(c) for c in data.get("challenges", [])],
+            )
+        except KeyError as e:
+            raise ValueError(f"ChallengeSet missing required key: {e}") from e
+
+
+@dataclass
+class ProjectMeta:
+    """Metadata for a book-spanning project."""
+
+    book_id: str
+    title: str
+    description: str
+    final_description: str = ""
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> ProjectMeta:
+        try:
+            return cls(
+                book_id=data["book_id"],
+                title=data["title"],
+                description=data["description"],
+                final_description=data.get("final_description", ""),
+            )
+        except KeyError as e:
+            raise ValueError(f"ProjectMeta missing required key: {e}") from e
+
+
+@dataclass
+class ProjectStep:
+    """A single step in a book-spanning project, tied to a chapter."""
+
+    step_id: str
+    book_id: str
+    chapter_num: int
+    title: str
+    description: str
+    starter_code: str
+    test_code: str
+    builds_on: str = ""  # step_id of the previous step
+    acceptance_criteria: list[str] = field(default_factory=list)
+    hints: list[str] = field(default_factory=list)
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> ProjectStep:
+        try:
+            return cls(
+                step_id=data["step_id"],
+                book_id=data["book_id"],
+                chapter_num=data["chapter_num"],
+                title=data["title"],
+                description=data["description"],
+                starter_code=data["starter_code"],
+                test_code=data["test_code"],
+                builds_on=data.get("builds_on", ""),
+                acceptance_criteria=data.get("acceptance_criteria", []),
+                hints=data.get("hints", []),
+            )
+        except KeyError as e:
+            raise ValueError(f"ProjectStep missing required key: {e}") from e
+
+
+@dataclass
 class Bookmark:
     """A user bookmark."""
 

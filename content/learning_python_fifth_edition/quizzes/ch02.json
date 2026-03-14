@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 2,
+  "questions": [
+    {
+      "id": "lp_ch02_q01",
+      "type": "multiple_choice",
+      "question": "What is the Python Virtual Machine (PVM)?",
+      "choices": [
+        "A separate application you must install",
+        "The runtime engine that executes Python byte code",
+        "A virtual operating system for Python",
+        "A debugging tool for Python programs"
+      ],
+      "correct": 1,
+      "explanation": "The PVM is the runtime engine of Python. It's the component that actually executes your compiled byte code. It's not a separate program — it's part of the Python system.",
+      "concepts": ["pvm", "runtime"]
+    },
+    {
+      "id": "lp_ch02_q02",
+      "type": "fill_in_blank",
+      "question": "Python source files use the ___ file extension.",
+      "correct": ".py",
+      "explanation": "Python source code files conventionally use the .py extension. Compiled byte code files use .pyc.",
+      "concepts": ["file_extensions", "source_files"]
+    },
+    {
+      "id": "lp_ch02_q03",
+      "type": "multiple_choice",
+      "question": "What happens when you import a Python module for the first time?",
+      "choices": [
+        "The source code is executed directly without compilation",
+        "Python compiles the source to byte code and then executes it",
+        "Python converts it to C and compiles that",
+        "The module is loaded from a pre-compiled library"
+      ],
+      "correct": 1,
+      "explanation": "When a module is first imported, Python compiles the source (.py) to byte code (.pyc) and saves it. On subsequent imports, Python loads the byte code directly if the source hasn't changed.",
+      "concepts": ["import", "compilation", "bytecode"]
+    },
+    {
+      "id": "lp_ch02_q04",
+      "type": "fill_in_blank",
+      "question": "Compiled Python byte code files have the ___ extension and are stored in the __pycache__ directory.",
+      "correct": ".pyc",
+      "explanation": "Python 3 stores compiled byte code in __pycache__ directories as .pyc files, named with the Python version for compatibility.",
+      "concepts": ["bytecode", "pyc", "pycache"]
+    },
+    {
+      "id": "lp_ch02_q05",
+      "type": "multiple_choice",
+      "question": "Which Python implementation uses a Just-In-Time (JIT) compiler to speed up execution?",
+      "choices": [
+        "CPython",
+        "Jython",
+        "PyPy",
+        "IronPython"
+      ],
+      "correct": 2,
+      "explanation": "PyPy is an alternative Python implementation that includes a JIT compiler, which can significantly speed up long-running programs by compiling frequently-used byte code to machine code at runtime.",
+      "concepts": ["pypy", "jit", "implementations"]
+    },
+    {
+      "id": "lp_ch02_q06",
+      "type": "multiple_choice",
+      "question": "What is 'frozen binaries' in the context of Python?",
+      "choices": [
+        "Python code that runs only in cold weather",
+        "Standalone executables that bundle Python byte code with the PVM",
+        "Python code that has been encrypted",
+        "Read-only Python source files"
+      ],
+      "correct": 1,
+      "explanation": "Frozen binaries bundle compiled Python byte code with the PVM into a single executable package that end users can run without installing Python. Tools like PyInstaller and cx_Freeze create frozen binaries.",
+      "concepts": ["frozen_binaries", "distribution"]
+    }
+  ]
+}

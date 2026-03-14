@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 39,
+  "questions": [
+    {
+      "id": "lp_ch39_q01",
+      "type": "multiple_choice",
+      "question": "What does the @decorator syntax do in Python?",
+      "choices": [
+        "It comments out the function below it",
+        "It rebinds the function name to the result of passing the function to the decorator",
+        "It makes the function run twice",
+        "It converts the function to a generator"
+      ],
+      "correct": 1,
+      "explanation": "@decorator above a function def is equivalent to writing func = decorator(func) after the function definition. The decorator receives the function as an argument and typically returns a wrapper that adds behavior.",
+      "concepts": ["decorator_syntax", "function_decorators", "rebinding"]
+    },
+    {
+      "id": "lp_ch39_q02",
+      "type": "fill_in_blank",
+      "question": "The functools.___ function is used inside decorators to preserve the original function's __name__, __doc__, and other attributes on the wrapper.",
+      "correct": "wraps",
+      "explanation": "functools.wraps(original_func) is a decorator applied to the wrapper function inside a decorator. It copies metadata (__name__, __doc__, __module__, etc.) from the original function to the wrapper, which aids debugging and introspection.",
+      "concepts": ["functools_wraps", "decorator_metadata", "introspection"]
+    },
+    {
+      "id": "lp_ch39_q03",
+      "type": "multiple_choice",
+      "question": "What is the result of stacking multiple decorators like @A then @B above a function f?",
+      "choices": [
+        "Only @A is applied, @B is ignored",
+        "f = A(B(f)) — B is applied first, then A wraps the result",
+        "f = B(A(f)) — A is applied first, then B wraps the result",
+        "Both decorators run simultaneously"
+      ],
+      "correct": 1,
+      "explanation": "Decorators are applied bottom-up. @A above @B above def f means f = A(B(f)). The decorator closest to the function (B) is applied first, and its result is passed to the next decorator (A).",
+      "concepts": ["decorator_chaining", "decorator_order", "stacking"]
+    },
+    {
+      "id": "lp_ch39_q04",
+      "type": "multiple_choice",
+      "question": "How do you create a decorator that accepts arguments, like @repeat(n=3)?",
+      "choices": [
+        "Define a function that takes the arguments and returns the actual decorator function",
+        "Add the arguments to the wrapper function directly",
+        "Use a special __decorate__ method",
+        "It is not possible to pass arguments to decorators"
+      ],
+      "correct": 0,
+      "explanation": "A decorator with arguments requires an extra layer of nesting: an outer function takes the arguments and returns the actual decorator, which in turn takes the function and returns the wrapper. This creates a three-level function nesting pattern.",
+      "concepts": ["decorator_arguments", "decorator_factory", "nested_functions"]
+    },
+    {
+      "id": "lp_ch39_q05",
+      "type": "fill_in_blank",
+      "question": "A class decorator is applied to a ___ definition using the @ syntax, just like function decorators are applied to functions.",
+      "correct": "class",
+      "explanation": "Class decorators use the same @decorator syntax but are placed above a class definition. The decorator receives the class as its argument and typically returns a modified class or a wrapper. For example, @dataclass is a class decorator.",
+      "concepts": ["class_decorators", "decorator_syntax", "class_definition"]
+    },
+    {
+      "id": "lp_ch39_q06",
+      "type": "multiple_choice",
+      "question": "Which of the following is a common use case for function decorators?",
+      "choices": [
+        "Defining new Python keywords",
+        "Adding logging, timing, access control, or caching to existing functions",
+        "Replacing the Python interpreter",
+        "Converting Python code to machine code"
+      ],
+      "correct": 1,
+      "explanation": "Decorators are commonly used for cross-cutting concerns like logging, performance timing, authentication/authorization, caching (e.g., @functools.lru_cache), and input validation — behavior you want to add to multiple functions without modifying each one.",
+      "concepts": ["decorator_use_cases", "cross_cutting_concerns", "logging", "caching"]
+    }
+  ]
+}

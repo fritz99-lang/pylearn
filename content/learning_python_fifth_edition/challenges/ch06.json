@@ -1,0 +1,28 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 6,
+  "challenges": [
+    {
+      "id": "lp_ch06_c01",
+      "title": "Type Inspector",
+      "description": "Create variables of 5 different types: an int called 'a', a float called 'b', a str called 'c', a list called 'd', and a bool called 'e'. Then create a list called 'type_names' containing each variable's type name (using type().__name__), in that order.",
+      "starter_code": "# Create variables of 5 different types\na = # your code here (int)\nb = # your code here (float)\nc = # your code here (str)\nd = # your code here (list)\ne = # your code here (bool)\n\n# Build a list of their type names using type().__name__\ntype_names = # your code here\n",
+      "test_code": "assert isinstance(a, int), f'a should be an int, got {type(a).__name__}'\nassert isinstance(b, float), f'b should be a float, got {type(b).__name__}'\nassert isinstance(c, str), f'c should be a str, got {type(c).__name__}'\nassert isinstance(d, list), f'd should be a list, got {type(d).__name__}'\nassert isinstance(e, bool), f'e should be a bool, got {type(e).__name__}'\nassert isinstance(type_names, list), 'type_names should be a list'\nassert len(type_names) == 5, f'type_names should have 5 elements, got {len(type_names)}'\nassert type_names == ['int', 'float', 'str', 'list', 'bool'], f\"Expected ['int', 'float', 'str', 'list', 'bool'], got {type_names}\"",
+      "difficulty": "easy",
+      "concepts_new": ["dynamic_typing", "type_function", "type_names"],
+      "concepts_review": ["variables", "lists"],
+      "hints": ["Assign any value of the right type, e.g. a = 42", "type(a).__name__ returns the string 'int'", "Build the list: [type(a).__name__, type(b).__name__, ...]"]
+    },
+    {
+      "id": "lp_ch06_c02",
+      "title": "Shared References",
+      "description": "Given a = [1, 2, 3], create b as an independent copy of a (not a shared reference). Then append 4 to b. After this, a should still be [1, 2, 3] and b should be [1, 2, 3, 4].",
+      "starter_code": "a = [1, 2, 3]\n\n# Create b as an independent copy of a (not a reference)\nb = # your code here\n\n# Append 4 to b\n# your code here\n",
+      "test_code": "assert a == [1, 2, 3], f'a should be unchanged as [1, 2, 3], got {a}'\nassert b == [1, 2, 3, 4], f'b should be [1, 2, 3, 4], got {b}'\nassert a is not b, 'a and b should not be the same object (use a copy, not a reference)'",
+      "difficulty": "medium",
+      "concepts_new": ["shared_references", "object_identity", "copying"],
+      "concepts_review": ["lists", "list_methods"],
+      "hints": ["b = a would create a shared reference, not a copy", "Use b = a[:] or b = list(a) or b = a.copy() to make an independent copy", "Use .append(4) to add 4 to b"]
+    }
+  ]
+}

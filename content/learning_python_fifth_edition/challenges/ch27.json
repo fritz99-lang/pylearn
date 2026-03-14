@@ -1,0 +1,54 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 27,
+  "challenges": [
+    {
+      "id": "lp_ch27_c01",
+      "title": "Person Class",
+      "description": "Create a class called `Person` with an `__init__` method that accepts `name` and `age` parameters and stores them as instance attributes.\n\nAdd a method called `greet()` that returns the string:\n\"Hi, I'm {name} and I'm {age} years old.\"",
+      "starter_code": "# Define the Person class\nclass Person:\n    def __init__(self, name, age):\n        # Store name and age as instance attributes\n        ...\n\n    def greet(self):\n        # Return the greeting string\n        ...\n",
+      "test_code": "p1 = Person(\"Alice\", 30)\nassert p1.name == \"Alice\", f\"name should be 'Alice', got '{p1.name}'\"\nassert p1.age == 30, f\"age should be 30, got {p1.age}\"\nassert p1.greet() == \"Hi, I'm Alice and I'm 30 years old.\", f\"greet() returned: {p1.greet()}\"\n\np2 = Person(\"Bob\", 25)\nassert p2.greet() == \"Hi, I'm Bob and I'm 25 years old.\", f\"greet() returned: {p2.greet()}\"\nassert p1.name != p2.name, \"Each instance should have its own name\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "easy",
+      "concepts_new": [
+        "class definition",
+        "__init__ method",
+        "self parameter",
+        "instance attributes"
+      ],
+      "concepts_review": [
+        "string formatting",
+        "function definitions",
+        "return statements"
+      ],
+      "hints": [
+        "Use 'self.name = name' to store an instance attribute.",
+        "The greet() method needs 'self' as its first parameter to access instance attributes.",
+        "Use an f-string to build the greeting: f\"Hi, I'm {self.name} and I'm {self.age} years old.\""
+      ]
+    },
+    {
+      "id": "lp_ch27_c02",
+      "title": "BankAccount",
+      "description": "Create a class `BankAccount` with:\n- `__init__(self, owner, balance=0)` that stores the owner name and starting balance\n- `deposit(amount)` that adds the amount to the balance\n- `withdraw(amount)` that subtracts the amount from balance IF sufficient funds exist; returns True on success, returns False if insufficient funds (balance should not change on failure)",
+      "starter_code": "class BankAccount:\n    def __init__(self, owner, balance=0):\n        # Store owner and balance\n        ...\n\n    def deposit(self, amount):\n        # Add amount to balance\n        ...\n\n    def withdraw(self, amount):\n        # Subtract amount if sufficient funds, return True/False\n        ...\n",
+      "test_code": "acct = BankAccount(\"Alice\", 100)\nassert acct.owner == \"Alice\", f\"owner should be 'Alice', got '{acct.owner}'\"\nassert acct.balance == 100, f\"balance should be 100, got {acct.balance}\"\n\nacct.deposit(50)\nassert acct.balance == 150, f\"After depositing 50, balance should be 150, got {acct.balance}\"\n\nresult = acct.withdraw(30)\nassert result == True, \"withdraw(30) should return True\"\nassert acct.balance == 120, f\"After withdrawing 30, balance should be 120, got {acct.balance}\"\n\nresult = acct.withdraw(200)\nassert result == False, \"withdraw(200) should return False (insufficient funds)\"\nassert acct.balance == 120, f\"Balance should remain 120 after failed withdrawal, got {acct.balance}\"\n\ndefault_acct = BankAccount(\"Bob\")\nassert default_acct.balance == 0, \"Default balance should be 0\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "default parameter values in __init__",
+        "methods that modify state",
+        "conditional logic in methods"
+      ],
+      "concepts_review": [
+        "class definition",
+        "__init__ method",
+        "instance attributes",
+        "boolean return values"
+      ],
+      "hints": [
+        "In withdraw(), check if self.balance >= amount before subtracting.",
+        "Remember to return True after a successful withdrawal and False if funds are insufficient.",
+        "The deposit method just needs: self.balance += amount"
+      ]
+    }
+  ]
+}

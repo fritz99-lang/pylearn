@@ -1,0 +1,56 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 45,
+  "questions": [
+    {
+      "id": "lp_ch45_q01",
+      "type": "multiple_choice",
+      "question": "Which of the following Python types is mutable?",
+      "choices": [
+        "tuple",
+        "str",
+        "list",
+        "int"
+      ],
+      "correct": 2,
+      "explanation": "Lists are mutable, meaning their contents can be changed in place. Tuples, strings, and integers are immutable — once created, their value cannot be altered. Understanding mutability is key to avoiding subtle bugs with shared references.",
+      "concepts": ["mutability", "types"]
+    },
+    {
+      "id": "lp_ch45_q02",
+      "type": "fill_in_blank",
+      "question": "The LEGB rule describes Python's variable lookup order: Local, Enclosing, Global, and ___.",
+      "correct": "Built-in",
+      "explanation": "Python resolves variable names by searching four scopes in order: Local (inside the current function), Enclosing (in any outer function), Global (module level), and Built-in (Python's built-in names like len and print).",
+      "concepts": ["scope", "LEGB_rule"]
+    },
+    {
+      "id": "lp_ch45_q03",
+      "type": "multiple_choice",
+      "question": "What does the 'import module' statement do compared to 'from module import name'?",
+      "choices": [
+        "They are identical in every way",
+        "'import module' loads the module and binds it to its name; 'from module import name' copies specific attributes into the current scope",
+        "'from module import name' is faster because it loads less code",
+        "'import module' only works with built-in modules"
+      ],
+      "correct": 1,
+      "explanation": "'import module' makes the entire module available under its name, requiring dot notation for access (module.name). 'from module import name' fetches specific attributes and places them directly in the importing scope. Both fully execute the module on first import.",
+      "concepts": ["import", "modules"]
+    },
+    {
+      "id": "lp_ch45_q04",
+      "type": "multiple_choice",
+      "question": "In class inheritance, what determines the order in which Python searches for attributes?",
+      "choices": [
+        "Alphabetical order of class names",
+        "The method resolution order (MRO), which follows the C3 linearization algorithm",
+        "Random order determined at runtime",
+        "The order in which methods were defined in the source file"
+      ],
+      "correct": 1,
+      "explanation": "Python uses the C3 linearization algorithm to compute the method resolution order (MRO). This determines the sequence in which base classes are searched when looking up an attribute, ensuring a consistent and predictable inheritance chain, especially with multiple inheritance.",
+      "concepts": ["inheritance", "MRO", "C3_linearization"]
+    }
+  ]
+}

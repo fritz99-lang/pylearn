@@ -1,0 +1,51 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 23,
+  "challenges": [
+    {
+      "id": "lp_ch23_c01",
+      "title": "Import Practice",
+      "description": "Import the math module and use it to create three variables:\n- `pi_val` should hold the value of math.pi\n- `sqrt_16` should hold the result of math.sqrt(16)\n- `ceil_val` should hold the result of math.ceil(4.3)",
+      "starter_code": "# Import the math module\n\n\n# Create pi_val using math.pi\npi_val = ...\n\n# Create sqrt_16 using math.sqrt()\nsqrt_16 = ...\n\n# Create ceil_val using math.ceil()\nceil_val = ...\n",
+      "test_code": "import math\nassert pi_val == math.pi, f\"pi_val should be {math.pi}, got {pi_val}\"\nassert sqrt_16 == 4.0, f\"sqrt_16 should be 4.0, got {sqrt_16}\"\nassert ceil_val == 5, f\"ceil_val should be 5, got {ceil_val}\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "easy",
+      "concepts_new": [
+        "import statement",
+        "module access with dot notation",
+        "math module"
+      ],
+      "concepts_review": [
+        "variable assignment",
+        "function calls"
+      ],
+      "hints": [
+        "Use 'import math' to bring in the entire module.",
+        "Access module attributes with dot notation: math.pi, math.sqrt(), math.ceil().",
+        "math.ceil() rounds a number UP to the nearest integer."
+      ]
+    },
+    {
+      "id": "lp_ch23_c02",
+      "title": "Selective Import",
+      "description": "Use the 'from ... import ...' syntax to import only the `basename` and `dirname` functions from the `os.path` module.\n\nGiven the path \"/home/user/docs/file.txt\", create:\n- `name` holding the result of basename(path)\n- `directory` holding the result of dirname(path)",
+      "starter_code": "# Use 'from os.path import ...' to import basename and dirname\n\n\npath = \"/home/user/docs/file.txt\"\n\n# Create 'name' using basename()\nname = ...\n\n# Create 'directory' using dirname()\ndirectory = ...\n",
+      "test_code": "assert name == \"file.txt\", f\"name should be 'file.txt', got '{name}'\"\nassert directory == \"/home/user/docs\", f\"directory should be '/home/user/docs', got '{directory}'\"\n# Verify selective import was used (basename and dirname should be in local scope)\nassert callable(basename), \"basename should be directly callable (use 'from' import)\"\nassert callable(dirname), \"dirname should be directly callable (use 'from' import)\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "from...import statement",
+        "selective imports",
+        "os.path module"
+      ],
+      "concepts_review": [
+        "import statement",
+        "string paths",
+        "function calls"
+      ],
+      "hints": [
+        "The syntax is: from os.path import basename, dirname",
+        "With 'from' imports you call the function directly: basename(path), not os.path.basename(path).",
+        "basename returns the final component of a path; dirname returns everything before it."
+      ]
+    }
+  ]
+}

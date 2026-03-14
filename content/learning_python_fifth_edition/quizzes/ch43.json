@@ -1,0 +1,56 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 43,
+  "questions": [
+    {
+      "id": "lp_ch43_q01",
+      "type": "multiple_choice",
+      "question": "What is the primary purpose of the Python Windows Launcher?",
+      "choices": [
+        "To compile Python scripts into executables",
+        "To allow selecting and launching different installed Python versions",
+        "To install Python automatically",
+        "To debug Python scripts"
+      ],
+      "correct": 1,
+      "explanation": "The Python Windows Launcher (py.exe) lets you choose which installed Python version to use when running scripts. This is especially useful when you have both Python 2 and Python 3 (or multiple 3.x versions) installed side by side.",
+      "concepts": ["py_launcher", "version_management"]
+    },
+    {
+      "id": "lp_ch43_q02",
+      "type": "fill_in_blank",
+      "question": "A shebang line like #!/usr/bin/env python3 at the top of a script tells the Windows Launcher to run the script with Python ___.",
+      "correct": "3",
+      "explanation": "On Windows, the py launcher reads shebang lines (even though they originate from Unix) to determine which Python version to use. '#!/usr/bin/env python3' directs the launcher to use the latest installed Python 3.x version.",
+      "concepts": ["shebang", "version_selection"]
+    },
+    {
+      "id": "lp_ch43_q03",
+      "type": "multiple_choice",
+      "question": "Which command uses the Windows Launcher to run a script with Python 3.10 specifically?",
+      "choices": [
+        "python3.10 script.py",
+        "py -3.10 script.py",
+        "py --version=3.10 script.py",
+        "run -python3.10 script.py"
+      ],
+      "correct": 1,
+      "explanation": "The syntax 'py -3.10 script.py' tells the Windows Launcher to use Python 3.10 specifically. You can use 'py -3' for the latest Python 3.x, or 'py -3.10' to pin a specific minor version.",
+      "concepts": ["py_command", "version_selection"]
+    },
+    {
+      "id": "lp_ch43_q04",
+      "type": "multiple_choice",
+      "question": "Where does the Windows Launcher look for configuration settings such as default Python version?",
+      "choices": [
+        "The Windows Registry only",
+        "An INI-style configuration file (py.ini)",
+        "Environment variables only",
+        "The script's directory only"
+      ],
+      "correct": 1,
+      "explanation": "The Windows Launcher reads configuration from py.ini files. A per-user py.ini can be placed in the user's application data folder to set defaults like the preferred Python version when no version flag is given.",
+      "concepts": ["launcher_configuration", "py_ini"]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 33,
+  "questions": [
+    {
+      "id": "lp_ch33_q01",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the try/except statement?",
+      "choices": [
+        "To define a new exception class",
+        "To catch and handle exceptions that occur in the try block",
+        "To guarantee code always runs regardless of exceptions",
+        "To raise an exception manually"
+      ],
+      "correct": 1,
+      "explanation": "The try/except statement catches exceptions raised in the try block. If an exception matches an except clause, the handler code runs instead of the program crashing. If no exception occurs, the except block is skipped.",
+      "concepts": ["try_except", "exception_handling"]
+    },
+    {
+      "id": "lp_ch33_q02",
+      "type": "fill_in_blank",
+      "question": "The try/________ statement ensures that cleanup code runs whether or not an exception was raised.",
+      "correct": "finally",
+      "explanation": "The finally clause runs no matter what -- whether the try block completes normally, raises an exception, or executes a return/break/continue. This makes it ideal for cleanup actions like closing files or releasing resources.",
+      "concepts": ["try_finally", "cleanup_code"]
+    },
+    {
+      "id": "lp_ch33_q03",
+      "type": "multiple_choice",
+      "question": "Which statement is used to manually trigger an exception?",
+      "choices": [
+        "throw",
+        "raise",
+        "except",
+        "error"
+      ],
+      "correct": 1,
+      "explanation": "The raise statement is used to manually trigger an exception. You can raise a specific exception class (raise ValueError('bad value')), re-raise the current exception (bare raise), or chain exceptions (raise X from Y).",
+      "concepts": ["raise", "exception_triggering"]
+    },
+    {
+      "id": "lp_ch33_q04",
+      "type": "multiple_choice",
+      "question": "What does the assert statement do?",
+      "choices": [
+        "It catches exceptions silently",
+        "It raises an AssertionError if the given condition is False",
+        "It logs a warning message",
+        "It terminates the program immediately"
+      ],
+      "correct": 1,
+      "explanation": "assert condition, message raises an AssertionError if the condition evaluates to False. It is typically used for debugging and verifying internal assumptions. Assertions can be disabled globally with the -O (optimize) flag.",
+      "concepts": ["assert", "AssertionError", "debugging"]
+    },
+    {
+      "id": "lp_ch33_q05",
+      "type": "fill_in_blank",
+      "question": "The exception raised when you try to convert the string 'abc' to an integer with int('abc') is called ________.",
+      "correct": "ValueError",
+      "explanation": "ValueError is raised when a function receives an argument of the right type but an inappropriate value. int('abc') fails because 'abc' is not a valid integer string, even though it is the correct type (str).",
+      "concepts": ["ValueError", "built_in_exceptions"]
+    },
+    {
+      "id": "lp_ch33_q06",
+      "type": "multiple_choice",
+      "question": "Which of the following is at the top of Python's built-in exception hierarchy?",
+      "choices": [
+        "Exception",
+        "BaseException",
+        "StandardError",
+        "RuntimeError"
+      ],
+      "correct": 1,
+      "explanation": "BaseException is the root of the entire exception hierarchy. Exception is a subclass of BaseException and is the base for most user-catchable exceptions. SystemExit, KeyboardInterrupt, and GeneratorExit inherit from BaseException but not from Exception.",
+      "concepts": ["BaseException", "Exception", "exception_hierarchy"]
+    },
+    {
+      "id": "lp_ch33_q07",
+      "type": "multiple_choice",
+      "question": "What exception is raised when you try to access an attribute that does not exist on an object?",
+      "choices": [
+        "NameError",
+        "KeyError",
+        "AttributeError",
+        "TypeError"
+      ],
+      "correct": 2,
+      "explanation": "AttributeError is raised when an attribute reference or assignment fails -- for example, accessing obj.x when x does not exist on the object or its class hierarchy. NameError is for undefined variable names, and KeyError is for missing dictionary keys.",
+      "concepts": ["AttributeError", "built_in_exceptions"]
+    }
+  ]
+}

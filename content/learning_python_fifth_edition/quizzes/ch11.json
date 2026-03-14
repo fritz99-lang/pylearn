@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 11,
+  "questions": [
+    {
+      "id": "lp_ch11_q01",
+      "type": "multiple_choice",
+      "question": "What does the augmented assignment x += 5 do?",
+      "choices": [
+        "Creates a new variable x equal to 5",
+        "Adds 5 to x in place (equivalent to x = x + 5)",
+        "Checks if x equals 5",
+        "Appends 5 to x"
+      ],
+      "correct": 1,
+      "explanation": "x += 5 is an augmented assignment that adds 5 to the current value of x. For immutable types like integers, it rebinds x to a new object. For mutable types like lists, it may modify the object in place (e.g., L += [1] calls L.extend([1])).",
+      "concepts": ["augmented_assignment", "operators", "in_place_operations"]
+    },
+    {
+      "id": "lp_ch11_q02",
+      "type": "fill_in_blank",
+      "question": "The syntax a, b = 1, 2 is called sequence ___.",
+      "correct": "unpacking",
+      "explanation": "Sequence unpacking assigns each value on the right to the corresponding variable on the left. The number of targets on the left must match the number of values on the right (unless extended unpacking with * is used).",
+      "concepts": ["sequence_unpacking", "assignment", "tuples"]
+    },
+    {
+      "id": "lp_ch11_q03",
+      "type": "multiple_choice",
+      "question": "Given the statement *a, b = [1, 2, 3, 4], what are the values of a and b?",
+      "choices": [
+        "a = 1, b = [2, 3, 4]",
+        "a = [1, 2, 3], b = 4",
+        "a = [1, 2, 3, 4], b = None",
+        "A SyntaxError is raised"
+      ],
+      "correct": 1,
+      "explanation": "Extended unpacking uses a starred variable (*a) to collect remaining items into a list. The non-starred variable b gets the last element (4), and *a collects everything else into [1, 2, 3].",
+      "concepts": ["extended_unpacking", "star_expression", "assignment"]
+    },
+    {
+      "id": "lp_ch11_q04",
+      "type": "multiple_choice",
+      "question": "What does print('a', 'b', 'c', sep='-') output?",
+      "choices": [
+        "a b c",
+        "a-b-c",
+        "a, b, c",
+        "-a-b-c-"
+      ],
+      "correct": 1,
+      "explanation": "The sep parameter of print() specifies the string inserted between arguments. The default is a single space. Here, sep='-' causes the output to be 'a-b-c' instead of 'a b c'.",
+      "concepts": ["print_function", "sep_parameter", "output_formatting"]
+    },
+    {
+      "id": "lp_ch11_q05",
+      "type": "fill_in_blank",
+      "question": "The print() parameter ___ controls the string appended after the last argument, which defaults to a newline character.",
+      "correct": "end",
+      "explanation": "print() appends end='\\n' by default after printing all arguments. You can change it, for example print('hello', end='') suppresses the newline, or print('hello', end=' ') ends with a space instead.",
+      "concepts": ["print_function", "end_parameter", "output_formatting"]
+    },
+    {
+      "id": "lp_ch11_q06",
+      "type": "multiple_choice",
+      "question": "What does the statement a = b = [] create?",
+      "choices": [
+        "Two independent empty lists",
+        "Two variables referencing the same single empty list",
+        "A syntax error",
+        "a becomes None and b becomes []"
+      ],
+      "correct": 1,
+      "explanation": "Multiple-target assignment makes both variables reference the same object. After a = b = [], both a and b point to the same list. Modifying a (e.g., a.append(1)) also affects b. To create independent lists, use a, b = [], [].",
+      "concepts": ["multiple_target_assignment", "shared_references", "mutable_objects"]
+    },
+    {
+      "id": "lp_ch11_q07",
+      "type": "multiple_choice",
+      "question": "For a list L = [1, 2, 3], what is the difference between L += [4] and L = L + [4]?",
+      "choices": [
+        "They are always identical in behavior",
+        "+= may modify L in place, while + always creates a new list object",
+        "+ modifies L in place, while += creates a new list",
+        "Both always create new list objects"
+      ],
+      "correct": 1,
+      "explanation": "For mutable objects like lists, += calls __iadd__ which modifies in place, while + calls __add__ which creates a new object. This matters when other variables share a reference to the same list.",
+      "concepts": ["augmented_assignment", "in_place_operations", "mutable_objects"]
+    },
+    {
+      "id": "lp_ch11_q08",
+      "type": "fill_in_blank",
+      "question": "The print() parameter ___ allows you to redirect output to a file object instead of the console.",
+      "correct": "file",
+      "explanation": "print('data', file=f) writes to the file object f instead of sys.stdout. The file must be opened in write or append mode. This is a convenient alternative to f.write() when you want automatic spacing and newlines.",
+      "concepts": ["print_function", "file_parameter", "output_redirection"]
+    }
+  ]
+}

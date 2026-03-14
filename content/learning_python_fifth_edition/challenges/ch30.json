@@ -1,0 +1,55 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 30,
+  "challenges": [
+    {
+      "id": "lp_ch30_c01",
+      "title": "Vector Class",
+      "description": "Create a class `Vector` with `__init__(self, x, y)` that stores x and y coordinates.\n\nImplement these operator overloads:\n- `__add__(self, other)` — vector addition, returns a new Vector(self.x + other.x, self.y + other.y)\n- `__mul__(self, scalar)` — scalar multiplication, returns a new Vector(self.x * scalar, self.y * scalar)\n- `__len__(self)` — returns 2 (a 2D vector always has 2 components)\n- `__repr__(self)` — returns \"Vector({x}, {y})\"",
+      "starter_code": "class Vector:\n    def __init__(self, x, y):\n        ...\n\n    def __add__(self, other):\n        # Return a new Vector with added components\n        ...\n\n    def __mul__(self, scalar):\n        # Return a new Vector with scaled components\n        ...\n\n    def __len__(self):\n        # Return the number of dimensions\n        ...\n\n    def __repr__(self):\n        ...\n",
+      "test_code": "v1 = Vector(1, 2)\nv2 = Vector(3, 4)\n\nassert repr(v1) == \"Vector(1, 2)\", f\"repr should be 'Vector(1, 2)', got '{repr(v1)}'\"\nassert repr(v2) == \"Vector(3, 4)\", f\"repr should be 'Vector(3, 4)', got '{repr(v2)}'\"\n\nv3 = v1 + v2\nassert repr(v3) == \"Vector(4, 6)\", f\"v1 + v2 should be Vector(4, 6), got {repr(v3)}\"\nassert isinstance(v3, Vector), \"Addition should return a Vector instance\"\n\nv4 = v1 * 3\nassert repr(v4) == \"Vector(3, 6)\", f\"v1 * 3 should be Vector(3, 6), got {repr(v4)}\"\nassert isinstance(v4, Vector), \"Multiplication should return a Vector instance\"\n\nassert len(v1) == 2, f\"len(Vector) should be 2, got {len(v1)}\"\n\n# Verify originals unchanged\nassert repr(v1) == \"Vector(1, 2)\", \"Original vector should not be modified\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "__add__ operator overloading",
+        "__mul__ operator overloading",
+        "__len__ method",
+        "returning new instances from operators"
+      ],
+      "concepts_review": [
+        "__repr__ method",
+        "__init__ method",
+        "instance attributes"
+      ],
+      "hints": [
+        "__add__ should return Vector(self.x + other.x, self.y + other.y) — a NEW vector, not modifying self.",
+        "__mul__ receives a scalar (integer or float): return Vector(self.x * scalar, self.y * scalar).",
+        "__len__ must return an integer. For a 2D vector, just return 2."
+      ]
+    },
+    {
+      "id": "lp_ch30_c02",
+      "title": "Smart List",
+      "description": "Create a class `SmartList` that wraps a regular Python list.\n\nImplement these methods:\n- `__init__(self, data)` — stores the list as an instance attribute\n- `__getitem__(self, index)` — returns the item at the given index\n- `__len__(self)` — returns the length of the internal list\n- `__contains__(self, item)` — returns True if item is in the list\n- `__add__(self, other)` — returns a new SmartList combining both lists (other is also a SmartList)",
+      "starter_code": "class SmartList:\n    def __init__(self, data):\n        # Store the list\n        ...\n\n    def __getitem__(self, index):\n        # Return item at index\n        ...\n\n    def __len__(self):\n        # Return length of internal list\n        ...\n\n    def __contains__(self, item):\n        # Check if item is in the list\n        ...\n\n    def __add__(self, other):\n        # Concatenate two SmartLists, return new SmartList\n        ...\n",
+      "test_code": "sl = SmartList([1, 2, 3, 4, 5])\nassert len(sl) == 5, f\"len should be 5, got {len(sl)}\"\nassert sl[0] == 1, f\"sl[0] should be 1, got {sl[0]}\"\nassert sl[4] == 5, f\"sl[4] should be 5, got {sl[4]}\"\nassert sl[-1] == 5, f\"sl[-1] should be 5, got {sl[-1]}\"\n\nassert 3 in sl, \"3 should be in the SmartList\"\nassert 99 not in sl, \"99 should not be in the SmartList\"\n\nsl2 = SmartList([6, 7, 8])\nsl3 = sl + sl2\nassert isinstance(sl3, SmartList), \"Addition should return a SmartList\"\nassert len(sl3) == 8, f\"Combined length should be 8, got {len(sl3)}\"\nassert sl3[5] == 6, f\"sl3[5] should be 6, got {sl3[5]}\"\nassert sl3[7] == 8, f\"sl3[7] should be 8, got {sl3[7]}\"\n\n# Verify originals unchanged\nassert len(sl) == 5, \"Original SmartList should not be modified\"\nassert len(sl2) == 3, \"Other SmartList should not be modified\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "hard",
+      "concepts_new": [
+        "__getitem__ for indexing",
+        "__contains__ for 'in' operator",
+        "wrapping built-in types",
+        "multiple operator overloads"
+      ],
+      "concepts_review": [
+        "__len__ method",
+        "__add__ method",
+        "list operations",
+        "returning new instances"
+      ],
+      "hints": [
+        "Store the list as self.data in __init__. All other methods delegate to self.data.",
+        "__getitem__ just returns self.data[index]; Python handles negative indexing automatically.",
+        "For __add__, combine the internal lists: return SmartList(self.data + other.data)."
+      ]
+    }
+  ]
+}

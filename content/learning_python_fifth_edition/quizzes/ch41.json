@@ -1,0 +1,56 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 41,
+  "questions": [
+    {
+      "id": "lp_ch41_q01",
+      "type": "multiple_choice",
+      "question": "Which of the following is considered a best practice for writing maintainable Python code?",
+      "choices": [
+        "Avoid using functions to keep code simple",
+        "Write clear, readable code with meaningful variable names and comments",
+        "Use single-letter variable names to save typing",
+        "Avoid object-oriented programming entirely"
+      ],
+      "correct": 1,
+      "explanation": "Python emphasizes readability and clarity. Using meaningful variable names, writing helpful comments, and following PEP 8 style guidelines are fundamental best practices for maintainable code.",
+      "concepts": ["best_practices", "readability"]
+    },
+    {
+      "id": "lp_ch41_q02",
+      "type": "fill_in_blank",
+      "question": "The Python community's style guide for writing clean, consistent code is known as PEP ___.",
+      "correct": "8",
+      "explanation": "PEP 8 is the official style guide for Python code. It covers conventions for naming, indentation, line length, imports, and other formatting details that help keep Python code consistent and readable.",
+      "concepts": ["pep8", "style_guide"]
+    },
+    {
+      "id": "lp_ch41_q03",
+      "type": "multiple_choice",
+      "question": "Which library ecosystem makes Python particularly strong for data science and scientific computing?",
+      "choices": [
+        "Django and Flask",
+        "Tkinter and PyQt",
+        "NumPy, pandas, and matplotlib",
+        "asyncio and aiohttp"
+      ],
+      "correct": 2,
+      "explanation": "NumPy provides efficient array operations, pandas offers data manipulation and analysis tools, and matplotlib handles visualization. Together they form the core of Python's data science ecosystem.",
+      "concepts": ["python_ecosystem", "data_science"]
+    },
+    {
+      "id": "lp_ch41_q04",
+      "type": "multiple_choice",
+      "question": "Which development workflow step helps catch bugs early before they reach production?",
+      "choices": [
+        "Writing code as quickly as possible",
+        "Writing automated tests and running them regularly",
+        "Only testing manually at the end of a project",
+        "Avoiding version control to reduce complexity"
+      ],
+      "correct": 1,
+      "explanation": "Automated testing (using frameworks like unittest or pytest) catches bugs early and provides confidence when refactoring. Combined with version control and code review, it forms the backbone of a professional development workflow.",
+      "concepts": ["testing", "development_workflow"]
+    }
+  ]
+}

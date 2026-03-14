@@ -1,0 +1,50 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 17,
+  "challenges": [
+    {
+      "id": "lp_ch17_c01",
+      "title": "Counter Factory",
+      "description": "Write a function `make_counter()` that returns a function. Each call to the returned function should increment and return a count starting from 1. Use a closure with the `nonlocal` keyword to maintain state between calls.",
+      "starter_code": "def make_counter():\n    # Create a variable to track the count\n    # Define and return an inner function that increments and returns the count\n    # Hint: use the 'nonlocal' keyword\n    pass\n",
+      "test_code": "counter = make_counter()\nassert counter() == 1\nassert counter() == 2\nassert counter() == 3\ncounter2 = make_counter()\nassert counter2() == 1\nassert counter() == 4\nprint('All tests passed!')\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "closures",
+        "nonlocal keyword",
+        "factory functions"
+      ],
+      "concepts_review": [
+        "nested functions",
+        "variable scope"
+      ],
+      "hints": [
+        "Start with a variable count = 0 inside make_counter.",
+        "Define an inner function that uses 'nonlocal count' to modify the enclosing variable.",
+        "The inner function should increment count by 1 and then return it."
+      ]
+    },
+    {
+      "id": "lp_ch17_c02",
+      "title": "Accumulator",
+      "description": "Write a function `make_accumulator(start)` that returns a function. Each call to the returned function takes a number argument, adds it to a running total (initialized to `start`), and returns the new total. For example: acc = make_accumulator(10); acc(5) returns 15; acc(3) returns 18.",
+      "starter_code": "def make_accumulator(start):\n    # Initialize the running total to start\n    # Define and return an inner function that adds its argument to the total\n    pass\n",
+      "test_code": "acc = make_accumulator(10)\nassert acc(5) == 15\nassert acc(3) == 18\nassert acc(0) == 18\nassert acc(-8) == 10\nacc2 = make_accumulator(0)\nassert acc2(100) == 100\nassert acc2(50) == 150\nprint('All tests passed!')\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "stateful closures",
+        "enclosing scope variables"
+      ],
+      "concepts_review": [
+        "closures",
+        "nonlocal keyword",
+        "function parameters"
+      ],
+      "hints": [
+        "Use 'total = start' as your enclosing variable.",
+        "The inner function needs 'nonlocal total' to modify the enclosing variable.",
+        "Add the argument to total, then return total."
+      ]
+    }
+  ]
+}

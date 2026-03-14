@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 15,
+  "questions": [
+    {
+      "id": "lp_ch15_q01",
+      "type": "multiple_choice",
+      "question": "Where should a docstring be placed in a Python function?",
+      "choices": [
+        "Before the def statement",
+        "As the first statement in the function body",
+        "After the return statement",
+        "Anywhere inside the function body"
+      ],
+      "correct": 1,
+      "explanation": "A docstring must be a string literal appearing as the very first statement in a function, class, or module body. Python stores it in the object's __doc__ attribute for later retrieval by tools like help().",
+      "concepts": ["docstrings", "documentation", "functions"]
+    },
+    {
+      "id": "lp_ch15_q02",
+      "type": "fill_in_blank",
+      "question": "To access the docstring of a function f programmatically, you use the attribute f.___.",
+      "correct": "__doc__",
+      "explanation": "Python automatically assigns a function's docstring to its __doc__ attribute. You can access it directly with f.__doc__ or indirectly through the help() function.",
+      "concepts": ["__doc__", "attributes", "docstrings"]
+    },
+    {
+      "id": "lp_ch15_q03",
+      "type": "multiple_choice",
+      "question": "What does the built-in dir() function return when called on an object?",
+      "choices": [
+        "The object's docstring",
+        "The object's source code",
+        "A sorted list of all attribute names available on the object",
+        "The object's type and memory address"
+      ],
+      "correct": 2,
+      "explanation": "dir(object) returns a sorted list of strings containing the names of all attributes available on that object, including inherited and special (__dunder__) attributes. It is useful for interactive exploration.",
+      "concepts": ["dir", "introspection", "built_in_functions"]
+    },
+    {
+      "id": "lp_ch15_q04",
+      "type": "multiple_choice",
+      "question": "What is the key difference between # comments and docstrings?",
+      "choices": [
+        "Comments are faster to execute than docstrings",
+        "Docstrings are retained at runtime and accessible via __doc__; comments are stripped by the parser",
+        "Comments can span multiple lines but docstrings cannot",
+        "There is no practical difference"
+      ],
+      "correct": 1,
+      "explanation": "Comments beginning with # are stripped out by the parser and are not available at runtime. Docstrings are string literals retained as __doc__ attributes, making them accessible programmatically and by tools like help() and PyDoc.",
+      "concepts": ["comments", "docstrings", "documentation"]
+    },
+    {
+      "id": "lp_ch15_q05",
+      "type": "fill_in_blank",
+      "question": "The built-in function ___ displays formatted documentation for any Python object, including its docstring and methods.",
+      "correct": "help",
+      "explanation": "help(obj) invokes Python's built-in help system (PyDoc) and displays formatted documentation for the given object. It reads docstrings and introspects the object to generate the output.",
+      "concepts": ["help", "PyDoc", "built_in_functions"]
+    },
+    {
+      "id": "lp_ch15_q06",
+      "type": "multiple_choice",
+      "question": "Which Python tool can generate HTML documentation pages from docstrings and run as a local web server?",
+      "choices": [
+        "Sphinx",
+        "PyDoc",
+        "doctest",
+        "pylint"
+      ],
+      "correct": 1,
+      "explanation": "PyDoc is Python's built-in documentation tool. It can display help text in the terminal, generate HTML pages, and start a local web server to browse documentation interactively. Sphinx is a popular third-party tool but is not covered in this chapter.",
+      "concepts": ["PyDoc", "documentation_tools", "HTML_docs"]
+    },
+    {
+      "id": "lp_ch15_q07",
+      "type": "multiple_choice",
+      "question": "What does dir() return when called with no arguments?",
+      "choices": [
+        "An empty list",
+        "A list of all built-in function names",
+        "A list of names defined in the current scope",
+        "An error because an argument is required"
+      ],
+      "correct": 2,
+      "explanation": "When called with no arguments, dir() returns a list of names in the current local scope. This includes variables, functions, imported modules, and other names you have defined.",
+      "concepts": ["dir", "scope", "introspection"]
+    }
+  ]
+}

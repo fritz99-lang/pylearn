@@ -1,0 +1,36 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 39,
+  "challenges": [
+    {
+      "id": "lp_ch39_c01",
+      "title": "Call Counter Decorator",
+      "description": "Write a decorator `count_calls` that tracks how many times a decorated function is called. Store the count in a `.calls` attribute on the wrapper function. Use functools.wraps to preserve the original function's name.",
+      "starter_code": "import functools\n\ndef count_calls(func):\n    \"\"\"Decorator that counts how many times a function is called.\"\"\"\n    # Your code here\n    pass\n\n@count_calls\ndef say_hello(name):\n    return f\"Hello, {name}!\"\n\n# Test it\nprint(say_hello(\"Alice\"))\nprint(say_hello(\"Bob\"))\nprint(f\"Called {say_hello.calls} times\")\n",
+      "test_code": "assert say_hello(\"Test\") == \"Hello, Test!\"\nassert say_hello.calls >= 1\nprev = say_hello.calls\nsay_hello(\"Again\")\nassert say_hello.calls == prev + 1\nassert say_hello.__name__ == \"say_hello\"",
+      "difficulty": "medium",
+      "concepts_new": ["decorators", "functools.wraps", "function_attributes"],
+      "concepts_review": ["closures", "functions"],
+      "hints": [
+        "Define a wrapper function inside count_calls",
+        "Use a mutable container (list) or setattr to track count",
+        "Apply @functools.wraps(func) to the wrapper"
+      ]
+    },
+    {
+      "id": "lp_ch39_c02",
+      "title": "Retry Decorator",
+      "description": "Write a decorator factory `retry(max_attempts=3)` that retries the decorated function up to max_attempts times if it raises an exception. If all attempts fail, re-raise the last exception. Return the result on success.",
+      "starter_code": "def retry(max_attempts=3):\n    \"\"\"Decorator factory that retries a function on failure.\"\"\"\n    def decorator(func):\n        # Your code here\n        pass\n    return decorator\n\n# Test it\nattempt_count = 0\n\n@retry(max_attempts=3)\ndef flaky_function():\n    global attempt_count\n    attempt_count += 1\n    if attempt_count < 3:\n        raise ValueError(\"Not ready yet\")\n    return \"success\"\n\nresult = flaky_function()\nprint(f\"Result: {result}, took {attempt_count} attempts\")\n",
+      "test_code": "attempt_count = 0\n@retry(max_attempts=3)\ndef test_flaky():\n    global attempt_count\n    attempt_count += 1\n    if attempt_count < 3:\n        raise ValueError(\"fail\")\n    return \"ok\"\nassert test_flaky() == \"ok\"\nassert attempt_count == 3\n\n@retry(max_attempts=1)\ndef always_fails():\n    raise RuntimeError(\"boom\")\ntry:\n    always_fails()\n    assert False, \"Should have raised\"\nexcept RuntimeError:\n    pass",
+      "difficulty": "hard",
+      "concepts_new": ["decorator_factory", "decorator_arguments", "retry_pattern"],
+      "concepts_review": ["decorators", "closures", "exceptions"],
+      "hints": [
+        "retry() returns a decorator, which returns a wrapper — three nested functions",
+        "Use a for loop with range(max_attempts) inside the wrapper",
+        "Catch Exception in the loop, re-raise on the last attempt"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 18,
+  "questions": [
+    {
+      "id": "lp_ch18_q01",
+      "type": "multiple_choice",
+      "question": "What is the difference between positional and keyword arguments in a function call?",
+      "choices": [
+        "Positional arguments are faster to process",
+        "Positional arguments are matched by position; keyword arguments are matched by name",
+        "Keyword arguments can only be strings",
+        "There is no difference; they are the same thing"
+      ],
+      "correct": 1,
+      "explanation": "Positional arguments are matched left-to-right to parameter names. Keyword arguments use name=value syntax to match by parameter name regardless of position.",
+      "concepts": ["positional vs keyword args"]
+    },
+    {
+      "id": "lp_ch18_q02",
+      "type": "fill_in_blank",
+      "question": "In a function definition, *args collects extra positional arguments into a ______.",
+      "choices": ["tuple"],
+      "correct": 0,
+      "explanation": "The *args syntax collects any extra positional arguments into a tuple. For example, def f(*args) means args will be a tuple of all positional arguments passed to the function.",
+      "concepts": ["*args (varargs)"]
+    },
+    {
+      "id": "lp_ch18_q03",
+      "type": "multiple_choice",
+      "question": "What does **kwargs do in a function definition?",
+      "choices": [
+        "It unpacks a dictionary into keyword arguments",
+        "It collects extra keyword arguments into a dictionary",
+        "It requires all arguments to be passed as keywords",
+        "It creates a copy of all arguments"
+      ],
+      "correct": 1,
+      "explanation": "In a function definition, **kwargs collects any extra keyword arguments that don't match named parameters into a dictionary, where keys are the argument names and values are the argument values.",
+      "concepts": ["**kwargs"]
+    },
+    {
+      "id": "lp_ch18_q04",
+      "type": "multiple_choice",
+      "question": "Given: def f(a, b=2, c=3), which call is valid?",
+      "choices": [
+        "f(b=5, 1)",
+        "f(1, c=10)",
+        "f()",
+        "f(a=1, 2)"
+      ],
+      "correct": 1,
+      "explanation": "f(1, c=10) is valid: a gets 1 positionally, b defaults to 2, and c is set to 10 by keyword. Positional arguments cannot follow keyword arguments (rules out choices A and D), and a is required (rules out choice C).",
+      "concepts": ["default values", "positional vs keyword args", "argument order rules"]
+    },
+    {
+      "id": "lp_ch18_q05",
+      "type": "fill_in_blank",
+      "question": "Parameters that appear after a bare * in a function definition are called ______-only arguments.",
+      "choices": ["keyword"],
+      "correct": 0,
+      "explanation": "Parameters after a bare * (or after *args) in a function definition can only be passed as keyword arguments, never positionally. For example: def f(a, *, b) requires b to be passed as f(1, b=2).",
+      "concepts": ["keyword-only args (after *)"]
+    },
+    {
+      "id": "lp_ch18_q06",
+      "type": "multiple_choice",
+      "question": "What does the * operator do when used in a function CALL (not definition)?",
+      "choices": [
+        "It multiplies the argument",
+        "It unpacks an iterable into separate positional arguments",
+        "It collects arguments into a tuple",
+        "It makes the argument optional"
+      ],
+      "correct": 1,
+      "explanation": "In a function call, *iterable unpacks the iterable into individual positional arguments. For example, f(*[1, 2, 3]) is equivalent to f(1, 2, 3). Similarly, **dict unpacks a dictionary into keyword arguments.",
+      "concepts": ["argument unpacking with * and **"]
+    },
+    {
+      "id": "lp_ch18_q07",
+      "type": "multiple_choice",
+      "question": "What is the correct order of parameter types in a function definition?",
+      "choices": [
+        "*args, normal args, **kwargs, keyword-only args",
+        "normal args, *args, keyword-only args, **kwargs",
+        "keyword-only args, normal args, *args, **kwargs",
+        "normal args, **kwargs, *args, keyword-only args"
+      ],
+      "correct": 1,
+      "explanation": "The correct order is: normal positional arguments, *args, keyword-only arguments, and finally **kwargs. For example: def f(a, b, *args, key=True, **kwargs). This order is enforced by Python's syntax rules.",
+      "concepts": ["argument order rules"]
+    },
+    {
+      "id": "lp_ch18_q08",
+      "type": "multiple_choice",
+      "question": "Why is using a mutable default argument (like def f(x=[])) considered a common Python gotcha?",
+      "choices": [
+        "It causes a SyntaxError",
+        "The default object is shared across all calls, so mutations persist between calls",
+        "It makes the function run slower",
+        "Mutable objects cannot be used as defaults"
+      ],
+      "correct": 1,
+      "explanation": "Default argument values are evaluated once when the function is defined, not each time it is called. A mutable default like [] is shared across all calls, so appending to it in one call affects subsequent calls. The fix is to use None as the default and create the list inside the function.",
+      "concepts": ["default values"]
+    }
+  ]
+}

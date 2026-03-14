@@ -1,0 +1,39 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 5,
+  "challenges": [
+    {
+      "id": "lp_ch05_c01",
+      "title": "Number Converter",
+      "description": "Create three variables: 'hex_val' storing the integer value of hex '0xFF', 'oct_val' storing the integer value of octal '0o77', and 'bin_val' storing the integer value of binary '0b1010'.",
+      "starter_code": "# Convert these literal representations to integers\nhex_val = # your code here\noct_val = # your code here\nbin_val = # your code here\n",
+      "test_code": "assert hex_val == 255, f'hex_val should be 255, got {hex_val}'\nassert oct_val == 63, f'oct_val should be 63, got {oct_val}'\nassert bin_val == 10, f'bin_val should be 10, got {bin_val}'",
+      "difficulty": "easy",
+      "concepts_new": ["hex_literals", "octal_literals", "binary_literals"],
+      "concepts_review": ["variables", "integers"],
+      "hints": ["Use 0xFF for hex, 0o77 for octal, 0b1010 for binary", "Python evaluates these to regular integers automatically"]
+    },
+    {
+      "id": "lp_ch05_c02",
+      "title": "Division Trio",
+      "description": "Given a = 17 and b = 5, compute three values: 'true_div' (true division), 'floor_div' (floor division), and 'remainder' (modulo). Store each in the named variable.",
+      "starter_code": "a = 17\nb = 5\n\ntrue_div = # your code here\nfloor_div = # your code here\nremainder = # your code here\n",
+      "test_code": "assert true_div == 3.4, f'true_div should be 3.4, got {true_div}'\nassert floor_div == 3, f'floor_div should be 3, got {floor_div}'\nassert remainder == 2, f'remainder should be 2, got {remainder}'",
+      "difficulty": "easy",
+      "concepts_new": ["true_division", "floor_division", "modulo"],
+      "concepts_review": ["variables", "arithmetic"],
+      "hints": ["True division uses /", "Floor division uses //", "Modulo (remainder) uses %"]
+    },
+    {
+      "id": "lp_ch05_c03",
+      "title": "Power and Round",
+      "description": "Calculate 2 raised to the power of 10 and store it in 'power_result'. Then calculate the square root of 144 using ** and store it in 'sqrt_result'. Finally, round 3.14159 to 2 decimal places and store in 'rounded'.",
+      "starter_code": "# 2 to the power of 10\npower_result = # your code here\n\n# Square root of 144 (hint: x ** 0.5)\nsqrt_result = # your code here\n\n# Round 3.14159 to 2 decimal places\nrounded = # your code here\n",
+      "test_code": "assert power_result == 1024, f'power_result should be 1024, got {power_result}'\nassert sqrt_result == 12.0, f'sqrt_result should be 12.0, got {sqrt_result}'\nassert rounded == 3.14, f'rounded should be 3.14, got {rounded}'",
+      "difficulty": "medium",
+      "concepts_new": ["exponentiation", "round"],
+      "concepts_review": ["variables", "float"],
+      "hints": ["Use ** for power: 2 ** 10", "Square root is the same as raising to 0.5: 144 ** 0.5", "Use round(number, ndigits): round(3.14159, 2)"]
+    }
+  ]
+}

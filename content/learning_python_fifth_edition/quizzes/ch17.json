@@ -1,0 +1,94 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 17,
+  "questions": [
+    {
+      "id": "lp_ch17_q01",
+      "type": "multiple_choice",
+      "question": "What does the LEGB rule stand for in Python's name resolution order?",
+      "choices": [
+        "Local, External, Global, Base",
+        "Local, Enclosing, Global, Built-in",
+        "Lexical, Enclosing, General, Built-in",
+        "Local, Enclosing, General, Base"
+      ],
+      "correct": 1,
+      "explanation": "LEGB stands for Local, Enclosing, Global, Built-in. Python searches for names in this order: first in the local scope, then any enclosing function scopes, then the module-level global scope, and finally the built-in scope.",
+      "concepts": ["LEGB rule", "name resolution order"]
+    },
+    {
+      "id": "lp_ch17_q02",
+      "type": "fill_in_blank",
+      "question": "The ______ statement allows a function to assign a value to a variable in the module-level (global) scope.",
+      "choices": ["global"],
+      "correct": 0,
+      "explanation": "The global statement declares that a name should be looked up in and assigned to the module's global scope. Without it, an assignment inside a function creates a new local variable instead of modifying the global one.",
+      "concepts": ["global statement"]
+    },
+    {
+      "id": "lp_ch17_q03",
+      "type": "multiple_choice",
+      "question": "What does the nonlocal statement do?",
+      "choices": [
+        "Declares a variable as belonging to the built-in scope",
+        "Prevents a variable from being modified",
+        "Allows an inner function to assign to a variable in an enclosing function's scope",
+        "Makes a variable accessible from any module"
+      ],
+      "correct": 2,
+      "explanation": "The nonlocal statement (Python 3 only) lets a nested function assign to a name in the nearest enclosing function's scope. Without it, an assignment would create a new local variable in the inner function instead.",
+      "concepts": ["nonlocal statement", "enclosing function scope"]
+    },
+    {
+      "id": "lp_ch17_q04",
+      "type": "multiple_choice",
+      "question": "What is a closure in Python?",
+      "choices": [
+        "A function that closes all open file handles",
+        "A nested function that remembers values from the enclosing function's scope even after it has returned",
+        "A function that cannot be called more than once",
+        "A class method that prevents attribute modification"
+      ],
+      "correct": 1,
+      "explanation": "A closure is a nested function that retains access to variables from the enclosing function's scope, even after the enclosing function has finished executing. This is the basis for factory functions in Python.",
+      "concepts": ["closures/factory functions", "enclosing function scope"]
+    },
+    {
+      "id": "lp_ch17_q05",
+      "type": "fill_in_blank",
+      "question": "Names like len, print, and int that are always available without importing anything live in Python's ______ scope.",
+      "choices": ["built-in"],
+      "correct": 0,
+      "explanation": "The built-in scope is the outermost scope in the LEGB lookup chain. It contains pre-defined names like len, print, int, and Exception. These names are provided by the builtins module and are always available.",
+      "concepts": ["built-in scope", "LEGB rule"]
+    },
+    {
+      "id": "lp_ch17_q06",
+      "type": "multiple_choice",
+      "question": "What is the output of this code?\n\ndef maker(n):\n    def action(x):\n        return x ** n\n    return action\n\nf = maker(3)\nprint(f(2))",
+      "choices": [
+        "6",
+        "8",
+        "9",
+        "An error because n is not defined in action"
+      ],
+      "correct": 1,
+      "explanation": "maker(3) returns the inner function action, which remembers n=3 from the enclosing scope (a closure). When f(2) is called, it computes 2 ** 3 = 8. The value of n is retained even after maker has returned.",
+      "concepts": ["closures/factory functions", "enclosing function scope"]
+    },
+    {
+      "id": "lp_ch17_q07",
+      "type": "multiple_choice",
+      "question": "If you reference a name that exists both as a local variable (assigned later in the function) and as a global, what happens when you reference it before the local assignment?",
+      "choices": [
+        "The global value is used",
+        "None is returned",
+        "An UnboundLocalError is raised",
+        "The built-in value is used"
+      ],
+      "correct": 2,
+      "explanation": "Python determines at compile time that a name is local if it is assigned anywhere in the function. If you reference it before the assignment executes, Python raises an UnboundLocalError rather than falling back to the global scope.",
+      "concepts": ["name resolution order", "LEGB rule"]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 22,
+  "questions": [
+    {
+      "id": "lp_ch22_q01",
+      "type": "multiple_choice",
+      "question": "What is the primary purpose of modules in Python?",
+      "choices": [
+        "To make programs run faster",
+        "To organize code into separate files for reuse, maintainability, and namespace management",
+        "To encrypt Python source code",
+        "To convert Python code into compiled executables"
+      ],
+      "correct": 1,
+      "explanation": "Modules allow you to organize code into separate files, enabling code reuse across programs, easier maintenance, and clean namespace separation to avoid name clashes.",
+      "concepts": ["modules", "code_organization"]
+    },
+    {
+      "id": "lp_ch22_q02",
+      "type": "fill_in_blank",
+      "question": "Python searches for imported modules using a list of directories stored in sys.___.",
+      "correct": "path",
+      "explanation": "sys.path is a list of directory strings that Python searches, in order, when you import a module. It is initialized from the script's directory, PYTHONPATH environment variable, and standard library paths.",
+      "concepts": ["sys_path", "module_search_path"]
+    },
+    {
+      "id": "lp_ch22_q03",
+      "type": "multiple_choice",
+      "question": "What happens the first time Python imports a module?",
+      "choices": [
+        "It only reads the file name",
+        "It finds the file, compiles it to byte code (if needed), and runs the module's code from top to bottom",
+        "It copies the module's code directly into the importing file",
+        "It checks for syntax errors but does not execute any code"
+      ],
+      "correct": 1,
+      "explanation": "On the first import, Python performs three steps: it finds the module file on sys.path, compiles it to byte code (.pyc) if necessary, and runs the module's top-level code to create the objects defined in it.",
+      "concepts": ["import_mechanism", "first_import"]
+    },
+    {
+      "id": "lp_ch22_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a valid module file type that Python can import?",
+      "choices": [
+        "A .py source file",
+        "A .pyc compiled byte code file",
+        "A C extension module (.so or .pyd)",
+        "A .txt plain text file"
+      ],
+      "correct": 3,
+      "explanation": "Python can import .py source files, .pyc byte code files, and C extension modules (.so on Linux, .pyd on Windows). Plain .txt files are not recognized as importable module types.",
+      "concepts": ["module_file_types"]
+    },
+    {
+      "id": "lp_ch22_q05",
+      "type": "fill_in_blank",
+      "question": "The special attribute __name__ is set to '___' when a Python file is run as the top-level script.",
+      "correct": "__main__",
+      "explanation": "When a file is run directly (not imported), Python sets its __name__ attribute to '__main__'. When the same file is imported as a module, __name__ is set to the module's name instead.",
+      "concepts": ["__name__", "__main__"]
+    },
+    {
+      "id": "lp_ch22_q06",
+      "type": "multiple_choice",
+      "question": "After a module has been imported once, what happens on subsequent import statements for the same module?",
+      "choices": [
+        "Python re-reads and re-executes the module's code",
+        "Python raises an ImportError",
+        "Python skips the import and reuses the already-loaded module object from its cache",
+        "Python recompiles the module to byte code but does not re-run it"
+      ],
+      "correct": 2,
+      "explanation": "Python caches imported modules in sys.modules. Subsequent import statements for the same module simply fetch the existing module object from this cache without re-running the module's code.",
+      "concepts": ["import_caching", "sys_modules"]
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 37,
+  "questions": [
+    {
+      "id": "lp_ch37_q01",
+      "type": "multiple_choice",
+      "question": "In Python 3, what is the difference between str and bytes?",
+      "choices": [
+        "They are interchangeable names for the same type",
+        "str holds decoded Unicode text; bytes holds raw encoded byte data",
+        "str is for ASCII only; bytes supports Unicode",
+        "bytes is mutable; str is immutable"
+      ],
+      "correct": 1,
+      "explanation": "In Python 3, str represents decoded Unicode text (sequences of characters), while bytes represents raw encoded binary data (sequences of integers 0-255). You must encode str to get bytes, and decode bytes to get str.",
+      "concepts": ["str", "bytes", "unicode", "encoding"]
+    },
+    {
+      "id": "lp_ch37_q02",
+      "type": "fill_in_blank",
+      "question": "To convert a Python 3 string to bytes using UTF-8 encoding, you call the string's ___ method.",
+      "choices": [],
+      "correct": "encode",
+      "explanation": "The str.encode() method converts a Unicode string to bytes using a specified encoding (UTF-8 by default). For example, 'hello'.encode('utf-8') returns b'hello'.",
+      "concepts": ["encode", "str_to_bytes", "utf8"]
+    },
+    {
+      "id": "lp_ch37_q03",
+      "type": "multiple_choice",
+      "question": "What does the b prefix in b'hello' indicate?",
+      "choices": [
+        "The string is stored in binary (base-2) format",
+        "The literal creates a bytes object instead of a str object",
+        "The string is compressed",
+        "The string uses big-endian byte order"
+      ],
+      "correct": 1,
+      "explanation": "The b prefix creates a bytes literal. b'hello' is a bytes object containing the ASCII-encoded bytes for 'hello', not a str object. Each element is an integer (0-255) rather than a character.",
+      "concepts": ["bytes_literal", "b_prefix", "bytes"]
+    },
+    {
+      "id": "lp_ch37_q04",
+      "type": "multiple_choice",
+      "question": "What is a BOM (Byte Order Mark) used for in Unicode files?",
+      "choices": [
+        "To compress the file",
+        "To indicate the byte order (endianness) of the encoded text",
+        "To encrypt the file contents",
+        "To mark the end of the file"
+      ],
+      "correct": 1,
+      "explanation": "A BOM is a special Unicode character (U+FEFF) placed at the start of a file to indicate the byte order (big-endian vs. little-endian) of multi-byte encodings like UTF-16 and UTF-32. UTF-8 sometimes includes a BOM but does not require one.",
+      "concepts": ["BOM", "byte_order", "unicode_encoding"]
+    },
+    {
+      "id": "lp_ch37_q05",
+      "type": "fill_in_blank",
+      "question": "When opening a text file in Python 3, you can specify the character encoding using the ___ parameter of the open() function.",
+      "choices": [],
+      "correct": "encoding",
+      "explanation": "The open() function accepts an encoding parameter (e.g., open('file.txt', encoding='utf-8')) to specify how bytes on disk should be decoded to str when reading, or how str should be encoded to bytes when writing.",
+      "concepts": ["open_function", "encoding_parameter", "file_io"]
+    },
+    {
+      "id": "lp_ch37_q06",
+      "type": "multiple_choice",
+      "question": "Which encoding can represent every Unicode character?",
+      "choices": [
+        "ASCII",
+        "Latin-1 (ISO-8859-1)",
+        "UTF-8",
+        "EBCDIC"
+      ],
+      "correct": 2,
+      "explanation": "UTF-8 can encode every Unicode code point using 1 to 4 bytes per character. ASCII only covers 128 characters, and Latin-1 covers 256. UTF-8 is backward-compatible with ASCII for the first 128 code points.",
+      "concepts": ["utf8", "unicode", "ascii", "latin1"]
+    },
+    {
+      "id": "lp_ch37_q07",
+      "type": "fill_in_blank",
+      "question": "To convert a bytes object back to a Unicode string, you call the bytes object's ___ method.",
+      "choices": [],
+      "correct": "decode",
+      "explanation": "The bytes.decode() method converts raw bytes to a Unicode str using a specified encoding (UTF-8 by default). For example, b'hello'.decode('utf-8') returns the string 'hello'.",
+      "concepts": ["decode", "bytes_to_str", "utf8"]
+    }
+  ]
+}

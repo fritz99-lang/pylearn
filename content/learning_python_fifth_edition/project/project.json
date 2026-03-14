@@ -1,0 +1,6 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "title": "Build a Personal Contact Manager",
+  "description": "Build a fully functional contact manager from scratch, adding features chapter by chapter. By the end, you'll have a CLI app with data storage, search, formatting, and error handling — all using concepts from the book.",
+  "final_description": "A complete contact manager with structured data, search, file persistence, formatted output, and robust error handling."
+}

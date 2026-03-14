@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 25,
+  "questions": [
+    {
+      "id": "lp_ch25_q01",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the __all__ list in a module?",
+      "choices": [
+        "It lists all classes in the module",
+        "It defines which names are exported when a client uses 'from module import *'",
+        "It prevents the module from being imported",
+        "It automatically documents all functions"
+      ],
+      "correct": 1,
+      "explanation": "__all__ is a list of strings that explicitly declares the public API of a module. When a client runs 'from module import *', only the names listed in __all__ are copied. Without it, all names not starting with an underscore are exported.",
+      "concepts": ["__all__", "public_api", "from_star"]
+    },
+    {
+      "id": "lp_ch25_q02",
+      "type": "fill_in_blank",
+      "question": "The idiom 'if __name__ == \"__main__\":' is used to run code only when the file is executed as a ___, not when it is imported.",
+      "correct": "script",
+      "explanation": "When Python runs a file directly, it sets __name__ to '__main__'. When the same file is imported as a module, __name__ is set to the module's name. This guard lets you include test code or a CLI entry point that only runs on direct execution.",
+      "concepts": ["__name__guard", "main_check", "script_vs_module"]
+    },
+    {
+      "id": "lp_ch25_q03",
+      "type": "multiple_choice",
+      "question": "What is the convention for single-underscore prefixed names like _helper in a module?",
+      "choices": [
+        "They cause a syntax error",
+        "They signal the name is internal and will be skipped by 'from module import *' if __all__ is not defined",
+        "They are automatically deleted after import",
+        "They are only accessible from within the same class"
+      ],
+      "correct": 1,
+      "explanation": "A single leading underscore (e.g., _helper) is a naming convention that signals a name is intended for internal use. If __all__ is not defined, 'from module import *' will skip these names, though they can still be imported explicitly.",
+      "concepts": ["_X_convention", "data_hiding", "naming_conventions"]
+    },
+    {
+      "id": "lp_ch25_q04",
+      "type": "multiple_choice",
+      "question": "What does 'from __future__ import annotations' do?",
+      "choices": [
+        "Enables Python 4 syntax",
+        "Makes all annotations lazily evaluated as strings instead of being resolved at definition time",
+        "Imports all future Python modules",
+        "Disables type checking"
+      ],
+      "correct": 1,
+      "explanation": "Future imports activate features planned for later Python versions. 'from __future__ import annotations' (PEP 563) makes all type annotations strings by default, enabling forward references and reducing import-time overhead.",
+      "concepts": ["future_imports", "__future__", "annotations"]
+    },
+    {
+      "id": "lp_ch25_q05",
+      "type": "fill_in_blank",
+      "question": "A module attribute named __all__ must be a list of ___.",
+      "correct": "strings",
+      "explanation": "__all__ must be a list of strings, where each string is the name of an attribute to export. For example: __all__ = ['parse', 'render', 'Config']. Non-string entries will cause an error during 'from module import *'.",
+      "concepts": ["__all__", "module_exports"]
+    },
+    {
+      "id": "lp_ch25_q06",
+      "type": "multiple_choice",
+      "question": "Which is a recommended module design pattern for large projects?",
+      "choices": [
+        "Put all code in a single large module for simplicity",
+        "Minimize cross-module coupling: modules should import what they need and expose a clear public API via __all__ or naming conventions",
+        "Use 'from module import *' everywhere to keep import lines short",
+        "Avoid splitting code into modules until the project exceeds 10,000 lines"
+      ],
+      "correct": 1,
+      "explanation": "Good module design minimizes coupling between modules. Each module should have a clear purpose, import only what it needs, and expose a well-defined public API. This makes code easier to understand, test, and maintain.",
+      "concepts": ["module_design", "coupling", "public_api"]
+    }
+  ]
+}

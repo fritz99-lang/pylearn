@@ -1,0 +1,54 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 29,
+  "challenges": [
+    {
+      "id": "lp_ch29_c01",
+      "title": "Printable Class",
+      "description": "Create a class `Product` with `__init__(self, name, price)` that stores both attributes.\n\nImplement two special methods:\n- `__str__` should return: \"Product: {name} - ${price:.2f}\"\n- `__repr__` should return: \"Product('{name}', {price})\"",
+      "starter_code": "class Product:\n    def __init__(self, name, price):\n        ...\n\n    def __str__(self):\n        # User-friendly display\n        ...\n\n    def __repr__(self):\n        # Developer-friendly representation\n        ...\n",
+      "test_code": "p = Product(\"Widget\", 9.99)\nassert str(p) == \"Product: Widget - $9.99\", f\"str() returned: {str(p)}\"\nassert repr(p) == \"Product('Widget', 9.99)\", f\"repr() returned: {repr(p)}\"\n\np2 = Product(\"Gadget\", 25)\nassert str(p2) == \"Product: Gadget - $25.00\", f\"str() returned: {str(p2)}\"\nassert repr(p2) == \"Product('Gadget', 25)\", f\"repr() returned: {repr(p2)}\"\n\np3 = Product(\"Thing\", 0.5)\nassert str(p3) == \"Product: Thing - $0.50\", f\"str() returned: {str(p3)}\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "__str__ method",
+        "__repr__ method",
+        "string representation of objects"
+      ],
+      "concepts_review": [
+        "class definition",
+        "f-string formatting",
+        "float formatting with :.2f"
+      ],
+      "hints": [
+        "__str__ is called by str() and print(); __repr__ is called by repr() and in the interactive shell.",
+        "Use f-string formatting: f\"Product: {self.name} - ${self.price:.2f}\" for __str__.",
+        "For __repr__, the convention is to return a string that looks like a valid constructor call."
+      ]
+    },
+    {
+      "id": "lp_ch29_c02",
+      "title": "Class Registry",
+      "description": "Create a class `Animal` with:\n- A class attribute `registry` initialized to an empty list\n- `__init__(self, species)` that stores the species and appends the new instance (self) to the registry list\n- A `@classmethod` called `count()` that returns the number of animals in the registry",
+      "starter_code": "class Animal:\n    # Define a class attribute 'registry' as an empty list\n    ...\n\n    def __init__(self, species):\n        # Store species and register this instance\n        ...\n\n    @classmethod\n    def count(cls):\n        # Return the number of registered animals\n        ...\n",
+      "test_code": "# Clear registry before testing\nAnimal.registry = []\n\nassert Animal.count() == 0, f\"count() should be 0 before creating any, got {Animal.count()}\"\n\na1 = Animal(\"Dog\")\nassert a1.species == \"Dog\", f\"species should be 'Dog', got '{a1.species}'\"\nassert Animal.count() == 1, f\"count() should be 1, got {Animal.count()}\"\n\na2 = Animal(\"Cat\")\na3 = Animal(\"Bird\")\nassert Animal.count() == 3, f\"count() should be 3, got {Animal.count()}\"\n\nassert a1 in Animal.registry, \"a1 should be in the registry\"\nassert a2 in Animal.registry, \"a2 should be in the registry\"\nassert a3 in Animal.registry, \"a3 should be in the registry\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "hard",
+      "concepts_new": [
+        "class attributes vs instance attributes",
+        "@classmethod decorator",
+        "cls parameter",
+        "instance registration pattern"
+      ],
+      "concepts_review": [
+        "__init__ method",
+        "self parameter",
+        "list.append()",
+        "len()"
+      ],
+      "hints": [
+        "Class attributes are defined directly in the class body, outside any method: registry = []",
+        "In __init__, use Animal.registry.append(self) or cls won't be available — use the class name directly.",
+        "A @classmethod receives 'cls' (the class) as its first argument instead of 'self'. Return len(cls.registry)."
+      ]
+    }
+  ]
+}

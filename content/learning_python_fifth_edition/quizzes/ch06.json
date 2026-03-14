@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 6,
+  "questions": [
+    {
+      "id": "lp_ch06_q01",
+      "type": "multiple_choice",
+      "question": "In Python, what does a variable actually hold?",
+      "choices": [
+        "The value itself",
+        "A reference (pointer) to an object in memory",
+        "A copy of the object",
+        "The memory address as an integer"
+      ],
+      "correct": 1,
+      "explanation": "Python variables are references to objects. When you assign a = 3, the variable 'a' holds a reference to the integer object 3 in memory, not the value itself.",
+      "concepts": ["references", "variables", "dynamic_typing"]
+    },
+    {
+      "id": "lp_ch06_q02",
+      "type": "fill_in_blank",
+      "question": "The ___ operator tests whether two variables refer to the exact same object in memory, rather than just equal values.",
+      "correct": "is",
+      "explanation": "The 'is' operator checks object identity (same memory location), while == checks value equality. For example, a is b is True only if a and b point to the same object.",
+      "concepts": ["identity", "is_operator", "references"]
+    },
+    {
+      "id": "lp_ch06_q03",
+      "type": "multiple_choice",
+      "question": "What happens when no variables reference a Python object?",
+      "choices": [
+        "It stays in memory permanently",
+        "It is reclaimed by garbage collection",
+        "It raises a ReferenceError",
+        "It is written to disk"
+      ],
+      "correct": 1,
+      "explanation": "Python uses garbage collection (primarily reference counting) to reclaim memory. When an object's reference count drops to zero, its memory is automatically freed.",
+      "concepts": ["garbage_collection", "reference_counting", "memory_management"]
+    },
+    {
+      "id": "lp_ch06_q04",
+      "type": "multiple_choice",
+      "question": "Given a = [1, 2, 3] and b = a, what happens when you run b.append(4)?",
+      "choices": [
+        "Only b becomes [1, 2, 3, 4]; a is unchanged",
+        "Both a and b become [1, 2, 3, 4] because they reference the same list",
+        "A TypeError is raised",
+        "a becomes [1, 2, 3] and b becomes [4]"
+      ],
+      "correct": 1,
+      "explanation": "Since b = a creates a shared reference (both point to the same list object), mutating the list through b also affects a. This is a key consequence of Python's reference-based variable model.",
+      "concepts": ["shared_references", "mutable_objects", "references"]
+    },
+    {
+      "id": "lp_ch06_q05",
+      "type": "fill_in_blank",
+      "question": "The built-in function ___ returns the type of an object.",
+      "correct": "type",
+      "explanation": "type(obj) returns the type (class) of an object. For example, type(42) returns <class 'int'> and type('hello') returns <class 'str'>.",
+      "concepts": ["type_function", "dynamic_typing", "built_in_functions"]
+    },
+    {
+      "id": "lp_ch06_q06",
+      "type": "multiple_choice",
+      "question": "In Python, types are associated with:",
+      "choices": [
+        "Variables (names)",
+        "Objects, not variables",
+        "Both variables and objects equally",
+        "Neither variables nor objects"
+      ],
+      "correct": 1,
+      "explanation": "In Python's dynamic typing model, types live with objects, not variables. A variable is just a name that can reference any type of object at any time. This is why x = 42 followed by x = 'hello' is perfectly valid.",
+      "concepts": ["dynamic_typing", "variables", "objects"]
+    },
+    {
+      "id": "lp_ch06_q07",
+      "type": "multiple_choice",
+      "question": "Given a = [1, 2, 3], which of the following creates a true copy rather than a shared reference?",
+      "choices": [
+        "b = a",
+        "b = a[:]",
+        "b = a * 1 and b = a are the same",
+        "It is impossible to copy a list"
+      ],
+      "correct": 1,
+      "explanation": "a[:] creates a shallow copy of the list — a new list object with the same elements. After b = a[:], modifying b does not affect a. In contrast, b = a creates a shared reference.",
+      "concepts": ["copying", "slicing", "shared_references"]
+    }
+  ]
+}

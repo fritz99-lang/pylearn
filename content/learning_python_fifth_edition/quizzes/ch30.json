@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 30,
+  "questions": [
+    {
+      "id": "lp_ch30_q01",
+      "type": "multiple_choice",
+      "question": "Which operator overloading method would you implement to make instances of your class support the + operator?",
+      "choices": [
+        "__mul__",
+        "__add__",
+        "__sub__",
+        "__mod__"
+      ],
+      "correct": 1,
+      "explanation": "The __add__ method is called when the + operator is used with an instance on the left side. For example, x + y calls x.__add__(y).",
+      "concepts": ["__add__", "operator_overloading"]
+    },
+    {
+      "id": "lp_ch30_q02",
+      "type": "fill_in_blank",
+      "question": "To make an instance callable like a function (e.g., obj()), you define the ________ method in the class.",
+      "correct": "__call__",
+      "explanation": "The __call__ method is invoked when an instance is called using function call syntax. If a class defines __call__, then obj(args) is equivalent to obj.__call__(args).",
+      "concepts": ["__call__", "callable_objects"]
+    },
+    {
+      "id": "lp_ch30_q03",
+      "type": "multiple_choice",
+      "question": "What does the __getitem__ method allow you to do with an instance?",
+      "choices": [
+        "Get the length of the instance",
+        "Access the instance using indexing syntax like obj[key]",
+        "Iterate over the instance",
+        "Check if a value is contained in the instance"
+      ],
+      "correct": 1,
+      "explanation": "__getitem__ is called when you use indexing syntax (obj[key]) on an instance. It allows your class to support bracket-based access like lists and dictionaries. It can also serve as a fallback for iteration if __iter__ is not defined.",
+      "concepts": ["__getitem__", "indexing", "operator_overloading"]
+    },
+    {
+      "id": "lp_ch30_q04",
+      "type": "multiple_choice",
+      "question": "Which method must you implement to make your class work with the len() built-in function?",
+      "choices": [
+        "__size__",
+        "__count__",
+        "__len__",
+        "__length__"
+      ],
+      "correct": 2,
+      "explanation": "__len__ is the special method called by the built-in len() function. It should return an integer representing the logical length or size of the object.",
+      "concepts": ["__len__", "built_in_functions"]
+    },
+    {
+      "id": "lp_ch30_q05",
+      "type": "fill_in_blank",
+      "question": "To support the 'in' operator for membership testing (e.g., x in obj), you define the ________ method.",
+      "correct": "__contains__",
+      "explanation": "__contains__ is called by the 'in' operator. It should return True or False. If __contains__ is not defined, Python falls back to iterating through the object using __iter__ or __getitem__.",
+      "concepts": ["__contains__", "membership_testing", "in_operator"]
+    },
+    {
+      "id": "lp_ch30_q06",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the __bool__ method?",
+      "choices": [
+        "It converts the object to a binary number",
+        "It defines the truth value of an instance when used in boolean contexts like if statements",
+        "It checks whether two objects are equal",
+        "It validates that the object was created correctly"
+      ],
+      "correct": 1,
+      "explanation": "__bool__ is called when an object is tested in a boolean context (e.g., if obj:, while obj:, bool(obj)). It should return True or False. If __bool__ is not defined, Python falls back to __len__ (nonzero length means True).",
+      "concepts": ["__bool__", "truth_value_testing"]
+    },
+    {
+      "id": "lp_ch30_q07",
+      "type": "multiple_choice",
+      "question": "If a class defines __iter__, what must the __iter__ method return?",
+      "choices": [
+        "A list of all items",
+        "An iterator object (an object with a __next__ method)",
+        "The number of items in the collection",
+        "A boolean indicating whether iteration is possible"
+      ],
+      "correct": 1,
+      "explanation": "__iter__ must return an iterator object -- that is, an object that implements __next__ (and typically __iter__ returning self). Each call to __next__ should return the next value or raise StopIteration when exhausted.",
+      "concepts": ["__iter__", "__next__", "iteration_protocol"]
+    }
+  ]
+}

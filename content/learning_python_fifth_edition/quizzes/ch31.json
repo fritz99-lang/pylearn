@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 31,
+  "questions": [
+    {
+      "id": "lp_ch31_q01",
+      "type": "multiple_choice",
+      "question": "What is delegation in the context of class design?",
+      "choices": [
+        "Passing all method calls to a parent class via inheritance",
+        "Wrapping an embedded object and forwarding method calls to it",
+        "Creating multiple instances of the same class",
+        "Using global functions instead of methods"
+      ],
+      "correct": 1,
+      "explanation": "Delegation is a design pattern where a wrapper class embeds another object and forwards (delegates) method calls to it. This is a form of composition and is often implemented using __getattr__ to intercept attribute lookups and redirect them.",
+      "concepts": ["delegation", "composition", "__getattr__"]
+    },
+    {
+      "id": "lp_ch31_q02",
+      "type": "multiple_choice",
+      "question": "What is the key difference between composition and inheritance?",
+      "choices": [
+        "Composition is faster; inheritance is slower",
+        "Inheritance models 'is-a' relationships; composition models 'has-a' relationships",
+        "Composition only works with built-in types",
+        "There is no difference; they are interchangeable"
+      ],
+      "correct": 1,
+      "explanation": "Inheritance expresses an 'is-a' relationship (a Manager is a Person), while composition expresses a 'has-a' relationship (a Department has Employees). Composition embeds objects as attributes rather than inheriting from their classes.",
+      "concepts": ["composition", "inheritance", "is_a", "has_a"]
+    },
+    {
+      "id": "lp_ch31_q03",
+      "type": "fill_in_blank",
+      "question": "Python's pseudoprivate name mangling transforms an attribute named __spam inside class Ham into _________spam.",
+      "correct": "_Ham__",
+      "explanation": "Python name mangling transforms attributes that start with two underscores (and have at most one trailing underscore) by prefixing them with _ClassName. So __spam in class Ham becomes _Ham__spam. This helps avoid name clashes in class hierarchies.",
+      "concepts": ["name_mangling", "pseudoprivate_attributes"]
+    },
+    {
+      "id": "lp_ch31_q04",
+      "type": "multiple_choice",
+      "question": "What is the purpose of pseudoprivate name mangling (double underscore prefix)?",
+      "choices": [
+        "To make attributes truly private and inaccessible from outside the class",
+        "To prevent accidental name clashes in class hierarchies when subclasses define attributes with the same name",
+        "To improve performance by caching attribute lookups",
+        "To encrypt the attribute values"
+      ],
+      "correct": 1,
+      "explanation": "Pseudoprivate names are not truly private -- they can still be accessed via the mangled name (_ClassName__X). Their purpose is to localize names to the class that created them, preventing accidental collisions when multiple classes in a hierarchy use the same attribute name.",
+      "concepts": ["name_mangling", "pseudoprivate_attributes", "namespace_collision"]
+    },
+    {
+      "id": "lp_ch31_q05",
+      "type": "multiple_choice",
+      "question": "In Python 3, what is a bound method?",
+      "choices": [
+        "A function defined outside of any class",
+        "A method that is associated with a specific instance and automatically receives that instance as self",
+        "A method that cannot be overridden by subclasses",
+        "A method that has been decorated with @staticmethod"
+      ],
+      "correct": 1,
+      "explanation": "A bound method is a method object that pairs a function with a specific instance. When you access a method through an instance (obj.method), Python creates a bound method that automatically passes the instance as the first argument (self) when called.",
+      "concepts": ["bound_methods", "method_objects"]
+    },
+    {
+      "id": "lp_ch31_q06",
+      "type": "fill_in_blank",
+      "question": "A class that defines method signatures but does not implement them, requiring subclasses to provide the implementation, is called an ________ superclass.",
+      "correct": "abstract",
+      "explanation": "An abstract superclass defines a common interface by declaring methods that subclasses must override. In Python, you can create abstract classes informally (by raising NotImplementedError) or formally using the abc module's ABC base class and @abstractmethod decorator.",
+      "concepts": ["abstract_classes", "abc_module", "class_design"]
+    },
+    {
+      "id": "lp_ch31_q07",
+      "type": "multiple_choice",
+      "question": "Which approach does Python use to formally enforce the interface of an abstract superclass?",
+      "choices": [
+        "Compile-time type checking that prevents instantiation",
+        "The abc module with ABC and @abstractmethod, which raises TypeError if abstract methods are not overridden",
+        "A special 'interface' keyword",
+        "Abstract classes cannot be created in Python"
+      ],
+      "correct": 1,
+      "explanation": "Python's abc module provides the ABC base class and @abstractmethod decorator. If a subclass does not override all abstract methods, attempting to instantiate it raises a TypeError. This is the formal mechanism for abstract classes in Python.",
+      "concepts": ["abc_module", "abstractmethod", "abstract_classes"]
+    }
+  ]
+}

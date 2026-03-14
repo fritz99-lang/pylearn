@@ -1,0 +1,39 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 18,
+  "challenges": [
+    {
+      "id": "lp_ch18_c01",
+      "title": "Greeting Function",
+      "description": "Write a function `greet(name, greeting=\"Hello\")` that returns a formatted greeting string using an f-string: `f\"{greeting}, {name}!\"`.",
+      "starter_code": "def greet(name, greeting=\"Hello\"):\n    # Your code here\n    pass\n\n# Test your function\nprint(greet(\"Alice\"))\nprint(greet(\"Bob\", \"Hi\"))",
+      "test_code": "assert greet(\"Alice\") == \"Hello, Alice!\"\nassert greet(\"Bob\", \"Hi\") == \"Hi, Bob!\"",
+      "difficulty": "easy",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    },
+    {
+      "id": "lp_ch18_c02",
+      "title": "Flexible Average",
+      "description": "Write a function `average(*args)` that accepts any number of numeric arguments and returns their average. If no arguments are provided, return 0.",
+      "starter_code": "def average(*args):\n    # Your code here\n    pass\n\n# Test your function\nprint(average(1, 2, 3))\nprint(average())\nprint(average(10))",
+      "test_code": "assert average(1, 2, 3) == 2.0\nassert average() == 0\nassert average(10) == 10.0",
+      "difficulty": "medium",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    },
+    {
+      "id": "lp_ch18_c03",
+      "title": "Config Builder",
+      "description": "Write a function `build_config(**kwargs)` that returns a dictionary containing all keyword arguments passed to it, plus default values of `debug=False` and `verbose=False` for any keys not explicitly provided.",
+      "starter_code": "def build_config(**kwargs):\n    # Your code here\n    pass\n\n# Test your function\nprint(build_config())\nprint(build_config(debug=True, name=\"test\"))",
+      "test_code": "assert build_config() == {\"debug\": False, \"verbose\": False}\nassert build_config(debug=True, name=\"test\") == {\"debug\": True, \"verbose\": False, \"name\": \"test\"}",
+      "difficulty": "medium",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    }
+  ]
+}

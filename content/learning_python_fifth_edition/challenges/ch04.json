@@ -1,0 +1,39 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 4,
+  "challenges": [
+    {
+      "id": "lp_ch04_c01",
+      "title": "String Slicer",
+      "description": "Given the string 'Learning Python', extract the word 'Python' using slicing and store it in a variable called 'word'.",
+      "starter_code": "text = 'Learning Python'\n# Extract 'Python' from text using slicing\nword = # your code here\n",
+      "test_code": "assert word == 'Python', f\"Expected 'Python', got '{word}'\"",
+      "difficulty": "easy",
+      "concepts_new": ["slicing", "strings"],
+      "concepts_review": ["variables"],
+      "hints": ["Count the index where 'Python' starts (index 9)", "Use text[start:end] syntax", "text[9:] will work since Python goes to the end"]
+    },
+    {
+      "id": "lp_ch04_c02",
+      "title": "List Builder",
+      "description": "Create a list called 'fruits' containing 'apple', 'banana', 'cherry'. Then add 'date' to the end using a list method. Finally, create 'count' storing the length of the list.",
+      "starter_code": "# Create the fruits list\nfruits = # your code here\n\n# Add 'date' to the end\n\n# Store the length in count\ncount = # your code here\n",
+      "test_code": "assert isinstance(fruits, list), 'fruits should be a list'\nassert fruits == ['apple', 'banana', 'cherry', 'date'], f'Expected [\"apple\", \"banana\", \"cherry\", \"date\"], got {fruits}'\nassert count == 4, f'count should be 4, got {count}'",
+      "difficulty": "easy",
+      "concepts_new": ["lists", "list_methods", "len"],
+      "concepts_review": ["variables"],
+      "hints": ["Create a list with square brackets: ['apple', 'banana', 'cherry']", "Use .append() to add an item", "Use len() to get the count"]
+    },
+    {
+      "id": "lp_ch04_c03",
+      "title": "Dictionary Lookup",
+      "description": "Create a dictionary called 'student' with keys 'name' (value: 'Alice'), 'age' (value: 21), and 'grade' (value: 'A'). Then create 'info' as a formatted string: 'Alice is 21 and got A'.",
+      "starter_code": "# Create the student dictionary\nstudent = # your code here\n\n# Create the info string\ninfo = # your code here\n",
+      "test_code": "assert isinstance(student, dict), 'student should be a dictionary'\nassert student['name'] == 'Alice', f\"name should be 'Alice'\"\nassert student['age'] == 21, f'age should be 21'\nassert student['grade'] == 'A', f\"grade should be 'A'\"\nassert info == 'Alice is 21 and got A', f\"info should be 'Alice is 21 and got A', got '{info}'\"",
+      "difficulty": "medium",
+      "concepts_new": ["dictionaries", "string_formatting"],
+      "concepts_review": ["variables", "strings"],
+      "hints": ["Use curly braces for dicts: {'key': 'value'}", "Access values with student['name']", "Use f-strings: f\"{student['name']} is {student['age']} and got {student['grade']}\""]
+    }
+  ]
+}

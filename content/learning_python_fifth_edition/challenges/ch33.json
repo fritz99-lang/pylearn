@@ -1,0 +1,52 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 33,
+  "challenges": [
+    {
+      "id": "lp_ch33_c01",
+      "title": "Safe Division",
+      "description": "Write a function `safe_divide(a, b)` that returns the result of a / b.\n\nIf b is zero, the function should catch the ZeroDivisionError and return None instead of crashing.",
+      "starter_code": "def safe_divide(a, b):\n    \"\"\"Return a / b, or None if b is zero.\"\"\"\n    # Use try/except to catch ZeroDivisionError\n    ...\n",
+      "test_code": "assert safe_divide(10, 2) == 5.0, f\"Expected 5.0, got {safe_divide(10, 2)}\"\nassert safe_divide(10, 0) is None, \"Dividing by zero should return None\"\nassert safe_divide(7, 2) == 3.5, f\"Expected 3.5, got {safe_divide(7, 2)}\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "easy",
+      "concepts_new": [
+        "try/except statement",
+        "ZeroDivisionError",
+        "exception handling basics"
+      ],
+      "concepts_review": [
+        "function definition",
+        "return values",
+        "division operator"
+      ],
+      "hints": [
+        "Wrap the division in a try block.",
+        "Use 'except ZeroDivisionError:' to catch only division-by-zero errors.",
+        "Return None inside the except block, and return a / b inside the try block."
+      ]
+    },
+    {
+      "id": "lp_ch33_c02",
+      "title": "Parse Int",
+      "description": "Write a function `parse_int(value)` that attempts to convert `value` to an integer using `int(value)`.\n\n- On success, return the integer.\n- On failure, raise a ValueError with the message \"Invalid integer: {value}\" (where {value} is replaced with the actual value passed in).",
+      "starter_code": "def parse_int(value):\n    \"\"\"Convert value to int, or raise ValueError with a descriptive message.\"\"\"\n    # Try to convert value to int\n    # If it fails, raise ValueError with message \"Invalid integer: {value}\"\n    ...\n",
+      "test_code": "assert parse_int(\"42\") == 42, f\"Expected 42, got {parse_int('42')}\"\nassert parse_int(\"-7\") == -7, f\"Expected -7, got {parse_int('-7')}\"\ntry:\n    parse_int(\"abc\")\n    assert False, \"Should have raised ValueError for 'abc'\"\nexcept ValueError as e:\n    assert \"Invalid integer: abc\" in str(e), f\"Wrong message: {e}\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "raising exceptions",
+        "ValueError",
+        "custom error messages"
+      ],
+      "concepts_review": [
+        "try/except statement",
+        "int() conversion",
+        "string formatting"
+      ],
+      "hints": [
+        "Use try/except to catch the ValueError from int().",
+        "In the except block, raise a new ValueError with your custom message.",
+        "Use an f-string to include the original value in the error message: f\"Invalid integer: {value}\""
+      ]
+    }
+  ]
+}

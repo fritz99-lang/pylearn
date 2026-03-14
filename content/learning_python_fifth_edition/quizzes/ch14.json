@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 14,
+  "questions": [
+    {
+      "id": "lp_ch14_q01",
+      "type": "multiple_choice",
+      "question": "What does the iter() built-in function return?",
+      "choices": [
+        "The first item of a sequence",
+        "An iterator object that supports the next() protocol",
+        "A list of all items",
+        "The length of the iterable"
+      ],
+      "correct": 1,
+      "explanation": "iter(obj) returns an iterator object from an iterable. The iterator supports the __next__() method (called via next()), which returns successive items and raises StopIteration when exhausted.",
+      "concepts": ["iter", "iterators", "iteration_protocol"]
+    },
+    {
+      "id": "lp_ch14_q02",
+      "type": "fill_in_blank",
+      "question": "Calling ___ on an iterator returns the next item or raises StopIteration if exhausted.",
+      "correct": "next",
+      "explanation": "next(iterator) fetches the next value from an iterator. When no more items are available, it raises StopIteration. You can pass a default value as a second argument to avoid the exception: next(it, default).",
+      "concepts": ["next", "iterators", "StopIteration"]
+    },
+    {
+      "id": "lp_ch14_q03",
+      "type": "multiple_choice",
+      "question": "What is the difference between a list comprehension and a generator expression?",
+      "choices": [
+        "They are identical in every way",
+        "List comprehensions use [] and build a list in memory; generator expressions use () and produce items lazily",
+        "Generator expressions are faster because they use C code",
+        "List comprehensions can only contain numbers"
+      ],
+      "correct": 1,
+      "explanation": "A list comprehension [x for x in items] builds the entire list in memory at once. A generator expression (x for x in items) produces items one at a time on demand, using less memory for large datasets.",
+      "concepts": ["list_comprehensions", "generator_expressions", "lazy_evaluation"]
+    },
+    {
+      "id": "lp_ch14_q04",
+      "type": "multiple_choice",
+      "question": "What does list(map(str, [1, 2, 3])) return?",
+      "choices": [
+        "[1, 2, 3]",
+        "['1', '2', '3']",
+        "'123'",
+        "['str', 'str', 'str']"
+      ],
+      "correct": 1,
+      "explanation": "map(func, iterable) applies func to each item. Here, str is applied to each integer, converting them to strings. map() returns an iterator in Python 3, so list() is needed to see the results.",
+      "concepts": ["map", "built_in_functions", "functional_programming"]
+    },
+    {
+      "id": "lp_ch14_q05",
+      "type": "fill_in_blank",
+      "question": "The built-in function ___ pairs items from multiple iterables into tuples.",
+      "correct": "zip",
+      "explanation": "zip(iter1, iter2, ...) creates an iterator of tuples, where each tuple contains the corresponding elements from the input iterables. It stops at the shortest iterable.",
+      "concepts": ["zip", "built_in_functions", "iteration"]
+    },
+    {
+      "id": "lp_ch14_q06",
+      "type": "multiple_choice",
+      "question": "What does list(filter(lambda x: x > 0, [-1, 0, 2, -3, 4])) return?",
+      "choices": [
+        "[-1, 0, 2, -3, 4]",
+        "[2, 4]",
+        "[-1, -3]",
+        "[0, 2, 4]"
+      ],
+      "correct": 1,
+      "explanation": "filter(func, iterable) keeps only items for which func returns a truthy value. Here, only 2 and 4 are greater than 0, so the result is [2, 4].",
+      "concepts": ["filter", "lambda", "functional_programming"]
+    },
+    {
+      "id": "lp_ch14_q07",
+      "type": "multiple_choice",
+      "question": "What does enumerate(['a', 'b', 'c']) produce when iterated?",
+      "choices": [
+        "['a', 'b', 'c']",
+        "(0, 'a'), (1, 'b'), (2, 'c')",
+        "{'a': 0, 'b': 1, 'c': 2}",
+        "(1, 'a'), (2, 'b'), (3, 'c')"
+      ],
+      "correct": 1,
+      "explanation": "enumerate(iterable) yields (index, item) tuples, starting at index 0 by default. You can change the start with enumerate(iterable, start=1).",
+      "concepts": ["enumerate", "built_in_functions", "iteration"]
+    },
+    {
+      "id": "lp_ch14_q08",
+      "type": "fill_in_blank",
+      "question": "A list comprehension with a condition, like [x for x in items if x > 0], includes the filtering clause at the ___.",
+      "correct": "end",
+      "explanation": "In a list comprehension, the if clause comes at the end: [expression for variable in iterable if condition]. Only items where the condition is truthy are included in the result.",
+      "concepts": ["list_comprehensions", "filtering", "conditional_comprehension"]
+    }
+  ]
+}

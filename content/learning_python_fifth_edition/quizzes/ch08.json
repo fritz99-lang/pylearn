@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 8,
+  "questions": [
+    {
+      "id": "lp_ch08_q01",
+      "type": "multiple_choice",
+      "question": "What is the difference between list.append(x) and list.extend(x)?",
+      "choices": [
+        "They are identical in behavior",
+        "append adds x as a single element; extend adds each item of iterable x individually",
+        "extend adds x as a single element; append adds each item individually",
+        "append modifies the list in place; extend returns a new list"
+      ],
+      "correct": 1,
+      "explanation": "append(x) adds x as one element at the end (even if x is a list). extend(x) iterates over x and adds each element individually. For example, [1].append([2,3]) gives [1, [2,3]], while [1].extend([2,3]) gives [1, 2, 3].",
+      "concepts": ["list_methods", "append", "extend"]
+    },
+    {
+      "id": "lp_ch08_q02",
+      "type": "fill_in_blank",
+      "question": "The dictionary method ___ returns a value for a key if it exists, or a default value if the key is not found, without raising a KeyError.",
+      "correct": "get",
+      "explanation": "d.get(key, default) returns d[key] if key exists, otherwise returns the default value (None if not specified). This avoids the KeyError that d[key] would raise for missing keys.",
+      "concepts": ["dict_methods", "get", "key_access"]
+    },
+    {
+      "id": "lp_ch08_q03",
+      "type": "multiple_choice",
+      "question": "What does [x ** 2 for x in range(5)] produce?",
+      "choices": [
+        "[1, 4, 9, 16, 25]",
+        "[0, 1, 4, 9, 16]",
+        "[0, 2, 4, 6, 8]",
+        "[0, 1, 2, 3, 4]"
+      ],
+      "correct": 1,
+      "explanation": "This list comprehension squares each value in range(5), which is 0, 1, 2, 3, 4. The results are 0, 1, 4, 9, 16.",
+      "concepts": ["list_comprehensions", "range", "expressions"]
+    },
+    {
+      "id": "lp_ch08_q04",
+      "type": "multiple_choice",
+      "question": "Which method removes and returns the last item from a list?",
+      "choices": [
+        "list.remove()",
+        "list.pop()",
+        "list.delete()",
+        "list.drop()"
+      ],
+      "correct": 1,
+      "explanation": "list.pop() removes and returns the last element. You can also pass an index: list.pop(0) removes and returns the first element. list.remove(value) removes by value, not by position.",
+      "concepts": ["list_methods", "pop", "remove"]
+    },
+    {
+      "id": "lp_ch08_q05",
+      "type": "fill_in_blank",
+      "question": "The dictionary method that returns a view of all key-value pairs as tuples is called ___.",
+      "correct": "items",
+      "explanation": "d.items() returns a view object containing (key, value) tuples. Similarly, d.keys() returns keys and d.values() returns values. These views reflect changes to the dictionary.",
+      "concepts": ["dict_methods", "items", "dict_views"]
+    },
+    {
+      "id": "lp_ch08_q06",
+      "type": "multiple_choice",
+      "question": "What does the del statement do when applied to a list element, such as del L[0]?",
+      "choices": [
+        "It sets L[0] to None",
+        "It removes the item at index 0 and shifts remaining elements left",
+        "It returns the item at index 0 and removes it",
+        "It raises an error because del only works on variables"
+      ],
+      "correct": 1,
+      "explanation": "del L[0] removes the element at index 0 in place and shifts all subsequent elements down by one index. Unlike pop(), del does not return the removed value. del can also remove slices (del L[1:3]) or entire variables.",
+      "concepts": ["del_statement", "list_operations", "in_place_operations"]
+    },
+    {
+      "id": "lp_ch08_q07",
+      "type": "multiple_choice",
+      "question": "How does list.insert(0, 'x') differ from list.append('x')?",
+      "choices": [
+        "insert adds at the beginning; append adds at the end",
+        "insert returns a new list; append modifies in place",
+        "They are equivalent operations",
+        "insert replaces the element at index 0; append adds a new element"
+      ],
+      "correct": 0,
+      "explanation": "list.insert(i, x) inserts x before the element at index i. So insert(0, 'x') places 'x' at the very beginning. append('x') always adds to the end. Both modify the list in place.",
+      "concepts": ["list_methods", "insert", "append"]
+    },
+    {
+      "id": "lp_ch08_q08",
+      "type": "fill_in_blank",
+      "question": "The dictionary method ___ merges another dictionary's key-value pairs into the current dictionary, overwriting existing keys.",
+      "correct": "update",
+      "explanation": "d.update(other) merges all key-value pairs from other into d. If a key already exists in d, its value is overwritten with the value from other. The method modifies d in place and returns None.",
+      "concepts": ["dict_methods", "update", "merging"]
+    }
+  ]
+}

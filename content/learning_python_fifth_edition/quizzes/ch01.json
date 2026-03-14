@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 1,
+  "questions": [
+    {
+      "id": "lp_ch01_q01",
+      "type": "multiple_choice",
+      "question": "What is the primary purpose of the Python interpreter?",
+      "choices": [
+        "To compile Python code into machine language",
+        "To execute Python code line by line",
+        "To convert Python to C++",
+        "To check Python syntax only"
+      ],
+      "correct": 1,
+      "explanation": "The Python interpreter reads and executes Python code line by line, making it an interpreted language rather than a compiled one.",
+      "concepts": ["interpreter", "execution"]
+    },
+    {
+      "id": "lp_ch01_q02",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a reason people choose Python?",
+      "choices": [
+        "Software quality",
+        "Developer productivity",
+        "Maximum execution speed",
+        "Portability across platforms"
+      ],
+      "correct": 2,
+      "explanation": "While Python is fast enough for most tasks, raw execution speed is not its primary selling point. Python prioritizes readability and developer productivity.",
+      "concepts": ["python_advantages"]
+    },
+    {
+      "id": "lp_ch01_q03",
+      "type": "fill_in_blank",
+      "question": "Python is an example of a(n) ___ language, meaning code is executed at runtime rather than compiled beforehand.",
+      "correct": "interpreted",
+      "explanation": "Python code is translated to bytecode and then interpreted by the Python Virtual Machine (PVM) at runtime.",
+      "concepts": ["interpreted", "compilation"]
+    },
+    {
+      "id": "lp_ch01_q04",
+      "type": "multiple_choice",
+      "question": "What does Python compile source code into before execution?",
+      "choices": [
+        "Machine code",
+        "Assembly language",
+        "Byte code",
+        "C code"
+      ],
+      "correct": 2,
+      "explanation": "Python first compiles source code into an intermediate format called byte code, which is then executed by the Python Virtual Machine (PVM).",
+      "concepts": ["bytecode", "compilation"]
+    },
+    {
+      "id": "lp_ch01_q05",
+      "type": "fill_in_blank",
+      "question": "The standard implementation of Python, written in C, is called ___.",
+      "correct": "CPython",
+      "explanation": "CPython is the standard, reference implementation of Python. Other implementations include Jython (Java), IronPython (.NET), and PyPy.",
+      "concepts": ["cpython", "implementations"]
+    },
+    {
+      "id": "lp_ch01_q06",
+      "type": "multiple_choice",
+      "question": "Which of the following is a valid use case for Python mentioned in the book?",
+      "choices": [
+        "Operating system kernel development",
+        "Systems programming, GUIs, Internet scripting, and database programming",
+        "Hardware driver development only",
+        "Assembly language replacement"
+      ],
+      "correct": 1,
+      "explanation": "Python is used across a wide range of domains including systems programming, GUIs, Internet scripting, component integration, database programming, rapid prototyping, and more.",
+      "concepts": ["use_cases", "applications"]
+    }
+  ]
+}

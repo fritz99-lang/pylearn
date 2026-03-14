@@ -1,0 +1,94 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 16,
+  "questions": [
+    {
+      "id": "lp_ch16_q01",
+      "type": "multiple_choice",
+      "question": "What keyword is used to create a function in Python?",
+      "choices": [
+        "function",
+        "func",
+        "def",
+        "define"
+      ],
+      "correct": 2,
+      "explanation": "The 'def' keyword is used to define a function in Python. It creates a function object and assigns it to the function's name.",
+      "concepts": ["def_statement", "function_definition"]
+    },
+    {
+      "id": "lp_ch16_q02",
+      "type": "fill_in_blank",
+      "question": "A function without an explicit return statement returns ______.",
+      "choices": ["None"],
+      "correct": 0,
+      "explanation": "If a function body does not execute a return statement (or executes a bare 'return' with no value), Python implicitly returns None.",
+      "concepts": ["return_statement", "None", "function_basics"]
+    },
+    {
+      "id": "lp_ch16_q03",
+      "type": "multiple_choice",
+      "question": "What does it mean that functions exhibit polymorphism in Python?",
+      "choices": [
+        "Functions can only accept one type of argument",
+        "Functions can operate on any object type that supports the expected interface",
+        "Functions must declare the types of their arguments",
+        "Functions automatically convert arguments to the correct type"
+      ],
+      "correct": 1,
+      "explanation": "Polymorphism means the same function can work with different object types, as long as those objects support the operations the function performs (duck typing).",
+      "concepts": ["polymorphism", "duck_typing", "function_basics"]
+    },
+    {
+      "id": "lp_ch16_q04",
+      "type": "multiple_choice",
+      "question": "Where are variables assigned inside a function body visible by default?",
+      "choices": [
+        "Everywhere in the program",
+        "Only inside the function (local scope)",
+        "In the function and all calling functions",
+        "In the module's global scope"
+      ],
+      "correct": 1,
+      "explanation": "Variables assigned inside a function are local to that function by default. They are created when the function is called and destroyed when it returns.",
+      "concepts": ["local_variables", "scope", "function_basics"]
+    },
+    {
+      "id": "lp_ch16_q05",
+      "type": "fill_in_blank",
+      "question": "The ______ statement is used to send a result object back to the caller of a function.",
+      "choices": ["return"],
+      "correct": 0,
+      "explanation": "The return statement exits the function and sends a value back to the caller. Without it, the function returns None.",
+      "concepts": ["return_statement", "function_basics"]
+    },
+    {
+      "id": "lp_ch16_q06",
+      "type": "multiple_choice",
+      "question": "What happens when you assign a value to a variable name inside a function?",
+      "choices": [
+        "It always modifies the global variable with that name",
+        "It creates or updates a local variable by default",
+        "It raises a NameError",
+        "It creates a new global variable"
+      ],
+      "correct": 1,
+      "explanation": "Assignment inside a function creates a local variable by default. To modify a global variable, you must declare it with the 'global' keyword.",
+      "concepts": ["local_variables", "assignment", "scope"]
+    },
+    {
+      "id": "lp_ch16_q07",
+      "type": "multiple_choice",
+      "question": "In Python, a def statement is:",
+      "choices": [
+        "A declaration that is processed at compile time",
+        "An executable statement that creates a function object at runtime",
+        "A static definition that cannot be nested",
+        "Only allowed at the module level"
+      ],
+      "correct": 1,
+      "explanation": "The def statement is executable — it runs at runtime and creates a new function object, binding it to the function's name. Functions can be defined inside if statements, loops, or other functions.",
+      "concepts": ["def_statement", "runtime", "function_objects"]
+    }
+  ]
+}

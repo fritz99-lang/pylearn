@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 35,
+  "questions": [
+    {
+      "id": "lp_ch35_q01",
+      "type": "multiple_choice",
+      "question": "What should user-defined exception classes inherit from?",
+      "choices": [
+        "object",
+        "BaseException",
+        "Exception",
+        "RuntimeError"
+      ],
+      "correct": 2,
+      "explanation": "User-defined exceptions should inherit from Exception (or a subclass of Exception), not from BaseException directly. This ensures they are caught by generic 'except Exception' clauses while allowing system exceptions like SystemExit and KeyboardInterrupt to propagate.",
+      "concepts": ["custom_exceptions", "Exception", "exception_hierarchy"]
+    },
+    {
+      "id": "lp_ch35_q02",
+      "type": "fill_in_blank",
+      "question": "To create a custom exception class with a user-friendly message, you can override the ________ method to return a descriptive string.",
+      "correct": "__str__",
+      "explanation": "By overriding __str__ in your custom exception class, you control the message displayed when the exception is printed or included in a traceback. The default __str__ from Exception displays the arguments passed to the constructor.",
+      "concepts": ["__str__", "custom_exceptions", "exception_display"]
+    },
+    {
+      "id": "lp_ch35_q03",
+      "type": "multiple_choice",
+      "question": "Why is it useful to organize custom exceptions into a hierarchy?",
+      "choices": [
+        "It makes the code run faster",
+        "It allows handlers to catch categories of related exceptions by catching a common superclass",
+        "Python requires all exceptions to be in a hierarchy",
+        "It prevents exceptions from being raised"
+      ],
+      "correct": 1,
+      "explanation": "Exception hierarchies let you catch broad categories of errors by catching the superclass, or specific errors by catching a subclass. For example, catching DatabaseError catches all database-related exceptions including ConnectionError and QueryError subclasses.",
+      "concepts": ["exception_hierarchy", "exception_design"]
+    },
+    {
+      "id": "lp_ch35_q04",
+      "type": "multiple_choice",
+      "question": "How can you store additional context in a custom exception instance?",
+      "choices": [
+        "By adding attributes in the exception's __init__ method and calling super().__init__()",
+        "By using global variables",
+        "By writing to a file before raising the exception",
+        "Context cannot be stored in exception objects"
+      ],
+      "correct": 0,
+      "explanation": "You can store context by defining an __init__ method that accepts extra arguments, saves them as instance attributes, and calls super().__init__() to preserve standard Exception behavior. For example: self.filename = filename, self.line_number = line_number.",
+      "concepts": ["exception_context", "custom_exceptions", "__init__"]
+    },
+    {
+      "id": "lp_ch35_q05",
+      "type": "fill_in_blank",
+      "question": "All arguments passed to an exception constructor are stored in the exception's ________ attribute as a tuple.",
+      "correct": "args",
+      "explanation": "The Exception base class stores all positional arguments passed to its constructor in the .args tuple attribute. For example, ValueError('bad', 42).args returns ('bad', 42). This is the standard way Exception preserves its construction arguments.",
+      "concepts": ["exception_args", "Exception"]
+    },
+    {
+      "id": "lp_ch35_q06",
+      "type": "multiple_choice",
+      "question": "What is the output of the following code?\n\nclass AppError(Exception): pass\nclass InputError(AppError): pass\n\ntry:\n    raise InputError('bad input')\nexcept AppError as e:\n    print(type(e).__name__, e)",
+      "choices": [
+        "AppError bad input",
+        "InputError bad input",
+        "An unhandled InputError exception",
+        "A TypeError is raised"
+      ],
+      "correct": 1,
+      "explanation": "Since InputError is a subclass of AppError, the 'except AppError' clause catches it. The variable e is the actual InputError instance, so type(e).__name__ is 'InputError' and str(e) is 'bad input'.",
+      "concepts": ["exception_hierarchy", "exception_catching", "polymorphism"]
+    }
+  ]
+}

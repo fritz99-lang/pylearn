@@ -1,0 +1,74 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 13,
+  "challenges": [
+    {
+      "id": "lp_ch13_c01",
+      "title": "FizzBuzz",
+      "description": "Create a list called `fizzbuzz` containing results for numbers 1 through 20. For each number: if divisible by both 3 and 5, append 'FizzBuzz'; if divisible by 3 only, append 'Fizz'; if divisible by 5 only, append 'Buzz'; otherwise append the number as a string (e.g., '1', '2').",
+      "starter_code": "fizzbuzz = []\n\n# Use a for loop over range(1, 21) to build the fizzbuzz list\n",
+      "test_code": "expected = ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz', 'Buzz',\n            '11', 'Fizz', '13', '14', 'FizzBuzz', '16', '17', 'Fizz', '19', 'Buzz']\nassert len(fizzbuzz) == 20, f'Expected 20 items, got {len(fizzbuzz)}'\nassert fizzbuzz == expected, f'FizzBuzz list does not match expected output.\\nGot: {fizzbuzz}'\nassert fizzbuzz[14] == 'FizzBuzz', '15 should be FizzBuzz (divisible by both 3 and 5)'\nassert fizzbuzz[2] == 'Fizz', '3 should be Fizz'\nassert fizzbuzz[4] == 'Buzz', '5 should be Buzz'\nassert fizzbuzz[0] == '1', '1 should be the string 1'",
+      "difficulty": "easy",
+      "concepts_new": [
+        "for loops",
+        "range() function",
+        "list.append()"
+      ],
+      "concepts_review": [
+        "if/elif/else",
+        "modulo operator",
+        "string conversion"
+      ],
+      "hints": [
+        "Check divisibility by both 3 AND 5 first, before checking each separately.",
+        "Use the modulo operator: number % 3 == 0 checks divisibility by 3.",
+        "Convert numbers to strings with str(number) for the non-Fizz/Buzz cases."
+      ]
+    },
+    {
+      "id": "lp_ch13_c02",
+      "title": "Factorial Calculator",
+      "description": "Write a while loop that calculates the factorial of `n = 7` and stores the result in a variable called `result`. The factorial of 7 is 7 * 6 * 5 * 4 * 3 * 2 * 1 = 5040. Do not use math.factorial or any built-in function — compute it manually with a loop.",
+      "starter_code": "n = 7\nresult = 1\n\n# Write a while loop to calculate n! (factorial of n)\n",
+      "test_code": "assert n == 7 or n == 0 or n == 1, 'n may have been modified by your loop — that is okay if result is correct'\nassert result == 5040, f'Expected 5040 for 7!, got {result}'\n\n# Verify the logic works for other factorials\nimport math\nfor test_n in [0, 1, 2, 5, 8, 10]:\n    test_result = 1\n    counter = test_n\n    while counter > 1:\n        test_result *= counter\n        counter -= 1\n    assert test_result == math.factorial(test_n), f'Factorial of {test_n}: expected {math.factorial(test_n)}, got {test_result}'",
+      "difficulty": "medium",
+      "concepts_new": [
+        "while loops",
+        "loop counter pattern",
+        "accumulator pattern"
+      ],
+      "concepts_review": [
+        "multiplication assignment (*=)",
+        "comparison operators"
+      ],
+      "hints": [
+        "Initialize result to 1 (the multiplicative identity).",
+        "Use a counter that starts at n and decrements each iteration.",
+        "The loop should continue while the counter is greater than 1."
+      ]
+    },
+    {
+      "id": "lp_ch13_c03",
+      "title": "Pattern Finder",
+      "description": "Given `text = 'abracadabra'`, use a for loop to count how many times each character appears. Store the results in a dictionary called `char_counts` where keys are characters and values are their counts.",
+      "starter_code": "text = 'abracadabra'\nchar_counts = {}\n\n# Use a for loop to count character occurrences\n",
+      "test_code": "assert text == 'abracadabra', 'text should remain unchanged'\nassert isinstance(char_counts, dict), 'char_counts should be a dictionary'\nassert char_counts == {'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1}, f'Expected {{\"a\": 5, \"b\": 2, \"r\": 2, \"c\": 1, \"d\": 1}}, got {char_counts}'\nassert char_counts['a'] == 5, f'Expected 5 occurrences of a, got {char_counts.get(\"a\", 0)}'\nassert char_counts['b'] == 2, f'Expected 2 occurrences of b, got {char_counts.get(\"b\", 0)}'\nassert len(char_counts) == 5, f'Expected 5 unique characters, got {len(char_counts)}'",
+      "difficulty": "medium",
+      "concepts_new": [
+        "iterating over strings",
+        "dictionary building in loops",
+        "dict.get() method"
+      ],
+      "concepts_review": [
+        "for loops",
+        "dictionaries",
+        "if/else"
+      ],
+      "hints": [
+        "Loop through each character in the string with: for char in text:",
+        "Use dict.get(key, default) to handle missing keys: char_counts.get(char, 0)",
+        "Alternative: check if the key exists with 'if char in char_counts:' and increment, else set to 1."
+      ]
+    }
+  ]
+}

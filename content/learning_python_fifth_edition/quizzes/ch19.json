@@ -1,0 +1,106 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 19,
+  "questions": [
+    {
+      "id": "lp_ch19_q01",
+      "type": "multiple_choice",
+      "question": "What is a lambda expression in Python?",
+      "choices": [
+        "A way to define a class in one line",
+        "An anonymous function defined with the lambda keyword that returns a single expression's value",
+        "A special type of list comprehension",
+        "A function that can only be called once"
+      ],
+      "correct": 1,
+      "explanation": "A lambda expression creates a small anonymous function inline. Its body is a single expression (not a block of statements), and it implicitly returns the result of that expression. Example: lambda x, y: x + y.",
+      "concepts": ["lambda expressions"]
+    },
+    {
+      "id": "lp_ch19_q02",
+      "type": "fill_in_blank",
+      "question": "The expression list(map(lambda x: x ** 2, [1, 2, 3])) produces ______.",
+      "correct": "[1, 4, 9]",
+      "explanation": "map() applies the lambda function to each element: 1**2=1, 2**2=4, 3**2=9. Wrapping in list() converts the map iterator to a list, giving [1, 4, 9].",
+      "concepts": ["map/filter with lambda", "lambda expressions"]
+    },
+    {
+      "id": "lp_ch19_q03",
+      "type": "multiple_choice",
+      "question": "What does a function annotation like def f(x: int, y: str) -> bool: do at runtime?",
+      "choices": [
+        "It enforces that x must be an int and y must be a str",
+        "It raises a TypeError if the wrong types are passed",
+        "It stores metadata in f.__annotations__ but does not enforce types",
+        "It converts the arguments to the annotated types automatically"
+      ],
+      "correct": 2,
+      "explanation": "Function annotations are stored in the function's __annotations__ dictionary but have no effect at runtime by themselves. Python does not enforce them. They serve as documentation and can be used by third-party tools like mypy for static type checking.",
+      "concepts": ["function annotations"]
+    },
+    {
+      "id": "lp_ch19_q04",
+      "type": "multiple_choice",
+      "question": "What is a recursive function?",
+      "choices": [
+        "A function that calls other functions",
+        "A function that calls itself, directly or indirectly",
+        "A function defined inside another function",
+        "A function that runs in an infinite loop"
+      ],
+      "correct": 1,
+      "explanation": "A recursive function calls itself to solve a problem by breaking it into smaller subproblems. Each recursive call should move toward a base case that stops the recursion. Python has a default recursion limit of 1000 calls.",
+      "concepts": ["recursive functions"]
+    },
+    {
+      "id": "lp_ch19_q05",
+      "type": "fill_in_blank",
+      "question": "In Python, functions are ______-class objects, meaning they can be assigned to variables, passed as arguments, and returned from other functions.",
+      "correct": "first",
+      "explanation": "Functions in Python are first-class objects. They can be assigned to variables, stored in data structures, passed as arguments to other functions, and returned as values from functions. This enables functional programming patterns.",
+      "concepts": ["first-class functions"]
+    },
+    {
+      "id": "lp_ch19_q06",
+      "type": "multiple_choice",
+      "question": "What does list(filter(lambda x: x > 0, [-2, -1, 0, 1, 2])) return?",
+      "choices": [
+        "[-2, -1, 0, 1, 2]",
+        "[0, 1, 2]",
+        "[1, 2]",
+        "[-2, -1]"
+      ],
+      "correct": 2,
+      "explanation": "filter() keeps only the items for which the lambda returns True. The lambda x: x > 0 is True for 1 and 2 only (0 is not greater than 0), so the result is [1, 2].",
+      "concepts": ["map/filter with lambda"]
+    },
+    {
+      "id": "lp_ch19_q07",
+      "type": "multiple_choice",
+      "question": "Which of the following is TRUE about function attributes in Python?",
+      "choices": [
+        "Functions cannot have custom attributes",
+        "You can attach arbitrary attributes to function objects, like f.count = 0",
+        "Function attributes are the same as local variables",
+        "Only built-in functions can have attributes"
+      ],
+      "correct": 1,
+      "explanation": "Since functions are objects in Python, you can attach arbitrary attributes to them just like any other object. For example, f.count = 0 stores a count attribute on the function object f. This can be used as an alternative to global variables for maintaining state.",
+      "concepts": ["function attributes"]
+    },
+    {
+      "id": "lp_ch19_q08",
+      "type": "multiple_choice",
+      "question": "Why can't a lambda body contain statements like if/else blocks or assignments?",
+      "choices": [
+        "Lambda functions run faster without statements",
+        "Lambda bodies are limited to a single expression, not statements",
+        "Python does not allow print inside lambda",
+        "Lambda functions cannot return values"
+      ],
+      "correct": 1,
+      "explanation": "A lambda body must be a single expression, not a statement or block of statements. This means you cannot use assignments, loops, or multi-line if/else blocks. However, you can use conditional expressions (x if cond else y) and function calls like print().",
+      "concepts": ["lambda expressions"]
+    }
+  ]
+}

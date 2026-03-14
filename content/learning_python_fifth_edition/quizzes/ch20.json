@@ -1,0 +1,106 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 20,
+  "questions": [
+    {
+      "id": "lp_ch20_q01",
+      "type": "multiple_choice",
+      "question": "Which of the following creates a dictionary comprehension?",
+      "choices": [
+        "[k: v for k, v in pairs]",
+        "{k: v for k, v in pairs}",
+        "(k: v for k, v in pairs)",
+        "dict[k: v for k, v in pairs]"
+      ],
+      "correct": 1,
+      "explanation": "Dictionary comprehensions use curly braces with a key: value expression: {k: v for k, v in pairs}. This is distinct from set comprehensions, which use curly braces with a single expression {x for x in items}.",
+      "concepts": ["list/set/dict comprehensions"]
+    },
+    {
+      "id": "lp_ch20_q02",
+      "type": "fill_in_blank",
+      "question": "A generator function uses the ______ keyword to produce values one at a time, suspending its state between each call.",
+      "correct": "yield",
+      "explanation": "The yield keyword turns a regular function into a generator function. When called, it returns a generator object. Each time next() is called on it, execution resumes after the last yield and runs until the next yield is reached.",
+      "concepts": ["generator functions with yield"]
+    },
+    {
+      "id": "lp_ch20_q03",
+      "type": "multiple_choice",
+      "question": "What is the output of {x ** 2 for x in [1, 2, 2, 3]}?",
+      "choices": [
+        "[1, 4, 4, 9]",
+        "{1, 4, 9}",
+        "{1: 1, 2: 4, 3: 9}",
+        "(1, 4, 9)"
+      ],
+      "correct": 1,
+      "explanation": "This is a set comprehension (curly braces, single expression). It squares each value: 1, 4, 4, 9. Since sets contain only unique values, the duplicate 4 is removed, giving {1, 4, 9}.",
+      "concepts": ["list/set/dict comprehensions"]
+    },
+    {
+      "id": "lp_ch20_q04",
+      "type": "multiple_choice",
+      "question": "What does the 'yield from' expression do in a generator function?",
+      "choices": [
+        "It imports values from another module",
+        "It delegates iteration to another iterable or sub-generator, yielding each of its values",
+        "It yields the generator object itself",
+        "It stops the generator permanently"
+      ],
+      "correct": 1,
+      "explanation": "'yield from iterable' delegates to a sub-iterator, yielding each value from it as if the outer generator had yielded them individually. It simplifies code that would otherwise need a for loop with yield inside a generator.",
+      "concepts": ["yield from"]
+    },
+    {
+      "id": "lp_ch20_q05",
+      "type": "fill_in_blank",
+      "question": "The generator method ______ allows you to pass a value into a suspended generator, which becomes the result of the yield expression inside it.",
+      "correct": "send",
+      "explanation": "The send(value) method resumes a generator and sends a value into it. Inside the generator, the value becomes the result of the yield expression. The first call must be send(None) or next() to advance to the first yield.",
+      "concepts": ["send() to generators"]
+    },
+    {
+      "id": "lp_ch20_q06",
+      "type": "multiple_choice",
+      "question": "What does this nested comprehension produce?\n\n[[j for j in range(3)] for i in range(2)]",
+      "choices": [
+        "[0, 1, 2, 0, 1, 2]",
+        "[[0, 1, 2], [0, 1, 2]]",
+        "[[0, 0], [1, 1], [2, 2]]",
+        "[0, 1, 2]"
+      ],
+      "correct": 1,
+      "explanation": "The outer comprehension runs twice (range(2)), and for each iteration, the inner comprehension builds [0, 1, 2] (range(3)). The result is a list of two identical lists: [[0, 1, 2], [0, 1, 2]].",
+      "concepts": ["nested comprehensions"]
+    },
+    {
+      "id": "lp_ch20_q07",
+      "type": "multiple_choice",
+      "question": "What is the key advantage of a generator expression over a list comprehension for large data sets?",
+      "choices": [
+        "Generator expressions are always faster",
+        "Generator expressions produce values lazily, using far less memory",
+        "Generator expressions support more data types",
+        "Generator expressions can be indexed like lists"
+      ],
+      "correct": 1,
+      "explanation": "Generator expressions produce values on demand (lazily) rather than building the entire sequence in memory at once. For large data sets, this dramatically reduces memory usage. However, they can only be iterated once and do not support indexing.",
+      "concepts": ["generator expressions"]
+    },
+    {
+      "id": "lp_ch20_q08",
+      "type": "multiple_choice",
+      "question": "What does [x + y for x in 'ab' for y in '12'] produce?",
+      "choices": [
+        "['a1', 'b2']",
+        "['a1', 'a2', 'b1', 'b2']",
+        "['a12', 'b12']",
+        "['ab', '12']"
+      ],
+      "correct": 1,
+      "explanation": "Multiple for clauses in a comprehension work like nested loops. The outer loop iterates over 'ab' and the inner loop over '12'. This produces all combinations: 'a'+'1', 'a'+'2', 'b'+'1', 'b'+'2', giving ['a1', 'a2', 'b1', 'b2'].",
+      "concepts": ["nested comprehensions", "list/set/dict comprehensions"]
+    }
+  ]
+}

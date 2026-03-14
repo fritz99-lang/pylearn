@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 12,
+  "questions": [
+    {
+      "id": "lp_ch12_q01",
+      "type": "multiple_choice",
+      "question": "What does the ternary expression x = 'even' if n % 2 == 0 else 'odd' do?",
+      "choices": [
+        "Assigns 'even' to x if n is divisible by 2, otherwise assigns 'odd'",
+        "Assigns 'odd' to x if n is divisible by 2, otherwise assigns 'even'",
+        "Raises a SyntaxError because if cannot appear in an expression",
+        "Always assigns 'even' to x"
+      ],
+      "correct": 0,
+      "explanation": "The ternary (conditional) expression has the form X if C else Y. It evaluates and returns X if condition C is true, otherwise it evaluates and returns Y. Here, it assigns 'even' when n is even and 'odd' when n is odd.",
+      "concepts": ["ternary_expression", "conditional_expression", "if_else"]
+    },
+    {
+      "id": "lp_ch12_q02",
+      "type": "fill_in_blank",
+      "question": "The built-in function ___ converts a value to its Boolean equivalent (True or False).",
+      "correct": "bool",
+      "explanation": "bool(x) returns False for values Python considers false (0, '', None, [], {}, etc.) and True for everything else. This is useful for explicitly testing the truth value of an object.",
+      "concepts": ["bool_function", "truth_values", "type_conversion"]
+    },
+    {
+      "id": "lp_ch12_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following values does Python consider False (falsy)?",
+      "choices": [
+        "The string '0'",
+        "The list [0]",
+        "The integer 0, empty string '', empty list [], and None",
+        "Only the keyword False"
+      ],
+      "correct": 2,
+      "explanation": "Python treats several values as false: numeric zeros (0, 0.0), empty sequences ('', [], ()), empty mappings ({}), None, and False itself. Non-empty containers and non-zero numbers are truthy, so '0' and [0] are both True.",
+      "concepts": ["truth_values", "falsy_values", "boolean_context"]
+    },
+    {
+      "id": "lp_ch12_q04",
+      "type": "multiple_choice",
+      "question": "What does the expression '' or 'default' evaluate to?",
+      "choices": [
+        "True",
+        "''",
+        "'default'",
+        "False"
+      ],
+      "correct": 2,
+      "explanation": "Python's or operator uses short-circuit evaluation: it returns the first truthy operand, or the last operand if all are falsy. Since '' is falsy, Python evaluates the second operand and returns 'default'. This is a common pattern for providing default values.",
+      "concepts": ["short_circuit_evaluation", "or_operator", "default_values"]
+    },
+    {
+      "id": "lp_ch12_q05",
+      "type": "fill_in_blank",
+      "question": "The special Python value ___ represents the absence of a value and is the only instance of its type (NoneType).",
+      "correct": "None",
+      "explanation": "None is Python's null value, representing 'nothing' or 'no value.' Functions that don't explicitly return a value return None. It is the sole instance of the NoneType class and is tested with 'is None' rather than '== None'.",
+      "concepts": ["None", "NoneType", "special_values"]
+    },
+    {
+      "id": "lp_ch12_q06",
+      "type": "multiple_choice",
+      "question": "What is the result of the chained comparison 1 < 2 < 3?",
+      "choices": [
+        "True, because it is equivalent to (1 < 2) and (2 < 3)",
+        "A SyntaxError",
+        "True, because it compares 1 < (2 < 3) which is 1 < True",
+        "False"
+      ],
+      "correct": 0,
+      "explanation": "Python supports chained comparisons as a shorthand. The expression 1 < 2 < 3 is equivalent to (1 < 2) and (2 < 3), both of which are True, so the result is True. This also works with other operators like 1 <= x < 10.",
+      "concepts": ["chained_comparisons", "comparison_operators", "syntax"]
+    },
+    {
+      "id": "lp_ch12_q07",
+      "type": "multiple_choice",
+      "question": "What does the expression 'hello' and 'world' evaluate to?",
+      "choices": [
+        "True",
+        "'hello'",
+        "'world'",
+        "'helloworld'"
+      ],
+      "correct": 2,
+      "explanation": "Python's and operator returns the first falsy operand, or the last operand if all are truthy. Since 'hello' is truthy, Python proceeds to evaluate the second operand and returns 'world'. It does not return True/False directly.",
+      "concepts": ["short_circuit_evaluation", "and_operator", "truth_values"]
+    },
+    {
+      "id": "lp_ch12_q08",
+      "type": "fill_in_blank",
+      "question": "In an if/elif/else chain, the ___ clause catches any case not matched by the preceding if and elif conditions.",
+      "correct": "else",
+      "explanation": "The else clause is optional and appears last in an if/elif/else chain. It runs only if none of the preceding if or elif conditions evaluated to True. It acts as a default or catch-all branch.",
+      "concepts": ["else_clause", "if_statement", "control_flow"]
+    }
+  ]
+}

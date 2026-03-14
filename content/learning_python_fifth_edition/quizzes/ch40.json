@@ -1,0 +1,64 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 40,
+  "questions": [
+    {
+      "id": "lp_ch40_q01",
+      "type": "multiple_choice",
+      "question": "What is the default metaclass used to create classes in Python?",
+      "choices": [
+        "object",
+        "type",
+        "meta",
+        "classmethod"
+      ],
+      "correct": 1,
+      "explanation": "The built-in 'type' is the default metaclass in Python. When you write a class statement, Python calls type() to create the class object. type is itself a class whose instances are other classes.",
+      "concepts": ["metaclass", "type"]
+    },
+    {
+      "id": "lp_ch40_q02",
+      "type": "fill_in_blank",
+      "question": "To specify a custom metaclass for a class, you use the ___ keyword argument in the class header.",
+      "correct": "metaclass",
+      "explanation": "In Python 3, you specify a metaclass with the syntax 'class MyClass(metaclass=MyMeta): ...'. This tells Python to use MyMeta instead of the default type to create the class object.",
+      "concepts": ["metaclass_keyword", "class_definition"]
+    },
+    {
+      "id": "lp_ch40_q03",
+      "type": "multiple_choice",
+      "question": "In a metaclass, what is the role of the __new__ method?",
+      "choices": [
+        "It initializes instance attributes of the class",
+        "It creates and returns the new class object before it is initialized",
+        "It is called when an instance of the class is deleted",
+        "It defines the string representation of the class"
+      ],
+      "correct": 1,
+      "explanation": "In a metaclass, __new__ is called first to create and return the new class object. It receives the metaclass, class name, bases tuple, and class dictionary. __init__ is called afterward to initialize the already-created class object.",
+      "concepts": ["__new__", "__init__", "class_creation"]
+    },
+    {
+      "id": "lp_ch40_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following correctly describes the class creation process when a metaclass is used?",
+      "choices": [
+        "The class body runs, then metaclass.__init__ is called, then metaclass.__new__",
+        "metaclass.__new__ is called, then the class body runs, then metaclass.__init__",
+        "The class body runs to produce a namespace dict, then metaclass.__new__ creates the class, then metaclass.__init__ initializes it",
+        "metaclass.__init__ creates the class, then the class body runs"
+      ],
+      "correct": 2,
+      "explanation": "Python first executes the class body to build a namespace dictionary of attributes. Then it calls the metaclass's __new__ method to create the class object, followed by __init__ to perform any additional initialization.",
+      "concepts": ["class_creation", "metaclass_protocol"]
+    },
+    {
+      "id": "lp_ch40_q05",
+      "type": "fill_in_blank",
+      "question": "The three-argument form of type() called as type(name, bases, dict) dynamically creates and returns a new ___ object.",
+      "correct": "class",
+      "explanation": "Calling type(name, bases, dict) with three arguments is the dynamic equivalent of a class statement. It creates and returns a new class object with the given name, base classes, and attribute dictionary.",
+      "concepts": ["type", "dynamic_class_creation"]
+    }
+  ]
+}

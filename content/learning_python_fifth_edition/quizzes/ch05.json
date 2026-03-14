@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 5,
+  "questions": [
+    {
+      "id": "lp_ch05_q01",
+      "type": "multiple_choice",
+      "question": "What is the result of 3 ** 2 in Python?",
+      "choices": [
+        "6",
+        "9",
+        "5",
+        "32"
+      ],
+      "correct": 1,
+      "explanation": "The ** operator is the exponentiation (power) operator. 3 ** 2 means 3 raised to the power of 2, which equals 9.",
+      "concepts": ["exponentiation", "operators", "numeric_types"]
+    },
+    {
+      "id": "lp_ch05_q02",
+      "type": "fill_in_blank",
+      "question": "In Python 3, the expression 7 / 2 returns ___.",
+      "correct": "3.5",
+      "explanation": "In Python 3, the / operator always performs true (float) division. Use // for floor division (which would give 3).",
+      "concepts": ["division", "true_division", "operators"]
+    },
+    {
+      "id": "lp_ch05_q03",
+      "type": "multiple_choice",
+      "question": "What is the difference between / and // in Python 3?",
+      "choices": [
+        "/ is integer division, // is float division",
+        "/ is true division (returns float), // is floor division (truncates to integer)",
+        "They are the same in Python 3",
+        "// is only used for comments"
+      ],
+      "correct": 1,
+      "explanation": "In Python 3, / always returns a float (true division), while // performs floor division, truncating the result toward negative infinity.",
+      "concepts": ["true_division", "floor_division", "operators"]
+    },
+    {
+      "id": "lp_ch05_q04",
+      "type": "multiple_choice",
+      "question": "What does the expression 10 % 3 evaluate to?",
+      "choices": [
+        "3",
+        "1",
+        "0",
+        "3.33"
+      ],
+      "correct": 1,
+      "explanation": "The % operator returns the remainder of division. 10 divided by 3 is 3 with a remainder of 1.",
+      "concepts": ["modulo", "remainder", "operators"]
+    },
+    {
+      "id": "lp_ch05_q05",
+      "type": "fill_in_blank",
+      "question": "Python integers have ___ precision, meaning they can be arbitrarily large.",
+      "correct": "unlimited",
+      "explanation": "Unlike many languages where integers have fixed sizes (32-bit, 64-bit), Python integers can grow to any size limited only by available memory.",
+      "concepts": ["integers", "precision", "numeric_types"]
+    },
+    {
+      "id": "lp_ch05_q06",
+      "type": "multiple_choice",
+      "question": "Which built-in function converts a string to an integer?",
+      "choices": [
+        "str()",
+        "float()",
+        "int()",
+        "num()"
+      ],
+      "correct": 2,
+      "explanation": "int() converts a string (or float) to an integer. For example, int('42') returns 42 and int(3.9) returns 3 (truncates toward zero).",
+      "concepts": ["type_conversion", "int", "built_in_functions"]
+    },
+    {
+      "id": "lp_ch05_q07",
+      "type": "multiple_choice",
+      "question": "What is the output of bool(0)?",
+      "choices": [
+        "True",
+        "False",
+        "0",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "In Python, 0 is considered falsy. bool(0) returns False. Non-zero numbers are truthy: bool(1) and bool(-5) both return True.",
+      "concepts": ["boolean", "truthy_falsy", "type_conversion"]
+    },
+    {
+      "id": "lp_ch05_q08",
+      "type": "fill_in_blank",
+      "question": "To write a hexadecimal literal in Python, you prefix the number with ___.",
+      "correct": "0x",
+      "explanation": "Hexadecimal literals use the 0x prefix (e.g., 0xFF = 255). Octal uses 0o (e.g., 0o77 = 63), and binary uses 0b (e.g., 0b1111 = 15).",
+      "concepts": ["hexadecimal", "number_literals", "numeric_types"]
+    }
+  ]
+}

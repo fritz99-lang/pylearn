@@ -1,0 +1,50 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 12,
+  "challenges": [
+    {
+      "id": "lp_ch12_c01",
+      "title": "Ternary Classifier",
+      "description": "Given `value = -5`, use a ternary (conditional) expression to set `sign` to 'positive' if the value is greater than zero, 'negative' if less than zero, or 'zero' if it equals zero. Try to do it in a single line using nested ternary expressions.",
+      "starter_code": "value = -5\n\n# Use a ternary expression to set `sign` to 'positive', 'negative', or 'zero'\n",
+      "test_code": "assert value == -5, 'value should remain -5'\nassert sign == 'negative', f'Expected negative for -5, got {sign}'\n\n# Test the ternary logic with other values\nfor v, expected in [(10, 'positive'), (0, 'zero'), (-5, 'negative'), (1, 'positive'), (-100, 'negative')]:\n    result = 'positive' if v > 0 else ('zero' if v == 0 else 'negative')\n    assert result == expected, f'For value {v}, expected {expected} but got {result}'",
+      "difficulty": "easy",
+      "concepts_new": [
+        "ternary expression (X if C else Y)",
+        "nested conditional expressions"
+      ],
+      "concepts_review": [
+        "comparison operators",
+        "variable assignment"
+      ],
+      "hints": [
+        "A ternary expression looks like: result = A if condition else B",
+        "You can nest ternaries: A if cond1 else (B if cond2 else C)",
+        "Check for positive first, then distinguish between zero and negative."
+      ]
+    },
+    {
+      "id": "lp_ch12_c02",
+      "title": "Truth Value Tester",
+      "description": "Create a function `is_truthy(val)` that returns True if the given value is truthy in Python, and False if it is falsy. Python considers 0, empty strings, empty lists, None, and False as falsy — everything else is truthy. Use Python's built-in truth value testing, not manual checks.",
+      "starter_code": "# Define the is_truthy function\ndef is_truthy(val):\n    pass  # Replace with your implementation\n",
+      "test_code": "# Falsy values\nassert is_truthy(0) == False, 'Expected 0 to be falsy'\nassert is_truthy('') == False, 'Expected empty string to be falsy'\nassert is_truthy([]) == False, 'Expected empty list to be falsy'\nassert is_truthy(None) == False, 'Expected None to be falsy'\nassert is_truthy(False) == False, 'Expected False to be falsy'\nassert is_truthy(0.0) == False, 'Expected 0.0 to be falsy'\nassert is_truthy({}) == False, 'Expected empty dict to be falsy'\n\n# Truthy values\nassert is_truthy(1) == True, 'Expected 1 to be truthy'\nassert is_truthy('hello') == True, 'Expected non-empty string to be truthy'\nassert is_truthy([1]) == True, 'Expected non-empty list to be truthy'\nassert is_truthy(True) == True, 'Expected True to be truthy'\nassert is_truthy(-1) == True, 'Expected -1 to be truthy'\nassert is_truthy({'a': 1}) == True, 'Expected non-empty dict to be truthy'",
+      "difficulty": "medium",
+      "concepts_new": [
+        "truth value testing",
+        "bool() built-in",
+        "falsy vs truthy values"
+      ],
+      "concepts_review": [
+        "function definition",
+        "return statement",
+        "if/else"
+      ],
+      "hints": [
+        "Python's bool() function converts any value to True or False.",
+        "You can also use: return True if val else False",
+        "The simplest solution is just one line using bool()."
+      ]
+    }
+  ]
+}

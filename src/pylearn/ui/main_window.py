@@ -20,12 +20,14 @@ from PyQt6.QtWidgets import (
     QMessageBox,
     QSplitter,
     QStatusBar,
+    QTabWidget,
     QVBoxLayout,
     QWidget,
 )
 
 from pylearn.core.config import AppConfig, BooksConfig, EditorConfig
 from pylearn.core.constants import APP_NAME, APP_VERSION, IS_FROZEN, TOC_WIDTH
+from pylearn.core.content_loader import ContentLoader
 from pylearn.core.database import Database
 from pylearn.core.models import Book
 from pylearn.executor.output_handler import OutputHandler
@@ -34,6 +36,7 @@ from pylearn.executor.session import Session
 from pylearn.parser.cache_manager import CacheManager
 from pylearn.ui.book_controller import BookController
 from pylearn.ui.bookmark_dialog import BookmarkDialog, add_bookmark_dialog
+from pylearn.ui.challenge_panel import ChallengePanel
 from pylearn.ui.console_panel import ConsolePanel
 from pylearn.ui.editor_panel import EditorPanel
 from pylearn.ui.exercise_panel import ExercisePanel
@@ -41,6 +44,8 @@ from pylearn.ui.external_editor import ExternalEditorManager
 from pylearn.ui.library_panel import LibraryPanel
 from pylearn.ui.notes_dialog import NotesDialog
 from pylearn.ui.progress_dialog import ProgressDialog
+from pylearn.ui.project_panel import ProjectPanel
+from pylearn.ui.quiz_panel import QuizPanel
 from pylearn.ui.reader_panel import ReaderPanel
 from pylearn.ui.search_dialog import SearchDialog
 from pylearn.ui.styles import get_stylesheet
@@ -167,6 +172,7 @@ class MainWindow(QMainWindow):
         # Core services
         self._db = Database()
         self._cache = CacheManager()
+        self._content = ContentLoader()
         self._session = Session(timeout=self._editor_config.execution_timeout)
         self._output = OutputHandler()
 
@@ -224,11 +230,21 @@ class MainWindow(QMainWindow):
         left_splitter.setSizes([TOC_WIDTH, 600])
         content_splitter.addWidget(left_splitter)
 
-        # Right side: Editor + Console
+        # Right side: Tabs (Editor+Console, Quiz) stacked vertically
         right_widget = QWidget()
         right_layout = QVBoxLayout(right_widget)
         right_layout.setContentsMargins(0, 0, 0, 0)
         right_layout.setSpacing(0)
+
+        # Tab widget for switching between Editor and Quiz
+        self._right_tabs = QTabWidget()
+        self._right_tabs.setTabPosition(QTabWidget.TabPosition.North)
+
+        # Tab 0: Editor + Console (vertical splitter)
+        editor_tab = QWidget()
+        editor_tab_layout = QVBoxLayout(editor_tab)
+        editor_tab_layout.setContentsMargins(0, 0, 0, 0)
+        editor_tab_layout.setSpacing(0)
 
         right_splitter = QSplitter(Qt.Orientation.Vertical)
 
@@ -241,7 +257,22 @@ class MainWindow(QMainWindow):
         right_splitter.setSizes(self._app_config.editor_console_sizes)
         self._right_splitter = right_splitter
 
-        right_layout.addWidget(right_splitter)
+        editor_tab_layout.addWidget(right_splitter)
+        self._right_tabs.addTab(editor_tab, "Editor")
+
+        # Tab 1: Quiz
+        self._quiz_panel = QuizPanel(self._db, self._content)
+        self._right_tabs.addTab(self._quiz_panel, "Quiz")
+
+        # Tab 2: Challenges
+        self._challenge_panel = ChallengePanel(self._db, self._content, self._session)
+        self._right_tabs.addTab(self._challenge_panel, "Challenge")
+
+        # Tab 3: Project
+        self._project_panel = ProjectPanel(self._db, self._content, self._session)
+        self._right_tabs.addTab(self._project_panel, "Project")
+
+        right_layout.addWidget(self._right_tabs)
         content_splitter.addWidget(right_widget)
 
         content_splitter.setSizes(self._app_config.splitter_sizes)
@@ -309,6 +340,9 @@ class MainWindow(QMainWindow):
         self._add_menu_action(view_menu, "Bookmarks...", self._show_bookmarks)
         self._add_menu_action(view_menu, "Notes...", self._show_notes)
         self._add_menu_action(view_menu, "Exercises...", self._show_exercises)
+        self._add_menu_action(view_menu, "Take Quiz", self._show_quiz, "Ctrl+Q")
+        self._add_menu_action(view_menu, "Code Challenge", self._show_challenge, "Ctrl+Shift+Q")
+        self._add_menu_action(view_menu, "Book Project", self._show_project, "Ctrl+P")
         view_menu.addSeparator()
         self._add_menu_action(view_menu, "Increase Font Size", self._increase_font, "Ctrl+=")
         self._add_menu_action(view_menu, "Decrease Font Size", self._decrease_font, "Ctrl+-")
@@ -792,6 +826,50 @@ class MainWindow(QMainWindow):
         layout.addWidget(panel)
         dialog.exec()
 
+    # --- Quiz ---
+
+    @safe_slot
+    def _show_quiz(self) -> None:
+        """Switch to the Quiz tab and load the quiz for the current chapter."""
+        if not self._book.current_book:
+            QMessageBox.information(self, "No Book", "Please select a book first.")
+            return
+        book_id = self._book.current_book.book_id
+        chapter_num = self._book.current_chapter_num
+        if self._quiz_panel.load_quiz(book_id, chapter_num):
+            self._right_tabs.setCurrentWidget(self._quiz_panel)
+        else:
+            QMessageBox.information(self, "No Quiz", f"No quiz available for Chapter {chapter_num} yet.")
+
+    # --- Challenge ---
+
+    @safe_slot
+    def _show_challenge(self) -> None:
+        """Switch to the Challenge tab and load challenges for the current chapter."""
+        if not self._book.current_book:
+            QMessageBox.information(self, "No Book", "Please select a book first.")
+            return
+        book_id = self._book.current_book.book_id
+        chapter_num = self._book.current_chapter_num
+        if self._challenge_panel.load_challenges(book_id, chapter_num):
+            self._right_tabs.setCurrentWidget(self._challenge_panel)
+        else:
+            QMessageBox.information(self, "No Challenge", f"No challenges available for Chapter {chapter_num} yet.")
+
+    # --- Project ---
+
+    @safe_slot
+    def _show_project(self) -> None:
+        """Switch to the Project tab and load the book project."""
+        if not self._book.current_book:
+            QMessageBox.information(self, "No Book", "Please select a book first.")
+            return
+        book_id = self._book.current_book.book_id
+        if self._project_panel.load_project(book_id):
+            self._right_tabs.setCurrentWidget(self._project_panel)
+        else:
+            QMessageBox.information(self, "No Project", "No project available for this book yet.")
+
     # --- View ---
 
     @safe_slot
@@ -837,6 +915,9 @@ class MainWindow(QMainWindow):
         self._reader.set_theme(theme_name)
         self._editor.set_theme(theme_name)
         self._console.set_theme(theme_name)
+        self._quiz_panel.set_theme(theme_name)
+        self._challenge_panel.set_theme(theme_name)
+        self._project_panel.set_theme(theme_name)
         self._output.set_theme(theme_name)
         self._app_config.theme = theme_name
 
@@ -907,6 +988,9 @@ class MainWindow(QMainWindow):
         <tr><td colspan="2"><b>Notes &amp; Bookmarks</b></td></tr>
         <tr><td><code>Ctrl+B</code></td><td>Add bookmark</td></tr>
         <tr><td><code>Ctrl+N</code></td><td>Add note</td></tr>
+        <tr><td><code>Ctrl+Q</code></td><td>Take quiz for current chapter</td></tr>
+        <tr><td><code>Ctrl+Shift+Q</code></td><td>Code challenge for current chapter</td></tr>
+        <tr><td><code>Ctrl+P</code></td><td>Open book project</td></tr>
         <tr><td colspan="2"><b>Other</b></td></tr>
         <tr><td><code>Ctrl+/</code></td><td>Show this dialog</td></tr>
         </table>

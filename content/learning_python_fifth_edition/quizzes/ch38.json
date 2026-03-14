@@ -1,0 +1,85 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 38,
+  "questions": [
+    {
+      "id": "lp_ch38_q01",
+      "type": "multiple_choice",
+      "question": "Which built-in function creates a managed attribute by accepting getter, setter, and deleter functions as arguments?",
+      "choices": [
+        "attribute()",
+        "property()",
+        "managed()",
+        "descriptor()"
+      ],
+      "correct": 1,
+      "explanation": "The property() built-in creates a managed attribute. It accepts up to four arguments: fget, fset, fdel, and doc. For example: name = property(get_name, set_name, del_name, 'name doc').",
+      "concepts": ["property", "managed_attributes", "getters_setters"]
+    },
+    {
+      "id": "lp_ch38_q02",
+      "type": "multiple_choice",
+      "question": "Which decorator syntax creates a read-only property when no setter is defined?",
+      "choices": [
+        "@staticmethod above a getter method",
+        "@property above a getter method",
+        "@classmethod above a getter method",
+        "@readonly above a getter method"
+      ],
+      "correct": 1,
+      "explanation": "Using @property on a method makes it the getter for a managed attribute. Without a corresponding @name.setter, any assignment attempt raises AttributeError, making it effectively read-only.",
+      "concepts": ["property_decorator", "read_only_property"]
+    },
+    {
+      "id": "lp_ch38_q03",
+      "type": "fill_in_blank",
+      "question": "A descriptor class must define at least one of the methods __get__, __set__, or ___.",
+      "choices": [],
+      "correct": "__delete__",
+      "explanation": "The descriptor protocol consists of three optional methods: __get__ for attribute access, __set__ for attribute assignment, and __delete__ for attribute deletion. A class defining any of these becomes a descriptor.",
+      "concepts": ["descriptors", "descriptor_protocol", "__delete__"]
+    },
+    {
+      "id": "lp_ch38_q04",
+      "type": "multiple_choice",
+      "question": "What is the key difference between __getattr__ and __getattribute__?",
+      "choices": [
+        "They are identical in behavior",
+        "__getattr__ runs for every attribute access; __getattribute__ only for missing ones",
+        "__getattr__ is called only when normal lookup fails; __getattribute__ is called for every attribute access",
+        "__getattr__ works only on new-style classes"
+      ],
+      "correct": 2,
+      "explanation": "__getattr__ is a fallback called only when an attribute is not found through normal mechanisms. __getattribute__ intercepts every attribute access unconditionally, making it more powerful but requiring care to avoid infinite recursion.",
+      "concepts": ["__getattr__", "__getattribute__", "attribute_interception"]
+    },
+    {
+      "id": "lp_ch38_q05",
+      "type": "multiple_choice",
+      "question": "In the descriptor protocol, what arguments does the __get__ method receive?",
+      "choices": [
+        "Only self",
+        "self and the attribute name",
+        "self, the instance, and the owner class",
+        "self, the attribute name, and the value"
+      ],
+      "correct": 2,
+      "explanation": "The __get__(self, instance, owner) method receives the descriptor instance, the object instance the attribute was accessed on (or None if accessed via the class), and the owner class.",
+      "concepts": ["__get__", "descriptor_protocol"]
+    },
+    {
+      "id": "lp_ch38_q06",
+      "type": "multiple_choice",
+      "question": "When using __setattr__ to intercept attribute assignments, how do you store a value without causing infinite recursion?",
+      "choices": [
+        "Call self.attr = value directly",
+        "Use a global variable to hold the value",
+        "Assign via self.__dict__[attr] = value or call object.__setattr__(self, attr, value)",
+        "You cannot store values when using __setattr__"
+      ],
+      "correct": 2,
+      "explanation": "Since __setattr__ intercepts all attribute assignments including self.x = val, you must bypass it by writing directly to the instance's __dict__ or calling object.__setattr__() to avoid infinite recursion.",
+      "concepts": ["__setattr__", "infinite_recursion", "attribute_storage"]
+    }
+  ]
+}

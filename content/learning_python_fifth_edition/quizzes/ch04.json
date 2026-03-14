@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 4,
+  "questions": [
+    {
+      "id": "lp_ch04_q01",
+      "type": "multiple_choice",
+      "question": "In Python, everything is a(n):",
+      "choices": [
+        "Variable",
+        "Object",
+        "Class",
+        "Function"
+      ],
+      "correct": 1,
+      "explanation": "In Python, every piece of data is an object. Numbers, strings, lists, functions, modules — they're all objects with a type, a value, and a unique identity.",
+      "concepts": ["objects", "core_types"]
+    },
+    {
+      "id": "lp_ch04_q02",
+      "type": "multiple_choice",
+      "question": "Which of the following is an immutable type in Python?",
+      "choices": [
+        "List",
+        "Dictionary",
+        "String",
+        "Set"
+      ],
+      "correct": 2,
+      "explanation": "Strings are immutable — once created, they cannot be changed in place. Lists, dictionaries, and sets are mutable and can be modified after creation.",
+      "concepts": ["immutability", "strings", "core_types"]
+    },
+    {
+      "id": "lp_ch04_q03",
+      "type": "fill_in_blank",
+      "question": "To create a dictionary in Python, you use ___ braces.",
+      "correct": "curly",
+      "explanation": "Dictionaries are created with curly braces {} containing key:value pairs, e.g., {'name': 'Bob', 'age': 40}.",
+      "concepts": ["dictionaries", "syntax"]
+    },
+    {
+      "id": "lp_ch04_q04",
+      "type": "multiple_choice",
+      "question": "What does len('hello') return?",
+      "choices": [
+        "4",
+        "5",
+        "6",
+        "An error"
+      ],
+      "correct": 1,
+      "explanation": "len() returns the number of items in a sequence. The string 'hello' has 5 characters, so len('hello') returns 5.",
+      "concepts": ["len", "strings", "sequences"]
+    },
+    {
+      "id": "lp_ch04_q05",
+      "type": "multiple_choice",
+      "question": "What is the result of [1, 2, 3] + [4, 5]?",
+      "choices": [
+        "[5, 7, 3]",
+        "[1, 2, 3, 4, 5]",
+        "An error — you can't add lists",
+        "[[1, 2, 3], [4, 5]]"
+      ],
+      "correct": 1,
+      "explanation": "The + operator concatenates lists, creating a new list containing all elements from both lists in order.",
+      "concepts": ["lists", "concatenation", "operators"]
+    },
+    {
+      "id": "lp_ch04_q06",
+      "type": "fill_in_blank",
+      "question": "To access the last element of a list L, you can use L[___].",
+      "correct": "-1",
+      "explanation": "Negative indexing counts from the end. L[-1] gives the last element, L[-2] gives the second to last, and so on.",
+      "concepts": ["indexing", "negative_indexing", "lists"]
+    },
+    {
+      "id": "lp_ch04_q07",
+      "type": "multiple_choice",
+      "question": "Which Python type is used to store an ordered, unchangeable sequence of items?",
+      "choices": [
+        "List",
+        "Dictionary",
+        "Tuple",
+        "Set"
+      ],
+      "correct": 2,
+      "explanation": "Tuples are ordered sequences like lists, but they are immutable (unchangeable). They're defined with parentheses: (1, 2, 3).",
+      "concepts": ["tuples", "immutability", "sequences"]
+    },
+    {
+      "id": "lp_ch04_q08",
+      "type": "fill_in_blank",
+      "question": "The expression 'spam'[1:3] returns '___'.",
+      "correct": "pa",
+      "explanation": "Slicing with [1:3] extracts characters at index 1 and 2 (the end index is exclusive). 'spam'[1] is 'p' and 'spam'[2] is 'a', so the result is 'pa'.",
+      "concepts": ["slicing", "strings", "indexing"]
+    }
+  ]
+}

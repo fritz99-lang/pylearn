@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 13,
+  "questions": [
+    {
+      "id": "lp_ch13_q01",
+      "type": "multiple_choice",
+      "question": "What does the 'break' statement do inside a loop?",
+      "choices": [
+        "Skips the rest of the current iteration and continues to the next",
+        "Exits the loop immediately, skipping any else clause",
+        "Exits the entire program",
+        "Pauses the loop until input is received"
+      ],
+      "correct": 1,
+      "explanation": "break immediately exits the nearest enclosing loop. If the loop has an else clause, the else is skipped when break is used. Execution continues with the first statement after the loop.",
+      "concepts": ["break", "loop_control", "loops"]
+    },
+    {
+      "id": "lp_ch13_q02",
+      "type": "fill_in_blank",
+      "question": "The built-in function ___ generates a sequence of integers commonly used with for loops.",
+      "correct": "range",
+      "explanation": "range(start, stop, step) generates integers from start up to (but not including) stop. range(5) produces 0, 1, 2, 3, 4. It is memory-efficient because it generates values on demand.",
+      "concepts": ["range", "built_in_functions", "for_loop"]
+    },
+    {
+      "id": "lp_ch13_q03",
+      "type": "multiple_choice",
+      "question": "When does the else clause of a while or for loop execute?",
+      "choices": [
+        "When the loop body raises an exception",
+        "After every iteration of the loop",
+        "When the loop finishes normally without hitting a break",
+        "Only when the loop body is empty"
+      ],
+      "correct": 2,
+      "explanation": "The else clause on a loop runs only if the loop completes without encountering a break statement. If break is executed, the else is skipped. This is useful for search loops.",
+      "concepts": ["loop_else", "break", "loop_control"]
+    },
+    {
+      "id": "lp_ch13_q04",
+      "type": "multiple_choice",
+      "question": "What does the 'continue' statement do inside a loop?",
+      "choices": [
+        "Exits the loop entirely",
+        "Restarts the loop from the beginning",
+        "Skips the rest of the current iteration and jumps to the next iteration",
+        "Continues to the else clause"
+      ],
+      "correct": 2,
+      "explanation": "continue skips the remaining statements in the current iteration and jumps back to the loop header for the next iteration. The loop itself does not terminate.",
+      "concepts": ["continue", "loop_control", "loops"]
+    },
+    {
+      "id": "lp_ch13_q05",
+      "type": "fill_in_blank",
+      "question": "A ___ loop repeats as long as its test condition is true.",
+      "correct": "while",
+      "explanation": "A while loop tests its condition before each iteration. The body executes repeatedly as long as the condition is truthy. When the condition becomes falsy, the loop ends (and the else clause runs, if present).",
+      "concepts": ["while_loop", "loop_types", "loops"]
+    },
+    {
+      "id": "lp_ch13_q06",
+      "type": "multiple_choice",
+      "question": "What does for x in [1, 2, 3]: print(x) do?",
+      "choices": [
+        "Prints [1, 2, 3] once",
+        "Prints each element on a separate line: 1, then 2, then 3",
+        "Prints 123 on a single line",
+        "Raises an error because x is not defined"
+      ],
+      "correct": 1,
+      "explanation": "The for loop iterates over each item in the list, assigning it to x one at a time. print(x) is called for each iteration, printing 1, 2, and 3 on separate lines.",
+      "concepts": ["for_loop", "iteration", "sequences"]
+    },
+    {
+      "id": "lp_ch13_q07",
+      "type": "multiple_choice",
+      "question": "What does range(2, 10, 3) produce?",
+      "choices": [
+        "2, 5, 8",
+        "2, 4, 6, 8",
+        "3, 6, 9",
+        "2, 5, 8, 11"
+      ],
+      "correct": 0,
+      "explanation": "range(2, 10, 3) starts at 2 and increments by 3, stopping before 10. The values are 2, 5, 8. The next value (11) would exceed the stop value, so it is not included.",
+      "concepts": ["range", "step_argument", "sequences"]
+    },
+    {
+      "id": "lp_ch13_q08",
+      "type": "fill_in_blank",
+      "question": "An infinite loop can be written as while ___, which runs forever unless a break statement is encountered.",
+      "correct": "True",
+      "explanation": "while True creates an infinite loop because the condition is always truthy. These loops are useful when you need to break out based on complex conditions tested inside the loop body.",
+      "concepts": ["infinite_loop", "while_loop", "break"]
+    }
+  ]
+}

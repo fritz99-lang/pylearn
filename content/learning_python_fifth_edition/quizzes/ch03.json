@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 3,
+  "questions": [
+    {
+      "id": "lp_ch03_q01",
+      "type": "multiple_choice",
+      "question": "What is the interactive prompt (>>>) used for?",
+      "choices": [
+        "Writing complete Python programs",
+        "Experimenting with code and testing expressions one line at a time",
+        "Compiling Python modules",
+        "Debugging only"
+      ],
+      "correct": 1,
+      "explanation": "The interactive prompt (>>>) lets you type Python code and see results immediately. It's ideal for experimenting, testing small pieces of code, and learning.",
+      "concepts": ["interactive_prompt", "repl"]
+    },
+    {
+      "id": "lp_ch03_q02",
+      "type": "fill_in_blank",
+      "question": "To run a Python script file named 'hello.py' from the command line, you type: python ___",
+      "correct": "hello.py",
+      "explanation": "You run Python scripts from the command line by typing 'python' followed by the script filename.",
+      "concepts": ["command_line", "running_scripts"]
+    },
+    {
+      "id": "lp_ch03_q03",
+      "type": "multiple_choice",
+      "question": "What does the PYTHONPATH environment variable do?",
+      "choices": [
+        "Sets the location of the Python interpreter",
+        "Adds directories to Python's module search path",
+        "Defines the default Python version",
+        "Sets the output encoding"
+      ],
+      "correct": 1,
+      "explanation": "PYTHONPATH lets you add directories to the module search path. When you import a module, Python looks in these directories (among others) to find it.",
+      "concepts": ["pythonpath", "module_search"]
+    },
+    {
+      "id": "lp_ch03_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a way to run Python code?",
+      "choices": [
+        "The interactive interpreter prompt",
+        "Running a .py script from the command line",
+        "Double-clicking a .py file on Windows",
+        "Printing the .py file on paper and scanning it"
+      ],
+      "correct": 3,
+      "explanation": "Python code can be run interactively, from script files on the command line, by clicking icons, from IDEs, and through various other launch mechanisms — but not by scanning printed paper.",
+      "concepts": ["execution_methods"]
+    },
+    {
+      "id": "lp_ch03_q05",
+      "type": "fill_in_blank",
+      "question": "In the interactive interpreter, the ___ variable holds the result of the last expression evaluated.",
+      "correct": "_",
+      "explanation": "The single underscore _ is a special variable in the interactive prompt that stores the result of the last evaluated expression. This is handy for reusing values in quick tests.",
+      "concepts": ["interactive_prompt", "underscore"]
+    },
+    {
+      "id": "lp_ch03_q06",
+      "type": "multiple_choice",
+      "question": "What is an IDE in the context of Python development?",
+      "choices": [
+        "A type of Python data structure",
+        "An Integrated Development Environment with editor, debugger, and other tools",
+        "A Python testing framework",
+        "A Python package manager"
+      ],
+      "correct": 1,
+      "explanation": "An IDE (Integrated Development Environment) combines a text editor, debugger, file browser, and other development tools into a single application. IDLE is Python's built-in IDE.",
+      "concepts": ["ide", "idle", "development_tools"]
+    }
+  ]
+}

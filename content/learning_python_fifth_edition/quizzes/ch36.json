@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 36,
+  "questions": [
+    {
+      "id": "lp_ch36_q01",
+      "type": "multiple_choice",
+      "question": "When nesting try/except statements, which handler catches an exception first?",
+      "choices": [
+        "The outermost try/except block",
+        "The most recently entered (innermost) try/except block",
+        "All matching handlers run in order",
+        "Python picks one at random"
+      ],
+      "correct": 1,
+      "explanation": "Python searches for exception handlers from the inside out. The most recently entered try block that has a matching except clause catches the exception first. If it does not handle it, the exception propagates outward.",
+      "concepts": ["nested_exceptions", "exception_propagation"]
+    },
+    {
+      "id": "lp_ch36_q02",
+      "type": "fill_in_blank",
+      "question": "The Pythonic idiom of attempting an operation and catching exceptions rather than checking preconditions is known by the acronym ________.",
+      "correct": "EAFP",
+      "explanation": "EAFP stands for 'Easier to Ask Forgiveness than Permission.' This approach favors wrapping operations in try/except blocks rather than testing conditions beforehand (LBYL -- Look Before You Leap). EAFP is generally considered more Pythonic.",
+      "concepts": ["EAFP", "LBYL", "exception_idioms"]
+    },
+    {
+      "id": "lp_ch36_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is a recommended practice when designing with exceptions?",
+      "choices": [
+        "Catch every possible exception with a bare except clause",
+        "Catch only specific exception types you expect and can handle, letting unexpected errors propagate",
+        "Avoid exceptions entirely and use return codes instead",
+        "Always silence exceptions using pass in the except block"
+      ],
+      "correct": 1,
+      "explanation": "Best practice is to catch only the specific exceptions you expect and can handle. Letting unexpected exceptions propagate helps with debugging because they surface as unhandled errors with full tracebacks.",
+      "concepts": ["exception_design", "specific_exceptions", "best_practices"]
+    },
+    {
+      "id": "lp_ch36_q04",
+      "type": "multiple_choice",
+      "question": "What happens if an exception is raised inside a function called from within a try block?",
+      "choices": [
+        "The exception is lost because it occurred in a different scope",
+        "The exception propagates up the call stack and can be caught by the enclosing try/except",
+        "Python automatically restarts the function",
+        "The program exits immediately without running any handlers"
+      ],
+      "correct": 1,
+      "explanation": "Exceptions propagate up the call stack. If a function raises an exception, Python unwinds the stack looking for a matching try/except handler. This means a try block can catch exceptions from deeply nested function calls.",
+      "concepts": ["exception_propagation", "call_stack"]
+    },
+    {
+      "id": "lp_ch36_q05",
+      "type": "fill_in_blank",
+      "question": "The approach of checking conditions before performing an operation (e.g., testing if a key exists before accessing it) is known by the acronym ________.",
+      "correct": "LBYL",
+      "explanation": "LBYL stands for 'Look Before You Leap.' This style checks preconditions before an operation, in contrast to the EAFP style that uses try/except. While LBYL is sometimes appropriate, EAFP is often preferred in Python.",
+      "concepts": ["LBYL", "EAFP", "exception_idioms"]
+    },
+    {
+      "id": "lp_ch36_q06",
+      "type": "multiple_choice",
+      "question": "In a nested exception handler design, if an inner except block re-raises an exception using a bare 'raise', what happens?",
+      "choices": [
+        "A new exception is created",
+        "The original exception propagates to the next outer handler with its original traceback intact",
+        "The program terminates immediately",
+        "The inner try block restarts"
+      ],
+      "correct": 1,
+      "explanation": "A bare 'raise' statement re-raises the current exception with its original traceback, allowing it to propagate to the next enclosing try/except handler. This is useful when you want to partially handle an exception (e.g., log it) and then let outer code handle it further.",
+      "concepts": ["re_raise", "nested_exceptions", "exception_propagation"]
+    }
+  ]
+}

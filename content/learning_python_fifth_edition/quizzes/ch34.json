@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 34,
+  "questions": [
+    {
+      "id": "lp_ch34_q01",
+      "type": "multiple_choice",
+      "question": "In a try/except/else/finally statement, when does the else block execute?",
+      "choices": [
+        "When an exception is raised in the try block",
+        "Only when the try block completes without raising any exception",
+        "After the finally block",
+        "Every time, regardless of exceptions"
+      ],
+      "correct": 1,
+      "explanation": "The else clause runs only if the try block completes successfully without raising any exception. This is useful for code that should execute only when no error occurred, keeping it separate from the exception-handling except clauses.",
+      "concepts": ["try_else", "exception_handling"]
+    },
+    {
+      "id": "lp_ch34_q02",
+      "type": "multiple_choice",
+      "question": "How do you catch multiple exception types in a single except clause?",
+      "choices": [
+        "except ValueError, TypeError:",
+        "except (ValueError, TypeError):",
+        "except ValueError | TypeError:",
+        "except [ValueError, TypeError]:"
+      ],
+      "correct": 1,
+      "explanation": "To catch multiple exception types in one except clause, list them as a tuple: except (ValueError, TypeError):. This catches either exception type and runs the same handler for both.",
+      "concepts": ["multiple_exceptions", "except_clause"]
+    },
+    {
+      "id": "lp_ch34_q03",
+      "type": "fill_in_blank",
+      "question": "To bind the caught exception object to a variable named e, you write: except ValueError ________ e:",
+      "correct": "as",
+      "explanation": "The 'as' clause in an except statement binds the exception instance to a variable. For example, 'except ValueError as e:' lets you access the exception object via e, including its message and any custom attributes.",
+      "concepts": ["as_clause", "exception_binding"]
+    },
+    {
+      "id": "lp_ch34_q04",
+      "type": "multiple_choice",
+      "question": "What does 'raise X from Y' do in Python 3?",
+      "choices": [
+        "It raises exception X and discards Y",
+        "It chains exception X to cause Y, setting X.__cause__ to Y for explicit exception chaining",
+        "It raises both X and Y simultaneously",
+        "It converts exception Y into exception X"
+      ],
+      "correct": 1,
+      "explanation": "'raise X from Y' creates an explicit exception chain. It sets X.__cause__ to Y, so the traceback shows both the new exception X and the original cause Y. This is useful when translating low-level exceptions into higher-level ones.",
+      "concepts": ["raise_from", "exception_chaining", "__cause__"]
+    },
+    {
+      "id": "lp_ch34_q05",
+      "type": "multiple_choice",
+      "question": "In nested try/except handlers, if an inner except block does not catch the exception, what happens?",
+      "choices": [
+        "The program terminates immediately",
+        "The exception propagates outward to the next enclosing try/except handler",
+        "The exception is silently ignored",
+        "Python restarts the inner try block"
+      ],
+      "correct": 1,
+      "explanation": "If no matching except clause is found in the innermost try block, the exception propagates outward through enclosing try statements, function calls, and up the call stack until a matching handler is found or the program terminates with a traceback.",
+      "concepts": ["exception_propagation", "nested_handlers"]
+    },
+    {
+      "id": "lp_ch34_q06",
+      "type": "fill_in_blank",
+      "question": "A bare ________ clause (with no exception type specified) catches every exception, but this practice is generally discouraged.",
+      "correct": "except",
+      "explanation": "A bare 'except:' clause with no exception class catches all exceptions, including SystemExit and KeyboardInterrupt. This is discouraged because it can hide bugs and intercept exceptions you did not intend to catch. Use 'except Exception:' instead to avoid catching system-exit exceptions.",
+      "concepts": ["bare_except", "exception_best_practices"]
+    },
+    {
+      "id": "lp_ch34_q07",
+      "type": "multiple_choice",
+      "question": "What is the execution order when a try statement has except, else, and finally clauses and no exception is raised?",
+      "choices": [
+        "try -> except -> else -> finally",
+        "try -> else -> finally",
+        "try -> finally -> else",
+        "try -> else -> except -> finally"
+      ],
+      "correct": 1,
+      "explanation": "When no exception occurs: the try block runs, then the else block runs (because no exception was raised), and finally the finally block runs (it always runs). The except block is skipped entirely since no exception was raised.",
+      "concepts": ["try_except_else_finally", "execution_order"]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 20,
+  "challenges": [
+    {
+      "id": "lp_ch20_c01",
+      "title": "Set Comprehension",
+      "description": "Given `words = [\"hello\", \"world\", \"hello\", \"python\", \"world\"]`, create a set comprehension called `unique_lengths` that contains the unique lengths of the words in the list.",
+      "starter_code": "words = [\"hello\", \"world\", \"hello\", \"python\", \"world\"]\n\n# Create a set comprehension of unique word lengths\nunique_lengths = None  # Replace with your code\n\nprint(unique_lengths)",
+      "test_code": "assert unique_lengths == {5, 6}",
+      "difficulty": "easy",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    },
+    {
+      "id": "lp_ch20_c02",
+      "title": "Fibonacci Generator",
+      "description": "Write a generator function `fibonacci(n)` that yields the first `n` Fibonacci numbers. The sequence starts with 0, 1, 1, 2, 3, 5, 8, ...",
+      "starter_code": "def fibonacci(n):\n    # Your code here\n    pass\n\n# Test your generator\nprint(list(fibonacci(7)))\nprint(list(fibonacci(1)))",
+      "test_code": "assert list(fibonacci(7)) == [0, 1, 1, 2, 3, 5, 8]\nassert list(fibonacci(1)) == [0]",
+      "difficulty": "medium",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    },
+    {
+      "id": "lp_ch20_c03",
+      "title": "Matrix Transpose",
+      "description": "Given `matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]`, create a variable `transposed` that contains the transpose of the matrix using a nested list comprehension. The transpose swaps rows and columns.",
+      "starter_code": "matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\n\n# Transpose the matrix using a nested list comprehension\ntransposed = None  # Replace with your code\n\nprint(transposed)",
+      "test_code": "assert transposed == [[1, 4, 7], [2, 5, 8], [3, 6, 9]]",
+      "difficulty": "hard",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    }
+  ]
+}

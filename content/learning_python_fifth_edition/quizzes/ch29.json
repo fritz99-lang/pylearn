@@ -1,0 +1,92 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 29,
+  "questions": [
+    {
+      "id": "lp_ch29_q01",
+      "type": "multiple_choice",
+      "question": "What is the primary purpose of the __init__ method in a Python class?",
+      "choices": [
+        "It creates the class object itself",
+        "It initializes instance attributes when a new object is created",
+        "It destroys the instance when it goes out of scope",
+        "It defines the class namespace"
+      ],
+      "correct": 1,
+      "explanation": "__init__ is the constructor initializer method. It is called automatically after a new instance is created, allowing you to set up instance attributes. It does not create the instance itself -- that is __new__'s job.",
+      "concepts": ["__init__", "constructor", "instance_initialization"]
+    },
+    {
+      "id": "lp_ch29_q02",
+      "type": "multiple_choice",
+      "question": "What is the difference between __str__ and __repr__ in a class?",
+      "choices": [
+        "__str__ is for developers; __repr__ is for end users",
+        "__str__ provides a user-friendly string; __repr__ provides a detailed, unambiguous string often suitable for recreating the object",
+        "__repr__ is called by print(); __str__ is called in the interactive prompt",
+        "There is no difference; they are aliases for each other"
+      ],
+      "correct": 1,
+      "explanation": "__str__ is intended to return a readable, user-friendly string and is called by print() and str(). __repr__ is intended to return a detailed, unambiguous representation (ideally one that could recreate the object) and is used in the interactive prompt and as a fallback if __str__ is not defined.",
+      "concepts": ["__str__", "__repr__", "string_representation"]
+    },
+    {
+      "id": "lp_ch29_q03",
+      "type": "fill_in_blank",
+      "question": "To define a class method that receives the class (not the instance) as its first argument, you use the ________ decorator.",
+      "correct": "@classmethod",
+      "explanation": "The @classmethod decorator transforms a method so that it receives the class as its first argument (conventionally named cls) instead of an instance. This allows the method to access or modify class-level state.",
+      "concepts": ["@classmethod", "class_methods", "decorators"]
+    },
+    {
+      "id": "lp_ch29_q04",
+      "type": "multiple_choice",
+      "question": "Which statement about @staticmethod is correct?",
+      "choices": [
+        "A static method receives the instance as its first argument",
+        "A static method receives the class as its first argument",
+        "A static method receives neither the instance nor the class as its first argument",
+        "A static method can only be called on the class, never on an instance"
+      ],
+      "correct": 2,
+      "explanation": "A @staticmethod does not receive an implicit first argument at all -- neither self nor cls. It behaves like a plain function that happens to live inside a class namespace. It can be called on both the class and instances.",
+      "concepts": ["@staticmethod", "static_methods"]
+    },
+    {
+      "id": "lp_ch29_q05",
+      "type": "multiple_choice",
+      "question": "In Python's multiple inheritance, what does MRO stand for and what does it determine?",
+      "choices": [
+        "Method Resolution Order -- the order in which base classes are searched for a method",
+        "Multiple Return Objects -- how many values a method can return",
+        "Module Reference Order -- the order in which modules are imported",
+        "Method Rewrite Override -- which methods can be overridden"
+      ],
+      "correct": 0,
+      "explanation": "MRO stands for Method Resolution Order. It defines the linear order in which Python searches base classes when looking up a method or attribute. Python 3 uses the C3 linearization algorithm to compute the MRO.",
+      "concepts": ["MRO", "method_resolution_order", "multiple_inheritance"]
+    },
+    {
+      "id": "lp_ch29_q06",
+      "type": "fill_in_blank",
+      "question": "You can inspect the method resolution order of a class MyClass by calling MyClass.________().",
+      "correct": "mro",
+      "explanation": "The mro() method returns a list representing the method resolution order for the class. You can also view it via the __mro__ attribute. For example, MyClass.mro() returns [MyClass, ParentA, ParentB, object].",
+      "concepts": ["mro", "__mro__", "method_resolution_order"]
+    },
+    {
+      "id": "lp_ch29_q07",
+      "type": "multiple_choice",
+      "question": "Given the following code, what is the output?\n\nclass A:\n    def greet(self):\n        return 'A'\n\nclass B(A):\n    def greet(self):\n        return 'B'\n\nclass C(A):\n    def greet(self):\n        return 'C'\n\nclass D(B, C):\n    pass\n\nprint(D().greet())",
+      "choices": [
+        "'A'",
+        "'B'",
+        "'C'",
+        "An error is raised"
+      ],
+      "correct": 1,
+      "explanation": "Python uses the C3 linearization MRO. For class D(B, C), the MRO is D -> B -> C -> A -> object. Since B is checked before C, and B defines greet(), the output is 'B'.",
+      "concepts": ["multiple_inheritance", "MRO", "C3_linearization"]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 37,
+  "challenges": [
+    {
+      "id": "lp_ch37_c01",
+      "title": "Encode Decode",
+      "description": "Practice encoding and decoding strings to and from bytes.\n\nGiven `text = \"caf\u00e9\"`, create the following variables:\n- `encoded` \u2014 the text encoded to bytes using UTF-8\n- `decoded` \u2014 the encoded bytes decoded back to a string using UTF-8\n- `ascii_safe` \u2014 the text encoded to ASCII with `errors='replace'`, then decoded back to ASCII",
+      "starter_code": "text = \"caf\u00e9\"\n\n# Encode text to UTF-8 bytes\nencoded = ...\n\n# Decode the bytes back to a string\ndecoded = ...\n\n# Encode to ASCII with errors='replace', then decode back\nascii_safe = ...\n",
+      "test_code": "assert isinstance(encoded, bytes), f\"encoded should be bytes, got {type(encoded)}\"\nassert decoded == \"caf\u00e9\", f\"decoded should be 'caf\\u00e9', got '{decoded}'\"\nassert \"?\" in ascii_safe or \"\\\\x\" not in ascii_safe, f\"ascii_safe should replace non-ASCII chars, got '{ascii_safe}'\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "easy",
+      "concepts_new": [
+        "str.encode()",
+        "bytes.decode()",
+        "UTF-8 encoding",
+        "ASCII encoding with error handling"
+      ],
+      "concepts_review": [
+        "string types",
+        "bytes type",
+        "unicode characters"
+      ],
+      "hints": [
+        "Use text.encode('utf-8') to create the encoded bytes.",
+        "Use encoded.decode('utf-8') to decode back to a string.",
+        "Use text.encode('ascii', errors='replace').decode('ascii') for the ASCII-safe version."
+      ]
+    },
+    {
+      "id": "lp_ch37_c02",
+      "title": "Byte Length",
+      "description": "Write a function `byte_length(text, encoding='utf-8')` that returns the number of bytes needed to encode the given text in the specified encoding.\n\nNote that characters like '\u00e9' take more than one byte in UTF-8!",
+      "starter_code": "def byte_length(text, encoding='utf-8'):\n    \"\"\"Return the number of bytes needed to encode text in the given encoding.\"\"\"\n    # Encode the text and return the length of the resulting bytes\n    ...\n",
+      "test_code": "assert byte_length(\"hello\") == 5, f\"Expected 5, got {byte_length('hello')}\"\nassert byte_length(\"caf\u00e9\") == 5, f\"Expected 5, got {byte_length('caf\\u00e9')}\"\nassert byte_length(\"hello\", 'ascii') == 5, f\"Expected 5, got {byte_length('hello', 'ascii')}\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "byte length vs character length",
+        "encoding parameter",
+        "multi-byte characters"
+      ],
+      "concepts_review": [
+        "str.encode()",
+        "len() function",
+        "default parameter values"
+      ],
+      "hints": [
+        "Use text.encode(encoding) to get the bytes representation.",
+        "Use len() on the resulting bytes to count how many bytes there are.",
+        "The character '\u00e9' is 2 bytes in UTF-8, so 'caf\u00e9' is 3 + 2 = 5 bytes."
+      ]
+    }
+  ]
+}

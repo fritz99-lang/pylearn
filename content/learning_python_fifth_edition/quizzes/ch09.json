@@ -1,0 +1,100 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 9,
+  "questions": [
+    {
+      "id": "lp_ch09_q01",
+      "type": "multiple_choice",
+      "question": "What happens when you try to assign to an element of a tuple, such as t[0] = 'x'?",
+      "choices": [
+        "The tuple is updated with the new value",
+        "A TypeError is raised because tuples are immutable",
+        "A new tuple is created with the change",
+        "The assignment silently fails with no error"
+      ],
+      "correct": 1,
+      "explanation": "Tuples are immutable sequences. Attempting to change an element in place raises a TypeError. To get a modified version, you must create a new tuple, for example: t = ('x',) + t[1:].",
+      "concepts": ["tuples", "immutability", "TypeError"]
+    },
+    {
+      "id": "lp_ch09_q02",
+      "type": "fill_in_blank",
+      "question": "The syntax a, b, c = (1, 2, 3) is known as tuple ___.",
+      "correct": "unpacking",
+      "explanation": "Tuple unpacking (also called sequence unpacking) assigns each element of the tuple to a corresponding variable on the left side of the assignment. The number of variables must match the number of elements unless extended unpacking with * is used.",
+      "concepts": ["tuple_unpacking", "assignment", "sequences"]
+    },
+    {
+      "id": "lp_ch09_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is the correct way to open a file for reading and ensure it is properly closed?",
+      "choices": [
+        "f = open('data.txt'); f.read(); f.close()",
+        "with open('data.txt') as f: data = f.read()",
+        "Both approaches close the file, but the with statement is preferred because it guarantees cleanup even if an exception occurs",
+        "f = open('data.txt', 'r'); del f"
+      ],
+      "correct": 2,
+      "explanation": "Both the manual open/close and the with statement can work, but the with statement is strongly preferred. It automatically closes the file when the block exits, even if an exception is raised, preventing resource leaks.",
+      "concepts": ["file_operations", "with_statement", "context_managers"]
+    },
+    {
+      "id": "lp_ch09_q04",
+      "type": "multiple_choice",
+      "question": "What does the built-in function type() return?",
+      "choices": [
+        "The value of the object",
+        "The type object representing the class of the argument",
+        "A string name of the type like 'int' or 'str'",
+        "True or False indicating if the object has a type"
+      ],
+      "correct": 1,
+      "explanation": "type(obj) returns the type object (class) of obj. For example, type(42) returns <class 'int'>. To check if an object is a specific type, isinstance() is generally preferred because it also accounts for inheritance.",
+      "concepts": ["type_function", "object_types", "introspection"]
+    },
+    {
+      "id": "lp_ch09_q05",
+      "type": "fill_in_blank",
+      "question": "A factory function from the collections module that creates tuple subclasses with named fields is called ___.",
+      "correct": "namedtuple",
+      "explanation": "collections.namedtuple creates a new class that is a subclass of tuple, with named fields accessible by attribute. For example, Point = namedtuple('Point', ['x', 'y']) lets you access p.x and p.y instead of p[0] and p[1].",
+      "concepts": ["namedtuple", "collections", "tuples"]
+    },
+    {
+      "id": "lp_ch09_q06",
+      "type": "multiple_choice",
+      "question": "What is the difference between type(x) == int and isinstance(x, int)?",
+      "choices": [
+        "They are always equivalent",
+        "isinstance also returns True for subclasses of int, while type() == int requires an exact match",
+        "type() is faster but less accurate",
+        "isinstance only works with built-in types"
+      ],
+      "correct": 1,
+      "explanation": "isinstance(x, int) returns True if x is an instance of int or any subclass of int (like bool, which is a subclass of int). type(x) == int only returns True for exact int instances. isinstance is generally preferred for type checking.",
+      "concepts": ["isinstance", "type_checking", "inheritance"]
+    },
+    {
+      "id": "lp_ch09_q07",
+      "type": "multiple_choice",
+      "question": "Which file mode string opens a file for writing, creating it if it does not exist and truncating it if it does?",
+      "choices": [
+        "'r'",
+        "'w'",
+        "'a'",
+        "'x'"
+      ],
+      "correct": 1,
+      "explanation": "Mode 'w' opens a file for writing, creates it if it doesn't exist, and truncates (empties) it if it does. Mode 'r' is read-only, 'a' appends without truncating, and 'x' creates exclusively (fails if file exists).",
+      "concepts": ["file_modes", "file_operations", "writing_files"]
+    },
+    {
+      "id": "lp_ch09_q08",
+      "type": "fill_in_blank",
+      "question": "A tuple containing a single element must include a trailing comma, like (42,), to distinguish it from a parenthesized ___.",
+      "correct": "expression",
+      "explanation": "Without the trailing comma, (42) is just the integer 42 in parentheses (a grouping expression). The comma is what makes it a tuple: (42,) is a one-element tuple. This is a common Python gotcha.",
+      "concepts": ["tuples", "single_element_tuple", "syntax"]
+    }
+  ]
+}

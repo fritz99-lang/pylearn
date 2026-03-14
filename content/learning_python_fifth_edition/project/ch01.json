@@ -1,0 +1,19 @@
+{
+  "step_id": "lp_proj_ch01",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 1,
+  "title": "Project Setup — Define the Data",
+  "description": "Start the contact manager by creating a list of contacts. Each contact is a dictionary with 'name', 'phone', and 'email' keys. Create at least 3 sample contacts in a list called 'contacts'.",
+  "builds_on": "",
+  "starter_code": "# Contact Manager — Step 1: Define the Data\n# Create a list called 'contacts' with at least 3 dictionaries.\n# Each dict should have 'name', 'phone', and 'email' keys.\n\ncontacts = [\n    # Add your contacts here\n]\n\n# Print how many contacts you have\nprint(f\"{len(contacts)} contacts loaded\")\n",
+  "test_code": "assert isinstance(contacts, list), 'contacts should be a list'\nassert len(contacts) >= 3, f'Need at least 3 contacts, got {len(contacts)}'\nassert all(isinstance(c, dict) for c in contacts), 'Each contact should be a dictionary'\nassert all('name' in c and 'phone' in c and 'email' in c for c in contacts), 'Each contact needs name, phone, and email keys'",
+  "acceptance_criteria": [
+    "contacts is a list of dictionaries",
+    "At least 3 contacts defined",
+    "Each contact has 'name', 'phone', and 'email' keys"
+  ],
+  "hints": [
+    "A contact looks like: {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'}",
+    "Use commas between dictionaries in the list"
+  ]
+}

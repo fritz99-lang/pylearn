@@ -1,0 +1,86 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 27,
+  "questions": [
+    {
+      "id": "lp_ch27_q01",
+      "type": "multiple_choice",
+      "question": "What does the class statement do in Python?",
+      "choices": [
+        "It immediately creates an instance of the class",
+        "It creates a new class object and assigns it to the class name in the current scope",
+        "It imports a class from another module",
+        "It defines a function that returns objects"
+      ],
+      "correct": 1,
+      "explanation": "The class statement creates a new class object when it runs and assigns it to the name given in the class header. The body of the class runs immediately, and any names assigned inside become class attributes.",
+      "concepts": ["class_statement", "class_object"]
+    },
+    {
+      "id": "lp_ch27_q02",
+      "type": "fill_in_blank",
+      "question": "The special method _____ is called automatically when a new instance of a class is created, and is used to initialize the instance's attributes.",
+      "correct": "__init__",
+      "explanation": "__init__ is known as the constructor (or initializer). Python calls it automatically when you create an instance (e.g., obj = MyClass()). It receives the new instance as self and sets up its initial state.",
+      "concepts": ["__init__", "constructor"]
+    },
+    {
+      "id": "lp_ch27_q03",
+      "type": "multiple_choice",
+      "question": "What is the 'self' parameter in a Python method?",
+      "choices": [
+        "A keyword that creates a new variable",
+        "A reference to the instance on which the method is called",
+        "A reference to the class itself",
+        "An optional parameter that can be omitted"
+      ],
+      "correct": 1,
+      "explanation": "The first parameter of every regular method is a reference to the instance that called the method. By convention it is named 'self'. Python automatically passes the instance when you call obj.method().",
+      "concepts": ["self", "instance_reference"]
+    },
+    {
+      "id": "lp_ch27_q04",
+      "type": "multiple_choice",
+      "question": "What is the difference between an instance attribute and a class attribute?",
+      "choices": [
+        "There is no difference; they are the same thing",
+        "Instance attributes are attached to individual objects (via self), while class attributes are shared by all instances of the class",
+        "Class attributes can only be numbers, while instance attributes can be any type",
+        "Instance attributes are defined outside the class, class attributes inside"
+      ],
+      "correct": 1,
+      "explanation": "Instance attributes are set on individual objects (typically via self.name in __init__) and each instance has its own copy. Class attributes are defined in the class body and shared across all instances unless overridden.",
+      "concepts": ["instance_attributes", "class_attributes"]
+    },
+    {
+      "id": "lp_ch27_q05",
+      "type": "fill_in_blank",
+      "question": "To create a subclass that inherits from a superclass, you list the superclass in ___ after the class name.",
+      "correct": "parentheses",
+      "explanation": "Inheritance is expressed by listing superclasses in parentheses in the class header, e.g., class Sub(Super). The subclass inherits all attributes from the superclass and can override or extend them.",
+      "concepts": ["inheritance_syntax", "subclass"]
+    },
+    {
+      "id": "lp_ch27_q06",
+      "type": "multiple_choice",
+      "question": "When you call a method on an instance, how does Python find the method?",
+      "choices": [
+        "It only looks in the instance's own namespace",
+        "It searches the instance, then its class, then any superclasses up the inheritance tree",
+        "It always calls the method from the topmost superclass",
+        "It randomly selects from available methods with that name"
+      ],
+      "correct": 1,
+      "explanation": "Method lookup follows the same inheritance search as any attribute: Python checks the instance first, then the instance's class, then superclasses moving up the tree, and uses the first match found.",
+      "concepts": ["method_resolution", "attribute_lookup"]
+    },
+    {
+      "id": "lp_ch27_q07",
+      "type": "fill_in_blank",
+      "question": "Calling a class like MyClass() creates a new ___ of that class.",
+      "correct": "instance",
+      "explanation": "Calling a class invokes its constructor, creating a new instance object. Python first creates the empty object, then calls __init__ to initialize it, and finally returns the new instance.",
+      "concepts": ["instantiation", "instance"]
+    }
+  ]
+}

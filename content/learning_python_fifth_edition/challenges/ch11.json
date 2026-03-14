@@ -1,0 +1,48 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 11,
+  "challenges": [
+    {
+      "id": "lp_ch11_c01",
+      "title": "Swap Variables",
+      "description": "Given `a = 10` and `b = 20`, swap their values so that `a` becomes 20 and `b` becomes 10. Use Python's tuple unpacking to do this in a single line — no temporary variable allowed!",
+      "starter_code": "a = 10\nb = 20\n\n# Swap a and b using tuple unpacking (one line)\n",
+      "test_code": "assert a == 20, f'Expected a to be 20 after swap, got {a}'\nassert b == 10, f'Expected b to be 10 after swap, got {b}'",
+      "difficulty": "easy",
+      "concepts_new": [
+        "tuple unpacking",
+        "simultaneous assignment"
+      ],
+      "concepts_review": [
+        "variable assignment",
+        "tuples"
+      ],
+      "hints": [
+        "Python lets you assign multiple variables at once: x, y = y, x",
+        "The right side is evaluated first, then assigned to the left side.",
+        "No parentheses are needed — the comma creates the tuple."
+      ]
+    },
+    {
+      "id": "lp_ch11_c02",
+      "title": "Extended Unpacking",
+      "description": "Given `data = [1, 2, 3, 4, 5, 6, 7]`, use Python's extended unpacking (the * operator) to assign the first element to `first`, the last element to `last`, and everything in between to `middle`. You should end up with first=1, middle=[2,3,4,5,6], last=7.",
+      "starter_code": "data = [1, 2, 3, 4, 5, 6, 7]\n\n# Use extended unpacking to split data into first, middle, and last\n",
+      "test_code": "assert first == 1, f'Expected first to be 1, got {first}'\nassert middle == [2, 3, 4, 5, 6], f'Expected middle to be [2,3,4,5,6], got {middle}'\nassert last == 7, f'Expected last to be 7, got {last}'\nassert data == [1, 2, 3, 4, 5, 6, 7], 'Original data should not be modified'",
+      "difficulty": "medium",
+      "concepts_new": [
+        "extended unpacking (*variable)",
+        "starred assignment"
+      ],
+      "concepts_review": [
+        "tuple unpacking",
+        "lists"
+      ],
+      "hints": [
+        "The * operator in an assignment collects 'remaining' elements into a list.",
+        "You can place the starred variable in any position: first, middle, or last.",
+        "The syntax is: first, *middle, last = sequence"
+      ]
+    }
+  ]
+}

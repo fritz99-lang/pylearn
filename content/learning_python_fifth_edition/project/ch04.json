@@ -1,0 +1,21 @@
+{
+  "step_id": "lp_proj_ch04",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 4,
+  "title": "Display & Search Contacts",
+  "description": "Add two functions to your contact manager: display_contacts() that prints all contacts in a formatted way, and find_contact(name) that searches by name (case-insensitive) and returns matching contacts.",
+  "builds_on": "lp_proj_ch01",
+  "starter_code": "# Contact Manager — Step 2: Display & Search\n# Start with your contacts list from Step 1, then add functions.\n\ncontacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@example.com'},\n]\n\ndef display_contacts(contact_list):\n    \"\"\"Print all contacts in a formatted way.\"\"\"\n    # Your code here\n    pass\n\ndef find_contact(contact_list, search_name):\n    \"\"\"Find contacts by name (case-insensitive partial match).\n    Returns a list of matching contact dicts.\"\"\"\n    # Your code here\n    return []\n\n# Test it\ndisplay_contacts(contacts)\nresults = find_contact(contacts, 'alice')\nprint(f\"Found {len(results)} match(es)\")\n",
+  "test_code": "assert callable(display_contacts), 'display_contacts should be a function'\nassert callable(find_contact), 'find_contact should be a function'\nresults = find_contact(contacts, 'alice')\nassert len(results) == 1, f'find_contact for alice should return 1 result, got {len(results)}'\nassert results[0]['name'] == 'Alice', f\"Expected Alice, got {results[0]['name']}\"\nresults2 = find_contact(contacts, 'ALICE')\nassert len(results2) == 1, 'Search should be case-insensitive'\nresults3 = find_contact(contacts, 'nobody')\nassert len(results3) == 0, 'Search for nonexistent should return empty list'",
+  "acceptance_criteria": [
+    "display_contacts() prints contacts in a readable format",
+    "find_contact() returns matching contacts as a list",
+    "Search is case-insensitive",
+    "Returns empty list when no matches"
+  ],
+  "hints": [
+    "Use a for loop to iterate contacts in display_contacts",
+    "For case-insensitive search: if search_name.lower() in c['name'].lower()",
+    "Build a results list with a list comprehension or for loop"
+  ]
+}

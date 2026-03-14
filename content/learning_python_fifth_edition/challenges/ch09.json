@@ -1,0 +1,28 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 9,
+  "challenges": [
+    {
+      "id": "lp_ch09_c01",
+      "title": "Tuple Unpacking",
+      "description": "Given point = (10, 20, 30), unpack it into three variables x, y, and z. Then calculate 'magnitude' as the Euclidean distance from the origin: (x**2 + y**2 + z**2) ** 0.5.",
+      "starter_code": "point = (10, 20, 30)\n\n# Unpack point into x, y, z\n# your code here\n\n# Calculate the magnitude (Euclidean distance from origin)\nmagnitude = # your code here\n",
+      "test_code": "assert x == 10, f'x should be 10, got {x}'\nassert y == 20, f'y should be 20, got {y}'\nassert z == 30, f'z should be 30, got {z}'\nexpected_mag = (10**2 + 20**2 + 30**2) ** 0.5\nassert abs(magnitude - expected_mag) < 0.0001, f'magnitude should be ~{expected_mag:.4f}, got {magnitude}'",
+      "difficulty": "easy",
+      "concepts_new": ["tuple_unpacking", "tuples"],
+      "concepts_review": ["variables", "arithmetic"],
+      "hints": ["Unpack with: x, y, z = point", "Magnitude formula: (x**2 + y**2 + z**2) ** 0.5", "** 0.5 calculates the square root"]
+    },
+    {
+      "id": "lp_ch09_c02",
+      "title": "Named Tuple",
+      "description": "Import namedtuple from collections and create a namedtuple type called 'Color' with fields 'red', 'green', 'blue'. Create an instance called 'sky' with values (135, 206, 235). Then create 'hex_sky' as the hex color string '#87CEEB' by converting each RGB component to a 2-digit uppercase hex value.",
+      "starter_code": "from collections import namedtuple\n\n# Create a namedtuple type called Color with fields red, green, blue\nColor = # your code here\n\n# Create a Color instance called sky with RGB (135, 206, 235)\nsky = # your code here\n\n# Create hex_sky as a hex color string like '#87CEEB'\nhex_sky = # your code here\n",
+      "test_code": "assert sky.red == 135, f'sky.red should be 135, got {sky.red}'\nassert sky.green == 206, f'sky.green should be 206, got {sky.green}'\nassert sky.blue == 235, f'sky.blue should be 235, got {sky.blue}'\nassert isinstance(sky, tuple), 'sky should be a tuple (namedtuple is a subclass of tuple)'\nassert hex_sky == '#87CEEB', f\"hex_sky should be '#87CEEB', got '{hex_sky}'\"",
+      "difficulty": "medium",
+      "concepts_new": ["namedtuple", "hex_formatting"],
+      "concepts_review": ["tuples", "f_strings", "imports"],
+      "hints": ["Create the type with: namedtuple('Color', ['red', 'green', 'blue'])", "Create the instance with: Color(135, 206, 235) or Color(red=135, green=206, blue=235)", "Format hex with f'#{sky.red:02X}{sky.green:02X}{sky.blue:02X}' — :02X means 2-digit uppercase hex"]
+    }
+  ]
+}

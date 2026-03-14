@@ -1,0 +1,55 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 28,
+  "challenges": [
+    {
+      "id": "lp_ch28_c01",
+      "title": "Employee Hierarchy",
+      "description": "Create a class `Employee` with:\n- `__init__(self, name, salary)` storing both as instance attributes\n- `annual_salary()` method that returns salary * 12\n\nThen create a subclass `Manager` that:\n- Extends Employee with an additional `bonus` parameter in __init__\n- Overrides `annual_salary()` to return (salary * 12) + bonus",
+      "starter_code": "class Employee:\n    def __init__(self, name, salary):\n        ...\n\n    def annual_salary(self):\n        ...\n\n\nclass Manager(Employee):\n    def __init__(self, name, salary, bonus):\n        # Call parent __init__ and store bonus\n        ...\n\n    def annual_salary(self):\n        # Override to include bonus\n        ...\n",
+      "test_code": "emp = Employee(\"Alice\", 5000)\nassert emp.name == \"Alice\", f\"Employee name should be 'Alice', got '{emp.name}'\"\nassert emp.salary == 5000, f\"Employee salary should be 5000, got {emp.salary}\"\nassert emp.annual_salary() == 60000, f\"Employee annual_salary should be 60000, got {emp.annual_salary()}\"\n\nmgr = Manager(\"Bob\", 7000, 10000)\nassert mgr.name == \"Bob\", f\"Manager name should be 'Bob', got '{mgr.name}'\"\nassert mgr.salary == 7000, f\"Manager salary should be 7000, got {mgr.salary}\"\nassert mgr.bonus == 10000, f\"Manager bonus should be 10000, got {mgr.bonus}\"\nassert mgr.annual_salary() == 94000, f\"Manager annual_salary should be 94000, got {mgr.annual_salary()}\"\nassert isinstance(mgr, Employee), \"Manager should be a subclass of Employee\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "inheritance",
+        "subclass definition",
+        "method overriding",
+        "super().__init__()"
+      ],
+      "concepts_review": [
+        "class definition",
+        "__init__ method",
+        "instance attributes",
+        "methods"
+      ],
+      "hints": [
+        "Define Manager as: class Manager(Employee): to inherit from Employee.",
+        "In Manager.__init__, call super().__init__(name, salary) to reuse the parent's initialization.",
+        "Manager.annual_salary() can call super().annual_salary() + self.bonus, or compute (self.salary * 12) + self.bonus directly."
+      ]
+    },
+    {
+      "id": "lp_ch28_c02",
+      "title": "Shape Classes",
+      "description": "Create a base class `Shape` with a method `area()` that returns 0.\n\nCreate two subclasses:\n- `Rectangle(width, height)` that overrides area() to return width * height\n- `Circle(radius)` that overrides area() to return 3.14159 * radius ** 2\n\nUse 3.14159 for pi (do not import math).",
+      "starter_code": "class Shape:\n    def area(self):\n        ...\n\n\nclass Rectangle(Shape):\n    def __init__(self, width, height):\n        ...\n\n    def area(self):\n        ...\n\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        ...\n\n    def area(self):\n        ...\n",
+      "test_code": "s = Shape()\nassert s.area() == 0, f\"Shape.area() should return 0, got {s.area()}\"\n\nr = Rectangle(5, 3)\nassert r.area() == 15, f\"Rectangle(5,3).area() should be 15, got {r.area()}\"\nassert isinstance(r, Shape), \"Rectangle should be a subclass of Shape\"\n\nc = Circle(10)\nexpected = 3.14159 * 100\nassert abs(c.area() - expected) < 0.001, f\"Circle(10).area() should be ~{expected}, got {c.area()}\"\nassert isinstance(c, Shape), \"Circle should be a subclass of Shape\"\n\nc2 = Circle(1)\nassert abs(c2.area() - 3.14159) < 0.001, f\"Circle(1).area() should be ~3.14159, got {c2.area()}\"\nprint(\"All tests passed!\")\n",
+      "difficulty": "medium",
+      "concepts_new": [
+        "polymorphism",
+        "base class design",
+        "multiple subclasses"
+      ],
+      "concepts_review": [
+        "inheritance",
+        "method overriding",
+        "__init__ method",
+        "arithmetic operations"
+      ],
+      "hints": [
+        "The base Shape class needs no __init__; just define area() to return 0.",
+        "Rectangle stores width and height; its area() returns self.width * self.height.",
+        "Circle stores radius; its area() returns 3.14159 * self.radius ** 2."
+      ]
+    }
+  ]
+}

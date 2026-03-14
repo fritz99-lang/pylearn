@@ -1,0 +1,48 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 10,
+  "challenges": [
+    {
+      "id": "lp_ch10_c01",
+      "title": "Grade Classifier",
+      "description": "Write an if/elif/else chain that takes a variable `score` (set to 85) and sets `grade` to the appropriate letter grade: 'A' for 90 and above, 'B' for 80 and above, 'C' for 70 and above, 'D' for 60 and above, or 'F' for anything below 60.",
+      "starter_code": "score = 85\n\n# Write your if/elif/else chain here to set `grade`\n",
+      "test_code": "assert score == 85, 'score should remain 85'\nassert grade == 'B', f'Expected grade B for score 85, got {grade}'\n\n# Test other scores by re-running the logic\nfor test_score, expected in [(95, 'A'), (90, 'A'), (85, 'B'), (80, 'B'), (75, 'C'), (70, 'C'), (65, 'D'), (60, 'D'), (55, 'F'), (0, 'F')]:\n    score = test_score\n    if score >= 90:\n        grade = 'A'\n    elif score >= 80:\n        grade = 'B'\n    elif score >= 70:\n        grade = 'C'\n    elif score >= 60:\n        grade = 'D'\n    else:\n        grade = 'F'\n    assert grade == expected, f'For score {test_score}, expected {expected} but got {grade}'",
+      "difficulty": "easy",
+      "concepts_new": [
+        "if/elif/else statements",
+        "comparison operators",
+        "multi-way branching"
+      ],
+      "concepts_review": [
+        "variable assignment"
+      ],
+      "hints": [
+        "Start with the highest threshold (>= 90) and work down.",
+        "Remember that elif checks are only reached if all previous conditions were False.",
+        "The else clause catches everything below 60."
+      ]
+    },
+    {
+      "id": "lp_ch10_c02",
+      "title": "Even/Odd Checker",
+      "description": "Given `number = 17`, write an if/else statement that sets `parity` to the string 'even' if the number is even, or 'odd' if it is odd. Use the modulo operator (%) to determine divisibility by 2.",
+      "starter_code": "number = 17\n\n# Write your if/else here to set `parity`\n",
+      "test_code": "assert number == 17, 'number should remain 17'\nassert parity == 'odd', f'Expected odd for 17, got {parity}'\n\n# Verify the logic works for other values\ntest_cases = [(0, 'even'), (1, 'odd'), (2, 'even'), (17, 'odd'), (100, 'even'), (-3, 'odd'), (-4, 'even')]\nfor n, expected in test_cases:\n    result = 'even' if n % 2 == 0 else 'odd'\n    assert result == expected, f'For {n}, expected {expected} but got {result}'",
+      "difficulty": "easy",
+      "concepts_new": [
+        "modulo operator",
+        "if/else statement"
+      ],
+      "concepts_review": [
+        "comparison operators",
+        "variable assignment"
+      ],
+      "hints": [
+        "The modulo operator (%) returns the remainder of division.",
+        "A number is even if number % 2 == 0.",
+        "You only need if and else — no elif required."
+      ]
+    }
+  ]
+}

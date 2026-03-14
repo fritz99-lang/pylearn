@@ -1,0 +1,39 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 19,
+  "challenges": [
+    {
+      "id": "lp_ch19_c01",
+      "title": "Lambda Sorter",
+      "description": "Given `pairs = [(2, 'b'), (1, 'a'), (3, 'c')]`, sort the list by the second element of each tuple using a `lambda` function. Store the result as `sorted_pairs`.",
+      "starter_code": "pairs = [(2, 'b'), (1, 'a'), (3, 'c')]\n\n# Sort pairs by the second element using a lambda\nsorted_pairs = None  # Replace with your code\n\nprint(sorted_pairs)",
+      "test_code": "assert sorted_pairs == [(1, 'a'), (2, 'b'), (3, 'c')]",
+      "difficulty": "easy",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    },
+    {
+      "id": "lp_ch19_c02",
+      "title": "Apply Chain",
+      "description": "Write a function `apply_all(value, *funcs)` that takes an initial value and any number of functions, then applies each function in sequence to the result of the previous one. Return the final result.",
+      "starter_code": "def apply_all(value, *funcs):\n    # Your code here\n    pass\n\n# Test your function\nprint(apply_all(5, str))\nprint(apply_all(-3, abs, str))\nprint(apply_all(\"hello\", str.upper, list))",
+      "test_code": "assert apply_all(5, str) == \"5\"\nassert apply_all(-3, abs, str) == \"3\"\nassert apply_all(\"hello\", str.upper, list) == ['H', 'E', 'L', 'L', 'O']",
+      "difficulty": "medium",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    },
+    {
+      "id": "lp_ch19_c03",
+      "title": "Recursive Flatten",
+      "description": "Write a function `flatten(lst)` that takes a nested list (e.g., `[1, [2, [3, 4]], 5]`) and returns a single flat list containing all elements in order (e.g., `[1, 2, 3, 4, 5]`). Use recursion to handle arbitrary nesting depth.",
+      "starter_code": "def flatten(lst):\n    # Your code here\n    pass\n\n# Test your function\nprint(flatten([1, [2, [3, 4]], 5]))\nprint(flatten([1, 2, 3]))\nprint(flatten([[1], [2], [3]]))",
+      "test_code": "assert flatten([1, [2, [3, 4]], 5]) == [1, 2, 3, 4, 5]\nassert flatten([1, 2, 3]) == [1, 2, 3]\nassert flatten([[1], [2], [3]]) == [1, 2, 3]",
+      "difficulty": "medium",
+      "concepts_new": [],
+      "concepts_review": [],
+      "hints": []
+    }
+  ]
+}

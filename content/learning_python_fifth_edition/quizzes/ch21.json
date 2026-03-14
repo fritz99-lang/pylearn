@@ -1,0 +1,78 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 21,
+  "questions": [
+    {
+      "id": "lp_ch21_q01",
+      "type": "multiple_choice",
+      "question": "Which standard library module is designed specifically for measuring the execution time of small code snippets?",
+      "choices": [
+        "time",
+        "timeit",
+        "profile",
+        "datetime"
+      ],
+      "correct": 1,
+      "explanation": "The timeit module is specifically designed for benchmarking small code snippets. It handles many details automatically, such as disabling garbage collection during timing and running multiple iterations for accuracy.",
+      "concepts": ["timeit", "benchmarking"]
+    },
+    {
+      "id": "lp_ch21_q02",
+      "type": "fill_in_blank",
+      "question": "The function time.___ returns a high-resolution performance counter that is ideal for benchmarking short code durations.",
+      "correct": "perf_counter",
+      "explanation": "time.perf_counter() provides the highest available resolution timer on the platform, making it the preferred choice over time.time() for measuring short elapsed durations.",
+      "concepts": ["perf_counter", "timing"]
+    },
+    {
+      "id": "lp_ch21_q03",
+      "type": "multiple_choice",
+      "question": "What is the primary difference between time.time() and time.perf_counter() for benchmarking?",
+      "choices": [
+        "time.time() is faster to call",
+        "time.perf_counter() offers higher resolution and is better suited for measuring short durations",
+        "time.time() measures CPU time while time.perf_counter() measures wall-clock time",
+        "There is no meaningful difference between them"
+      ],
+      "correct": 1,
+      "explanation": "time.perf_counter() provides a higher-resolution clock than time.time(), making it more reliable for measuring short code durations. time.time() may not have sufficient precision for very fast operations.",
+      "concepts": ["perf_counter", "time", "resolution"]
+    },
+    {
+      "id": "lp_ch21_q04",
+      "type": "multiple_choice",
+      "question": "Which Python module can generate a detailed report showing how much time is spent in each function call during execution?",
+      "choices": [
+        "timeit",
+        "time",
+        "cProfile",
+        "sys"
+      ],
+      "correct": 2,
+      "explanation": "The cProfile module (and the older profile module) profiles Python programs by tracking every function call, reporting how many times each function was called and how much time was spent in each.",
+      "concepts": ["profiling", "cProfile"]
+    },
+    {
+      "id": "lp_ch21_q05",
+      "type": "fill_in_blank",
+      "question": "A general Python optimization tip is to avoid building results with string ___ in loops, and use join() instead.",
+      "correct": "concatenation",
+      "explanation": "Repeated string concatenation in a loop creates a new string object each time, which is O(n^2). Using ''.join() with a list of strings is much more efficient because it allocates memory once for the final result.",
+      "concepts": ["optimization", "string_concatenation"]
+    },
+    {
+      "id": "lp_ch21_q06",
+      "type": "multiple_choice",
+      "question": "When benchmarking Python code, why is it important to run the code multiple times and take the best (minimum) time?",
+      "choices": [
+        "Because Python code always gets faster after the first run",
+        "Because system load and other processes can inflate individual timing results, so the minimum reflects the true speed",
+        "Because the average is always inaccurate",
+        "Because Python caches all function results after the first call"
+      ],
+      "correct": 1,
+      "explanation": "Individual timing runs can be affected by system load, background processes, and other factors that inflate the result. Taking the minimum of multiple runs gives the most representative measurement of the code's actual speed.",
+      "concepts": ["benchmarking", "methodology"]
+    }
+  ]
+}
