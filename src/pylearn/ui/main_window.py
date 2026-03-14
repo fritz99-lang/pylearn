@@ -52,7 +52,7 @@ from pylearn.ui.styles import get_stylesheet
 from pylearn.ui.toc_panel import TOCPanel
 from pylearn.ui.toolbar import MainToolBar
 from pylearn.utils.error_handler import safe_slot
-from pylearn.utils.export import export_to_markdown
+from pylearn.utils.export import export_progress_to_markdown, export_to_markdown
 from pylearn.utils.text_utils import detect_repl_code, strip_repl_prompts
 
 logger = logging.getLogger("pylearn.ui")
@@ -323,6 +323,7 @@ class MainWindow(QMainWindow):
         self._add_menu_action(file_menu, "Load Code...", self._load_code_from_file, "Ctrl+O")
         self._add_menu_action(file_menu, "Open in External Editor", self._open_external_editor, "Ctrl+E")
         self._add_menu_action(file_menu, "Export Notes && Bookmarks...", self._export_notes_bookmarks)
+        self._add_menu_action(file_menu, "Export Progress...", self._export_progress)
         file_menu.addSeparator()
         self._add_menu_action(file_menu, "E&xit", self.close, "Alt+F4")
 
@@ -341,6 +342,7 @@ class MainWindow(QMainWindow):
         self._add_menu_action(view_menu, "Notes...", self._show_notes)
         self._add_menu_action(view_menu, "Exercises...", self._show_exercises)
         self._add_menu_action(view_menu, "Take Quiz", self._show_quiz, "Ctrl+Q")
+        self._add_menu_action(view_menu, "Review Missed Questions", self._show_quiz_review, "Ctrl+R")
         self._add_menu_action(view_menu, "Code Challenge", self._show_challenge, "Ctrl+Shift+Q")
         self._add_menu_action(view_menu, "Book Project", self._show_project, "Ctrl+P")
         view_menu.addSeparator()
@@ -753,6 +755,45 @@ class MainWindow(QMainWindow):
             except OSError as e:
                 QMessageBox.warning(self, "Export Failed", f"Could not save file:\n{e}")
 
+    def _export_progress(self) -> None:
+        """Export learning progress to a Markdown file."""
+        book_id: str | None = None
+        suggested_name = "pylearn_progress.md"
+
+        if self._book.current_book:
+            msg = QMessageBox(self)
+            msg.setWindowTitle("Export Progress")
+            msg.setText("Export progress for which books?")
+            current_btn = msg.addButton("Current Book", QMessageBox.ButtonRole.AcceptRole)
+            all_btn = msg.addButton("All Books", QMessageBox.ButtonRole.AcceptRole)
+            msg.addButton(QMessageBox.StandardButton.Cancel)
+            msg.exec()
+
+            clicked = msg.clickedButton()
+            if clicked == current_btn:
+                book_id = self._book.current_book.book_id
+                safe_title = self._book.current_book.title.replace(" ", "_")
+                suggested_name = f"{safe_title}_progress.md"
+            elif clicked == all_btn:
+                book_id = None
+            else:
+                return
+
+        result = export_progress_to_markdown(self._db, book_id)
+        if result is None:
+            QMessageBox.information(self, "Nothing to Export", "No progress data found.")
+            return
+
+        path, _ = QFileDialog.getSaveFileName(
+            self, "Export Progress", suggested_name, "Markdown Files (*.md);;All Files (*)"
+        )
+        if path:
+            try:
+                Path(path).write_text(result, encoding="utf-8")
+                self._status_state.setText(f"Exported to {Path(path).name}")
+            except OSError as e:
+                QMessageBox.warning(self, "Export Failed", f"Could not save file:\n{e}")
+
     # --- Bookmarks & Notes ---
 
     @safe_slot
@@ -840,6 +881,20 @@ class MainWindow(QMainWindow):
             self._right_tabs.setCurrentWidget(self._quiz_panel)
         else:
             QMessageBox.information(self, "No Quiz", f"No quiz available for Chapter {chapter_num} yet.")
+
+    @safe_slot
+    def _show_quiz_review(self) -> None:
+        """Load missed quiz questions for spaced repetition review."""
+        if not self._book.current_book:
+            QMessageBox.information(self, "No Book", "Please select a book first.")
+            return
+        book_id = self._book.current_book.book_id
+        if self._quiz_panel.load_review_quiz(book_id):
+            self._right_tabs.setCurrentWidget(self._quiz_panel)
+        else:
+            QMessageBox.information(
+                self, "No Missed Questions", "No incorrect quiz answers to review. Keep up the good work!"
+            )
 
     # --- Challenge ---
 

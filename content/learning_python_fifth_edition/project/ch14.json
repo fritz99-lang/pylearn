@@ -1,0 +1,23 @@
+{
+  "step_id": "lp_proj_ch14",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 14,
+  "title": "Contact Statistics & Reports",
+  "description": "Use comprehensions and iteration tools to generate statistics and reports from your contact data. Create contact_stats() that computes summary data, and group_by_domain() that groups contacts by their email domain.",
+  "builds_on": "lp_proj_ch13",
+  "starter_code": "# Contact Manager — Step 10: Statistics & Reports\n# Use comprehensions and iteration to analyze contact data.\n\ncontacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@work.org'},\n    {'name': 'Diana', 'phone': '555-0004', 'email': 'diana@work.org'},\n    {'name': 'Eve', 'phone': '555-0005', 'email': 'eve@example.com'},\n]\n\ndef contact_stats(contact_list):\n    \"\"\"Return a dict with statistics about the contacts:\n    {\n        'total': number of contacts,\n        'domains': number of unique email domains,\n        'avg_name_length': average length of contact names (float),\n        'longest_name': the longest contact name\n    }\n    \"\"\"\n    # Your code here — use comprehensions to extract data\n    return {}\n\ndef group_by_domain(contact_list):\n    \"\"\"Group contacts by email domain.\n    Returns a dict like: {'example.com': ['Alice', 'Bob'], 'work.org': ['Charlie']}\n    \"\"\"\n    # Your code here\n    return {}\n\n# Test it\nstats = contact_stats(contacts)\nprint(f\"Total: {stats['total']}\")\nprint(f\"Domains: {stats['domains']}\")\nprint(f\"Avg name length: {stats['avg_name_length']:.1f}\")\nprint(f\"Longest name: {stats['longest_name']}\")\n\nprint(\"\\nGrouped by domain:\")\nfor domain, names in group_by_domain(contacts).items():\n    print(f\"  {domain}: {', '.join(names)}\")\n",
+  "test_code": "test_contacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@work.org'},\n]\nstats = contact_stats(test_contacts)\nassert isinstance(stats, dict), 'contact_stats should return a dict'\nassert stats['total'] == 3, f\"total should be 3, got {stats['total']}\"\nassert stats['domains'] == 2, f\"domains should be 2, got {stats['domains']}\"\nassert isinstance(stats['avg_name_length'], float), 'avg_name_length should be a float'\nexpected_avg = (5 + 3 + 7) / 3\nassert abs(stats['avg_name_length'] - expected_avg) < 0.01, f\"avg_name_length should be {expected_avg}, got {stats['avg_name_length']}\"\nassert stats['longest_name'] == 'Charlie', f\"longest_name should be Charlie, got {stats['longest_name']}\"\ngroups = group_by_domain(test_contacts)\nassert isinstance(groups, dict), 'group_by_domain should return a dict'\nassert len(groups) == 2, f'Should have 2 domains, got {len(groups)}'\nassert 'example.com' in groups, 'Should have example.com domain'\nassert sorted(groups['example.com']) == ['Alice', 'Bob'], f\"example.com should have Alice and Bob, got {groups['example.com']}\"\nassert groups['work.org'] == ['Charlie'], f\"work.org should have Charlie, got {groups['work.org']}\"\nempty_stats = contact_stats([])\nassert empty_stats['total'] == 0, 'Empty list should have total 0'",
+  "acceptance_criteria": [
+    "contact_stats() returns dict with total, domains, avg_name_length, longest_name",
+    "avg_name_length is a float (not int)",
+    "Handles empty contact list without errors",
+    "group_by_domain() groups contacts by the part after @ in email",
+    "Returns dict mapping domain -> list of names"
+  ],
+  "hints": [
+    "Extract domains with a set comprehension: {c['email'].split('@')[1] for c in contact_list}",
+    "Average: sum(len(c['name']) for c in lst) / len(lst) — but watch for empty lists!",
+    "Use max() with a key: max(contact_list, key=lambda c: len(c['name']))['name']",
+    "For group_by_domain: build a dict, loop contacts, extract domain, setdefault or check if key exists"
+  ]
+}

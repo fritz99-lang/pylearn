@@ -1,0 +1,22 @@
+{
+  "step_id": "lp_proj_ch09",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 9,
+  "title": "Save & Load from File",
+  "description": "Add file persistence to the contact manager. Create save_contacts() that writes contacts to a text file (one contact per line, fields separated by '|'), and load_contacts() that reads them back.",
+  "builds_on": "lp_proj_ch08",
+  "starter_code": "# Contact Manager — Step 6: Save & Load from File\n# Use file I/O to persist contacts between sessions.\n\nimport os\n\ncontacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@example.com'},\n]\n\ndef save_contacts(contact_list, filename):\n    \"\"\"Save contacts to a text file.\n    Each line: name|phone|email\n    \"\"\"\n    # Your code here — open file for writing\n    pass\n\ndef load_contacts(filename):\n    \"\"\"Load contacts from a text file.\n    Returns a list of contact dicts.\n    Returns empty list if file doesn't exist.\n    \"\"\"\n    # Your code here — open file for reading\n    return []\n\n# Test it\nsave_contacts(contacts, 'test_contacts.txt')\nloaded = load_contacts('test_contacts.txt')\nprint(f\"Saved {len(contacts)}, loaded {len(loaded)}\")\nfor c in loaded:\n    print(f\"  {c['name']} - {c['phone']} - {c['email']}\")\n\n# Clean up test file\nos.remove('test_contacts.txt')\n",
+  "test_code": "import os\ntest_file = '_test_proj_contacts.txt'\ntry:\n    test_data = [\n        {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n        {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    ]\n    save_contacts(test_data, test_file)\n    assert os.path.exists(test_file), 'save_contacts should create the file'\n    loaded = load_contacts(test_file)\n    assert isinstance(loaded, list), 'load_contacts should return a list'\n    assert len(loaded) == 2, f'Should load 2 contacts, got {len(loaded)}'\n    assert loaded[0]['name'] == 'Alice', f\"First contact name should be Alice, got {loaded[0]['name']}\"\n    assert loaded[0]['phone'] == '555-0001', 'First contact phone should match'\n    assert loaded[0]['email'] == 'alice@example.com', 'First contact email should match'\n    assert loaded[1]['name'] == 'Bob', 'Second contact should be Bob'\n    empty = load_contacts('_nonexistent_file.txt')\n    assert empty == [], 'load_contacts should return [] for missing file'\nfinally:\n    if os.path.exists(test_file):\n        os.remove(test_file)",
+  "acceptance_criteria": [
+    "save_contacts() writes contacts to a text file (one per line, pipe-separated)",
+    "load_contacts() reads contacts back into a list of dicts",
+    "load_contacts() returns empty list if the file doesn't exist",
+    "Data survives a round-trip: save then load produces identical data"
+  ],
+  "hints": [
+    "Use open(filename, 'w') to write — use a with statement to auto-close",
+    "Write each contact as: f.write(f\"{c['name']}|{c['phone']}|{c['email']}\\n\")",
+    "For loading: use open(filename, 'r') and line.strip().split('|')",
+    "Wrap load in try/except FileNotFoundError to handle missing files"
+  ]
+}

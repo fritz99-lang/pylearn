@@ -341,6 +341,84 @@ class TestQuizPanelDirect:
             db.close()
 
 
+class TestReviewQuiz:
+    """Test spaced repetition review quiz loading."""
+
+    def test_load_review_no_wrong_answers(self, qtbot, tmp_path: Path, quiz_content: Path) -> None:
+        from pylearn.core.content_loader import ContentLoader
+        from pylearn.core.database import Database
+        from pylearn.ui.quiz_panel import QuizPanel
+
+        db = Database(tmp_path / "review_test1.db")
+        loader = ContentLoader(quiz_content)
+        try:
+            db.upsert_book("test_book", "Test", "/p", 100, 5)
+            panel = QuizPanel(db, loader)
+            qtbot.addWidget(panel)
+            assert panel.load_review_quiz("test_book") is False
+        finally:
+            db.close()
+
+    def test_load_review_with_wrong_answers(self, qtbot, tmp_path: Path, quiz_content: Path) -> None:
+        from pylearn.core.content_loader import ContentLoader
+        from pylearn.core.database import Database
+        from pylearn.ui.quiz_panel import QuizPanel
+
+        db = Database(tmp_path / "review_test2.db")
+        loader = ContentLoader(quiz_content)
+        try:
+            db.upsert_book("test_book", "Test", "/p", 100, 5)
+            # Answer q1 wrong, q2 right, q3 wrong
+            db.save_quiz_answer("tb_q01", "test_book", 1, False, "0")
+            db.save_quiz_answer("tb_q02", "test_book", 1, True, "spaces")
+            db.save_quiz_answer("tb_q03", "test_book", 1, False, "0")
+
+            panel = QuizPanel(db, loader)
+            qtbot.addWidget(panel)
+            panel.show()
+            result = panel.load_review_quiz("test_book")
+
+            assert result is True
+            assert panel._quiz is not None
+            assert len(panel._quiz.questions) == 2  # Only wrong ones
+            assert panel._quiz.chapter_num == 0  # Review mode sentinel
+            assert "Review" in panel._title_label.text()
+            assert "2 Missed" in panel._title_label.text()
+
+            # Progress for wrong questions should be reset
+            assert db.get_quiz_answer("tb_q01") is None
+            assert db.get_quiz_answer("tb_q03") is None
+            # Correct answer should be untouched
+            assert db.get_quiz_answer("tb_q02") is not None
+        finally:
+            db.close()
+
+    def test_review_score_updates(self, qtbot, tmp_path: Path, quiz_content: Path) -> None:
+        from pylearn.core.content_loader import ContentLoader
+        from pylearn.core.database import Database
+        from pylearn.ui.quiz_panel import QuizPanel
+
+        db = Database(tmp_path / "review_test3.db")
+        loader = ContentLoader(quiz_content)
+        try:
+            db.upsert_book("test_book", "Test", "/p", 100, 5)
+            db.save_quiz_answer("tb_q01", "test_book", 1, False, "0")
+
+            panel = QuizPanel(db, loader)
+            qtbot.addWidget(panel)
+            panel.show()
+            panel.load_review_quiz("test_book")
+
+            # Answer correctly this time
+            buttons = panel._button_group.buttons()
+            buttons[1].setChecked(True)
+            panel._check_answer()
+
+            assert "1/1 correct" in panel._score_label.text()
+        finally:
+            db.close()
+
+
 class TestQuizThemeIntegration:
     """Theme switching applies to quiz panel via MainWindow."""
 

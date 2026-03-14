@@ -1,0 +1,23 @@
+{
+  "step_id": "lp_proj_ch11",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 11,
+  "title": "Update Contact Fields",
+  "description": "Add the ability to update individual fields of existing contacts. Create update_contact() that finds a contact by name and updates specified fields using keyword arguments.",
+  "builds_on": "lp_proj_ch09",
+  "starter_code": "# Contact Manager — Step 7: Update Contacts\n# Use assignments and dictionary updates to modify contact data.\n\ncontacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@example.com'},\n]\n\ndef find_contact(contact_list, search_name):\n    return [c for c in contact_list if search_name.lower() in c['name'].lower()]\n\ndef update_contact(contact_list, contact_name, **updates):\n    \"\"\"Find a contact by exact name (case-insensitive) and update fields.\n    \n    Example: update_contact(contacts, 'Alice', phone='555-9999')\n    Returns True if contact was found and updated, False otherwise.\n    Only updates fields that are valid (name, phone, email).\n    \"\"\"\n    # Your code here\n    return False\n\n# Test it\nprint(f\"Before: {contacts[0]}\")\nresult = update_contact(contacts, 'Alice', phone='555-9999', email='newalice@example.com')\nprint(f\"Updated: {result}\")\nprint(f\"After: {contacts[0]}\")\n",
+  "test_code": "test_contacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n]\nresult = update_contact(test_contacts, 'Alice', phone='555-9999')\nassert result is True, 'update_contact should return True when contact is found'\nassert test_contacts[0]['phone'] == '555-9999', f\"Phone should be updated to 555-9999, got {test_contacts[0]['phone']}\"\nassert test_contacts[0]['email'] == 'alice@example.com', 'Email should not change when only phone is updated'\nresult2 = update_contact(test_contacts, 'Bob', email='newbob@test.com', name='Bobby')\nassert result2 is True, 'Should update multiple fields at once'\nassert test_contacts[1]['name'] == 'Bobby', f\"Name should be Bobby, got {test_contacts[1]['name']}\"\nassert test_contacts[1]['email'] == 'newbob@test.com', 'Email should be updated'\nresult3 = update_contact(test_contacts, 'alice', phone='555-0000')\nassert result3 is True, 'Search should be case-insensitive'\nresult4 = update_contact(test_contacts, 'Nobody', phone='555-0000')\nassert result4 is False, 'Should return False when contact not found'\nresult5 = update_contact(test_contacts, 'Alice', invalid_field='test')\nassert 'invalid_field' not in test_contacts[0], 'Should not add invalid fields to contact'",
+  "acceptance_criteria": [
+    "update_contact() finds contact by name (case-insensitive exact match)",
+    "Updates only the specified fields using **kwargs",
+    "Only allows valid fields (name, phone, email) — ignores unknown fields",
+    "Returns True if found and updated, False if not found",
+    "Modifies the contact in-place in the list"
+  ],
+  "hints": [
+    "Use **updates to accept any keyword arguments: def update_contact(contact_list, contact_name, **updates)",
+    "Loop through the list to find the contact whose name matches contact_name (case-insensitive)",
+    "Filter updates to valid keys: valid = {k: v for k, v in updates.items() if k in ('name', 'phone', 'email')}",
+    "Use contact.update(valid) to apply the changes"
+  ]
+}

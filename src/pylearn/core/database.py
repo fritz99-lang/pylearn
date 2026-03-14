@@ -445,6 +445,22 @@ class Database:
             row = conn.execute("SELECT * FROM quiz_progress WHERE question_id = ?", (question_id,)).fetchone()
             return dict(row) if row else None
 
+    def get_wrong_quiz_answers(self, book_id: str) -> list[dict]:
+        """Get all quiz answers the user got wrong (most recent attempt).
+
+        Returns list of dicts with question_id, chapter_num, user_answer,
+        attempts, last_attempt_at — ordered by chapter then question.
+        """
+        with self._transaction() as conn:
+            rows = conn.execute(
+                """SELECT question_id, chapter_num, user_answer, attempts, last_attempt_at
+                   FROM quiz_progress
+                   WHERE book_id = ? AND correct = 0
+                   ORDER BY chapter_num, question_id""",
+                (book_id,),
+            ).fetchall()
+            return [dict(r) for r in rows]
+
     def reset_quiz_progress(self, question_ids: list[str]) -> None:
         """Delete quiz progress for the given question IDs."""
         with self._transaction() as conn:

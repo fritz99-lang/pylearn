@@ -1,0 +1,22 @@
+{
+  "step_id": "lp_proj_ch08",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 8,
+  "title": "Sort & Multi-field Search",
+  "description": "Add sorting and improved search to the contact manager. Create sort_contacts() that returns contacts sorted by a given field, and search_contacts() that searches across all fields (name, phone, email).",
+  "builds_on": "lp_proj_ch07",
+  "starter_code": "# Contact Manager — Step 5: Sort & Multi-field Search\n# Use list methods and dict operations for sorting and searching.\n\ncontacts = [\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@example.com'},\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n]\n\ndef sort_contacts(contact_list, field='name'):\n    \"\"\"Return a new list of contacts sorted by the given field.\n    Field can be 'name', 'phone', or 'email'. Case-insensitive for strings.\n    \"\"\"\n    # Your code here — use sorted() with a key function\n    return []\n\ndef search_contacts(contact_list, query):\n    \"\"\"Search all fields (name, phone, email) for the query string.\n    Case-insensitive. Returns list of matching contacts.\n    \"\"\"\n    # Your code here\n    return []\n\n# Test it\nprint(\"Sorted by name:\")\nfor c in sort_contacts(contacts):\n    print(f\"  {c['name']}\")\n\nprint(f\"\\nSearch for '555': {len(search_contacts(contacts, '555'))} results\")\nprint(f\"Search for 'alice': {len(search_contacts(contacts, 'alice'))} results\")\n",
+  "test_code": "test_contacts = [\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@example.com'},\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n]\nsorted_result = sort_contacts(test_contacts, 'name')\nassert isinstance(sorted_result, list), 'sort_contacts should return a list'\nassert len(sorted_result) == 3, 'sort_contacts should return all contacts'\nassert sorted_result[0]['name'] == 'Alice', f\"First sorted by name should be Alice, got {sorted_result[0]['name']}\"\nassert sorted_result[2]['name'] == 'Charlie', f\"Last sorted by name should be Charlie, got {sorted_result[2]['name']}\"\nassert test_contacts[0]['name'] == 'Charlie', 'sort_contacts should not modify the original list'\nsorted_phone = sort_contacts(test_contacts, 'phone')\nassert sorted_phone[0]['phone'] == '555-0001', 'Should sort by phone field when specified'\nresults = search_contacts(test_contacts, '555')\nassert len(results) == 3, f'Searching for 555 should match all 3, got {len(results)}'\nresults2 = search_contacts(test_contacts, 'alice')\nassert len(results2) == 1, f'Searching for alice should match 1, got {len(results2)}'\nresults3 = search_contacts(test_contacts, 'example.com')\nassert len(results3) == 3, f'Searching for example.com should match all 3, got {len(results3)}'\nresults4 = search_contacts(test_contacts, 'CHARLIE')\nassert len(results4) == 1, 'Search should be case-insensitive'\nresults5 = search_contacts(test_contacts, 'zzz')\nassert len(results5) == 0, 'Search for nonexistent should return empty list'",
+  "acceptance_criteria": [
+    "sort_contacts() returns a new sorted list without modifying original",
+    "Sorting works for any field: name, phone, email",
+    "search_contacts() matches across all fields (name, phone, email)",
+    "Search is case-insensitive",
+    "Returns empty list when no matches"
+  ],
+  "hints": [
+    "Use sorted(contact_list, key=lambda c: c[field].lower()) for case-insensitive sort",
+    "For multi-field search, check if query.lower() appears in any value of each contact dict",
+    "Loop through c.values() to check all fields: any(query.lower() in v.lower() for v in c.values())"
+  ]
+}

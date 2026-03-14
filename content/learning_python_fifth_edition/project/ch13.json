@@ -1,0 +1,23 @@
+{
+  "step_id": "lp_proj_ch13",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 13,
+  "title": "Interactive CLI Loop",
+  "description": "Bring the contact manager to life with a while loop that runs the menu system until the user chooses to quit. Create run_app() that combines the menu, input, and action handling in a continuous loop.",
+  "builds_on": "lp_proj_ch12",
+  "starter_code": "# Contact Manager — Step 9: Interactive CLI Loop\n# Use while loops and break to create the main application loop.\n\ncontacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@example.com'},\n]\n\ndef show_menu():\n    return \"\\n1. View all contacts\\n2. Search contacts\\n3. Add contact\\n4. Remove contact\\n5. Quit\\n\"\n\ndef display_contacts(contact_list):\n    for c in contact_list:\n        print(f\"  {c['name']} | {c['phone']} | {c['email']}\")\n\ndef find_contact(contact_list, search_name):\n    return [c for c in contact_list if search_name.lower() in c['name'].lower()]\n\ndef add_contact(contact_list, name, phone, email):\n    contact_list.append({'name': name, 'phone': phone, 'email': email})\n\ndef remove_contact(contact_list, name):\n    for c in contact_list:\n        if c['name'].lower() == name.lower():\n            contact_list.remove(c)\n            return True\n    return False\n\ndef run_app(contact_list, inputs=None):\n    \"\"\"Run the contact manager in a loop.\n    \n    If inputs is provided (a list of strings), use those instead of input().\n    This allows automated testing.\n    \n    Returns a list of action strings that were performed\n    (e.g., ['view', 'search', 'quit']).\n    \"\"\"\n    actions = []\n    input_index = 0\n    \n    def get_input(prompt=''):\n        nonlocal input_index\n        if inputs is not None:\n            if input_index < len(inputs):\n                val = inputs[input_index]\n                input_index += 1\n                return val\n            return '5'  # auto-quit if inputs exhausted\n        return input(prompt)\n    \n    # Your code here — while loop that:\n    # 1. Shows the menu\n    # 2. Gets user choice via get_input()\n    # 3. Handles the choice (view, search, add, remove, quit)\n    # 4. Appends the action name to the actions list\n    # 5. Breaks on quit\n    \n    return actions\n\n# Test it with simulated inputs: view contacts, then quit\nresult = run_app(contacts, inputs=['1', '5'])\nprint(f\"Actions performed: {result}\")\n",
+  "test_code": "actions = run_app(contacts, inputs=['5'])\nassert isinstance(actions, list), 'run_app should return a list'\nassert 'quit' in actions, f\"Choosing 5 should produce 'quit' action, got {actions}\"\nactions2 = run_app(contacts, inputs=['1', '5'])\nassert actions2[0] == 'view', f\"Choice 1 should produce 'view', got {actions2[0]}\"\nassert actions2[-1] == 'quit', 'Last action should be quit'\nassert len(actions2) == 2, f'Two inputs should produce 2 actions, got {len(actions2)}'\nactions3 = run_app(contacts, inputs=['1', '1', '1', '5'])\nassert len(actions3) == 4, f'Four inputs should produce 4 actions, got {len(actions3)}'\nassert all(a == 'view' for a in actions3[:-1]), 'First three actions should be view'\nactions4 = run_app(contacts, inputs=['9', '5'])\nassert actions4[0] == 'invalid', f\"Bad choice should produce 'invalid', got {actions4[0]}\"",
+  "acceptance_criteria": [
+    "run_app() loops continuously showing menu and handling choices",
+    "Loop breaks when user chooses '5' (quit)",
+    "Returns a list of action strings performed during the session",
+    "Handles invalid input gracefully (records 'invalid' and continues)",
+    "Uses while loop with break statement"
+  ],
+  "hints": [
+    "Use while True: as the main loop — break when choice is '5'",
+    "Call get_input() instead of input() so tests can provide simulated inputs",
+    "Map each choice to an action string and append it to the actions list",
+    "For now, just track actions — the actual operations (view, add, etc.) are already written"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "step_id": "lp_proj_ch07",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 7,
+  "title": "Format & Validate Contacts",
+  "description": "Use string methods to format contact display output and validate email addresses. Create format_contact() that returns a neatly aligned string, and validate_email() that checks for basic email structure.",
+  "builds_on": "lp_proj_ch05",
+  "starter_code": "# Contact Manager — Step 4: Format & Validate\n# Use string methods to produce clean output and validate data.\n\ncontacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@example.com'},\n]\n\ndef format_contact(contact):\n    \"\"\"Return a formatted string like: 'Alice          555-0001   alice@example.com'\n    Name should be left-justified in a 15-character field.\n    Phone should be left-justified in a 15-character field.\n    \"\"\"\n    # Your code here — use string ljust() or format()\n    return ''\n\ndef validate_email(email):\n    \"\"\"Return True if email contains exactly one '@' with text on both sides.\"\"\"\n    # Your code here\n    return False\n\n# Test it\nfor c in contacts:\n    print(format_contact(c))\n\nprint(f\"\\nValid: {validate_email('alice@example.com')}\")\nprint(f\"Invalid: {validate_email('not-an-email')}\")\n",
+  "test_code": "result = format_contact({'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'})\nassert isinstance(result, str), 'format_contact should return a string'\nassert 'Alice' in result, 'Formatted string should contain the name'\nassert '555-0001' in result, 'Formatted string should contain the phone'\nassert 'alice@example.com' in result, 'Formatted string should contain the email'\nr1 = format_contact({'name': 'Al', 'phone': '1', 'email': 'a@b'})\nr2 = format_contact({'name': 'Alexander', 'phone': '555-1234', 'email': 'alex@test.com'})\nassert r1.index('1') == r2.index('555-1234'), 'Phone column should start at the same position (name is padded)'\nassert validate_email('alice@example.com') is True, 'alice@example.com should be valid'\nassert validate_email('user@domain.org') is True, 'user@domain.org should be valid'\nassert validate_email('not-an-email') is False, 'no @ sign should be invalid'\nassert validate_email('@missing-name.com') is False, 'nothing before @ should be invalid'\nassert validate_email('missing-domain@') is False, 'nothing after @ should be invalid'\nassert validate_email('two@@ats.com') is False, 'two @ signs should be invalid'",
+  "acceptance_criteria": [
+    "format_contact() returns a string with name, phone, email",
+    "Output is fixed-width (aligned columns regardless of data length)",
+    "validate_email() returns True for valid emails (has @ with text on both sides)",
+    "validate_email() returns False for missing @, empty sides, or multiple @"
+  ],
+  "hints": [
+    "Use 'Alice'.ljust(15) to left-justify in a 15-char field",
+    "For validate_email: use email.count('@') == 1 to check for exactly one @",
+    "Then use email.split('@') and check both parts are non-empty"
+  ]
+}

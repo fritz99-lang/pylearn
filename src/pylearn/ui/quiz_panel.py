@@ -142,6 +142,49 @@ class QuizPanel(QWidget):
         self._update_score()
         return True
 
+    def load_review_quiz(self, book_id: str) -> bool:
+        """Load wrong answers from across all chapters for review.
+
+        Collects questions the user got wrong (most recent attempt),
+        resets their progress, and presents them as a review quiz.
+        Returns True if there are questions to review.
+        """
+        wrong = self._db.get_wrong_quiz_answers(book_id)
+        if not wrong:
+            return False
+
+        # Collect the actual QuizQuestion objects from content files
+        wrong_ids = {w["question_id"] for w in wrong}
+        wrong_chapters = {w["chapter_num"] for w in wrong}
+
+        review_questions: list[QuizQuestion] = []
+        for ch in sorted(wrong_chapters):
+            quiz = self._content.load_quiz(book_id, ch)
+            if quiz:
+                for q in quiz.questions:
+                    if q.question_id in wrong_ids:
+                        review_questions.append(q)
+
+        if not review_questions:
+            return False
+
+        # Reset progress on these questions so user can re-answer
+        self._db.reset_quiz_progress([q.question_id for q in review_questions])
+
+        # Build a synthetic QuizSet for the review session
+        self._quiz = QuizSet(
+            book_id=book_id,
+            chapter_num=0,  # Sentinel — mixed chapters
+            questions=review_questions,
+        )
+        self._current_index = 0
+        self._answered = False
+        self._title_label.setText(f"Review — {len(review_questions)} Missed Questions")
+        self._retry_btn.setVisible(False)
+        self._display_question()
+        self._score_label.setText(f"0/{len(review_questions)} answered")
+        return True
+
     def _show_empty_state(self) -> None:
         self._title_label.setText("No Quiz Available")
         self._progress_label.setText("")
@@ -296,10 +339,21 @@ class QuizPanel(QWidget):
     def _update_score(self) -> None:
         if not self._quiz:
             return
-        stats = self._db.get_quiz_stats(self._quiz.book_id, self._quiz.chapter_num)
         total_q = len(self._quiz.questions)
-        answered = stats["total"]
-        correct = stats["correct"]
+        if self._quiz.chapter_num == 0:
+            # Review mode: count from individual question lookups
+            answered = 0
+            correct = 0
+            for q in self._quiz.questions:
+                saved = self._db.get_quiz_answer(q.question_id)
+                if saved is not None:
+                    answered += 1
+                    if saved["correct"]:
+                        correct += 1
+        else:
+            stats = self._db.get_quiz_stats(self._quiz.book_id, self._quiz.chapter_num)
+            answered = stats["total"]
+            correct = stats["correct"]
         self._score_label.setText(f"Score: {correct}/{answered} correct ({answered}/{total_q} answered)")
 
     def _next_question(self) -> None:

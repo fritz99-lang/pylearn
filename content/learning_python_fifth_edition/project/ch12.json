@@ -1,0 +1,22 @@
+{
+  "step_id": "lp_proj_ch12",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 12,
+  "title": "Menu System",
+  "description": "Build a menu system for the contact manager. Create show_menu() that displays available actions, and handle_choice() that dispatches to the right function based on user input.",
+  "builds_on": "lp_proj_ch11",
+  "starter_code": "# Contact Manager — Step 8: Menu System\n# Use if/elif/else to build a command dispatcher.\n\ncontacts = [\n    {'name': 'Alice', 'phone': '555-0001', 'email': 'alice@example.com'},\n    {'name': 'Bob', 'phone': '555-0002', 'email': 'bob@example.com'},\n    {'name': 'Charlie', 'phone': '555-0003', 'email': 'charlie@example.com'},\n]\n\ndef show_menu():\n    \"\"\"Display the menu and return the text as a string.\n    Menu options:\n    1. View all contacts\n    2. Search contacts\n    3. Add contact\n    4. Remove contact\n    5. Quit\n    \"\"\"\n    # Your code here — build and return the menu string\n    return ''\n\ndef handle_choice(choice, contact_list):\n    \"\"\"Handle a menu choice. Returns a string describing what happened.\n    \n    '1' -> return 'view' (would display all contacts)\n    '2' -> return 'search' (would search contacts)\n    '3' -> return 'add' (would add a contact)\n    '4' -> return 'remove' (would remove a contact)\n    '5' -> return 'quit' (exit the program)\n    anything else -> return 'invalid'\n    \"\"\"\n    # Your code here — use if/elif/else\n    return 'invalid'\n\n# Test it\nprint(show_menu())\nprint(f\"Choice 1: {handle_choice('1', contacts)}\")\nprint(f\"Choice 5: {handle_choice('5', contacts)}\")\nprint(f\"Choice 9: {handle_choice('9', contacts)}\")\n",
+  "test_code": "menu = show_menu()\nassert isinstance(menu, str), 'show_menu should return a string'\nassert '1' in menu, 'Menu should contain option 1'\nassert '2' in menu, 'Menu should contain option 2'\nassert '3' in menu, 'Menu should contain option 3'\nassert '4' in menu, 'Menu should contain option 4'\nassert '5' in menu, 'Menu should contain option 5'\nassert handle_choice('1', contacts) == 'view', f\"Choice 1 should return 'view', got '{handle_choice('1', contacts)}'\"\nassert handle_choice('2', contacts) == 'search', f\"Choice 2 should return 'search', got '{handle_choice('2', contacts)}'\"\nassert handle_choice('3', contacts) == 'add', f\"Choice 3 should return 'add', got '{handle_choice('3', contacts)}'\"\nassert handle_choice('4', contacts) == 'remove', f\"Choice 4 should return 'remove', got '{handle_choice('4', contacts)}'\"\nassert handle_choice('5', contacts) == 'quit', f\"Choice 5 should return 'quit', got '{handle_choice('5', contacts)}'\"\nassert handle_choice('9', contacts) == 'invalid', f\"Invalid choice should return 'invalid', got '{handle_choice('9', contacts)}'\"\nassert handle_choice('', contacts) == 'invalid', 'Empty string should be invalid'\nassert handle_choice('abc', contacts) == 'invalid', 'Non-numeric should be invalid'",
+  "acceptance_criteria": [
+    "show_menu() returns a string containing all 5 options",
+    "handle_choice() returns correct action string for choices 1-5",
+    "handle_choice() returns 'invalid' for unrecognized input",
+    "Uses if/elif/else structure for dispatching"
+  ],
+  "hints": [
+    "Build the menu string with \\n between lines and return it",
+    "Use if choice == '1': ... elif choice == '2': ... etc.",
+    "The final else catches all invalid inputs",
+    "Compare choice as a string, not an integer — input() always returns strings"
+  ]
+}
