@@ -651,7 +651,7 @@ class TestProgressDialogContent:
         assert 0 in values
 
     def test_completion_labels_present(self, qtbot, seeded_db):
-        """Labels showing completed/total chapter counts should exist."""
+        """Labels showing chapter completion info should exist."""
         dialog = ProgressDialog(seeded_db)
         qtbot.addWidget(dialog)
 
@@ -660,10 +660,10 @@ class TestProgressDialogContent:
         labels = dialog.findChildren(QLabel)
         label_texts = [lbl.text() for lbl in labels]
 
-        # b1 has 1 completed out of 3
-        assert any("1 / 3" in t for t in label_texts)
-        # b2 has 0 completed out of 2
-        assert any("0 / 2" in t for t in label_texts)
+        # b1 has 1 completed, 1 in progress — shown in "Chapters: X done, Y in progress" format
+        assert any("1 done" in t for t in label_texts)
+        # b2 has 0 completed, 0 in progress
+        assert any("0 done" in t for t in label_texts)
 
     def test_in_progress_label_present(self, qtbot, seeded_db):
         """In Progress count should be shown."""
@@ -675,8 +675,8 @@ class TestProgressDialogContent:
         labels = dialog.findChildren(QLabel)
         label_texts = [lbl.text() for lbl in labels]
 
-        # b1 has 1 in_progress chapter
-        assert any("In Progress: 1" in t for t in label_texts)
+        # b1 has 1 in_progress chapter — shown in "Chapters: X done, Y in progress" format
+        assert any("1 in progress" in t for t in label_texts)
 
     def test_exercise_stats_shown(self, qtbot, seeded_db):
         """Exercise completion stats should be displayed for books with exercises."""

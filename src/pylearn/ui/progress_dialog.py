@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import (
     QDialog,
     QGridLayout,
@@ -15,6 +16,7 @@ from PyQt6.QtWidgets import (
 )
 
 from pylearn.core.database import Database
+from pylearn.utils.export import compute_overall_grade
 
 
 class ProgressDialog(QDialog):
@@ -43,33 +45,52 @@ class ProgressDialog(QDialog):
             group.setStyleSheet("QGroupBox { font-weight: bold; font-size: 13px; }")
             group_layout = QGridLayout(group)
 
-            # Progress bar
-            progress = QProgressBar()
-            progress.setMinimum(0)
-            progress.setMaximum(100)
-            progress.setValue(stats["percent"])
-            progress.setFormat(f"{stats['percent']}%")
-            progress.setMinimumHeight(25)
-            group_layout.addWidget(progress, 0, 0, 1, 2)
+            # Overall grade
+            grade_data = compute_overall_grade(self._db, book_id)
+            grade = grade_data["grade"]
+            label = grade_data["label"]
 
-            # Stats
+            grade_bar = QProgressBar()
+            grade_bar.setMinimum(0)
+            grade_bar.setMaximum(100)
+            grade_bar.setValue(grade)
+            grade_bar.setFormat(f"Overall: {grade}% ({label})")
+            grade_bar.setMinimumHeight(28)
+            grade_bar.setStyleSheet(self._grade_bar_style(grade))
+            group_layout.addWidget(grade_bar, 0, 0, 1, 2)
+
+            # Breakdown
+            breakdown = grade_data["breakdown"]
+            row = 1
+            for cat, info in breakdown.items():
+                cat_label = _CATEGORY_LABELS.get(cat, cat.title())
+                text = f"{cat_label}: {info['numerator']}/{info['denominator']} ({info['score']}%)"
+                group_layout.addWidget(QLabel(text), row, 0)
+                weight_label = QLabel(f"{info['weight']}% of grade")
+                weight_label.setAlignment(Qt.AlignmentFlag.AlignRight)
+                weight_label.setStyleSheet("color: gray; font-size: 11px;")
+                group_layout.addWidget(weight_label, row, 1)
+                row += 1
+
+            # Reading detail
             group_layout.addWidget(
-                QLabel(f"Completed: {stats['completed']} / {stats['total']} chapters"),
-                1,
+                QLabel(
+                    f"Chapters: {stats['completed']} done, {stats['in_progress']} in progress, "
+                    f"{stats['not_started']} not started"
+                ),
+                row,
                 0,
-            )
-            group_layout.addWidget(
-                QLabel(f"In Progress: {stats['in_progress']}"),
                 1,
-                1,
+                2,
             )
+            row += 1
 
             # Exercise stats
             completed_ex, total_ex = self._db.get_exercise_completion_count(book_id)
             if total_ex:
                 group_layout.addWidget(
                     QLabel(f"Exercises: {completed_ex} / {total_ex} completed"),
-                    2,
+                    row,
                     0,
                     1,
                     2,
@@ -89,3 +110,27 @@ class ProgressDialog(QDialog):
         close_btn.clicked.connect(self.close)
         close_layout.addWidget(close_btn)
         layout.addLayout(close_layout)
+
+    @staticmethod
+    def _grade_bar_style(grade: int) -> str:
+        """Return a QSS snippet that colors the progress bar by grade."""
+        if grade >= 90:
+            color = "#27ae60"  # green
+        elif grade >= 70:
+            color = "#2980b9"  # blue
+        elif grade >= 50:
+            color = "#f39c12"  # orange
+        else:
+            color = "#c0392b"  # red
+        return (
+            f"QProgressBar::chunk {{ background-color: {color}; border-radius: 3px; }}"
+            f"QProgressBar {{ text-align: center; font-weight: bold; }}"
+        )
+
+
+_CATEGORY_LABELS = {
+    "reading": "Reading",
+    "quizzes": "Quizzes",
+    "challenges": "Challenges",
+    "project": "Project",
+}

@@ -32,7 +32,7 @@ An interactive desktop app for learning programming from PDF books. Split-pane i
 - **Code Editor** — QScintilla-powered editor with syntax highlighting, line numbers, auto-indent, and configurable font/tab settings
 - **Code Execution** — Run Python code directly from the editor with output displayed in an integrated console (30s timeout, sandboxed subprocess)
 - **Table of Contents** — Auto-generated chapter navigation from PDF structure
-- **Progress Tracking** — SQLite database tracks chapter completion status, bookmarks, and notes per book
+- **Progress Tracking** — SQLite database tracks chapter completion status, bookmarks, and notes per book. Overall 0-100% grade combines reading, quiz, challenge, and project scores
 - **Bookmarks & Notes** — Save bookmarks and attach notes to any page
 - **Multiple Book Profiles** — Supports Python, C++, and HTML/CSS books with per-book font classification profiles
 - **Themes** — Light, dark, and sepia themes for the reader panel
@@ -208,7 +208,7 @@ Config files are JSON. For git-clone installs they live in `config/` inside the 
 ## Development
 
 ```bash
-# Run all tests (749 tests)
+# Run all tests (1136 tests)
 pytest tests/ -v
 
 # Skip slow tests
@@ -239,7 +239,7 @@ src/pylearn/
   utils/        Text utilities, error handling
 config/         User-specific JSON config (not committed; see *.json.example)
 data/           SQLite database + parsed PDF cache (not committed)
-tests/          749 tests (500+ unit + 150+ integration)
+tests/          1136 tests (800+ unit + 330+ integration)
 scripts/        Utility scripts for PDF analysis, book parsing, and builds
 ```
 

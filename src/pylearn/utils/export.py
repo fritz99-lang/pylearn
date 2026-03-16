@@ -267,3 +267,106 @@ def _score_emoji(pct: int) -> str:
     if pct >= 60:
         return "Good"
     return "Needs Review"
+
+
+# ---------------------------------------------------------------------------
+# Overall Grade
+# ---------------------------------------------------------------------------
+
+# Default category weights (must sum to 1.0)
+_WEIGHTS = {
+    "reading": 0.40,
+    "quizzes": 0.30,
+    "challenges": 0.15,
+    "project": 0.15,
+}
+
+
+def compute_overall_grade(db: Database, book_id: str) -> dict:
+    """Compute a 0-100 overall grade for a book.
+
+    Categories and their weights (when all present):
+        Reading   (40%) — chapters completed / total chapters
+        Quizzes   (30%) — correct answers / total answered
+        Challenges(15%) — challenges passed / total attempted
+        Project   (15%) — steps completed / total attempted
+
+    Categories with no data are excluded and their weight is
+    redistributed proportionally among the remaining categories.
+
+    Returns a dict with keys:
+        grade       — int 0-100
+        breakdown   — dict of {category: {score, weight, numerator, denominator}}
+        label       — human-readable label (e.g., "Great")
+    """
+    scores: dict[str, tuple[int, int]] = {}  # category → (numerator, denominator)
+
+    # Reading — always has data if the book has chapters
+    stats = db.get_completion_stats(book_id)
+    if stats["total"] > 0:
+        scores["reading"] = (stats["completed"], stats["total"])
+
+    # Quizzes — only if the user has answered at least one question
+    quiz = db.get_quiz_stats(book_id)
+    if quiz["total"] > 0:
+        scores["quizzes"] = (quiz["correct"], quiz["total"])
+
+    # Challenges
+    ch = db.get_challenge_stats(book_id)
+    if ch["total"] > 0:
+        scores["challenges"] = (ch["passed"], ch["total"])
+
+    # Project
+    proj = db.get_project_stats(book_id)
+    if proj["total"] > 0:
+        scores["project"] = (proj["completed"], proj["total"])
+
+    # Redistribute weights
+    active_weight = sum(_WEIGHTS[k] for k in scores)
+
+    breakdown: dict[str, dict] = {}
+    weighted_sum = 0.0
+
+    for cat, (num, den) in scores.items():
+        pct = num / den * 100 if den > 0 else 0.0
+        w = _WEIGHTS[cat] / active_weight if active_weight > 0 else 0.0
+        weighted_sum += pct * w
+        breakdown[cat] = {
+            "score": round(pct),
+            "weight": round(w * 100),
+            "numerator": num,
+            "denominator": den,
+        }
+
+    grade = round(weighted_sum) if scores else 0
+
+    return {
+        "grade": grade,
+        "breakdown": breakdown,
+        "label": _grade_label(grade),
+    }
+
+
+def _grade_label(grade: int) -> str:
+    """Return a human-readable label for a grade."""
+    if grade >= 97:
+        return "A+"
+    if grade >= 93:
+        return "A"
+    if grade >= 90:
+        return "A-"
+    if grade >= 87:
+        return "B+"
+    if grade >= 83:
+        return "B"
+    if grade >= 80:
+        return "B-"
+    if grade >= 77:
+        return "C+"
+    if grade >= 73:
+        return "C"
+    if grade >= 70:
+        return "C-"
+    if grade >= 60:
+        return "D"
+    return "F"
