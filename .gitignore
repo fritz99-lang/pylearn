@@ -39,6 +39,9 @@ docs/CODE_PATTERNS.md
 .coverage.*
 htmlcov/
 
+# Content generation drafts (staging area, not committed)
+drafts/
+
 # Misc
 .claude/
 src/data/
