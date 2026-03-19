@@ -1,0 +1,21 @@
+{
+  "step_id": "lp_adv_ch02",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 2,
+  "title": "The Game World — Data Structures",
+  "description": "Start building your text adventure by defining the game world. Create a 'rooms' dictionary that maps room names to their descriptions (at least 3 rooms). Create an 'items' list with the names of items found in the world. Create a 'player' dictionary with 'name', 'health', and 'inventory' keys.",
+  "builds_on": "",
+  "starter_code": "# Text Adventure — Step 1: The Game World\n# Define the data structures for your game world.\n\n# rooms: a dict mapping room name (str) to description (str)\n# Include at least 3 rooms.\nrooms = {\n    # e.g. 'entrance': 'You stand at the entrance of a dark cave.',\n}\n\n# items: a list of item name strings found in the world\nitems = [\n    # e.g. 'torch', 'sword', 'key'\n]\n\n# player: a dict with 'name' (str), 'health' (int), and 'inventory' (list)\nplayer = {\n    # Your player here\n}\n\n# Print the game world\nprint(f\"World has {len(rooms)} rooms\")\nprint(f\"Items available: {items}\")\nprint(f\"Player: {player['name']} (HP: {player['health']})\")\n",
+  "test_code": "assert isinstance(rooms, dict), 'rooms should be a dictionary'\nassert len(rooms) >= 3, f'Need at least 3 rooms, got {len(rooms)}'\nassert all(isinstance(k, str) and isinstance(v, str) for k, v in rooms.items()), 'Room keys and values should be strings'\nassert isinstance(items, list), 'items should be a list'\nassert len(items) >= 1, 'items should have at least 1 item'\nassert isinstance(player, dict), 'player should be a dictionary'\nassert 'name' in player, \"player needs a 'name' key\"\nassert 'health' in player, \"player needs a 'health' key\"\nassert 'inventory' in player, \"player needs an 'inventory' key\"\nassert isinstance(player['name'], str), \"player['name'] should be a string\"\nassert isinstance(player['health'], (int, float)), \"player['health'] should be a number\"\nassert isinstance(player['inventory'], list), \"player['inventory'] should be a list\"",
+  "acceptance_criteria": [
+    "rooms is a dict with at least 3 room name/description pairs",
+    "items is a list of item names",
+    "player is a dict with 'name', 'health', and 'inventory' keys",
+    "player['inventory'] is a list"
+  ],
+  "hints": [
+    "A room entry looks like: 'cave': 'A dark cave with dripping water.'",
+    "The player dict might look like: {'name': 'Hero', 'health': 100, 'inventory': []}",
+    "You can start with an empty inventory list — items will be added later"
+  ]
+}

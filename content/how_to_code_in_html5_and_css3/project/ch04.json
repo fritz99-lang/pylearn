@@ -1,0 +1,24 @@
+{
+  "step_id": "hc_proj_ch04",
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 4,
+  "title": "First Recipe \u2014 Content",
+  "description": "Add your first recipe inside the main element. Include an h2 for the recipe title, a paragraph describing the dish, an h3 'Ingredients' heading with an unordered list, an h3 'Instructions' heading with an ordered list, and an img element with an alt attribute for a photo of the dish.",
+  "builds_on": "hc_proj_ch03",
+  "starter_code": "# Recipe Collection Website \u2014 Step 3: First Recipe Content\n# Add a recipe with h2 title, description, ingredients (ul), instructions (ol), and image.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>My Recipes</title>\n</head>\n<body>\n    <header>\n        <h1>My Recipe Collection</h1>\n    </header>\n\n    <main>\n        <p>Welcome to my favorite recipes!</p>\n\n        <!-- Add an h2 for the recipe name -->\n\n        <!-- Add a paragraph describing the dish -->\n\n        <!-- Add h3 \"Ingredients\" with a <ul> list -->\n\n        <!-- Add h3 \"Instructions\" with an <ol> list -->\n\n        <!-- Add an <img> with src and alt attributes -->\n\n    </main>\n\n    <footer>\n        <p>&copy; 2026 My Recipe Collection</p>\n    </footer>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<header>' in html.lower() and '<main>' in html.lower() and '<footer>' in html.lower(), 'Must keep semantic structure from previous step'\nassert '<h2>' in html.lower() and '</h2>' in html.lower(), 'Must include an <h2> for the recipe title'\nassert '<h3>' in html.lower() and '</h3>' in html.lower(), 'Must include <h3> headings for Ingredients and Instructions'\nassert html.lower().count('<h3>') >= 2, 'Must have at least 2 <h3> headings (Ingredients and Instructions)'\nassert '<ul>' in html.lower() and '</ul>' in html.lower(), 'Must include a <ul> for ingredients'\nassert '<ol>' in html.lower() and '</ol>' in html.lower(), 'Must include an <ol> for instructions'\nassert '<li>' in html.lower() and '</li>' in html.lower(), 'Must include <li> items in your lists'\nassert html.lower().count('<li>') >= 3, 'Must have at least 3 list items total'\nassert '<img' in html.lower(), 'Must include an <img> element'\nassert 'alt=' in html.lower(), 'The <img> must have an alt attribute for accessibility'",
+  "acceptance_criteria": [
+    "An h2 heading names the recipe",
+    "A paragraph describes the dish",
+    "An h3 'Ingredients' heading precedes an unordered list",
+    "An h3 'Instructions' heading precedes an ordered list",
+    "An img element with alt attribute shows the dish",
+    "Semantic structure (header, main, footer) is preserved"
+  ],
+  "hints": [
+    "Recipe title: <h2>Classic Pancakes</h2>",
+    "Ingredients list: <ul><li>2 cups flour</li><li>2 eggs</li></ul>",
+    "Ordered steps: <ol><li>Mix dry ingredients</li><li>Add wet ingredients</li></ol>",
+    "Image with alt: <img src=\"pancakes.jpg\" alt=\"A stack of golden pancakes\">"
+  ]
+}

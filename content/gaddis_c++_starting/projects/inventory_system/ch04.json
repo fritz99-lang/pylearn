@@ -1,0 +1,23 @@
+{
+  "step_id": "cpp_inv_ch04",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 4,
+  "title": "Input Validation \u2014 Decisions",
+  "description": "Add input validation to your inventory program using if/else statements. Validate that price is greater than 0 and quantity is >= 0, printing error messages for invalid input. Add a switch statement to handle the menu choice (1-6), with a default case for invalid choices. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_inv_ch03",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    cout << \"===== Inventory Management System =====\" << endl;\n    cout << \"1. Add Product\" << endl;\n    cout << \"2. View Products\" << endl;\n    cout << \"3. Search Product\" << endl;\n    cout << \"4. Sort Products\" << endl;\n    cout << \"5. Save to File\" << endl;\n    cout << \"6. Exit\" << endl;\n\n    int choice;\n    cout << \"Enter your choice: \";\n    cin >> choice;\n\n    // Use a switch statement to handle menu choices\n\n    // For Add Product: read name, price, quantity\n    // Validate price > 0 and quantity >= 0 using if/else\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'if' in cpp, 'Use if statements for input validation'\nassert 'else' in cpp, 'Use else to handle invalid input cases'\nassert 'switch' in cpp, 'Use a switch statement to handle menu choices'\nassert 'case' in cpp, 'Switch statement needs case labels for each menu option'\nassert 'default' in cpp, 'Include a default case for invalid menu choices'\nassert 'price' in cpp.lower(), 'Validate the price value'\nassert 'quantity' in cpp.lower() or 'qty' in cpp.lower(), 'Validate the quantity value'\nassert '> 0' in cpp or '>0' in cpp or '<= 0' in cpp or '<=0' in cpp or '< 0' in cpp or '<0' in cpp, 'Check that price is positive (> 0 or handle <= 0)'",
+  "acceptance_criteria": [
+    "Uses switch statement to handle menu choices 1-6",
+    "Includes a default case for invalid menu choices",
+    "Validates price > 0 using if/else",
+    "Validates quantity >= 0 using if/else",
+    "Prints appropriate error messages for invalid input"
+  ],
+  "hints": [
+    "A switch statement is ideal for menu selection: switch(choice) { case 1: ... break; }",
+    "Don't forget the break statement after each case",
+    "Use if (price <= 0) to catch zero and negative prices",
+    "The default case handles any choice not matching 1-6"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 2,
+  "challenges": [
+    {
+      "id": "pp_ch02_c01",
+      "title": "Dict-Based Record Display",
+      "description": "Create a dictionary called 'record' with keys 'name', 'age', and 'job' set to 'Alice', 30, and 'Engineer' respectively. Then write a function called 'display_record' that takes a record dict and returns a formatted string like 'Alice, age 30, Engineer'.",
+      "starter_code": "# Create a record dict with name, age, and job\nrecord = {}\n\ndef display_record(rec):\n    \"\"\"Return a formatted string: 'name, age N, job'\"\"\"\n    pass\n",
+      "test_code": "assert record == {'name': 'Alice', 'age': 30, 'job': 'Engineer'}\nassert display_record({'name': 'Alice', 'age': 30, 'job': 'Engineer'}) == 'Alice, age 30, Engineer'\nassert display_record({'name': 'Bob', 'age': 25, 'job': 'Designer'}) == 'Bob, age 25, Designer'\nassert display_record({'name': 'Carol', 'age': 45, 'job': 'Manager'}) == 'Carol, age 45, Manager'",
+      "difficulty": "easy",
+      "concepts_new": ["dict_records", "string_formatting"],
+      "concepts_review": ["dictionaries", "functions"],
+      "hints": [
+        "Use curly braces to build the dict: {'name': 'Alice', 'age': 30, 'job': 'Engineer'}",
+        "Use an f-string: f\"{rec['name']}, age {rec['age']}, {rec['job']}\""
+      ]
+    },
+    {
+      "id": "pp_ch02_c02",
+      "title": "Record Database Search",
+      "description": "Create a list called 'database' containing three record dicts: Alice/30/Engineer, Bob/25/Designer, Carol/45/Manager. Then write a function 'search_by_field' that takes the database list, a field name, and a value, and returns a list of all records where that field matches the value.",
+      "starter_code": "# Create a list of 3 record dicts (name, age, job)\ndatabase = []\n\ndef search_by_field(db, field, value):\n    \"\"\"Return list of records where record[field] == value.\"\"\"\n    pass\n",
+      "test_code": "assert len(database) == 3\nassert database[0]['name'] == 'Alice'\nassert database[1]['name'] == 'Bob'\nassert database[2]['name'] == 'Carol'\nassert search_by_field(database, 'name', 'Alice') == [{'name': 'Alice', 'age': 30, 'job': 'Engineer'}]\nassert search_by_field(database, 'job', 'Designer') == [{'name': 'Bob', 'age': 25, 'job': 'Designer'}]\nassert search_by_field(database, 'age', 99) == []\nassert search_by_field(database, 'job', 'Engineer') == [{'name': 'Alice', 'age': 30, 'job': 'Engineer'}]",
+      "difficulty": "medium",
+      "concepts_new": ["record_databases", "field_search"],
+      "concepts_review": ["list_comprehensions", "dictionaries", "filtering"],
+      "hints": [
+        "Build the database as a list of dicts: [{'name': 'Alice', ...}, ...]",
+        "Use a list comprehension: [rec for rec in db if rec[field] == value]"
+      ]
+    }
+  ]
+}

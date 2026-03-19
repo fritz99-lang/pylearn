@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 14,
+  "questions": [
+    {
+      "id": "pp_ch14_q01",
+      "type": "multiple_choice",
+      "question": "Which Python standard library module provides a high-level interface for uploading and downloading files via the FTP protocol?",
+      "choices": [
+        "urllib.request",
+        "ftplib",
+        "socket",
+        "http.client"
+      ],
+      "correct": 1,
+      "explanation": "The ftplib module provides the FTP class for connecting to FTP servers, logging in, navigating directories, and transferring files. It handles the FTP protocol details (control and data connections) behind a simple Python API.",
+      "concepts": ["ftplib", "FTP"]
+    },
+    {
+      "id": "pp_ch14_q02",
+      "type": "multiple_choice",
+      "question": "When sending email programmatically in Python, which module provides the SMTP client class for connecting to a mail server and transmitting messages?",
+      "choices": [
+        "email",
+        "poplib",
+        "smtplib",
+        "imaplib"
+      ],
+      "correct": 2,
+      "explanation": "smtplib provides the SMTP class which connects to an SMTP server and sends email using the sendmail() method. The email module is used to construct/parse message objects, while poplib and imaplib are for receiving email.",
+      "concepts": ["smtplib", "SMTP"]
+    },
+    {
+      "id": "pp_ch14_q03",
+      "type": "multiple_choice",
+      "question": "What does the email.message module's EmailMessage class (or older Message class) primarily help you do?",
+      "choices": [
+        "Connect to a POP3 server and download messages",
+        "Construct, parse, and manipulate email messages including headers, body text, and MIME attachments",
+        "Send email directly without needing smtplib",
+        "Encrypt email messages for secure transmission"
+      ],
+      "correct": 1,
+      "explanation": "The email package provides tools for constructing and parsing email messages in MIME format. It handles headers, text bodies, HTML content, and file attachments. You build the message with the email module and then hand it to smtplib for actual sending.",
+      "concepts": ["email module", "MIME"]
+    },
+    {
+      "id": "pp_ch14_q04",
+      "type": "multiple_choice",
+      "question": "Which module and function would you use to fetch a web page or download a file from an HTTP URL in the Python standard library?",
+      "choices": [
+        "http.server.HTTPServer()",
+        "urllib.request.urlopen()",
+        "socket.create_connection()",
+        "ftplib.FTP.retrbinary()"
+      ],
+      "correct": 1,
+      "explanation": "urllib.request.urlopen(url) opens a URL (HTTP, HTTPS, FTP) and returns a response object that you can read() to get the content. It handles HTTP protocol details, redirects, and can be customized with Request objects for headers and POST data.",
+      "concepts": ["urllib", "HTTP"]
+    },
+    {
+      "id": "pp_ch14_q05",
+      "type": "fill_in_blank",
+      "question": "To retrieve email from a mail server using the older mailbox-download protocol, you use the ______ module which implements the POP3 protocol.",
+      "correct": "poplib",
+      "explanation": "poplib provides the POP3 class for connecting to a POP3 mail server, authenticating, listing messages, and retrieving (or deleting) them. POP3 typically downloads messages and removes them from the server, unlike IMAP which supports server-side management.",
+      "concepts": ["poplib", "POP3"]
+    },
+    {
+      "id": "pp_ch14_q06",
+      "type": "fill_in_blank",
+      "question": "MIME stands for Multipurpose Internet Mail ______, and it is the standard that allows email messages to carry attachments, HTML, and non-ASCII text.",
+      "correct": "Extensions",
+      "explanation": "MIME (Multipurpose Internet Mail Extensions) extends the basic text-only email format to support attachments, character encodings, multipart messages, and content types like text/html and image/png. Python's email package handles MIME encoding and decoding.",
+      "concepts": ["MIME"]
+    }
+  ]
+}

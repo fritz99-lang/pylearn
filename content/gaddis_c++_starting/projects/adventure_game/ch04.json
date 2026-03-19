@@ -1,0 +1,23 @@
+{
+  "step_id": "cpp_adv_ch04",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 4,
+  "title": "Room Choices — Branching Paths",
+  "description": "Add decision-making to the game. After displaying the starting room, let the player choose a direction (north, south, east). Use if/else statements to describe what happens in each direction. Add a switch statement to handle actions in the new room (1=Explore, 2=Rest, 3=Go back). Each choice should have a different outcome (e.g., finding gold, losing health, discovering an item). Include at least 3 case labels in your switch. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_adv_ch03",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    cout << \"===== TEXT ADVENTURE GAME =====\" << endl;\n\n    // Player creation (from previous step)\n    string playerName;\n    cout << \"Enter your name: \";\n    getline(cin, playerName);\n\n    int health = 100;\n    int gold = 50;\n    int attackPower = 15;\n\n    // Starting room\n    cout << endl;\n    cout << \"You are standing in a dark forest clearing.\" << endl;\n    cout << \"Paths lead to the north, south, and east.\" << endl;\n    cout << endl;\n\n    // Ask player to choose a direction\n    string direction;\n    cout << \"Which way do you go? (north/south/east): \";\n    cin >> direction;\n\n    // Use if/else to handle direction choices\n    // Each direction leads to a different room with a different description\n\n    // In the new room, use switch for actions\n    // 1=Explore, 2=Rest, 3=Go back\n\n    // Display updated stats\n    cout << endl;\n    cout << playerName << \" - Health: \" << health;\n    cout << \" | Gold: \" << gold;\n    cout << \" | Attack: \" << attackPower << endl;\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'if' in cpp, 'Use if statements to handle direction choices'\nassert 'else' in cpp, 'Use else to handle alternative directions'\nassert 'switch' in cpp, 'Use a switch statement for room actions'\nassert cpp.count('case') >= 3, 'Include at least 3 case labels in the switch statement'\nimport re\nif_else_count = len(re.findall(r'\\bif\\b', cpp)) + len(re.findall(r'\\belse\\b', cpp))\nassert if_else_count >= 3, 'Use at least 3 if/else branches for direction handling'",
+  "acceptance_criteria": [
+    "Player can choose a direction (north/south/east)",
+    "if/else statements handle each direction with unique room descriptions",
+    "A switch statement handles at least 3 actions in the new room",
+    "Choices affect player stats (health, gold, etc.)",
+    "Updated stats are displayed after choices"
+  ],
+  "hints": [
+    "Compare direction with ==: if (direction == \"north\") { ... }",
+    "Use switch(action) with case 1:, case 2:, case 3: and don't forget break;",
+    "Exploring might add gold (gold += 10), resting might restore health (health += 20)",
+    "Add a default: case to handle invalid input"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 20,
+  "challenges": [
+    {
+      "id": "css_ch20_c01",
+      "title": "Pixels, Ems, and Percentages",
+      "description": "Write three CSS rules: (1) target `h1` and set `font-size` to `24px`, (2) target `p` and set `font-size` to `1.2em`, (3) target `.container` and set `width` to `80%`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* h1 with px */\n\n/* p with em */\n\n/* .container with % */\n\n\"\"\"",
+      "test_code": "assert 'h1' in css.lower(), 'Should target h1'\nassert 'p' in css.lower(), 'Should target p'\nassert '.container' in css, 'Should target .container'\nassert 'px' in css.lower(), 'Should use px units'\nassert 'em' in css.lower(), 'Should use em units'\nassert '%' in css, 'Should use percentage units'\nassert 'font-size' in css.lower(), 'Should set font-size'\nassert 'width' in css.lower(), 'Should set width'",
+      "difficulty": "easy",
+      "concepts_new": ["px-units", "em-units", "percent-units"],
+      "concepts_review": ["css-rules", "font-size"],
+      "hints": [
+        "px is an absolute unit, em is relative to the parent font size, % is relative to the parent dimension.",
+        "Example: `font-size: 1.2em;` makes text 1.2 times the parent's font size."
+      ]
+    },
+    {
+      "id": "css_ch20_c02",
+      "title": "Rem, Viewport Units, and Calc",
+      "description": "Write three CSS rules: (1) target `body` and set `font-size` to `1rem`, (2) target `.hero` and set `height` to `100vh` and `width` to `100vw`, (3) target `.sidebar` and set `width` using `calc()` that combines a percentage and pixels (e.g. `calc(100% - 250px)`). Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* body with rem */\n\n/* .hero with viewport units */\n\n/* .sidebar with calc() */\n\n\"\"\"",
+      "test_code": "assert 'body' in css.lower(), 'Should target body'\nassert '.hero' in css, 'Should target .hero'\nassert '.sidebar' in css, 'Should target .sidebar'\nassert 'rem' in css.lower(), 'Should use rem units'\nassert 'vh' in css.lower(), 'Should use vh (viewport height) units'\nassert 'vw' in css.lower(), 'Should use vw (viewport width) units'\nassert 'calc(' in css.lower(), 'Should use calc() function'\nassert 'width' in css.lower(), 'Should set width'\nassert 'height' in css.lower(), 'Should set height'",
+      "difficulty": "medium",
+      "concepts_new": ["rem-units", "viewport-units", "calc-function"],
+      "concepts_review": ["px-units", "em-units", "percent-units"],
+      "hints": [
+        "rem is relative to the root (html) font size, unlike em which is relative to the parent.",
+        "Viewport units: 100vh = full viewport height, 100vw = full viewport width. calc() lets you mix units: `calc(100% - 250px)`."
+      ]
+    }
+  ]
+}

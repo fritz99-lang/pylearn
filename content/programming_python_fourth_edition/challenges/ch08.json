@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 8,
+  "challenges": [
+    {
+      "id": "pp_ch08_c01",
+      "title": "Widget Registry",
+      "description": "Create a dictionary called 'widgets' that maps four tkinter widget names to their descriptions: 'Label' -> 'Displays text or images', 'Button' -> 'Clickable action trigger', 'Entry' -> 'Single-line text input', 'Frame' -> 'Container for organizing widgets'. Then write a function 'get_widget_info' that takes a widget name and returns its description, or 'Unknown widget' if the name is not found.",
+      "starter_code": "# Create widgets dict mapping names to descriptions\nwidgets = {}\n\ndef get_widget_info(name):\n    \"\"\"Return description for widget name, or 'Unknown widget'.\"\"\"\n    pass\n",
+      "test_code": "assert len(widgets) == 4\nassert widgets['Label'] == 'Displays text or images'\nassert widgets['Button'] == 'Clickable action trigger'\nassert widgets['Entry'] == 'Single-line text input'\nassert widgets['Frame'] == 'Container for organizing widgets'\nassert get_widget_info('Label') == 'Displays text or images'\nassert get_widget_info('Button') == 'Clickable action trigger'\nassert get_widget_info('Spinner') == 'Unknown widget'\nassert get_widget_info('') == 'Unknown widget'",
+      "difficulty": "easy",
+      "concepts_new": ["widget_concepts", "gui_vocabulary"],
+      "concepts_review": ["dictionaries", "dict_get"],
+      "hints": [
+        "Build the dict with the exact key-value pairs specified in the description.",
+        "Use widgets.get(name, 'Unknown widget') for safe lookup with a default."
+      ]
+    },
+    {
+      "id": "pp_ch08_c02",
+      "title": "Form Data Validator",
+      "description": "Write a function called 'validate_form' that takes a dictionary with keys 'name', 'age', and 'email'. It should return a dictionary with key 'valid' (bool) and 'errors' (list of error strings). Validation rules: name must be a non-empty string (after stripping), age must be convertible to an integer between 0 and 150, email must contain exactly one '@' with non-empty parts on both sides. If all valid, errors list is empty.",
+      "starter_code": "def validate_form(data):\n    \"\"\"Validate form data dict with name, age, email fields.\n    \n    Returns dict with 'valid' (bool) and 'errors' (list of str).\n    \"\"\"\n    pass\n",
+      "test_code": "# Valid form\nresult = validate_form({'name': 'Alice', 'age': '30', 'email': 'alice@example.com'})\nassert result['valid'] == True\nassert result['errors'] == []\n\n# Empty name\nresult2 = validate_form({'name': '  ', 'age': '25', 'email': 'a@b.com'})\nassert result2['valid'] == False\nassert any('name' in e.lower() for e in result2['errors'])\n\n# Bad age\nresult3 = validate_form({'name': 'Bob', 'age': 'abc', 'email': 'b@c.com'})\nassert result3['valid'] == False\nassert any('age' in e.lower() for e in result3['errors'])\n\n# Age out of range\nresult4 = validate_form({'name': 'Carol', 'age': '200', 'email': 'c@d.com'})\nassert result4['valid'] == False\n\n# Bad email - no @\nresult5 = validate_form({'name': 'Dave', 'age': '40', 'email': 'nodomain'})\nassert result5['valid'] == False\nassert any('email' in e.lower() for e in result5['errors'])\n\n# Bad email - empty parts\nresult6 = validate_form({'name': 'Eve', 'age': '35', 'email': '@b.com'})\nassert result6['valid'] == False\n\n# Multiple errors\nresult7 = validate_form({'name': '', 'age': 'xyz', 'email': 'bad'})\nassert result7['valid'] == False\nassert len(result7['errors']) == 3",
+      "difficulty": "medium",
+      "concepts_new": ["form_validation", "multi_field_validation"],
+      "concepts_review": ["string_methods", "type_conversion", "error_collection"],
+      "hints": [
+        "Build an errors list. Check each field and append an error message if invalid. Set valid to len(errors) == 0.",
+        "For age: use try/except around int(data['age']) to catch non-numeric. For email: use split('@') and check len(parts)==2 with both parts non-empty."
+      ]
+    }
+  ]
+}

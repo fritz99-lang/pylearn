@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 31,
+  "questions": [
+    {
+      "id": "css_ch31_q01",
+      "type": "multiple_choice",
+      "question": "Which `cursor` value displays a hand icon, typically used for clickable elements?",
+      "choices": [
+        "hand",
+        "pointer",
+        "click",
+        "link"
+      ],
+      "correct": 1,
+      "explanation": "The `cursor: pointer` value displays a pointing hand icon, indicating that an element is clickable. This is the standard cursor shown over hyperlinks.",
+      "concepts": ["cursor", "pointer"]
+    },
+    {
+      "id": "css_ch31_q02",
+      "type": "multiple_choice",
+      "question": "How do you set a custom image as the cursor in CSS?",
+      "choices": [
+        "cursor: image('cursor.png')",
+        "cursor: url('cursor.png'), auto",
+        "cursor: custom('cursor.png')",
+        "cursor: src('cursor.png')"
+      ],
+      "correct": 1,
+      "explanation": "Custom cursors are set using the `url()` function followed by a fallback keyword such as `auto`. The fallback is required in case the image fails to load.",
+      "concepts": ["cursor", "custom-cursor"]
+    },
+    {
+      "id": "css_ch31_q03",
+      "type": "multiple_choice",
+      "question": "Which `cursor` value indicates that the requested action is not allowed?",
+      "choices": [
+        "no-drop",
+        "forbidden",
+        "not-allowed",
+        "disabled"
+      ],
+      "correct": 2,
+      "explanation": "The `cursor: not-allowed` value displays a circle with a line through it (prohibition sign), indicating that the action the user is attempting is not permitted.",
+      "concepts": ["cursor", "not-allowed"]
+    },
+    {
+      "id": "css_ch31_q04",
+      "type": "multiple_choice",
+      "question": "Which `cursor` value is typically displayed when hovering over editable text?",
+      "choices": [
+        "edit",
+        "text",
+        "input",
+        "caret"
+      ],
+      "correct": 1,
+      "explanation": "The `cursor: text` value displays an I-beam cursor, indicating that the text underneath can be selected or edited.",
+      "concepts": ["cursor", "text"]
+    },
+    {
+      "id": "css_ch31_q05",
+      "type": "fill_in_blank",
+      "question": "The `cursor: ___` value displays an hourglass or spinner, indicating that the program is busy.",
+      "correct": "wait",
+      "explanation": "The `cursor: wait` value shows a busy indicator (hourglass on Windows, spinning wheel on macOS), telling the user to wait for an operation to complete.",
+      "concepts": ["cursor", "wait"]
+    },
+    {
+      "id": "css_ch31_q06",
+      "type": "fill_in_blank",
+      "question": "The `cursor: ___` value displays a four-directional arrow, indicating that an element can be moved.",
+      "correct": "move",
+      "explanation": "The `cursor: move` value shows a four-directional arrow cursor, signaling that the element can be dragged or repositioned.",
+      "concepts": ["cursor", "move"]
+    }
+  ]
+}

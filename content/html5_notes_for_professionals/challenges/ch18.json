@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 18,
+  "challenges": [
+    {
+      "id": "h5_ch18_c01",
+      "title": "Contact Form",
+      "description": "Create a contact form with an action attribute and method=\"post\". Include text inputs for name and email, a textarea for a message, and a submit button. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a contact form with action, method, inputs, textarea, and submit -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> element'\nassert 'action=' in html.lower(), 'Form should have an action attribute'\nassert 'method=\"post\"' in html.lower(), 'Form should have method=\"post\"'\nassert html.lower().count('<input') >= 2, 'Should contain at least 2 input elements'\nassert '<textarea' in html.lower(), 'Should contain a <textarea> element'\nassert '</textarea>' in html.lower(), 'Should close the <textarea> element'\nassert 'type=\"submit\"' in html.lower() or '<button' in html.lower(), 'Should contain a submit button'",
+      "difficulty": "easy",
+      "concepts_new": ["form_action", "form_method", "textarea", "submit_button"],
+      "concepts_review": ["forms", "input_types"],
+      "hints": [
+        "Use <form action=\"/submit\" method=\"post\">",
+        "Add <textarea name=\"message\"></textarea> for the message field",
+        "Use <input type=\"submit\" value=\"Send\"> or <button type=\"submit\">Send</button>"
+      ]
+    },
+    {
+      "id": "h5_ch18_c02",
+      "title": "Fieldset Form",
+      "description": "Create a form that uses fieldset and legend elements to group related inputs. Include at least two fieldset groups, each with a legend and at least two labeled inputs. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form with fieldset and legend grouping -->\n<!-- Include at least two groups of inputs -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> element'\nassert html.lower().count('<fieldset') >= 2, 'Should contain at least 2 fieldset elements'\nassert html.lower().count('</fieldset>') >= 2, 'Should close all fieldset elements'\nassert html.lower().count('<legend') >= 2, 'Each fieldset should have a legend element'\nassert html.lower().count('</legend>') >= 2, 'Should close all legend elements'\nassert html.lower().count('<input') >= 4, 'Should contain at least 4 input elements'\nassert html.lower().count('<label') >= 4, 'Should contain at least 4 label elements'",
+      "difficulty": "medium",
+      "concepts_new": ["fieldset", "legend", "input_grouping"],
+      "concepts_review": ["forms", "labels", "input_types"],
+      "hints": [
+        "Wrap related inputs in <fieldset> with a <legend> describing the group",
+        "For example, group personal info inputs and address inputs separately",
+        "Each input should still have its own label"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 42,
+  "challenges": [
+    {
+      "id": "css_ch42_c01",
+      "title": "Using the Inherit Keyword",
+      "description": "Write CSS that targets a link element '.parent a' and sets its color property to inherit, so it takes the color from its parent. Also set font-family to inherit. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Make links inherit color and font from parent */\n\n\"\"\"",
+      "test_code": "assert '.parent a' in css.lower() or '.parent a' in css, 'Should target .parent a'\nassert 'inherit' in css.lower(), 'Should use the inherit keyword'\nassert 'color' in css.lower(), 'Should set color to inherit'\nassert 'font-family' in css.lower(), 'Should set font-family to inherit'\nlines = [l.strip() for l in css.lower().split(';') if 'inherit' in l]\nassert len(lines) >= 2, 'Should use inherit on at least two properties'",
+      "difficulty": "easy",
+      "concepts_new": ["inherit keyword", "CSS inheritance"],
+      "concepts_review": ["color", "font-family"],
+      "hints": [
+        "The inherit keyword forces a property to take its value from the parent element.",
+        "Use color: inherit and font-family: inherit inside the .parent a rule."
+      ]
+    },
+    {
+      "id": "css_ch42_c02",
+      "title": "Inherit, Initial, and Unset",
+      "description": "Write CSS with three rules: (1) target '.child-inherit' and set color to inherit, (2) target '.child-initial' and set color to initial, (3) target '.child-unset' and set margin to unset and color to unset. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Demonstrate inherit, initial, and unset keywords */\n\n\"\"\"",
+      "test_code": "assert 'inherit' in css.lower(), 'Should use the inherit keyword'\nassert 'initial' in css.lower(), 'Should use the initial keyword'\nassert 'unset' in css.lower(), 'Should use the unset keyword'\nassert '.child-inherit' in css.lower(), 'Should target .child-inherit'\nassert '.child-initial' in css.lower(), 'Should target .child-initial'\nassert '.child-unset' in css.lower(), 'Should target .child-unset'\nassert 'color' in css.lower(), 'Should use the color property'\nassert 'margin' in css.lower(), 'Should use the margin property'",
+      "difficulty": "medium",
+      "concepts_new": ["initial keyword", "unset keyword"],
+      "concepts_review": ["inherit keyword", "color", "margin"],
+      "hints": [
+        "inherit takes the value from the parent, initial resets to the CSS spec default, and unset acts as inherit for inherited properties or initial for non-inherited ones.",
+        "margin is a non-inherited property, so unset on margin acts like initial.",
+        "color is an inherited property, so unset on color acts like inherit."
+      ]
+    }
+  ]
+}

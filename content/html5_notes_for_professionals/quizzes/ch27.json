@@ -1,0 +1,63 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 27,
+  "questions": [
+    {
+      "id": "h5_ch27_q01",
+      "type": "multiple_choice",
+      "question": "Which element is used to group related options within a <select> menu?",
+      "choices": ["<group>", "<optgroup>", "<fieldset>", "<optionset>"],
+      "correct": 1,
+      "explanation": "The <optgroup> element groups related <option> elements under a label within a dropdown. It uses the label attribute to display the group name.",
+      "concepts": ["optgroup", "select"]
+    },
+    {
+      "id": "h5_ch27_q02",
+      "type": "multiple_choice",
+      "question": "What does the multiple attribute on a <select> element allow?",
+      "choices": [
+        "Multiple <select> elements on the same page",
+        "The user to select more than one option at a time",
+        "Multiple forms to share the same dropdown",
+        "The dropdown to appear in multiple locations"
+      ],
+      "correct": 1,
+      "explanation": "The multiple attribute changes the select control from a single-choice dropdown to a list box where the user can select multiple options, typically by holding Ctrl or Cmd while clicking.",
+      "concepts": ["multiple", "select"]
+    },
+    {
+      "id": "h5_ch27_q03",
+      "type": "multiple_choice",
+      "question": "Which element provides a list of predefined suggestions for an <input> field without restricting the user's input?",
+      "choices": ["<select>", "<optgroup>", "<datalist>", "<suggest>"],
+      "correct": 2,
+      "explanation": "The <datalist> element provides autocomplete suggestions for an input field. Unlike <select>, the user can still type a custom value that is not in the list.",
+      "concepts": ["datalist", "input"]
+    },
+    {
+      "id": "h5_ch27_q04",
+      "type": "multiple_choice",
+      "question": "Which attribute on an <option> element makes it chosen by default when the page loads?",
+      "choices": ["default", "checked", "selected", "active"],
+      "correct": 2,
+      "explanation": "The selected attribute marks an option as the default selection. When the form loads, this option will be pre-selected in the dropdown.",
+      "concepts": ["selected", "option"]
+    },
+    {
+      "id": "h5_ch27_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on a <select> element controls how many options are visible at once without scrolling.",
+      "correct": "size",
+      "explanation": "The size attribute specifies the number of visible options in the list. When size is greater than 1, the select renders as a list box instead of a dropdown.",
+      "concepts": ["size", "select"]
+    },
+    {
+      "id": "h5_ch27_q06",
+      "type": "fill_in_blank",
+      "question": "An <input> element is linked to a <datalist> by setting the input's ___ attribute to the datalist's id.",
+      "correct": "list",
+      "explanation": "The list attribute on an <input> element references the id of a <datalist>, connecting the input to its predefined suggestions.",
+      "concepts": ["datalist", "list"]
+    }
+  ]
+}

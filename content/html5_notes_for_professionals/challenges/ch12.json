@@ -1,0 +1,28 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 12,
+  "challenges": [
+    {
+      "id": "h5_ch12_c01",
+      "title": "Resource Links",
+      "description": "Create an HTML <head> section containing a <link> to a stylesheet (rel=\"stylesheet\") and a <link> for a favicon (rel=\"icon\"). Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<head' in html.lower(), 'Should contain a <head> element'\nassert '</head>' in html.lower(), 'Should close the <head> element'\nassert '<link' in html.lower(), 'Should contain <link> elements'\nassert 'rel=\"stylesheet\"' in html.lower() or \"rel='stylesheet'\" in html.lower(), 'Should have a link with rel=\"stylesheet\"'\nassert 'rel=\"icon\"' in html.lower() or \"rel='icon'\" in html.lower(), 'Should have a link with rel=\"icon\"'\nassert html.lower().count('href=') >= 2, 'Both link elements should have href attributes'",
+      "difficulty": "easy",
+      "concepts_new": ["link_element", "stylesheet_link", "favicon"],
+      "concepts_review": ["head_element"],
+      "hints": ["Use <link rel=\"stylesheet\" href=\"styles.css\"> for a stylesheet", "Use <link rel=\"icon\" href=\"favicon.ico\"> for a favicon"]
+    },
+    {
+      "id": "h5_ch12_c02",
+      "title": "Preloading",
+      "description": "Create an HTML <head> section with: a stylesheet link (rel=\"stylesheet\"), a preload link for a font (rel=\"preload\"), and a link with rel=\"icon\". The preload link should include an as attribute. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<head' in html.lower(), 'Should contain a <head> element'\nassert '</head>' in html.lower(), 'Should close the <head> element'\nassert 'rel=\"stylesheet\"' in html.lower() or \"rel='stylesheet'\" in html.lower(), 'Should have a link with rel=\"stylesheet\"'\nassert 'rel=\"preload\"' in html.lower() or \"rel='preload'\" in html.lower(), 'Should have a link with rel=\"preload\"'\nassert 'rel=\"icon\"' in html.lower() or \"rel='icon'\" in html.lower(), 'Should have a link with rel=\"icon\"'\nassert 'as=' in html.lower(), 'Preload link should have an as attribute'",
+      "difficulty": "medium",
+      "concepts_new": ["preload", "resource_hints"],
+      "concepts_review": ["link_element", "stylesheet_link", "favicon"],
+      "hints": ["Preload hints: <link rel=\"preload\" href=\"font.woff2\" as=\"font\">", "The as attribute tells the browser what type of resource is being preloaded"]
+    }
+  ]
+}

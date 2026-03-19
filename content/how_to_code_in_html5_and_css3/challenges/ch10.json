@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 10,
+  "challenges": [
+    {
+      "id": "hc_ch10_c01",
+      "title": "Div and Span Basics",
+      "description": "Create a page that uses <div> for block-level grouping and <span> for inline styling. Include at least two <div> sections each containing text, and use <span> inside a paragraph to highlight a word with a different color via a <style> block. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Use div for block grouping and span for inline styling -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<div') >= 2, 'Should contain at least two <div> elements'\nassert html.lower().count('</div>') >= 2, 'Should contain at least two closing </div> tags'\nassert '<span' in html.lower(), 'Should contain a <span> element'\nassert '</span>' in html.lower(), 'Should contain a closing </span> tag'\nassert '<style>' in html.lower(), 'Should contain a <style> block'\nassert 'color' in html.lower(), 'Should use color property to style the span'",
+      "difficulty": "easy",
+      "concepts_new": ["div tag", "span tag", "block vs inline"],
+      "concepts_review": ["style tag", "color property", "p tag"],
+      "hints": [
+        "<div> is a block-level container that takes up the full width.",
+        "<span> is an inline container used to style a portion of text within a line."
+      ]
+    },
+    {
+      "id": "hc_ch10_c02",
+      "title": "Styled Layout with Divs and Spans",
+      "description": "Create a page layout with at least three styled <div> sections (using class selectors with background-color, padding, and margin). Inside one section, use <span> elements with different classes to demonstrate inline styling (e.g., bold text, colored text). Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a layout with styled divs and spans -->\n\n\"\"\"",
+      "test_code": "assert '<style>' in html.lower(), 'Should contain a <style> block'\nassert html.lower().count('<div') >= 3, 'Should contain at least three <div> elements'\nassert html.lower().count('<span') >= 2, 'Should contain at least two <span> elements'\nassert 'background-color' in html.lower(), 'Should use background-color on divs'\nassert 'padding' in html.lower(), 'Should use padding on divs'\nassert 'margin' in html.lower(), 'Should use margin on divs'\nassert html.lower().count('class=') >= 3, 'Should use class attributes on at least three elements'\nstyle_block = html.lower().split('<style>')[1].split('</style>')[0]\nassert style_block.count('.') >= 3, 'Should define at least three class selectors in CSS'",
+      "difficulty": "medium",
+      "concepts_new": ["div layout", "styled containers", "multiple classes"],
+      "concepts_review": ["div tag", "span tag", "class selector", "background-color", "padding", "margin"],
+      "hints": [
+        "Give each <div> a class and style it with background-color, padding, and margin.",
+        "Use different classes on <span> elements for distinct inline styles like color or font-weight."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 11,
+  "questions": [
+    {
+      "id": "css_ch11_q01",
+      "type": "multiple_choice",
+      "question": "How does an outline differ from a border?",
+      "choices": [
+        "An outline takes up space in the layout; a border does not",
+        "An outline does not take up space in the layout; a border does",
+        "An outline can only be applied to block elements",
+        "There is no difference between outline and border"
+      ],
+      "correct": 1,
+      "explanation": "Outlines are drawn outside the border edge and do not affect the element's dimensions or layout, unlike borders.",
+      "concepts": ["outline", "outline vs border"]
+    },
+    {
+      "id": "css_ch11_q02",
+      "type": "multiple_choice",
+      "question": "What does the `outline-offset` property control?",
+      "choices": [
+        "The thickness of the outline",
+        "The color of the outline",
+        "The space between the outline and the border edge",
+        "The corner rounding of the outline"
+      ],
+      "correct": 2,
+      "explanation": "outline-offset sets the distance between the outline and the outer edge of the element's border, and can even be negative.",
+      "concepts": ["outline-offset"]
+    },
+    {
+      "id": "css_ch11_q03",
+      "type": "multiple_choice",
+      "question": "Which of these is NOT a valid outline-style value?",
+      "choices": [
+        "dotted",
+        "double",
+        "collapsed",
+        "groove"
+      ],
+      "correct": 2,
+      "explanation": "collapsed is not a valid outline-style value. Valid values include none, dotted, dashed, solid, double, groove, ridge, inset, and outset.",
+      "concepts": ["outline-style"]
+    },
+    {
+      "id": "css_ch11_q04",
+      "type": "multiple_choice",
+      "question": "Can you set different outlines on individual sides of an element (e.g., outline-top)?",
+      "choices": [
+        "Yes, using outline-top, outline-right, etc.",
+        "Yes, but only for top and bottom",
+        "No, outlines always apply uniformly around the entire element",
+        "Yes, using the outline shorthand with four values"
+      ],
+      "correct": 2,
+      "explanation": "Unlike borders, outlines cannot be set on individual sides. The outline always goes around the entire element uniformly.",
+      "concepts": ["outline", "outline vs border"]
+    },
+    {
+      "id": "css_ch11_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ shorthand property sets the style, color, and width of an outline in one declaration.",
+      "correct": "outline",
+      "explanation": "The outline shorthand combines outline-style, outline-color, and outline-width into a single declaration.",
+      "concepts": ["outline", "shorthand"]
+    },
+    {
+      "id": "css_ch11_q06",
+      "type": "fill_in_blank",
+      "question": "Setting `outline: ___` removes the outline from an element entirely.",
+      "correct": "none",
+      "explanation": "Setting outline to none removes any visible outline from the element.",
+      "concepts": ["outline"]
+    }
+  ]
+}

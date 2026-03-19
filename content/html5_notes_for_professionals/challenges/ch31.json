@@ -1,0 +1,37 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 31,
+  "challenges": [
+    {
+      "id": "h5_ch31_c01",
+      "title": "SVG Shapes",
+      "description": "Create an inline SVG element containing a circle and a rectangle (rect). Give each shape fill colors. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create an inline SVG with a circle and a rectangle -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<svg' in lower, 'Should contain an <svg> element'\nassert '</svg>' in lower, 'Should close the <svg> element'\nassert '<circle' in lower, 'Should contain a <circle> element'\nassert '<rect' in lower, 'Should contain a <rect> element'\nassert 'fill=' in lower, 'Shapes should have fill attributes'",
+      "difficulty": "easy",
+      "concepts_new": ["svg", "circle", "rect", "fill"],
+      "concepts_review": [],
+      "hints": [
+        "The <circle> element uses cx, cy, and r attributes for position and radius.",
+        "The <rect> element uses x, y, width, and height attributes.",
+        "Use fill=\"color\" to set the shape color, e.g. fill=\"blue\"."
+      ]
+    },
+    {
+      "id": "h5_ch31_c02",
+      "title": "SVG Scene",
+      "description": "Create an SVG element with a viewBox attribute. Inside it, include a circle, rect, line, and polygon element. Use fill and stroke attributes to style the shapes. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create an SVG scene with multiple shapes -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<svg' in lower, 'Should contain an <svg> element'\nassert 'viewbox=' in lower, 'SVG should have a viewBox attribute'\nassert '<circle' in lower, 'Should contain a <circle> element'\nassert '<rect' in lower, 'Should contain a <rect> element'\nassert '<line' in lower, 'Should contain a <line> element'\nassert '<polygon' in lower, 'Should contain a <polygon> element'\nassert 'fill=' in lower, 'Shapes should have fill attributes'\nassert 'stroke=' in lower, 'Shapes should have stroke attributes'\nassert '</svg>' in lower, 'Should close the <svg> element'",
+      "difficulty": "medium",
+      "concepts_new": ["viewBox", "line", "polygon", "stroke"],
+      "concepts_review": ["svg", "circle", "rect", "fill"],
+      "hints": [
+        "The viewBox attribute defines the coordinate system, e.g. viewBox=\"0 0 200 200\".",
+        "The <line> element uses x1, y1, x2, y2 attributes.",
+        "The <polygon> element uses a points attribute with coordinate pairs, e.g. points=\"100,10 40,198 190,78\".",
+        "Use stroke=\"color\" and stroke-width=\"N\" to add outlines."
+      ]
+    }
+  ]
+}

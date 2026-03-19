@@ -1,0 +1,22 @@
+{
+  "step_id": "cpp_inv_ch03",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 3,
+  "title": "Product Entry \u2014 User Input",
+  "description": "Extend your inventory program to read product information from the user. Use getline to read a product name (string), cin to read a price (double) and quantity (int). Calculate and display the total value (price * quantity). Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_inv_ch01",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    // Display inventory system menu\n    cout << \"===== Inventory Management System =====\" << endl;\n    cout << \"1. Add Product\" << endl;\n    cout << \"2. View Products\" << endl;\n    cout << \"3. Search Product\" << endl;\n    cout << \"4. Sort Products\" << endl;\n    cout << \"5. Save to File\" << endl;\n    cout << \"6. Exit\" << endl;\n\n    // Declare variables for product info\n    string name;\n    double price;\n    int quantity;\n\n    // Read product name, price, quantity from user\n    // Calculate and display total value\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'cin' in cpp, 'Use cin to read numeric input from the user'\nassert 'getline' in cpp, 'Use getline to read the product name (handles spaces)'\nassert 'double' in cpp, 'Declare price as a double'\nassert 'string' in cpp, 'Use string type for the product name'\nassert 'price' in cpp.lower() or 'cost' in cpp.lower(), 'Include a variable for the product price'\nassert 'quantity' in cpp.lower() or 'qty' in cpp.lower() or 'count' in cpp.lower(), 'Include a variable for the product quantity'\nassert '*' in cpp, 'Calculate total value using multiplication (price * quantity)'",
+  "acceptance_criteria": [
+    "Uses getline to read product name (handles spaces in names)",
+    "Uses cin to read price (double) and quantity (int)",
+    "Calculates total value as price * quantity",
+    "Displays the product info and total value back to the user",
+    "Includes #include <string>"
+  ],
+  "hints": [
+    "After using cin >> for a number, call cin.ignore() before getline to clear the newline from the buffer",
+    "Use getline(cin, name) to read product names that may contain spaces",
+    "Total value = price * quantity gives you the value of that product in stock"
+  ]
+}

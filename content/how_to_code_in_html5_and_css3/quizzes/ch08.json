@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 8,
+  "questions": [
+    {
+      "id": "hc_ch08_q01",
+      "type": "multiple_choice",
+      "question": "Which tool built into most browsers helps you inspect and debug HTML and CSS?",
+      "choices": [
+        "File Manager",
+        "Developer Tools (DevTools)",
+        "HTML Validator plugin",
+        "Code Editor"
+      ],
+      "correct": 1,
+      "explanation": "Browser Developer Tools (opened with F12 or right-click > Inspect) let you view the HTML structure, inspect CSS rules, and debug issues live.",
+      "concepts": ["developer tools", "debugging"]
+    },
+    {
+      "id": "hc_ch08_q02",
+      "type": "multiple_choice",
+      "question": "What is a common mistake when writing CSS that causes styles not to appear?",
+      "choices": [
+        "Using too many comments",
+        "Forgetting the semicolon at the end of a declaration",
+        "Using lowercase tag names",
+        "Adding too much whitespace"
+      ],
+      "correct": 1,
+      "explanation": "A missing semicolon after a CSS declaration can cause that rule and subsequent rules in the same block to be ignored by the browser.",
+      "concepts": ["common mistakes", "CSS syntax"]
+    },
+    {
+      "id": "hc_ch08_q03",
+      "type": "multiple_choice",
+      "question": "Why is it best practice to use external CSS files instead of inline styles?",
+      "choices": [
+        "Inline styles load faster",
+        "External files allow reusing styles across multiple pages and are easier to maintain",
+        "Browsers cannot read inline styles",
+        "External files have higher specificity"
+      ],
+      "correct": 1,
+      "explanation": "External stylesheets promote separation of concerns, allow style reuse across multiple pages, and make maintenance much easier.",
+      "concepts": ["best practices", "external CSS"]
+    },
+    {
+      "id": "hc_ch08_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a best practice in HTML?",
+      "choices": [
+        "Using semantic tags for structure",
+        "Always closing tags that require closing",
+        "Using only <div> and <span> for all elements",
+        "Including a DOCTYPE declaration"
+      ],
+      "correct": 2,
+      "explanation": "Using only <div> and <span> ignores semantic HTML. Best practice is to use meaningful tags like <header>, <nav>, <article>, and <footer>.",
+      "concepts": ["best practices", "semantic HTML"]
+    },
+    {
+      "id": "hc_ch08_q05",
+      "type": "fill_in_blank",
+      "question": "You can open browser Developer Tools by pressing the ___ key.",
+      "correct": "F12",
+      "explanation": "Pressing F12 in most browsers (Chrome, Firefox, Edge) opens the Developer Tools panel for inspecting HTML and CSS.",
+      "concepts": ["developer tools", "debugging"]
+    },
+    {
+      "id": "hc_ch08_q06",
+      "type": "fill_in_blank",
+      "question": "CSS stands for Cascading Style ___.",
+      "correct": "Sheets",
+      "explanation": "CSS stands for Cascading Style Sheets. The 'cascading' part refers to how styles are applied based on specificity and source order.",
+      "concepts": ["CSS basics", "terminology"]
+    }
+  ]
+}

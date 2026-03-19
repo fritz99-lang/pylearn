@@ -1,0 +1,58 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 45,
+  "questions": [
+    {
+      "id": "css_ch45_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS property prevents an element from being split across page or column breaks?",
+      "choices": ["break-before", "break-after", "break-inside", "page-break"],
+      "correct": 2,
+      "explanation": "The break-inside property controls whether a break (page, column, or region) is allowed inside an element. Setting break-inside: avoid prevents the element's content from being split across breaks.",
+      "concepts": ["break-inside", "fragmentation"]
+    },
+    {
+      "id": "css_ch45_q02",
+      "type": "multiple_choice",
+      "question": "What do the 'orphans' and 'widows' properties control?",
+      "choices": ["The number of columns in a layout", "The minimum number of lines that must appear at the bottom/top of a page", "The spacing between page breaks", "The margin around printed pages"],
+      "correct": 1,
+      "explanation": "The orphans property sets the minimum number of lines of a block that must be left at the bottom of a page, and widows sets the minimum lines at the top of a new page. Both help avoid awkward single-line fragments in print layouts.",
+      "concepts": ["orphans", "widows", "fragmentation"]
+    },
+    {
+      "id": "css_ch45_q03",
+      "type": "multiple_choice",
+      "question": "Which property is the modern replacement for the legacy page-break-before property?",
+      "choices": ["break-before", "break-inside", "page-start", "column-break"],
+      "correct": 0,
+      "explanation": "The break-before property is the modern CSS Fragmentation specification replacement for page-break-before. It supports values like auto, avoid, page, column, and region, providing more control than the legacy property.",
+      "concepts": ["break-before", "page-break-before", "fragmentation"]
+    },
+    {
+      "id": "css_ch45_q04",
+      "type": "multiple_choice",
+      "question": "Which value of break-before forces a page break before the element?",
+      "choices": ["avoid", "auto", "page", "column"],
+      "correct": 2,
+      "explanation": "Setting break-before: page forces a page break immediately before the element. This is commonly used in print stylesheets to ensure sections like chapters start on a new page.",
+      "concepts": ["break-before", "fragmentation"]
+    },
+    {
+      "id": "css_ch45_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property sets the minimum number of lines of a paragraph that must be visible at the bottom of a page.",
+      "correct": "orphans",
+      "explanation": "The orphans property specifies the minimum number of lines in a block container that must be shown at the bottom of a page or column. The default value is typically 2.",
+      "concepts": ["orphans", "fragmentation"]
+    },
+    {
+      "id": "css_ch45_q06",
+      "type": "fill_in_blank",
+      "question": "Setting break-inside to ___ prevents a page or column break from occurring within an element.",
+      "correct": "avoid",
+      "explanation": "The value avoid for break-inside tells the browser to avoid inserting a break inside the element if possible. This is useful for keeping tables, figures, or code blocks together on a single page.",
+      "concepts": ["break-inside", "fragmentation"]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 9,
+  "challenges": [
+    {
+      "id": "hc_ch09_c01",
+      "title": "Basic Form with Inputs",
+      "description": "Create a <form> with a text input, an email input, each with a <label>, and a submit button. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a basic form with text, email, and submit -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> tag'\nassert '</form>' in html.lower(), 'Should contain a closing </form> tag'\nassert html.lower().count('<label') >= 2, 'Should contain at least two <label> elements'\nassert 'type=\"text\"' in html.lower() or \"type='text'\" in html.lower(), 'Should contain a text input'\nassert 'type=\"email\"' in html.lower() or \"type='email'\" in html.lower(), 'Should contain an email input'\nassert 'type=\"submit\"' in html.lower() or \"type='submit'\" in html.lower(), 'Should contain a submit button'",
+      "difficulty": "easy",
+      "concepts_new": ["form tag", "input tag", "label tag", "input types", "submit button"],
+      "concepts_review": ["HTML5 structure"],
+      "hints": [
+        "Use <input type=\"text\"> for text and <input type=\"email\"> for email.",
+        "Each input should have a matching <label> for accessibility."
+      ]
+    },
+    {
+      "id": "hc_ch09_c02",
+      "title": "Form with Validation and Textarea",
+      "description": "Create a form with required text and email inputs (use the required attribute), placeholder text on each input, a <textarea> for a message, and a submit button. Wrap each field with a <label>. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form with validation, placeholders, and textarea -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> tag'\nassert 'type=\"text\"' in html.lower() or \"type='text'\" in html.lower(), 'Should contain a text input'\nassert 'type=\"email\"' in html.lower() or \"type='email'\" in html.lower(), 'Should contain an email input'\nassert html.lower().count('required') >= 2, 'Should have at least two required fields'\nassert html.lower().count('placeholder') >= 2, 'Should have placeholder text on at least two inputs'\nassert '<textarea' in html.lower(), 'Should contain a <textarea> element'\nassert '</textarea>' in html.lower(), 'Should contain a closing </textarea> tag'\nassert html.lower().count('<label') >= 3, 'Should contain at least three labels'\nassert 'type=\"submit\"' in html.lower() or \"type='submit'\" in html.lower(), 'Should contain a submit button'",
+      "difficulty": "medium",
+      "concepts_new": ["required attribute", "placeholder attribute", "textarea tag"],
+      "concepts_review": ["form tag", "input tag", "label tag", "submit button"],
+      "hints": [
+        "Add the required attribute directly on the input: <input type=\"text\" required>",
+        "Use placeholder=\"Enter your name\" to show hint text inside the input."
+      ]
+    }
+  ]
+}

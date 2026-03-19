@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 7,
+  "questions": [
+    {
+      "id": "h5_ch07_q01",
+      "type": "multiple_choice",
+      "question": "Which tag creates an unordered (bulleted) list?",
+      "choices": ["<ol>", "<ul>", "<list>", "<bl>"],
+      "correct": 1,
+      "explanation": "The <ul> (unordered list) tag creates a bulleted list. Each item inside is wrapped in an <li> (list item) tag. By default, browsers render bullets as filled circles.",
+      "concepts": ["ul tag", "unordered lists"]
+    },
+    {
+      "id": "h5_ch07_q02",
+      "type": "multiple_choice",
+      "question": "What is the correct structure for a definition list?",
+      "choices": ["<dl> containing <li> items", "<dl> containing <dt> and <dd> pairs", "<ul> containing <dt> and <dd> pairs", "<ol> containing <def> items"],
+      "correct": 1,
+      "explanation": "A definition list uses <dl> as the container, <dt> (definition term) for the term being defined, and <dd> (definition description) for the definition or description.",
+      "concepts": ["dl tag", "dt tag", "dd tag"]
+    },
+    {
+      "id": "h5_ch07_q03",
+      "type": "multiple_choice",
+      "question": "How do you create a nested list in HTML?",
+      "choices": ["Place a <ul> or <ol> directly inside the parent <ul>", "Place a <ul> or <ol> inside an <li> element of the parent list", "Use the nested attribute on the <li> tag", "Indent the <li> elements with extra spaces"],
+      "correct": 1,
+      "explanation": "To nest a list, place a complete <ul> or <ol> inside an <li> element of the parent list. The nested list becomes a child of that list item.",
+      "concepts": ["nested lists", "list structure"]
+    },
+    {
+      "id": "h5_ch07_q04",
+      "type": "multiple_choice",
+      "question": "Which attribute changes the starting number of an ordered list?",
+      "choices": ["begin", "start", "from", "initial"],
+      "correct": 1,
+      "explanation": "The start attribute on an <ol> tag sets the starting number for the list. For example, <ol start=\"5\"> begins numbering at 5.",
+      "concepts": ["start attribute", "ordered lists"]
+    },
+    {
+      "id": "h5_ch07_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ tag is used to wrap each individual item in both ordered and unordered lists.",
+      "correct": "<li>",
+      "explanation": "The <li> (list item) tag defines each entry in an ordered (<ol>) or unordered (<ul>) list. It is the only valid direct child of <ol> and <ul> elements.",
+      "concepts": ["li tag", "list items"]
+    },
+    {
+      "id": "h5_ch07_q06",
+      "type": "fill_in_blank",
+      "question": "To make an ordered list count in reverse, add the ___ attribute to the <ol> tag.",
+      "correct": "reversed",
+      "explanation": "The reversed attribute on an <ol> tag makes the list count downward. For example, a three-item list would be numbered 3, 2, 1 instead of 1, 2, 3.",
+      "concepts": ["reversed attribute", "ordered lists"]
+    }
+  ]
+}

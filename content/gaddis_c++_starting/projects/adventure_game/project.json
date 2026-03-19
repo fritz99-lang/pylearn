@@ -1,0 +1,6 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "title": "Build a Text Adventure Game",
+  "description": "Build an interactive text adventure game in C++ from scratch, adding features chapter by chapter. By the end, you'll have a game with rooms, items, combat, file saves, and an object-oriented design with classes and inheritance.",
+  "final_description": "A complete text adventure game with a room map using structs, item inventory, NPC combat, save/load via file I/O, and an object-oriented design with classes, inheritance, and polymorphism — built across 10 chapters using progressively advanced C++ concepts."
+}

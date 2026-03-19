@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 14,
+  "questions": [
+    {
+      "id": "h5_ch14_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML element is used to write CSS rules directly within an HTML document?",
+      "choices": ["<css>", "<link>", "<style>", "<script>"],
+      "correct": 2,
+      "explanation": "The <style> element allows you to write CSS rules directly inside the HTML document, typically placed in the <head> section.",
+      "concepts": ["style tag", "internal CSS"]
+    },
+    {
+      "id": "h5_ch14_q02",
+      "type": "multiple_choice",
+      "question": "Which method of applying CSS has the highest specificity?",
+      "choices": ["External stylesheet", "Internal <style> tag", "Inline style attribute", "Browser default styles"],
+      "correct": 2,
+      "explanation": "Inline styles applied via the style attribute have the highest specificity and override both internal and external stylesheet rules (unless !important is used).",
+      "concepts": ["specificity", "inline styles"]
+    },
+    {
+      "id": "h5_ch14_q03",
+      "type": "multiple_choice",
+      "question": "What is the correct HTML attribute for applying inline CSS to an element?",
+      "choices": ["css", "class", "style", "design"],
+      "correct": 2,
+      "explanation": "The style attribute is used to apply inline CSS directly to an HTML element, e.g., <p style=\"color: red;\">.",
+      "concepts": ["inline styles", "style attribute"]
+    },
+    {
+      "id": "h5_ch14_q04",
+      "type": "multiple_choice",
+      "question": "Why are external stylesheets generally preferred over inline styles?",
+      "choices": ["They load faster", "They allow separation of concerns and reuse across pages", "They have higher specificity", "They are required by HTML5"],
+      "correct": 1,
+      "explanation": "External stylesheets separate structure (HTML) from presentation (CSS), making code more maintainable and allowing styles to be reused across multiple pages.",
+      "concepts": ["external stylesheets", "best practices"]
+    },
+    {
+      "id": "h5_ch14_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute is used to apply CSS styles directly to a single HTML element.",
+      "correct": "style",
+      "explanation": "The style attribute accepts CSS property-value pairs and applies them directly to the element, e.g., style=\"color: blue; font-size: 14px;\".",
+      "concepts": ["inline styles", "style attribute"]
+    },
+    {
+      "id": "h5_ch14_q06",
+      "type": "fill_in_blank",
+      "question": "CSS rules defined inside a <style> tag in the HTML document are called ___ styles.",
+      "correct": "internal",
+      "explanation": "Internal (or embedded) styles are CSS rules written inside a <style> element within the HTML document, as opposed to external stylesheets linked via <link>.",
+      "concepts": ["internal CSS", "style tag"]
+    }
+  ]
+}

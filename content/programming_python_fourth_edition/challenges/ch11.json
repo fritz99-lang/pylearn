@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 11,
+  "challenges": [
+    {
+      "id": "pp_ch11_c01",
+      "title": "Delayed Callback Timer",
+      "description": "Write a function called 'delayed_call' that takes a callable, a delay in seconds, and any positional arguments. It should record the start time, wait for the delay using time.sleep, call the function with the given arguments, and return a dictionary with 'result' (the function's return value) and 'elapsed' (actual seconds elapsed as a float, rounded to 1 decimal place).",
+      "starter_code": "import time\n\ndef delayed_call(func, delay, *args):\n    \"\"\"Call func(*args) after delay seconds.\n    \n    Returns dict with 'result' and 'elapsed' (rounded to 1 decimal).\n    \"\"\"\n    pass\n",
+      "test_code": "def add(a, b):\n    return a + b\n\nresult = delayed_call(add, 0.1, 3, 4)\nassert result['result'] == 7\nassert 0.1 <= result['elapsed'] <= 0.5\n\ndef greet(name):\n    return f'Hello, {name}'\n\nresult2 = delayed_call(greet, 0.1, 'World')\nassert result2['result'] == 'Hello, World'\nassert result2['elapsed'] >= 0.1\n\n# Zero delay\nresult3 = delayed_call(add, 0, 10, 20)\nassert result3['result'] == 30\nassert result3['elapsed'] >= 0.0",
+      "difficulty": "easy",
+      "concepts_new": ["timed_execution", "delayed_callbacks"],
+      "concepts_review": ["time_module", "args_unpacking", "dictionaries"],
+      "hints": [
+        "Use time.time() before and after the sleep+call to measure elapsed time.",
+        "Pattern: start = time.time(); time.sleep(delay); result = func(*args); elapsed = round(time.time() - start, 1)"
+      ]
+    },
+    {
+      "id": "pp_ch11_c02",
+      "title": "Threaded Task Runner",
+      "description": "Write a class called 'TaskRunner' that executes a callable in a background thread and lets you check its status and retrieve the result. Methods: start(func, *args) — run func(*args) in a new thread (raise RuntimeError if already running); is_alive() — return True if the thread is still running; get_result(timeout=None) — wait up to timeout seconds for the thread to finish and return the result (raise RuntimeError if the thread hasn't been started, raise TimeoutError if it's still running after timeout).",
+      "starter_code": "import threading\n\nclass TaskRunner:\n    \"\"\"Run a function in a background thread with status checking.\"\"\"\n    \n    def __init__(self):\n        pass\n    \n    def start(self, func, *args):\n        \"\"\"Start func(*args) in a background thread.\"\"\"\n        pass\n    \n    def is_alive(self):\n        \"\"\"Return True if the background thread is still running.\"\"\"\n        pass\n    \n    def get_result(self, timeout=None):\n        \"\"\"Wait for result. Raise TimeoutError if still running after timeout.\"\"\"\n        pass\n",
+      "test_code": "import time\n\n# Basic usage\nrunner = TaskRunner()\ndef compute(a, b):\n    return a * b\n\nrunner.start(compute, 6, 7)\nresult = runner.get_result(timeout=2)\nassert result == 42\nassert runner.is_alive() == False\n\n# Slow task with timeout\nrunner2 = TaskRunner()\ndef slow_task():\n    import time\n    time.sleep(2)\n    return 'done'\n\nrunner2.start(slow_task)\nassert runner2.is_alive() == True\ntry:\n    runner2.get_result(timeout=0.1)\n    assert False, 'Should raise TimeoutError'\nexcept TimeoutError:\n    pass\n\n# RuntimeError if not started\nrunner3 = TaskRunner()\ntry:\n    runner3.get_result()\n    assert False, 'Should raise RuntimeError'\nexcept RuntimeError:\n    pass\n\n# RuntimeError if already running\ntry:\n    runner2.start(compute, 1, 2)\n    assert False, 'Should raise RuntimeError'\nexcept RuntimeError:\n    pass",
+      "difficulty": "medium",
+      "concepts_new": ["threaded_task_runner", "result_retrieval", "thread_lifecycle"],
+      "concepts_review": ["threading", "classes", "error_handling"],
+      "hints": [
+        "Store the thread and result as instance variables. Use a wrapper function that saves the return value: def wrapper(): self._result = func(*args)",
+        "In get_result, call self._thread.join(timeout=timeout), then check self._thread.is_alive() — if still alive, raise TimeoutError."
+      ]
+    }
+  ]
+}

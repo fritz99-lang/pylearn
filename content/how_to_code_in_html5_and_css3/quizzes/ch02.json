@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 2,
+  "questions": [
+    {
+      "id": "hc_ch02_q01",
+      "type": "multiple_choice",
+      "question": "Which tag is used to define the visible content of a web page?",
+      "choices": [
+        "<head>",
+        "<title>",
+        "<body>",
+        "<html>"
+      ],
+      "correct": 2,
+      "explanation": "The <body> tag contains all the visible content that appears on the web page, such as text, images, and links.",
+      "concepts": ["body tag", "HTML structure"]
+    },
+    {
+      "id": "hc_ch02_q02",
+      "type": "multiple_choice",
+      "question": "What does the <title> tag define?",
+      "choices": [
+        "The main heading displayed on the page",
+        "The text shown in the browser tab",
+        "The first paragraph of the page",
+        "The name of the HTML file"
+      ],
+      "correct": 1,
+      "explanation": "The <title> tag sets the text displayed in the browser's title bar or tab. It is placed inside the <head> section.",
+      "concepts": ["title tag", "head section"]
+    },
+    {
+      "id": "hc_ch02_q03",
+      "type": "multiple_choice",
+      "question": "Which heading tag represents the highest level (most important) heading?",
+      "choices": [
+        "<h6>",
+        "<h3>",
+        "<heading>",
+        "<h1>"
+      ],
+      "correct": 3,
+      "explanation": "The <h1> tag is the highest-level heading in HTML. Heading levels range from <h1> (most important) to <h6> (least important).",
+      "concepts": ["headings", "HTML elements"]
+    },
+    {
+      "id": "hc_ch02_q04",
+      "type": "multiple_choice",
+      "question": "What is the correct file extension for an HTML file?",
+      "choices": [
+        ".txt",
+        ".htm or .html",
+        ".web",
+        ".css"
+      ],
+      "correct": 1,
+      "explanation": "HTML files use the .htm or .html file extension. The .html extension is the most commonly used.",
+      "concepts": ["HTML files", "file extensions"]
+    },
+    {
+      "id": "hc_ch02_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ tag wraps around the entire HTML document as the root element.",
+      "correct": "html",
+      "explanation": "The <html> tag is the root element that wraps around all other elements in an HTML document.",
+      "concepts": ["html tag", "document structure"]
+    },
+    {
+      "id": "hc_ch02_q06",
+      "type": "fill_in_blank",
+      "question": "The <p> tag is used to create a ___.",
+      "correct": "paragraph",
+      "explanation": "The <p> tag defines a paragraph of text in HTML. Browsers automatically add spacing before and after paragraphs.",
+      "concepts": ["paragraph tag", "HTML elements"]
+    }
+  ]
+}

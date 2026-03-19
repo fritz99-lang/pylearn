@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 8,
+  "questions": [
+    {
+      "id": "h5_ch08_q01",
+      "type": "multiple_choice",
+      "question": "Which tag defines a single cell of data in an HTML table?",
+      "choices": ["<tc>", "<td>", "<cell>", "<tr>"],
+      "correct": 1,
+      "explanation": "The <td> (table data) tag defines a standard data cell in a table. It must be placed inside a <tr> (table row) element.",
+      "concepts": ["td tag", "table cells"]
+    },
+    {
+      "id": "h5_ch08_q02",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the <thead>, <tbody>, and <tfoot> tags?",
+      "choices": ["They add borders to the table", "They group rows into header, body, and footer sections for semantics and styling", "They are required for the table to render", "They control the column widths"],
+      "correct": 1,
+      "explanation": "These tags semantically group table rows into header, body, and footer sections. They enable separate styling, allow the body to scroll independently, and help screen readers understand table structure.",
+      "concepts": ["thead tag", "tbody tag", "tfoot tag"]
+    },
+    {
+      "id": "h5_ch08_q03",
+      "type": "multiple_choice",
+      "question": "Which attribute makes a cell span across multiple columns?",
+      "choices": ["span", "colspan", "colwidth", "merge"],
+      "correct": 1,
+      "explanation": "The colspan attribute on a <td> or <th> element specifies how many columns the cell should span. For example, colspan=\"3\" makes the cell stretch across three columns.",
+      "concepts": ["colspan", "cell spanning"]
+    },
+    {
+      "id": "h5_ch08_q04",
+      "type": "multiple_choice",
+      "question": "What does the <th> tag represent compared to <td>?",
+      "choices": ["A taller cell", "A header cell that is bold and centered by default", "A cell with a thick border", "A cell that cannot be edited"],
+      "correct": 1,
+      "explanation": "The <th> (table header) tag defines a header cell. Browsers render it bold and centered by default. It also carries semantic meaning, helping screen readers identify column or row headers.",
+      "concepts": ["th tag", "table headers"]
+    },
+    {
+      "id": "h5_ch08_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ tag is used to provide a title or description for an HTML table.",
+      "correct": "<caption>",
+      "explanation": "The <caption> tag adds a visible title to a table. It must be the first child of the <table> element and helps users understand the table's purpose.",
+      "concepts": ["caption tag", "table accessibility"]
+    },
+    {
+      "id": "h5_ch08_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on a <th> element indicates whether it is a header for a row or a column.",
+      "correct": "scope",
+      "explanation": "The scope attribute can be set to \"col\", \"row\", \"colgroup\", or \"rowgroup\" to clarify the header's relationship. It is important for accessibility, helping screen readers associate headers with data cells.",
+      "concepts": ["scope attribute", "table accessibility"]
+    }
+  ]
+}

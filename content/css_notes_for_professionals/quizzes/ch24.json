@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 24,
+  "questions": [
+    {
+      "id": "css_ch24_q01",
+      "type": "multiple_choice",
+      "question": "What does the fr unit represent in CSS Grid?",
+      "choices": [
+        "A fixed number of pixels",
+        "A fraction of the available space in the grid container",
+        "The font-relative size",
+        "A percentage of the viewport"
+      ],
+      "correct": 1,
+      "explanation": "The fr (fraction) unit represents a fraction of the available space in the grid container. For example, 1fr 2fr splits available space into thirds: one-third and two-thirds.",
+      "concepts": ["fr", "grid"]
+    },
+    {
+      "id": "css_ch24_q02",
+      "type": "multiple_choice",
+      "question": "Which CSS property defines the column structure of a grid?",
+      "choices": [
+        "grid-row",
+        "grid-gap",
+        "grid-template-columns",
+        "grid-area"
+      ],
+      "correct": 2,
+      "explanation": "grid-template-columns defines the number and sizes of columns in a grid container. Values can use px, %, fr, or functions like repeat() and minmax().",
+      "concepts": ["grid-template-columns", "grid"]
+    },
+    {
+      "id": "css_ch24_q03",
+      "type": "multiple_choice",
+      "question": "What does repeat(3, 1fr) produce in a grid-template-columns declaration?",
+      "choices": [
+        "One column that is 3fr wide",
+        "Three columns each taking one-third of the available space",
+        "Three rows of equal height",
+        "A 3-pixel gap between columns"
+      ],
+      "correct": 1,
+      "explanation": "repeat(3, 1fr) is shorthand for 1fr 1fr 1fr, creating three columns that each take an equal fraction of the available space.",
+      "concepts": ["repeat", "fr", "grid"]
+    },
+    {
+      "id": "css_ch24_q04",
+      "type": "multiple_choice",
+      "question": "How do you make a grid item span from column line 1 to column line 3?",
+      "choices": [
+        "grid-column: 1 3",
+        "grid-column: 1 / 3",
+        "grid-column: span 1-3",
+        "grid-column: 1, 3"
+      ],
+      "correct": 1,
+      "explanation": "grid-column: 1 / 3 tells the item to start at column line 1 and end at column line 3, spanning two columns. The slash separates start and end line numbers.",
+      "concepts": ["grid-column", "grid-lines"]
+    },
+    {
+      "id": "css_ch24_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property sets the spacing between grid rows and columns.",
+      "correct": "grid-gap",
+      "explanation": "grid-gap (or its modern shorthand gap) sets the gutter size between grid rows and columns. It accepts one value for both or two values for row-gap and column-gap separately.",
+      "concepts": ["grid-gap", "gap"]
+    },
+    {
+      "id": "css_ch24_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property assigns a grid item to a named area defined by grid-template-areas.",
+      "correct": "grid-area",
+      "explanation": "The grid-area property places a grid item into a named area that was defined on the container using grid-template-areas, or can be used as shorthand for grid-row and grid-column.",
+      "concepts": ["grid-area", "grid-template-areas"]
+    }
+  ]
+}

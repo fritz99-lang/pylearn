@@ -1,0 +1,63 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 4,
+  "questions": [
+    {
+      "id": "cpp_ch04_q01",
+      "type": "multiple_choice",
+      "question": "Which relational operator tests whether two values are NOT equal?",
+      "choices": ["==", "!=", "<>", "!=="],
+      "correct": 1,
+      "explanation": "The != operator tests for inequality in C++. The == operator tests for equality. <> and !== are not valid C++ operators.",
+      "concepts": ["relational operators", "inequality"]
+    },
+    {
+      "id": "cpp_ch04_q02",
+      "type": "multiple_choice",
+      "question": "What does the following code output?\nint x = 5;\nif (x > 3 && x < 10)\n    cout << \"Yes\";\nelse\n    cout << \"No\";",
+      "choices": ["No", "Yes", "YesNo", "Compilation error"],
+      "correct": 1,
+      "explanation": "The logical AND (&&) operator requires both conditions to be true. Since 5 > 3 is true and 5 < 10 is true, the overall expression is true, so \"Yes\" is printed.",
+      "concepts": ["logical operators", "AND operator", "if/else"]
+    },
+    {
+      "id": "cpp_ch04_q03",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the break statement inside a switch case?",
+      "choices": [
+        "It terminates the entire program",
+        "It exits the switch statement so subsequent cases are not executed",
+        "It skips to the next case",
+        "It restarts the switch from the beginning"
+      ],
+      "correct": 1,
+      "explanation": "Without break, execution falls through to the next case. The break statement exits the switch block, preventing fall-through to subsequent cases.",
+      "concepts": ["switch", "break", "fall-through"]
+    },
+    {
+      "id": "cpp_ch04_q04",
+      "type": "multiple_choice",
+      "question": "What does the conditional (ternary) operator expression (x > 0) ? \"positive\" : \"non-positive\" evaluate to when x is -3?",
+      "choices": ["positive", "non-positive", "0", "Compilation error"],
+      "correct": 1,
+      "explanation": "The conditional operator ?: evaluates the condition first. Since -3 > 0 is false, the expression after the colon is returned: \"non-positive\".",
+      "concepts": ["conditional operator", "ternary operator"]
+    },
+    {
+      "id": "cpp_ch04_q05",
+      "type": "fill_in_blank",
+      "question": "The logical ___ operator (!) reverses the truth or falsity of a condition.",
+      "correct": "NOT",
+      "explanation": "The logical NOT operator (!) negates a Boolean expression. If a condition is true, !condition is false, and vice versa.",
+      "concepts": ["logical operators", "NOT operator"]
+    },
+    {
+      "id": "cpp_ch04_q06",
+      "type": "fill_in_blank",
+      "question": "In a switch statement, the ___ keyword handles any value not matched by a case label.",
+      "correct": "default",
+      "explanation": "The default case in a switch statement executes when none of the case values match the switch expression. It is optional but recommended.",
+      "concepts": ["switch", "default case"]
+    }
+  ]
+}

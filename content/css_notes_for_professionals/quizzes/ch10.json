@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 10,
+  "questions": [
+    {
+      "id": "css_ch10_q01",
+      "type": "multiple_choice",
+      "question": "Which shorthand correctly sets a 2px solid red border?",
+      "choices": [
+        "border: solid 2px red",
+        "border: 2px solid red",
+        "border: red 2px solid",
+        "All of the above"
+      ],
+      "correct": 3,
+      "explanation": "The border shorthand accepts width, style, and color in any order, so all three declarations are valid.",
+      "concepts": ["border", "shorthand"]
+    },
+    {
+      "id": "css_ch10_q02",
+      "type": "multiple_choice",
+      "question": "What does `border-radius: 50%` do to a square element?",
+      "choices": [
+        "Rounds only the top corners",
+        "Creates an elliptical shape",
+        "Turns the element into a circle",
+        "Has no visible effect"
+      ],
+      "correct": 2,
+      "explanation": "Setting border-radius to 50% on a square element makes it a perfect circle by rounding all four corners equally.",
+      "concepts": ["border-radius"]
+    },
+    {
+      "id": "css_ch10_q03",
+      "type": "multiple_choice",
+      "question": "Which border-style value displays a line of dashes?",
+      "choices": [
+        "dotted",
+        "dashed",
+        "double",
+        "groove"
+      ],
+      "correct": 1,
+      "explanation": "The dashed value renders the border as a series of short dashes.",
+      "concepts": ["border-style"]
+    },
+    {
+      "id": "css_ch10_q04",
+      "type": "multiple_choice",
+      "question": "What does `border-collapse: collapse` do on a table?",
+      "choices": [
+        "Removes all borders from the table",
+        "Merges adjacent cell borders into a single border",
+        "Collapses the table to zero height",
+        "Hides the table header borders"
+      ],
+      "correct": 1,
+      "explanation": "border-collapse: collapse merges adjacent table cell borders into a single shared border instead of having separate borders with spacing.",
+      "concepts": ["border-collapse", "tables"]
+    },
+    {
+      "id": "css_ch10_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property sets the style of the border on the right side of an element only.",
+      "correct": "border-right-style",
+      "explanation": "border-right-style is the longhand property for setting just the style of the right border.",
+      "concepts": ["border", "individual sides"]
+    },
+    {
+      "id": "css_ch10_q06",
+      "type": "fill_in_blank",
+      "question": "To make a border visible, the ___ property must be set to a value other than none.",
+      "correct": "border-style",
+      "explanation": "A border will not appear unless border-style is set, since its default value is none.",
+      "concepts": ["border-style"]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "step_id": "h5_proj_ch01",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 1,
+  "title": "Portfolio Foundation \u2014 Basic HTML Structure",
+  "description": "Create the basic HTML5 document structure for your portfolio website. Include the DOCTYPE declaration, html, head, and body elements. Add a title in the head, an h1 heading with your name, and a welcome paragraph in the body.",
+  "builds_on": "",
+  "starter_code": "# Portfolio Website \u2014 Step 1: Basic HTML Structure\n# Create a complete HTML5 document with doctype, html, head, title, body.\n# Add an h1 with your name and a welcome paragraph.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <!-- Add an h1 heading with your name -->\n\n    <!-- Add a welcome paragraph -->\n\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<!doctype html>' in html.lower(), 'Must include <!DOCTYPE html> declaration'\nassert '<html>' in html.lower() or '<html ' in html.lower(), 'Must include <html> tag'\nassert '</html>' in html.lower(), 'Must include closing </html> tag'\nassert '<head>' in html.lower(), 'Must include <head> tag'\nassert '</head>' in html.lower(), 'Must include closing </head> tag'\nassert '<body>' in html.lower(), 'Must include <body> tag'\nassert '</body>' in html.lower(), 'Must include closing </body> tag'\nassert '<title>' in html.lower() and '</title>' in html.lower(), 'Must include a <title> element in the head'\nassert '<h1>' in html.lower() and '</h1>' in html.lower(), 'Must include an <h1> heading with your name'\nassert '<p>' in html.lower() and '</p>' in html.lower(), 'Must include at least one <p> paragraph'",
+  "acceptance_criteria": [
+    "HTML5 DOCTYPE declaration is present",
+    "Document has html, head, and body elements",
+    "Title element is in the head section",
+    "An h1 heading contains your name",
+    "A welcome paragraph is included"
+  ],
+  "hints": [
+    "The DOCTYPE declaration is: <!DOCTYPE html>",
+    "The h1 goes inside the body: <h1>Your Name</h1>",
+    "A paragraph is: <p>Welcome to my portfolio!</p>"
+  ]
+}

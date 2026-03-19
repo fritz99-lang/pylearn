@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 5,
+  "questions": [
+    {
+      "id": "css_ch05_q01",
+      "type": "multiple_choice",
+      "question": "Which property sets the background color of an element?",
+      "choices": [
+        "bg-color",
+        "color",
+        "background-color",
+        "fill-color"
+      ],
+      "correct": 2,
+      "explanation": "The background-color property sets the background color of an element. The 'color' property sets the text color, not the background.",
+      "concepts": ["background-color"]
+    },
+    {
+      "id": "css_ch05_q02",
+      "type": "multiple_choice",
+      "question": "What value for `background-repeat` prevents the image from repeating?",
+      "choices": [
+        "none",
+        "no-repeat",
+        "repeat-none",
+        "stop"
+      ],
+      "correct": 1,
+      "explanation": "The value no-repeat prevents the background image from tiling. Other valid values include repeat, repeat-x, and repeat-y.",
+      "concepts": ["background-repeat"]
+    },
+    {
+      "id": "css_ch05_q03",
+      "type": "multiple_choice",
+      "question": "Which `background-size` value scales the image to cover the entire element, potentially cropping?",
+      "choices": [
+        "contain",
+        "100%",
+        "cover",
+        "fill"
+      ],
+      "correct": 2,
+      "explanation": "The value 'cover' scales the background image to completely cover the element, maintaining aspect ratio. Parts of the image may be cropped. 'Contain' fits the entire image within the element instead.",
+      "concepts": ["background-size"]
+    },
+    {
+      "id": "css_ch05_q04",
+      "type": "multiple_choice",
+      "question": "Which is the correct order of values in the `background` shorthand property?",
+      "choices": [
+        "color image position/size repeat",
+        "image color repeat position",
+        "color position image repeat",
+        "repeat image color position"
+      ],
+      "correct": 0,
+      "explanation": "The background shorthand follows: background: color image position/size repeat; For example: background: #fff url(bg.png) center/cover no-repeat;",
+      "concepts": ["background shorthand"]
+    },
+    {
+      "id": "css_ch05_q05",
+      "type": "fill_in_blank",
+      "question": "The CSS function used to specify a background image URL is ___().",
+      "correct": "url",
+      "explanation": "The url() function is used with background-image to specify the path to an image, e.g., background-image: url('image.png');",
+      "concepts": ["background-image"]
+    },
+    {
+      "id": "css_ch05_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property controls where a background image is positioned within the element.",
+      "correct": "background-position",
+      "explanation": "The background-position property sets the starting position of a background image, accepting values like center, top left, or pixel/percentage values.",
+      "concepts": ["background-position"]
+    }
+  ]
+}

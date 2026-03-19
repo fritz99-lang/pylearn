@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 19,
+  "challenges": [
+    {
+      "id": "css_ch19_c01",
+      "title": "Setting Element Opacity",
+      "description": "Write two CSS rules: (1) target `.faded` and set `opacity` to `0.5`, (2) target `.hidden` and set `opacity` to `0`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* .faded at half opacity */\n\n/* .hidden fully transparent */\n\n\"\"\"",
+      "test_code": "assert '.faded' in css, 'Should target .faded'\nassert '.hidden' in css, 'Should target .hidden'\nassert 'opacity' in css.lower(), 'Should use the opacity property'\nassert '0.5' in css or '.5' in css, 'Should set opacity to 0.5 for .faded'\nassert css.lower().count('opacity') >= 2, 'Should set opacity in both rules'",
+      "difficulty": "easy",
+      "concepts_new": ["opacity-property"],
+      "concepts_review": ["css-rules", "class-selector"],
+      "hints": [
+        "The opacity property takes a value from 0 (fully transparent) to 1 (fully opaque).",
+        "Use `opacity: 0.5;` for 50% transparency."
+      ]
+    },
+    {
+      "id": "css_ch19_c02",
+      "title": "Opacity vs RGBA Background",
+      "description": "Write two CSS rules that both create semi-transparent effects: (1) target `.box-opacity` and set `opacity` to `0.5` with `background-color` set to `blue` — this makes the entire element transparent including its text, (2) target `.box-rgba` and set `background-color` using `rgba()` with an alpha of `0.5` — this only makes the background transparent while text remains fully opaque. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* .box-opacity: opacity affects the whole element */\n\n/* .box-rgba: rgba() only affects the background */\n\n\"\"\"",
+      "test_code": "assert '.box-opacity' in css, 'Should target .box-opacity'\nassert '.box-rgba' in css, 'Should target .box-rgba'\nassert 'opacity' in css.lower(), 'Should use the opacity property'\nassert 'rgba(' in css.lower(), 'Should use rgba() for the background'\nassert 'background-color' in css.lower(), 'Should set background-color'\nassert '0.5' in css or '.5' in css, 'Should use 0.5 for transparency'",
+      "difficulty": "medium",
+      "concepts_new": ["opacity-vs-rgba"],
+      "concepts_review": ["opacity-property", "rgba-colors"],
+      "hints": [
+        "The `opacity` property makes the entire element (including children and text) transparent.",
+        "Using `rgba()` for background-color only makes the background transparent, keeping text fully visible."
+      ]
+    }
+  ]
+}

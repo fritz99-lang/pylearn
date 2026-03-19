@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 6,
+  "questions": [
+    {
+      "id": "h5_ch06_q01",
+      "type": "multiple_choice",
+      "question": "Which attribute of the <a> tag specifies the URL the link points to?",
+      "choices": ["src", "link", "href", "url"],
+      "correct": 2,
+      "explanation": "The href (hypertext reference) attribute specifies the destination URL of a link. Without href, the <a> tag acts as a placeholder rather than a functional hyperlink.",
+      "concepts": ["href attribute", "a tag"]
+    },
+    {
+      "id": "h5_ch06_q02",
+      "type": "multiple_choice",
+      "question": "What does target=\"_blank\" do on an anchor tag?",
+      "choices": ["Opens the link in the same tab", "Opens the link in a new tab or window", "Opens a blank page", "Clears the current page"],
+      "correct": 1,
+      "explanation": "Setting target=\"_blank\" tells the browser to open the linked URL in a new tab or window. The default behavior (target=\"_self\") opens the link in the same tab.",
+      "concepts": ["target attribute", "link behavior"]
+    },
+    {
+      "id": "h5_ch06_q03",
+      "type": "multiple_choice",
+      "question": "Which href value creates a link that opens the user's email client?",
+      "choices": ["href=\"email:user@example.com\"", "href=\"mail:user@example.com\"", "href=\"mailto:user@example.com\"", "href=\"send:user@example.com\""],
+      "correct": 2,
+      "explanation": "The mailto: protocol in the href attribute opens the user's default email client with the specified address pre-filled. You can also add subject and body parameters.",
+      "concepts": ["mailto links", "href protocols"]
+    },
+    {
+      "id": "h5_ch06_q04",
+      "type": "multiple_choice",
+      "question": "What is the difference between a relative and an absolute URL?",
+      "choices": ["There is no difference", "Relative URLs include the full domain, absolute URLs do not", "Absolute URLs include the full protocol and domain, relative URLs are paths from the current page", "Relative URLs only work on localhost"],
+      "correct": 2,
+      "explanation": "Absolute URLs include the full path starting with the protocol (e.g., https://example.com/page). Relative URLs specify a path relative to the current document's location (e.g., ../page.html).",
+      "concepts": ["relative URLs", "absolute URLs"]
+    },
+    {
+      "id": "h5_ch06_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on an anchor tag prompts the browser to download the linked file instead of navigating to it.",
+      "correct": "download",
+      "explanation": "Adding the download attribute to an <a> tag tells the browser to download the resource rather than navigate to it. You can optionally specify a filename as the attribute value.",
+      "concepts": ["download attribute", "file downloads"]
+    },
+    {
+      "id": "h5_ch06_q06",
+      "type": "fill_in_blank",
+      "question": "To create a link that dials a phone number on mobile devices, use the ___ protocol in the href.",
+      "correct": "tel:",
+      "explanation": "The tel: protocol (e.g., href=\"tel:+15551234567\") creates a clickable phone number link. On mobile devices, tapping it initiates a phone call.",
+      "concepts": ["tel links", "href protocols"]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 21,
+  "questions": [
+    {
+      "id": "h5_ch21_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML5 element is specifically designed to contain a set of navigation links?",
+      "choices": ["<menu>", "<nav>", "<ul>", "<header>"],
+      "correct": 1,
+      "explanation": "The <nav> element is the semantic HTML5 element for navigation. It should contain major navigation blocks such as site-wide navigation, table of contents, or breadcrumbs.",
+      "concepts": ["nav element", "semantic navigation"]
+    },
+    {
+      "id": "h5_ch21_q02",
+      "type": "multiple_choice",
+      "question": "What ARIA role is implicitly associated with the <nav> element?",
+      "choices": ["role=\"menu\"", "role=\"navigation\"", "role=\"banner\"", "role=\"toolbar\""],
+      "correct": 1,
+      "explanation": "The <nav> element has an implicit ARIA role of 'navigation'. This means screen readers automatically recognize it as a navigation landmark without needing an explicit role attribute.",
+      "concepts": ["ARIA roles", "nav element", "accessibility"]
+    },
+    {
+      "id": "h5_ch21_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is a best practice when creating navigation bars for accessibility?",
+      "choices": [
+        "Use <div> elements with onclick handlers instead of links",
+        "Use an unordered list (<ul>) of links inside a <nav> element",
+        "Avoid using any ARIA attributes on navigation elements",
+        "Use only images as navigation items without alt text"
+      ],
+      "correct": 1,
+      "explanation": "Using a <ul> with <li> elements containing <a> links inside a <nav> element is a widely recommended pattern. It provides semantic structure, is keyboard-navigable by default, and is well-supported by screen readers.",
+      "concepts": ["accessible navigation", "nav best practices"]
+    },
+    {
+      "id": "h5_ch21_q04",
+      "type": "multiple_choice",
+      "question": "When a page has multiple <nav> elements, what should be added to help screen reader users distinguish between them?",
+      "choices": [
+        "A unique id attribute on each <nav>",
+        "An aria-label or aria-labelledby attribute on each <nav>",
+        "A title attribute on each <nav>",
+        "A class attribute on each <nav>"
+      ],
+      "correct": 1,
+      "explanation": "When multiple <nav> elements exist on a page, each should have an aria-label (e.g., aria-label=\"Main navigation\") or aria-labelledby attribute so screen reader users can distinguish between them.",
+      "concepts": ["aria-label", "multiple nav elements", "accessibility"]
+    },
+    {
+      "id": "h5_ch21_q05",
+      "type": "fill_in_blank",
+      "question": "The aria-___ attribute provides a text label for a navigation element when no visible heading is present.",
+      "correct": "label",
+      "explanation": "The aria-label attribute provides an accessible name for an element when no visible text label exists. For navigation, it helps screen reader users understand the purpose of the nav (e.g., aria-label=\"Main navigation\").",
+      "concepts": ["aria-label", "accessibility"]
+    },
+    {
+      "id": "h5_ch21_q06",
+      "type": "fill_in_blank",
+      "question": "The currently active page in a navigation bar should be indicated with the aria-___=\"page\" attribute.",
+      "correct": "current",
+      "explanation": "The aria-current=\"page\" attribute indicates the current page within a set of navigation links. Screen readers announce this to users so they know which page they are currently on.",
+      "concepts": ["aria-current", "navigation state", "accessibility"]
+    }
+  ]
+}

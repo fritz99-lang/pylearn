@@ -1,0 +1,58 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 43,
+  "questions": [
+    {
+      "id": "css_ch43_q01",
+      "type": "multiple_choice",
+      "question": "What is a CSS image sprite?",
+      "choices": ["An animated GIF used in CSS", "A single image file containing multiple smaller images", "A CSS filter applied to images", "A vector graphic format for icons"],
+      "correct": 1,
+      "explanation": "A CSS image sprite is a single image file that combines multiple smaller images into one. Individual images are displayed by using CSS background-position to show only the desired portion of the combined image.",
+      "concepts": ["sprites", "background-image"]
+    },
+    {
+      "id": "css_ch43_q02",
+      "type": "multiple_choice",
+      "question": "Which CSS property is used to select a specific icon from a sprite sheet?",
+      "choices": ["background-image", "background-position", "background-clip", "background-origin"],
+      "correct": 1,
+      "explanation": "background-position is used to offset the sprite sheet so that only the desired icon is visible within the element's dimensions. Negative values shift the image left or up to reveal different parts of the sprite.",
+      "concepts": ["background-position", "sprites"]
+    },
+    {
+      "id": "css_ch43_q03",
+      "type": "multiple_choice",
+      "question": "What is the primary performance benefit of using image sprites?",
+      "choices": ["Images are compressed more efficiently", "Fewer HTTP requests are needed to load all images", "The browser can cache sprites longer", "Sprites use less memory than individual images"],
+      "correct": 1,
+      "explanation": "The main performance benefit of sprites is reducing the number of HTTP requests. Instead of making a separate request for each icon or image, the browser loads one sprite sheet, which decreases page load time.",
+      "concepts": ["sprites", "performance"]
+    },
+    {
+      "id": "css_ch43_q04",
+      "type": "multiple_choice",
+      "question": "When using a sprite sheet, why are background-position values typically negative?",
+      "choices": ["To flip the image horizontally", "To shift the sprite image left/up so the desired icon aligns with the element", "To reduce the image file size", "To apply a transform to the background"],
+      "correct": 1,
+      "explanation": "Negative background-position values shift the sprite sheet left (for x) and up (for y), moving the desired portion of the image into the visible area of the element. Positive values would shift the image right/down, showing empty space.",
+      "concepts": ["background-position", "sprites"]
+    },
+    {
+      "id": "css_ch43_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ CSS property specifies the image file to use as the element's background, including sprite sheets.",
+      "correct": "background-image",
+      "explanation": "The background-image property sets the sprite sheet as the element's background. Combined with background-position and fixed dimensions on the element, it displays a specific icon from the sheet.",
+      "concepts": ["background-image", "sprites"]
+    },
+    {
+      "id": "css_ch43_q06",
+      "type": "fill_in_blank",
+      "question": "Using sprites reduces the number of HTTP ___ needed to load a page's images.",
+      "correct": "requests",
+      "explanation": "Each individual image normally requires its own HTTP request. By combining many images into a single sprite sheet, only one request is needed to download all the images, improving page load performance.",
+      "concepts": ["sprites", "performance"]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 12,
+  "questions": [
+    {
+      "id": "h5_ch12_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML element is used to link an external CSS stylesheet?",
+      "choices": ["<style>", "<css>", "<link>", "<script>"],
+      "correct": 2,
+      "explanation": "The <link> element is used to link external resources such as stylesheets. The <style> tag is for inline CSS within the document.",
+      "concepts": ["link tag", "stylesheets"]
+    },
+    {
+      "id": "h5_ch12_q02",
+      "type": "multiple_choice",
+      "question": "What rel attribute value is used when linking a CSS stylesheet?",
+      "choices": ["rel=\"css\"", "rel=\"style\"", "rel=\"stylesheet\"", "rel=\"text/css\""],
+      "correct": 2,
+      "explanation": "The rel=\"stylesheet\" value tells the browser that the linked resource is a CSS stylesheet to be applied to the document.",
+      "concepts": ["rel attribute", "stylesheet linking"]
+    },
+    {
+      "id": "h5_ch12_q03",
+      "type": "multiple_choice",
+      "question": "Which rel value is used to specify a website's favicon?",
+      "choices": ["rel=\"favicon\"", "rel=\"icon\"", "rel=\"image\"", "rel=\"shortcut\""],
+      "correct": 1,
+      "explanation": "The rel=\"icon\" value is used to link a favicon. While rel=\"shortcut icon\" was common historically, rel=\"icon\" is the standard.",
+      "concepts": ["favicon", "rel attribute"]
+    },
+    {
+      "id": "h5_ch12_q04",
+      "type": "multiple_choice",
+      "question": "What does rel=\"preload\" do on a link element?",
+      "choices": ["Loads the resource after the page is fully rendered", "Tells the browser to fetch the resource early with high priority", "Caches the resource for offline use", "Defers loading until the user scrolls"],
+      "correct": 1,
+      "explanation": "rel=\"preload\" instructs the browser to fetch the resource as soon as possible with high priority, before it is actually needed during rendering.",
+      "concepts": ["preload", "performance"]
+    },
+    {
+      "id": "h5_ch12_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on the <link> tag specifies the relationship between the current document and the linked resource.",
+      "correct": "rel",
+      "explanation": "The rel (relationship) attribute defines how the linked resource relates to the document, such as stylesheet, icon, or preload.",
+      "concepts": ["rel attribute", "link tag"]
+    },
+    {
+      "id": "h5_ch12_q06",
+      "type": "fill_in_blank",
+      "question": "Using rel=\"___\" on a link tag hints to the browser that a resource may be needed for future navigation.",
+      "correct": "prefetch",
+      "explanation": "rel=\"prefetch\" is a low-priority hint that tells the browser to fetch a resource in the background for potential use in future navigations.",
+      "concepts": ["prefetch", "performance"]
+    }
+  ]
+}

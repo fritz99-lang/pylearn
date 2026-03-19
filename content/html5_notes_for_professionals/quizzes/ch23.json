@@ -1,0 +1,63 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 23,
+  "questions": [
+    {
+      "id": "h5_ch23_q01",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the <output> element in HTML5?",
+      "choices": [
+        "To display server error messages",
+        "To represent the result of a calculation or user action",
+        "To create a text output stream to the console",
+        "To define a print-only section of the page"
+      ],
+      "correct": 1,
+      "explanation": "The <output> element represents the result of a calculation or user action. It is commonly used with forms to display computed results, such as the sum of two input values.",
+      "concepts": ["output element", "form calculations"]
+    },
+    {
+      "id": "h5_ch23_q02",
+      "type": "multiple_choice",
+      "question": "Which attribute on the <output> element specifies which form controls contributed to the result?",
+      "choices": ["name", "for", "form", "value"],
+      "correct": 1,
+      "explanation": "The 'for' attribute on the <output> element contains a space-separated list of IDs of the form controls that contributed to the calculated result. This creates a semantic relationship between the inputs and the output.",
+      "concepts": ["for attribute", "output element"]
+    },
+    {
+      "id": "h5_ch23_q03",
+      "type": "multiple_choice",
+      "question": "Which event is commonly used on a <form> to update an <output> element in real time as input values change?",
+      "choices": ["onsubmit", "onclick", "oninput", "onload"],
+      "correct": 2,
+      "explanation": "The 'oninput' event fires immediately when the value of an input element changes (e.g., typing, moving a slider). It is commonly used on the <form> element to recalculate and update the <output> in real time.",
+      "concepts": ["oninput event", "real-time calculation"]
+    },
+    {
+      "id": "h5_ch23_q04",
+      "type": "multiple_choice",
+      "question": "What is the default display behavior of the <output> element?",
+      "choices": ["Block-level", "Inline", "None (hidden)", "Inline-block"],
+      "correct": 1,
+      "explanation": "The <output> element is an inline element by default, meaning it flows within the surrounding text content and does not start on a new line.",
+      "concepts": ["output element", "inline elements"]
+    },
+    {
+      "id": "h5_ch23_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on the <output> element gives it a name for form submission, similar to input elements.",
+      "correct": "name",
+      "explanation": "The 'name' attribute on an <output> element allows its value to be included when the form is submitted, just like other form controls. The output's current text content is submitted as its value.",
+      "concepts": ["name attribute", "output element", "form submission"]
+    },
+    {
+      "id": "h5_ch23_q06",
+      "type": "fill_in_blank",
+      "question": "The <output> element's default value can be reset using the form's ___ method or a reset button.",
+      "correct": "reset",
+      "explanation": "When a form is reset (via a <input type=\"reset\">, <button type=\"reset\">, or the form's reset() method), the <output> element reverts to its default value, which is the text content it had when the page loaded.",
+      "concepts": ["form reset", "output element"]
+    }
+  ]
+}

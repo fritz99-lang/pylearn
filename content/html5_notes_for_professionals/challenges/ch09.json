@@ -1,0 +1,28 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 9,
+  "challenges": [
+    {
+      "id": "h5_ch09_c01",
+      "title": "Commented Code",
+      "description": "Create HTML with a visible paragraph containing any text, and an HTML comment explaining what the paragraph does. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<p>' in html.lower() or '<p ' in html.lower(), 'Should contain a <p> element'\nassert '</p>' in html.lower(), 'Should close the <p> element'\nassert '<!--' in html, 'Should contain an HTML comment'\nassert '-->' in html, 'Should close the HTML comment'",
+      "difficulty": "easy",
+      "concepts_new": ["html_comments"],
+      "concepts_review": ["paragraphs"],
+      "hints": ["HTML comments start with <!-- and end with -->", "Comments are not displayed in the browser but are visible in the source code"]
+    },
+    {
+      "id": "h5_ch09_c02",
+      "title": "Comment Sections",
+      "description": "Create HTML with two sections (using <section> tags), each preceded by a comment describing the section's purpose. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<section') >= 2, 'Should contain at least 2 <section> elements'\nassert html.lower().count('</section>') >= 2, 'Should close both <section> elements'\nassert html.count('<!--') >= 2, 'Should contain at least 2 HTML comments'\nassert html.count('-->') >= 2, 'Should close both HTML comments'",
+      "difficulty": "easy",
+      "concepts_new": ["comment_documentation"],
+      "concepts_review": ["html_comments", "sections"],
+      "hints": ["Use <!-- Description --> before each <section> tag", "Each section should have a comment explaining its purpose"]
+    }
+  ]
+}

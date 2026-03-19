@@ -1,0 +1,68 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 34,
+  "questions": [
+    {
+      "id": "css_ch34_q01",
+      "type": "multiple_choice",
+      "question": "Which list-style-type value displays list items with filled circular markers?",
+      "choices": ["circle", "disc", "dot", "bullet"],
+      "correct": 1,
+      "explanation": "The disc value displays filled circular markers. The circle value displays hollow circular markers instead.",
+      "concepts": ["list-style-type", "disc"]
+    },
+    {
+      "id": "css_ch34_q02",
+      "type": "multiple_choice",
+      "question": "What does list-style-position: inside do?",
+      "choices": [
+        "Places the marker inside the list item's content flow",
+        "Hides the marker inside the element's padding",
+        "Positions the marker inside the border box",
+        "Indents the marker further inside the list"
+      ],
+      "correct": 0,
+      "explanation": "When list-style-position is set to inside, the marker is placed inside the list item's content area and text wraps under the marker. The default value outside places the marker outside the content flow.",
+      "concepts": ["list-style-position", "inside"]
+    },
+    {
+      "id": "css_ch34_q03",
+      "type": "multiple_choice",
+      "question": "Which is the correct order of values in the list-style shorthand property?",
+      "choices": [
+        "type, position, image",
+        "type, image, position",
+        "image, position, type",
+        "Any order is valid"
+      ],
+      "correct": 3,
+      "explanation": "The list-style shorthand accepts its values in any order. The browser can distinguish between the type, position, and image values by their syntax.",
+      "concepts": ["list-style", "shorthand"]
+    },
+    {
+      "id": "css_ch34_q04",
+      "type": "multiple_choice",
+      "question": "Which list-style-type value produces markers like a, b, c, d?",
+      "choices": ["lower-roman", "lower-alpha", "lower-latin", "Both B and C"],
+      "correct": 3,
+      "explanation": "Both lower-alpha and lower-latin produce lowercase alphabetical markers (a, b, c, d). They are functionally equivalent in CSS.",
+      "concepts": ["list-style-type", "lower-alpha", "lower-latin"]
+    },
+    {
+      "id": "css_ch34_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property allows you to use a custom image as the list item marker.",
+      "correct": "list-style-image",
+      "explanation": "The list-style-image property accepts a url() value pointing to an image file that replaces the default list marker.",
+      "concepts": ["list-style-image"]
+    },
+    {
+      "id": "css_ch34_q06",
+      "type": "fill_in_blank",
+      "question": "To remove all list markers entirely, set list-style-type to ___.",
+      "correct": "none",
+      "explanation": "Setting list-style-type: none removes the list markers completely. This is commonly used when styling navigation menus from list elements.",
+      "concepts": ["list-style-type", "none"]
+    }
+  ]
+}

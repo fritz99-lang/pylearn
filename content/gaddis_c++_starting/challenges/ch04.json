@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 4,
+  "challenges": [
+    {
+      "id": "cpp_ch04_c01",
+      "title": "If/Else Decision",
+      "description": "Write a C++ program that reads a number from the user and uses an if/else statement to determine whether the number is positive, negative, or zero. Display the result. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Use cin to read a number\n- Use if and else to check conditions\n- Handle all three cases: positive, negative, and zero\n- Display the result with cout",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'if' in cpp, 'Should use an if statement'\nassert 'else' in cpp, 'Should use else for alternative cases'\nassert 'cin' in cpp, 'Should read input with cin'\nassert 'cout' in cpp, 'Should display the result'\nassert '>' in cpp or '<' in cpp or '==' in cpp, 'Should use a comparison operator'\nassert 'positive' in cpp.lower() or 'negative' in cpp.lower() or 'zero' in cpp.lower(), 'Should mention positive, negative, or zero in output'",
+      "difficulty": "easy",
+      "concepts_new": ["if", "else", "else if", "comparison operators"],
+      "concepts_review": ["cin", "cout", "int"],
+      "hints": [
+        "Use if (num > 0) to check for positive, else if (num < 0) for negative",
+        "The final else handles the zero case"
+      ]
+    },
+    {
+      "id": "cpp_ch04_c02",
+      "title": "Switch Statement Menu",
+      "description": "Write a C++ program that displays a menu with at least 3 options, reads the user's choice, and uses a switch statement with a default case to respond. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Display a numbered menu with at least 3 options\n- Use cin to read the user's choice\n- Use a switch statement with at least 3 case labels\n- Include a default case for invalid input\n- Use break in each case",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'switch' in cpp, 'Should use a switch statement'\nassert cpp.count('case') >= 3, 'Should have at least 3 case labels'\nassert 'default' in cpp, 'Should include a default case'\nassert 'break' in cpp, 'Should use break in each case'\nassert 'cin' in cpp, 'Should read the user choice with cin'\nassert 'cout' in cpp, 'Should display output with cout'",
+      "difficulty": "medium",
+      "concepts_new": ["switch", "case", "break", "default"],
+      "concepts_review": ["if", "else", "cin", "cout"],
+      "hints": [
+        "A switch looks like: switch (choice) { case 1: ... break; case 2: ... break; }",
+        "Always include default: at the end to handle unexpected input"
+      ]
+    }
+  ]
+}

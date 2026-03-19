@@ -1,0 +1,68 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 18,
+  "questions": [
+    {
+      "id": "cpp_ch18_q01",
+      "type": "multiple_choice",
+      "question": "Which principle describes how a stack operates?",
+      "choices": [
+        "First In, First Out (FIFO)",
+        "Last In, First Out (LIFO)",
+        "Random access",
+        "Priority-based ordering"
+      ],
+      "correct": 1,
+      "explanation": "A stack follows Last In, First Out (LIFO) ordering. The last element pushed onto the stack is the first one to be popped off. Think of a stack of plates: you add and remove from the top.",
+      "concepts": ["LIFO", "stack"]
+    },
+    {
+      "id": "cpp_ch18_q02",
+      "type": "multiple_choice",
+      "question": "Which operation removes and returns the element at the front of a queue?",
+      "choices": ["push", "pop", "enqueue", "dequeue"],
+      "correct": 3,
+      "explanation": "The dequeue operation removes the element at the front of the queue. Since queues follow FIFO ordering, the element that was added first (at the front) is the one removed by dequeue.",
+      "concepts": ["dequeue", "queue operations"]
+    },
+    {
+      "id": "cpp_ch18_q03",
+      "type": "multiple_choice",
+      "question": "In an array-based stack implementation, what must be checked before performing a push operation?",
+      "choices": [
+        "Whether the stack is empty",
+        "Whether the stack is full",
+        "Whether the element already exists in the stack",
+        "Whether the stack is sorted"
+      ],
+      "correct": 1,
+      "explanation": "Before pushing an element onto an array-based stack, you must check if the stack is full (the top index has reached the maximum array size). Pushing onto a full stack causes a stack overflow error.",
+      "concepts": ["stack overflow", "array-based stack"]
+    },
+    {
+      "id": "cpp_ch18_q04",
+      "type": "multiple_choice",
+      "question": "Which data structure would be most appropriate for managing a print job scheduler where jobs are processed in the order they arrive?",
+      "choices": ["Stack", "Queue", "Binary tree", "Hash table"],
+      "correct": 1,
+      "explanation": "A queue is ideal for a print job scheduler because it follows First In, First Out (FIFO) ordering. Jobs are processed in the same order they were submitted, ensuring fairness.",
+      "concepts": ["FIFO", "queue applications"]
+    },
+    {
+      "id": "cpp_ch18_q05",
+      "type": "fill_in_blank",
+      "question": "The stack operation that adds an element to the top of the stack is called ___.",
+      "correct": "push",
+      "explanation": "The push operation places a new element on top of the stack. Along with pop (which removes the top element), push is one of the two fundamental stack operations.",
+      "concepts": ["push", "stack operations"]
+    },
+    {
+      "id": "cpp_ch18_q06",
+      "type": "fill_in_blank",
+      "question": "A queue follows ___ ordering, meaning the first element added is the first one removed.",
+      "correct": "FIFO",
+      "explanation": "FIFO stands for First In, First Out. In a queue, elements are added at the rear and removed from the front, so the element that has been waiting the longest is served first.",
+      "concepts": ["FIFO", "queue"]
+    }
+  ]
+}

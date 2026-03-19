@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 22,
+  "questions": [
+    {
+      "id": "css_ch22_q01",
+      "type": "multiple_choice",
+      "question": "What is the default value of the CSS position property?",
+      "choices": [
+        "relative",
+        "absolute",
+        "static",
+        "fixed"
+      ],
+      "correct": 2,
+      "explanation": "The default value of position is static. Static elements are positioned in the normal document flow and do not respond to top, right, bottom, left, or z-index.",
+      "concepts": ["position", "static"]
+    },
+    {
+      "id": "css_ch22_q02",
+      "type": "multiple_choice",
+      "question": "An element with position: absolute is positioned relative to what?",
+      "choices": [
+        "The viewport",
+        "Its own normal position",
+        "The nearest positioned ancestor (non-static)",
+        "The document body"
+      ],
+      "correct": 2,
+      "explanation": "An absolutely positioned element is placed relative to its nearest ancestor that has a position value other than static. If no such ancestor exists, it uses the initial containing block.",
+      "concepts": ["absolute", "containing-block"]
+    },
+    {
+      "id": "css_ch22_q03",
+      "type": "multiple_choice",
+      "question": "Which position value keeps an element fixed relative to the viewport even when scrolling?",
+      "choices": [
+        "static",
+        "relative",
+        "absolute",
+        "fixed"
+      ],
+      "correct": 3,
+      "explanation": "An element with position: fixed is positioned relative to the viewport and stays in the same place even when the page is scrolled.",
+      "concepts": ["fixed", "viewport"]
+    },
+    {
+      "id": "css_ch22_q04",
+      "type": "multiple_choice",
+      "question": "What does position: sticky do?",
+      "choices": [
+        "Removes the element from the document flow permanently",
+        "Positions the element relative to the viewport at all times",
+        "Acts as relative until a scroll threshold is reached, then becomes fixed",
+        "Sticks the element to its parent's bottom edge"
+      ],
+      "correct": 2,
+      "explanation": "A sticky element is treated as relative until its containing block crosses a specified scroll threshold (set with top, right, bottom, or left), at which point it becomes fixed within its container.",
+      "concepts": ["sticky", "scroll"]
+    },
+    {
+      "id": "css_ch22_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property controls the stacking order of positioned elements that overlap.",
+      "correct": "z-index",
+      "explanation": "The z-index property sets the stack level of a positioned element. Higher values appear in front of lower values. It only works on elements with a position value other than static.",
+      "concepts": ["z-index", "stacking-context"]
+    },
+    {
+      "id": "css_ch22_q06",
+      "type": "fill_in_blank",
+      "question": "An element with position: ___ is offset from its normal position but still occupies its original space in the flow.",
+      "correct": "relative",
+      "explanation": "A relatively positioned element is offset from where it would normally be, but the space it originally occupied is preserved in the document flow.",
+      "concepts": ["relative", "document-flow"]
+    }
+  ]
+}

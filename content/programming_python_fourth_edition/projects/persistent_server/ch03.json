@@ -1,0 +1,22 @@
+{
+  "step_id": "pp_srv_ch03",
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 3,
+  "title": "Server Foundation \u2014 System Setup",
+  "description": "Create a ServerConfig class that reads configuration from environment variables using os.environ, providing sensible defaults for HOST (127.0.0.1), PORT (9000), LOG_LEVEL (INFO), and DATA_DIR (./data). Use os.makedirs to ensure the data directory exists. The class should have a get(key, default=None) method that looks up config values by name.",
+  "builds_on": "",
+  "starter_code": "# Persistent Server \u2014 Step 1: Server Foundation\nimport os\n\n\nclass ServerConfig:\n    \"\"\"Server configuration loaded from environment variables.\n\n    Defaults:\n        HOST = '127.0.0.1'\n        PORT = 9000\n        LOG_LEVEL = 'INFO'\n        DATA_DIR = './data'\n    \"\"\"\n\n    DEFAULTS = {\n        'HOST': '127.0.0.1',\n        'PORT': '9000',\n        'LOG_LEVEL': 'INFO',\n        'DATA_DIR': './data',\n    }\n\n    def __init__(self):\n        # TODO: Load each config value from os.environ with a fallback\n        # to the DEFAULTS dict. Store them in self._config.\n        # Then ensure the DATA_DIR directory exists using os.makedirs.\n        pass\n\n    def get(self, key, default=None):\n        \"\"\"Get a config value by key, with optional default.\"\"\"\n        # TODO: Return the value from self._config, or default if missing.\n        pass\n",
+  "test_code": "# Tests for Step 1: ServerConfig\nimport os\n\nassert 'ServerConfig' in dir(), 'ServerConfig class must be defined'\n\n# Test defaults\nconfig = ServerConfig()\nassert config.get('HOST') == os.environ.get('SERVER_HOST', '127.0.0.1'), 'HOST should default to 127.0.0.1'\nassert config.get('PORT') == os.environ.get('SERVER_PORT', '9000'), 'PORT should default to 9000'\nassert config.get('LOG_LEVEL') == os.environ.get('SERVER_LOG_LEVEL', 'INFO'), 'LOG_LEVEL should default to INFO'\nassert config.get('DATA_DIR') is not None, 'DATA_DIR must have a value'\n\n# Test get() with missing key\nassert config.get('NONEXISTENT') is None, 'Missing key should return None'\nassert config.get('NONEXISTENT', 'fallback') == 'fallback', 'Missing key with default should return default'\n\n# Test that DATA_DIR was created\ndata_dir = config.get('DATA_DIR')\nassert os.path.isdir(data_dir), f'DATA_DIR {data_dir} must be created on init'\n\n# Test that config has expected keys\nassert config.get('HOST') is not None, 'HOST must be set'\nassert config.get('PORT') is not None, 'PORT must be set'\n",
+  "acceptance_criteria": [
+    "ServerConfig class is defined with DEFAULTS dict",
+    "Config values are loaded from os.environ with fallback to defaults",
+    "get(key, default=None) returns config values or the given default",
+    "DATA_DIR directory is created automatically on init using os.makedirs"
+  ],
+  "hints": [
+    "Use os.environ.get('SERVER_HOST', self.DEFAULTS['HOST']) to read env vars with fallbacks.",
+    "Prefix env var names with SERVER_ to avoid collisions (e.g., SERVER_HOST, SERVER_PORT).",
+    "os.makedirs(path, exist_ok=True) creates the directory without error if it already exists.",
+    "Store config in a plain dict: self._config = {} and populate it in __init__."
+  ]
+}

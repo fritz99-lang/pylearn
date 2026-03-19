@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 23,
+  "challenges": [
+    {
+      "id": "h5_ch23_c01",
+      "title": "Calculator Output",
+      "description": "Create a form with two number inputs and an output element. The output element should have a name and a for attribute referencing the inputs. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form with two number inputs and an output element -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> element'\nassert html.lower().count('type=\"number\"') >= 2, 'Should contain at least 2 number inputs'\nassert '<output' in html.lower(), 'Should contain an <output> element'\nassert '</output>' in html.lower(), 'Should close the <output> element'\nassert 'name=' in html.lower(), 'Output element should have a name attribute'\nassert 'for=' in html.lower(), 'Output element should have a for attribute'",
+      "difficulty": "easy",
+      "concepts_new": ["output_element", "output_for_attribute"],
+      "concepts_review": ["forms", "number_input"],
+      "hints": [
+        "Use <output name=\"result\" for=\"a b\"> to reference inputs with ids 'a' and 'b'",
+        "The for attribute on <output> lists the ids of the related inputs",
+        "The output element displays the result of a calculation"
+      ]
+    },
+    {
+      "id": "h5_ch23_c02",
+      "title": "Range Display",
+      "description": "Create a form with a range input (min 0, max 100) and an output element. Add an oninput attribute to the form or range input that updates the output with the range value. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form with a range input and output display -->\n<!-- Use oninput to update the output with the slider value -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> element'\nassert 'type=\"range\"' in html.lower(), 'Should contain a range input'\nassert 'min=' in html.lower(), 'Range input should have a min attribute'\nassert 'max=' in html.lower(), 'Range input should have a max attribute'\nassert '<output' in html.lower(), 'Should contain an <output> element'\nassert '</output>' in html.lower(), 'Should close the <output> element'\nassert 'oninput=' in html.lower(), 'Should have an oninput attribute to update the output'",
+      "difficulty": "medium",
+      "concepts_new": ["oninput_event", "range_output_binding"],
+      "concepts_review": ["output_element", "range_input", "forms"],
+      "hints": [
+        "Use oninput=\"result.value=slider.value\" on the form element",
+        "Give the range input an id like 'slider' and the output a name like 'result'",
+        "The oninput event fires every time the slider value changes"
+      ]
+    }
+  ]
+}

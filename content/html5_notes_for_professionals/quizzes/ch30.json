@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 30,
+  "questions": [
+    {
+      "id": "h5_ch30_q01",
+      "type": "multiple_choice",
+      "question": "Which attribute specifies the primary language of an HTML document or element?",
+      "choices": ["language", "locale", "lang", "xml:lang"],
+      "correct": 2,
+      "explanation": "The lang attribute declares the language of the element's content using a BCP 47 language tag (e.g., lang=\"en\", lang=\"fr\"). It is typically set on the <html> element for the entire page.",
+      "concepts": ["lang", "language codes"]
+    },
+    {
+      "id": "h5_ch30_q02",
+      "type": "multiple_choice",
+      "question": "What does the dir attribute control?",
+      "choices": [
+        "The directory where files are stored",
+        "The text direction (left-to-right or right-to-left)",
+        "The display order of child elements",
+        "The reading level of the content"
+      ],
+      "correct": 1,
+      "explanation": "The dir attribute sets the text directionality. It accepts ltr (left-to-right), rtl (right-to-left), or auto (let the browser determine direction from the content).",
+      "concepts": ["dir", "ltr", "rtl"]
+    },
+    {
+      "id": "h5_ch30_q03",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the hreflang attribute on an <a> or <link> element?",
+      "choices": [
+        "It translates the linked page automatically",
+        "It specifies the language of the linked resource",
+        "It changes the display language of the current page",
+        "It sets the encoding of the linked document"
+      ],
+      "correct": 1,
+      "explanation": "The hreflang attribute indicates the language of the document at the linked URL. It helps search engines and browsers understand which language version of a page to serve.",
+      "concepts": ["hreflang", "lang"]
+    },
+    {
+      "id": "h5_ch30_q04",
+      "type": "multiple_choice",
+      "question": "Which attribute indicates whether the content of an element should be translated by automated translation services?",
+      "choices": ["lang", "dir", "translate", "localize"],
+      "correct": 2,
+      "explanation": "The translate attribute accepts yes or no values. Setting translate=\"no\" tells translation tools to leave the content as-is, which is useful for brand names, code, or technical terms.",
+      "concepts": ["translate"]
+    },
+    {
+      "id": "h5_ch30_q05",
+      "type": "fill_in_blank",
+      "question": "To set a document's text direction to right-to-left, you use dir=\"___\".",
+      "correct": "rtl",
+      "explanation": "The value rtl (right-to-left) is used for languages such as Arabic and Hebrew that are written from right to left.",
+      "concepts": ["dir", "rtl"]
+    },
+    {
+      "id": "h5_ch30_q06",
+      "type": "fill_in_blank",
+      "question": "The language code for English in the lang attribute is ___.",
+      "correct": "en",
+      "explanation": "The BCP 47 language tag for English is \"en\". More specific variants include \"en-US\" for American English and \"en-GB\" for British English.",
+      "concepts": ["lang", "language codes"]
+    }
+  ]
+}

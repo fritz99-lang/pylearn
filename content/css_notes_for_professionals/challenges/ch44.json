@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 44,
+  "challenges": [
+    {
+      "id": "css_ch44_c01",
+      "title": "Clip-Path Shapes",
+      "description": "Write CSS with two rules: (1) target '.circle' and use clip-path with circle(50%) to clip it into a circle, (2) target '.triangle' and use clip-path with polygon() to create a triangle shape using three coordinate points. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Clip elements into circle and triangle shapes */\n\n\"\"\"",
+      "test_code": "assert 'clip-path' in css.lower(), 'Should use clip-path property'\nassert '.circle' in css.lower(), 'Should target .circle'\nassert '.triangle' in css.lower(), 'Should target .triangle'\nassert 'circle(' in css.lower(), 'Should use circle() function'\nassert '50%' in css, 'Should use 50% for circle radius'\nassert 'polygon(' in css.lower(), 'Should use polygon() function for triangle'",
+      "difficulty": "easy",
+      "concepts_new": ["clip-path", "circle()", "polygon()"],
+      "concepts_review": [],
+      "hints": [
+        "clip-path: circle(50%) creates a perfect circle clipping mask.",
+        "A triangle polygon needs three points, e.g., polygon(50% 0%, 0% 100%, 100% 100%)."
+      ]
+    },
+    {
+      "id": "css_ch44_c02",
+      "title": "Clip-Path with Hover Transition",
+      "description": "Write CSS that targets '.shape' and sets clip-path to circle(30%) with a transition of clip-path 0.5s ease. Then write a '.shape:hover' rule that changes clip-path to circle(50%). Also set the '.shape' width and height to 200px and background-color to a color of your choice. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Animate clip-path on hover */\n\n\"\"\"",
+      "test_code": "assert '.shape' in css.lower(), 'Should target .shape'\nassert 'clip-path' in css.lower(), 'Should use clip-path'\nassert 'circle(' in css.lower(), 'Should use circle() function'\nassert '30%' in css, 'Should start with circle(30%)'\nassert '50%' in css, 'Should expand to circle(50%) on hover'\nassert 'transition' in css.lower(), 'Should use transition property'\nassert 'hover' in css.lower(), 'Should have a :hover rule'\nassert '0.5s' in css.lower() or '.5s' in css.lower(), 'Should use 0.5s transition duration'\nassert 'background' in css.lower(), 'Should set a background color'\nassert '200px' in css, 'Should set width and height to 200px'",
+      "difficulty": "medium",
+      "concepts_new": ["clip-path transitions", "animated clipping"],
+      "concepts_review": ["clip-path", "circle()", "transition", ":hover"],
+      "hints": [
+        "clip-path can be animated with CSS transitions when the shape function type matches.",
+        "Define the default clip-path on .shape and the expanded one on .shape:hover.",
+        "Include transition: clip-path 0.5s ease to animate smoothly between states."
+      ]
+    }
+  ]
+}

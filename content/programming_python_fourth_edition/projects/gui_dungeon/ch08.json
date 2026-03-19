@@ -1,0 +1,26 @@
+{
+  "step_id": "pp_dng_ch08",
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 8,
+  "title": "Game Window — tkinter Setup",
+  "description": "Create the main game window using tkinter. Build a GameWindow class that sets up a fixed-size window with a Canvas widget for rendering the dungeon map and a Label at the bottom for status messages. Use grid geometry manager for layout.",
+  "builds_on": "",
+  "starter_code": "# GUI Dungeon Crawler — Step 1: Game Window\n# Create the main tkinter window with Canvas and status bar.\n\nimport tkinter as tk\n\nclass GameWindow:\n    \"\"\"Main game window with a canvas for the map and a status label.\n\n    Attributes:\n        root: The Tk root window.\n        canvas: A Canvas widget for drawing the dungeon map.\n        status_label: A Label widget for status messages.\n        width: Window width in pixels.\n        height: Window height in pixels.\n    \"\"\"\n\n    def __init__(self, title='Dungeon Crawler', width=800, height=600):\n        \"\"\"Initialize the game window.\n\n        Args:\n            title: Window title string.\n            width: Window width in pixels.\n            height: Window height in pixels.\n        \"\"\"\n        self.width = width\n        self.height = height\n        # Your code here:\n        # 1. Create the Tk root window and store as self.root\n        # 2. Set the window title\n        # 3. Make the window non-resizable (both directions)\n        # 4. Call self.configure_grid() to set up layout\n        # 5. Create self.canvas — a Canvas widget in row 0, col 0\n        #    with a black background and size (width x height-40)\n        # 6. Create self.status_label — a Label in row 1, col 0\n        #    with white text on dark gray background\n        # 7. Set initial status text to 'Welcome to the Dungeon!'\n        pass\n\n    def configure_grid(self):\n        \"\"\"Configure grid weights so canvas expands to fill space.\"\"\"\n        # Your code here:\n        # Make row 0 (canvas) expand, row 1 (status) fixed\n        # Make column 0 expand\n        pass\n\n    def set_status(self, text):\n        \"\"\"Update the status label text.\"\"\"\n        # Your code here\n        pass\n\n    def run(self):\n        \"\"\"Start the tkinter main loop.\"\"\"\n        self.root.mainloop()\n\n# Test it\nif __name__ == '__main__':\n    game = GameWindow()\n    game.set_status('Use WASD or arrow keys to move.')\n    game.run()\n",
+  "test_code": "game = GameWindow(title='Test Dungeon', width=800, height=600)\nassert hasattr(game, 'root'), 'GameWindow must have a root attribute'\nassert hasattr(game, 'canvas'), 'GameWindow must have a canvas attribute'\nassert hasattr(game, 'status_label'), 'GameWindow must have a status_label attribute'\nassert isinstance(game.canvas, tk.Canvas), 'canvas must be a tk.Canvas instance'\nassert isinstance(game.status_label, tk.Label), 'status_label must be a tk.Label instance'\nassert game.width == 800, 'width should be 800'\nassert game.height == 600, 'height should be 600'\nassert game.root.title() == 'Test Dungeon', \"Window title should be 'Test Dungeon'\"\ngame.set_status('Testing')\nassert game.status_label.cget('text') == 'Testing', 'set_status should update label text'\ngame.root.destroy()",
+  "acceptance_criteria": [
+    "GameWindow class creates a Tk root window with the given title",
+    "Window is fixed size (non-resizable) at 800x600",
+    "Canvas widget fills the main area with a black background",
+    "Status Label sits at the bottom with white-on-dark-gray text",
+    "configure_grid() sets up row/column weights for proper expansion",
+    "set_status() updates the label text"
+  ],
+  "hints": [
+    "Create root: self.root = tk.Tk()",
+    "Set title: self.root.title(title)",
+    "Non-resizable: self.root.resizable(False, False)",
+    "Grid weights: self.root.rowconfigure(0, weight=1)",
+    "Canvas: tk.Canvas(self.root, width=width, height=height-40, bg='black')",
+    "Use grid(row=..., col=..., sticky='nsew') for layout"
+  ]
+}

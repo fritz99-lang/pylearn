@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 12,
+  "challenges": [
+    {
+      "id": "pp_ch12_c01",
+      "title": "Calculator Evaluate Function",
+      "description": "Write a function called `calc_evaluate(a, op, b)` that takes two numbers and an operator string (+, -, *, /) and returns the result. Raise ValueError for unknown operators and ZeroDivisionError for division by zero.",
+      "starter_code": "def calc_evaluate(a, op, b):\n    \"\"\"Evaluate a simple arithmetic expression.\n    \n    Args:\n        a: First operand (int or float).\n        op: Operator string: '+', '-', '*', or '/'.\n        b: Second operand (int or float).\n    \n    Returns:\n        The result of the operation.\n    \n    Raises:\n        ValueError: If op is not one of +, -, *, /.\n        ZeroDivisionError: If dividing by zero.\n    \"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "assert calc_evaluate(10, '+', 5) == 15\nassert calc_evaluate(10, '-', 3) == 7\nassert calc_evaluate(4, '*', 6) == 24\nassert calc_evaluate(20, '/', 4) == 5.0\nassert calc_evaluate(-3, '+', 3) == 0\nassert calc_evaluate(7, '*', 0) == 0\ntry:\n    calc_evaluate(1, '%', 2)\n    assert False, 'Should have raised ValueError'\nexcept ValueError:\n    pass\ntry:\n    calc_evaluate(5, '/', 0)\n    assert False, 'Should have raised ZeroDivisionError'\nexcept ZeroDivisionError:\n    pass",
+      "difficulty": "easy",
+      "concepts_new": ["gui_callback_logic", "operator_dispatch"],
+      "concepts_review": ["functions", "exceptions"],
+      "hints": [
+        "Use if/elif to check the operator string.",
+        "Check for division by zero before performing the division."
+      ]
+    },
+    {
+      "id": "pp_ch12_c02",
+      "title": "Text Buffer with Undo",
+      "description": "Create a `TextBuffer` class that simulates a simple text editor buffer. It should support: `insert(pos, text)` to insert text at a position, `delete(pos, length)` to delete characters, `get_text()` to return the current text, and `undo()` to reverse the last operation. Each insert/delete should be undoable. Undo on an empty history should do nothing.",
+      "starter_code": "class TextBuffer:\n    \"\"\"A simple text buffer with undo support.\"\"\"\n\n    def __init__(self, initial_text=''):\n        # Your code here\n        pass\n\n    def insert(self, pos, text):\n        \"\"\"Insert text at the given position.\"\"\"\n        # Your code here\n        pass\n\n    def delete(self, pos, length):\n        \"\"\"Delete `length` characters starting at `pos`.\"\"\"\n        # Your code here\n        pass\n\n    def get_text(self):\n        \"\"\"Return the current buffer contents.\"\"\"\n        # Your code here\n        pass\n\n    def undo(self):\n        \"\"\"Undo the last insert or delete operation.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "buf = TextBuffer()\nbuf.insert(0, 'Hello')\nassert buf.get_text() == 'Hello'\nbuf.insert(5, ' World')\nassert buf.get_text() == 'Hello World'\nbuf.delete(5, 6)\nassert buf.get_text() == 'Hello'\nbuf.undo()\nassert buf.get_text() == 'Hello World'\nbuf.undo()\nassert buf.get_text() == 'Hello'\nbuf.undo()\nassert buf.get_text() == ''\nbuf.undo()\nassert buf.get_text() == ''\nbuf2 = TextBuffer('abc')\nbuf2.insert(1, 'X')\nassert buf2.get_text() == 'aXbc'\nbuf2.delete(0, 2)\nassert buf2.get_text() == 'bc'\nbuf2.undo()\nassert buf2.get_text() == 'aXbc'",
+      "difficulty": "medium",
+      "concepts_new": ["undo_pattern", "text_manipulation"],
+      "concepts_review": ["classes", "lists", "string_slicing"],
+      "hints": [
+        "Store the text as a string and use slicing for insert/delete.",
+        "Keep a history stack. For insert, store enough info to reverse it (position and length inserted). For delete, store the deleted text and its position."
+      ]
+    }
+  ]
+}

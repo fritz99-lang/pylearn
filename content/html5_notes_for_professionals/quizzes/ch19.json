@@ -1,0 +1,73 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 19,
+  "questions": [
+    {
+      "id": "h5_ch19_q01",
+      "type": "multiple_choice",
+      "question": "What type of element is the <div> tag in HTML?",
+      "choices": ["Inline element", "Block-level element", "Inline-block element", "Void element"],
+      "correct": 1,
+      "explanation": "The <div> element is a block-level container that takes up the full width available and starts on a new line. It is used to group other elements together for styling or layout purposes.",
+      "concepts": ["div element", "block-level elements"]
+    },
+    {
+      "id": "h5_ch19_q02",
+      "type": "multiple_choice",
+      "question": "What is the primary purpose of the <div> element?",
+      "choices": [
+        "To display text in bold",
+        "To create a hyperlink",
+        "To group content together as a generic container",
+        "To define a paragraph of text"
+      ],
+      "correct": 2,
+      "explanation": "The <div> element is a generic container used to group content together. It has no inherent semantic meaning and is primarily used for applying CSS styles or JavaScript behavior to a section of content.",
+      "concepts": ["div element", "content grouping"]
+    },
+    {
+      "id": "h5_ch19_q03",
+      "type": "multiple_choice",
+      "question": "Why is it generally better to use semantic elements like <article> or <section> instead of <div>?",
+      "choices": [
+        "Semantic elements load faster than <div> elements",
+        "Semantic elements provide meaning about the content, improving accessibility and SEO",
+        "The <div> element is deprecated in HTML5",
+        "Semantic elements automatically apply default styling"
+      ],
+      "correct": 1,
+      "explanation": "Semantic elements convey meaning about the content they contain, which helps screen readers, search engines, and other tools understand the page structure. <div> is appropriate when no semantic element fits the purpose.",
+      "concepts": ["semantic HTML", "accessibility", "div vs semantic elements"]
+    },
+    {
+      "id": "h5_ch19_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a valid reason to use a <div> element?",
+      "choices": [
+        "To wrap elements for CSS layout purposes",
+        "To group elements for applying a shared style",
+        "To represent a standalone section of content with a heading",
+        "To serve as a container for JavaScript DOM manipulation"
+      ],
+      "correct": 2,
+      "explanation": "A standalone section of content with a heading should use the <section> or <article> element, not a <div>. The <div> should be used only when no semantic element is appropriate, typically for layout or styling purposes.",
+      "concepts": ["div element", "semantic HTML", "proper element usage"]
+    },
+    {
+      "id": "h5_ch19_q05",
+      "type": "fill_in_blank",
+      "question": "The <div> element is a ___-level container that starts on a new line and takes up the full width available.",
+      "correct": "block",
+      "explanation": "The <div> is a block-level element, meaning it starts on a new line and stretches to fill the full width of its parent container by default. This is in contrast to inline elements like <span>.",
+      "concepts": ["block-level elements", "div element"]
+    },
+    {
+      "id": "h5_ch19_q06",
+      "type": "fill_in_blank",
+      "question": "The inline equivalent of the <div> element is the ___ element.",
+      "correct": "<span>",
+      "explanation": "While <div> is a block-level generic container, <span> is an inline generic container. <span> does not start on a new line and only takes up as much width as its content requires.",
+      "concepts": ["span element", "inline elements", "div vs span"]
+    }
+  ]
+}

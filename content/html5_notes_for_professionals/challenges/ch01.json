@@ -1,0 +1,34 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 1,
+  "challenges": [
+    {
+      "id": "h5_ch01_c01",
+      "title": "Basic HTML Page",
+      "description": "Create a complete HTML page with a DOCTYPE declaration, <html> element, <head> with a <title>, and a <body> containing a <p> paragraph. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<!doctype html>' in html.lower(), 'Should start with a DOCTYPE declaration'\nassert '<html' in html.lower(), 'Should contain an <html> element'\nassert '</html>' in html.lower(), 'Should close the <html> element'\nassert '<head>' in html.lower(), 'Should contain a <head> element'\nassert '</head>' in html.lower(), 'Should close the <head> element'\nassert '<title>' in html.lower(), 'Should contain a <title> element'\nassert '</title>' in html.lower(), 'Should close the <title> element'\nassert '<body>' in html.lower(), 'Should contain a <body> element'\nassert '</body>' in html.lower(), 'Should close the <body> element'\nassert '<p>' in html.lower(), 'Should contain a <p> paragraph element'\nassert '</p>' in html.lower(), 'Should close the <p> element'",
+      "difficulty": "easy",
+      "concepts_new": ["doctype", "html element", "head element", "body element", "paragraph"],
+      "concepts_review": [],
+      "hints": [
+        "Start with <!DOCTYPE html> to declare the document type",
+        "The <head> section contains metadata like <title>, while <body> contains visible content"
+      ]
+    },
+    {
+      "id": "h5_ch01_c02",
+      "title": "Hello World Page",
+      "description": "Create an HTML page with an <h1> heading that says \"Hello World\" and a <p> paragraph below it with any text. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<h1>' in html.lower(), 'Should contain an <h1> heading'\nassert '</h1>' in html.lower(), 'Should close the <h1> heading'\nassert 'hello world' in html.lower(), 'The h1 should contain the text \"Hello World\"'\nassert '<p>' in html.lower(), 'Should contain a <p> paragraph below the heading'\nassert '</p>' in html.lower(), 'Should close the <p> element'\nassert html.lower().index('<h1>') < html.lower().index('<p>'), 'The <h1> heading should appear before the <p> paragraph'",
+      "difficulty": "easy",
+      "concepts_new": ["h1 heading", "page structure"],
+      "concepts_review": ["paragraph"],
+      "hints": [
+        "Use <h1> for the main heading and <p> for the paragraph",
+        "Make sure the heading appears before the paragraph in your HTML"
+      ]
+    }
+  ]
+}

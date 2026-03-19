@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 4,
+  "questions": [
+    {
+      "id": "hc_ch04_q01",
+      "type": "multiple_choice",
+      "question": "Which tag is used to create a clickable link to another page?",
+      "choices": [
+        "<link>",
+        "<a>",
+        "<href>",
+        "<url>"
+      ],
+      "correct": 1,
+      "explanation": "The <a> (anchor) tag creates hyperlinks. The href attribute specifies the destination URL.",
+      "concepts": ["links", "anchor tag"]
+    },
+    {
+      "id": "hc_ch04_q02",
+      "type": "multiple_choice",
+      "question": "Which tag is used to display an image on a web page?",
+      "choices": [
+        "<picture>",
+        "<image>",
+        "<img>",
+        "<src>"
+      ],
+      "correct": 2,
+      "explanation": "The <img> tag embeds an image. It requires a src attribute for the image path and an alt attribute for accessibility.",
+      "concepts": ["images", "img tag"]
+    },
+    {
+      "id": "hc_ch04_q03",
+      "type": "multiple_choice",
+      "question": "Which HTML element creates a numbered list?",
+      "choices": [
+        "<ul>",
+        "<nl>",
+        "<ol>",
+        "<list>"
+      ],
+      "correct": 2,
+      "explanation": "The <ol> (ordered list) tag creates a numbered list. Each item inside uses the <li> tag.",
+      "concepts": ["ordered lists", "list elements"]
+    },
+    {
+      "id": "hc_ch04_q04",
+      "type": "multiple_choice",
+      "question": "What is the correct order of elements for a basic blog post structure?",
+      "choices": [
+        "<img>, <p>, <h1>, <ul>",
+        "<h1>, <p>, <img>, <ul>",
+        "<body>, <head>, <title>, <p>",
+        "<ul>, <h1>, <img>, <p>"
+      ],
+      "correct": 1,
+      "explanation": "A typical blog post starts with a heading (<h1>), followed by body paragraphs (<p>), images (<img>), and possibly lists (<ul> or <ol>).",
+      "concepts": ["article structure", "content organization"]
+    },
+    {
+      "id": "hc_ch04_q05",
+      "type": "fill_in_blank",
+      "question": "The <a> tag uses the ___ attribute to specify the destination URL.",
+      "correct": "href",
+      "explanation": "The href (hypertext reference) attribute on the <a> tag specifies the URL the link points to.",
+      "concepts": ["href attribute", "links"]
+    },
+    {
+      "id": "hc_ch04_q06",
+      "type": "fill_in_blank",
+      "question": "The <img> tag uses the ___ attribute to provide alternative text for screen readers.",
+      "correct": "alt",
+      "explanation": "The alt attribute provides a text description of the image for accessibility and is displayed if the image fails to load.",
+      "concepts": ["alt attribute", "accessibility"]
+    }
+  ]
+}

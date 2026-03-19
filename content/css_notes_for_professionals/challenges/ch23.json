@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 23,
+  "challenges": [
+    {
+      "id": "css_ch23_c01",
+      "title": "Block, Inline, and Inline-Block",
+      "description": "Write three CSS rules: (1) target `.full-width` and set `display` to `block`, (2) target `.inline-text` and set `display` to `inline`, (3) target `.badge` and set `display` to `inline-block` with `padding` of `4px 8px`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* .full-width as block */\n\n/* .inline-text as inline */\n\n/* .badge as inline-block with padding */\n\n\"\"\"",
+      "test_code": "assert '.full-width' in css, 'Should target .full-width'\nassert '.inline-text' in css, 'Should target .inline-text'\nassert '.badge' in css, 'Should target .badge'\nassert 'block' in css.lower(), 'Should use display: block'\nassert 'inline-block' in css.lower(), 'Should use display: inline-block'\nassert 'display' in css.lower(), 'Should set the display property'\nassert css.lower().count('display') >= 3, 'Should set display in all three rules'\nassert 'padding' in css.lower(), 'Should set padding on .badge'",
+      "difficulty": "easy",
+      "concepts_new": ["display-block", "display-inline", "display-inline-block"],
+      "concepts_review": ["css-rules", "class-selector"],
+      "hints": [
+        "block takes full width; inline flows with text (no width/height); inline-block flows inline but accepts width/height/padding.",
+        "Use `display: inline-block;` to create pill-shaped badges that sit inline with text."
+      ]
+    },
+    {
+      "id": "css_ch23_c02",
+      "title": "Display None vs Visibility Hidden",
+      "description": "Write two CSS rules: (1) target `.removed` and set `display` to `none` — this removes the element from the layout entirely, (2) target `.invisible` and set `visibility` to `hidden` — this hides the element but it still occupies space. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* .removed — gone from layout */\n\n/* .invisible — hidden but still takes space */\n\n\"\"\"",
+      "test_code": "assert '.removed' in css, 'Should target .removed'\nassert '.invisible' in css, 'Should target .invisible'\nassert 'display' in css.lower(), 'Should use the display property'\nassert 'none' in css.lower(), 'Should use display: none'\nassert 'visibility' in css.lower(), 'Should use the visibility property'\nassert 'hidden' in css.lower(), 'Should use visibility: hidden'",
+      "difficulty": "medium",
+      "concepts_new": ["display-none", "visibility-hidden"],
+      "concepts_review": ["display-block", "display-inline", "css-rules"],
+      "hints": [
+        "display: none removes the element from the flow — surrounding elements close the gap.",
+        "visibility: hidden makes the element invisible but it still takes up its original space in the layout."
+      ]
+    }
+  ]
+}

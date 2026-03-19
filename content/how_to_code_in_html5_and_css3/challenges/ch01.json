@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 1,
+  "challenges": [
+    {
+      "id": "hc_ch01_c01",
+      "title": "Minimal HTML Page",
+      "description": "Create a minimal HTML page that contains the three essential structural tags: <html>, <head>, and <body>. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<html>' in html.lower(), 'Should contain an <html> tag'\nassert '</html>' in html.lower(), 'Should contain a closing </html> tag'\nassert '<head>' in html.lower(), 'Should contain a <head> tag'\nassert '</head>' in html.lower(), 'Should contain a closing </head> tag'\nassert '<body>' in html.lower(), 'Should contain a <body> tag'\nassert '</body>' in html.lower(), 'Should contain a closing </body> tag'",
+      "difficulty": "easy",
+      "concepts_new": ["html tag", "head tag", "body tag", "page structure"],
+      "concepts_review": [],
+      "hints": [
+        "Every HTML page needs three structural tags: <html>, <head>, and <body>.",
+        "The <head> and <body> tags go inside the <html> tag."
+      ]
+    },
+    {
+      "id": "hc_ch01_c02",
+      "title": "Page with Title and Paragraph",
+      "description": "Create an HTML page with a <title> inside the <head> and a <p> paragraph inside the <body> that explains what a website is. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page with a title and a paragraph -->\n\n\"\"\"",
+      "test_code": "assert '<html>' in html.lower(), 'Should contain an <html> tag'\nassert '<head>' in html.lower(), 'Should contain a <head> tag'\nassert '<title>' in html.lower(), 'Should contain a <title> tag'\nassert '</title>' in html.lower(), 'Should contain a closing </title> tag'\nassert '<body>' in html.lower(), 'Should contain a <body> tag'\nassert '<p>' in html.lower(), 'Should contain a <p> paragraph tag'\nassert '</p>' in html.lower(), 'Should contain a closing </p> tag'\nassert len(html.split('</p>')[0].split('<p>')[1].strip()) > 10, 'Paragraph should contain meaningful text about websites'",
+      "difficulty": "medium",
+      "concepts_new": ["title tag", "paragraph tag"],
+      "concepts_review": ["html tag", "head tag", "body tag"],
+      "hints": [
+        "The <title> tag goes inside <head> and sets the browser tab text.",
+        "The <p> tag goes inside <body> and contains paragraph text."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "step_id": "cpp_proj_ch15",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 15,
+  "title": "Specialized Trackers — Inheritance",
+  "description": "Create a class hierarchy using inheritance. Define a base Tracker class with virtual methods for calculating averages and displaying students. Then create a derived WeightedGradeBook class that overrides calculateAverage to apply weighted grades (e.g., homework 30%, midterm 30%, final 40%). Demonstrate polymorphism by using a base class pointer.",
+  "builds_on": "cpp_proj_ch13",
+  "starter_code": "# Student Grade Tracker — Step 10: Inheritance\n# Create a Tracker base class and WeightedGradeBook derived class.\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\n#include <vector>\nusing namespace std;\n\nconst int NUM_GRADES = 3;\n\nstruct Student {\n    string name;\n    double grades[NUM_GRADES];\n    double average;\n    char letterGrade;\n};\n\nchar getLetterGrade(double avg) {\n    if (avg >= 90) return 'A';\n    else if (avg >= 80) return 'B';\n    else if (avg >= 70) return 'C';\n    else if (avg >= 60) return 'D';\n    else return 'F';\n}\n\n// Define base class: Tracker\n// - protected: vector<Student> roster\n// - public: virtual double calculateStudentAverage(double grades[], int size)\n// - public: void addStudent(Student s)\n// - public: virtual void displayAll()\n// - public: virtual ~Tracker() {}\n\n// Define derived class: WeightedGradeBook : public Tracker\n// - private: double weights[NUM_GRADES] (e.g., {0.30, 0.30, 0.40})\n// - public: override calculateStudentAverage to use weights\n// - public: override displayAll to show \"(Weighted)\" label\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    // Create both a regular Tracker and a WeightedGradeBook\n    // Demonstrate polymorphism with a base class pointer\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "assert 'class' in cpp, 'Must define classes'\nassert ':' in cpp.split('class')[2] if cpp.count('class') >= 2 else False, 'Must use inheritance (: public BaseClass)'\nassert 'virtual' in cpp, 'Must use virtual keyword for polymorphic methods'\nassert 'override' in cpp or 'Override' in cpp, 'Must use override keyword on derived class methods'\nassert 'Tracker' in cpp, 'Must define a Tracker base class'\nassert 'WeightedGradeBook' in cpp or 'Weighted' in cpp, 'Must define a WeightedGradeBook derived class'\nassert 'protected' in cpp or 'public' in cpp, 'Must use access specifiers in class hierarchy'\nassert 'weight' in cpp.lower(), 'WeightedGradeBook must use weights for grade calculation'",
+  "acceptance_criteria": [
+    "Defines a Tracker base class with virtual methods",
+    "Defines a WeightedGradeBook class that inherits from Tracker",
+    "WeightedGradeBook overrides calculateStudentAverage with weighted calculation",
+    "Uses virtual keyword on base class methods",
+    "Uses override keyword on derived class methods",
+    "Demonstrates polymorphism (base class pointer or reference)"
+  ],
+  "hints": [
+    "Base class: class Tracker { protected: vector<Student> roster; public: virtual double calculateStudentAverage(double grades[], int size) { ... } };",
+    "Derived class: class WeightedGradeBook : public Tracker { ... };",
+    "Override: double calculateStudentAverage(double grades[], int size) override { return grades[0]*0.3 + grades[1]*0.3 + grades[2]*0.4; }",
+    "Polymorphism: Tracker* tracker = new WeightedGradeBook(); tracker->displayAll();",
+    "Always define a virtual destructor in the base class: virtual ~Tracker() {}"
+  ]
+}

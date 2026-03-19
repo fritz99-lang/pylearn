@@ -1,0 +1,21 @@
+{
+  "step_id": "h5_proj_ch05",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 5,
+  "title": "About Me \u2014 Formatted Bio",
+  "description": "Enhance your About Me section with formatted text. Write a short bio that uses <strong> for key skills or qualities, <em> for emphasis on important phrases, and <mark> to highlight a standout achievement or specialty.",
+  "builds_on": "h5_proj_ch03",
+  "starter_code": "# Portfolio Website \u2014 Step 3: Text Formatting\n# Enhance the About Me section with strong, em, and mark elements.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <h1>Your Name</h1>\n    <p>Welcome to my portfolio!</p>\n\n    <h2>About Me</h2>\n    <!-- Write a bio paragraph using <strong>, <em>, and <mark> -->\n    <p>\n        I am a developer who is <strong>passionate</strong> about\n        building things. <!-- Add more formatted text here -->\n    </p>\n\n    <h2>My Projects</h2>\n    <p>Here are some of my recent projects.</p>\n\n    <h2>Contact</h2>\n    <p>Get in touch with me.</p>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<strong>' in html.lower() and '</strong>' in html.lower(), 'Must include <strong> for bold emphasis'\nassert '<em>' in html.lower() and '</em>' in html.lower(), 'Must include <em> for italic emphasis'\nassert '<mark>' in html.lower() and '</mark>' in html.lower(), 'Must include <mark> to highlight text'\nassert '<h2>' in html.lower(), 'Must still include h2 section headings'\nassert html.lower().count('<p>') >= 3, 'Must include at least 3 paragraphs'",
+  "acceptance_criteria": [
+    "About Me section contains a bio with formatted text",
+    "<strong> element is used for bold emphasis",
+    "<em> element is used for italic emphasis",
+    "<mark> element is used to highlight text"
+  ],
+  "hints": [
+    "Wrap a key skill in <strong>: <strong>Python</strong>",
+    "Use <em> for subtle emphasis: <em>constantly learning</em>",
+    "Highlight something special with <mark>: <mark>award-winning</mark>"
+  ]
+}

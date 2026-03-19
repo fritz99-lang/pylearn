@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 39,
+  "challenges": [
+    {
+      "id": "css_ch39_c01",
+      "title": "Basic Column Layout",
+      "description": "Write CSS that uses CSS columns to create a multi-column text layout. Create a rule for `.columns` that sets `column-count: 3` and `column-gap: 30px`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'column-count' in css.lower(), 'Should use column-count property'\nassert 'column-gap' in css.lower(), 'Should use column-gap property'\nassert '3' in css, 'Should set column-count to 3'\nassert '.columns' in css.lower(), 'Should target .columns'",
+      "difficulty": "easy",
+      "concepts_new": ["column-count", "column-gap"],
+      "concepts_review": [],
+      "hints": [
+        "column-count specifies how many columns the content should be divided into",
+        "column-gap controls the space between columns"
+      ]
+    },
+    {
+      "id": "css_ch39_c02",
+      "title": "Column Rules and Spanning",
+      "description": "Write CSS for a styled column layout. Create a rule for `.article` that sets `column-count: 2`, `column-gap: 40px`, and `column-rule: 1px solid #ccc` to add a visible divider between columns. Create a rule for `.article h2` that sets `column-span: all` so headings stretch across all columns. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'column-count' in css.lower(), 'Should use column-count'\nassert 'column-rule' in css.lower(), 'Should use column-rule for a divider between columns'\nassert 'column-span' in css.lower(), 'Should use column-span'\nassert 'all' in css.lower(), 'Should set column-span to all'\nassert '.article' in css.lower(), 'Should target .article'\nassert 'h2' in css.lower(), 'Should target h2 within .article'",
+      "difficulty": "medium",
+      "concepts_new": ["column-rule", "column-span"],
+      "concepts_review": ["column-count", "column-gap"],
+      "hints": [
+        "column-rule works like the border shorthand: width, style, and color",
+        "column-span: all makes an element stretch across all columns"
+      ]
+    }
+  ]
+}

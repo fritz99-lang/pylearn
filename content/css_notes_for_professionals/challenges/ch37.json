@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 37,
+  "challenges": [
+    {
+      "id": "css_ch37_c01",
+      "title": "Define and Use Custom Properties",
+      "description": "Write CSS that defines custom properties (CSS variables) in `:root` and uses them with `var()`. In the `:root` selector, define `--primary-color` as `#3498db`, `--font-size` as `16px`, and `--spacing` as `1rem`. Create a rule for `.card` that uses `color: var(--primary-color)`, `font-size: var(--font-size)`, and `padding: var(--spacing)`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert ':root' in css.lower(), 'Should define variables in :root'\nassert '--primary-color' in css.lower(), 'Should define --primary-color variable'\nassert '--font-size' in css.lower(), 'Should define --font-size variable'\nassert '--spacing' in css.lower(), 'Should define --spacing variable'\nassert 'var(' in css.lower(), 'Should use var() to reference variables'\nassert '.card' in css.lower(), 'Should target .card'",
+      "difficulty": "easy",
+      "concepts_new": ["custom properties", ":root", "var()"],
+      "concepts_review": ["color", "font-size", "padding"],
+      "hints": [
+        "Custom properties always start with two dashes: --property-name",
+        "Define them in :root to make them globally available, then use var(--name) to reference them"
+      ]
+    },
+    {
+      "id": "css_ch37_c02",
+      "title": "Fallback Values and Scoped Variables",
+      "description": "Write CSS that uses `var()` with fallback values and component-scoped custom properties. In `:root`, define `--gap` as `20px`. Create a rule for `.button` that defines its own scoped `--btn-bg` as `#2ecc71` and uses `background: var(--btn-bg)`, `padding: var(--btn-padding, 10px 20px)` (with a fallback since `--btn-padding` is not defined), and `margin: var(--gap)`. Create a rule for `.button.danger` that overrides `--btn-bg` to `#e74c3c`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert ':root' in css.lower(), 'Should define global variables in :root'\nassert 'var(' in css.lower(), 'Should use var() function'\nassert '--btn-bg' in css.lower(), 'Should define component-scoped --btn-bg variable'\nassert '--btn-padding' in css.lower(), 'Should reference --btn-padding with a fallback'\nassert '.button' in css.lower(), 'Should target .button'\nassert 'danger' in css.lower(), 'Should target .button.danger to override variable'\nassert '--gap' in css.lower(), 'Should define --gap variable'",
+      "difficulty": "medium",
+      "concepts_new": ["var() fallback values", "scoped custom properties", "variable override"],
+      "concepts_review": ["custom properties", "var()", ":root"],
+      "hints": [
+        "var(--name, fallback) uses the fallback value when the variable is not defined",
+        "Redefining a custom property in a more specific selector overrides it for that scope"
+      ]
+    }
+  ]
+}

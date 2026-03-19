@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 30,
+  "challenges": [
+    {
+      "id": "h5_ch30_c01",
+      "title": "Multilingual Page",
+      "description": "Create an HTML page with the lang attribute set to English on the html element. Include a paragraph that contains a span with a different lang attribute (e.g., French or Spanish) to mark a phrase in another language. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a multilingual page with lang attributes -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<html' in lower, 'Should contain an <html> element'\nassert 'lang=' in lower, 'Should have lang attributes'\nassert 'lang=\"en\"' in lower or \"lang='en'\" in lower, 'HTML element should have lang=\"en\"'\nassert '<span' in lower, 'Should contain a <span> element with a different language'\nassert lower.count('lang=') >= 2, 'Should have at least 2 lang attributes (html and span)'\nassert '<p' in lower, 'Should contain a <p> element'",
+      "difficulty": "easy",
+      "concepts_new": ["lang attribute", "multilingual content"],
+      "concepts_review": ["html element", "span"],
+      "hints": [
+        "Set lang=\"en\" on the <html> element for English.",
+        "Use a <span> with a different lang value like lang=\"fr\" for French text.",
+        "Common language codes: en, fr, es, de, ja, zh."
+      ]
+    },
+    {
+      "id": "h5_ch30_c02",
+      "title": "RTL Content",
+      "description": "Create a page with the lang attribute on the html element. Include a paragraph with left-to-right text and another element with right-to-left text using the dir attribute set to rtl (e.g., Arabic or Hebrew). Also add a link element with an hreflang attribute. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page with LTR and RTL content -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<html' in lower, 'Should contain an <html> element'\nassert 'lang=' in lower, 'Should have a lang attribute'\nassert 'dir=' in lower, 'Should have a dir attribute'\nassert 'rtl' in lower, 'Should include dir=\"rtl\" for right-to-left text'\nassert 'hreflang=' in lower, 'Should have an hreflang attribute on a link'\nassert '<a ' in lower or '<link' in lower, 'Should contain a link element with hreflang'",
+      "difficulty": "medium",
+      "concepts_new": ["dir attribute", "rtl", "hreflang"],
+      "concepts_review": ["lang attribute", "multilingual content"],
+      "hints": [
+        "Use dir=\"rtl\" on an element to indicate right-to-left text direction.",
+        "The hreflang attribute on an <a> tag indicates the language of the linked page.",
+        "Arabic (ar) and Hebrew (he) are common RTL languages."
+      ]
+    }
+  ]
+}

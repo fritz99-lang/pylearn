@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 24,
+  "challenges": [
+    {
+      "id": "css_ch24_c01",
+      "title": "Basic CSS Grid",
+      "description": "Write a CSS rule that targets `.grid` and sets `display` to `grid` and `grid-template-columns` to `1fr 1fr 1fr` to create a three-column layout. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* .grid with three equal columns */\n\n\"\"\"",
+      "test_code": "assert '.grid' in css, 'Should target .grid'\nassert 'display' in css.lower(), 'Should set display property'\nassert 'grid' in css.lower(), 'Should use display: grid'\nassert 'grid-template-columns' in css.lower(), 'Should set grid-template-columns'\nassert '1fr' in css.lower(), 'Should use fr units for flexible columns'",
+      "difficulty": "easy",
+      "concepts_new": ["display-grid", "grid-template-columns", "fr-units"],
+      "concepts_review": ["css-rules"],
+      "hints": [
+        "CSS Grid starts with `display: grid;` on the container.",
+        "Use `grid-template-columns: 1fr 1fr 1fr;` for three equal-width columns. `fr` means fraction of available space."
+      ]
+    },
+    {
+      "id": "css_ch24_c02",
+      "title": "Grid Areas and Gap",
+      "description": "Write a CSS rule that targets `.layout` and sets `display` to `grid`, defines `grid-template-areas` with at least two named areas (e.g. `'header header'` and `'sidebar main'`), uses `grid-template-columns` with `fr` units, and sets `gap` to a value like `16px`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* .layout with grid areas and gap */\n\n\"\"\"",
+      "test_code": "assert '.layout' in css, 'Should target .layout'\nassert 'display' in css.lower(), 'Should set display property'\nassert 'grid' in css.lower(), 'Should use display: grid'\nassert 'grid-template-areas' in css.lower(), 'Should define grid-template-areas'\nassert 'grid-template-columns' in css.lower(), 'Should set grid-template-columns'\nassert 'fr' in css.lower(), 'Should use fr units in columns'\nassert 'gap' in css.lower(), 'Should set gap between grid cells'",
+      "difficulty": "medium",
+      "concepts_new": ["grid-template-areas", "grid-gap"],
+      "concepts_review": ["display-grid", "grid-template-columns", "fr-units"],
+      "hints": [
+        "grid-template-areas uses quoted strings to name regions: `grid-template-areas: 'header header' 'sidebar main';`",
+        "The `gap` property (shorthand for row-gap and column-gap) adds spacing between grid cells."
+      ]
+    }
+  ]
+}

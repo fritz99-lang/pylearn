@@ -1,0 +1,58 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 9,
+  "questions": [
+    {
+      "id": "cpp_ch09_q01",
+      "type": "multiple_choice",
+      "question": "What does the address-of operator (&) return when applied to a variable?",
+      "choices": ["The value stored in the variable", "The memory address of the variable", "A reference to the variable", "The size of the variable in bytes"],
+      "correct": 1,
+      "explanation": "The address-of operator (&) returns the memory address where the variable is stored, which can be assigned to a pointer variable.",
+      "concepts": ["address_of_operator", "pointer_variables"]
+    },
+    {
+      "id": "cpp_ch09_q02",
+      "type": "multiple_choice",
+      "question": "Given `int *ptr = new int;`, how do you properly free the allocated memory?",
+      "choices": ["free(ptr);", "delete ptr;", "remove ptr;", "ptr = nullptr;"],
+      "correct": 1,
+      "explanation": "Memory allocated with 'new' must be freed with 'delete'. Using 'delete ptr;' releases the dynamically allocated integer back to the system.",
+      "concepts": ["dynamic_memory", "new_delete"]
+    },
+    {
+      "id": "cpp_ch09_q03",
+      "type": "multiple_choice",
+      "question": "What is the result of the expression `*(ptr + 2)` if ptr points to the first element of an integer array?",
+      "choices": ["The address of the third element", "The value of the third element", "The value of the first element plus 2", "A compilation error"],
+      "correct": 1,
+      "explanation": "Pointer arithmetic adds (2 * sizeof(int)) bytes to the pointer. The dereference operator (*) then retrieves the value at that address, which is the third element (index 2).",
+      "concepts": ["pointer_arithmetic", "dereference_operator"]
+    },
+    {
+      "id": "cpp_ch09_q04",
+      "type": "multiple_choice",
+      "question": "What value should a pointer be set to when it is not pointing to a valid memory address in modern C++?",
+      "choices": ["0", "NULL", "nullptr", "void"],
+      "correct": 2,
+      "explanation": "In modern C++ (C++11 and later), nullptr is the preferred way to represent a null pointer. It is type-safe, unlike 0 or NULL which are integer constants.",
+      "concepts": ["nullptr", "pointer_variables"]
+    },
+    {
+      "id": "cpp_ch09_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ operator (*) is used to access the value stored at the address held by a pointer.",
+      "correct": "dereference",
+      "explanation": "The dereference operator (*), also called the indirection operator, follows a pointer to the memory location it points to and accesses the value stored there.",
+      "concepts": ["dereference_operator"]
+    },
+    {
+      "id": "cpp_ch09_q06",
+      "type": "fill_in_blank",
+      "question": "To dynamically allocate an array of 10 integers, you write: int *arr = ___ int[10];",
+      "correct": "new",
+      "explanation": "The 'new' operator allocates memory on the heap at runtime. 'new int[10]' allocates space for 10 integers and returns a pointer to the first element.",
+      "concepts": ["dynamic_memory", "new_delete"]
+    }
+  ]
+}

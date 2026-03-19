@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 9,
+  "challenges": [
+    {
+      "id": "css_ch09_c01",
+      "title": "Padding Shorthand",
+      "description": "Write CSS that sets padding on a `.box` selector using the shorthand `padding` property. Set it to 10px on top and bottom, and 20px on left and right, using the two-value shorthand. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.box' in css.lower(), 'Should target the .box selector'\nassert 'padding' in css.lower(), 'Should use the padding property'\nassert '10px' in css.lower(), 'Should include 10px value'\nassert '20px' in css.lower(), 'Should include 20px value'",
+      "difficulty": "easy",
+      "concepts_new": ["padding-shorthand"],
+      "concepts_review": [],
+      "hints": [
+        "The padding shorthand with two values sets top/bottom and left/right.",
+        "Use: padding: 10px 20px;"
+      ]
+    },
+    {
+      "id": "css_ch09_c02",
+      "title": "Padding with Box Sizing",
+      "description": "Write CSS for a `.card` selector that sets padding to 15px on top, 20px on right, 25px on left, and 10px on bottom using the four-value shorthand. Also set `box-sizing: border-box` and a `width` of 300px so the padding is included in the total width. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.card' in css.lower(), 'Should target the .card selector'\nassert 'padding' in css.lower(), 'Should use the padding property'\nassert '15px' in css.lower(), 'Should include 15px for top padding'\nassert '20px' in css.lower(), 'Should include 20px for right padding'\nassert '10px' in css.lower(), 'Should include 10px for bottom padding'\nassert '25px' in css.lower(), 'Should include 25px for left padding'\nassert 'box-sizing' in css.lower(), 'Should use box-sizing property'\nassert 'border-box' in css.lower(), 'Should set box-sizing to border-box'\nassert '300px' in css.lower(), 'Should set width to 300px'",
+      "difficulty": "medium",
+      "concepts_new": ["box-sizing", "padding-four-values"],
+      "concepts_review": ["padding-shorthand"],
+      "hints": [
+        "The four-value padding shorthand order is: top right bottom left (clockwise).",
+        "box-sizing: border-box makes padding count toward the element's total width.",
+        "Use: padding: 15px 20px 10px 25px;"
+      ]
+    }
+  ]
+}

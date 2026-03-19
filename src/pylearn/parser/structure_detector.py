@@ -140,10 +140,16 @@ class StructureDetector:
 
         # Pick the chapter-level size:
         # - If the largest size has very few instances (<=10), it's likely Part titles
-        #   and the second-largest is chapters
+        #   and the next size with enough instances is chapters
         # - Otherwise the largest IS chapters
         if len(sizes) >= 2 and size_counts[sizes[0]] <= 10:
-            chapter_size = sizes[1]
+            # Find the first size after the largest that has more than 2 instances,
+            # since very-low-count sizes are likely sub-part headings, not chapters.
+            chapter_size = sizes[1]  # default fallback
+            for s in sizes[1:]:
+                if size_counts[s] > 2:
+                    chapter_size = s
+                    break
             logger.info(
                 f"Using font size {chapter_size} as chapters "
                 f"({size_counts[sizes[0]]} parts at size {sizes[0]}, "

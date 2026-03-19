@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 19,
+  "challenges": [
+    {
+      "id": "h5_ch19_c01",
+      "title": "Page Layout",
+      "description": "Create a page structure using div elements with class attributes for header, content, sidebar, and footer sections. Each div should contain at least one heading or paragraph. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page layout using div elements with class attributes -->\n<!-- Include header, content, sidebar, and footer sections -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<div') >= 4, 'Should contain at least 4 div elements'\nassert html.lower().count('</div>') >= 4, 'Should close all div elements'\nassert 'class=\"header\"' in html.lower() or 'class=\"head' in html.lower(), 'Should have a div with a header class'\nassert 'class=\"content\"' in html.lower() or 'class=\"main' in html.lower(), 'Should have a div with a content or main class'\nassert 'class=\"sidebar\"' in html.lower() or 'class=\"side' in html.lower(), 'Should have a div with a sidebar class'\nassert 'class=\"footer\"' in html.lower() or 'class=\"foot' in html.lower(), 'Should have a div with a footer class'",
+      "difficulty": "easy",
+      "concepts_new": ["div_element", "class_attribute", "page_layout"],
+      "concepts_review": ["html_structure"],
+      "hints": [
+        "Use <div class=\"header\">, <div class=\"content\">, etc.",
+        "Add headings or paragraphs inside each div to give them content",
+        "The class attribute names should describe the purpose of each section"
+      ]
+    },
+    {
+      "id": "h5_ch19_c02",
+      "title": "Card Layout",
+      "description": "Create at least 3 div-based 'card' elements, each with a class of 'card'. Each card should contain an h3 heading, a paragraph, and an anchor link. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create at least 3 card divs -->\n<!-- Each card should contain an h3, a paragraph, and a link -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('class=\"card\"') >= 3, 'Should contain at least 3 elements with class=\"card\"'\nassert html.lower().count('<h3') >= 3, 'Each card should contain an h3 heading'\nassert html.lower().count('</h3>') >= 3, 'Should close all h3 elements'\nassert html.lower().count('<p') >= 3, 'Each card should contain a paragraph'\nassert html.lower().count('<a ') >= 3, 'Each card should contain a link'\nassert html.lower().count('href=') >= 3, 'Each link should have an href attribute'",
+      "difficulty": "medium",
+      "concepts_new": ["card_pattern", "reusable_components"],
+      "concepts_review": ["div_element", "class_attribute", "headings", "paragraphs", "links"],
+      "hints": [
+        "Create each card as <div class=\"card\"> with content inside",
+        "Include an <h3>, a <p>, and an <a href=\"#\"> in each card",
+        "You can wrap all cards in a container div if you like"
+      ]
+    }
+  ]
+}

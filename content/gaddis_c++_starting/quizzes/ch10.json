@@ -1,0 +1,58 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 10,
+  "questions": [
+    {
+      "id": "cpp_ch10_q01",
+      "type": "multiple_choice",
+      "question": "Which C-string function returns the length of a string without counting the null terminator?",
+      "choices": ["strcpy", "strcmp", "strlen", "strcat"],
+      "correct": 2,
+      "explanation": "strlen returns the number of characters in a C-string, not counting the null terminator ('\\0') that marks the end of the string.",
+      "concepts": ["c_string_functions", "strlen"]
+    },
+    {
+      "id": "cpp_ch10_q02",
+      "type": "multiple_choice",
+      "question": "What does the character testing function `isdigit(ch)` return when ch contains '7'?",
+      "choices": ["0 (false)", "A non-zero value (true)", "The integer 7", "The character '7'"],
+      "correct": 1,
+      "explanation": "isdigit returns a non-zero (true) value if the character is a digit ('0' through '9'), and 0 (false) otherwise. '7' is a digit, so it returns true.",
+      "concepts": ["character_testing", "isdigit"]
+    },
+    {
+      "id": "cpp_ch10_q03",
+      "type": "multiple_choice",
+      "question": "Which string class method returns the number of characters currently stored in a string object?",
+      "choices": ["string::capacity()", "string::length()", "string::max_size()", "string::reserve()"],
+      "correct": 1,
+      "explanation": "The length() method (and its synonym size()) returns the number of characters currently stored in the string object, not including any null terminator.",
+      "concepts": ["string_class", "string_methods"]
+    },
+    {
+      "id": "cpp_ch10_q04",
+      "type": "multiple_choice",
+      "question": "What happens if you use the relational operators (==, <, >) directly on two C-string variables?",
+      "choices": ["It compares the strings character by character", "It compares the memory addresses of the strings, not their contents", "It causes a compilation error", "It compares the lengths of the strings"],
+      "correct": 1,
+      "explanation": "Using relational operators on C-string variables compares their memory addresses (pointers), not their contents. Use strcmp to compare C-string contents.",
+      "concepts": ["c_string_functions", "strcmp"]
+    },
+    {
+      "id": "cpp_ch10_q05",
+      "type": "fill_in_blank",
+      "question": "The C-string function ___ is used to copy one string into another.",
+      "correct": "strcpy",
+      "explanation": "strcpy(destination, source) copies the contents of the source C-string into the destination array, including the null terminator.",
+      "concepts": ["c_string_functions", "strcpy"]
+    },
+    {
+      "id": "cpp_ch10_q06",
+      "type": "fill_in_blank",
+      "question": "The function ___ tests whether a character is an alphabetic letter (a-z or A-Z).",
+      "correct": "isalpha",
+      "explanation": "isalpha returns a non-zero (true) value if the character is an uppercase or lowercase letter, and 0 (false) otherwise.",
+      "concepts": ["character_testing", "isalpha"]
+    }
+  ]
+}

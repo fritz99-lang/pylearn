@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 15,
+  "questions": [
+    {
+      "id": "pp_ch15_q01",
+      "type": "multiple_choice",
+      "question": "In the PyMailGUI case study, why is email fetching performed in a background thread rather than directly in the GUI callback?",
+      "choices": [
+        "Python's socket module only works in background threads",
+        "Network operations can take seconds or minutes, and running them in the main thread would freeze the GUI",
+        "Threading makes the email download faster by parallelizing packets",
+        "tkinter requires all I/O to happen in daemon threads"
+      ],
+      "correct": 1,
+      "explanation": "Email operations involve network I/O with unpredictable latency. Running them in the main tkinter thread would block the event loop, making the GUI unresponsive. Background threads handle the network work while the main thread keeps the GUI alive, using after() to poll for results.",
+      "concepts": ["threaded GUI", "email fetching"]
+    },
+    {
+      "id": "pp_ch15_q02",
+      "type": "multiple_choice",
+      "question": "When constructing an email with attachments in PyMailGUI, what type of MIME message structure is used to combine the text body with file attachments?",
+      "choices": [
+        "A single text/plain message with base64-encoded attachments appended",
+        "A multipart/mixed message containing separate MIME parts for body and each attachment",
+        "Multiple independent email messages sent in sequence",
+        "A text/html message with embedded binary data"
+      ],
+      "correct": 1,
+      "explanation": "A multipart/mixed MIME message contains multiple parts: typically a text/plain (or text/html) part for the body and additional parts for each attachment with appropriate Content-Type and Content-Disposition headers. Python's email module handles this structure.",
+      "concepts": ["MIME message construction", "attachments"]
+    },
+    {
+      "id": "pp_ch15_q03",
+      "type": "multiple_choice",
+      "question": "In PyMailGUI, when the user clicks Reply, what information from the original message is typically used to pre-populate the reply compose window?",
+      "choices": [
+        "Only the original sender's address in the To field",
+        "The original sender in To, a 'Re: subject' in Subject, and the original body quoted with '>' prefixes",
+        "Just the Subject line with 'Re:' prepended",
+        "The full original message is forwarded without modification"
+      ],
+      "correct": 1,
+      "explanation": "Reply pre-fills the To field with the original sender (from the From or Reply-To header), prepends 'Re:' to the Subject, and includes the original message body with each line prefixed by '>' to indicate quoted text. This is standard email reply convention.",
+      "concepts": ["reply", "forward"]
+    },
+    {
+      "id": "pp_ch15_q04",
+      "type": "multiple_choice",
+      "question": "What strategy does PyMailGUI use to avoid re-downloading all email headers every time the user checks for new mail?",
+      "choices": [
+        "It stores a local copy of all messages and never contacts the server again",
+        "It caches previously fetched message headers and only fetches headers for new messages by comparing message counts",
+        "It uses IMAP IDLE push notifications",
+        "It downloads only the 10 most recent messages"
+      ],
+      "correct": 1,
+      "explanation": "PyMailGUI caches previously seen message headers locally. When checking for new mail, it compares the server's message count with what it has cached and only downloads headers for messages it hasn't seen yet, significantly reducing network traffic and latency.",
+      "concepts": ["email caching", "performance"]
+    },
+    {
+      "id": "pp_ch15_q05",
+      "type": "fill_in_blank",
+      "question": "When forwarding an email in PyMailGUI, the subject line is prefixed with '______:' followed by the original subject text.",
+      "correct": "Fwd",
+      "explanation": "The standard convention for forwarded emails is to prefix the subject with 'Fwd:' (or 'FW:'). PyMailGUI follows this convention and includes the original message body, allowing the user to add their own comments before sending.",
+      "concepts": ["forward", "email conventions"]
+    },
+    {
+      "id": "pp_ch15_q06",
+      "type": "fill_in_blank",
+      "question": "PyMailGUI reuses the ______ text editor component (built in an earlier chapter) as an embedded widget for composing and viewing email message text.",
+      "correct": "PyEdit",
+      "explanation": "PyMailGUI embeds PyEdit — the text editor built as a Frame subclass in Chapter 12 — for editing and viewing email text. This demonstrates the power of building GUI components as reusable classes: PyEdit works standalone and as an embedded component.",
+      "concepts": ["component reuse", "PyEdit"]
+    }
+  ]
+}

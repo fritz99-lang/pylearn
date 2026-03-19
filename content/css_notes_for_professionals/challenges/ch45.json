@@ -1,0 +1,36 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 45,
+  "challenges": [
+    {
+      "id": "css_ch45_c01",
+      "title": "Prevent Column Breaks in Print",
+      "description": "Write CSS that targets '.card' elements and uses break-inside set to avoid, so cards are not split across columns or pages when printing. Also add a @media print rule that targets '.no-break' and sets page-break-inside to avoid for older browser support. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Prevent elements from breaking across columns/pages */\n\n\"\"\"",
+      "test_code": "assert 'break-inside' in css.lower(), 'Should use break-inside property'\nassert 'avoid' in css.lower(), 'Should use avoid value'\nassert '.card' in css.lower(), 'Should target .card elements'\nassert '@media' in css.lower(), 'Should include a @media rule'\nassert 'print' in css.lower(), 'Should target print media'\nassert 'page-break-inside' in css.lower(), 'Should include page-break-inside for compatibility'",
+      "difficulty": "easy",
+      "concepts_new": ["break-inside", "page-break-inside", "CSS fragmentation"],
+      "concepts_review": ["@media print"],
+      "hints": [
+        "break-inside: avoid prevents an element from being split across columns or pages.",
+        "page-break-inside: avoid is the older syntax that some browsers still require.",
+        "Wrap print-specific styles in @media print { }."
+      ]
+    },
+    {
+      "id": "css_ch45_c02",
+      "title": "Print Layout with Fragmentation Control",
+      "description": "Write CSS inside a @media print rule that: (1) targets 'h2' and sets break-before to always so each h2 starts a new page, (2) targets '.section' and sets break-after to avoid so sections stay with content after them, (3) targets 'p' and sets orphans to 3 and widows to 3 to control line breaking. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Control page breaks and line distribution for print */\n\n\"\"\"",
+      "test_code": "assert '@media' in css.lower(), 'Should use @media rule'\nassert 'print' in css.lower(), 'Should target print media'\nassert 'break-before' in css.lower(), 'Should use break-before'\nassert 'break-after' in css.lower(), 'Should use break-after'\nassert 'always' in css.lower(), 'Should use always value for break-before'\nassert 'avoid' in css.lower(), 'Should use avoid value for break-after'\nassert 'orphans' in css.lower(), 'Should set orphans property'\nassert 'widows' in css.lower(), 'Should set widows property'\nassert '3' in css, 'Should set orphans and widows to 3'\nassert 'h2' in css.lower(), 'Should target h2 elements'\nassert '.section' in css.lower(), 'Should target .section elements'",
+      "difficulty": "medium",
+      "concepts_new": ["break-before", "break-after", "orphans", "widows"],
+      "concepts_review": ["break-inside", "@media print", "CSS fragmentation"],
+      "hints": [
+        "break-before: always forces a page break before the element.",
+        "break-after: avoid tries to keep the element on the same page as the content after it.",
+        "orphans controls the minimum number of lines at the bottom of a page; widows controls the minimum at the top of the next page."
+      ]
+    }
+  ]
+}

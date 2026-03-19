@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 28,
+  "challenges": [
+    {
+      "id": "css_ch28_c01",
+      "title": "Translate and Rotate",
+      "description": "Apply translate(50px, 100px) and rotate(45deg) to a .icon element using the transform property. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Use translate and rotate transforms */\n\n\"\"\"",
+      "test_code": "assert 'transform' in css.lower(), 'Should use the transform property'\nassert 'translate' in css.lower(), 'Should use the translate() function'\nassert '50px' in css.lower(), 'Should translate 50px on the x-axis'\nassert '100px' in css.lower(), 'Should translate 100px on the y-axis'\nassert 'rotate' in css.lower(), 'Should use the rotate() function'\nassert '45deg' in css.lower(), 'Should rotate by 45 degrees'",
+      "difficulty": "easy",
+      "concepts_new": ["translate", "rotate"],
+      "concepts_review": ["transform"],
+      "hints": [
+        "You can chain transforms in one declaration: transform: translate(50px, 100px) rotate(45deg).",
+        "translate(x, y) moves the element; rotate(angle) spins it."
+      ]
+    },
+    {
+      "id": "css_ch28_c02",
+      "title": "Scale, Skew, and Transform Origin",
+      "description": "Apply scale(1.5), skewX(10deg), and set transform-origin to top left on a .card element. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Combine scale, skew, and transform-origin */\n\n\"\"\"",
+      "test_code": "assert 'transform' in css.lower(), 'Should use the transform property'\nassert 'scale' in css.lower(), 'Should use the scale() function'\nassert '1.5' in css.lower(), 'Should scale to 1.5'\nassert 'skewx' in css.lower(), 'Should use the skewX() function'\nassert '10deg' in css.lower(), 'Should skew by 10 degrees'\nassert 'transform-origin' in css.lower(), 'Should use the transform-origin property'\nassert 'top' in css.lower(), 'Should set transform-origin to top'\nassert 'left' in css.lower(), 'Should set transform-origin to left'",
+      "difficulty": "medium",
+      "concepts_new": ["scale", "skewX", "transform-origin"],
+      "concepts_review": ["transform"],
+      "hints": [
+        "Chain transforms: transform: scale(1.5) skewX(10deg).",
+        "transform-origin changes the point around which transforms are applied.",
+        "transform-origin: top left sets the origin to the top-left corner."
+      ]
+    }
+  ]
+}

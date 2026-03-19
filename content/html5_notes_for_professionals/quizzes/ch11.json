@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 11,
+  "questions": [
+    {
+      "id": "h5_ch11_q01",
+      "type": "multiple_choice",
+      "question": "What prefix must all custom data attributes use in HTML5?",
+      "choices": ["custom-", "attr-", "data-", "x-"],
+      "correct": 2,
+      "explanation": "HTML5 custom data attributes must begin with 'data-' followed by at least one character, e.g., data-user-id=\"42\".",
+      "concepts": ["data attributes", "syntax"]
+    },
+    {
+      "id": "h5_ch11_q02",
+      "type": "multiple_choice",
+      "question": "How do you access data-user-name in JavaScript using the dataset property?",
+      "choices": ["element.dataset.data-user-name", "element.dataset.userName", "element.dataset['data-user-name']", "element.data.userName"],
+      "correct": 1,
+      "explanation": "The dataset property converts hyphenated data attribute names to camelCase. So data-user-name becomes dataset.userName.",
+      "concepts": ["data attributes", "dataset property", "JavaScript"]
+    },
+    {
+      "id": "h5_ch11_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a valid data attribute name?",
+      "choices": ["data-id", "data-user-role", "data-XML", "data-item-count"],
+      "correct": 2,
+      "explanation": "Data attribute names must not contain uppercase letters. 'data-XML' is invalid because it contains uppercase characters.",
+      "concepts": ["data attributes", "naming rules"]
+    },
+    {
+      "id": "h5_ch11_q04",
+      "type": "multiple_choice",
+      "question": "What type of value do data attributes store?",
+      "choices": ["Only numbers", "Only booleans", "Always strings", "Any JavaScript type"],
+      "correct": 2,
+      "explanation": "Data attributes always store string values in HTML. If you need a number or boolean, you must convert the string value in JavaScript.",
+      "concepts": ["data attributes", "data types"]
+    },
+    {
+      "id": "h5_ch11_q05",
+      "type": "fill_in_blank",
+      "question": "In JavaScript, the ___ property on an element provides access to all its data-* attributes.",
+      "correct": "dataset",
+      "explanation": "The dataset property returns a DOMStringMap of all data-* attributes on an element, with names converted from hyphenated to camelCase.",
+      "concepts": ["dataset property", "JavaScript"]
+    },
+    {
+      "id": "h5_ch11_q06",
+      "type": "fill_in_blank",
+      "question": "The data attribute data-item-count is accessed in JavaScript as dataset.___.",
+      "correct": "itemCount",
+      "explanation": "Hyphenated data attribute names are converted to camelCase when accessed via the dataset property. data-item-count becomes itemCount.",
+      "concepts": ["data attributes", "camelCase conversion"]
+    }
+  ]
+}

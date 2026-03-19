@@ -1,0 +1,22 @@
+{
+  "step_id": "h5_proj_ch25",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 25,
+  "title": "Media Showcase \u2014 Video and Audio",
+  "description": "Add media elements to your portfolio. Include a video element with the controls attribute and a source element inside it. Add an audio element with controls and a source. Both should have fallback text for browsers that do not support media playback.",
+  "builds_on": "h5_proj_ch20",
+  "starter_code": "# Portfolio Website \u2014 Step 9: Video and Audio\n# Add video and audio elements with controls, source, and fallback text.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <header>\n        <h1>Your Name</h1>\n        <nav>\n            <a href=\"#about\">About Me</a> |\n            <a href=\"#projects\">Projects</a> |\n            <a href=\"#contact\">Contact</a>\n        </nav>\n    </header>\n\n    <main>\n        <section id=\"about\">\n            <h2>About Me</h2>\n            <p>\n                I am a developer who is <strong>passionate</strong> about\n                building things. I am <em>constantly learning</em> and\n                <mark>love problem-solving</mark>.\n            </p>\n            <table>\n                <thead>\n                    <tr><th>Skill</th><th>Level</th><th>Years</th></tr>\n                </thead>\n                <tbody>\n                    <tr><td>HTML</td><td>Beginner</td><td>1</td></tr>\n                    <tr><td>CSS</td><td>Beginner</td><td>1</td></tr>\n                    <tr><td>Python</td><td>Intermediate</td><td>2</td></tr>\n                </tbody>\n            </table>\n        </section>\n\n        <section id=\"projects\">\n            <h2>My Projects</h2>\n            <figure>\n                <img src=\"project1.png\" alt=\"Screenshot of project 1\">\n                <figcaption>My first web project</figcaption>\n            </figure>\n\n            <!-- Add a video element here with controls and source -->\n\n            <!-- Add an audio element here with controls and source -->\n\n        </section>\n\n        <section id=\"contact\">\n            <h2>Contact</h2>\n            <form method=\"post\">\n                <label for=\"name\">Name:</label>\n                <input type=\"text\" id=\"name\" name=\"name\">\n                <label for=\"email\">Email:</label>\n                <input type=\"email\" id=\"email\" name=\"email\">\n                <label for=\"message\">Message:</label>\n                <textarea id=\"message\" name=\"message\"></textarea>\n                <button type=\"submit\">Send</button>\n            </form>\n        </section>\n    </main>\n\n    <footer>\n        <p>&copy; 2026 Your Name</p>\n    </footer>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<video' in html.lower() and '</video>' in html.lower(), 'Must include a <video> element'\nassert '<audio' in html.lower() and '</audio>' in html.lower(), 'Must include an <audio> element'\nassert '<source' in html.lower(), 'Must include <source> elements inside video and audio'\nassert html.lower().count('<source') >= 2, f'Need at least 2 <source> elements (one for video, one for audio), found {html.lower().count(\"<source\")}'\nassert 'controls' in html.lower(), 'Video and audio elements must have the controls attribute'",
+  "acceptance_criteria": [
+    "A video element with the controls attribute",
+    "A source element inside the video with src and type",
+    "An audio element with the controls attribute",
+    "A source element inside the audio with src and type",
+    "Fallback text inside both video and audio elements"
+  ],
+  "hints": [
+    "Video: <video controls><source src=\"demo.mp4\" type=\"video/mp4\">Your browser does not support video.</video>",
+    "Audio: <audio controls><source src=\"music.mp3\" type=\"audio/mpeg\">Your browser does not support audio.</audio>",
+    "The controls attribute has no value \u2014 just add the word 'controls'"
+  ]
+}

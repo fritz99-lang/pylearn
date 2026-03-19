@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 32,
+  "challenges": [
+    {
+      "id": "css_ch32_c01",
+      "title": "Basic Box Shadow",
+      "description": "Add a box-shadow to a .card element with 2px horizontal offset, 4px vertical offset, 8px blur radius, and a color of rgba(0,0,0,0.3). Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Add a basic box-shadow to a card */\n\n\"\"\"",
+      "test_code": "assert 'box-shadow' in css.lower(), 'Should use the box-shadow property'\nassert '2px' in css.lower(), 'Should set 2px horizontal offset'\nassert '4px' in css.lower(), 'Should set 4px vertical offset'\nassert '8px' in css.lower(), 'Should set 8px blur radius'\nassert 'rgba' in css.lower(), 'Should use rgba color for the shadow'\nassert '.card' in css.lower(), 'Should target the .card class'",
+      "difficulty": "easy",
+      "concepts_new": ["box-shadow"],
+      "concepts_review": ["rgba"],
+      "hints": [
+        "box-shadow syntax: box-shadow: offset-x offset-y blur-radius color.",
+        "rgba(0,0,0,0.3) creates a semi-transparent black shadow."
+      ]
+    },
+    {
+      "id": "css_ch32_c02",
+      "title": "Inset and Multiple Shadows",
+      "description": "On a .panel element, apply two box-shadows separated by a comma: first an inset shadow (inset 0 2px 4px rgba(0,0,0,0.2)) and then an outer shadow (0 4px 12px rgba(0,0,0,0.15)). Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Use inset shadow and multiple box-shadows */\n\n\"\"\"",
+      "test_code": "assert 'box-shadow' in css.lower(), 'Should use the box-shadow property'\nassert 'inset' in css.lower(), 'Should include an inset shadow'\nassert '12px' in css.lower(), 'Should set 12px blur on the outer shadow'\nassert '.panel' in css.lower(), 'Should target the .panel class'\nassert css.lower().count('rgba') >= 2, 'Should use rgba color for both shadows'\nassert ',' in css, 'Should separate multiple shadows with a comma'",
+      "difficulty": "medium",
+      "concepts_new": ["inset shadow", "multiple box-shadows"],
+      "concepts_review": ["box-shadow", "rgba"],
+      "hints": [
+        "The inset keyword goes at the start: inset 0 2px 4px rgba(...).",
+        "Separate multiple shadows with a comma in a single box-shadow declaration.",
+        "Inset shadows appear inside the element; outer shadows appear outside."
+      ]
+    }
+  ]
+}

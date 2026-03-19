@@ -1,0 +1,73 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 15,
+  "questions": [
+    {
+      "id": "cpp_ch15_q01",
+      "type": "multiple_choice",
+      "question": "Which access specifier allows a member to be accessed by derived classes but not by code outside the class hierarchy?",
+      "choices": ["public", "private", "protected", "friend"],
+      "correct": 2,
+      "explanation": "The protected access specifier allows members to be accessed by the class itself and by derived classes, but not by code outside the class hierarchy.",
+      "concepts": ["protected access", "inheritance"]
+    },
+    {
+      "id": "cpp_ch15_q02",
+      "type": "multiple_choice",
+      "question": "What happens when a derived class defines a function with the same name and parameters as a base class function?",
+      "choices": [
+        "A compiler error occurs",
+        "The base class function is called automatically",
+        "The derived class function overrides the base class function",
+        "Both functions are called in sequence"
+      ],
+      "correct": 2,
+      "explanation": "When a derived class defines a function with the same signature as a base class function, the derived class version overrides the base class version. The base class version can still be called using the scope resolution operator.",
+      "concepts": ["function overriding", "derived classes"]
+    },
+    {
+      "id": "cpp_ch15_q03",
+      "type": "multiple_choice",
+      "question": "What is a pure virtual function?",
+      "choices": [
+        "A function that cannot be overridden",
+        "A virtual function with no body, declared with = 0",
+        "A function that is only defined in the derived class",
+        "A static function in a base class"
+      ],
+      "correct": 1,
+      "explanation": "A pure virtual function is declared by assigning 0 to it in the base class (e.g., virtual void draw() = 0;). It has no body in the base class and must be overridden by any concrete derived class.",
+      "concepts": ["pure virtual functions", "abstract classes"]
+    },
+    {
+      "id": "cpp_ch15_q04",
+      "type": "multiple_choice",
+      "question": "Which statement about abstract classes is true?",
+      "choices": [
+        "You can create objects of an abstract class",
+        "An abstract class must contain only pure virtual functions",
+        "You cannot create objects of an abstract class, but you can create pointers to one",
+        "An abstract class cannot have a constructor"
+      ],
+      "correct": 2,
+      "explanation": "An abstract class (one with at least one pure virtual function) cannot be instantiated directly, but you can declare pointers and references to it. This enables polymorphism through base class pointers.",
+      "concepts": ["abstract classes", "polymorphism"]
+    },
+    {
+      "id": "cpp_ch15_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ keyword is placed before a member function declaration in the base class to allow dynamic binding when called through a base class pointer.",
+      "correct": "virtual",
+      "explanation": "The virtual keyword enables dynamic (late) binding, so the correct derived class version of the function is called at runtime when accessed through a base class pointer or reference.",
+      "concepts": ["virtual functions", "dynamic binding"]
+    },
+    {
+      "id": "cpp_ch15_q06",
+      "type": "fill_in_blank",
+      "question": "When a derived class inherits from two or more base classes, this is called ___ inheritance.",
+      "correct": "multiple",
+      "explanation": "Multiple inheritance occurs when a derived class has two or more base classes. For example: class DerivedClass : public Base1, public Base2 { };",
+      "concepts": ["multiple inheritance"]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 20,
+  "challenges": [
+    {
+      "id": "cpp_ch20_c01",
+      "title": "Binary Tree Node Struct",
+      "description": "Write a C++ program that defines a struct `TreeNode` for a binary tree. The struct should have an int `data` member and two pointers: `TreeNode* left` and `TreeNode* right`. In main(), create at least three nodes, link them into a small tree (one root with two children), and print all three values. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define a TreeNode struct with int data, left pointer, and right pointer\n- Create at least 3 nodes and connect them as a tree\n- Print the data values from the tree",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'struct TreeNode' in cpp or 'struct  TreeNode' in cpp, 'Should define a struct called TreeNode'\nassert 'int data' in cpp or 'int  data' in cpp, 'TreeNode should have an int data member'\nassert 'left' in cpp, 'TreeNode should have a left pointer'\nassert 'right' in cpp, 'TreeNode should have a right pointer'\nassert 'new TreeNode' in cpp or 'new  TreeNode' in cpp, 'Should dynamically allocate tree nodes'\nassert 'cout' in cpp, 'Should print the data values'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "easy",
+      "concepts_new": ["binary tree", "TreeNode", "left pointer", "right pointer", "tree structure"],
+      "concepts_review": ["structs", "pointers", "dynamic allocation"],
+      "hints": [
+        "Define the struct: struct TreeNode { int data; TreeNode* left; TreeNode* right; };",
+        "Build the tree: root->left = leftChild; root->right = rightChild;"
+      ]
+    },
+    {
+      "id": "cpp_ch20_c02",
+      "title": "BST Insert and Inorder Traversal",
+      "description": "Write a C++ program that implements a Binary Search Tree with two functions: `insert(TreeNode*& root, int value)` that inserts a value in BST order (smaller values go left, larger go right), and `inorder(TreeNode* root)` that performs an inorder traversal printing values in sorted order. In main(), insert at least 5 values and print the tree using inorder traversal. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define a TreeNode struct\n- Write a recursive insert function\n- Write a recursive inorder traversal function\n- Insert at least 5 values and print them in sorted order",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nstruct TreeNode {\n    int data;\n    TreeNode* left;\n    TreeNode* right;\n};\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'struct TreeNode' in cpp, 'Should define a TreeNode struct'\nassert 'insert' in cpp, 'Should define an insert function'\nassert 'inorder' in cpp, 'Should define an inorder traversal function'\nassert cpp.count('insert') >= 6, 'Should call insert at least 5 times (1 definition + 5 calls)'\nassert 'left' in cpp and 'right' in cpp, 'Insert should compare and go left or right'\nassert 'if' in cpp, 'Should have base cases and comparisons'\nassert 'new TreeNode' in cpp or 'new  TreeNode' in cpp, 'Should allocate new nodes in insert'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "medium",
+      "concepts_new": ["binary search tree", "BST insert", "inorder traversal", "sorted output"],
+      "concepts_review": ["recursion", "TreeNode struct", "pointers", "pass-by-reference"],
+      "hints": [
+        "Insert: if root is null, create new node; if value < root->data, insert left; else insert right",
+        "Inorder traversal: inorder(root->left); cout << root->data; inorder(root->right);"
+      ]
+    }
+  ]
+}

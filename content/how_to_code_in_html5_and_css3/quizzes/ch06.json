@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 6,
+  "questions": [
+    {
+      "id": "hc_ch06_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML element is commonly used as the foundation for a navigation menu?",
+      "choices": [
+        "<ol>",
+        "<menu>",
+        "<ul>",
+        "<div>"
+      ],
+      "correct": 2,
+      "explanation": "An unordered list (<ul>) with list items (<li>) containing links is the standard, semantic way to build a navigation menu.",
+      "concepts": ["navigation menus", "unordered lists"]
+    },
+    {
+      "id": "hc_ch06_q02",
+      "type": "multiple_choice",
+      "question": "Which CSS property removes the bullet points from a list?",
+      "choices": [
+        "text-decoration: none",
+        "list-style: none",
+        "bullets: hidden",
+        "display: none"
+      ],
+      "correct": 1,
+      "explanation": "Setting list-style: none on a <ul> or <ol> removes the default bullet points or numbers from list items.",
+      "concepts": ["list-style", "menu styling"]
+    },
+    {
+      "id": "hc_ch06_q03",
+      "type": "multiple_choice",
+      "question": "How can you make list items appear side by side in a horizontal menu?",
+      "choices": [
+        "Set list items to display: block",
+        "Set list items to display: inline or use flexbox",
+        "Add horizontal=\"true\" to the <ul> tag",
+        "Use the <hmenu> tag"
+      ],
+      "correct": 1,
+      "explanation": "Setting display: inline or display: inline-block on list items, or using flexbox on the parent <ul>, arranges menu items horizontally.",
+      "concepts": ["horizontal menus", "display property"]
+    },
+    {
+      "id": "hc_ch06_q04",
+      "type": "multiple_choice",
+      "question": "Which CSS property removes the default underline from links?",
+      "choices": [
+        "font-style: none",
+        "link-decoration: none",
+        "text-decoration: none",
+        "underline: false"
+      ],
+      "correct": 2,
+      "explanation": "The text-decoration: none property removes the default underline that browsers apply to anchor (<a>) tags.",
+      "concepts": ["text-decoration", "link styling"]
+    },
+    {
+      "id": "hc_ch06_q05",
+      "type": "fill_in_blank",
+      "question": "The <___> tag wraps around navigation links to indicate a navigation section.",
+      "correct": "nav",
+      "explanation": "The <nav> tag is a semantic HTML5 element that identifies a section of navigation links on the page.",
+      "concepts": ["nav tag", "semantic HTML"]
+    },
+    {
+      "id": "hc_ch06_q06",
+      "type": "fill_in_blank",
+      "question": "Each item in a list is wrapped in an <___> tag.",
+      "correct": "li",
+      "explanation": "The <li> (list item) tag defines each individual item inside an ordered (<ol>) or unordered (<ul>) list.",
+      "concepts": ["list items", "HTML lists"]
+    }
+  ]
+}

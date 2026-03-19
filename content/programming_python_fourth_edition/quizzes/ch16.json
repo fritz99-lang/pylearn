@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 16,
+  "questions": [
+    {
+      "id": "pp_ch16_q01",
+      "type": "multiple_choice",
+      "question": "In a CGI script, which module is used to parse form data submitted by the client?",
+      "choices": [
+        "http.server",
+        "cgi",
+        "urllib.parse",
+        "html.parser"
+      ],
+      "correct": 1,
+      "explanation": "The cgi module provides the FieldStorage class which automatically parses form data from both GET query strings and POST request bodies, handling multipart encoding and character decoding.",
+      "concepts": ["cgi_module"]
+    },
+    {
+      "id": "pp_ch16_q02",
+      "type": "multiple_choice",
+      "question": "What is the first line a CGI script must print to stdout before any HTML content?",
+      "choices": [
+        "Content-Length: <size>",
+        "HTTP/1.1 200 OK",
+        "Content-Type: text/html\\n",
+        "Status: 200"
+      ],
+      "correct": 2,
+      "explanation": "CGI scripts must emit the Content-Type header followed by a blank line (two newlines) before the HTML body. This tells the web server and browser how to interpret the response. The blank line separates headers from content per the HTTP protocol.",
+      "concepts": ["cgi_basics"]
+    },
+    {
+      "id": "pp_ch16_q03",
+      "type": "multiple_choice",
+      "question": "When a form uses method=\"GET\", where does the browser place the form data?",
+      "choices": [
+        "In the HTTP request body as multipart data",
+        "In a cookie header sent with the request",
+        "Appended to the URL as a query string after a ? character",
+        "In a hidden form field within the HTML"
+      ],
+      "correct": 2,
+      "explanation": "HTTP GET encodes form data as key=value pairs in the URL query string (e.g., /script.py?name=Bob&age=30). This makes the data visible in the URL, bookmarkable, but limited in length. POST places data in the request body instead.",
+      "concepts": ["http_get_post"]
+    },
+    {
+      "id": "pp_ch16_q04",
+      "type": "multiple_choice",
+      "question": "Which http.cookies class should be used for server-side cookie handling because it rejects potentially dangerous cookie values?",
+      "choices": [
+        "SimpleCookie",
+        "BaseCookie",
+        "SecureCookie",
+        "SafeCookie"
+      ],
+      "correct": 0,
+      "explanation": "http.cookies.SimpleCookie is the recommended class for cookie handling. Unlike BaseCookie, SimpleCookie validates cookie values by rejecting those containing special characters that could be used in injection attacks. It parses and generates Set-Cookie headers safely.",
+      "concepts": ["cookies"]
+    },
+    {
+      "id": "pp_ch16_q05",
+      "type": "fill_in_blank",
+      "question": "To access the value of a form field named 'username' from a cgi.FieldStorage instance called form, you use form[________].value.",
+      "correct": "'username'",
+      "explanation": "cgi.FieldStorage behaves like a dictionary keyed by field name. Accessing form['username'] returns a MiniFieldStorage object, and .value gives the string value. You can also use form.getvalue('username') as a safer alternative that returns None for missing fields.",
+      "concepts": ["form_data_parsing"]
+    },
+    {
+      "id": "pp_ch16_q06",
+      "type": "fill_in_blank",
+      "question": "The CGI environment variable that contains the query string from a GET request URL is called ________.",
+      "correct": "QUERY_STRING",
+      "explanation": "The web server passes CGI metadata through environment variables. QUERY_STRING contains everything after the ? in the URL. Other important CGI variables include REQUEST_METHOD, CONTENT_TYPE, CONTENT_LENGTH, and REMOTE_ADDR. Python's os.environ provides access to these.",
+      "concepts": ["query_strings"]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "step_id": "pp_proj_ch04",
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 4,
+  "title": "Command Parser — Arguments",
+  "description": "Add a command parser that takes a list of argument strings and returns a structured dict. Support commands like ['list', '/path'] or ['search', '*.py', '/path']. The parser should identify the command name and its arguments.",
+  "builds_on": "pp_proj_ch03",
+  "starter_code": "# File Manager CLI — Step 2: Command Parser\n# Parse command-line style arguments into structured dicts.\n\nimport os\nimport sys\n\ndef get_system_info():\n    \"\"\"Return system information dict.\"\"\"\n    return {\n        'cwd': os.getcwd(),\n        'platform': sys.platform,\n        'python_version': sys.version,\n        'user': os.environ.get('USER', os.environ.get('USERNAME', '')),\n    }\n\nVALID_COMMANDS = ['list', 'search', 'info', 'help', 'copy', 'move', 'delete']\n\ndef parse_command(args_list):\n    \"\"\"Parse a list of argument strings into a command dict.\n\n    Args:\n        args_list: List of strings, e.g. ['list', '/path'] or ['search', '*.py', '/path']\n\n    Returns:\n        Dict with 'command' (str) and 'args' (list of remaining strings).\n        If args_list is empty, command should be 'help' with empty args.\n    \"\"\"\n    # Your code here\n    return {}\n\n# Test it\nfor cmd in [['list', '/tmp'], ['search', '*.py', '/home'], [], ['info']]:\n    result = parse_command(cmd)\n    print(f\"{cmd} -> {result}\")\n",
+  "test_code": "result = parse_command(['list', '/tmp'])\nassert isinstance(result, dict), 'parse_command should return a dict'\nassert 'command' in result, \"Result must have 'command' key\"\nassert 'args' in result, \"Result must have 'args' key\"\nassert result['command'] == 'list', f\"Command should be 'list', got '{result['command']}'\"\nassert result['args'] == ['/tmp'], f\"Args should be ['/tmp'], got {result['args']}\"\nresult2 = parse_command(['search', '*.py', '/home'])\nassert result2['command'] == 'search', f\"Command should be 'search', got '{result2['command']}'\"\nassert result2['args'] == ['*.py', '/home'], f\"Args should be ['*.py', '/home'], got {result2['args']}\"\nresult3 = parse_command([])\nassert result3['command'] == 'help', f\"Empty args should give 'help', got '{result3['command']}'\"\nassert result3['args'] == [], f\"Empty args should give empty list, got {result3['args']}\"\nresult4 = parse_command(['info'])\nassert result4['command'] == 'info', f\"Command should be 'info', got '{result4['command']}'\"\nassert result4['args'] == [], f\"Args should be [], got {result4['args']}\"",
+  "acceptance_criteria": [
+    "parse_command() returns a dict with 'command' and 'args' keys",
+    "First element of args_list becomes the command",
+    "Remaining elements become the args list",
+    "Empty input returns {'command': 'help', 'args': []}"
+  ],
+  "hints": [
+    "If args_list is empty, return the default help command",
+    "The command is args_list[0], the rest is args_list[1:]",
+    "Use list slicing to separate command from arguments"
+  ]
+}

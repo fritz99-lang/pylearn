@@ -1,0 +1,58 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 12,
+  "questions": [
+    {
+      "id": "cpp_ch12_q01",
+      "type": "multiple_choice",
+      "question": "Which file access mode flag opens a file for output and erases any existing contents?",
+      "choices": ["ios::app", "ios::in", "ios::out", "ios::ate"],
+      "correct": 2,
+      "explanation": "ios::out opens a file for output. By default, if the file already exists, its contents are erased. Use ios::app instead to append to an existing file.",
+      "concepts": ["file_access_modes", "file_stream_objects"]
+    },
+    {
+      "id": "cpp_ch12_q02",
+      "type": "multiple_choice",
+      "question": "Which member function moves the read position to a specific byte in a file?",
+      "choices": ["seekp", "seekg", "tellg", "tellp"],
+      "correct": 1,
+      "explanation": "seekg (seek get) moves the read (get) position in a file. seekp (seek put) moves the write position. tellg and tellp return the current positions.",
+      "concepts": ["random_access", "seekg"]
+    },
+    {
+      "id": "cpp_ch12_q03",
+      "type": "multiple_choice",
+      "question": "When writing a structure to a binary file, which function is used?",
+      "choices": ["file << structure;", "file.put(structure);", "file.write(reinterpret_cast<char*>(&structure), sizeof(structure));", "file.output(structure);"],
+      "correct": 2,
+      "explanation": "To write binary data, use the write() member function with reinterpret_cast<char*> to treat the structure's memory as a sequence of bytes, and sizeof to specify the number of bytes.",
+      "concepts": ["binary_files", "read_write"]
+    },
+    {
+      "id": "cpp_ch12_q04",
+      "type": "multiple_choice",
+      "question": "What does the ios::binary flag do when opening a file?",
+      "choices": ["Converts all data to binary numbers", "Prevents newline character translation", "Encrypts the file contents", "Compresses the file data"],
+      "correct": 1,
+      "explanation": "The ios::binary flag opens the file in binary mode, which prevents the system from translating newline characters (e.g., converting \\n to \\r\\n on Windows).",
+      "concepts": ["binary_files", "file_access_modes"]
+    },
+    {
+      "id": "cpp_ch12_q05",
+      "type": "fill_in_blank",
+      "question": "The member function ___ moves the write (put) position to a specified byte in a file.",
+      "correct": "seekp",
+      "explanation": "seekp (seek put) moves the file's write position. It is commonly used with random-access files to write data at a specific location in the file.",
+      "concepts": ["random_access", "seekp"]
+    },
+    {
+      "id": "cpp_ch12_q06",
+      "type": "fill_in_blank",
+      "question": "To read raw bytes from a binary file into a structure, you use the ___ member function.",
+      "correct": "read",
+      "explanation": "The read() member function reads a specified number of raw bytes from a file into a memory location, typically used with reinterpret_cast<char*> for binary file I/O.",
+      "concepts": ["binary_files", "read_write"]
+    }
+  ]
+}

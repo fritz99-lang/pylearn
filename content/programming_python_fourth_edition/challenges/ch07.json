@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 7,
+  "challenges": [
+    {
+      "id": "pp_ch07_c01",
+      "title": "String Chunk Splitter",
+      "description": "Write a function called 'split_chunks' that takes a string and an integer N, and returns a list of substrings each of length N (the last chunk may be shorter). For example, split_chunks('abcdefgh', 3) returns ['abc', 'def', 'gh']. If N is less than 1, raise a ValueError.",
+      "starter_code": "def split_chunks(text, n):\n    \"\"\"Split text into chunks of n characters. Last chunk may be shorter.\"\"\"\n    pass\n",
+      "test_code": "assert split_chunks('abcdefgh', 3) == ['abc', 'def', 'gh']\nassert split_chunks('abcdef', 3) == ['abc', 'def']\nassert split_chunks('abcdef', 1) == ['a', 'b', 'c', 'd', 'e', 'f']\nassert split_chunks('hello', 10) == ['hello']\nassert split_chunks('', 5) == []\ntry:\n    split_chunks('abc', 0)\n    assert False, 'Should have raised ValueError'\nexcept ValueError:\n    pass\ntry:\n    split_chunks('abc', -1)\n    assert False, 'Should have raised ValueError'\nexcept ValueError:\n    pass",
+      "difficulty": "easy",
+      "concepts_new": ["string_chunking", "slicing_patterns"],
+      "concepts_review": ["string_slicing", "list_building", "error_handling"],
+      "hints": [
+        "Use a range with step N: [text[i:i+n] for i in range(0, len(text), n)]",
+        "Check if n < 1 at the start and raise ValueError if so."
+      ]
+    },
+    {
+      "id": "pp_ch07_c02",
+      "title": "Recursive File Finder",
+      "description": "Write a function called 'find_files' that takes a directory path and a file extension (like '.py'), and returns a sorted list of full file paths for all files matching that extension anywhere in the directory tree. Use os.walk to traverse subdirectories recursively. If the directory doesn't exist, return an empty list.",
+      "starter_code": "import os\n\ndef find_files(directory, extension):\n    \"\"\"Recursively find all files with the given extension. Return sorted paths.\"\"\"\n    pass\n",
+      "test_code": "import tempfile, os\nwith tempfile.TemporaryDirectory() as tmpdir:\n    # Create directory structure\n    os.makedirs(os.path.join(tmpdir, 'sub1', 'deep'))\n    os.makedirs(os.path.join(tmpdir, 'sub2'))\n    # Create files\n    for name in ['top.py', 'top.txt']:\n        open(os.path.join(tmpdir, name), 'w').close()\n    for name in ['a.py', 'b.py']:\n        open(os.path.join(tmpdir, 'sub1', name), 'w').close()\n    open(os.path.join(tmpdir, 'sub1', 'deep', 'c.py'), 'w').close()\n    open(os.path.join(tmpdir, 'sub2', 'notes.txt'), 'w').close()\n    \n    result = find_files(tmpdir, '.py')\n    assert len(result) == 4\n    assert all(f.endswith('.py') for f in result)\n    assert result == sorted(result)\n    \n    txt_result = find_files(tmpdir, '.txt')\n    assert len(txt_result) == 2\n    \n    assert find_files('/nonexistent_path_xyz', '.py') == []",
+      "difficulty": "medium",
+      "concepts_new": ["os_walk", "recursive_traversal", "file_pattern_matching"],
+      "concepts_review": ["os_path", "list_building", "sorting"],
+      "hints": [
+        "os.walk(directory) yields (dirpath, dirnames, filenames) for each directory in the tree.",
+        "For each (dirpath, dirs, files) from os.walk, check if each filename endswith(extension) and build the full path with os.path.join(dirpath, filename)."
+      ]
+    }
+  ]
+}

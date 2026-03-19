@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 15,
+  "questions": [
+    {
+      "id": "h5_ch15_q01",
+      "type": "multiple_choice",
+      "question": "Which attribute on the <img> tag provides alternative text for screen readers and when the image fails to load?",
+      "choices": ["title", "alt", "desc", "label"],
+      "correct": 1,
+      "explanation": "The alt attribute provides alternative text that describes the image. It is essential for accessibility and is displayed when the image cannot be loaded.",
+      "concepts": ["img tag", "alt attribute", "accessibility"]
+    },
+    {
+      "id": "h5_ch15_q02",
+      "type": "multiple_choice",
+      "question": "Which HTML5 element is used to provide a caption for an image?",
+      "choices": ["<caption>", "<figcaption>", "<imgcaption>", "<label>"],
+      "correct": 1,
+      "explanation": "The <figcaption> element is used inside a <figure> element to provide a caption or description for the image or media content.",
+      "concepts": ["figcaption", "figure", "semantic HTML"]
+    },
+    {
+      "id": "h5_ch15_q03",
+      "type": "multiple_choice",
+      "question": "What does the srcset attribute on an <img> tag allow you to do?",
+      "choices": ["Add multiple alt texts", "Specify different image sources for different screen sizes or resolutions", "Set the source code of the image", "Link to a CSS stylesheet for the image"],
+      "correct": 1,
+      "explanation": "The srcset attribute lets you provide multiple image files so the browser can choose the most appropriate one based on screen size, resolution, or pixel density.",
+      "concepts": ["srcset", "responsive images"]
+    },
+    {
+      "id": "h5_ch15_q04",
+      "type": "multiple_choice",
+      "question": "Which HTML5 element provides the most control over serving different images for different viewport conditions?",
+      "choices": ["<img>", "<figure>", "<picture>", "<source>"],
+      "correct": 2,
+      "explanation": "The <picture> element contains multiple <source> elements with media queries, giving full control over which image is displayed at different viewport sizes.",
+      "concepts": ["picture element", "responsive images"]
+    },
+    {
+      "id": "h5_ch15_q05",
+      "type": "fill_in_blank",
+      "question": "The <img> tag is a ___ element, meaning it does not have a closing tag.",
+      "correct": "void",
+      "explanation": "The <img> tag is a void (or self-closing) element in HTML. It has no content and no closing tag, only attributes like src and alt.",
+      "concepts": ["img tag", "void elements"]
+    },
+    {
+      "id": "h5_ch15_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ element is used as a semantic container for images, diagrams, or illustrations along with their captions.",
+      "correct": "<figure>",
+      "explanation": "The <figure> element groups self-contained content like images or diagrams, typically paired with <figcaption> for a caption.",
+      "concepts": ["figure", "semantic HTML"]
+    }
+  ]
+}

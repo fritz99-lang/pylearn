@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 15,
+  "challenges": [
+    {
+      "id": "pp_ch15_c01",
+      "title": "MailMessage Class",
+      "description": "Create a `MailMessage` class with attributes: subject, sender, body, and date. The constructor should accept all four as arguments. Implement `__str__` to return 'From: {sender} | Subject: {subject}'. Implement `summary(max_body=50)` that returns the first `max_body` characters of the body followed by '...' if truncated.",
+      "starter_code": "class MailMessage:\n    \"\"\"Represents an email message.\"\"\"\n\n    def __init__(self, subject, sender, body, date):\n        # Your code here\n        pass\n\n    def __str__(self):\n        \"\"\"Return 'From: {sender} | Subject: {subject}'.\"\"\"\n        # Your code here\n        pass\n\n    def summary(self, max_body=50):\n        \"\"\"Return truncated body text.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "msg = MailMessage('Hello', 'alice@test.com', 'This is the body of the email.', '2026-01-01')\nassert msg.subject == 'Hello'\nassert msg.sender == 'alice@test.com'\nassert msg.body == 'This is the body of the email.'\nassert msg.date == '2026-01-01'\nassert str(msg) == 'From: alice@test.com | Subject: Hello'\nassert msg.summary() == 'This is the body of the email.'\nlong_body = 'A' * 100\nmsg2 = MailMessage('Test', 'bob@test.com', long_body, '2026-03-15')\nsummary = msg2.summary()\nassert len(summary) == 53\nassert summary.endswith('...')\nassert msg2.summary(10) == 'AAAAAAAAAA...'\nshort = MailMessage('Hi', 'x@y.com', 'Short', '2026-01-01')\nassert short.summary(50) == 'Short'",
+      "difficulty": "easy",
+      "concepts_new": ["email_data_model", "text_truncation"],
+      "concepts_review": ["classes", "dunder_methods", "string_slicing"],
+      "hints": [
+        "Store all four parameters as instance attributes in __init__.",
+        "In summary(), check if len(self.body) > max_body. If so, slice and add '...'."
+      ]
+    },
+    {
+      "id": "pp_ch15_c02",
+      "title": "Threaded Mail Fetcher",
+      "description": "Write a `MailFetcher` class that simulates fetching mail with status tracking. It should have: a `status` attribute (starts as 'idle'), a `messages` list (starts empty), a `fetch(message_list)` method that sets status to 'fetching', stores the messages, and sets status to 'done', and a `get_results()` method that returns messages if status is 'done' or raises RuntimeError if not. Also implement `reset()` to go back to 'idle' with empty messages.",
+      "starter_code": "class MailFetcher:\n    \"\"\"Simulates an async mail fetcher with status tracking.\"\"\"\n\n    def __init__(self):\n        # Your code here\n        pass\n\n    def fetch(self, message_list):\n        \"\"\"Simulate fetching messages. Updates status and stores results.\"\"\"\n        # Your code here\n        pass\n\n    def get_results(self):\n        \"\"\"Return fetched messages if done, else raise RuntimeError.\"\"\"\n        # Your code here\n        pass\n\n    def reset(self):\n        \"\"\"Reset to idle state with no messages.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "fetcher = MailFetcher()\nassert fetcher.status == 'idle'\nassert fetcher.messages == []\ntry:\n    fetcher.get_results()\n    assert False, 'Should have raised RuntimeError'\nexcept RuntimeError:\n    pass\ntest_msgs = ['msg1', 'msg2', 'msg3']\nfetcher.fetch(test_msgs)\nassert fetcher.status == 'done'\nassert fetcher.get_results() == ['msg1', 'msg2', 'msg3']\nfetcher.reset()\nassert fetcher.status == 'idle'\nassert fetcher.messages == []\ntry:\n    fetcher.get_results()\n    assert False, 'Should have raised RuntimeError after reset'\nexcept RuntimeError:\n    pass\nfetcher.fetch([])\nassert fetcher.status == 'done'\nassert fetcher.get_results() == []\nfetcher.fetch(['only_one'])\nassert fetcher.get_results() == ['only_one']",
+      "difficulty": "medium",
+      "concepts_new": ["async_simulation", "status_tracking"],
+      "concepts_review": ["classes", "exceptions", "state_management"],
+      "hints": [
+        "Initialize status='idle' and messages=[] in __init__.",
+        "In get_results(), check if self.status == 'done' before returning messages."
+      ]
+    }
+  ]
+}

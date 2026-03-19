@@ -1,0 +1,36 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 46,
+  "challenges": [
+    {
+      "id": "css_ch46_c01",
+      "title": "Computed Style Properties",
+      "description": "Write CSS that targets '#main-box' and sets display to flex, background-color to rgb(30, 60, 90), font-size to 18px, and padding to 20px. These properties would be accessible via JavaScript's getComputedStyle(). Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Style #main-box with properties accessible via CSSOM */\n\n\"\"\"",
+      "test_code": "assert '#main-box' in css.lower(), 'Should target #main-box'\nassert 'display' in css.lower(), 'Should set display property'\nassert 'flex' in css.lower(), 'Should use display: flex'\nassert 'background-color' in css.lower(), 'Should set background-color'\nassert 'rgb(' in css.lower(), 'Should use rgb() color value'\nassert 'font-size' in css.lower(), 'Should set font-size'\nassert '18px' in css, 'Should use 18px font-size'\nassert 'padding' in css.lower(), 'Should set padding'\nassert '20px' in css, 'Should use 20px padding'",
+      "difficulty": "easy",
+      "concepts_new": ["CSSOM", "getComputedStyle", "computed values"],
+      "concepts_review": ["display: flex", "background-color", "font-size", "padding"],
+      "hints": [
+        "The CSSOM (CSS Object Model) allows JavaScript to read and manipulate styles programmatically.",
+        "getComputedStyle() returns the resolved values of all CSS properties on an element.",
+        "Write standard CSS rules — the CSSOM reads whatever styles are applied."
+      ]
+    },
+    {
+      "id": "css_ch46_c02",
+      "title": "Custom Properties for Programmatic Access",
+      "description": "Write CSS that defines custom properties on :root for --primary-color (set to #3498db), --spacing-unit (set to 8px), and --font-main (set to a sans-serif font stack). Then target '.widget' and use all three custom properties via var(): set color to --primary-color, padding to --spacing-unit, and font-family to --font-main. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Define and use custom properties for CSSOM access */\n\n\"\"\"",
+      "test_code": "assert ':root' in css.lower(), 'Should define custom properties on :root'\nassert '--primary-color' in css.lower(), 'Should define --primary-color'\nassert '--spacing-unit' in css.lower(), 'Should define --spacing-unit'\nassert '--font-main' in css.lower(), 'Should define --font-main'\nassert '#3498db' in css.lower(), 'Should set --primary-color to #3498db'\nassert '8px' in css, 'Should set --spacing-unit to 8px'\nassert 'var(' in css.lower(), 'Should use var() to reference custom properties'\nassert '.widget' in css.lower(), 'Should target .widget'\nassert 'sans-serif' in css.lower(), 'Should include sans-serif in font stack'\nassert 'color' in css.lower(), 'Should set color using custom property'\nassert 'padding' in css.lower(), 'Should set padding using custom property'\nassert 'font-family' in css.lower(), 'Should set font-family using custom property'",
+      "difficulty": "medium",
+      "concepts_new": ["custom properties for CSSOM", "programmatic style access"],
+      "concepts_review": ["custom properties", "var()", ":root"],
+      "hints": [
+        "Custom properties (CSS variables) are accessible via the CSSOM using element.style.getPropertyValue('--name').",
+        "Define variables on :root and consume them with var(--variable-name).",
+        "A font stack like 'Helvetica, Arial, sans-serif' provides fallbacks."
+      ]
+    }
+  ]
+}

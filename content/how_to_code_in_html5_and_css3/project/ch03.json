@@ -1,0 +1,23 @@
+{
+  "step_id": "hc_proj_ch03",
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 3,
+  "title": "Semantic Structure",
+  "description": "Improve your recipe page with proper semantic HTML5 structure. Add a header element (containing the h1), a main element (for the page content), and a footer element. Also add a meta charset='utf-8' tag inside the head for proper character encoding.",
+  "builds_on": "hc_proj_ch02",
+  "starter_code": "# Recipe Collection Website \u2014 Step 2: Semantic Structure\n# Add semantic elements: header, main, footer.\n# Add meta charset in the head.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>My Recipes</title>\n</head>\n<body>\n    <!-- Wrap the h1 in a <header> element -->\n\n    <!-- Wrap main content in a <main> element -->\n\n    <!-- Add a <footer> element -->\n\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<!doctype html>' in html.lower(), 'Must include <!DOCTYPE html> declaration'\nassert '<html>' in html.lower() or '<html ' in html.lower(), 'Must include <html> tag'\nassert '<head>' in html.lower(), 'Must include <head> tag'\nassert '<title>' in html.lower() and 'my recipes' in html.lower(), 'Title should contain \"My Recipes\"'\nassert 'charset' in html.lower() and 'utf-8' in html.lower(), 'Must include meta charset=\"utf-8\"'\nassert '<header>' in html.lower() and '</header>' in html.lower(), 'Must include a <header> element'\nassert '<main>' in html.lower() and '</main>' in html.lower(), 'Must include a <main> element'\nassert '<footer>' in html.lower() and '</footer>' in html.lower(), 'Must include a <footer> element'\nassert '<h1>' in html.lower() and '</h1>' in html.lower(), 'Must include an <h1> heading'\nassert '<p>' in html.lower() and '</p>' in html.lower(), 'Must include at least one <p> paragraph'",
+  "acceptance_criteria": [
+    "Meta charset='utf-8' is in the head section",
+    "Page content is wrapped in a <header> element",
+    "Main content area uses a <main> element",
+    "A <footer> element is present at the bottom",
+    "h1 heading and welcome paragraph are still present"
+  ],
+  "hints": [
+    "Add <meta charset=\"utf-8\"> inside the <head> before the title",
+    "Wrap the h1 in: <header><h1>...</h1></header>",
+    "The main content goes in: <main><p>...</p></main>",
+    "A simple footer: <footer><p>Copyright 2026</p></footer>"
+  ]
+}

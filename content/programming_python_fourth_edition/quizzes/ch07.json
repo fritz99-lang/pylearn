@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 7,
+  "questions": [
+    {
+      "id": "pp_ch07_q01",
+      "type": "multiple_choice",
+      "question": "When splitting a large file into smaller parts for transport, what is the typical strategy for naming the output chunks?",
+      "choices": [
+        "Random UUIDs",
+        "Sequential numbered suffixes (e.g., file.part001, file.part002)",
+        "Hash-based names from file content",
+        "Timestamp-based names"
+      ],
+      "correct": 1,
+      "explanation": "File splitting utilities typically name chunks with sequential numbered suffixes so they can be easily sorted and reassembled in order. The join operation reads parts in sorted name order.",
+      "concepts": ["file_splitting", "system_programs"]
+    },
+    {
+      "id": "pp_ch07_q02",
+      "type": "multiple_choice",
+      "question": "When comparing two directory trees to find differences, which module provides functions like cmp() and cmpfiles()?",
+      "choices": [
+        "difflib",
+        "filecmp",
+        "shutil",
+        "os.path"
+      ],
+      "correct": 1,
+      "explanation": "The filecmp module provides filecmp.cmp() for comparing two files and filecmp.cmpfiles() for comparing files across two directories. difflib is for comparing text sequences, not files/directories.",
+      "concepts": ["filecmp", "directory_comparison"]
+    },
+    {
+      "id": "pp_ch07_q03",
+      "type": "multiple_choice",
+      "question": "In a global search-and-replace script that processes an entire directory tree, which function is most appropriate for traversing all files?",
+      "choices": [
+        "os.listdir() with manual recursion",
+        "os.walk() to traverse the tree yielding directories and files",
+        "glob.glob('*') in the top directory only",
+        "os.scandir() without recursion"
+      ],
+      "correct": 1,
+      "explanation": "os.walk() recursively traverses a directory tree, yielding (dirpath, dirnames, filenames) tuples. This makes it ideal for processing all files in all subdirectories without manual recursion.",
+      "concepts": ["os_walk", "directory_traversal"]
+    },
+    {
+      "id": "pp_ch07_q04",
+      "type": "multiple_choice",
+      "question": "What is a key consideration when writing a file-joining utility that reassembles split binary files?",
+      "choices": [
+        "Files must be opened in text mode for cross-platform compatibility",
+        "Files must be opened in binary mode ('rb'/'wb') to avoid line-ending corruption",
+        "The output file must be opened with 'a' mode (append) for each chunk",
+        "Each chunk must be loaded entirely into memory before writing"
+      ],
+      "correct": 1,
+      "explanation": "Binary mode is essential when joining split files to prevent the OS from translating line endings (e.g., \\n to \\r\\n on Windows), which would corrupt binary data like images or executables.",
+      "concepts": ["binary_mode", "file_operations"]
+    },
+    {
+      "id": "pp_ch07_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ module provides tools for comparing sequences of text lines, useful for generating diffs between file versions.",
+      "correct": "difflib",
+      "explanation": "The difflib module contains classes and functions for comparing sequences, including unified_diff() and context_diff() for generating human-readable diffs between text files.",
+      "concepts": ["difflib", "text_comparison"]
+    },
+    {
+      "id": "pp_ch07_q06",
+      "type": "fill_in_blank",
+      "question": "When copying entire directory trees programmatically, the shutil.___ function recursively copies a source directory to a destination.",
+      "correct": "copytree",
+      "explanation": "shutil.copytree(src, dst) recursively copies an entire directory tree rooted at src to dst. It creates the destination directory and copies files, preserving metadata by default.",
+      "concepts": ["shutil", "directory_copy"]
+    }
+  ]
+}

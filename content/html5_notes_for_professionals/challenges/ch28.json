@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 28,
+  "challenges": [
+    {
+      "id": "h5_ch28_c01",
+      "title": "Embedded Content",
+      "description": "Create an embed element with src and type attributes to embed external content (e.g., a PDF or media file). Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create an embed element -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<embed' in lower, 'Should contain an <embed> element'\nassert 'src=' in lower, 'Embed should have a src attribute'\nassert 'type=' in lower, 'Embed should have a type attribute'",
+      "difficulty": "easy",
+      "concepts_new": ["embed", "type attribute"],
+      "concepts_review": ["src"],
+      "hints": [
+        "The <embed> element is a void element (no closing tag).",
+        "The type attribute specifies the MIME type, e.g. type=\"application/pdf\".",
+        "You can also add width and height attributes."
+      ]
+    },
+    {
+      "id": "h5_ch28_c02",
+      "title": "Object Embed",
+      "description": "Create both an embed element and an object element. The object element should contain at least one param child element and include fallback text. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create embed and object elements -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<embed' in lower, 'Should contain an <embed> element'\nassert '<object' in lower, 'Should contain an <object> element'\nassert '</object>' in lower, 'Should close the <object> element'\nassert '<param' in lower, 'Object should contain a <param> element'\nassert 'name=' in lower, 'Param should have a name attribute'\nassert 'value=' in lower, 'Param should have a value attribute'\nassert 'data=' in lower or 'type=' in lower, 'Object should have a data or type attribute'",
+      "difficulty": "medium",
+      "concepts_new": ["object", "param"],
+      "concepts_review": ["embed", "src", "type attribute"],
+      "hints": [
+        "The <object> element uses data= instead of src= to specify the resource.",
+        "Each <param> element has name and value attributes.",
+        "Fallback content goes between the opening and closing <object> tags."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 10,
+  "questions": [
+    {
+      "id": "pp_ch10_q01",
+      "type": "multiple_choice",
+      "question": "In the tkinter grid geometry manager, which two options specify the row and column where a widget is placed?",
+      "choices": [
+        "x and y",
+        "row and column",
+        "rownum and colnum",
+        "gridrow and gridcol"
+      ],
+      "correct": 1,
+      "explanation": "The grid() method accepts row and column keyword arguments to position a widget in a table-like layout. Rows and columns are zero-indexed and automatically sized to fit their contents.",
+      "concepts": ["grid geometry manager"]
+    },
+    {
+      "id": "pp_ch10_q02",
+      "type": "multiple_choice",
+      "question": "Which Canvas method draws a rectangle given two corner coordinates (x1, y1, x2, y2)?",
+      "choices": [
+        "canvas.draw_rect(x1, y1, x2, y2)",
+        "canvas.create_rectangle(x1, y1, x2, y2)",
+        "canvas.rectangle(x1, y1, x2, y2)",
+        "canvas.add_shape('rect', x1, y1, x2, y2)"
+      ],
+      "correct": 1,
+      "explanation": "The Canvas widget uses create_* methods for drawing: create_rectangle, create_oval, create_line, create_text, create_arc, and create_polygon. Each returns an integer item ID that can be used to modify or delete the shape later.",
+      "concepts": ["Canvas", "drawing shapes"]
+    },
+    {
+      "id": "pp_ch10_q03",
+      "type": "multiple_choice",
+      "question": "In the tkinter Text widget, what mechanism lets you apply formatting (font, color, etc.) to a specific range of characters?",
+      "choices": [
+        "Style sheets attached to the widget",
+        "Tags applied to character ranges with tag_add and tag_config",
+        "Direct HTML formatting in the inserted text",
+        "Setting the font option on individual lines"
+      ],
+      "correct": 1,
+      "explanation": "The Text widget uses tags to apply formatting. You define tag appearance with tag_config (font, foreground, background, etc.) and then apply tags to character ranges using tag_add with start and end indices like '1.0' and 'end'.",
+      "concepts": ["Text widget", "tags"]
+    },
+    {
+      "id": "pp_ch10_q04",
+      "type": "multiple_choice",
+      "question": "How do you connect a Scrollbar to a Listbox so that scrolling the bar updates the Listbox view?",
+      "choices": [
+        "Pass the Listbox as the parent of the Scrollbar",
+        "Set the Scrollbar's command to the Listbox's yview method and the Listbox's yscrollcommand to the Scrollbar's set method",
+        "Call Scrollbar.attach(listbox)",
+        "Scrollbar and Listbox are automatically linked when packed in the same Frame"
+      ],
+      "correct": 1,
+      "explanation": "Linking a Scrollbar to a scrollable widget is a two-way connection: the Scrollbar's command calls the widget's xview or yview to move the view, and the widget's xscrollcommand or yscrollcommand calls the Scrollbar's set to update the slider position.",
+      "concepts": ["Scrollbar", "Listbox"]
+    },
+    {
+      "id": "pp_ch10_q05",
+      "type": "fill_in_blank",
+      "question": "In the grid geometry manager, the ______ option makes a widget span multiple columns (e.g., a value of 2 means the widget occupies two adjacent columns).",
+      "correct": "columnspan",
+      "explanation": "The columnspan option (and its counterpart rowspan) lets a widget stretch across multiple grid cells, similar to HTML table cell spanning. This is essential for layouts where a widget like a status bar needs to span the full width.",
+      "concepts": ["grid geometry manager", "columnspan"]
+    },
+    {
+      "id": "pp_ch10_q06",
+      "type": "fill_in_blank",
+      "question": "To search for a string inside a tkinter Text widget starting from position '1.0', you call text.______('1.0', search_string).",
+      "correct": "search",
+      "explanation": "The Text widget's search() method finds occurrences of a string (or regex pattern with regexp=True) and returns the index of the match. It supports forward and backward searching and optional case sensitivity via nocase.",
+      "concepts": ["Text widget", "search"]
+    }
+  ]
+}

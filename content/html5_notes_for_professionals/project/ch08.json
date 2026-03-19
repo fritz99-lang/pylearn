@@ -1,0 +1,21 @@
+{
+  "step_id": "h5_proj_ch08",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 8,
+  "title": "Skills Table \u2014 Showcasing Abilities",
+  "description": "Add a table in the About Me section that lists your skills. The table should have a header row (thead) with columns: Skill, Level, Years. Add a tbody with at least 3 rows of skills. Use th for header cells and td for data cells.",
+  "builds_on": "h5_proj_ch06",
+  "starter_code": "# Portfolio Website \u2014 Step 5: Skills Table\n# Add a table to the About section with Skill, Level, Years columns.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <h1>Your Name</h1>\n\n    <a href=\"#about\">About Me</a> |\n    <a href=\"#projects\">Projects</a> |\n    <a href=\"#contact\">Contact</a>\n\n    <p>Welcome to my portfolio!</p>\n\n    <div id=\"about\">\n        <h2>About Me</h2>\n        <p>\n            I am a developer who is <strong>passionate</strong> about\n            building things. I am <em>constantly learning</em> and\n            <mark>love problem-solving</mark>.\n        </p>\n\n        <!-- Add a skills table here with thead and tbody -->\n        <table>\n            <thead>\n                <tr>\n                    <!-- Add th cells: Skill, Level, Years -->\n                </tr>\n            </thead>\n            <tbody>\n                <!-- Add at least 3 rows of skills -->\n            </tbody>\n        </table>\n    </div>\n\n    <div id=\"projects\">\n        <h2>My Projects</h2>\n        <p>Here are some of my recent projects.</p>\n    </div>\n\n    <div id=\"contact\">\n        <h2>Contact</h2>\n        <p>Get in touch with me.</p>\n    </div>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<table>' in html.lower() and '</table>' in html.lower(), 'Must include a <table> element'\nassert '<thead>' in html.lower() and '</thead>' in html.lower(), 'Must include <thead> for the header row'\nassert '<th>' in html.lower(), 'Must include <th> header cells'\nassert html.lower().count('<th>') >= 3, f'Need at least 3 <th> cells (Skill, Level, Years), found {html.lower().count(\"<th>\")}'\nassert '<tbody>' in html.lower() and '</tbody>' in html.lower(), 'Must include <tbody> for the data rows'\nassert '<td>' in html.lower(), 'Must include <td> data cells'\n_tbody = html.lower().split('<tbody>')[1].split('</tbody>')[0]\nassert _tbody.count('<tr>') >= 3, f'Need at least 3 data rows in tbody, found {_tbody.count(\"<tr>\")}'",
+  "acceptance_criteria": [
+    "A table element is present in the About section",
+    "thead contains a row with at least 3 th cells",
+    "tbody contains at least 3 rows of skill data",
+    "Each data row uses td cells for values"
+  ],
+  "hints": [
+    "Header row: <thead><tr><th>Skill</th><th>Level</th><th>Years</th></tr></thead>",
+    "Data row: <tr><td>Python</td><td>Intermediate</td><td>2</td></tr>",
+    "Put the table inside the About Me section div"
+  ]
+}

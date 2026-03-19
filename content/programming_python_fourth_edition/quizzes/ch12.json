@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 12,
+  "questions": [
+    {
+      "id": "pp_ch12_q01",
+      "type": "multiple_choice",
+      "question": "In the PyEdit text editor example, what is the primary advantage of building the application as a Frame subclass rather than a collection of standalone functions?",
+      "choices": [
+        "It runs faster because Frame subclasses are optimized by tkinter",
+        "It can be embedded as a component inside other GUI applications",
+        "It automatically saves files on exit",
+        "It enables multi-document editing without any additional code"
+      ],
+      "correct": 1,
+      "explanation": "By packaging PyEdit as a Frame subclass, it becomes a reusable component. Other programs can import and embed PyEdit as a widget inside their own GUIs, which is exactly how it gets reused in PyMailGUI and other examples in the book.",
+      "concepts": ["reusable GUI components", "Frame subclass"]
+    },
+    {
+      "id": "pp_ch12_q02",
+      "type": "multiple_choice",
+      "question": "When building a calculator GUI like PyCalc, what Python built-in function is commonly (though dangerously) used to evaluate the expression string entered by the user?",
+      "choices": [
+        "exec()",
+        "compile()",
+        "eval()",
+        "ast.parse()"
+      ],
+      "correct": 2,
+      "explanation": "eval() takes a string and evaluates it as a Python expression, returning the result. While convenient for a calculator, it poses a security risk in production because it can execute arbitrary Python code. The book uses it for simplicity in the example.",
+      "concepts": ["eval", "expression evaluation"]
+    },
+    {
+      "id": "pp_ch12_q03",
+      "type": "multiple_choice",
+      "question": "In the PyDraw painting application, which tkinter widget serves as the drawing surface where users create shapes with mouse events?",
+      "choices": [
+        "Frame",
+        "Text",
+        "Canvas",
+        "Label"
+      ],
+      "correct": 2,
+      "explanation": "The Canvas widget is tkinter's drawing surface. PyDraw binds mouse events (ButtonPress, B1-Motion, ButtonRelease) to Canvas callbacks that create shapes using methods like create_line, create_oval, and create_rectangle.",
+      "concepts": ["Canvas", "drawing application"]
+    },
+    {
+      "id": "pp_ch12_q04",
+      "type": "multiple_choice",
+      "question": "What design approach does the book recommend for building complete GUI programs from smaller components?",
+      "choices": [
+        "Write all GUI code in a single monolithic class for simplicity",
+        "Use multiple inheritance to combine widget behaviors",
+        "Compose applications by embedding reusable Frame-based components together",
+        "Generate GUI code from XML layout files"
+      ],
+      "correct": 2,
+      "explanation": "The book advocates composition: building small, self-contained widget classes (each a Frame subclass) and then combining them into larger applications. This is demonstrated by embedding PyEdit inside PyMailGUI and other composite applications.",
+      "concepts": ["composition", "GUI architecture"]
+    },
+    {
+      "id": "pp_ch12_q05",
+      "type": "fill_in_blank",
+      "question": "In the PyPhoto image viewer, to display various image formats beyond GIF in tkinter, you can use the PIL/Pillow library's ImageTk.______ class as a drop-in replacement for tkinter's PhotoImage.",
+      "correct": "PhotoImage",
+      "explanation": "PIL/Pillow provides ImageTk.PhotoImage which supports JPEG, PNG, BMP, and many other formats that tkinter's built-in PhotoImage cannot handle. It creates a tkinter-compatible image object from a PIL Image.",
+      "concepts": ["PIL", "image display"]
+    },
+    {
+      "id": "pp_ch12_q06",
+      "type": "fill_in_blank",
+      "question": "To persist user preferences (like window size, font choice, or last opened file) across sessions in a GUI application, a common approach is to save them to a ______ file that is read at startup.",
+      "correct": "configuration",
+      "explanation": "Complete GUI applications typically save user preferences to a configuration file (e.g., INI, JSON, or Python-based config) so settings persist between sessions. The book's examples demonstrate this pattern for saving editor preferences and window state.",
+      "concepts": ["configuration persistence", "user preferences"]
+    }
+  ]
+}

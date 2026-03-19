@@ -1,0 +1,58 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 41,
+  "questions": [
+    {
+      "id": "css_ch41_q01",
+      "type": "multiple_choice",
+      "question": "What value of the display property makes an element generate a box that is both inline-level and block-level?",
+      "choices": ["display: inline", "display: block", "display: inline-block", "display: flex"],
+      "correct": 2,
+      "explanation": "display: inline-block generates an inline-level block container. The element flows inline like text but can have width, height, and vertical margins/padding applied like a block element.",
+      "concepts": ["inline-block", "display"]
+    },
+    {
+      "id": "css_ch41_q02",
+      "type": "multiple_choice",
+      "question": "What causes unwanted gaps between inline-block elements?",
+      "choices": ["Border collapse", "Margin collapse", "Whitespace in the HTML source", "Padding overflow"],
+      "correct": 2,
+      "explanation": "Whitespace characters (spaces, tabs, newlines) between inline-block elements in the HTML source are rendered as visible gaps. Common fixes include removing whitespace in the source, using negative margins, or setting font-size: 0 on the parent.",
+      "concepts": ["inline-block", "whitespace"]
+    },
+    {
+      "id": "css_ch41_q03",
+      "type": "multiple_choice",
+      "question": "What is the default vertical-align value for inline-block elements?",
+      "choices": ["top", "middle", "bottom", "baseline"],
+      "correct": 3,
+      "explanation": "The default vertical-align for inline-block elements is baseline. This means the baseline of the element aligns with the baseline of the parent's text, which can cause unexpected alignment when elements have different content heights.",
+      "concepts": ["vertical-align", "inline-block"]
+    },
+    {
+      "id": "css_ch41_q04",
+      "type": "multiple_choice",
+      "question": "Which is an advantage of using inline-block over float for layout?",
+      "choices": ["Inline-block elements automatically clear", "Inline-block does not require a clearfix on the parent", "Inline-block ignores the box model", "Inline-block elements cannot have width set"],
+      "correct": 1,
+      "explanation": "Unlike floated elements, inline-block elements remain in the normal document flow, so the parent container automatically expands to contain them without needing a clearfix hack.",
+      "concepts": ["inline-block", "float", "layout"]
+    },
+    {
+      "id": "css_ch41_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property controls how inline-block elements align relative to each other on a line.",
+      "correct": "vertical-align",
+      "explanation": "The vertical-align property controls the vertical alignment of inline-block elements relative to the line box. Common values include top, middle, bottom, and baseline.",
+      "concepts": ["vertical-align", "inline-block"]
+    },
+    {
+      "id": "css_ch41_q06",
+      "type": "fill_in_blank",
+      "question": "Setting font-size: 0 on a parent element is one technique to remove ___ gaps between inline-block children.",
+      "correct": "whitespace",
+      "explanation": "Setting font-size: 0 on the parent collapses the rendered whitespace between inline-block children to zero width. You must then reset font-size on the children themselves.",
+      "concepts": ["inline-block", "whitespace"]
+    }
+  ]
+}

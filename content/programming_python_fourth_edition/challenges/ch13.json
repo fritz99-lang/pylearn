@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 13,
+  "challenges": [
+    {
+      "id": "pp_ch13_c01",
+      "title": "Socket Address Formatter",
+      "description": "Create two tuples: `SERVER_ADDR` set to ('localhost', 8080) and `CLIENT_ADDR` set to ('127.0.0.1', 9090). Then write a function `format_address(addr)` that takes an (host, port) tuple and returns a string like 'host:port'. Also write `parse_address(s)` that takes a 'host:port' string and returns an (host, int_port) tuple.",
+      "starter_code": "# Define server and client address tuples\nSERVER_ADDR = None  # ('localhost', 8080)\nCLIENT_ADDR = None  # ('127.0.0.1', 9090)\n\ndef format_address(addr):\n    \"\"\"Format an (host, port) tuple as 'host:port' string.\"\"\"\n    # Your code here\n    pass\n\ndef parse_address(s):\n    \"\"\"Parse a 'host:port' string into an (host, port) tuple.\"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "assert SERVER_ADDR == ('localhost', 8080)\nassert CLIENT_ADDR == ('127.0.0.1', 9090)\nassert format_address(('localhost', 8080)) == 'localhost:8080'\nassert format_address(('192.168.1.1', 443)) == '192.168.1.1:443'\nassert format_address(('0.0.0.0', 0)) == '0.0.0.0:0'\nassert parse_address('localhost:8080') == ('localhost', 8080)\nassert parse_address('192.168.1.1:443') == ('192.168.1.1', 443)\nassert isinstance(parse_address('host:80')[1], int)",
+      "difficulty": "easy",
+      "concepts_new": ["socket_addresses", "network_tuples"],
+      "concepts_review": ["tuples", "string_formatting", "string_splitting"],
+      "hints": [
+        "Use an f-string or str.format() for format_address.",
+        "Use str.split(':') for parse_address and convert the port to int."
+      ]
+    },
+    {
+      "id": "pp_ch13_c02",
+      "title": "Network Protocol Parser",
+      "description": "Write a `ProtocolParser` class that handles text-based network messages in the format 'COMMAND arg1 arg2 ...'. Implement `parse(message)` which returns a dict with 'command' (uppercase string) and 'args' (list of strings). Implement `build(command, *args)` which constructs a message string. Handle edge cases: empty messages should raise ValueError, and commands should always be uppercased.",
+      "starter_code": "class ProtocolParser:\n    \"\"\"Parse and build simple text-based protocol messages.\"\"\"\n\n    def parse(self, message):\n        \"\"\"Parse 'COMMAND arg1 arg2' into {'command': str, 'args': list}.\n        \n        Raises:\n            ValueError: If message is empty or whitespace-only.\n        \"\"\"\n        # Your code here\n        pass\n\n    def build(self, command, *args):\n        \"\"\"Build a protocol message string from command and args.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "parser = ProtocolParser()\nresult = parser.parse('GET /index.html HTTP/1.1')\nassert result['command'] == 'GET'\nassert result['args'] == ['/index.html', 'HTTP/1.1']\nresult2 = parser.parse('QUIT')\nassert result2['command'] == 'QUIT'\nassert result2['args'] == []\nresult3 = parser.parse('send hello world')\nassert result3['command'] == 'SEND'\nassert result3['args'] == ['hello', 'world']\nassert parser.build('GET', '/index.html') == 'GET /index.html'\nassert parser.build('QUIT') == 'QUIT'\nassert parser.build('send', 'a', 'b') == 'SEND a b'\ntry:\n    parser.parse('')\n    assert False, 'Should have raised ValueError'\nexcept ValueError:\n    pass\ntry:\n    parser.parse('   ')\n    assert False, 'Should have raised ValueError'\nexcept ValueError:\n    pass",
+      "difficulty": "medium",
+      "concepts_new": ["protocol_parsing", "message_formats"],
+      "concepts_review": ["classes", "string_methods", "exceptions"],
+      "hints": [
+        "Use str.split() (no arguments) to split on whitespace and ignore extra spaces.",
+        "The first token is the command; the rest are args. Use str.upper() on the command."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 10,
+  "challenges": [
+    {
+      "id": "h5_ch10_c01",
+      "title": "Styled Elements",
+      "description": "Create HTML with at least three elements that use class attributes. Use at least 2 different class names across the elements. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('class=') >= 3, 'Should have at least 3 elements with class attributes'\nimport re\nclasses = re.findall(r'class=[\"\\']([^\"\\']+)[\"\\']', html.lower())\nassert len(classes) >= 3, 'Should have at least 3 class attribute values'\nunique = set()\nfor c in classes:\n    for name in c.split():\n        unique.add(name)\nassert len(unique) >= 2, 'Should use at least 2 different class names'",
+      "difficulty": "easy",
+      "concepts_new": ["class_attribute"],
+      "concepts_review": ["html_elements"],
+      "hints": ["Use class=\"classname\" on elements like <p>, <div>, or <span>", "Multiple elements can share the same class name"]
+    },
+    {
+      "id": "h5_ch10_c02",
+      "title": "Unique Elements",
+      "description": "Create HTML with elements using both id and class attributes. At least one element must have an id, at least two must have classes, and at least one element must have multiple classes (space-separated). Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert 'id=' in html.lower(), 'Should contain at least one id attribute'\nassert html.lower().count('class=') >= 2, 'Should have at least 2 elements with class attributes'\nimport re\nclasses = re.findall(r'class=[\"\\']([^\"\\']+)[\"\\']', html.lower())\nhas_multiple = any(' ' in c.strip() for c in classes)\nassert has_multiple, 'At least one element should have multiple classes (space-separated)'",
+      "difficulty": "medium",
+      "concepts_new": ["id_attribute", "multiple_classes"],
+      "concepts_review": ["class_attribute"],
+      "hints": ["Use id=\"unique-name\" for unique identification", "Multiple classes are separated by spaces: class=\"class1 class2\"", "Each id should be unique on the page"]
+    }
+  ]
+}

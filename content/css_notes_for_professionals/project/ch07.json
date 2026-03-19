@@ -1,0 +1,20 @@
+{
+  "step_id": "css_proj_ch07",
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 7,
+  "title": "Content Containers \u2014 Box Model",
+  "description": "Now that your base styles are set, it's time to structure the page using the CSS box model. Add a .container class to center and constrain content width, apply the universal box-sizing: border-box rule so padding never breaks layouts, and style .post cards with padding, margin, background, and a border.",
+  "builds_on": "css_proj_ch01",
+  "starter_code": "css = \"\"\"\n/* Blog Theme CSS */\n/* Step 1: Foundation */\nbody {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    font-size: 16px;\n    line-height: 1.6;\n    color: #333;\n    background-color: #f9f9f9;\n}\n\na {\n    color: #0077cc;\n    text-decoration: none;\n}\n\nh1 {\n    font-size: 2rem;\n    margin-bottom: 0.5rem;\n}\n\n/* Step 2: Box Model */\n/* TODO: Add universal box-sizing: border-box rule */\n\n.container {\n    /* TODO: Add max-width, margin: auto, padding */\n}\n\n.post {\n    /* TODO: Add padding, margin-bottom, background, border */\n}\n\"\"\"",
+  "test_code": "assert 'box-sizing' in css.lower(), 'Missing box-sizing property'\nassert 'border-box' in css.lower(), 'Should use border-box value for box-sizing'\nassert '.container' in css.lower(), 'Missing .container selector'\nassert 'max-width' in css.lower(), 'Missing max-width on .container'\nassert 'margin' in css.lower(), 'Missing margin (use auto to center .container)'\nassert '.post' in css.lower(), 'Missing .post selector'\nassert 'padding' in css.lower(), 'Missing padding property'",
+  "acceptance_criteria": [
+    "Universal box-sizing: border-box rule is applied",
+    ".container has max-width, margin: auto for centering, and padding",
+    ".post has padding, margin-bottom, background, and a border"
+  ],
+  "hints": [
+    "Use *, *::before, *::after { box-sizing: border-box; } for the universal rule",
+    "A good max-width for a blog container is 900px to 1200px",
+    "margin: 0 auto centers a block element horizontally"
+  ]
+}

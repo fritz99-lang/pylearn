@@ -1,0 +1,23 @@
+{
+  "step_id": "hc_proj_ch02",
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 2,
+  "title": "Recipe Page Foundation",
+  "description": "Create the basic HTML page for your recipe collection website. Include the DOCTYPE declaration, html element, head with a title ('My Recipes'), and a body with an h1 heading and a welcome paragraph introducing the site.",
+  "builds_on": "",
+  "starter_code": "# Recipe Collection Website \u2014 Step 1: Page Foundation\n# Create a complete HTML5 page with doctype, html, head, title, body.\n# Add an h1 heading and a welcome paragraph.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Recipes</title>\n</head>\n<body>\n    <!-- Add an h1 heading for the site -->\n\n    <!-- Add a welcome paragraph -->\n\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<!doctype html>' in html.lower(), 'Must include <!DOCTYPE html> declaration'\nassert '<html>' in html.lower() or '<html ' in html.lower(), 'Must include <html> tag'\nassert '</html>' in html.lower(), 'Must include closing </html> tag'\nassert '<head>' in html.lower(), 'Must include <head> tag'\nassert '</head>' in html.lower(), 'Must include closing </head> tag'\nassert '<title>' in html.lower() and '</title>' in html.lower(), 'Must include a <title> element'\nassert 'my recipes' in html.lower(), 'Title should contain \"My Recipes\"'\nassert '<body>' in html.lower(), 'Must include <body> tag'\nassert '</body>' in html.lower(), 'Must include closing </body> tag'\nassert '<h1>' in html.lower() and '</h1>' in html.lower(), 'Must include an <h1> heading'\nassert '<p>' in html.lower() and '</p>' in html.lower(), 'Must include at least one <p> paragraph'",
+  "acceptance_criteria": [
+    "HTML5 DOCTYPE declaration is present",
+    "Document has html, head, and body elements",
+    "Title element contains 'My Recipes'",
+    "An h1 heading introduces the site",
+    "A welcome paragraph is included in the body"
+  ],
+  "hints": [
+    "The DOCTYPE declaration is: <!DOCTYPE html>",
+    "Set the title like: <title>My Recipes</title>",
+    "Add a heading: <h1>My Recipe Collection</h1>",
+    "Add a paragraph: <p>Welcome to my favorite recipes!</p>"
+  ]
+}

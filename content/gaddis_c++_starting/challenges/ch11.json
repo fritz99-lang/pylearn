@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 11,
+  "challenges": [
+    {
+      "id": "cpp_ch11_c01",
+      "title": "Define and Use a Struct",
+      "description": "Write a C++ program that defines a struct called `Student` with at least three members: `name` (string), `id` (int), and `gpa` (double). In `main`, create an instance of `Student`, assign values to each member using the dot operator, and print all the member values. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'struct' in cpp, 'You must define a struct'\nassert 'Student' in cpp, 'Name your struct Student'\nassert cpp.count('.') >= 3, 'Use the dot operator to access struct members (at least 3 times for assigning or printing)'\nassert 'name' in cpp and 'id' in cpp and 'gpa' in cpp, 'The struct should have name, id, and gpa members'\nassert 'cout' in cpp, 'Print the struct member values using cout'",
+      "difficulty": "easy",
+      "concepts_new": ["structs", "dot_operator", "structured_data"],
+      "concepts_review": ["variables", "data_types", "cout"],
+      "hints": [
+        "Define the struct before main: struct Student { string name; int id; double gpa; };",
+        "Access members with the dot operator: student1.name = \"Alice\";"
+      ]
+    },
+    {
+      "id": "cpp_ch11_c02",
+      "title": "Array of Structs and Struct Functions",
+      "description": "Write a C++ program that defines a `Book` struct with members `title` (string), `author` (string), and `pages` (int). Create an array of at least 3 `Book` structs and initialize them. Write a function called `displayBook` that takes a `Book` parameter and prints its information. Use a loop to call `displayBook` for each book in the array. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'struct' in cpp and 'Book' in cpp, 'Define a struct called Book'\nassert 'displayBook' in cpp, 'Define a function called displayBook'\nassert 'Book ' in cpp and '[' in cpp and ']' in cpp, 'Create an array of Book structs'\nassert 'title' in cpp and 'author' in cpp and 'pages' in cpp, 'Book should have title, author, and pages members'\nassert 'for' in cpp or 'while' in cpp, 'Use a loop to display all books'\nassert 'void' in cpp, 'displayBook should return void'",
+      "difficulty": "medium",
+      "concepts_new": ["array_of_structs", "passing_structs_to_functions"],
+      "concepts_review": ["structs", "arrays", "functions", "loops"],
+      "hints": [
+        "Declare an array of structs: Book library[3];",
+        "Pass a struct to a function: void displayBook(Book b) { ... }"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 10,
+  "challenges": [
+    {
+      "id": "pp_ch10_c01",
+      "title": "Menu Structure Builder",
+      "description": "Create a dictionary called 'menu_structure' that represents a menu bar. It should map menu names to lists of item names: 'File' -> ['New', 'Open', 'Save', 'Exit'], 'Edit' -> ['Cut', 'Copy', 'Paste', 'Undo'], 'Help' -> ['About', 'Documentation']. Then write a function 'get_menu_items' that takes the menu dict and a menu name, returning the list of items or an empty list if the menu doesn't exist.",
+      "starter_code": "# Create menu_structure dict: menu_name -> [item_names]\nmenu_structure = {}\n\ndef get_menu_items(menu, name):\n    \"\"\"Return list of items for menu name, or empty list if not found.\"\"\"\n    pass\n",
+      "test_code": "assert 'File' in menu_structure\nassert 'Edit' in menu_structure\nassert 'Help' in menu_structure\nassert menu_structure['File'] == ['New', 'Open', 'Save', 'Exit']\nassert menu_structure['Edit'] == ['Cut', 'Copy', 'Paste', 'Undo']\nassert menu_structure['Help'] == ['About', 'Documentation']\nassert get_menu_items(menu_structure, 'File') == ['New', 'Open', 'Save', 'Exit']\nassert get_menu_items(menu_structure, 'Edit') == ['Cut', 'Copy', 'Paste', 'Undo']\nassert get_menu_items(menu_structure, 'View') == []\nassert get_menu_items({}, 'File') == []",
+      "difficulty": "easy",
+      "concepts_new": ["menu_structures", "nested_data"],
+      "concepts_review": ["dictionaries", "lists", "dict_get"],
+      "hints": [
+        "Build the dict with exact keys and list values as described.",
+        "Use menu.get(name, []) to return an empty list for missing menus."
+      ]
+    },
+    {
+      "id": "pp_ch10_c02",
+      "title": "Canvas Coordinate Tracker",
+      "description": "Write a class called 'CoordinateTracker' that tracks named points on a 2D canvas. It should support: add_point(name, x, y) — store a point; get_point(name) — return (x, y) tuple or None; move_point(name, dx, dy) — shift a point by dx, dy (raise KeyError if not found); distance(name1, name2) — return Euclidean distance between two points (raise KeyError if either not found); all_points() — return dict of {name: (x, y)}.",
+      "starter_code": "import math\n\nclass CoordinateTracker:\n    \"\"\"Track named points on a 2D canvas.\"\"\"\n    \n    def __init__(self):\n        pass\n    \n    def add_point(self, name, x, y):\n        pass\n    \n    def get_point(self, name):\n        \"\"\"Return (x, y) tuple or None.\"\"\"\n        pass\n    \n    def move_point(self, name, dx, dy):\n        \"\"\"Move point by (dx, dy). Raises KeyError if not found.\"\"\"\n        pass\n    \n    def distance(self, name1, name2):\n        \"\"\"Euclidean distance between two named points.\"\"\"\n        pass\n    \n    def all_points(self):\n        \"\"\"Return dict of {name: (x, y)}.\"\"\"\n        pass\n",
+      "test_code": "ct = CoordinateTracker()\nct.add_point('origin', 0, 0)\nct.add_point('right', 3, 0)\nct.add_point('up', 0, 4)\n\nassert ct.get_point('origin') == (0, 0)\nassert ct.get_point('right') == (3, 0)\nassert ct.get_point('missing') is None\n\n# Distance\nassert ct.distance('origin', 'right') == 3.0\nassert ct.distance('origin', 'up') == 4.0\nassert ct.distance('right', 'up') == 5.0\n\n# Move\nct.move_point('origin', 1, 1)\nassert ct.get_point('origin') == (1, 1)\nct.move_point('origin', -1, -1)\nassert ct.get_point('origin') == (0, 0)\n\n# All points\nall_pts = ct.all_points()\nassert len(all_pts) == 3\nassert all_pts['right'] == (3, 0)\n\n# KeyError on missing\ntry:\n    ct.move_point('nope', 1, 1)\n    assert False, 'Should raise KeyError'\nexcept KeyError:\n    pass\n\ntry:\n    ct.distance('origin', 'nope')\n    assert False, 'Should raise KeyError'\nexcept KeyError:\n    pass",
+      "difficulty": "medium",
+      "concepts_new": ["coordinate_geometry", "canvas_concepts"],
+      "concepts_review": ["classes", "tuples", "math_module", "dictionaries"],
+      "hints": [
+        "Store points in a dict: self._points = {}. Each value is a (x, y) tuple.",
+        "Euclidean distance: math.sqrt((x2-x1)**2 + (y2-y1)**2). For move_point, update the stored tuple."
+      ]
+    }
+  ]
+}

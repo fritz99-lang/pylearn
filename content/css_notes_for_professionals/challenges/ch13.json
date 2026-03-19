@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 13,
+  "challenges": [
+    {
+      "id": "css_ch13_c01",
+      "title": "Basic Media Query",
+      "description": "Write CSS that includes a `@media` query targeting screens with a `max-width` of 768px. Inside the media query, set the `.sidebar` selector to `display: none`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '@media' in css.lower(), 'Should include a @media rule'\nassert 'max-width' in css.lower(), 'Should use max-width in the media query'\nassert '768px' in css.lower(), 'Should target 768px breakpoint'\nassert '.sidebar' in css.lower(), 'Should target the .sidebar selector'\nassert 'display' in css.lower(), 'Should use the display property'\nassert 'none' in css.lower(), 'Should set display to none'",
+      "difficulty": "easy",
+      "concepts_new": ["media-queries", "max-width-breakpoint"],
+      "concepts_review": [],
+      "hints": [
+        "Media queries use the syntax: @media (condition) { rules }",
+        "Use: @media (max-width: 768px) { .sidebar { display: none; } }"
+      ]
+    },
+    {
+      "id": "css_ch13_c02",
+      "title": "Multiple Breakpoints",
+      "description": "Write CSS with two `@media` queries for responsive design. First, for screens with `max-width: 600px`, set `.grid` to have a single column by setting `grid-template-columns` to `1fr`. Second, for screens with `min-width: 601px` and `max-width: 1024px`, set `.grid` to have two columns using `grid-template-columns: 1fr 1fr`. Also include a base rule outside any media query that sets `.grid` to `display: grid`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '@media' in css.lower(), 'Should include @media rules'\nassert css.lower().count('@media') >= 2, 'Should have at least two @media rules'\nassert 'max-width' in css.lower(), 'Should use max-width'\nassert 'min-width' in css.lower(), 'Should use min-width'\nassert '600px' in css.lower(), 'Should include the 600px breakpoint'\nassert '1024px' in css.lower(), 'Should include the 1024px breakpoint'\nassert '.grid' in css.lower(), 'Should target the .grid selector'\nassert 'grid-template-columns' in css.lower(), 'Should use grid-template-columns'\nassert 'display' in css.lower(), 'Should set display property'\nassert 'grid' in css.lower(), 'Should use display: grid'",
+      "difficulty": "medium",
+      "concepts_new": ["multiple-breakpoints", "min-width-breakpoint"],
+      "concepts_review": ["media-queries", "max-width-breakpoint"],
+      "hints": [
+        "You can combine min-width and max-width with 'and': @media (min-width: 601px) and (max-width: 1024px).",
+        "Define the base .grid styles outside of any media query.",
+        "Each @media block overrides styles at its specific screen size range."
+      ]
+    }
+  ]
+}

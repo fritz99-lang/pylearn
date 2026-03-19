@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 3,
+  "questions": [
+    {
+      "id": "css_ch03_q01",
+      "type": "multiple_choice",
+      "question": "What is the correct syntax for a CSS comment?",
+      "choices": [
+        "// This is a comment",
+        "/* This is a comment */",
+        "<!-- This is a comment -->",
+        "# This is a comment"
+      ],
+      "correct": 1,
+      "explanation": "CSS comments use the /* */ syntax. Double slashes (//) are not valid in CSS, and <!-- --> is for HTML comments.",
+      "concepts": ["comment syntax"]
+    },
+    {
+      "id": "css_ch03_q02",
+      "type": "multiple_choice",
+      "question": "Can CSS comments span multiple lines?",
+      "choices": [
+        "No, each line needs its own comment markers",
+        "Yes, everything between /* and */ is commented out",
+        "Only if each line starts with an asterisk (*)",
+        "Only single-line comments are supported in CSS"
+      ],
+      "correct": 1,
+      "explanation": "CSS comments can span multiple lines. Everything between the opening /* and closing */ is treated as a comment, regardless of how many lines it covers.",
+      "concepts": ["multi-line comments"]
+    },
+    {
+      "id": "css_ch03_q03",
+      "type": "multiple_choice",
+      "question": "What happens when you wrap a CSS rule inside /* and */?",
+      "choices": [
+        "The rule is executed with lower priority",
+        "The rule is highlighted in the browser inspector",
+        "The rule is ignored by the browser",
+        "The rule causes a syntax error"
+      ],
+      "correct": 2,
+      "explanation": "Wrapping CSS code inside /* */ comments it out, causing the browser to completely ignore those rules. This is a common debugging technique.",
+      "concepts": ["commenting out code"]
+    },
+    {
+      "id": "css_ch03_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a valid CSS comment?",
+      "choices": [
+        "/* single line comment */",
+        "/* multi\n   line\n   comment */",
+        "// single line comment",
+        "/* comment with special chars: @#$% */"
+      ],
+      "correct": 2,
+      "explanation": "CSS does not support single-line comments with //. Only the /* */ syntax is valid for comments in CSS.",
+      "concepts": ["comment syntax"]
+    },
+    {
+      "id": "css_ch03_q05",
+      "type": "fill_in_blank",
+      "question": "A CSS comment begins with /* and ends with ___.",
+      "correct": "*/",
+      "explanation": "CSS comments are enclosed between /* (opening) and */ (closing). Everything in between is ignored by the browser.",
+      "concepts": ["comment syntax"]
+    },
+    {
+      "id": "css_ch03_q06",
+      "type": "fill_in_blank",
+      "question": "Temporarily disabling a CSS rule by wrapping it in /* */ is called ___ out code.",
+      "correct": "commenting",
+      "explanation": "Commenting out code is a common debugging technique where you wrap code in comment markers to disable it without deleting it.",
+      "concepts": ["commenting out code"]
+    }
+  ]
+}

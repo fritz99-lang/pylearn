@@ -1,0 +1,63 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 35,
+  "questions": [
+    {
+      "id": "css_ch35_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS property initializes a counter and sets its starting value?",
+      "choices": ["counter-start", "counter-increment", "counter-reset", "counter-set"],
+      "correct": 2,
+      "explanation": "The counter-reset property creates a new counter and optionally sets it to a specific value. By default the counter starts at 0.",
+      "concepts": ["counter-reset", "counters"]
+    },
+    {
+      "id": "css_ch35_q02",
+      "type": "multiple_choice",
+      "question": "In which CSS property is the counter() function typically used to display a counter's value?",
+      "choices": ["display", "content", "counter-output", "text-content"],
+      "correct": 1,
+      "explanation": "The counter() function is used inside the content property, typically on ::before or ::after pseudo-elements, to display the current value of a counter.",
+      "concepts": ["counter()", "content"]
+    },
+    {
+      "id": "css_ch35_q03",
+      "type": "multiple_choice",
+      "question": "What is the difference between counter() and counters()?",
+      "choices": [
+        "counter() is for incrementing, counters() is for decrementing",
+        "counter() shows one level, counters() shows nested levels with a separator",
+        "counter() is for ordered lists, counters() is for unordered lists",
+        "There is no difference; they are aliases"
+      ],
+      "correct": 1,
+      "explanation": "The counter() function displays the value of a single counter. The counters() function displays values from nested counter instances joined by a specified separator string, such as '1.2.3'.",
+      "concepts": ["counter()", "counters()", "nesting"]
+    },
+    {
+      "id": "css_ch35_q04",
+      "type": "multiple_choice",
+      "question": "What is the default increment value when using counter-increment?",
+      "choices": ["0", "1", "10", "It must be explicitly specified"],
+      "correct": 1,
+      "explanation": "By default, counter-increment increases the counter by 1. You can specify a different integer value, including negative numbers, after the counter name.",
+      "concepts": ["counter-increment", "default value"]
+    },
+    {
+      "id": "css_ch35_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property increases or decreases a CSS counter's value each time it is encountered.",
+      "correct": "counter-increment",
+      "explanation": "The counter-increment property specifies which counter to modify and by how much. It is applied to elements that should advance the count.",
+      "concepts": ["counter-increment"]
+    },
+    {
+      "id": "css_ch35_q06",
+      "type": "fill_in_blank",
+      "question": "To display nested counters separated by dots (like 1.2.3), use the ___ function.",
+      "correct": "counters()",
+      "explanation": "The counters() function takes a counter name, a separator string, and an optional counter style, and outputs all nested instances of that counter joined by the separator.",
+      "concepts": ["counters()", "nesting"]
+    }
+  ]
+}

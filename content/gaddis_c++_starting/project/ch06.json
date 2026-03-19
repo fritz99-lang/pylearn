@@ -1,0 +1,22 @@
+{
+  "step_id": "cpp_proj_ch06",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 6,
+  "title": "Modular Code — Functions",
+  "description": "Refactor your program by extracting logic into at least three functions: calculateAverage() that takes three grades and returns the average, getLetterGrade() that takes an average and returns a letter grade, and displayStudent() that prints the student info. Call these functions from main.",
+  "builds_on": "cpp_proj_ch05",
+  "starter_code": "# Student Grade Tracker — Step 5: Functions\n# Extract logic into reusable functions.\n# Define: calculateAverage(), getLetterGrade(), displayStudent()\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\n// Define calculateAverage: takes 3 doubles, returns double\n\n// Define getLetterGrade: takes a double average, returns char\n\n// Define displayStudent: takes name, average, letterGrade, prints info\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    char choice;\n    int studentCount = 0;\n\n    do {\n        string name;\n        double g1, g2, g3;\n\n        cout << \"Enter student name: \";\n        cin.ignore();\n        getline(cin, name);\n\n        cout << \"Enter 3 grades: \";\n        cin >> g1 >> g2 >> g3;\n\n        // Call your functions here\n        // double avg = calculateAverage(g1, g2, g3);\n        // char letter = getLetterGrade(avg);\n        // displayStudent(name, avg, letter);\n\n        studentCount++;\n        cout << \"Add another student? (y/n): \";\n        cin >> choice;\n    } while (choice == 'y' || choice == 'Y');\n\n    cout << \"Total students entered: \" << studentCount << endl;\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "cpp_content = cpp\n# Check for at least 3 function definitions (return_type name(params) {)\nimport re\nfunc_pattern = r'(double|char|void|int|string)\\s+\\w+\\s*\\([^)]*\\)\\s*\\{'\nfunctions_found = re.findall(func_pattern, cpp_content)\n# Subtract 1 for main\nnon_main_funcs = [f for f in re.finditer(r'(double|char|void|int|string)\\s+(\\w+)\\s*\\([^)]*\\)\\s*\\{', cpp_content) if f.group(2) != 'main']\nassert len(non_main_funcs) >= 3, f'Must define at least 3 functions besides main, found {len(non_main_funcs)}'\nassert 'calculateAverage' in cpp or 'calculate_average' in cpp or 'calcAverage' in cpp, 'Must have a function for calculating the average'\nassert 'getLetterGrade' in cpp or 'get_letter_grade' in cpp or 'letterGrade' in cpp, 'Must have a function for getting the letter grade'\nassert 'displayStudent' in cpp or 'display_student' in cpp or 'printStudent' in cpp, 'Must have a function for displaying student info'",
+  "acceptance_criteria": [
+    "Defines calculateAverage() that takes 3 grades and returns the average",
+    "Defines getLetterGrade() that takes an average and returns a char letter grade",
+    "Defines displayStudent() that prints student name, average, and letter grade",
+    "All three functions are called from main"
+  ],
+  "hints": [
+    "Function signature: double calculateAverage(double g1, double g2, double g3) { return (g1+g2+g3)/3.0; }",
+    "getLetterGrade takes a double and returns a char: char getLetterGrade(double avg) { ... }",
+    "displayStudent can return void: void displayStudent(string name, double avg, char grade) { ... }",
+    "Define functions above main — C++ requires functions to be declared before they are called"
+  ]
+}

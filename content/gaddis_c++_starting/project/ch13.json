@@ -1,0 +1,25 @@
+{
+  "step_id": "cpp_proj_ch13",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 13,
+  "title": "GradeBook Class — OOP",
+  "description": "Convert your program to use object-oriented design. Create a GradeBook class with a private vector of Student structs and public methods: addStudent(), displayAll(), getClassAverage(), saveToFile(), and loadFromFile(). The class should encapsulate all grade tracking logic.",
+  "builds_on": "cpp_proj_ch12",
+  "starter_code": "# Student Grade Tracker — Step 9: Classes\n# Create a GradeBook class that encapsulates all functionality.\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\n#include <vector>\nusing namespace std;\n\nconst int NUM_GRADES = 3;\n\nstruct Student {\n    string name;\n    double grades[NUM_GRADES];\n    double average;\n    char letterGrade;\n};\n\n// Define the GradeBook class\n// Private: vector<Student> roster\n// Public:\n//   GradeBook() constructor\n//   void addStudent(Student s)\n//   void displayAll()\n//   double getClassAverage()\n//   void saveToFile(string filename)\n//   void loadFromFile(string filename)\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    // Create a GradeBook object\n    // GradeBook book;\n\n    // Use the object's methods for all operations\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "assert 'class' in cpp, 'Must define a class'\nassert 'GradeBook' in cpp, 'Class should be named GradeBook'\nassert 'private' in cpp, 'Must have a private section in the class'\nassert 'public' in cpp, 'Must have a public section in the class'\nimport re\nhas_constructor = bool(re.search(r'GradeBook\\s*\\(', cpp))\nassert has_constructor, 'Must define a GradeBook constructor'\nassert 'addStudent' in cpp or 'add_student' in cpp, 'Must have an addStudent method'\nassert 'displayAll' in cpp or 'display_all' in cpp, 'Must have a displayAll method'\nassert 'getClassAverage' in cpp or 'get_class_average' in cpp or 'classAverage' in cpp, 'Must have a getClassAverage method'",
+  "acceptance_criteria": [
+    "Defines a GradeBook class with private and public sections",
+    "Private section contains a vector or array of Student structs",
+    "Has a constructor",
+    "Public methods: addStudent, displayAll, getClassAverage",
+    "File I/O methods are part of the class",
+    "main() creates a GradeBook object and uses its methods"
+  ],
+  "hints": [
+    "Class structure: class GradeBook { private: vector<Student> roster; public: GradeBook() {} ... };",
+    "Add a student: void addStudent(Student s) { roster.push_back(s); }",
+    "Class average: loop through roster, sum averages, divide by roster.size()",
+    "Include <vector> for vector<Student>",
+    "Don't forget the semicolon after the closing brace of the class definition"
+  ]
+}

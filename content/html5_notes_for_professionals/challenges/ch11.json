@@ -1,0 +1,28 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 11,
+  "challenges": [
+    {
+      "id": "h5_ch11_c01",
+      "title": "Data Storage",
+      "description": "Create at least two HTML elements that use data-* attributes. Include at least three different data attributes across the elements (e.g., data-id, data-name, data-value). Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "import re\ndata_attrs = re.findall(r'data-[a-z][a-z0-9-]*=', html.lower())\nassert len(data_attrs) >= 3, 'Should contain at least 3 data-* attributes'\nattr_names = set(re.findall(r'(data-[a-z][a-z0-9-]*)=', html.lower()))\nassert len(attr_names) >= 3, 'Should use at least 3 different data-* attribute names'",
+      "difficulty": "easy",
+      "concepts_new": ["data_attributes"],
+      "concepts_review": ["html_attributes"],
+      "hints": ["Data attributes start with data- followed by a name: data-id=\"123\"", "You can create any custom data attribute like data-name, data-value, etc."]
+    },
+    {
+      "id": "h5_ch11_c02",
+      "title": "Interactive Data",
+      "description": "Create an unordered list (<ul>) with at least 3 list items (<li>). Each list item should have both a data-category and a data-price attribute. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<ul' in html.lower(), 'Should contain a <ul> element'\nassert html.lower().count('<li') >= 3, 'Should contain at least 3 <li> elements'\nassert html.lower().count('data-category=') >= 3, 'Each list item should have a data-category attribute'\nassert html.lower().count('data-price=') >= 3, 'Each list item should have a data-price attribute'",
+      "difficulty": "medium",
+      "concepts_new": ["data_attribute_patterns"],
+      "concepts_review": ["data_attributes", "lists"],
+      "hints": ["Each <li> needs both data-category and data-price attributes", "Example: <li data-category=\"fruit\" data-price=\"1.50\">Apple</li>"]
+    }
+  ]
+}

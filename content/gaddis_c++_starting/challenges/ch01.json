@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 1,
+  "challenges": [
+    {
+      "id": "cpp_ch01_c01",
+      "title": "Hello World",
+      "description": "Write a C++ program that prints \"Hello, World!\" to the console. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Include the iostream header\n- Use cout to print the message\n- Have a main() function that returns 0",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert '#include <iostream>' in cpp, 'Should include the iostream header'\nassert 'cout' in cpp, 'Should use cout to produce output'\nassert 'Hello' in cpp, 'Should print a Hello message'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "easy",
+      "concepts_new": ["#include", "iostream", "cout", "main function"],
+      "concepts_review": [],
+      "hints": [
+        "Use #include <iostream> at the top of your program",
+        "cout << \"Hello, World!\" sends text to the console"
+      ]
+    },
+    {
+      "id": "cpp_ch01_c02",
+      "title": "Personal Info Output",
+      "description": "Write a C++ program that outputs your name on one line and your age on the next line. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Include the iostream header\n- Use cout with endl (or '\\n') to print on separate lines\n- Output at least two separate cout statements or use endl between them",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert '#include <iostream>' in cpp, 'Should include the iostream header'\nassert 'cout' in cpp, 'Should use cout for output'\nassert cpp.count('cout') >= 2 or 'endl' in cpp or '\\\\n' in cpp, 'Should output on multiple lines using endl or multiple cout statements'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "medium",
+      "concepts_new": ["endl", "multiple output statements", "escape sequences"],
+      "concepts_review": ["#include", "iostream", "cout", "main function"],
+      "hints": [
+        "Use endl after your first cout to move to a new line: cout << \"Name\" << endl;",
+        "You can chain multiple items with <<, for example: cout << \"Age: \" << 25 << endl;"
+      ]
+    }
+  ]
+}

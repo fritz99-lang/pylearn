@@ -1,0 +1,44 @@
+{
+  "books": [
+    {
+      "book_id": "learning_python_fifth_edition",
+      "title": "Learning_Python_Fifth_Edition",
+      "pdf_path": "C:/Users/tritl/OneDrive/Nate/Research/Research/Comp Prog/Learning_Python_Fifth_Edition.pdf",
+      "profile_name": "learning_python"
+    },
+    {
+      "book_id": "gaddis_c++_starting",
+      "title": "Gaddis C++ Starting",
+      "pdf_path": "C:/Users/tritl/OneDrive/Nate/Research/Research/Comp Prog/Gaddis C++ Starting.pdf",
+      "profile_name": "gaddis_cpp",
+      "language": "cpp"
+    },
+    {
+      "book_id": "html5_notes_for_professionals",
+      "title": "HTML5 Notes for Professionals",
+      "pdf_path": "C:/Users/tritl/OneDrive/Nate/Research/Research/Comp Prog/HTML5NotesForProfessionals.pdf",
+      "language": "html",
+      "profile_name": ""
+    },
+    {
+      "book_id": "css_notes_for_professionals",
+      "title": "CSS Notes for Professionals",
+      "pdf_path": "C:/Users/tritl/OneDrive/Nate/Research/Research/Comp Prog/CSSNotesForProfessionals.pdf",
+      "language": "html",
+      "profile_name": ""
+    },
+    {
+      "book_id": "how_to_code_in_html5_and_css3",
+      "title": "How to Code in HTML5 and CSS3",
+      "pdf_path": "C:/Users/tritl/OneDrive/Nate/Research/Research/Comp Prog/HowToCodeInHTML5AndCSS3.pdf",
+      "language": "html",
+      "profile_name": ""
+    },
+    {
+      "book_id": "programming_python_fourth_edition",
+      "title": "Programming Python, Fourth Edition",
+      "pdf_path": "C:/Users/tritl/OneDrive/Nate/Research/Research/Comp Prog/Programming_Python_Fourth_Edition.pdf",
+      "profile_name": "programming_python"
+    }
+  ]
+}

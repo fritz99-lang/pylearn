@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 28,
+  "questions": [
+    {
+      "id": "h5_ch28_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML element is used to embed external content such as a Flash animation or a PDF viewer plugin?",
+      "choices": ["<iframe>", "<embed>", "<include>", "<link>"],
+      "correct": 1,
+      "explanation": "The <embed> element embeds external content at a specified point in the document. It is commonly used for plugin-based content like Flash or PDF files.",
+      "concepts": ["embed"]
+    },
+    {
+      "id": "h5_ch28_q02",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the <param> element?",
+      "choices": [
+        "It defines query parameters for a URL",
+        "It passes named parameters to an <object> element's plugin",
+        "It sets configuration values for the entire HTML page",
+        "It defines variables in embedded JavaScript"
+      ],
+      "correct": 1,
+      "explanation": "The <param> element defines parameters for an <object> element's plugin. Each <param> has a name and value attribute that configure how the embedded content behaves.",
+      "concepts": ["param", "object"]
+    },
+    {
+      "id": "h5_ch28_q03",
+      "type": "multiple_choice",
+      "question": "Which attribute on the <embed> element specifies the MIME type of the embedded content?",
+      "choices": ["mime", "content-type", "type", "format"],
+      "correct": 2,
+      "explanation": "The type attribute specifies the MIME type of the embedded resource (e.g., type=\"application/pdf\"), which helps the browser determine how to handle the content.",
+      "concepts": ["type", "MIME types", "embed"]
+    },
+    {
+      "id": "h5_ch28_q04",
+      "type": "multiple_choice",
+      "question": "How does the <object> element differ from the <embed> element?",
+      "choices": [
+        "The <object> element cannot embed multimedia content",
+        "The <object> element supports fallback content between its tags and <param> children",
+        "The <embed> element supports child elements but <object> does not",
+        "There is no difference; they are interchangeable"
+      ],
+      "correct": 1,
+      "explanation": "The <object> element can contain fallback content (displayed if the object fails to load) and <param> elements for configuration. The <embed> element is a void element with no children.",
+      "concepts": ["object", "embed", "fallback"]
+    },
+    {
+      "id": "h5_ch28_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on an <embed> or <object> element specifies the URL of the resource to embed.",
+      "correct": "src",
+      "explanation": "The src attribute provides the URL of the external resource. For <object>, the equivalent attribute is called data rather than src.",
+      "concepts": ["src", "embed"]
+    },
+    {
+      "id": "h5_ch28_q06",
+      "type": "fill_in_blank",
+      "question": "On an <object> element, the URL of the embedded resource is specified with the ___ attribute instead of src.",
+      "correct": "data",
+      "explanation": "The <object> element uses the data attribute to specify the resource URL, unlike <embed> which uses src.",
+      "concepts": ["object", "data"]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 20,
+  "questions": [
+    {
+      "id": "cpp_ch20_q01",
+      "type": "multiple_choice",
+      "question": "In a binary search tree, where is a new value placed if it is less than the current node's value?",
+      "choices": [
+        "In the right subtree",
+        "In the left subtree",
+        "At the root",
+        "At the end of the tree"
+      ],
+      "correct": 1,
+      "explanation": "In a binary search tree, values less than a node are placed in the left subtree, and values greater than a node are placed in the right subtree. This ordering property allows efficient searching.",
+      "concepts": ["binary search tree", "insertion"]
+    },
+    {
+      "id": "cpp_ch20_q02",
+      "type": "multiple_choice",
+      "question": "Which tree traversal visits nodes in the order: left subtree, root, right subtree?",
+      "choices": ["Preorder", "Inorder", "Postorder", "Level-order"],
+      "correct": 1,
+      "explanation": "Inorder traversal visits the left subtree first, then the current node (root), then the right subtree. When applied to a binary search tree, inorder traversal visits nodes in ascending sorted order.",
+      "concepts": ["inorder traversal", "tree traversals"]
+    },
+    {
+      "id": "cpp_ch20_q03",
+      "type": "multiple_choice",
+      "question": "What is a leaf node in a binary tree?",
+      "choices": [
+        "The first node in the tree",
+        "A node with exactly one child",
+        "A node with no children",
+        "A node that points back to the root"
+      ],
+      "correct": 2,
+      "explanation": "A leaf node is a node that has no children (both its left and right child pointers are nullptr). Leaf nodes are at the bottom of the tree and represent the endpoints of any path from the root.",
+      "concepts": ["leaf node", "tree terminology"]
+    },
+    {
+      "id": "cpp_ch20_q04",
+      "type": "multiple_choice",
+      "question": "In which traversal order is the root node visited BEFORE its subtrees?",
+      "choices": ["Preorder", "Inorder", "Postorder", "Reverse order"],
+      "correct": 0,
+      "explanation": "Preorder traversal visits the root node first, then recursively traverses the left subtree, then the right subtree. The prefix 'pre' indicates the root is processed before (pre) its children.",
+      "concepts": ["preorder traversal", "tree traversals"]
+    },
+    {
+      "id": "cpp_ch20_q05",
+      "type": "fill_in_blank",
+      "question": "The topmost node in a binary tree, which has no parent, is called the ___.",
+      "correct": "root",
+      "explanation": "The root is the topmost node in a tree and serves as the starting point for all operations. Every other node in the tree is a descendant of the root and can be reached by following child pointers from it.",
+      "concepts": ["root", "tree terminology"]
+    },
+    {
+      "id": "cpp_ch20_q06",
+      "type": "fill_in_blank",
+      "question": "A traversal that visits left subtree, right subtree, then the root is called ___ traversal.",
+      "correct": "postorder",
+      "explanation": "Postorder traversal processes the left subtree, then the right subtree, and finally the root node. The prefix 'post' indicates the root is processed after (post) its children. This is useful for operations like deleting a tree.",
+      "concepts": ["postorder traversal", "tree traversals"]
+    }
+  ]
+}

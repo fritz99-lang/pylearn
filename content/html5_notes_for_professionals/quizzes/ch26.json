@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 26,
+  "questions": [
+    {
+      "id": "h5_ch26_q01",
+      "type": "multiple_choice",
+      "question": "Which two attributes define the completion state of a <progress> element?",
+      "choices": ["min and max", "value and max", "low and high", "start and end"],
+      "correct": 1,
+      "explanation": "The value attribute indicates the current progress and max defines the total work. Together they represent completion as value/max.",
+      "concepts": ["progress", "value", "max"]
+    },
+    {
+      "id": "h5_ch26_q02",
+      "type": "multiple_choice",
+      "question": "What happens when you omit the value attribute from a <progress> element?",
+      "choices": [
+        "The progress bar defaults to 0%",
+        "The progress bar defaults to 100%",
+        "The progress bar displays as indeterminate",
+        "The element is invalid and will not render"
+      ],
+      "correct": 2,
+      "explanation": "A <progress> element without a value attribute renders as an indeterminate progress bar, typically shown as an animated bar indicating that work is in progress but the completion amount is unknown.",
+      "concepts": ["progress", "indeterminate"]
+    },
+    {
+      "id": "h5_ch26_q03",
+      "type": "multiple_choice",
+      "question": "What is the default value of the max attribute on a <progress> element if it is not specified?",
+      "choices": ["0", "1", "100", "There is no default"],
+      "correct": 1,
+      "explanation": "When the max attribute is omitted, it defaults to 1.0. So a value of 0.5 would represent 50% completion.",
+      "concepts": ["progress", "max"]
+    },
+    {
+      "id": "h5_ch26_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following correctly creates a progress bar showing 70% completion?",
+      "choices": [
+        "<progress value=\"70\"></progress>",
+        "<progress value=\"70\" max=\"100\"></progress>",
+        "<progress percent=\"70\"></progress>",
+        "<progress complete=\"70%\"></progress>"
+      ],
+      "correct": 1,
+      "explanation": "Setting value=\"70\" and max=\"100\" creates a determinate progress bar at 70%. Option A would also work but would show 70 out of a default max of 1, which is clamped to 100%.",
+      "concepts": ["progress", "value", "max"]
+    },
+    {
+      "id": "h5_ch26_q05",
+      "type": "fill_in_blank",
+      "question": "The HTML tag used to represent the completion progress of a task is ___.",
+      "correct": "<progress>",
+      "explanation": "The <progress> element displays a progress bar indicating how much of a task has been completed.",
+      "concepts": ["progress"]
+    },
+    {
+      "id": "h5_ch26_q06",
+      "type": "fill_in_blank",
+      "question": "A progress bar without a ___ attribute is considered indeterminate.",
+      "correct": "value",
+      "explanation": "When the value attribute is omitted, the browser cannot determine the completion percentage and renders an indeterminate (animated) progress indicator.",
+      "concepts": ["progress", "indeterminate"]
+    }
+  ]
+}

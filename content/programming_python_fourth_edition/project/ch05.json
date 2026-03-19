@@ -1,0 +1,24 @@
+{
+  "step_id": "pp_proj_ch05",
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 5,
+  "title": "Directory Listing — File Operations",
+  "description": "Add a directory listing function that returns detailed information about files and directories. Use os.path and os.listdir to build a list of file info dicts with name, size, whether it's a directory, and file extension.",
+  "builds_on": "pp_proj_ch04",
+  "starter_code": "# File Manager CLI — Step 3: Directory Listing\n# List files and directories with detailed info.\n\nimport os\nimport sys\n\ndef get_system_info():\n    \"\"\"Return system information dict.\"\"\"\n    return {\n        'cwd': os.getcwd(),\n        'platform': sys.platform,\n        'python_version': sys.version,\n        'user': os.environ.get('USER', os.environ.get('USERNAME', '')),\n    }\n\nVALID_COMMANDS = ['list', 'search', 'info', 'help', 'copy', 'move', 'delete']\n\ndef parse_command(args_list):\n    \"\"\"Parse a list of argument strings into a command dict.\"\"\"\n    if not args_list:\n        return {'command': 'help', 'args': []}\n    return {'command': args_list[0], 'args': args_list[1:]}\n\ndef list_directory(path='.'):\n    \"\"\"List contents of a directory with details.\n\n    Args:\n        path: Directory path to list. Defaults to current directory.\n\n    Returns:\n        List of dicts, each with keys:\n        - 'name': filename (str)\n        - 'size': file size in bytes (int), 0 for directories\n        - 'is_dir': True if directory (bool)\n        - 'extension': file extension including dot, or '' for dirs/no ext (str)\n    \"\"\"\n    # Your code here\n    return []\n\n# Test it\nfiles = list_directory('.')\nfor f in files[:5]:\n    kind = 'DIR' if f['is_dir'] else 'FILE'\n    print(f\"  {kind}  {f['name']:30s}  {f['size']:>10d}  {f['extension']}\")\nprint(f\"\\nTotal: {len(files)} items\")\n",
+  "test_code": "result = list_directory('.')\nassert isinstance(result, list), 'list_directory should return a list'\nassert len(result) > 0, 'Current directory should not be empty'\nfirst = result[0]\nassert isinstance(first, dict), 'Each entry should be a dict'\nassert 'name' in first, \"Each entry must have 'name' key\"\nassert 'size' in first, \"Each entry must have 'size' key\"\nassert 'is_dir' in first, \"Each entry must have 'is_dir' key\"\nassert 'extension' in first, \"Each entry must have 'extension' key\"\nassert isinstance(first['name'], str), 'name should be a string'\nassert isinstance(first['size'], int), 'size should be an int'\nassert isinstance(first['is_dir'], bool), 'is_dir should be a bool'\nassert isinstance(first['extension'], str), 'extension should be a string'\nfor entry in result:\n    if entry['is_dir']:\n        assert entry['extension'] == '', f\"Directories should have empty extension, got '{entry['extension']}' for {entry['name']}\"",
+  "acceptance_criteria": [
+    "list_directory() returns a list of dicts",
+    "Each dict has name, size, is_dir, and extension keys",
+    "size is int (bytes), 0 for directories",
+    "extension includes the dot (e.g., '.py') or '' for dirs/no extension",
+    "Defaults to current directory when no path given"
+  ],
+  "hints": [
+    "Use os.listdir(path) to get filenames",
+    "Build full path with os.path.join(path, name)",
+    "Check directory: os.path.isdir(full_path)",
+    "Get size: os.path.getsize(full_path)",
+    "Get extension: os.path.splitext(name)[1]"
+  ]
+}

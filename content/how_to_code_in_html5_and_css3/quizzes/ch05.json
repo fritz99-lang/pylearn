@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 5,
+  "questions": [
+    {
+      "id": "hc_ch05_q01",
+      "type": "multiple_choice",
+      "question": "What is the purpose of CSS?",
+      "choices": [
+        "To define the structure of a web page",
+        "To control the visual presentation and styling of HTML elements",
+        "To add interactivity to a web page",
+        "To store data on the server"
+      ],
+      "correct": 1,
+      "explanation": "CSS (Cascading Style Sheets) controls the visual presentation of HTML elements, including colors, fonts, spacing, and layout.",
+      "concepts": ["CSS purpose", "styling"]
+    },
+    {
+      "id": "hc_ch05_q02",
+      "type": "multiple_choice",
+      "question": "Which HTML tag is used to link an external CSS file?",
+      "choices": [
+        "<css>",
+        "<style>",
+        "<link>",
+        "<script>"
+      ],
+      "correct": 2,
+      "explanation": "The <link> tag with rel=\"stylesheet\" and href pointing to the CSS file is used to connect an external stylesheet to an HTML document.",
+      "concepts": ["linking CSS", "link tag"]
+    },
+    {
+      "id": "hc_ch05_q03",
+      "type": "multiple_choice",
+      "question": "In the CSS rule `p { color: blue; }`, what is `p`?",
+      "choices": [
+        "A property",
+        "A value",
+        "A selector",
+        "A declaration"
+      ],
+      "correct": 2,
+      "explanation": "The `p` is a selector — it targets all <p> elements on the page. The selector tells the browser which elements to apply the styles to.",
+      "concepts": ["selectors", "CSS syntax"]
+    },
+    {
+      "id": "hc_ch05_q04",
+      "type": "multiple_choice",
+      "question": "Which CSS property changes the text color of an element?",
+      "choices": [
+        "text-color",
+        "font-color",
+        "color",
+        "foreground"
+      ],
+      "correct": 2,
+      "explanation": "The `color` property sets the text color of an element. Despite the generic name, it applies specifically to text content.",
+      "concepts": ["color property", "text styling"]
+    },
+    {
+      "id": "hc_ch05_q05",
+      "type": "fill_in_blank",
+      "question": "The CSS property ___ changes the size of text.",
+      "correct": "font-size",
+      "explanation": "The font-size property controls the size of text. Values can be in pixels (px), em, rem, percentages, or keywords.",
+      "concepts": ["font-size", "text styling"]
+    },
+    {
+      "id": "hc_ch05_q06",
+      "type": "fill_in_blank",
+      "question": "The CSS property ___ sets the background color of an element.",
+      "correct": "background-color",
+      "explanation": "The background-color property sets the background color of an element. It accepts color names, hex codes, RGB, and other color values.",
+      "concepts": ["background-color", "CSS properties"]
+    }
+  ]
+}

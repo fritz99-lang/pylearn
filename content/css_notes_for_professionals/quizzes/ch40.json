@@ -1,0 +1,63 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 40,
+  "questions": [
+    {
+      "id": "css_ch40_q01",
+      "type": "multiple_choice",
+      "question": "Which property controls how content is distributed across columns in a multi-column layout?",
+      "choices": ["column-distribute", "column-fill", "column-balance", "column-flow"],
+      "correct": 1,
+      "explanation": "The column-fill property determines whether content is balanced across columns (auto lets columns fill sequentially, balance distributes content as evenly as possible).",
+      "concepts": ["column-fill", "multi-column"]
+    },
+    {
+      "id": "css_ch40_q02",
+      "type": "multiple_choice",
+      "question": "Which property prevents an element from being split across two columns?",
+      "choices": ["column-break: avoid", "break-inside: avoid", "page-break: none", "split-inside: none"],
+      "correct": 1,
+      "explanation": "Setting break-inside: avoid on an element prevents the multi-column layout from breaking that element across column boundaries, keeping it whole in a single column.",
+      "concepts": ["break-inside", "fragmentation"]
+    },
+    {
+      "id": "css_ch40_q03",
+      "type": "multiple_choice",
+      "question": "Which property forces a column break before an element?",
+      "choices": ["column-break-before: always", "break-before: column", "page-break-before: column", "break-before: always"],
+      "correct": 1,
+      "explanation": "The break-before: column declaration forces a column break immediately before the element, pushing it to the start of the next column.",
+      "concepts": ["break-before", "column break"]
+    },
+    {
+      "id": "css_ch40_q04",
+      "type": "multiple_choice",
+      "question": "What do the orphans and widows properties control in multi-column and paged layouts?",
+      "choices": [
+        "The number of empty columns allowed",
+        "The minimum lines of text at the bottom and top of a column or page",
+        "The spacing between the first and last columns",
+        "The number of columns that must contain content"
+      ],
+      "correct": 1,
+      "explanation": "The orphans property sets the minimum number of lines that must remain at the bottom of a column/page before a break. The widows property sets the minimum lines at the top of the next column/page.",
+      "concepts": ["orphans", "widows", "fragmentation"]
+    },
+    {
+      "id": "css_ch40_q05",
+      "type": "fill_in_blank",
+      "question": "To force a column break after an element, use the property break-after with the value ___.",
+      "correct": "column",
+      "explanation": "Setting break-after: column forces the content following the element to move to the next column. Other values include avoid, page, and auto.",
+      "concepts": ["break-after", "column break"]
+    },
+    {
+      "id": "css_ch40_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property sets the minimum number of lines of a paragraph that must be visible at the bottom of a column before a break.",
+      "correct": "orphans",
+      "explanation": "The orphans property specifies how many lines of a block container must be left at the bottom of a column or page. This prevents single lines from being stranded before a break.",
+      "concepts": ["orphans", "fragmentation"]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 5,
+  "challenges": [
+    {
+      "id": "hc_ch05_c01",
+      "title": "Basic CSS Styling",
+      "description": "Create an HTML page with a <style> block that sets the color and font-size on the body element. Include an <h1> and a <p> in the body. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page with basic CSS styling -->\n\n\"\"\"",
+      "test_code": "assert '<style>' in html.lower(), 'Should contain a <style> block'\nassert '</style>' in html.lower(), 'Should contain a closing </style> tag'\nassert 'color' in html.lower(), 'Should set a color property in CSS'\nassert 'font-size' in html.lower(), 'Should set a font-size property in CSS'\nassert '<h1>' in html.lower(), 'Should contain an <h1> heading'\nassert '<p>' in html.lower(), 'Should contain a <p> paragraph'",
+      "difficulty": "easy",
+      "concepts_new": ["style tag", "CSS color property", "font-size property", "CSS basics"],
+      "concepts_review": ["head tag", "body tag", "h1 heading", "p tag"],
+      "hints": [
+        "The <style> tag goes inside <head> and contains CSS rules.",
+        "CSS syntax: selector { property: value; } — e.g., body { color: navy; font-size: 16px; }"
+      ]
+    },
+    {
+      "id": "hc_ch05_c02",
+      "title": "Multiple CSS Selectors and Properties",
+      "description": "Create an HTML page with a <style> block that styles at least three different elements using color, background-color, font-family, and margin properties. Include an <h1>, <h2>, and <p> in the body. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page with multiple CSS selectors and properties -->\n\n\"\"\"",
+      "test_code": "assert '<style>' in html.lower(), 'Should contain a <style> block'\nassert 'color' in html.lower(), 'Should use the color property'\nassert 'background-color' in html.lower(), 'Should use the background-color property'\nassert 'font-family' in html.lower(), 'Should use the font-family property'\nassert 'margin' in html.lower(), 'Should use the margin property'\nassert '<h1>' in html.lower(), 'Should contain an <h1> heading'\nassert '<h2>' in html.lower(), 'Should contain an <h2> heading'\nassert '<p>' in html.lower(), 'Should contain a <p> paragraph'\nstyle_block = html.lower().split('<style>')[1].split('</style>')[0]\nassert style_block.count('{') >= 3, 'Should have at least three CSS rule blocks'",
+      "difficulty": "medium",
+      "concepts_new": ["background-color", "font-family", "margin", "multiple selectors"],
+      "concepts_review": ["style tag", "color property", "font-size property"],
+      "hints": [
+        "Each element selector gets its own CSS rule block: h1 { ... } h2 { ... } p { ... }",
+        "Font-family accepts font names like Arial, serif, sans-serif, etc."
+      ]
+    }
+  ]
+}

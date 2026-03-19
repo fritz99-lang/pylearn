@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 3,
+  "challenges": [
+    {
+      "id": "hc_ch03_c01",
+      "title": "Proper HTML5 Document",
+      "description": "Create a properly structured HTML5 page with <!DOCTYPE html>, <html>, <head> with <meta charset> and <title>, and a <body> with a paragraph. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a proper HTML5 document -->\n\n\"\"\"",
+      "test_code": "assert '<!doctype html>' in html.lower(), 'Should start with <!DOCTYPE html>'\nassert '<html>' in html.lower() or '<html ' in html.lower(), 'Should contain an <html> tag'\nassert '<meta' in html.lower(), 'Should contain a <meta> tag'\nassert 'charset' in html.lower(), 'Should specify charset in meta tag'\nassert '<title>' in html.lower(), 'Should contain a <title> tag'\nassert '<body>' in html.lower(), 'Should contain a <body> tag'\nassert '<p>' in html.lower(), 'Should contain a paragraph'",
+      "difficulty": "easy",
+      "concepts_new": ["doctype declaration", "meta charset", "HTML5 structure"],
+      "concepts_review": ["html tag", "head tag", "title tag", "body tag"],
+      "hints": [
+        "Every HTML5 page should start with <!DOCTYPE html>.",
+        "The <meta charset=\"utf-8\"> tag goes inside <head> to declare character encoding."
+      ]
+    },
+    {
+      "id": "hc_ch03_c02",
+      "title": "Semantic Page Structure",
+      "description": "Create an HTML5 page using semantic tags: <header>, <main>, and <footer>. The header should contain an <h1>, main should contain at least one <p>, and footer should contain text. Include proper doctype and head. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a semantic HTML5 page with header, main, footer -->\n\n\"\"\"",
+      "test_code": "assert '<!doctype html>' in html.lower(), 'Should start with <!DOCTYPE html>'\nassert '<header>' in html.lower(), 'Should contain a <header> tag'\nassert '</header>' in html.lower(), 'Should contain a closing </header> tag'\nassert '<main>' in html.lower(), 'Should contain a <main> tag'\nassert '</main>' in html.lower(), 'Should contain a closing </main> tag'\nassert '<footer>' in html.lower(), 'Should contain a <footer> tag'\nassert '</footer>' in html.lower(), 'Should contain a closing </footer> tag'\nassert '<h1>' in html.lower(), 'Should contain an <h1> inside header'\nassert '<p>' in html.lower(), 'Should contain a <p> inside main'",
+      "difficulty": "medium",
+      "concepts_new": ["header tag", "main tag", "footer tag", "semantic HTML"],
+      "concepts_review": ["doctype", "meta charset", "h1 heading", "p tag"],
+      "hints": [
+        "Semantic tags like <header>, <main>, and <footer> go inside <body>.",
+        "These tags describe the purpose of each section, making the page more accessible."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 25,
+  "challenges": [
+    {
+      "id": "h5_ch25_c01",
+      "title": "Video Player",
+      "description": "Create a video element with the controls attribute. Inside it, include source elements for both mp4 and webm formats, and add fallback text for browsers that do not support the video element. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a video player with multiple sources and fallback text -->\n\n\"\"\"",
+      "test_code": "assert '<video' in html.lower(), 'Should contain a <video> element'\nassert 'controls' in html.lower(), 'Video should have the controls attribute'\nassert '<source' in html.lower(), 'Should contain <source> elements'\nassert 'video/mp4' in html.lower(), 'Should include an mp4 source type'\nassert 'video/webm' in html.lower(), 'Should include a webm source type'\nassert '</video>' in html.lower(), 'Should close the <video> element'",
+      "difficulty": "easy",
+      "concepts_new": ["video", "source", "controls"],
+      "concepts_review": [],
+      "hints": [
+        "The <video> tag wraps one or more <source> elements.",
+        "Each <source> needs a src and a type attribute, e.g. type=\"video/mp4\".",
+        "Fallback text goes between the <source> elements and the closing </video> tag."
+      ]
+    },
+    {
+      "id": "h5_ch25_c02",
+      "title": "Media Page",
+      "description": "Create a page with both a video element and an audio element. The video should have controls, a poster attribute, and source elements for mp4 and webm. The audio should have controls and source elements for mp3 and ogg. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page with video and audio elements -->\n\n\"\"\"",
+      "test_code": "assert '<video' in html.lower(), 'Should contain a <video> element'\nassert '<audio' in html.lower(), 'Should contain an <audio> element'\nassert 'poster' in html.lower(), 'Video should have a poster attribute'\nassert 'controls' in html.lower(), 'Media elements should have controls'\nassert 'video/mp4' in html.lower(), 'Should include an mp4 video source'\nassert 'video/webm' in html.lower(), 'Should include a webm video source'\nassert 'audio/mpeg' in html.lower() or 'audio/mp3' in html.lower(), 'Should include an mp3 audio source'\nassert 'audio/ogg' in html.lower(), 'Should include an ogg audio source'\nassert '</video>' in html.lower(), 'Should close the <video> element'\nassert '</audio>' in html.lower(), 'Should close the <audio> element'",
+      "difficulty": "medium",
+      "concepts_new": ["audio", "poster", "multiple media"],
+      "concepts_review": ["video", "source", "controls"],
+      "hints": [
+        "The <audio> element works just like <video> but for sound files.",
+        "The poster attribute on <video> specifies an image to show before playback.",
+        "MP3 audio uses the MIME type audio/mpeg."
+      ]
+    }
+  ]
+}

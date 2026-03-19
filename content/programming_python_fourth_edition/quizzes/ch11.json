@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 11,
+  "questions": [
+    {
+      "id": "pp_ch11_q01",
+      "type": "multiple_choice",
+      "question": "Why does running a long-running task directly in a tkinter callback cause the GUI to freeze?",
+      "choices": [
+        "tkinter automatically pauses rendering during callbacks",
+        "The long task blocks the mainloop, preventing it from processing events and redrawing widgets",
+        "Python's GIL prevents any GUI updates while Python code is executing",
+        "tkinter callbacks have a built-in 5-second timeout"
+      ],
+      "correct": 1,
+      "explanation": "tkinter runs a single-threaded event loop (mainloop). When a callback performs a long computation, it monopolizes that thread, preventing mainloop from processing pending events, redraws, and user input until the callback returns.",
+      "concepts": ["mainloop", "GUI freezing"]
+    },
+    {
+      "id": "pp_ch11_q02",
+      "type": "multiple_choice",
+      "question": "What is the recommended way to run a long task without freezing a tkinter GUI?",
+      "choices": [
+        "Call root.update() in a tight loop inside the callback",
+        "Spawn the task in a separate thread and use the after() method to poll for results from the main thread",
+        "Use multiprocessing.Pool to parallelize the GUI event loop",
+        "Increase the mainloop timeout parameter"
+      ],
+      "correct": 1,
+      "explanation": "The standard pattern is to launch the long-running work in a background thread, then use widget.after(delay_ms, callback) to periodically check from the main thread whether the work is done. Only the main thread should update tkinter widgets, since tkinter is not thread-safe.",
+      "concepts": ["threading", "after method"]
+    },
+    {
+      "id": "pp_ch11_q03",
+      "type": "multiple_choice",
+      "question": "Which method schedules a callback to run after a specified number of milliseconds, allowing periodic polling without blocking the event loop?",
+      "choices": [
+        "widget.after_idle(callback)",
+        "widget.after(milliseconds, callback)",
+        "widget.schedule(milliseconds, callback)",
+        "widget.timer(milliseconds, callback)"
+      ],
+      "correct": 1,
+      "explanation": "widget.after(ms, callback) registers a one-shot timer that fires the callback after the given delay. Calling after() again inside the callback creates a repeating poll. after_idle() is similar but runs when the event loop is idle rather than after a fixed delay.",
+      "concepts": ["after method", "event scheduling"]
+    },
+    {
+      "id": "pp_ch11_q04",
+      "type": "multiple_choice",
+      "question": "What is a key advantage of wrapping reusable GUI components as custom widget classes that inherit from Frame?",
+      "choices": [
+        "Frame subclasses run in their own thread automatically",
+        "They encapsulate layout and behavior into a self-contained, reusable component that can be embedded in any parent",
+        "Frame subclasses bypass the mainloop entirely",
+        "Only Frame subclasses can respond to keyboard events"
+      ],
+      "correct": 1,
+      "explanation": "Subclassing Frame to create custom widget classes is a core tkinter design pattern. It bundles child widgets, layout logic, and event handlers into one reusable unit that can be attached to any parent container, promoting modular and maintainable GUI code.",
+      "concepts": ["custom widget classes", "Frame subclass"]
+    },
+    {
+      "id": "pp_ch11_q05",
+      "type": "fill_in_blank",
+      "question": "To copy text to the system clipboard in tkinter, you call widget.clipboard_clear() followed by widget.______(text).",
+      "correct": "clipboard_append",
+      "explanation": "tkinter provides clipboard_clear() and clipboard_append(string) methods on any widget to interact with the system clipboard. This allows GUI applications to support copy/paste with other applications.",
+      "concepts": ["clipboard"]
+    },
+    {
+      "id": "pp_ch11_q06",
+      "type": "fill_in_blank",
+      "question": "When building a program that works as both a command-line tool and a GUI app, the common pattern is to separate the core ______ from the user interface so either front end can use it.",
+      "correct": "logic",
+      "explanation": "Separating core application logic from the GUI (or CLI) layer is a fundamental design principle. The logic layer handles data processing and business rules, while the interface layer handles display and user interaction. This enables reuse and testability.",
+      "concepts": ["GUI vs CLI", "separation of concerns"]
+    }
+  ]
+}

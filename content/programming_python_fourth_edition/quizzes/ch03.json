@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 3,
+  "questions": [
+    {
+      "id": "pp_ch03_q01",
+      "type": "multiple_choice",
+      "question": "Which function returns the current working directory as a string?",
+      "choices": [
+        "sys.getcwd()",
+        "os.getcwd()",
+        "os.path.cwd()",
+        "os.curdir()"
+      ],
+      "correct": 1,
+      "explanation": "os.getcwd() returns the current working directory as a string. os.curdir is a constant (typically '.'), not a function, and sys has no getcwd().",
+      "concepts": ["os_module", "current_directory"]
+    },
+    {
+      "id": "pp_ch03_q02",
+      "type": "multiple_choice",
+      "question": "What does sys.path represent in Python?",
+      "choices": [
+        "The file system path of the running script",
+        "The list of directories Python searches when importing modules",
+        "The PATH environment variable as a list",
+        "The path to the Python interpreter executable"
+      ],
+      "correct": 1,
+      "explanation": "sys.path is the module search path -- a list of directory strings that Python checks in order when you use an import statement. It can be modified at runtime.",
+      "concepts": ["sys_module", "module_search_path"]
+    },
+    {
+      "id": "pp_ch03_q03",
+      "type": "multiple_choice",
+      "question": "How do you list the contents of a directory using the os module?",
+      "choices": [
+        "os.dir('.')",
+        "os.listdir('.')",
+        "os.list('.')",
+        "os.scandir('.').list()"
+      ],
+      "correct": 1,
+      "explanation": "os.listdir(path) returns a list of names (strings) of the entries in the given directory. os.scandir() also works but returns DirEntry objects, not a plain list.",
+      "concepts": ["os_module", "directory_listing"]
+    },
+    {
+      "id": "pp_ch03_q04",
+      "type": "multiple_choice",
+      "question": "Which attribute holds the command-line arguments passed to a Python script?",
+      "choices": [
+        "os.args",
+        "sys.argv",
+        "sys.args",
+        "os.argv"
+      ],
+      "correct": 1,
+      "explanation": "sys.argv is a list of strings where sys.argv[0] is the script name and sys.argv[1:] are the arguments passed on the command line.",
+      "concepts": ["sys_module", "command_line_arguments"]
+    },
+    {
+      "id": "pp_ch03_q05",
+      "type": "fill_in_blank",
+      "question": "The os.___ function changes the current working directory to the specified path.",
+      "correct": "chdir",
+      "explanation": "os.chdir(path) changes the current working directory of the process to the given path. It is the counterpart to os.getcwd().",
+      "concepts": ["os_module", "current_directory"]
+    },
+    {
+      "id": "pp_ch03_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute of the sys module contains the list of directories Python searches for modules during import.",
+      "correct": "path",
+      "explanation": "sys.path is initialized from PYTHONPATH and installation-dependent defaults. You can append directories to it at runtime to make additional modules importable.",
+      "concepts": ["sys_module", "module_search_path"]
+    }
+  ]
+}

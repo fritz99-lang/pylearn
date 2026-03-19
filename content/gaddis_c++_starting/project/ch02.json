@@ -1,0 +1,21 @@
+{
+  "step_id": "cpp_proj_ch02",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 2,
+  "title": "Project Setup — Basic Output",
+  "description": "Create a C++ program that prints a welcome message for the Student Grade Tracker. Display a sample student name and their grade using cout. This is the foundation — every future step builds on this.",
+  "builds_on": "",
+  "starter_code": "# Student Grade Tracker — Step 1: Basic Output\n# Write a C++ program that prints a welcome message,\n# then displays a sample student name and grade using cout.\n\ncpp = \"\"\"\n#include <iostream>\nusing namespace std;\n\nint main() {\n    // Print a welcome message for the Grade Tracker\n\n    // Display a sample student name and grade\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "assert '#include <iostream>' in cpp, 'Must include <iostream> header'\nassert 'cout' in cpp, 'Must use cout to display output'\nassert 'main' in cpp, 'Must define a main function'\nassert 'return 0' in cpp, 'main should return 0'\nassert 'using namespace std' in cpp or 'std::cout' in cpp, 'Must use std namespace or std:: prefix'\nassert cpp.count('cout') >= 2, 'Use cout at least twice — once for welcome message and once for student info'",
+  "acceptance_criteria": [
+    "Program includes <iostream> header",
+    "Uses cout to print a welcome message",
+    "Displays a sample student name and grade",
+    "main() returns 0"
+  ],
+  "hints": [
+    "Start with: cout << \"Welcome to the Student Grade Tracker!\" << endl;",
+    "Display a student like: cout << \"Student: Alice — Grade: 92\" << endl;",
+    "Remember to use << endl or \\n for line breaks"
+  ]
+}

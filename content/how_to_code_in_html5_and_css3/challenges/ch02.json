@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 2,
+  "challenges": [
+    {
+      "id": "hc_ch02_c01",
+      "title": "Headings and Paragraphs",
+      "description": "Create an HTML page with an <h1> heading, an <h2> subheading, and two <p> paragraphs. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page with headings and paragraphs -->\n\n\"\"\"",
+      "test_code": "assert '<h1>' in html.lower(), 'Should contain an <h1> heading'\nassert '</h1>' in html.lower(), 'Should contain a closing </h1> tag'\nassert '<h2>' in html.lower(), 'Should contain an <h2> subheading'\nassert '</h2>' in html.lower(), 'Should contain a closing </h2> tag'\nassert html.lower().count('<p>') >= 2, 'Should contain at least two <p> paragraphs'\nassert html.lower().count('</p>') >= 2, 'Should contain at least two closing </p> tags'",
+      "difficulty": "easy",
+      "concepts_new": ["h1 heading", "h2 heading", "multiple paragraphs"],
+      "concepts_review": ["html tag", "body tag", "p tag"],
+      "hints": [
+        "Use <h1> for the main heading and <h2> for a subheading.",
+        "Each paragraph needs its own <p>...</p> tags."
+      ]
+    },
+    {
+      "id": "hc_ch02_c02",
+      "title": "Heading Hierarchy with List",
+      "description": "Create an HTML page with an <h1>, <h2>, and <h3> heading hierarchy, at least one paragraph, and an unordered list (<ul>) with at least three list items (<li>). Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page with heading hierarchy, paragraph, and list -->\n\n\"\"\"",
+      "test_code": "assert '<h1>' in html.lower(), 'Should contain an <h1> heading'\nassert '<h2>' in html.lower(), 'Should contain an <h2> heading'\nassert '<h3>' in html.lower(), 'Should contain an <h3> heading'\nassert '<p>' in html.lower(), 'Should contain at least one paragraph'\nassert '<ul>' in html.lower(), 'Should contain an unordered list'\nassert '</ul>' in html.lower(), 'Should contain a closing </ul> tag'\nassert html.lower().count('<li>') >= 3, 'Should contain at least three list items'",
+      "difficulty": "medium",
+      "concepts_new": ["h3 heading", "unordered list", "list items"],
+      "concepts_review": ["h1 heading", "h2 heading", "p tag"],
+      "hints": [
+        "Heading tags go from <h1> (most important) to <h6> (least important).",
+        "An unordered list uses <ul> with <li> items inside it."
+      ]
+    }
+  ]
+}

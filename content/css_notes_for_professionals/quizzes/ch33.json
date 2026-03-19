@@ -1,0 +1,63 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 33,
+  "questions": [
+    {
+      "id": "css_ch33_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS property allows you to define a non-rectangular shape that inline content wraps around?",
+      "choices": ["clip-path", "shape-outside", "float-shape", "wrap-shape"],
+      "correct": 1,
+      "explanation": "The shape-outside property defines a shape around which inline content will wrap. It only works on floated elements.",
+      "concepts": ["shape-outside", "floats"]
+    },
+    {
+      "id": "css_ch33_q02",
+      "type": "multiple_choice",
+      "question": "Which shape function creates a circular wrapping boundary with a 50% radius centered in the element?",
+      "choices": ["circle(50%)", "ellipse(50% 50%)", "round(50%)", "inset(50%)"],
+      "correct": 0,
+      "explanation": "The circle() function accepts a radius parameter. circle(50%) creates a circle with a radius of 50% of the element's dimensions.",
+      "concepts": ["circle()", "shape-outside"]
+    },
+    {
+      "id": "css_ch33_q03",
+      "type": "multiple_choice",
+      "question": "What does the shape-margin property do?",
+      "choices": [
+        "Sets the margin of the floated element",
+        "Adds space between the shape boundary and the wrapping content",
+        "Defines the inner padding of the shape",
+        "Sets the distance between two shaped elements"
+      ],
+      "correct": 1,
+      "explanation": "The shape-margin property adds a margin around the defined shape, creating extra space between the shape boundary and the inline content that wraps around it.",
+      "concepts": ["shape-margin", "shape-outside"]
+    },
+    {
+      "id": "css_ch33_q04",
+      "type": "multiple_choice",
+      "question": "Which shape function would you use to define an irregular wrapping boundary with multiple vertices?",
+      "choices": ["inset()", "ellipse()", "polygon()", "path()"],
+      "correct": 2,
+      "explanation": "The polygon() function accepts a comma-separated list of coordinate pairs, allowing you to define complex irregular shapes with multiple vertices.",
+      "concepts": ["polygon()", "shape-outside"]
+    },
+    {
+      "id": "css_ch33_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property controls the alpha channel threshold when using an image to define a float shape.",
+      "correct": "shape-image-threshold",
+      "explanation": "The shape-image-threshold property sets the alpha value threshold for extracting a shape from an image. Pixels above the threshold contribute to the shape.",
+      "concepts": ["shape-image-threshold"]
+    },
+    {
+      "id": "css_ch33_q06",
+      "type": "fill_in_blank",
+      "question": "The inset() shape function creates a ___ shape inset from the edges of the element's reference box.",
+      "correct": "rectangular",
+      "explanation": "The inset() function defines a rectangular shape by specifying offsets from each edge of the reference box, optionally with border-radius for rounded corners.",
+      "concepts": ["inset()", "shape-outside"]
+    }
+  ]
+}

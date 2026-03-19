@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 21,
+  "challenges": [
+    {
+      "id": "h5_ch21_c01",
+      "title": "Simple Nav",
+      "description": "Create a nav element containing an unordered list with at least 4 list items, each containing a link. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a nav with an unordered list of at least 4 links -->\n\n\"\"\"",
+      "test_code": "assert '<nav' in html.lower(), 'Should contain a <nav> element'\nassert '</nav>' in html.lower(), 'Should close the <nav> element'\nassert '<ul' in html.lower(), 'Should contain a <ul> element'\nassert '</ul>' in html.lower(), 'Should close the <ul> element'\nassert html.lower().count('<li') >= 4, 'Should contain at least 4 list items'\nassert html.lower().count('<a ') >= 4, 'Each list item should contain a link'\nassert html.lower().count('href=') >= 4, 'Each link should have an href attribute'",
+      "difficulty": "easy",
+      "concepts_new": ["navigation_bar", "nav_with_list"],
+      "concepts_review": ["nav_element", "unordered_lists", "links"],
+      "hints": [
+        "Wrap an <ul> inside a <nav> element",
+        "Each <li> should contain an <a> link",
+        "Use href=\"#\" as a placeholder for the link destinations"
+      ]
+    },
+    {
+      "id": "h5_ch21_c02",
+      "title": "Accessible Nav",
+      "description": "Create a nav element with an aria-label attribute. Inside, include an unordered list of at least 4 links. Mark one link as the current page using aria-current=\"page\". Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create an accessible nav with aria-label -->\n<!-- Mark one link as the current page with aria-current -->\n\n\"\"\"",
+      "test_code": "assert '<nav' in html.lower(), 'Should contain a <nav> element'\nassert 'aria-label=' in html.lower(), 'Nav should have an aria-label attribute'\nassert '<ul' in html.lower(), 'Should contain a <ul> element'\nassert html.lower().count('<li') >= 4, 'Should contain at least 4 list items'\nassert html.lower().count('<a ') >= 4, 'Should contain at least 4 links'\nassert 'aria-current=\"page\"' in html.lower(), 'One link should have aria-current=\"page\"'",
+      "difficulty": "medium",
+      "concepts_new": ["aria_label", "aria_current", "accessible_navigation"],
+      "concepts_review": ["navigation_bar", "nav_element", "links"],
+      "hints": [
+        "Add aria-label=\"Main navigation\" to the <nav> element",
+        "Add aria-current=\"page\" to the link representing the current page",
+        "These ARIA attributes help screen readers understand the navigation"
+      ]
+    }
+  ]
+}

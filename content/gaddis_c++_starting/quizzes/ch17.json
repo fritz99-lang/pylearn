@@ -1,0 +1,78 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 17,
+  "questions": [
+    {
+      "id": "cpp_ch17_q01",
+      "type": "multiple_choice",
+      "question": "In a singly linked list, what does each node contain?",
+      "choices": [
+        "Only a data value",
+        "A data value and a pointer to the previous node",
+        "A data value and a pointer to the next node",
+        "A data value and pointers to both the previous and next nodes"
+      ],
+      "correct": 2,
+      "explanation": "In a singly linked list, each node contains a data value and a pointer to the next node in the list. The last node's pointer is set to nullptr to indicate the end of the list.",
+      "concepts": ["node structure", "singly linked list"]
+    },
+    {
+      "id": "cpp_ch17_q02",
+      "type": "multiple_choice",
+      "question": "What is the head pointer in a linked list?",
+      "choices": [
+        "A pointer to the last node in the list",
+        "A pointer to the first node in the list",
+        "A pointer to the middle node in the list",
+        "A special node that stores the list's size"
+      ],
+      "correct": 1,
+      "explanation": "The head pointer points to the first node in the linked list. It is the entry point for accessing and traversing the entire list. If the list is empty, the head pointer is nullptr.",
+      "concepts": ["head pointer", "linked list"]
+    },
+    {
+      "id": "cpp_ch17_q03",
+      "type": "multiple_choice",
+      "question": "What is a key advantage of a linked list over an array?",
+      "choices": [
+        "Linked lists allow direct access to any element by index",
+        "Linked lists use less memory per element",
+        "Linked lists can grow and shrink dynamically without moving existing elements",
+        "Linked lists are always faster to search"
+      ],
+      "correct": 2,
+      "explanation": "Linked lists can grow and shrink at runtime by allocating and deallocating individual nodes. Insertions and deletions do not require shifting elements, unlike arrays where elements must be moved to maintain order.",
+      "concepts": ["linked list vs array", "dynamic memory"]
+    },
+    {
+      "id": "cpp_ch17_q04",
+      "type": "multiple_choice",
+      "question": "To delete a node from the middle of a linked list, which step must happen BEFORE deallocating the node?",
+      "choices": [
+        "Set the head pointer to nullptr",
+        "Update the previous node's pointer to skip the deleted node",
+        "Traverse the list to count total nodes",
+        "Copy all data to a new list"
+      ],
+      "correct": 1,
+      "explanation": "Before deleting a node from the middle of a linked list, you must update the previous node's next pointer to point to the node after the one being deleted. Otherwise the list becomes broken and remaining nodes are lost.",
+      "concepts": ["deleting nodes", "linked list operations"]
+    },
+    {
+      "id": "cpp_ch17_q05",
+      "type": "fill_in_blank",
+      "question": "The last node in a singly linked list has its next pointer set to ___ to indicate the end of the list.",
+      "correct": "nullptr",
+      "explanation": "The nullptr value (or NULL in older C++) is used as a sentinel to mark the end of a linked list. When traversing, reaching a nullptr next pointer means you have reached the last node.",
+      "concepts": ["nullptr", "linked list"]
+    },
+    {
+      "id": "cpp_ch17_q06",
+      "type": "fill_in_blank",
+      "question": "To visit every node in a linked list from beginning to end, you perform a list ___.",
+      "correct": "traversal",
+      "explanation": "A traversal walks through the linked list by starting at the head pointer and following each node's next pointer until reaching nullptr. This is the standard way to visit or display all elements.",
+      "concepts": ["traversal", "linked list operations"]
+    }
+  ]
+}

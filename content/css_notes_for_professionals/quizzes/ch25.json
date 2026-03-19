@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 25,
+  "questions": [
+    {
+      "id": "css_ch25_q01",
+      "type": "multiple_choice",
+      "question": "What does the `border-collapse: collapse` property do on a table?",
+      "choices": [
+        "Removes all borders from the table",
+        "Merges adjacent cell borders into a single border",
+        "Adds spacing between cell borders",
+        "Collapses the table width to fit its content"
+      ],
+      "correct": 1,
+      "explanation": "The `border-collapse: collapse` property merges adjacent table cell borders into a single shared border, eliminating the default double-border appearance.",
+      "concepts": ["border-collapse", "tables"]
+    },
+    {
+      "id": "css_ch25_q02",
+      "type": "multiple_choice",
+      "question": "Which `table-layout` value causes the browser to use the first row to determine column widths?",
+      "choices": [
+        "auto",
+        "fixed",
+        "inherit",
+        "responsive"
+      ],
+      "correct": 1,
+      "explanation": "With `table-layout: fixed`, the browser determines column widths from the first row (or explicit column widths), ignoring the content of subsequent rows. This allows faster rendering.",
+      "concepts": ["table-layout", "tables"]
+    },
+    {
+      "id": "css_ch25_q03",
+      "type": "multiple_choice",
+      "question": "What does the `empty-cells: hide` property do?",
+      "choices": [
+        "Removes empty cells from the DOM",
+        "Hides borders and backgrounds on empty table cells",
+        "Collapses empty cells to zero width",
+        "Fills empty cells with a placeholder"
+      ],
+      "correct": 1,
+      "explanation": "The `empty-cells: hide` property hides the borders and backgrounds of table cells that have no content. It only applies when `border-collapse` is set to `separate`.",
+      "concepts": ["empty-cells", "tables"]
+    },
+    {
+      "id": "css_ch25_q04",
+      "type": "multiple_choice",
+      "question": "Which property controls the gap between table cell borders when `border-collapse` is set to `separate`?",
+      "choices": [
+        "cell-spacing",
+        "border-spacing",
+        "cell-gap",
+        "table-gap"
+      ],
+      "correct": 1,
+      "explanation": "The `border-spacing` property sets the distance between adjacent cell borders when `border-collapse: separate` is used. It accepts one or two length values for horizontal and vertical spacing.",
+      "concepts": ["border-spacing", "tables"]
+    },
+    {
+      "id": "css_ch25_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property controls whether a table caption appears above or below the table.",
+      "correct": "caption-side",
+      "explanation": "The `caption-side` property accepts values `top` or `bottom` to position the table's <caption> element relative to the table.",
+      "concepts": ["caption-side", "tables"]
+    },
+    {
+      "id": "css_ch25_q06",
+      "type": "fill_in_blank",
+      "question": "Setting `table-layout` to ___ makes the browser calculate column widths based on the entire table content.",
+      "correct": "auto",
+      "explanation": "With `table-layout: auto` (the default), the browser analyzes all cell content in every row to determine optimal column widths, which can be slower for large tables.",
+      "concepts": ["table-layout", "tables"]
+    }
+  ]
+}

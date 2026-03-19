@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 5,
+  "challenges": [
+    {
+      "id": "cpp_ch05_c01",
+      "title": "For Loop and While Loop",
+      "description": "Write a C++ program that uses a for loop to print the numbers 1 through 10, and a while loop to count down from 5 to 1. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Use a for loop to count up from 1 to 10\n- Use a while loop to count down\n- Display output with cout in each loop",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'for' in cpp, 'Should use a for loop'\nassert 'while' in cpp, 'Should use a while loop'\nassert 'cout' in cpp, 'Should display output inside the loops'\nassert '++' in cpp or '+=' in cpp, 'Should increment a counter in the for loop'\nassert '--' in cpp or '-=' in cpp, 'Should decrement a counter in the while loop'",
+      "difficulty": "easy",
+      "concepts_new": ["for loop", "while loop", "increment", "decrement"],
+      "concepts_review": ["cout", "int", "comparison operators"],
+      "hints": [
+        "A for loop: for (int i = 1; i <= 10; i++) { cout << i << endl; }",
+        "A while loop: while (count > 0) { cout << count << endl; count--; }"
+      ]
+    },
+    {
+      "id": "cpp_ch05_c02",
+      "title": "Nested Loops and File Output",
+      "description": "Write a C++ program that uses nested for loops to print a multiplication table (e.g., 1-5), and uses ofstream to write the table to a file. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Include the fstream header\n- Use nested for loops (a loop inside a loop)\n- Use ofstream to open and write to a file\n- Close the file or let it go out of scope",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <fstream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert '#include <fstream>' in cpp, 'Should include the fstream header'\nassert 'ofstream' in cpp, 'Should use ofstream to write to a file'\nassert cpp.count('for') >= 2, 'Should have nested for loops (at least two for statements)'\nassert '<<' in cpp, 'Should use the insertion operator to write output'\nassert '*' in cpp, 'Should use multiplication for the table'",
+      "difficulty": "medium",
+      "concepts_new": ["nested loops", "ofstream", "fstream", "file output"],
+      "concepts_review": ["for loop", "cout", "arithmetic operators"],
+      "hints": [
+        "Open a file with: ofstream outFile(\"table.txt\");",
+        "Nested loops: the outer loop handles rows, the inner loop handles columns"
+      ]
+    }
+  ]
+}

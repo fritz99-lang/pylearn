@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 12,
+  "questions": [
+    {
+      "id": "css_ch12_q01",
+      "type": "multiple_choice",
+      "question": "What is the default value of the `overflow` property?",
+      "choices": [
+        "hidden",
+        "scroll",
+        "auto",
+        "visible"
+      ],
+      "correct": 3,
+      "explanation": "The default value of overflow is visible, which allows content to render outside the element's box without clipping.",
+      "concepts": ["overflow"]
+    },
+    {
+      "id": "css_ch12_q02",
+      "type": "multiple_choice",
+      "question": "What does `overflow: auto` do?",
+      "choices": [
+        "Always shows scrollbars",
+        "Always hides overflowing content",
+        "Shows scrollbars only when content overflows",
+        "Automatically resizes the element to fit content"
+      ],
+      "correct": 2,
+      "explanation": "overflow: auto only displays scrollbars when the content actually overflows the element's box.",
+      "concepts": ["overflow"]
+    },
+    {
+      "id": "css_ch12_q03",
+      "type": "multiple_choice",
+      "question": "Which property would you use to show an ellipsis (...) when text overflows a single line?",
+      "choices": [
+        "overflow: ellipsis",
+        "text-overflow: ellipsis",
+        "text-wrap: ellipsis",
+        "word-overflow: ellipsis"
+      ],
+      "correct": 1,
+      "explanation": "text-overflow: ellipsis displays an ellipsis when text overflows. It also requires overflow: hidden and white-space: nowrap to work.",
+      "concepts": ["text-overflow"]
+    },
+    {
+      "id": "css_ch12_q04",
+      "type": "multiple_choice",
+      "question": "What does `overflow-x: scroll` combined with `overflow-y: hidden` produce?",
+      "choices": [
+        "Scrollbars on all sides",
+        "A horizontal scrollbar only, vertical overflow is clipped",
+        "No scrollbars at all",
+        "A vertical scrollbar only, horizontal overflow is clipped"
+      ],
+      "correct": 1,
+      "explanation": "overflow-x: scroll adds a horizontal scrollbar, while overflow-y: hidden clips any content that overflows vertically.",
+      "concepts": ["overflow-x", "overflow-y"]
+    },
+    {
+      "id": "css_ch12_q05",
+      "type": "fill_in_blank",
+      "question": "Setting `overflow: ___` clips overflowing content and does not provide a scrollbar.",
+      "correct": "hidden",
+      "explanation": "overflow: hidden clips content that extends beyond the element's box without providing any way to scroll to it.",
+      "concepts": ["overflow"]
+    },
+    {
+      "id": "css_ch12_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property controls overflow behavior on the horizontal axis only.",
+      "correct": "overflow-x",
+      "explanation": "overflow-x controls how content that overflows the element's left and right edges is handled.",
+      "concepts": ["overflow-x"]
+    }
+  ]
+}

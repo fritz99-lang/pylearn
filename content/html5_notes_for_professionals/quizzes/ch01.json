@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 1,
+  "questions": [
+    {
+      "id": "h5_ch01_q01",
+      "type": "multiple_choice",
+      "question": "Which tag is used to define the root of an HTML document?",
+      "choices": ["<head>", "<body>", "<html>", "<doctype>"],
+      "correct": 2,
+      "explanation": "The <html> tag is the root element that wraps all content in an HTML document, including the <head> and <body> sections.",
+      "concepts": ["html tag", "document structure"]
+    },
+    {
+      "id": "h5_ch01_q02",
+      "type": "multiple_choice",
+      "question": "What is the correct order of elements in a basic HTML document?",
+      "choices": ["<html>, <body>, <head>", "<!DOCTYPE>, <html>, <head>, <body>", "<head>, <html>, <body>", "<!DOCTYPE>, <head>, <html>, <body>"],
+      "correct": 1,
+      "explanation": "A valid HTML document starts with <!DOCTYPE html>, followed by <html>, then <head> for metadata, and <body> for visible content.",
+      "concepts": ["document structure", "doctype"]
+    },
+    {
+      "id": "h5_ch01_q03",
+      "type": "multiple_choice",
+      "question": "Which section of an HTML document contains metadata such as the title and character encoding?",
+      "choices": ["<body>", "<footer>", "<head>", "<main>"],
+      "correct": 2,
+      "explanation": "The <head> section contains metadata about the document, including the <title>, <meta> charset declaration, linked stylesheets, and scripts.",
+      "concepts": ["head tag", "metadata"]
+    },
+    {
+      "id": "h5_ch01_q04",
+      "type": "multiple_choice",
+      "question": "What does the <title> tag define?",
+      "choices": ["A heading displayed on the page", "The title shown in the browser tab", "A tooltip for an element", "The document's author name"],
+      "correct": 1,
+      "explanation": "The <title> tag sets the text displayed in the browser's title bar or tab. It is placed inside the <head> section and is not visible on the page itself.",
+      "concepts": ["title tag", "head tag"]
+    },
+    {
+      "id": "h5_ch01_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ tag contains all the visible content that is displayed in the browser window.",
+      "correct": "<body>",
+      "explanation": "The <body> tag wraps all content that is rendered and visible to the user in the browser, such as text, images, links, and other elements.",
+      "concepts": ["body tag", "document structure"]
+    },
+    {
+      "id": "h5_ch01_q06",
+      "type": "fill_in_blank",
+      "question": "To specify the character encoding as UTF-8, you add a ___ tag inside the <head> section.",
+      "correct": "<meta>",
+      "explanation": "The <meta charset=\"UTF-8\"> tag declares the character encoding for the document, ensuring special characters are displayed correctly.",
+      "concepts": ["meta tag", "character encoding"]
+    }
+  ]
+}

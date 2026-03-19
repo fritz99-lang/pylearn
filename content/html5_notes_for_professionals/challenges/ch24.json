@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 24,
+  "challenges": [
+    {
+      "id": "h5_ch24_c01",
+      "title": "Void Elements",
+      "description": "Create HTML that uses at least 4 different void elements: br, hr, img (with src and alt), input, and meta. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Use at least 4 different void elements -->\n<!-- Void elements: br, hr, img, input, meta -->\n\n\"\"\"",
+      "test_code": "assert '<br' in html.lower(), 'Should contain a <br> element'\nassert '<hr' in html.lower(), 'Should contain an <hr> element'\nassert '<img' in html.lower(), 'Should contain an <img> element'\nassert 'src=' in html.lower(), 'The img element should have a src attribute'\nassert 'alt=' in html.lower(), 'The img element should have an alt attribute'\nassert '<input' in html.lower(), 'Should contain an <input> element'\nassert '<meta' in html.lower(), 'Should contain a <meta> element'",
+      "difficulty": "easy",
+      "concepts_new": ["void_elements", "self_closing_tags", "br_element", "hr_element"],
+      "concepts_review": ["img_element", "input_types", "meta_element"],
+      "hints": [
+        "Void elements cannot have content and do not need a closing tag",
+        "Examples: <br>, <hr>, <img src=\"photo.jpg\" alt=\"A photo\">, <input type=\"text\">",
+        "The <meta> element goes in the head, but for this challenge you can include it anywhere"
+      ]
+    },
+    {
+      "id": "h5_ch24_c02",
+      "title": "Self-Closing Gallery",
+      "description": "Create a page that uses void elements in context: at least 2 img elements (with src and alt), br for line breaks, hr as a separator, an input for search, a link element for a stylesheet, and a meta element for charset. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page using void elements in context -->\n<!-- Include img, br, hr, input, link, and meta elements -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<img') >= 2, 'Should contain at least 2 img elements'\nassert html.lower().count('alt=') >= 2, 'Each img should have an alt attribute'\nassert '<br' in html.lower(), 'Should contain a <br> element'\nassert '<hr' in html.lower(), 'Should contain an <hr> element'\nassert '<input' in html.lower(), 'Should contain an <input> element'\nassert '<link' in html.lower(), 'Should contain a <link> element'\nassert 'rel=' in html.lower(), 'The link element should have a rel attribute'\nassert '<meta' in html.lower(), 'Should contain a <meta> element'\nassert 'charset=' in html.lower(), 'The meta element should specify a charset'",
+      "difficulty": "medium",
+      "concepts_new": ["link_element", "stylesheet_link", "charset_meta"],
+      "concepts_review": ["void_elements", "img_element", "br_element", "hr_element"],
+      "hints": [
+        "Use <link rel=\"stylesheet\" href=\"style.css\"> for the stylesheet",
+        "Use <meta charset=\"utf-8\"> for the charset declaration",
+        "Place images with <img src=\"image.jpg\" alt=\"description\"> and separate them with <hr>"
+      ]
+    }
+  ]
+}

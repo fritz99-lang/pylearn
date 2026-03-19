@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 9,
+  "questions": [
+    {
+      "id": "css_ch09_q01",
+      "type": "multiple_choice",
+      "question": "What does the shorthand `padding: 10px 20px` set?",
+      "choices": [
+        "10px top/bottom, 20px left/right",
+        "10px all sides, then override right to 20px",
+        "10px top, 20px right, 10px bottom, 20px left",
+        "10px left/right, 20px top/bottom"
+      ],
+      "correct": 0,
+      "explanation": "With two values, the first sets top/bottom and the second sets left/right.",
+      "concepts": ["padding", "shorthand"]
+    },
+    {
+      "id": "css_ch09_q02",
+      "type": "multiple_choice",
+      "question": "What happens when you set padding as a percentage value (e.g., `padding: 10%`)?",
+      "choices": [
+        "It is calculated relative to the element's own height",
+        "It is calculated relative to the containing block's width",
+        "It is calculated relative to the viewport width",
+        "Percentage values are not valid for padding"
+      ],
+      "correct": 1,
+      "explanation": "Percentage padding is always calculated relative to the width of the containing block, even for top and bottom padding.",
+      "concepts": ["padding", "percentage"]
+    },
+    {
+      "id": "css_ch09_q03",
+      "type": "multiple_choice",
+      "question": "With `box-sizing: border-box`, how does padding affect the total width of an element?",
+      "choices": [
+        "Padding is added outside the specified width",
+        "Padding is included within the specified width",
+        "Padding is ignored entirely",
+        "Padding is subtracted from the margin"
+      ],
+      "correct": 1,
+      "explanation": "With border-box, padding and border are included within the element's specified width and height, so they do not increase the total size.",
+      "concepts": ["padding", "box-sizing"]
+    },
+    {
+      "id": "css_ch09_q04",
+      "type": "multiple_choice",
+      "question": "In the shorthand `padding: 5px 10px 15px 20px`, which value sets the left padding?",
+      "choices": [
+        "5px",
+        "10px",
+        "15px",
+        "20px"
+      ],
+      "correct": 3,
+      "explanation": "The four-value shorthand follows the order top, right, bottom, left (clockwise from the top).",
+      "concepts": ["padding", "shorthand"]
+    },
+    {
+      "id": "css_ch09_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property sets the padding on the top side of an element only.",
+      "correct": "padding-top",
+      "explanation": "padding-top is the longhand property that targets only the top padding of an element.",
+      "concepts": ["padding"]
+    },
+    {
+      "id": "css_ch09_q06",
+      "type": "fill_in_blank",
+      "question": "Setting `box-sizing: ___` makes padding count toward the element's total width and height.",
+      "correct": "border-box",
+      "explanation": "The border-box value includes padding and border within the element's declared width and height.",
+      "concepts": ["box-sizing", "padding"]
+    }
+  ]
+}

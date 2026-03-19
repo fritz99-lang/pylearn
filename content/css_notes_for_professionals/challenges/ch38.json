@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 38,
+  "challenges": [
+    {
+      "id": "css_ch38_c01",
+      "title": "Create a Circle with CSS",
+      "description": "Write CSS that creates a circle using a single element. Create a rule for `.circle` that sets `width` and `height` to `100px`, applies `border-radius: 50%` to make it circular, and sets a `background-color` of `#3498db`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'border-radius' in css.lower(), 'Should use border-radius property'\nassert '50%' in css, 'Should set border-radius to 50% for a circle'\nassert 'width' in css.lower(), 'Should set width'\nassert 'height' in css.lower(), 'Should set height'\nassert 'background' in css.lower(), 'Should set a background color'\nassert '.circle' in css.lower(), 'Should target .circle'",
+      "difficulty": "easy",
+      "concepts_new": ["single element shapes", "border-radius circle"],
+      "concepts_review": ["border-radius", "width", "height"],
+      "hints": [
+        "A circle is a square element with border-radius: 50%",
+        "Make sure width and height are equal to get a perfect circle"
+      ]
+    },
+    {
+      "id": "css_ch38_c02",
+      "title": "Create a CSS Triangle",
+      "description": "Write CSS that creates a triangle using the border trick on a single element. Create a rule for `.triangle` that sets `width: 0` and `height: 0`. Use `border-left` and `border-right` set to `50px solid transparent`, and `border-bottom` set to `100px solid #e74c3c` to create an upward-pointing triangle. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'border-left' in css.lower(), 'Should use border-left'\nassert 'border-right' in css.lower(), 'Should use border-right'\nassert 'border-bottom' in css.lower(), 'Should use border-bottom'\nassert 'transparent' in css.lower(), 'Should use transparent borders for the sides'\nassert 'width' in css.lower(), 'Should set width to 0'\nassert 'height' in css.lower(), 'Should set height to 0'\nassert '.triangle' in css.lower(), 'Should target .triangle'",
+      "difficulty": "medium",
+      "concepts_new": ["CSS triangle", "border trick"],
+      "concepts_review": ["border", "transparent"],
+      "hints": [
+        "A CSS triangle works by setting width and height to 0 and using thick borders",
+        "Make two sides transparent and one side colored to form the triangle shape"
+      ]
+    }
+  ]
+}

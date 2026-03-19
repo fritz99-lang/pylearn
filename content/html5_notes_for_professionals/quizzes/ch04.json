@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 4,
+  "questions": [
+    {
+      "id": "h5_ch04_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML tag is used to define a paragraph?",
+      "choices": ["<para>", "<text>", "<p>", "<pg>"],
+      "correct": 2,
+      "explanation": "The <p> tag defines a paragraph of text. Browsers automatically add margin above and below paragraphs to visually separate them.",
+      "concepts": ["p tag", "paragraphs"]
+    },
+    {
+      "id": "h5_ch04_q02",
+      "type": "multiple_choice",
+      "question": "How does HTML handle multiple consecutive spaces in paragraph text?",
+      "choices": ["All spaces are preserved exactly", "Multiple spaces collapse into a single space", "Extra spaces are converted to &nbsp;", "The browser throws a warning"],
+      "correct": 1,
+      "explanation": "HTML collapses multiple whitespace characters (spaces, tabs, newlines) into a single space. To preserve whitespace, use the <pre> tag or CSS white-space property.",
+      "concepts": ["whitespace collapsing", "HTML rendering"]
+    },
+    {
+      "id": "h5_ch04_q03",
+      "type": "multiple_choice",
+      "question": "What does the <br> tag do?",
+      "choices": ["Creates a new paragraph", "Inserts a horizontal rule", "Inserts a line break within text", "Creates a blank page"],
+      "correct": 2,
+      "explanation": "The <br> tag inserts a single line break. Unlike <p>, it does not create a new block-level element with margins. It is a void element and has no closing tag.",
+      "concepts": ["br tag", "line breaks"]
+    },
+    {
+      "id": "h5_ch04_q04",
+      "type": "multiple_choice",
+      "question": "Which tag preserves whitespace and displays text in a fixed-width font?",
+      "choices": ["<code>", "<pre>", "<fixed>", "<space>"],
+      "correct": 1,
+      "explanation": "The <pre> (preformatted) tag preserves all whitespace including spaces, tabs, and line breaks. It renders text in a monospace font, making it useful for code or ASCII art.",
+      "concepts": ["pre tag", "preformatted text"]
+    },
+    {
+      "id": "h5_ch04_q05",
+      "type": "fill_in_blank",
+      "question": "The <br> tag is a ___ element, meaning it has no closing tag.",
+      "correct": "void",
+      "explanation": "Void elements like <br>, <img>, and <hr> cannot have content and do not need a closing tag. In HTML5, the trailing slash (<br />) is optional.",
+      "concepts": ["void elements", "br tag"]
+    },
+    {
+      "id": "h5_ch04_q06",
+      "type": "fill_in_blank",
+      "question": "The HTML entity ___ is used to insert a non-breaking space that will not be collapsed.",
+      "correct": "&nbsp;",
+      "explanation": "The &nbsp; entity inserts a space that browsers will not collapse. It also prevents a line break from occurring at that position in the text.",
+      "concepts": ["HTML entities", "non-breaking space"]
+    }
+  ]
+}

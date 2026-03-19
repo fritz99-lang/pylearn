@@ -1,0 +1,35 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 26,
+  "challenges": [
+    {
+      "id": "h5_ch26_c01",
+      "title": "Progress Bar",
+      "description": "Create a progress element with a value attribute and a max attribute to show task completion. Add a label element associated with the progress bar. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a labeled progress bar -->\n\n\"\"\"",
+      "test_code": "assert '<progress' in html.lower(), 'Should contain a <progress> element'\nassert 'value' in html.lower(), 'Progress should have a value attribute'\nassert 'max' in html.lower(), 'Progress should have a max attribute'\nassert '</progress>' in html.lower(), 'Should close the <progress> element'\nassert '<label' in html.lower(), 'Should contain a <label> element'",
+      "difficulty": "easy",
+      "concepts_new": ["progress", "value", "max"],
+      "concepts_review": ["label"],
+      "hints": [
+        "The <progress> element uses value and max attributes, e.g. value=\"70\" max=\"100\".",
+        "Use a <label> with a for attribute matching the progress element's id."
+      ]
+    },
+    {
+      "id": "h5_ch26_c02",
+      "title": "Multiple Progress",
+      "description": "Create three progress bars showing different completion levels (e.g., 25%, 50%, 75%). Each progress bar should have a label describing what it tracks. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create three labeled progress bars at different levels -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert lower.count('<progress') >= 3, 'Should contain at least 3 <progress> elements'\nassert lower.count('</progress>') >= 3, 'Should close all <progress> elements'\nassert lower.count('<label') >= 3, 'Should contain at least 3 <label> elements'\nassert 'value' in lower, 'Progress elements should have value attributes'\nassert 'max' in lower, 'Progress elements should have max attributes'",
+      "difficulty": "medium",
+      "concepts_new": ["multiple progress indicators"],
+      "concepts_review": ["progress", "label", "value", "max"],
+      "hints": [
+        "Create three separate <progress> elements, each with different value attributes.",
+        "Give each progress element a unique id so you can associate it with its label.",
+        "For 25% completion with max=\"100\", use value=\"25\"."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 9,
+  "challenges": [
+    {
+      "id": "cpp_ch09_c01",
+      "title": "Pointer Basics",
+      "description": "Write a C++ program that declares an int variable and a pointer to it. Use the address-of operator (&) to assign the variable's address to the pointer. Use the dereference operator (*) to print the value through the pointer. Also print the memory address stored in the pointer. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'int*' in cpp.replace(' ', '') or 'int *' in cpp, 'You must declare a pointer variable (int* or int *)'\nassert '&' in cpp, 'Use the address-of operator (&) to get the variable address'\nassert cpp.count('*') >= 2, 'Use the dereference operator (*) to access the value through the pointer'\nassert 'cout' in cpp, 'Print the value and address using cout'",
+      "difficulty": "easy",
+      "concepts_new": ["pointers", "address_of_operator", "dereference_operator"],
+      "concepts_review": ["variables", "data_types", "cout"],
+      "hints": [
+        "Declare a pointer with: int *ptr = &myVar;",
+        "Dereference with *ptr to get the value, and use ptr alone to print the address"
+      ]
+    },
+    {
+      "id": "cpp_ch09_c02",
+      "title": "Dynamic Memory Allocation",
+      "description": "Write a C++ program that uses `new` to dynamically allocate an array of integers. Ask the user for the array size, allocate memory with `new`, fill the array with values using a loop, print all values, then release the memory with `delete[]`. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'new' in cpp, 'Use the new operator to allocate dynamic memory'\nassert 'delete' in cpp, 'Use delete to free the dynamically allocated memory'\nassert 'delete[]' in cpp.replace(' ', '') or 'delete []' in cpp, 'Use delete[] (with brackets) to free a dynamically allocated array'\nassert 'cin' in cpp, 'Use cin to get the array size from the user'\nassert 'for' in cpp or 'while' in cpp, 'Use a loop to fill and print the array'",
+      "difficulty": "medium",
+      "concepts_new": ["dynamic_memory", "new_operator", "delete_operator"],
+      "concepts_review": ["pointers", "arrays", "loops", "user_input"],
+      "hints": [
+        "Allocate with: int *arr = new int[size];",
+        "Always pair new[] with delete[] to avoid memory leaks"
+      ]
+    }
+  ]
+}

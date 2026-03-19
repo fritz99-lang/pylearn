@@ -1,0 +1,21 @@
+{
+  "step_id": "css_proj_ch16",
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 16,
+  "title": "Navigation Bar \u2014 Flexbox Layout",
+  "description": "Build a navigation bar using Flexbox. Create a .nav class with display: flex to lay out links horizontally, set justify-content to space items, align-items to center them vertically, and give it a background-color. Style the .nav a links with padding, color, and text-decoration: none. Add a :hover effect so links respond to user interaction.",
+  "builds_on": "css_proj_ch15",
+  "starter_code": "css = \"\"\"\n/* Blog Theme CSS */\n/* Step 1: Foundation */\nbody {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    font-size: 16px;\n    line-height: 1.6;\n    color: #333;\n    background-color: #f9f9f9;\n}\n\na {\n    color: #0077cc;\n    text-decoration: none;\n}\n\nh1 {\n    font-size: 2rem;\n    margin-bottom: 0.5rem;\n    border-bottom: 3px solid #0077cc;\n    padding-bottom: 0.3rem;\n}\n\n/* Step 2: Box Model */\n*, *::before, *::after {\n    box-sizing: border-box;\n}\n\n.container {\n    max-width: 1100px;\n    margin: 0 auto;\n    padding: 0 20px;\n}\n\n.post {\n    padding: 25px;\n    margin-bottom: 30px;\n    background: #fff;\n    border: 1px solid #e0e0e0;\n    border-radius: 8px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n}\n\n/* Step 3: Borders and Radius */\n.post img {\n    border-radius: 6px;\n    max-width: 100%;\n}\n\n/* Step 4: Typography */\nh1, h2, h3 {\n    font-family: Georgia, 'Times New Roman', serif;\n    font-weight: 700;\n    letter-spacing: 0.5px;\n}\n\n.post-meta {\n    font-size: 0.85rem;\n    color: #888;\n    text-transform: uppercase;\n}\n\nblockquote {\n    font-style: italic;\n    border-left: 4px solid #0077cc;\n    padding-left: 1rem;\n    margin: 1rem 0;\n    color: #555;\n}\n\n/* Step 5: Flexbox Navigation */\n.nav {\n    /* TODO: Add display: flex, justify-content, align-items, background-color */\n}\n\n.nav a {\n    /* TODO: Add padding, color, text-decoration: none */\n}\n\n.nav a:hover {\n    /* TODO: Add hover effect */\n}\n\"\"\"",
+  "test_code": "assert 'display' in css.lower() and 'flex' in css.lower(), 'Missing display: flex on .nav'\nassert 'justify-content' in css.lower(), 'Missing justify-content on .nav'\nassert '.nav' in css.lower(), 'Missing .nav selector'\nassert 'text-decoration' in css.lower(), 'Missing text-decoration on .nav a'\nassert ':hover' in css.lower(), 'Missing :hover pseudo-class for nav link interaction'",
+  "acceptance_criteria": [
+    ".nav uses display: flex with justify-content and align-items",
+    ".nav has a background-color",
+    ".nav a links have padding, color, and text-decoration: none",
+    "Nav links have a :hover effect"
+  ],
+  "hints": [
+    "justify-content: space-around or space-between distributes nav links evenly",
+    "align-items: center vertically centers items in the flex container",
+    "For hover, try changing background-color or adding an underline with border-bottom"
+  ]
+}

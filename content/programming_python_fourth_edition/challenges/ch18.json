@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 18,
+  "challenges": [
+    {
+      "id": "pp_ch18_c01",
+      "title": "Shelve Record Store",
+      "description": "Write functions to use Python's `shelve` module for persistent storage. Implement `store_records(db_path, records)` that takes a file path and a dict of {key: record_dict} and stores them in a shelve. Implement `retrieve_record(db_path, key)` that retrieves a single record by key, returning None if not found. Implement `list_keys(db_path)` that returns a sorted list of all keys.",
+      "starter_code": "import shelve\nimport os\n\ndef store_records(db_path, records):\n    \"\"\"Store records dict into a shelve database.\"\"\"\n    # Your code here\n    pass\n\ndef retrieve_record(db_path, key):\n    \"\"\"Retrieve a single record by key. Returns None if not found.\"\"\"\n    # Your code here\n    pass\n\ndef list_keys(db_path):\n    \"\"\"Return a sorted list of all keys in the shelve.\"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "import tempfile, os\ntmp = os.path.join(tempfile.mkdtemp(), 'testdb')\nrecords = {\n    'emp001': {'name': 'Alice', 'role': 'Engineer'},\n    'emp002': {'name': 'Bob', 'role': 'Manager'},\n    'emp003': {'name': 'Carol', 'role': 'Designer'}\n}\nstore_records(tmp, records)\nassert retrieve_record(tmp, 'emp001') == {'name': 'Alice', 'role': 'Engineer'}\nassert retrieve_record(tmp, 'emp002') == {'name': 'Bob', 'role': 'Manager'}\nassert retrieve_record(tmp, 'missing') is None\nassert list_keys(tmp) == ['emp001', 'emp002', 'emp003']\nstore_records(tmp, {'emp004': {'name': 'Dave', 'role': 'Intern'}})\nassert retrieve_record(tmp, 'emp004') == {'name': 'Dave', 'role': 'Intern'}\nassert 'emp001' in list_keys(tmp)",
+      "difficulty": "easy",
+      "concepts_new": ["shelve", "persistent_storage"],
+      "concepts_review": ["dictionaries", "context_managers", "file_paths"],
+      "hints": [
+        "Use shelve.open(db_path) as a context manager (with statement).",
+        "Shelve objects behave like dictionaries — use db[key] = value to store, db.get(key) to retrieve."
+      ]
+    },
+    {
+      "id": "pp_ch18_c02",
+      "title": "SQLite Database Operations",
+      "description": "Write a class `EmployeeDB` that manages an SQLite database. The constructor takes a db_path and creates an 'employees' table (id TEXT PRIMARY KEY, name TEXT, department TEXT, salary REAL) if it doesn't exist. Implement `add(id, name, department, salary)`, `get(id)` returning a dict or None, `find_by_department(dept)` returning a list of dicts, and `update_salary(id, new_salary)`.",
+      "starter_code": "import sqlite3\n\nclass EmployeeDB:\n    \"\"\"SQLite-backed employee database.\"\"\"\n\n    def __init__(self, db_path):\n        # Your code here — create table if not exists\n        pass\n\n    def add(self, id, name, department, salary):\n        \"\"\"Add an employee record.\"\"\"\n        # Your code here\n        pass\n\n    def get(self, id):\n        \"\"\"Get employee by id. Returns dict or None.\"\"\"\n        # Your code here\n        pass\n\n    def find_by_department(self, dept):\n        \"\"\"Find all employees in a department. Returns list of dicts.\"\"\"\n        # Your code here\n        pass\n\n    def update_salary(self, id, new_salary):\n        \"\"\"Update an employee's salary.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "import tempfile, os\ntmp = os.path.join(tempfile.mkdtemp(), 'test.db')\ndb = EmployeeDB(tmp)\ndb.add('E001', 'Alice', 'Engineering', 95000.0)\ndb.add('E002', 'Bob', 'Engineering', 88000.0)\ndb.add('E003', 'Carol', 'Marketing', 82000.0)\nemp = db.get('E001')\nassert emp is not None\nassert emp['name'] == 'Alice'\nassert emp['department'] == 'Engineering'\nassert emp['salary'] == 95000.0\nassert db.get('E999') is None\neng = db.find_by_department('Engineering')\nassert len(eng) == 2\nnames = {e['name'] for e in eng}\nassert names == {'Alice', 'Bob'}\nmkt = db.find_by_department('Marketing')\nassert len(mkt) == 1\nassert mkt[0]['name'] == 'Carol'\ndb.update_salary('E001', 105000.0)\nassert db.get('E001')['salary'] == 105000.0\nassert db.find_by_department('HR') == []",
+      "difficulty": "medium",
+      "concepts_new": ["sqlite3", "sql_queries", "database_crud"],
+      "concepts_review": ["classes", "context_managers", "dictionaries"],
+      "hints": [
+        "Use sqlite3.connect(db_path) and cursor.execute() for SQL operations. Remember to conn.commit() after changes.",
+        "For get() and find_by_department(), use cursor.fetchone() / cursor.fetchall() and convert rows to dicts using column names."
+      ]
+    }
+  ]
+}

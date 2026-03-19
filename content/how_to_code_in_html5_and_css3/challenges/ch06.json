@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 6,
+  "challenges": [
+    {
+      "id": "hc_ch06_c01",
+      "title": "Basic Navigation Menu",
+      "description": "Create an unordered list (<ul>) of at least three links (<a>) styled as a basic navigation menu. Use a <nav> wrapper and a <style> block that removes list bullets (list-style: none). Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a basic navigation menu -->\n\n\"\"\"",
+      "test_code": "assert '<nav>' in html.lower(), 'Should contain a <nav> tag'\nassert '</nav>' in html.lower(), 'Should contain a closing </nav> tag'\nassert '<ul>' in html.lower(), 'Should contain an unordered list'\nassert html.lower().count('<li>') >= 3, 'Should contain at least three list items'\nassert html.lower().count('<a ') >= 3, 'Should contain at least three links'\nassert 'list-style' in html.lower(), 'Should style list-style to remove bullets'\nassert '<style>' in html.lower(), 'Should contain a <style> block'",
+      "difficulty": "easy",
+      "concepts_new": ["nav tag", "navigation menu", "list-style property"],
+      "concepts_review": ["ul tag", "li tag", "anchor tag", "style tag"],
+      "hints": [
+        "Wrap your menu in <nav> for semantic meaning.",
+        "Use list-style: none; on the <ul> to remove bullet points."
+      ]
+    },
+    {
+      "id": "hc_ch06_c02",
+      "title": "Horizontal Navigation Menu",
+      "description": "Create a horizontal navigation menu using <nav>, <ul>, and <li> with links. Style it with CSS so the items display horizontally (using display: inline, display: inline-block, or display: flex). Add text-decoration and padding styles to the links. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a horizontal navigation menu -->\n\n\"\"\"",
+      "test_code": "assert '<nav>' in html.lower(), 'Should contain a <nav> tag'\nassert '<ul>' in html.lower(), 'Should contain an unordered list'\nassert html.lower().count('<li>') >= 3, 'Should contain at least three menu items'\nassert html.lower().count('<a ') >= 3, 'Should contain at least three links'\nassert '<style>' in html.lower(), 'Should contain a <style> block'\nassert 'list-style' in html.lower(), 'Should remove list bullets'\nhas_horizontal = 'display: inline' in html.lower() or 'display:inline' in html.lower() or 'display: flex' in html.lower() or 'display:flex' in html.lower()\nassert has_horizontal, 'Should use display: inline, inline-block, or flex for horizontal layout'\nassert 'text-decoration' in html.lower(), 'Should style text-decoration on links'\nassert 'padding' in html.lower(), 'Should add padding for spacing'",
+      "difficulty": "medium",
+      "concepts_new": ["display property", "inline layout", "text-decoration", "padding"],
+      "concepts_review": ["nav tag", "list-style", "anchor tag"],
+      "hints": [
+        "Set display: inline or display: inline-block on <li> elements to make them horizontal.",
+        "Alternatively, set display: flex on the <ul> for a flexbox-based horizontal layout."
+      ]
+    }
+  ]
+}

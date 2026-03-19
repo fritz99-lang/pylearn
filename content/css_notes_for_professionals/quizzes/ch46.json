@@ -1,0 +1,58 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 46,
+  "questions": [
+    {
+      "id": "css_ch46_q01",
+      "type": "multiple_choice",
+      "question": "Which JavaScript method returns the computed style values for an element, including styles from stylesheets?",
+      "choices": ["element.style", "element.getAttribute('style')", "window.getComputedStyle()", "document.styleSheets"],
+      "correct": 2,
+      "explanation": "window.getComputedStyle() returns a CSSStyleDeclaration object containing the final computed values of all CSS properties for an element, including values from external stylesheets, inline styles, and browser defaults.",
+      "concepts": ["getComputedStyle", "CSSOM"]
+    },
+    {
+      "id": "css_ch46_q02",
+      "type": "multiple_choice",
+      "question": "What is the difference between element.style and getComputedStyle()?",
+      "choices": ["element.style is read-only while getComputedStyle() is writable", "element.style only reflects inline styles while getComputedStyle() reflects all applied styles", "They return identical values", "getComputedStyle() only works with class-based styles"],
+      "correct": 1,
+      "explanation": "element.style only accesses inline styles set directly on the element via the style attribute or JavaScript. getComputedStyle() returns the final computed values from all sources including stylesheets, inheritance, and browser defaults.",
+      "concepts": ["element.style", "getComputedStyle", "CSSOM"]
+    },
+    {
+      "id": "css_ch46_q03",
+      "type": "multiple_choice",
+      "question": "Which method on CSSStyleDeclaration sets a CSS property with an optional priority flag?",
+      "choices": ["setAttribute()", "setProperty()", "addStyle()", "defineProperty()"],
+      "correct": 1,
+      "explanation": "The setProperty() method sets a CSS property on a CSSStyleDeclaration object. It accepts the property name, value, and an optional priority parameter (e.g., 'important').",
+      "concepts": ["setProperty", "CSSOM"]
+    },
+    {
+      "id": "css_ch46_q04",
+      "type": "multiple_choice",
+      "question": "What does the cssText property of a CSSStyleDeclaration represent?",
+      "choices": ["The CSS selector for the rule", "The full text of all inline style declarations as a string", "The name of the stylesheet file", "The computed display value"],
+      "correct": 1,
+      "explanation": "The cssText property returns or sets the entire inline style declaration as a single string. Setting cssText replaces all existing inline styles, e.g., element.style.cssText = 'color: red; font-size: 16px;'.",
+      "concepts": ["cssText", "CSSOM"]
+    },
+    {
+      "id": "css_ch46_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ method retrieves the value of a specific CSS property from a CSSStyleDeclaration object.",
+      "correct": "getPropertyValue()",
+      "explanation": "getPropertyValue() takes a CSS property name as a string and returns its value. For example, style.getPropertyValue('color') returns the color value. It uses the CSS property name format (hyphenated, not camelCase).",
+      "concepts": ["getPropertyValue", "CSSOM"]
+    },
+    {
+      "id": "css_ch46_q06",
+      "type": "fill_in_blank",
+      "question": "The interface returned by both element.style and getComputedStyle() is called ___.",
+      "correct": "CSSStyleDeclaration",
+      "explanation": "CSSStyleDeclaration is the CSSOM interface that represents a collection of CSS property-value pairs. Both element.style and the return value of getComputedStyle() are CSSStyleDeclaration objects, though the latter is read-only.",
+      "concepts": ["CSSStyleDeclaration", "CSSOM"]
+    }
+  ]
+}

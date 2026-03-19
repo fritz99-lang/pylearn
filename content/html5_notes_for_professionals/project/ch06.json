@@ -1,0 +1,21 @@
+{
+  "step_id": "h5_proj_ch06",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 6,
+  "title": "Navigation Links \u2014 Connecting Pages",
+  "description": "Add a navigation bar at the top of your portfolio with anchor links that jump to each section. Create links pointing to #about, #projects, and #contact. Add matching id attributes to each section's h2 or a wrapping div so the links have targets.",
+  "builds_on": "h5_proj_ch05",
+  "starter_code": "# Portfolio Website \u2014 Step 4: Navigation Links\n# Add a nav section with anchor links and id attributes on sections.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <h1>Your Name</h1>\n\n    <!-- Add navigation with links to #about, #projects, #contact -->\n\n    <p>Welcome to my portfolio!</p>\n\n    <!-- Add id=\"about\" to this section -->\n    <h2>About Me</h2>\n    <p>\n        I am a developer who is <strong>passionate</strong> about\n        building things. I am <em>constantly learning</em> and\n        <mark>love problem-solving</mark>.\n    </p>\n\n    <!-- Add id=\"projects\" to this section -->\n    <h2>My Projects</h2>\n    <p>Here are some of my recent projects.</p>\n\n    <!-- Add id=\"contact\" to this section -->\n    <h2>Contact</h2>\n    <p>Get in touch with me.</p>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<a ' in html.lower(), 'Must include anchor <a> elements for navigation'\nassert 'href=\"#about\"' in html.lower() or \"href='#about'\" in html.lower(), 'Must include a link to href=\"#about\"'\nassert 'href=\"#projects\"' in html.lower() or \"href='#projects'\" in html.lower(), 'Must include a link to href=\"#projects\"'\nassert 'href=\"#contact\"' in html.lower() or \"href='#contact'\" in html.lower(), 'Must include a link to href=\"#contact\"'\nassert 'id=\"about\"' in html.lower() or \"id='about'\" in html.lower(), 'Must include id=\"about\" on the About section'\nassert 'id=\"projects\"' in html.lower() or \"id='projects'\" in html.lower(), 'Must include id=\"projects\" on the Projects section'\nassert 'id=\"contact\"' in html.lower() or \"id='contact'\" in html.lower(), 'Must include id=\"contact\" on the Contact section'",
+  "acceptance_criteria": [
+    "Navigation section with anchor links is at the top",
+    "Links point to #about, #projects, and #contact",
+    "Each target section has a matching id attribute",
+    "All previous content is preserved"
+  ],
+  "hints": [
+    "Create a link like: <a href=\"#about\">About Me</a>",
+    "Add an id to a section: <div id=\"about\"> or <h2 id=\"about\">",
+    "Put all nav links together at the top of the body"
+  ]
+}

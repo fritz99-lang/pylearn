@@ -1,0 +1,22 @@
+{
+  "step_id": "cpp_inv_ch01",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 1,
+  "title": "System Design \u2014 Planning the Program",
+  "description": "Write a C++ program that displays a menu for the inventory management system. The menu should show numbered options: (1) Add Product, (2) View Products, (3) Search Product, (4) Sort Products, (5) Save to File, (6) Exit. Include a brief description of what each option will do using cout statements. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\nusing namespace std;\n\nint main() {\n    // Display the inventory system menu\n    // Show options 1-6 with descriptions\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert '#include <iostream>' in cpp, 'Must include <iostream> for input/output'\nassert 'cout' in cpp, 'Use cout to display the menu'\nassert 'Add Product' in cpp or 'Add product' in cpp or 'add product' in cpp, 'Menu should include an Add Product option'\nassert 'View Product' in cpp or 'View product' in cpp or 'view product' in cpp or 'Display' in cpp or 'display' in cpp or 'List' in cpp, 'Menu should include a View/Display Products option'\nassert 'Search' in cpp or 'search' in cpp or 'Find' in cpp or 'find' in cpp, 'Menu should include a Search option'\nassert 'Sort' in cpp or 'sort' in cpp, 'Menu should include a Sort option'\nassert 'Save' in cpp or 'save' in cpp or 'File' in cpp or 'file' in cpp, 'Menu should include a Save to File option'\nassert 'Exit' in cpp or 'exit' in cpp or 'Quit' in cpp or 'quit' in cpp, 'Menu should include an Exit option'\nassert 'return 0' in cpp, 'Program should return 0 from main'",
+  "acceptance_criteria": [
+    "Program includes #include <iostream>",
+    "Menu displays at least 6 numbered options using cout",
+    "Options cover: Add, View, Search, Sort, Save, Exit",
+    "Each option has a brief description of what it will do",
+    "Program compiles and returns 0"
+  ],
+  "hints": [
+    "Use cout << with endl or \\n to print each menu line",
+    "Number each option so users know what to type later",
+    "Think about what a real inventory system needs: adding items, viewing them, searching, sorting, saving data, and quitting"
+  ]
+}

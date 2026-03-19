@@ -1,0 +1,24 @@
+{
+  "step_id": "cpp_inv_ch07",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 7,
+  "title": "Product Catalog \u2014 Array Storage",
+  "description": "Replace single-product handling with arrays. Declare a string array for product names, a double array for prices, and an int array for quantities (max 100 products). Use an int counter to track how many products have been added. Loop through the arrays to display all products. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_inv_ch05",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\nconst int MAX_PRODUCTS = 100;\n\nint main() {\n    // Declare parallel arrays for product data\n    string names[MAX_PRODUCTS];\n    double prices[MAX_PRODUCTS];\n    int quantities[MAX_PRODUCTS];\n    int productCount = 0;\n\n    int choice;\n\n    do {\n        cout << \"\\n===== Inventory Management System =====\" << endl;\n        cout << \"1. Add Product\" << endl;\n        cout << \"2. View Products\" << endl;\n        cout << \"3. Search Product\" << endl;\n        cout << \"4. Sort Products\" << endl;\n        cout << \"5. Save to File\" << endl;\n        cout << \"6. Exit\" << endl;\n        cout << \"Enter your choice: \";\n        cin >> choice;\n\n        switch (choice) {\n            case 1: {\n                // Add product to arrays at index productCount\n                // Increment productCount after adding\n                break;\n            }\n            case 2: {\n                // Loop through arrays to display all products\n                break;\n            }\n            case 5: {\n                // Save all products to file using a loop\n                break;\n            }\n            case 6:\n                cout << \"Goodbye!\" << endl;\n                break;\n            default:\n                cout << \"Invalid choice.\" << endl;\n        }\n    } while (choice != 6);\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'names[' in cpp or 'name[' in cpp or 'productNames[' in cpp, 'Declare a string array for product names'\nassert 'prices[' in cpp or 'price[' in cpp or 'productPrices[' in cpp, 'Declare a double array for product prices'\nassert 'quantities[' in cpp or 'quantity[' in cpp or 'qty[' in cpp or 'productQty[' in cpp, 'Declare an int array for product quantities'\nassert 'for' in cpp, 'Use a for loop to iterate through the arrays'\nassert 'productCount' in cpp or 'numProducts' in cpp or 'count' in cpp.lower(), 'Track the number of products with a counter variable'\nassert 'MAX_PRODUCTS' in cpp or 'MAX_SIZE' in cpp or 'CAPACITY' in cpp or '100' in cpp, 'Define a maximum array size'",
+  "acceptance_criteria": [
+    "Declares parallel arrays: string names, double prices, int quantities",
+    "Uses a constant for maximum array size (e.g., MAX_PRODUCTS = 100)",
+    "Tracks number of products with a counter variable",
+    "Adds new products to arrays at the counter index",
+    "Uses a for loop to display all stored products",
+    "Saves all products to file using a loop"
+  ],
+  "hints": [
+    "Parallel arrays store related data at the same index: names[i] goes with prices[i] and quantities[i]",
+    "Always check productCount < MAX_PRODUCTS before adding a new product",
+    "Use a for loop: for (int i = 0; i < productCount; i++) to display all products",
+    "Increment productCount++ after successfully adding a product"
+  ]
+}

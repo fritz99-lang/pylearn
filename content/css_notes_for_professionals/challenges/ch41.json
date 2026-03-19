@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 41,
+  "challenges": [
+    {
+      "id": "css_ch41_c01",
+      "title": "Inline-Block Elements",
+      "description": "Write CSS that targets elements with class 'box' and sets their display to inline-block, gives them a width of 150px, and a height of 100px. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Style .box elements as inline-block */\n\n\"\"\"",
+      "test_code": "assert 'inline-block' in css.lower(), 'Should use display: inline-block'\nassert '.box' in css.lower(), 'Should target the .box class'\nassert 'width' in css.lower(), 'Should set a width'\nassert '150px' in css, 'Width should be 150px'\nassert 'height' in css.lower(), 'Should set a height'\nassert '100px' in css, 'Height should be 100px'",
+      "difficulty": "easy",
+      "concepts_new": ["display: inline-block", "inline-block layout"],
+      "concepts_review": ["width", "height"],
+      "hints": [
+        "Use display: inline-block to make elements flow inline but accept width/height.",
+        "Target the .box class and set display, width, and height properties."
+      ]
+    },
+    {
+      "id": "css_ch41_c02",
+      "title": "Inline-Block Whitespace and Alignment",
+      "description": "Write CSS that targets a container with class 'nav' and sets font-size to 0 to fix inline-block whitespace gaps. Then target '.nav a' elements, set them to display inline-block, set font-size back to 16px, set vertical-align to middle, and add padding of 10px 20px. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Fix inline-block whitespace and align nav links */\n\n\"\"\"",
+      "test_code": "assert '.nav' in css.lower(), 'Should target the .nav container'\nassert 'font-size' in css.lower(), 'Should use font-size'\nassert 'font-size: 0' in css.lower().replace(' ', '').replace(': ', ':') or 'font-size:0' in css.lower().replace(' ', ''), 'Should set font-size to 0 on the container'\nassert 'inline-block' in css.lower(), 'Should use display: inline-block on links'\nassert 'vertical-align' in css.lower(), 'Should use vertical-align'\nassert 'middle' in css.lower(), 'Should set vertical-align to middle'\nassert '16px' in css, 'Should reset font-size to 16px on child elements'\nassert 'padding' in css.lower(), 'Should add padding to the links'",
+      "difficulty": "medium",
+      "concepts_new": ["inline-block whitespace fix", "vertical-align"],
+      "concepts_review": ["display: inline-block", "font-size", "padding"],
+      "hints": [
+        "Setting font-size: 0 on the parent removes whitespace gaps between inline-block children.",
+        "Remember to reset font-size on the child elements so text is visible.",
+        "vertical-align: middle aligns inline-block elements along their midpoints."
+      ]
+    }
+  ]
+}

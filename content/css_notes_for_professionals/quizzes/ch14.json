@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 14,
+  "questions": [
+    {
+      "id": "css_ch14_q01",
+      "type": "multiple_choice",
+      "question": "What does `float: left` do to an element?",
+      "choices": [
+        "Centers the element horizontally",
+        "Moves the element to the left, allowing content to wrap around its right side",
+        "Pins the element to the left side of the viewport",
+        "Aligns text within the element to the left"
+      ],
+      "correct": 1,
+      "explanation": "float: left takes the element out of normal flow and positions it to the left of its container, with surrounding content wrapping around its right side.",
+      "concepts": ["float"]
+    },
+    {
+      "id": "css_ch14_q02",
+      "type": "multiple_choice",
+      "question": "What problem does the clearfix technique solve?",
+      "choices": [
+        "Preventing text from wrapping around floated elements",
+        "A parent container collapsing to zero height when all children are floated",
+        "Removing the default margin on floated elements",
+        "Centering floated elements horizontally"
+      ],
+      "correct": 1,
+      "explanation": "When all children are floated, the parent loses its height. The clearfix technique forces the parent to contain its floated children.",
+      "concepts": ["clearfix", "float"]
+    },
+    {
+      "id": "css_ch14_q03",
+      "type": "multiple_choice",
+      "question": "Which property is used to prevent an element from appearing next to a floated element?",
+      "choices": [
+        "position: relative",
+        "display: block",
+        "clear: both",
+        "float: none"
+      ],
+      "correct": 2,
+      "explanation": "The clear property (with values left, right, or both) forces an element to move below any preceding floated elements.",
+      "concepts": ["clear", "float"]
+    },
+    {
+      "id": "css_ch14_q04",
+      "type": "multiple_choice",
+      "question": "Which value of `clear` prevents the element from sitting beside floats on either side?",
+      "choices": [
+        "clear: left",
+        "clear: right",
+        "clear: none",
+        "clear: both"
+      ],
+      "correct": 3,
+      "explanation": "clear: both clears floats on both the left and right sides, ensuring the element starts below any preceding floated elements.",
+      "concepts": ["clear"]
+    },
+    {
+      "id": "css_ch14_q05",
+      "type": "fill_in_blank",
+      "question": "Setting `float: ___` removes a float and returns the element to normal document flow.",
+      "correct": "none",
+      "explanation": "float: none is the default value that keeps an element in normal flow without floating.",
+      "concepts": ["float"]
+    },
+    {
+      "id": "css_ch14_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property specifies whether an element should be moved below preceding floated elements.",
+      "correct": "clear",
+      "explanation": "The clear property controls whether an element is moved down to clear past left, right, or both floats.",
+      "concepts": ["clear", "float"]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 4,
+  "challenges": [
+    {
+      "id": "hc_ch04_c01",
+      "title": "Simple Blog Post",
+      "description": "Create a blog post page with an <h1> title, at least two <p> paragraphs of content, and an unordered list (<ul>) with at least three items. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a simple blog post -->\n\n\"\"\"",
+      "test_code": "assert '<h1>' in html.lower(), 'Should contain an <h1> blog title'\nassert '</h1>' in html.lower(), 'Should contain a closing </h1> tag'\nassert html.lower().count('<p>') >= 2, 'Should contain at least two paragraphs'\nassert '<ul>' in html.lower(), 'Should contain an unordered list'\nassert html.lower().count('<li>') >= 3, 'Should contain at least three list items'",
+      "difficulty": "easy",
+      "concepts_new": ["blog post structure", "content organization"],
+      "concepts_review": ["h1 heading", "p tag", "ul tag", "li tag"],
+      "hints": [
+        "A blog post typically has a title (<h1>), body text (<p>), and sometimes lists.",
+        "Use <ul> for an unordered list and wrap each item in <li>."
+      ]
+    },
+    {
+      "id": "hc_ch04_c02",
+      "title": "Full Blog Post with Link and Image",
+      "description": "Create a complete blog post with an <h1> title, an <h2> subtitle, at least two paragraphs, an ordered list (<ol>) with at least three items, a link (<a> with href), and an image (<img> with src and alt). Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a full blog post with link and image -->\n\n\"\"\"",
+      "test_code": "assert '<h1>' in html.lower(), 'Should contain an <h1> title'\nassert '<h2>' in html.lower(), 'Should contain an <h2> subtitle'\nassert html.lower().count('<p>') >= 2, 'Should contain at least two paragraphs'\nassert '<ol>' in html.lower(), 'Should contain an ordered list'\nassert html.lower().count('<li>') >= 3, 'Should contain at least three list items'\nassert '<a ' in html.lower(), 'Should contain an <a> link tag'\nassert 'href=' in html.lower(), 'Link should have an href attribute'\nassert '<img ' in html.lower(), 'Should contain an <img> tag'\nassert 'src=' in html.lower(), 'Image should have a src attribute'\nassert 'alt=' in html.lower(), 'Image should have an alt attribute'",
+      "difficulty": "medium",
+      "concepts_new": ["anchor tag", "href attribute", "img tag", "src attribute", "alt attribute", "ordered list"],
+      "concepts_review": ["h1 heading", "h2 heading", "p tag", "li tag"],
+      "hints": [
+        "Links use <a href=\"url\">text</a> and images use <img src=\"url\" alt=\"description\">.",
+        "An ordered list uses <ol> instead of <ul> to number the items automatically."
+      ]
+    }
+  ]
+}

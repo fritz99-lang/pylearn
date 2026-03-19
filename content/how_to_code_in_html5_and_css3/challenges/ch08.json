@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 8,
+  "challenges": [
+    {
+      "id": "hc_ch08_c01",
+      "title": "Complete HTML+CSS Page",
+      "description": "Create a complete HTML+CSS page combining headings (<h1>, <h2>), paragraphs, a link (<a>), and a <style> block with at least two CSS rules setting color and font-family. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a complete HTML+CSS page -->\n\n\"\"\"",
+      "test_code": "assert '<!doctype html>' in html.lower(), 'Should start with <!DOCTYPE html>'\nassert '<style>' in html.lower(), 'Should contain a <style> block'\nassert '<h1>' in html.lower(), 'Should contain an <h1> heading'\nassert '<h2>' in html.lower(), 'Should contain an <h2> heading'\nassert '<p>' in html.lower(), 'Should contain a paragraph'\nassert '<a ' in html.lower(), 'Should contain a link'\nassert 'href=' in html.lower(), 'Link should have an href attribute'\nassert 'color' in html.lower(), 'Should set a color in CSS'\nassert 'font-family' in html.lower(), 'Should set font-family in CSS'\nstyle_block = html.lower().split('<style>')[1].split('</style>')[0]\nassert style_block.count('{') >= 2, 'Should have at least two CSS rule blocks'",
+      "difficulty": "easy",
+      "concepts_new": ["combining HTML and CSS", "page composition"],
+      "concepts_review": ["doctype", "style tag", "headings", "paragraphs", "links", "color", "font-family"],
+      "hints": [
+        "This challenge combines everything from previous chapters into one page.",
+        "Make sure your <style> block has at least two separate selectors with rules."
+      ]
+    },
+    {
+      "id": "hc_ch08_c02",
+      "title": "Styled Multi-Section Page",
+      "description": "Create a styled page with a <nav> containing links, at least two <section> elements with headings and paragraphs, an <img> tag, and consistent CSS styling (font-family on body, colors on headings, margin/padding on sections). Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a styled multi-section page -->\n\n\"\"\"",
+      "test_code": "assert '<!doctype html>' in html.lower(), 'Should start with <!DOCTYPE html>'\nassert '<style>' in html.lower(), 'Should contain a <style> block'\nassert '<nav>' in html.lower(), 'Should contain a <nav> element'\nassert html.lower().count('<a ') >= 2, 'Nav should contain at least two links'\nassert html.lower().count('<section>') >= 2 or html.lower().count('<section ') >= 2, 'Should contain at least two <section> elements'\nassert '<img ' in html.lower(), 'Should contain an <img> tag'\nassert 'alt=' in html.lower(), 'Image should have an alt attribute'\nassert 'font-family' in html.lower(), 'Should set font-family in CSS'\nassert 'margin' in html.lower() or 'padding' in html.lower(), 'Should use margin or padding for spacing'\nstyle_block = html.lower().split('<style>')[1].split('</style>')[0]\nassert style_block.count('{') >= 3, 'Should have at least three CSS rule blocks'",
+      "difficulty": "medium",
+      "concepts_new": ["section tag", "multi-section layout", "consistent styling"],
+      "concepts_review": ["nav tag", "links", "img tag", "font-family", "margin", "padding"],
+      "hints": [
+        "Use <section> to divide your page into distinct content areas.",
+        "Apply font-family to the body so all sections inherit the same font."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 40,
+  "challenges": [
+    {
+      "id": "css_ch40_c01",
+      "title": "Column Width and Gap",
+      "description": "Write CSS that uses `column-width` for a responsive multi-column layout. Create a rule for `.content` that sets `column-width: 250px` and `column-gap: 2em`. The browser will automatically determine the number of columns based on the available width. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'column-width' in css.lower(), 'Should use column-width property'\nassert 'column-gap' in css.lower(), 'Should use column-gap property'\nassert '250px' in css.lower(), 'Should set column-width to 250px'\nassert '.content' in css.lower(), 'Should target .content'",
+      "difficulty": "easy",
+      "concepts_new": ["column-width"],
+      "concepts_review": ["column-gap"],
+      "hints": [
+        "column-width sets the ideal width for each column; the browser calculates how many fit",
+        "Unlike column-count, column-width creates a responsive layout automatically"
+      ]
+    },
+    {
+      "id": "css_ch40_c02",
+      "title": "Preventing Column Breaks and Column Fill",
+      "description": "Write CSS for a polished multi-column layout that prevents awkward breaks. Create a rule for `.multi-col` that sets `column-count: 3`, `column-gap: 30px`, and `column-fill: balance` to evenly distribute content. Create a rule for `.multi-col .card` that sets `break-inside: avoid` to prevent cards from being split across columns, and add `margin-bottom: 1em`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'break-inside' in css.lower(), 'Should use break-inside property'\nassert 'avoid' in css.lower(), 'Should set break-inside to avoid'\nassert 'column-fill' in css.lower(), 'Should use column-fill property'\nassert 'balance' in css.lower(), 'Should set column-fill to balance'\nassert 'column-count' in css.lower(), 'Should use column-count'\nassert '.multi-col' in css.lower(), 'Should target .multi-col'\nassert '.card' in css.lower(), 'Should target .card within .multi-col'",
+      "difficulty": "medium",
+      "concepts_new": ["break-inside", "column-fill"],
+      "concepts_review": ["column-count", "column-gap"],
+      "hints": [
+        "break-inside: avoid prevents an element from being split across column boundaries",
+        "column-fill: balance distributes content evenly; column-fill: auto fills columns sequentially"
+      ]
+    }
+  ]
+}

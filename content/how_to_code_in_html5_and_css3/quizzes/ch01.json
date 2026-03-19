@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 1,
+  "questions": [
+    {
+      "id": "hc_ch01_q01",
+      "type": "multiple_choice",
+      "question": "What is the primary role of a web browser?",
+      "choices": [
+        "To write HTML code",
+        "To render HTML into a visual web page",
+        "To store website files on a server",
+        "To connect websites to databases"
+      ],
+      "correct": 1,
+      "explanation": "A web browser reads HTML code and renders it into a visual web page that users can see and interact with.",
+      "concepts": ["browsers", "rendering"]
+    },
+    {
+      "id": "hc_ch01_q02",
+      "type": "multiple_choice",
+      "question": "In the client-server model, which part requests a web page?",
+      "choices": [
+        "The server",
+        "The database",
+        "The client (browser)",
+        "The HTML file"
+      ],
+      "correct": 2,
+      "explanation": "In the client-server model, the client (typically a web browser) sends a request to the server, which then responds with the web page files.",
+      "concepts": ["client-server model", "web architecture"]
+    },
+    {
+      "id": "hc_ch01_q03",
+      "type": "multiple_choice",
+      "question": "How is HTML compared to building blocks in the Lego analogy?",
+      "choices": [
+        "HTML elements snap together to build a web page, like Lego bricks build a structure",
+        "HTML must be purchased in sets like Lego kits",
+        "HTML pages break apart easily like Lego pieces",
+        "HTML comes with instruction manuals like Lego sets"
+      ],
+      "correct": 0,
+      "explanation": "HTML elements are like Lego bricks — individual building blocks that snap together to create the structure of a web page.",
+      "concepts": ["HTML basics", "web page structure"]
+    },
+    {
+      "id": "hc_ch01_q04",
+      "type": "multiple_choice",
+      "question": "What does a server do when it receives a request for a web page?",
+      "choices": [
+        "It writes new HTML code on the fly",
+        "It sends the requested files back to the client",
+        "It opens the web page in its own browser",
+        "It converts the page into a mobile app"
+      ],
+      "correct": 1,
+      "explanation": "When a server receives a request, it locates the requested files (HTML, CSS, images, etc.) and sends them back to the client browser.",
+      "concepts": ["client-server model", "web servers"]
+    },
+    {
+      "id": "hc_ch01_q05",
+      "type": "fill_in_blank",
+      "question": "HTML stands for HyperText ___ Language.",
+      "correct": "Markup",
+      "explanation": "HTML stands for HyperText Markup Language. It is a markup language used to structure content on the web.",
+      "concepts": ["HTML basics"]
+    },
+    {
+      "id": "hc_ch01_q06",
+      "type": "fill_in_blank",
+      "question": "In the client-server model, the web browser acts as the ___.",
+      "correct": "client",
+      "explanation": "The web browser is the client that sends requests to servers and displays the responses as web pages.",
+      "concepts": ["client-server model"]
+    }
+  ]
+}

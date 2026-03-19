@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 15,
+  "challenges": [
+    {
+      "id": "cpp_ch15_c01",
+      "title": "Base and Derived Classes",
+      "description": "Write a C++ program that defines a base class `Animal` with a public member variable `name` (string) and a method `speak()` that prints a generic message. Then define a derived class `Dog` that publicly inherits from `Animal`. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define a class Animal with a string member and a speak() method\n- Define a class Dog that inherits from Animal using public inheritance\n- Include a main() function that creates a Dog object",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'class Animal' in cpp, 'Should define a base class named Animal'\nassert 'class Dog' in cpp, 'Should define a derived class named Dog'\nassert ': public Animal' in cpp or ':public Animal' in cpp, 'Dog should use public inheritance from Animal'\nassert 'speak' in cpp, 'Should have a speak() method'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "easy",
+      "concepts_new": ["inheritance", "base class", "derived class", "public inheritance"],
+      "concepts_review": ["classes", "member functions", "objects"],
+      "hints": [
+        "Define the base class first: class Animal { public: void speak() { ... } };",
+        "Use a colon for inheritance: class Dog : public Animal { };"
+      ]
+    },
+    {
+      "id": "cpp_ch15_c02",
+      "title": "Virtual Functions and Polymorphism",
+      "description": "Write a C++ program that demonstrates polymorphism using virtual functions. Define a base class `Shape` with a virtual method `area()` that returns a double. Define a derived class `Rectangle` that overrides `area()` to compute width * height. Use a base class pointer to call the overridden method. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define Shape with a virtual area() method\n- Define Rectangle that overrides area()\n- Use a Shape pointer to a Rectangle object and call area()",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'class Shape' in cpp, 'Should define a base class Shape'\nassert 'class Rectangle' in cpp, 'Should define a derived class Rectangle'\nassert 'virtual' in cpp, 'Should use virtual keyword for polymorphism'\nassert 'area' in cpp, 'Should have an area() method'\nassert 'override' in cpp or '// override' in cpp or 'area()' in cpp, 'Derived class should override the area method'\nassert 'Shape*' in cpp or 'Shape *' in cpp, 'Should use a base class pointer for polymorphism'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "medium",
+      "concepts_new": ["virtual functions", "polymorphism", "override", "base class pointers"],
+      "concepts_review": ["inheritance", "public inheritance", "member functions"],
+      "hints": [
+        "Declare area() as virtual in Shape: virtual double area() { return 0; }",
+        "Use a pointer: Shape* s = new Rectangle(5, 3); cout << s->area();"
+      ]
+    }
+  ]
+}

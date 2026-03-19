@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 9,
+  "questions": [
+    {
+      "id": "pp_ch09_q01",
+      "type": "multiple_choice",
+      "question": "Which tkinter geometry manager arranges widgets by anchoring them to sides of their parent container using options like side, fill, and expand?",
+      "choices": [
+        "grid()",
+        "place()",
+        "pack()",
+        "layout()"
+      ],
+      "correct": 2,
+      "explanation": "The pack() geometry manager positions widgets by packing them against the sides (TOP, BOTTOM, LEFT, RIGHT) of their parent. The fill and expand options control how widgets stretch to fill available space.",
+      "concepts": ["pack geometry manager"]
+    },
+    {
+      "id": "pp_ch09_q02",
+      "type": "multiple_choice",
+      "question": "What does passing expand=YES and fill=BOTH to pack() accomplish for a widget?",
+      "choices": [
+        "The widget is centered but does not resize",
+        "The widget claims all extra space in its parent and stretches in both directions to fill it",
+        "The widget fills horizontally only and stays at its natural height",
+        "The widget is hidden until the parent is resized"
+      ],
+      "correct": 1,
+      "explanation": "expand=YES tells the packer to allocate extra space to the widget when the parent grows, and fill=BOTH makes the widget stretch horizontally and vertically to fill that allocated space.",
+      "concepts": ["pack options", "expand", "fill"]
+    },
+    {
+      "id": "pp_ch09_q03",
+      "type": "multiple_choice",
+      "question": "How do you display an image on a tkinter Label or Button widget?",
+      "choices": [
+        "Pass a file path string directly to the text option",
+        "Create a PhotoImage object and pass it to the widget's image option",
+        "Call widget.load_image() with the file path",
+        "Use the Canvas widget instead; Label and Button cannot display images"
+      ],
+      "correct": 1,
+      "explanation": "You create a PhotoImage (for GIF/PNG) or BitmapImage object, then pass it to the image option of Label or Button. You must keep a reference to the PhotoImage object or it will be garbage-collected and the image disappears.",
+      "concepts": ["PhotoImage", "image display"]
+    },
+    {
+      "id": "pp_ch09_q04",
+      "type": "multiple_choice",
+      "question": "Which tkinter widget allows a user to select a numeric value by dragging a slider along a horizontal or vertical trough?",
+      "choices": [
+        "Spinbox",
+        "Scrollbar",
+        "Scale",
+        "Entry"
+      ],
+      "correct": 2,
+      "explanation": "The Scale widget presents a slider that the user drags to choose a numeric value within a configured range. Its orient option sets it horizontal or vertical, and the command callback fires as the slider moves.",
+      "concepts": ["Scale widget"]
+    },
+    {
+      "id": "pp_ch09_q05",
+      "type": "fill_in_blank",
+      "question": "To create a standard pop-up dialog that asks the user to confirm an action with OK/Cancel buttons, you call tkinter.messagebox.______().",
+      "correct": "askokcancel",
+      "explanation": "tkinter.messagebox.askokcancel(title, message) displays a dialog with OK and Cancel buttons, returning True if OK is pressed and False otherwise.",
+      "concepts": ["messagebox", "dialog"]
+    },
+    {
+      "id": "pp_ch09_q06",
+      "type": "fill_in_blank",
+      "question": "To make a Checkbutton reflect and update a Python-level variable, you create a tkinter ______ (e.g., IntVar or StringVar) and pass it as the widget's variable option.",
+      "correct": "variable",
+      "explanation": "tkinter control variables (IntVar, StringVar, DoubleVar, BooleanVar) link widget state to Python values. Passing one as the variable option of a Checkbutton or Radiobutton keeps the widget and the variable synchronized automatically.",
+      "concepts": ["control variables", "Checkbutton"]
+    }
+  ]
+}

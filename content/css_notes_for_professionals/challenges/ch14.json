@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 14,
+  "challenges": [
+    {
+      "id": "css_ch14_c01",
+      "title": "Float Left",
+      "description": "Write CSS for an `.image` selector that sets `float` to `left` and adds a `margin-right` of 15px to create spacing between the floated element and adjacent content. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.image' in css.lower(), 'Should target the .image selector'\nassert 'float' in css.lower(), 'Should use the float property'\nassert 'left' in css.lower(), 'Should float to the left'\nassert 'margin-right' in css.lower(), 'Should use margin-right for spacing'\nassert '15px' in css.lower(), 'Should set margin-right to 15px'",
+      "difficulty": "easy",
+      "concepts_new": ["float-left"],
+      "concepts_review": [],
+      "hints": [
+        "float: left moves the element to the left and lets content wrap around it.",
+        "Adding margin-right creates space between the floated element and surrounding text."
+      ]
+    },
+    {
+      "id": "css_ch14_c02",
+      "title": "Clearfix with Pseudo-Element",
+      "description": "Write CSS that creates a clearfix for a `.clearfix` selector using the `::after` pseudo-element. The `::after` should have `content` set to an empty string, `display` set to `table`, and `clear` set to `both`. Also write a rule for `.float-child` with `float: left` and `width: 50%`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.clearfix' in css.lower(), 'Should target the .clearfix selector'\nassert '::after' in css.lower(), 'Should use the ::after pseudo-element'\nassert 'content' in css.lower(), 'Should set the content property'\nassert 'display' in css.lower(), 'Should set display property'\nassert 'table' in css.lower(), 'Should set display to table'\nassert 'clear' in css.lower(), 'Should use the clear property'\nassert 'both' in css.lower(), 'Should set clear to both'\nassert '.float-child' in css.lower(), 'Should target the .float-child selector'\nassert 'float' in css.lower(), 'Should use float on child elements'\nassert '50%' in css.lower(), 'Should set width to 50%'",
+      "difficulty": "medium",
+      "concepts_new": ["clearfix", "pseudo-element-after", "clear-both"],
+      "concepts_review": ["float-left"],
+      "hints": [
+        "The clearfix pattern uses ::after to create an invisible element that clears floats.",
+        "The pseudo-element needs content: '' to exist in the DOM.",
+        "display: table on the ::after element is a reliable cross-browser clearfix technique."
+      ]
+    }
+  ]
+}

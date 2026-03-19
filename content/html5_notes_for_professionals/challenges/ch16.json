@@ -1,0 +1,28 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 16,
+  "challenges": [
+    {
+      "id": "h5_ch16_c01",
+      "title": "Clickable Map",
+      "description": "Create an <img> element with a usemap attribute, and a <map> element with a matching name attribute containing at least 2 <area> elements. Each area should have shape, coords, href, and alt attributes. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<img' in html.lower(), 'Should contain an <img> element'\nassert 'usemap=' in html.lower(), 'Image should have a usemap attribute'\nassert '<map' in html.lower(), 'Should contain a <map> element'\nassert '</map>' in html.lower(), 'Should close the <map> element'\nimport re\nassert re.search(r'<map[^>]+name=', html.lower()), 'Map should have a name attribute'\nareas = re.findall(r'<area', html.lower())\nassert len(areas) >= 2, 'Should contain at least 2 <area> elements'\nassert html.lower().count('shape=') >= 2, 'Each area should have a shape attribute'\nassert html.lower().count('coords=') >= 2, 'Each area should have a coords attribute'\nassert html.lower().count('href=') >= 2, 'Each area should have an href attribute'",
+      "difficulty": "easy",
+      "concepts_new": ["image_maps", "map_element", "area_element", "usemap"],
+      "concepts_review": ["img_element"],
+      "hints": ["Link the image to the map: <img src=\"image.png\" usemap=\"#mymap\">", "The map name matches without the #: <map name=\"mymap\">", "Each area needs shape, coords, href, and alt attributes"]
+    },
+    {
+      "id": "h5_ch16_c02",
+      "title": "Shape Areas",
+      "description": "Create an image map with three <area> elements: one with shape=\"rect\", one with shape=\"circle\", and one with shape=\"poly\". Each area should have coords, href, and alt attributes. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<img' in html.lower(), 'Should contain an <img> element'\nassert 'usemap=' in html.lower(), 'Image should have a usemap attribute'\nassert '<map' in html.lower(), 'Should contain a <map> element'\nassert '</map>' in html.lower(), 'Should close the <map> element'\nimport re\nareas = re.findall(r'<area[^>]+>', html.lower())\nassert len(areas) >= 3, 'Should contain at least 3 <area> elements'\nshapes = [re.search(r'shape=[\"\\']([^\"\\']+)[\"\\']', a) for a in areas]\nshape_values = [m.group(1) for m in shapes if m]\nassert 'rect' in shape_values, 'Should have an area with shape=\"rect\"'\nassert 'circle' in shape_values, 'Should have an area with shape=\"circle\"'\nassert 'poly' in shape_values, 'Should have an area with shape=\"poly\"'\nassert html.lower().count('coords=') >= 3, 'Each area should have a coords attribute'\nassert html.lower().count('alt=') >= 3, 'Each area should have an alt attribute'",
+      "difficulty": "medium",
+      "concepts_new": ["rect_shape", "circle_shape", "poly_shape"],
+      "concepts_review": ["image_maps", "map_element", "area_element"],
+      "hints": ["rect coords: \"x1,y1,x2,y2\" (top-left and bottom-right corners)", "circle coords: \"cx,cy,radius\" (center and radius)", "poly coords: \"x1,y1,x2,y2,x3,y3,...\" (each vertex of the polygon)"]
+    }
+  ]
+}

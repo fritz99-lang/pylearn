@@ -1,0 +1,36 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 47,
+  "challenges": [
+    {
+      "id": "css_ch47_c01",
+      "title": "Basic @supports Rule",
+      "description": "Write CSS that uses an @supports rule to test for display: grid support. Inside the @supports block, target '.container' and set display to grid, grid-template-columns to repeat(3, 1fr), and gap to 20px. Outside the @supports block, target '.container' as a fallback and set display to flex and flex-wrap to wrap. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Use @supports to progressively enhance with grid */\n\n\"\"\"",
+      "test_code": "assert '@supports' in css.lower(), 'Should use @supports rule'\nassert 'display' in css.lower(), 'Should test display property'\nassert 'grid' in css.lower(), 'Should test for grid support'\nassert '.container' in css.lower(), 'Should target .container'\nassert 'grid-template-columns' in css.lower(), 'Should set grid-template-columns inside @supports'\nassert 'repeat(' in css.lower(), 'Should use repeat() for columns'\nassert 'gap' in css.lower(), 'Should set gap'\nassert 'flex' in css.lower(), 'Should use flex as fallback'\nassert 'flex-wrap' in css.lower(), 'Should set flex-wrap as fallback'",
+      "difficulty": "easy",
+      "concepts_new": ["@supports", "feature queries"],
+      "concepts_review": ["display: grid", "display: flex", "progressive enhancement"],
+      "hints": [
+        "@supports (display: grid) { } checks if the browser supports CSS Grid.",
+        "Place the enhanced layout inside @supports and the fallback layout outside it.",
+        "The fallback flex layout ensures older browsers still get a usable layout."
+      ]
+    },
+    {
+      "id": "css_ch47_c02",
+      "title": "Advanced Feature Queries with Operators",
+      "description": "Write CSS with three @supports rules: (1) use @supports (display: grid) and (gap: 20px) with the 'and' operator, targeting '.modern-layout' with display grid; (2) use @supports (display: flex) or (display: grid) with the 'or' operator, targeting '.flexible' with appropriate layout; (3) use @supports not (display: grid) with the 'not' operator, targeting '.legacy' with display block and a float-based layout using float: left and width: 33.33%. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Use @supports with and, or, and not operators */\n\n\"\"\"",
+      "test_code": "lower = css.lower()\nassert '@supports' in lower, 'Should use @supports rules'\nassert lower.count('@supports') >= 3, 'Should have at least three @supports rules'\nassert ' and ' in lower or ')and(' in lower.replace(' ', ''), 'Should use the and operator'\nassert ' or ' in lower or ')or(' in lower.replace(' ', ''), 'Should use the or operator'\nassert 'not ' in lower or 'not(' in lower, 'Should use the not operator'\nassert '.modern-layout' in lower, 'Should target .modern-layout'\nassert '.flexible' in lower, 'Should target .flexible'\nassert '.legacy' in lower, 'Should target .legacy'\nassert 'float' in lower, 'Should use float in legacy fallback'\nassert '33.33%' in css, 'Should use 33.33% width for float layout'\nassert 'grid' in lower, 'Should reference grid'\nassert 'flex' in lower, 'Should reference flex'",
+      "difficulty": "medium",
+      "concepts_new": ["@supports and", "@supports or", "@supports not"],
+      "concepts_review": ["@supports", "feature queries", "progressive enhancement"],
+      "hints": [
+        "Use 'and' to require multiple features: @supports (display: grid) and (gap: 20px) { }",
+        "Use 'or' to match any feature: @supports (display: flex) or (display: grid) { }",
+        "Use 'not' to target browsers lacking a feature: @supports not (display: grid) { }"
+      ]
+    }
+  ]
+}

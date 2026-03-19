@@ -1,0 +1,36 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 16,
+  "challenges": [
+    {
+      "id": "css_ch16_c01",
+      "title": "Flex Container Basics",
+      "description": "Write CSS for a `.nav` selector that sets `display` to `flex` and `justify-content` to `space-between`. Also set `align-items` to `center`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.nav' in css.lower(), 'Should target the .nav selector'\nassert 'display' in css.lower(), 'Should use the display property'\nassert 'flex' in css.lower(), 'Should set display to flex'\nassert 'justify-content' in css.lower(), 'Should use justify-content'\nassert 'space-between' in css.lower(), 'Should set justify-content to space-between'\nassert 'align-items' in css.lower(), 'Should use align-items'\nassert 'center' in css.lower(), 'Should set align-items to center'",
+      "difficulty": "easy",
+      "concepts_new": ["display-flex", "justify-content", "align-items"],
+      "concepts_review": [],
+      "hints": [
+        "display: flex turns an element into a flex container.",
+        "justify-content: space-between puts equal space between items with no space at edges.",
+        "align-items: center vertically centers items in the container."
+      ]
+    },
+    {
+      "id": "css_ch16_c02",
+      "title": "Flex Wrap and Flex Shorthand",
+      "description": "Write CSS for a `.gallery` selector that sets `display` to `flex`, `flex-wrap` to `wrap`, and `align-items` to `stretch`. Then write a rule for `.gallery-item` that uses the `flex` shorthand set to `1 1 200px` (grow, shrink, basis). Also set `margin` to 10px on the gallery items. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.gallery' in css.lower(), 'Should target the .gallery selector'\nassert 'display' in css.lower(), 'Should use the display property'\nassert 'flex-wrap' in css.lower(), 'Should use flex-wrap'\nassert 'wrap' in css.lower(), 'Should set flex-wrap to wrap'\nassert 'align-items' in css.lower(), 'Should use align-items'\nassert 'stretch' in css.lower(), 'Should set align-items to stretch'\nassert '.gallery-item' in css.lower(), 'Should target the .gallery-item selector'\nassert 'flex' in css.lower(), 'Should use the flex shorthand on items'\nassert '200px' in css.lower(), 'Should include 200px as the flex-basis'\nassert 'margin' in css.lower(), 'Should set margin on gallery items'\nassert '10px' in css.lower(), 'Should set margin to 10px'",
+      "difficulty": "medium",
+      "concepts_new": ["flex-wrap", "flex-shorthand", "flex-basis"],
+      "concepts_review": ["display-flex", "align-items"],
+      "hints": [
+        "flex-wrap: wrap allows flex items to flow onto multiple lines.",
+        "The flex shorthand combines flex-grow, flex-shrink, and flex-basis: flex: 1 1 200px;",
+        "flex-basis sets the initial size of a flex item before growing or shrinking."
+      ]
+    }
+  ]
+}

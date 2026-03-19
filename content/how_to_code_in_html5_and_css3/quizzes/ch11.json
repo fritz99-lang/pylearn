@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 11,
+  "questions": [
+    {
+      "id": "hc_ch11_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML element creates a dropdown selection list?",
+      "choices": [
+        "<dropdown>",
+        "<input type=\"dropdown\">",
+        "<select>",
+        "<list>"
+      ],
+      "correct": 2,
+      "explanation": "The <select> element creates a dropdown list. Each option inside it is defined with an <option> tag.",
+      "concepts": ["select element", "dropdowns"]
+    },
+    {
+      "id": "hc_ch11_q02",
+      "type": "multiple_choice",
+      "question": "What is the difference between radio buttons and checkboxes?",
+      "choices": [
+        "Radio buttons allow multiple selections; checkboxes allow only one",
+        "Radio buttons allow only one selection from a group; checkboxes allow multiple",
+        "There is no difference — they are interchangeable",
+        "Radio buttons are for text; checkboxes are for numbers"
+      ],
+      "correct": 1,
+      "explanation": "Radio buttons with the same name attribute allow only one selection from the group. Checkboxes allow the user to select multiple options independently.",
+      "concepts": ["radio buttons", "checkboxes"]
+    },
+    {
+      "id": "hc_ch11_q03",
+      "type": "multiple_choice",
+      "question": "What does the <fieldset> element do in a form?",
+      "choices": [
+        "It submits the form data",
+        "It groups related form controls together with a visual border",
+        "It validates all inputs inside it",
+        "It creates a new form section that submits separately"
+      ],
+      "correct": 1,
+      "explanation": "The <fieldset> element groups related form controls together and draws a border around them. The <legend> tag provides a caption for the group.",
+      "concepts": ["fieldset", "form organization"]
+    },
+    {
+      "id": "hc_ch11_q04",
+      "type": "multiple_choice",
+      "question": "Which attribute allows you to specify a regex pattern for input validation?",
+      "choices": [
+        "validate",
+        "regex",
+        "pattern",
+        "format"
+      ],
+      "correct": 2,
+      "explanation": "The pattern attribute accepts a regular expression that the input value must match for the form to be submitted.",
+      "concepts": ["pattern attribute", "form validation"]
+    },
+    {
+      "id": "hc_ch11_q05",
+      "type": "fill_in_blank",
+      "question": "The <___> element provides a caption or title for a <fieldset> group.",
+      "correct": "legend",
+      "explanation": "The <legend> tag defines a caption for the <fieldset> element, displayed at the top of the group's border.",
+      "concepts": ["legend tag", "fieldset"]
+    },
+    {
+      "id": "hc_ch11_q06",
+      "type": "fill_in_blank",
+      "question": "The <___> element provides a predefined list of suggestions for an input field.",
+      "correct": "datalist",
+      "explanation": "The <datalist> element contains <option> elements that appear as autocomplete suggestions when the user types in the associated input field.",
+      "concepts": ["datalist", "input suggestions"]
+    }
+  ]
+}

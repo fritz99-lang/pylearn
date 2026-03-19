@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 7,
+  "challenges": [
+    {
+      "id": "cpp_ch07_c01",
+      "title": "Array Basics",
+      "description": "Write a C++ program that declares an array of 5 integers, initializes it with values using an initializer list, and uses a for loop to print each element. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Declare an int array of size 5\n- Initialize the array with values using an initializer list { }\n- Use a for loop to iterate through the array\n- Display each element with cout",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'int' in cpp and '[' in cpp and ']' in cpp, 'Should declare an int array with square bracket notation'\nassert '{' in cpp and '}' in cpp, 'Should use an initializer list with curly braces'\nassert 'for' in cpp, 'Should use a for loop to iterate through the array'\nassert 'cout' in cpp, 'Should display each element with cout'\nassert '5' in cpp, 'Array should have 5 elements'",
+      "difficulty": "easy",
+      "concepts_new": ["array declaration", "initializer list", "array indexing"],
+      "concepts_review": ["for loop", "int", "cout"],
+      "hints": [
+        "Declare and initialize: int numbers[5] = {10, 20, 30, 40, 50};",
+        "Access elements with an index: numbers[i] inside a for loop"
+      ]
+    },
+    {
+      "id": "cpp_ch07_c02",
+      "title": "Array Functions and Vectors",
+      "description": "Write a C++ program that defines a function taking an int array and its size as parameters, which calculates and returns the sum of all elements. Also declare a vector, add elements with push_back, and display them. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Include the vector header\n- Define a function that accepts an array parameter and a size parameter\n- The function should return the sum of the array elements\n- Declare a vector and use push_back to add elements\n- Display results with cout",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <vector>\nusing namespace std;\n\n// Define your function here\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert '#include <vector>' in cpp, 'Should include the vector header'\nassert 'vector' in cpp, 'Should declare a vector'\nassert 'push_back' in cpp, 'Should use push_back to add elements to the vector'\nassert 'int ' in cpp and '[]' in cpp, 'Should have a function that takes an array parameter'\nassert 'return' in cpp, 'The function should return the sum'\nassert 'cout' in cpp, 'Should display results with cout'\nassert cpp.count('for') >= 1, 'Should use a loop to process array or vector elements'",
+      "difficulty": "medium",
+      "concepts_new": ["array as function parameter", "vector", "push_back", "size parameter"],
+      "concepts_review": ["array declaration", "for loop", "function definition", "return value"],
+      "hints": [
+        "Function signature: int sumArray(int arr[], int size)",
+        "Declare a vector: vector<int> nums; then nums.push_back(10);"
+      ]
+    }
+  ]
+}

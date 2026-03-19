@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 12,
+  "challenges": [
+    {
+      "id": "cpp_ch12_c01",
+      "title": "Basic File I/O",
+      "description": "Write a C++ program that uses `ofstream` to write at least 3 lines of text to a file called \"output.txt\", then uses `ifstream` to read the file line by line and print each line to the console. Include `<fstream>` and use a `while` loop with `getline` to read the file. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <fstream>\n#include <string>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'ofstream' in cpp, 'Use ofstream to write to a file'\nassert 'ifstream' in cpp, 'Use ifstream to read from a file'\nassert 'getline' in cpp, 'Use getline to read the file line by line'\nassert 'fstream' in cpp, 'Include <fstream> for file operations'\nassert '.open(' in cpp or 'ofstream ' in cpp, 'Open the file using .open() or the constructor'\nassert '.close()' in cpp, 'Close the file when done'",
+      "difficulty": "easy",
+      "concepts_new": ["ifstream", "ofstream", "file_io", "getline"],
+      "concepts_review": ["loops", "strings", "include_headers"],
+      "hints": [
+        "Create a file with: ofstream outFile(\"output.txt\");",
+        "Read line by line with: while (getline(inFile, line)) { ... }"
+      ]
+    },
+    {
+      "id": "cpp_ch12_c02",
+      "title": "Binary File Operations",
+      "description": "Write a C++ program that defines a struct called `Record` with an int `id` and a char array `name[50]`. Write at least 2 `Record` structs to a binary file using `.write()` with `reinterpret_cast`. Then use `seekg` to move to a specific record, read it with `.read()`, and print it. Open files in `ios::binary` mode. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <fstream>\n#include <cstring>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'struct' in cpp and 'Record' in cpp, 'Define a struct called Record'\nassert 'ios::binary' in cpp or 'binary' in cpp, 'Open files in binary mode'\nassert '.write(' in cpp, 'Use .write() to write binary data'\nassert '.read(' in cpp, 'Use .read() to read binary data'\nassert 'reinterpret_cast' in cpp, 'Use reinterpret_cast for type conversion in binary I/O'\nassert 'seekg' in cpp, 'Use seekg to move to a specific position in the file'",
+      "difficulty": "medium",
+      "concepts_new": ["binary_files", "seekg", "reinterpret_cast", "binary_read_write"],
+      "concepts_review": ["structs", "file_io", "fstream"],
+      "hints": [
+        "Write binary data with: file.write(reinterpret_cast<char*>(&record), sizeof(record));",
+        "Seek to a record with: file.seekg(recordNum * sizeof(Record), ios::beg);"
+      ]
+    }
+  ]
+}

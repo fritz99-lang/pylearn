@@ -1,0 +1,36 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 6,
+  "challenges": [
+    {
+      "id": "css_ch06_c01",
+      "title": "Center Text and a Block Element",
+      "description": "Write two CSS rules: (1) target `.text-center` and set `text-align` to `center`, (2) target `.box` and center it horizontally by setting a `width` of `200px` and `margin` to `0 auto`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Center text with text-align */\n\n/* Center a block element with margin auto */\n\n\"\"\"",
+      "test_code": "assert '.text-center' in css, 'Should target .text-center class'\nassert 'text-align' in css.lower(), 'Should set text-align property'\nassert 'center' in css.lower(), 'Should set text-align to center'\nassert '.box' in css, 'Should target .box class'\nassert 'width' in css.lower(), 'Should set width on .box'\nassert '200px' in css.lower(), 'Should set width to 200px'\nassert 'margin' in css.lower(), 'Should set margin on .box'\nassert 'auto' in css.lower(), 'Should use auto for horizontal centering'",
+      "difficulty": "easy",
+      "concepts_new": ["text-align-center", "margin-auto-centering"],
+      "concepts_review": ["css-rules", "class-selector"],
+      "hints": [
+        "text-align: center; centers inline/text content",
+        "margin: 0 auto; centers a block element that has a set width"
+      ]
+    },
+    {
+      "id": "css_ch06_c02",
+      "title": "Flexbox Centering",
+      "description": "Write a CSS rule for `.flex-center` that uses flexbox to center its children both horizontally and vertically. Set `display` to `flex`, `justify-content` to `center`, `align-items` to `center`, and `height` to `100vh`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Use flexbox to center content both ways */\n\n\"\"\"",
+      "test_code": "assert '.flex-center' in css, 'Should target .flex-center class'\nassert 'display' in css.lower(), 'Should set display property'\nassert 'flex' in css.lower(), 'Should set display to flex'\nassert 'justify-content' in css.lower(), 'Should set justify-content property'\nassert 'align-items' in css.lower(), 'Should set align-items property'\nparts = css.lower().split('center')\nassert len(parts) >= 3, 'Should use center for both justify-content and align-items'\nassert 'height' in css.lower(), 'Should set height property'\nassert '100vh' in css.lower(), 'Should set height to 100vh'",
+      "difficulty": "medium",
+      "concepts_new": ["flexbox", "justify-content", "align-items", "viewport-height"],
+      "concepts_review": ["text-align-center", "margin-auto-centering"],
+      "hints": [
+        "display: flex; enables flexbox on the container",
+        "justify-content: center; centers children horizontally",
+        "align-items: center; centers children vertically",
+        "height: 100vh; makes the container fill the full viewport height"
+      ]
+    }
+  ]
+}

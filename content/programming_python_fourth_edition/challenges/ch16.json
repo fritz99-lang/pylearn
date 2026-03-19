@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 16,
+  "challenges": [
+    {
+      "id": "pp_ch16_c01",
+      "title": "Query String Parser",
+      "description": "Write a function `parse_query_string(url)` that extracts query parameters from a URL string and returns them as a dictionary. If a parameter appears multiple times, keep the last value. If the URL has no query string, return an empty dict. Use `urllib.parse.urlparse` and `urllib.parse.parse_qs`.",
+      "starter_code": "from urllib.parse import urlparse, parse_qs\n\ndef parse_query_string(url):\n    \"\"\"Extract query parameters from a URL as a dict.\n    \n    For duplicate keys, keep the last value.\n    \"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "assert parse_query_string('http://example.com/search?q=python&page=2') == {'q': 'python', 'page': '2'}\nassert parse_query_string('http://example.com/') == {}\nassert parse_query_string('http://example.com/path') == {}\nresult = parse_query_string('http://example.com/?name=alice&age=30&city=NYC')\nassert result == {'name': 'alice', 'age': '30', 'city': 'NYC'}\nresult2 = parse_query_string('http://example.com/?key=first&key=second')\nassert result2 == {'key': 'second'}\nassert parse_query_string('http://example.com/?empty=') == {'empty': ''}",
+      "difficulty": "easy",
+      "concepts_new": ["query_string_parsing", "cgi_parameters"],
+      "concepts_review": ["urllib", "dictionaries", "string_parsing"],
+      "hints": [
+        "urlparse(url).query gives you the query string portion.",
+        "parse_qs returns lists for each key. Use a dict comprehension to take the last value from each list."
+      ]
+    },
+    {
+      "id": "pp_ch16_c02",
+      "title": "URL Request Router",
+      "description": "Create a `Router` class that maps URL path patterns to handler functions. Implement `add_route(pattern, handler)` to register a handler for a path string, and `dispatch(path)` that calls the matching handler and returns its result. If no route matches, raise a `KeyError`. Support a `routes` property that returns a list of registered pattern strings.",
+      "starter_code": "class Router:\n    \"\"\"A simple URL request router.\"\"\"\n\n    def __init__(self):\n        # Your code here\n        pass\n\n    def add_route(self, pattern, handler):\n        \"\"\"Register a handler function for a URL pattern.\"\"\"\n        # Your code here\n        pass\n\n    def dispatch(self, path):\n        \"\"\"Find and call the handler for the given path.\n        \n        Raises:\n            KeyError: If no route matches the path.\n        \"\"\"\n        # Your code here\n        pass\n\n    @property\n    def routes(self):\n        \"\"\"Return list of registered route patterns.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "router = Router()\ndef home():\n    return 'Welcome Home'\ndef about():\n    return 'About Page'\ndef contact():\n    return 'Contact Us'\nrouter.add_route('/', home)\nrouter.add_route('/about', about)\nrouter.add_route('/contact', contact)\nassert router.dispatch('/') == 'Welcome Home'\nassert router.dispatch('/about') == 'About Page'\nassert router.dispatch('/contact') == 'Contact Us'\nassert sorted(router.routes) == ['/', '/about', '/contact']\ntry:\n    router.dispatch('/missing')\n    assert False, 'Should have raised KeyError'\nexcept KeyError:\n    pass\nrouter.add_route('/about', lambda: 'New About')\nassert router.dispatch('/about') == 'New About'",
+      "difficulty": "medium",
+      "concepts_new": ["url_routing", "request_dispatch"],
+      "concepts_review": ["classes", "dictionaries", "callables", "properties"],
+      "hints": [
+        "Store routes in a dictionary mapping pattern strings to handler functions.",
+        "In dispatch(), look up the path in your dictionary and call the function."
+      ]
+    }
+  ]
+}

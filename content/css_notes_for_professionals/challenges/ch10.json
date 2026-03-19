@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 10,
+  "challenges": [
+    {
+      "id": "css_ch10_c01",
+      "title": "Border Shorthand",
+      "description": "Write CSS for a `.frame` selector that sets a border using the shorthand `border` property. Use a 2px solid black border. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.frame' in css.lower(), 'Should target the .frame selector'\nassert 'border' in css.lower(), 'Should use the border property'\nassert '2px' in css.lower(), 'Should include 2px width'\nassert 'solid' in css.lower(), 'Should use solid border style'\nassert 'black' in css.lower() or '#000' in css.lower(), 'Should use black color'",
+      "difficulty": "easy",
+      "concepts_new": ["border-shorthand"],
+      "concepts_review": [],
+      "hints": [
+        "The border shorthand combines width, style, and color in one declaration.",
+        "Use: border: 2px solid black;"
+      ]
+    },
+    {
+      "id": "css_ch10_c02",
+      "title": "Border Radius and Individual Sides",
+      "description": "Write CSS for a `.badge` selector that sets `border-radius` to 8px, a `border-bottom` of 3px solid blue, and a `border-top` of 1px dashed gray. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.badge' in css.lower(), 'Should target the .badge selector'\nassert 'border-radius' in css.lower(), 'Should use border-radius'\nassert '8px' in css.lower(), 'Should set border-radius to 8px'\nassert 'border-bottom' in css.lower(), 'Should use border-bottom for the bottom side'\nassert 'border-top' in css.lower(), 'Should use border-top for the top side'\nassert 'solid' in css.lower(), 'Should use solid style on one border'\nassert 'dashed' in css.lower(), 'Should use dashed style on one border'",
+      "difficulty": "medium",
+      "concepts_new": ["border-radius", "individual-border-sides"],
+      "concepts_review": ["border-shorthand"],
+      "hints": [
+        "You can set borders on individual sides with border-top, border-bottom, etc.",
+        "border-radius rounds the corners of an element.",
+        "Each individual border side uses the same shorthand format: width style color."
+      ]
+    }
+  ]
+}

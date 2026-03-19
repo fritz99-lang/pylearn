@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 37,
+  "questions": [
+    {
+      "id": "css_ch37_q01",
+      "type": "multiple_choice",
+      "question": "How are CSS custom properties (variables) declared?",
+      "choices": [
+        "$variable-name: value",
+        "@variable-name: value",
+        "--variable-name: value",
+        "var-name: value"
+      ],
+      "correct": 2,
+      "explanation": "CSS custom properties are declared with a double-hyphen prefix (--), such as --primary-color: blue. They are accessed using the var() function.",
+      "concepts": ["custom properties", "declaration"]
+    },
+    {
+      "id": "css_ch37_q02",
+      "type": "multiple_choice",
+      "question": "Why is :root commonly used to define CSS custom properties?",
+      "choices": [
+        "It is the only place custom properties can be defined",
+        "It provides document-wide scope since it matches the html element",
+        "It provides higher performance than other selectors",
+        "Custom properties defined elsewhere are ignored by browsers"
+      ],
+      "correct": 1,
+      "explanation": "The :root pseudo-class matches the document's root element (html). Defining custom properties there makes them available throughout the entire document via inheritance.",
+      "concepts": [":root", "scope", "inheritance"]
+    },
+    {
+      "id": "css_ch37_q03",
+      "type": "multiple_choice",
+      "question": "What happens when var() references an undefined custom property and no fallback is provided?",
+      "choices": [
+        "The browser throws an error",
+        "The property uses its inherited or initial value",
+        "The value defaults to 0",
+        "The entire rule is ignored"
+      ],
+      "correct": 1,
+      "explanation": "When a custom property is not defined and no fallback is given, the property using var() becomes invalid at computed-value time. The browser then uses the inherited value or the property's initial value.",
+      "concepts": ["var()", "fallback", "invalid at computed-value time"]
+    },
+    {
+      "id": "css_ch37_q04",
+      "type": "multiple_choice",
+      "question": "How do you specify a fallback value in the var() function?",
+      "choices": [
+        "var(--color || blue)",
+        "var(--color, blue)",
+        "var(--color ? blue)",
+        "var(--color | blue)"
+      ],
+      "correct": 1,
+      "explanation": "The var() function accepts an optional second argument separated by a comma that serves as the fallback value: var(--color, blue).",
+      "concepts": ["var()", "fallback values"]
+    },
+    {
+      "id": "css_ch37_q05",
+      "type": "fill_in_blank",
+      "question": "CSS custom properties follow the normal ___ rules, meaning a child element can inherit variables defined on a parent.",
+      "correct": "cascade",
+      "explanation": "Custom properties participate in the CSS cascade just like regular properties. They are inherited by default, so child elements receive values set on ancestor elements.",
+      "concepts": ["cascade", "inheritance", "custom properties"]
+    },
+    {
+      "id": "css_ch37_q06",
+      "type": "fill_in_blank",
+      "question": "To use a CSS custom property named --spacing in a declaration, write padding: ___.",
+      "correct": "var(--spacing)",
+      "explanation": "The var() function is used to retrieve the value of a custom property. Writing padding: var(--spacing) applies the value of --spacing to the padding property.",
+      "concepts": ["var()", "custom properties"]
+    }
+  ]
+}

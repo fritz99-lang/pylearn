@@ -1,0 +1,78 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 22,
+  "questions": [
+    {
+      "id": "h5_ch22_q01",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the 'for' attribute on a <label> element?",
+      "choices": [
+        "It specifies the form the label belongs to",
+        "It associates the label with a specific form control by matching its id",
+        "It sets the label text direction",
+        "It defines the order of labels on the page"
+      ],
+      "correct": 1,
+      "explanation": "The 'for' attribute on a <label> must match the 'id' attribute of the form control it labels. This creates an explicit association, so clicking the label focuses or activates the associated control.",
+      "concepts": ["label element", "for attribute", "explicit association"]
+    },
+    {
+      "id": "h5_ch22_q02",
+      "type": "multiple_choice",
+      "question": "What is the difference between explicit and implicit label association?",
+      "choices": [
+        "Explicit uses CSS, implicit uses JavaScript",
+        "Explicit uses the 'for' attribute, implicit wraps the control inside the <label> tag",
+        "Explicit is for checkboxes only, implicit is for text inputs only",
+        "There is no difference; they are the same thing"
+      ],
+      "correct": 1,
+      "explanation": "Explicit association uses the 'for' attribute on the label matching the 'id' on the control. Implicit association wraps the form control inside the <label> element, requiring no 'for' or 'id' attributes.",
+      "concepts": ["explicit association", "implicit association", "label element"]
+    },
+    {
+      "id": "h5_ch22_q03",
+      "type": "multiple_choice",
+      "question": "What happens when a user clicks on a <label> that is properly associated with a checkbox?",
+      "choices": [
+        "Nothing happens; labels are display-only",
+        "The checkbox is toggled on or off",
+        "The form is submitted",
+        "The label text changes color"
+      ],
+      "correct": 1,
+      "explanation": "When a label is properly associated with a checkbox (via 'for' attribute or wrapping), clicking the label toggles the checkbox. This increases the clickable area and improves usability, especially on mobile devices.",
+      "concepts": ["label element", "checkbox", "usability"]
+    },
+    {
+      "id": "h5_ch22_q04",
+      "type": "multiple_choice",
+      "question": "Why are labels important for web accessibility?",
+      "choices": [
+        "They make form controls visually larger",
+        "They allow screen readers to announce what each form control is for",
+        "They are required for form validation to work",
+        "They automatically translate form controls into other languages"
+      ],
+      "correct": 1,
+      "explanation": "Labels are essential for accessibility because screen readers use the label text to announce what each form control is for. Without labels, users relying on assistive technology may not understand the purpose of form inputs.",
+      "concepts": ["accessibility", "screen readers", "label element"]
+    },
+    {
+      "id": "h5_ch22_q05",
+      "type": "fill_in_blank",
+      "question": "In explicit label association, the label's 'for' attribute must match the form control's ___ attribute.",
+      "correct": "id",
+      "explanation": "The 'for' attribute on a <label> creates an explicit association by referencing the 'id' attribute of the form control. For example: <label for=\"email\"> pairs with <input id=\"email\">.",
+      "concepts": ["for attribute", "id attribute", "explicit association"]
+    },
+    {
+      "id": "h5_ch22_q06",
+      "type": "fill_in_blank",
+      "question": "In ___ label association, the form control is placed inside the <label> element without needing a 'for' attribute.",
+      "correct": "implicit",
+      "explanation": "Implicit association is achieved by nesting the form control inside the <label> element. For example: <label>Email: <input type=\"email\"></label>. No 'for' or 'id' attributes are needed.",
+      "concepts": ["implicit association", "label element"]
+    }
+  ]
+}

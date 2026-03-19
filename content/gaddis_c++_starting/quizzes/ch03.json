@@ -1,0 +1,68 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 3,
+  "questions": [
+    {
+      "id": "cpp_ch03_q01",
+      "type": "multiple_choice",
+      "question": "What is the result of the expression 2 + 3 * 4 in C++?",
+      "choices": ["20", "14", "24", "11"],
+      "correct": 1,
+      "explanation": "Due to operator precedence, multiplication is performed before addition: 3 * 4 = 12, then 2 + 12 = 14.",
+      "concepts": ["operator precedence", "mathematical expressions"]
+    },
+    {
+      "id": "cpp_ch03_q02",
+      "type": "multiple_choice",
+      "question": "Which function is used to read an entire line of input, including spaces?",
+      "choices": ["cin >>", "getline()", "scanf()", "readline()"],
+      "correct": 1,
+      "explanation": "getline(cin, variable) reads an entire line of input including spaces. The cin >> operator stops reading at whitespace.",
+      "concepts": ["getline", "string input"]
+    },
+    {
+      "id": "cpp_ch03_q03",
+      "type": "multiple_choice",
+      "question": "What is the purpose of a static_cast<double>(x) where x is an int?",
+      "choices": [
+        "It converts x to a string",
+        "It converts x to a double for floating-point arithmetic",
+        "It rounds x to the nearest integer",
+        "It deletes the variable x"
+      ],
+      "correct": 1,
+      "explanation": "static_cast<double>(x) performs type casting, converting the integer value of x to a double so floating-point division and arithmetic can be performed.",
+      "concepts": ["type casting", "static_cast"]
+    },
+    {
+      "id": "cpp_ch03_q04",
+      "type": "multiple_choice",
+      "question": "How do you declare a named constant with value 3.14159 in C++?",
+      "choices": [
+        "constant double PI = 3.14159;",
+        "const double PI = 3.14159;",
+        "#define double PI 3.14159;",
+        "final double PI = 3.14159;"
+      ],
+      "correct": 1,
+      "explanation": "The const keyword declares a named constant whose value cannot be changed after initialization. The syntax is: const type name = value;",
+      "concepts": ["const", "named constants"]
+    },
+    {
+      "id": "cpp_ch03_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ operator returns the remainder of integer division in C++.",
+      "correct": "%",
+      "explanation": "The modulus operator (%) returns the remainder when one integer is divided by another. For example, 10 % 3 equals 1.",
+      "concepts": ["modulus operator", "arithmetic operators"]
+    },
+    {
+      "id": "cpp_ch03_q06",
+      "type": "fill_in_blank",
+      "question": "To use the string class in C++, you must include the ___ header file.",
+      "correct": "<string>",
+      "explanation": "The <string> header provides the string class, which allows you to create and manipulate string objects in C++.",
+      "concepts": ["string class", "header files"]
+    }
+  ]
+}

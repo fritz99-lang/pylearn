@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 24,
+  "questions": [
+    {
+      "id": "h5_ch24_q01",
+      "type": "multiple_choice",
+      "question": "What defines a void element in HTML?",
+      "choices": [
+        "An element that is invisible on the page",
+        "An element that cannot have any content or closing tag",
+        "An element that has been deprecated in HTML5",
+        "An element that only contains text, not other elements"
+      ],
+      "correct": 1,
+      "explanation": "Void elements are HTML elements that cannot have any child content (text or nested elements) and do not have a closing tag. Examples include <br>, <hr>, <img>, and <input>.",
+      "concepts": ["void elements", "HTML syntax"]
+    },
+    {
+      "id": "h5_ch24_q02",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a void element?",
+      "choices": ["<img>", "<br>", "<p>", "<input>"],
+      "correct": 2,
+      "explanation": "The <p> element is not a void element; it has both an opening and closing tag and can contain content. Elements like <img>, <br>, and <input> are void elements that cannot have content or closing tags.",
+      "concepts": ["void elements", "non-void elements"]
+    },
+    {
+      "id": "h5_ch24_q03",
+      "type": "multiple_choice",
+      "question": "In HTML5, which is the correct way to write a void element?",
+      "choices": [
+        "<br></br>",
+        "<br/>",
+        "<br>",
+        "Both <br/> and <br> are valid in HTML5"
+      ],
+      "correct": 3,
+      "explanation": "In HTML5, both <br> and <br/> are valid syntax for void elements. The trailing slash is optional and has no effect. However, <br> (without the slash) is the more common HTML5 convention, while <br/> is carried over from XHTML.",
+      "concepts": ["void element syntax", "HTML5 vs XHTML"]
+    },
+    {
+      "id": "h5_ch24_q04",
+      "type": "multiple_choice",
+      "question": "Which void element is used to define the relationship between the current document and an external resource, such as a stylesheet?",
+      "choices": ["<meta>", "<link>", "<source>", "<base>"],
+      "correct": 1,
+      "explanation": "The <link> element is a void element used to define relationships between the document and external resources. Its most common use is linking to CSS stylesheets with <link rel=\"stylesheet\" href=\"styles.css\">.",
+      "concepts": ["link element", "void elements", "external resources"]
+    },
+    {
+      "id": "h5_ch24_q05",
+      "type": "fill_in_blank",
+      "question": "The <___> void element is used to insert a thematic break or horizontal rule between sections of content.",
+      "correct": "hr",
+      "explanation": "The <hr> element is a void element that represents a thematic break between paragraph-level content. It is typically rendered as a horizontal line and does not require a closing tag.",
+      "concepts": ["hr element", "void elements"]
+    },
+    {
+      "id": "h5_ch24_q06",
+      "type": "fill_in_blank",
+      "question": "The <___> void element provides metadata about the HTML document, such as character encoding and viewport settings.",
+      "correct": "meta",
+      "explanation": "The <meta> element is a void element placed in the <head> section that provides metadata about the document. Common uses include setting the character encoding (<meta charset=\"UTF-8\">) and viewport for responsive design.",
+      "concepts": ["meta element", "void elements", "document metadata"]
+    }
+  ]
+}

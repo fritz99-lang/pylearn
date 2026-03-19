@@ -1,0 +1,24 @@
+{
+  "step_id": "cpp_adv_ch08",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 8,
+  "title": "Inventory Search — Finding Items",
+  "description": "Add search and sort capabilities to the inventory system. Store items in a string array. Write a searchItem() function that performs a linear search through the array to find an item by name, returning its index or -1 if not found. Write a sortInventory() function that sorts the items array alphabetically (using bubble sort or selection sort). Display the inventory before and after sorting. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_adv_ch06",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\nvoid displayRoom(string roomName, string description) {\n    cout << \"=== \" << roomName << \" ===\" << endl;\n    cout << description << endl;\n}\n\nint playerAttack(int attackPower) {\n    return attackPower;\n}\n\n// Write a search function:\n// int searchItem(string items[], int size, string target)\n//   - Loop through the array\n//   - If items[i] == target, return i\n//   - If not found, return -1\n\n// Write a sort function:\n// void sortInventory(string items[], int size)\n//   - Use bubble sort or selection sort\n//   - Sort items alphabetically\n\nvoid showInventory(string items[], int itemCount) {\n    cout << \"=== INVENTORY ===\" << endl;\n    for (int i = 0; i < itemCount; i++) {\n        cout << i + 1 << \". \" << items[i] << endl;\n    }\n}\n\nvoid saveGame(string playerName, int health, int gold, int turns) {\n    ofstream saveFile(\"savegame.txt\");\n    saveFile << playerName << endl;\n    saveFile << health << endl;\n    saveFile << gold << endl;\n    saveFile << turns << endl;\n    saveFile.close();\n}\n\nint main() {\n    cout << \"===== TEXT ADVENTURE GAME =====\" << endl;\n\n    string playerName;\n    cout << \"Enter your name: \";\n    getline(cin, playerName);\n\n    int health = 100, gold = 50, attackPower = 15;\n    bool playing = true;\n    int turn = 0;\n\n    string items[20];\n    int itemCount = 0;\n    items[0] = \"Rusty Sword\";\n    items[1] = \"Health Potion\";\n    items[2] = \"Magic Shield\";\n    items[3] = \"Ancient Map\";\n    itemCount = 4;\n\n    while (playing && health > 0) {\n        turn++;\n        displayRoom(\"Forest Clearing\", \"Tall trees surround you.\");\n\n        string choice;\n        cout << \"Action (search/sort/inventory/quit): \";\n        cin >> choice;\n\n        if (choice == \"search\") {\n            // Use searchItem() to find an item\n        } else if (choice == \"sort\") {\n            // Use sortInventory() to sort items\n        } else if (choice == \"inventory\") {\n            showInventory(items, itemCount);\n        } else if (choice == \"quit\") {\n            playing = false;\n        }\n    }\n\n    saveGame(playerName, health, gold, turn);\n    cout << \"Thanks for playing!\" << endl;\n    return 0;\n}\n\"\"\"",
+  "test_code": "import re\nassert 'searchItem' in cpp or 'search_item' in cpp or 'findItem' in cpp or 'find_item' in cpp, 'Create a search function (e.g., searchItem)'\nsort_funcs = re.findall(r'void\\s+sort\\w*\\s*\\(', cpp)\nassert len(sort_funcs) >= 1 or 'sort' in cpp.lower(), 'Create a sort function for the inventory'\nassert 'string items' in cpp or 'string inventory' in cpp, 'Use a string array to store items'\nassert '== target' in cpp or '== search' in cpp or '== item' in cpp or '== name' in cpp, 'Compare each array element to the search target'\nassert 'return -1' in cpp or 'return(-1)' in cpp, 'Return -1 if the item is not found'\nswap_pattern = re.search(r'(swap|temp|items\\[.*\\]\\s*=)', cpp)\nassert swap_pattern, 'Sort function should swap elements (use a temp variable or swap())'",
+  "acceptance_criteria": [
+    "searchItem function performs a linear search through the items array",
+    "Search returns the index if found, -1 if not found",
+    "sortInventory function sorts items alphabetically",
+    "Sort uses bubble sort or selection sort with element swapping",
+    "Items are stored in a string array",
+    "Inventory can be displayed before and after sorting"
+  ],
+  "hints": [
+    "Linear search: loop from 0 to size, compare items[i] == target, return i if match",
+    "Bubble sort: nested loops, if (items[j] > items[j+1]) swap them",
+    "To swap strings: string temp = items[j]; items[j] = items[j+1]; items[j+1] = temp;",
+    "String comparison with > works alphabetically in C++ (\"Banana\" > \"Apple\" is true)"
+  ]
+}

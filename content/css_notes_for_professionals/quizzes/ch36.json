@@ -1,0 +1,68 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 36,
+  "questions": [
+    {
+      "id": "css_ch36_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS function allows you to perform mathematical calculations to determine property values?",
+      "choices": ["math()", "calc()", "compute()", "eval()"],
+      "correct": 1,
+      "explanation": "The calc() function lets you perform addition, subtraction, multiplication, and division with mixed units, such as calc(100% - 20px).",
+      "concepts": ["calc()", "functions"]
+    },
+    {
+      "id": "css_ch36_q02",
+      "type": "multiple_choice",
+      "question": "What does the clamp() function accept as its three arguments?",
+      "choices": [
+        "start, end, step",
+        "minimum, preferred, maximum",
+        "lower, value, upper",
+        "min, max, fallback"
+      ],
+      "correct": 1,
+      "explanation": "The clamp() function takes three values: a minimum, a preferred value, and a maximum. It resolves to the preferred value as long as it falls between the min and max bounds.",
+      "concepts": ["clamp()", "responsive design"]
+    },
+    {
+      "id": "css_ch36_q03",
+      "type": "multiple_choice",
+      "question": "Which function retrieves the value of a CSS custom property?",
+      "choices": ["attr()", "env()", "var()", "get()"],
+      "correct": 2,
+      "explanation": "The var() function retrieves the value of a CSS custom property (variable). It accepts an optional second argument as a fallback value if the variable is not defined.",
+      "concepts": ["var()", "custom properties"]
+    },
+    {
+      "id": "css_ch36_q04",
+      "type": "multiple_choice",
+      "question": "What does the env() function provide access to in CSS?",
+      "choices": [
+        "JavaScript environment variables",
+        "User-agent defined environment variables like safe-area-inset",
+        "Operating system theme settings",
+        "Server-side configuration values"
+      ],
+      "correct": 1,
+      "explanation": "The env() function accesses user-agent defined environment variables. The most common use is for safe area insets on devices with notches, such as env(safe-area-inset-top).",
+      "concepts": ["env()", "safe area"]
+    },
+    {
+      "id": "css_ch36_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ function returns the smallest value from a comma-separated list of expressions.",
+      "correct": "min()",
+      "explanation": "The min() function evaluates each expression and returns the smallest result. It is useful for responsive sizing, such as width: min(100%, 600px).",
+      "concepts": ["min()", "responsive design"]
+    },
+    {
+      "id": "css_ch36_q06",
+      "type": "fill_in_blank",
+      "question": "To reference an external resource like an image in CSS, you use the ___ function.",
+      "correct": "url()",
+      "explanation": "The url() function specifies the location of an external resource. It is used in properties like background-image, list-style-image, and content.",
+      "concepts": ["url()", "functions"]
+    }
+  ]
+}

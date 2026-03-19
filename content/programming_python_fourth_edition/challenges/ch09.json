@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 9,
+  "challenges": [
+    {
+      "id": "pp_ch09_c01",
+      "title": "Widget Configuration Builder",
+      "description": "Create a function called 'build_widget_config' that takes keyword arguments for text, bg (background color), fg (foreground color), and font, and returns a dictionary containing only the keys that were provided (not None). Defaults: text=None, bg=None, fg=None, font=None. Also create a variable 'sample_config' by calling build_widget_config(text='Hello', bg='white', fg='black', font='Arial 12').",
+      "starter_code": "def build_widget_config(text=None, bg=None, fg=None, font=None):\n    \"\"\"Build a config dict from non-None keyword arguments.\"\"\"\n    pass\n\n# Create sample_config with all four options set\nsample_config = None\n",
+      "test_code": "# Full config\nassert build_widget_config(text='Hi', bg='red', fg='white', font='Bold') == {'text': 'Hi', 'bg': 'red', 'fg': 'white', 'font': 'Bold'}\n# Partial config\nassert build_widget_config(text='Click') == {'text': 'Click'}\nassert build_widget_config(bg='blue', fg='yellow') == {'bg': 'blue', 'fg': 'yellow'}\n# Empty config\nassert build_widget_config() == {}\n# sample_config check\nassert sample_config == {'text': 'Hello', 'bg': 'white', 'fg': 'black', 'font': 'Arial 12'}",
+      "difficulty": "easy",
+      "concepts_new": ["widget_configuration", "config_dicts"],
+      "concepts_review": ["keyword_arguments", "dict_comprehension", "None_filtering"],
+      "hints": [
+        "Build a dict of all params, then filter out None values: {k: v for k, v in pairs if v is not None}.",
+        "You can use locals() or just explicitly list the params: items = {'text': text, 'bg': bg, ...}"
+      ]
+    },
+    {
+      "id": "pp_ch09_c02",
+      "title": "Widget State Machine",
+      "description": "Write a class called 'WidgetStateManager' that tracks enable/disable states for named widgets. It should support: add_widget(name) — adds widget in 'enabled' state; enable(name) — sets widget to 'enabled'; disable(name) — sets widget to 'disabled'; is_enabled(name) — returns True/False; get_all_states() — returns dict of {name: state}; toggle(name) — switches between enabled/disabled. All methods that reference a widget name should raise KeyError if the widget hasn't been added.",
+      "starter_code": "class WidgetStateManager:\n    \"\"\"Track enable/disable state for named widgets.\"\"\"\n    \n    def __init__(self):\n        pass\n    \n    def add_widget(self, name):\n        \"\"\"Add widget in 'enabled' state.\"\"\"\n        pass\n    \n    def enable(self, name):\n        pass\n    \n    def disable(self, name):\n        pass\n    \n    def is_enabled(self, name):\n        pass\n    \n    def get_all_states(self):\n        \"\"\"Return dict of {name: state_string}.\"\"\"\n        pass\n    \n    def toggle(self, name):\n        pass\n",
+      "test_code": "mgr = WidgetStateManager()\nmgr.add_widget('button1')\nmgr.add_widget('entry1')\nassert mgr.is_enabled('button1') == True\nassert mgr.is_enabled('entry1') == True\n\nmgr.disable('button1')\nassert mgr.is_enabled('button1') == False\nassert mgr.get_all_states() == {'button1': 'disabled', 'entry1': 'enabled'}\n\nmgr.toggle('button1')\nassert mgr.is_enabled('button1') == True\nmgr.toggle('entry1')\nassert mgr.is_enabled('entry1') == False\n\nmgr.enable('entry1')\nassert mgr.is_enabled('entry1') == True\n\n# KeyError for unknown widget\ntry:\n    mgr.is_enabled('unknown')\n    assert False, 'Should raise KeyError'\nexcept KeyError:\n    pass\n\ntry:\n    mgr.toggle('unknown')\n    assert False, 'Should raise KeyError'\nexcept KeyError:\n    pass",
+      "difficulty": "medium",
+      "concepts_new": ["state_management", "widget_states"],
+      "concepts_review": ["classes", "dictionaries", "error_handling"],
+      "hints": [
+        "Use a dict self._states = {} to map widget names to 'enabled'/'disabled' strings.",
+        "In each method, check if name is in self._states first. If not, raise KeyError(name)."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 5,
+  "challenges": [
+    {
+      "id": "pp_ch05_c01",
+      "title": "File Round-Trip Verification",
+      "description": "Write a function called 'write_and_verify' that takes a file path and a string of content. It should write the content to the file, then read it back and return True if the read content matches the original, False otherwise. Use 'utf-8' encoding for both operations. Create parent directories if they don't exist.",
+      "starter_code": "import os\n\ndef write_and_verify(filepath, content):\n    \"\"\"Write content to file, read it back, return True if they match.\"\"\"\n    pass\n",
+      "test_code": "import tempfile, os\nwith tempfile.TemporaryDirectory() as tmpdir:\n    path = os.path.join(tmpdir, 'test.txt')\n    assert write_and_verify(path, 'Hello, World!') == True\n    assert write_and_verify(path, 'Line 1\\nLine 2\\nLine 3') == True\n    assert write_and_verify(path, '') == True\n    # Test with unicode\n    assert write_and_verify(path, 'Héllo Wörld café') == True\n    # Test nested directory creation\n    nested = os.path.join(tmpdir, 'sub', 'deep', 'file.txt')\n    assert write_and_verify(nested, 'nested content') == True",
+      "difficulty": "easy",
+      "concepts_new": ["file_io", "encoding", "round_trip_verification"],
+      "concepts_review": ["string_comparison", "os_path"],
+      "hints": [
+        "Use open(filepath, 'w', encoding='utf-8') to write and open(filepath, 'r', encoding='utf-8') to read.",
+        "Use os.makedirs(os.path.dirname(filepath), exist_ok=True) to create parent directories."
+      ]
+    },
+    {
+      "id": "pp_ch05_c02",
+      "title": "Path Inspector",
+      "description": "Write a function called 'inspect_path' that takes a file or directory path string and returns a dictionary with: 'exists' (bool), 'is_file' (bool), 'is_dir' (bool), 'extension' (str, including the dot, or '' if no extension), 'parent' (str, parent directory), and 'name' (str, filename or dirname). Use os.path functions for all operations.",
+      "starter_code": "import os\n\ndef inspect_path(path):\n    \"\"\"Return dict with path metadata: exists, is_file, is_dir, extension, parent, name.\"\"\"\n    pass\n",
+      "test_code": "import tempfile, os\nwith tempfile.TemporaryDirectory() as tmpdir:\n    # Test with an existing file\n    fpath = os.path.join(tmpdir, 'data.csv')\n    with open(fpath, 'w') as f:\n        f.write('a,b')\n    result = inspect_path(fpath)\n    assert result['exists'] == True\n    assert result['is_file'] == True\n    assert result['is_dir'] == False\n    assert result['extension'] == '.csv'\n    assert result['name'] == 'data.csv'\n    assert result['parent'] == tmpdir\n    \n    # Test with an existing directory\n    result2 = inspect_path(tmpdir)\n    assert result2['exists'] == True\n    assert result2['is_file'] == False\n    assert result2['is_dir'] == True\n    \n    # Test with non-existent path\n    result3 = inspect_path(os.path.join(tmpdir, 'nope.txt'))\n    assert result3['exists'] == False\n    assert result3['extension'] == '.txt'\n    assert result3['name'] == 'nope.txt'",
+      "difficulty": "medium",
+      "concepts_new": ["os_path_utilities", "path_decomposition"],
+      "concepts_review": ["dictionaries", "boolean_logic", "file_system"],
+      "hints": [
+        "os.path.exists(), os.path.isfile(), os.path.isdir() check path status.",
+        "os.path.splitext(path)[1] gives the extension, os.path.basename(path) gives the name, os.path.dirname(path) gives the parent."
+      ]
+    }
+  ]
+}

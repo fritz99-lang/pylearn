@@ -1,0 +1,23 @@
+{
+  "step_id": "h5_proj_ch20",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 20,
+  "title": "Semantic Structure \u2014 HTML5 Sections",
+  "description": "Replace generic div containers with semantic HTML5 elements. Use <header> for the top area with your name and navigation, <nav> for the navigation links, <main> to wrap the primary content, <section> for each content area, and <footer> at the bottom with copyright info.",
+  "builds_on": "h5_proj_ch18",
+  "starter_code": "# Portfolio Website \u2014 Step 8: Semantic HTML5 Elements\n# Replace divs with header, nav, main, section, and footer.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <!-- Replace this area with <header> and <nav> -->\n    <h1>Your Name</h1>\n    <a href=\"#about\">About Me</a> |\n    <a href=\"#projects\">Projects</a> |\n    <a href=\"#contact\">Contact</a>\n\n    <!-- Wrap content sections in <main> and use <section> instead of <div> -->\n\n    <div id=\"about\">\n        <h2>About Me</h2>\n        <p>\n            I am a developer who is <strong>passionate</strong> about\n            building things. I am <em>constantly learning</em> and\n            <mark>love problem-solving</mark>.\n        </p>\n        <table>\n            <thead>\n                <tr><th>Skill</th><th>Level</th><th>Years</th></tr>\n            </thead>\n            <tbody>\n                <tr><td>HTML</td><td>Beginner</td><td>1</td></tr>\n                <tr><td>CSS</td><td>Beginner</td><td>1</td></tr>\n                <tr><td>Python</td><td>Intermediate</td><td>2</td></tr>\n            </tbody>\n        </table>\n    </div>\n\n    <div id=\"projects\">\n        <h2>My Projects</h2>\n        <figure>\n            <img src=\"project1.png\" alt=\"Screenshot of project 1\">\n            <figcaption>My first web project</figcaption>\n        </figure>\n    </div>\n\n    <div id=\"contact\">\n        <h2>Contact</h2>\n        <form method=\"post\">\n            <label for=\"name\">Name:</label>\n            <input type=\"text\" id=\"name\" name=\"name\">\n            <label for=\"email\">Email:</label>\n            <input type=\"email\" id=\"email\" name=\"email\">\n            <label for=\"message\">Message:</label>\n            <textarea id=\"message\" name=\"message\"></textarea>\n            <button type=\"submit\">Send</button>\n        </form>\n    </div>\n\n    <!-- Add a <footer> here -->\n\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<header>' in html.lower() and '</header>' in html.lower(), 'Must include a <header> element'\nassert '<nav>' in html.lower() and '</nav>' in html.lower(), 'Must include a <nav> element for navigation'\nassert '<main>' in html.lower() and '</main>' in html.lower(), 'Must include a <main> element for primary content'\nassert '<section' in html.lower(), 'Must use <section> elements for content areas'\nassert html.lower().count('<section') >= 2, f'Need at least 2 <section> elements, found {html.lower().count(\"<section\")}'\nassert '<footer>' in html.lower() and '</footer>' in html.lower(), 'Must include a <footer> element'",
+  "acceptance_criteria": [
+    "A header element wraps the site title and navigation",
+    "A nav element contains the navigation links",
+    "A main element wraps the primary page content",
+    "Section elements replace div containers",
+    "A footer element is at the bottom of the page"
+  ],
+  "hints": [
+    "Wrap the h1 and nav in: <header><h1>...</h1><nav>...</nav></header>",
+    "Replace <div id=\"about\"> with <section id=\"about\">",
+    "Wrap all sections in <main>...</main>",
+    "Add a footer: <footer><p>&copy; 2026 Your Name</p></footer>"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "step_id": "cpp_proj_ch12",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 12,
+  "title": "Save and Load — File I/O",
+  "description": "Add file I/O to persist student records. Write a saveToFile() function that writes all student data to a text file using ofstream, and a loadFromFile() function that reads records back using ifstream. The user should be able to save their roster and reload it later.",
+  "builds_on": "cpp_proj_ch11",
+  "starter_code": "# Student Grade Tracker — Step 8: File I/O\n# Add functions to save and load student records from a file.\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\nconst int MAX_STUDENTS = 30;\nconst int NUM_GRADES = 3;\n\nstruct Student {\n    string name;\n    double grades[NUM_GRADES];\n    double average;\n    char letterGrade;\n};\n\ndouble calculateAverage(double grades[], int size) {\n    double sum = 0;\n    for (int i = 0; i < size; i++)\n        sum += grades[i];\n    return sum / size;\n}\n\nchar getLetterGrade(double avg) {\n    if (avg >= 90) return 'A';\n    else if (avg >= 80) return 'B';\n    else if (avg >= 70) return 'C';\n    else if (avg >= 60) return 'D';\n    else return 'F';\n}\n\nvoid displayStudent(Student s) {\n    cout << s.name << \" — Average: \" << s.average\n         << \" — Grade: \" << s.letterGrade << endl;\n}\n\n// Define saveToFile: takes Student array, count, filename\n// Write each student's name and grades to the file\n\n// Define loadFromFile: takes Student array, reference to count, filename\n// Read student data back from the file\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    Student roster[MAX_STUDENTS];\n    int count = 0;\n\n    // Menu: 1) Add student  2) Display all  3) Save  4) Load  5) Quit\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "assert '#include <fstream>' in cpp, 'Must include <fstream> header for file I/O'\nassert 'ofstream' in cpp, 'Must use ofstream to write to a file'\nassert 'ifstream' in cpp, 'Must use ifstream to read from a file'\nassert 'open' in cpp or 'ofstream' in cpp, 'Must open a file for writing'\nassert 'saveToFile' in cpp or 'save_to_file' in cpp or 'saveFile' in cpp, 'Must define a save function'\nassert 'loadFromFile' in cpp or 'load_from_file' in cpp or 'loadFile' in cpp, 'Must define a load function'",
+  "acceptance_criteria": [
+    "Includes <fstream> header",
+    "Defines saveToFile() that writes student data using ofstream",
+    "Defines loadFromFile() that reads student data using ifstream",
+    "Save and load functions handle the Student struct data",
+    "File operations are used in main (e.g., via a menu)"
+  ],
+  "hints": [
+    "Include the header: #include <fstream>",
+    "Open for writing: ofstream outFile(filename); outFile << s.name << endl;",
+    "Open for reading: ifstream inFile(filename); getline(inFile, s.name);",
+    "Write grades on one line: for (int i = 0; i < NUM_GRADES; i++) outFile << s.grades[i] << ' ';",
+    "Always close files or let the destructor handle it when the stream goes out of scope"
+  ]
+}

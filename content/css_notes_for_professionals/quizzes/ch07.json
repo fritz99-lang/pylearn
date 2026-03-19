@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 7,
+  "questions": [
+    {
+      "id": "css_ch07_q01",
+      "type": "multiple_choice",
+      "question": "What is the correct order of the CSS box model layers from inside to outside?",
+      "choices": [
+        "Margin, border, padding, content",
+        "Content, padding, border, margin",
+        "Padding, content, border, margin",
+        "Content, border, padding, margin"
+      ],
+      "correct": 1,
+      "explanation": "The CSS box model layers from innermost to outermost are: content, padding, border, margin. Content is what you see, padding is space around it, border wraps the padding, and margin is the outer spacing.",
+      "concepts": ["box model layers"]
+    },
+    {
+      "id": "css_ch07_q02",
+      "type": "multiple_choice",
+      "question": "With `box-sizing: content-box`, what does a `width: 200px` element with `padding: 20px` and `border: 5px` actually take up horizontally?",
+      "choices": [
+        "200px",
+        "225px",
+        "240px",
+        "250px"
+      ],
+      "correct": 3,
+      "explanation": "With content-box (the default), width only applies to the content. Total width = 200 + 20 + 20 (padding both sides) + 5 + 5 (border both sides) = 250px.",
+      "concepts": ["content-box", "width calculation"]
+    },
+    {
+      "id": "css_ch07_q03",
+      "type": "multiple_choice",
+      "question": "What does `box-sizing: border-box` do?",
+      "choices": [
+        "It adds an extra border around the element",
+        "It makes padding and border included within the specified width and height",
+        "It removes the border from the element",
+        "It only calculates the border in the total width"
+      ],
+      "correct": 1,
+      "explanation": "With border-box, the specified width and height include content, padding, and border. This makes layout calculations more intuitive since the element never exceeds its declared size.",
+      "concepts": ["border-box", "box-sizing"]
+    },
+    {
+      "id": "css_ch07_q04",
+      "type": "multiple_choice",
+      "question": "Which is the default value of the `box-sizing` property?",
+      "choices": [
+        "border-box",
+        "content-box",
+        "padding-box",
+        "margin-box"
+      ],
+      "correct": 1,
+      "explanation": "The default value of box-sizing is content-box, where width and height only apply to the content area. Many developers override this to border-box for easier layout calculations.",
+      "concepts": ["content-box", "box-sizing default"]
+    },
+    {
+      "id": "css_ch07_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ is the space between the content and the border in the CSS box model.",
+      "correct": "padding",
+      "explanation": "Padding sits between the content area and the border. It creates internal space within the element and inherits the element's background color.",
+      "concepts": ["padding", "box model layers"]
+    },
+    {
+      "id": "css_ch07_q06",
+      "type": "fill_in_blank",
+      "question": "Setting box-sizing to ___ makes width and height include padding and border.",
+      "correct": "border-box",
+      "explanation": "box-sizing: border-box ensures the total rendered size of the element matches the declared width and height, with padding and border fitting inside those dimensions.",
+      "concepts": ["border-box", "box-sizing"]
+    }
+  ]
+}

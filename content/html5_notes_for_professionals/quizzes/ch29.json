@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 29,
+  "questions": [
+    {
+      "id": "h5_ch29_q01",
+      "type": "multiple_choice",
+      "question": "What does the sandbox attribute on an <iframe> do?",
+      "choices": [
+        "It sets the background color of the iframe",
+        "It applies extra restrictions on the content within the iframe",
+        "It makes the iframe resizable by the user",
+        "It enables offline caching for the iframe content"
+      ],
+      "correct": 1,
+      "explanation": "The sandbox attribute enables a set of restrictions on iframe content, such as blocking scripts, form submissions, and popups. Specific restrictions can be relaxed by adding values like allow-scripts.",
+      "concepts": ["iframe", "sandbox", "security"]
+    },
+    {
+      "id": "h5_ch29_q02",
+      "type": "multiple_choice",
+      "question": "Which attribute allows you to embed HTML content directly within an <iframe> without loading an external URL?",
+      "choices": ["src", "srcdoc", "content", "html"],
+      "correct": 1,
+      "explanation": "The srcdoc attribute contains inline HTML that the iframe renders directly. When both src and srcdoc are present, srcdoc takes priority.",
+      "concepts": ["iframe", "srcdoc"]
+    },
+    {
+      "id": "h5_ch29_q03",
+      "type": "multiple_choice",
+      "question": "Which sandbox value must be added to allow JavaScript execution inside a sandboxed iframe?",
+      "choices": ["allow-popups", "allow-scripts", "allow-js", "allow-execution"],
+      "correct": 1,
+      "explanation": "By default, a sandboxed iframe blocks all scripts. Adding allow-scripts to the sandbox attribute re-enables JavaScript execution within the iframe.",
+      "concepts": ["sandbox", "allow-scripts"]
+    },
+    {
+      "id": "h5_ch29_q04",
+      "type": "multiple_choice",
+      "question": "What is a key security concern when using <iframe> elements?",
+      "choices": [
+        "Iframes increase page load speed too much",
+        "Iframes can be used for clickjacking attacks by overlaying invisible frames",
+        "Iframes automatically share cookies with the parent page",
+        "Iframes bypass all CORS restrictions"
+      ],
+      "correct": 1,
+      "explanation": "Clickjacking is a major iframe security concern where a malicious site overlays an invisible iframe over trusted content, tricking users into clicking on something they did not intend. The X-Frame-Options header and sandbox attribute help mitigate this.",
+      "concepts": ["iframe", "security", "clickjacking"]
+    },
+    {
+      "id": "h5_ch29_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on an <iframe> specifies the URL of the page to embed.",
+      "correct": "src",
+      "explanation": "The src attribute provides the URL of the external document to display within the iframe.",
+      "concepts": ["iframe", "src"]
+    },
+    {
+      "id": "h5_ch29_q06",
+      "type": "fill_in_blank",
+      "question": "To allow form submission inside a sandboxed iframe, you must add the ___ value to the sandbox attribute.",
+      "correct": "allow-forms",
+      "explanation": "The allow-forms token re-enables form submission within a sandboxed iframe. Without it, any form submissions inside the iframe are blocked.",
+      "concepts": ["sandbox", "allow-forms"]
+    }
+  ]
+}

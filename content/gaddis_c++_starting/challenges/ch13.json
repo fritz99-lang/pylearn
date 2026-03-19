@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 13,
+  "challenges": [
+    {
+      "id": "cpp_ch13_c01",
+      "title": "Basic Class with Encapsulation",
+      "description": "Write a C++ program that defines a class called `Rectangle` with private data members `width` and `height` (both double). Include a public constructor that takes width and height parameters, a getter method `getArea()` that returns width * height, and a getter `getPerimeter()` that returns 2 * (width + height). In `main`, create a `Rectangle` object and print its area and perimeter. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'class' in cpp and 'Rectangle' in cpp, 'Define a class called Rectangle'\nassert 'private' in cpp, 'Use private access specifier to encapsulate data members'\nassert 'public' in cpp, 'Use public access specifier for the constructor and methods'\nassert 'getArea' in cpp, 'Define a getArea() method'\nassert 'getPerimeter' in cpp, 'Define a getPerimeter() method'\nassert 'width' in cpp and 'height' in cpp, 'The class should have width and height members'\nassert 'cout' in cpp, 'Print the area and perimeter in main'",
+      "difficulty": "easy",
+      "concepts_new": ["classes", "private_members", "public_methods", "constructors", "encapsulation"],
+      "concepts_review": ["functions", "data_types", "cout"],
+      "hints": [
+        "Use private: for data members and public: for the constructor and methods",
+        "Constructor syntax: Rectangle(double w, double h) { width = w; height = h; }"
+      ]
+    },
+    {
+      "id": "cpp_ch13_c02",
+      "title": "Class with Constructor, Destructor, and Methods",
+      "description": "Write a C++ program that defines a class called `Logger` with a private string member `name` and a private int member `messageCount`. Include a constructor that takes a name parameter and initializes `messageCount` to 0, a destructor that prints a shutdown message, a `log` method that increments `messageCount` and prints a message, and a `getCount` method. In `main`, create a `Logger`, call `log` at least twice, and print the message count. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'class' in cpp and 'Logger' in cpp, 'Define a class called Logger'\nassert 'private' in cpp, 'Use private access specifier for data members'\nassert '~Logger' in cpp, 'Define a destructor with ~Logger'\nassert 'log' in cpp.split('class')[1] if 'class' in cpp else False, 'Define a log method in the class'\nassert 'getCount' in cpp, 'Define a getCount method to return the message count'\nassert 'messageCount' in cpp or 'message_count' in cpp, 'Track the number of messages with a counter'\nassert cpp.count('.log(') >= 2 or cpp.count('->log(') >= 2, 'Call the log method at least twice in main'",
+      "difficulty": "medium",
+      "concepts_new": ["destructors", "multiple_member_functions", "state_tracking"],
+      "concepts_review": ["classes", "constructors", "private_members", "encapsulation"],
+      "hints": [
+        "Destructor syntax: ~Logger() { cout << name << \" shutting down\" << endl; }",
+        "Increment messageCount inside the log method each time it is called"
+      ]
+    }
+  ]
+}

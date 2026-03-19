@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 17,
+  "questions": [
+    {
+      "id": "h5_ch17_q01",
+      "type": "multiple_choice",
+      "question": "Which input type restricts the user to entering only a valid email address format?",
+      "choices": ["text", "email", "url", "tel"],
+      "correct": 1,
+      "explanation": "The email input type provides built-in validation that checks for a valid email address format (e.g., user@domain.com) before the form can be submitted.",
+      "concepts": ["input types", "email validation"]
+    },
+    {
+      "id": "h5_ch17_q02",
+      "type": "multiple_choice",
+      "question": "What does the 'pattern' attribute on an input element do?",
+      "choices": [
+        "Sets a placeholder text for the input",
+        "Specifies a regular expression the input value must match",
+        "Defines the input type",
+        "Sets the maximum length of the input"
+      ],
+      "correct": 1,
+      "explanation": "The 'pattern' attribute specifies a regular expression that the input's value is checked against during form validation. It works with text, search, url, tel, email, and password input types.",
+      "concepts": ["pattern attribute", "form validation", "regular expressions"]
+    },
+    {
+      "id": "h5_ch17_q03",
+      "type": "multiple_choice",
+      "question": "Which input type displays a slider control for selecting a numeric value within a range?",
+      "choices": ["number", "range", "slider", "scale"],
+      "correct": 1,
+      "explanation": "The 'range' input type renders as a slider control, allowing users to select a value between a minimum and maximum. Unlike 'number', it does not show the exact value by default.",
+      "concepts": ["range input", "input types"]
+    },
+    {
+      "id": "h5_ch17_q04",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the 'required' attribute on an input element?",
+      "choices": [
+        "It makes the input read-only",
+        "It prevents the form from being submitted if the input is empty",
+        "It automatically fills in a default value",
+        "It disables the input until another field is filled"
+      ],
+      "correct": 1,
+      "explanation": "The 'required' attribute is a boolean attribute that prevents form submission if the input field is left empty. The browser will display a validation message prompting the user to fill in the field.",
+      "concepts": ["required attribute", "form validation"]
+    },
+    {
+      "id": "h5_ch17_q05",
+      "type": "fill_in_blank",
+      "question": "The input type ___ allows users to pick a color using a color picker widget.",
+      "correct": "color",
+      "explanation": "The 'color' input type displays a color picker that lets users select a color. The value is returned as a hexadecimal color code (e.g., #ff0000).",
+      "concepts": ["color input", "input types"]
+    },
+    {
+      "id": "h5_ch17_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on an input element displays hint text that disappears when the user starts typing.",
+      "correct": "placeholder",
+      "explanation": "The 'placeholder' attribute provides a short hint describing the expected value of the input field. It is displayed inside the field when it is empty and disappears when the user begins entering text.",
+      "concepts": ["placeholder attribute", "input attributes"]
+    }
+  ]
+}

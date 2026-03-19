@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 27,
+  "challenges": [
+    {
+      "id": "h5_ch27_c01",
+      "title": "Dropdown Menu",
+      "description": "Create a select element with at least 5 option elements. One of the options should have the selected attribute to make it the default choice. Add a label for the select. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a dropdown menu with at least 5 options -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<select' in lower, 'Should contain a <select> element'\nassert '</select>' in lower, 'Should close the <select> element'\nassert lower.count('<option') >= 5, 'Should contain at least 5 <option> elements'\nassert 'selected' in lower, 'One option should have the selected attribute'\nassert '<label' in lower, 'Should contain a <label> element'",
+      "difficulty": "easy",
+      "concepts_new": ["select", "option", "selected"],
+      "concepts_review": ["label"],
+      "hints": [
+        "The <select> element contains multiple <option> elements.",
+        "Add the selected attribute to one <option> to make it the default.",
+        "Each <option> can have a value attribute different from its display text."
+      ]
+    },
+    {
+      "id": "h5_ch27_c02",
+      "title": "Grouped Select",
+      "description": "Create a select element that uses optgroup elements to group related options (e.g., group cars by manufacturer). Also create a separate input with a datalist element containing at least 3 options. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a grouped select and a datalist -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<select' in lower, 'Should contain a <select> element'\nassert '<optgroup' in lower, 'Should contain <optgroup> elements'\nassert 'label=' in lower, 'Optgroup should have a label attribute'\nassert lower.count('<optgroup') >= 2, 'Should have at least 2 option groups'\nassert '</select>' in lower, 'Should close the <select> element'\nassert '<datalist' in lower, 'Should contain a <datalist> element'\nassert '</datalist>' in lower, 'Should close the <datalist> element'\nassert '<input' in lower, 'Should contain an <input> element for the datalist'\nassert 'list=' in lower, 'Input should have a list attribute referencing the datalist'",
+      "difficulty": "medium",
+      "concepts_new": ["optgroup", "datalist"],
+      "concepts_review": ["select", "option", "label"],
+      "hints": [
+        "The <optgroup> element uses a label attribute to name the group.",
+        "A <datalist> is linked to an <input> via the input's list attribute matching the datalist's id.",
+        "The <datalist> contains <option> elements just like <select>."
+      ]
+    }
+  ]
+}

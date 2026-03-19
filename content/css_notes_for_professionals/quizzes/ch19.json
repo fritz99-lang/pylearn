@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 19,
+  "questions": [
+    {
+      "id": "css_ch19_q01",
+      "type": "multiple_choice",
+      "question": "What is the valid range of values for the CSS opacity property?",
+      "choices": [
+        "0 to 100",
+        "0 to 1",
+        "0% to 100%",
+        "-1 to 1"
+      ],
+      "correct": 1,
+      "explanation": "The opacity property accepts values from 0 (fully transparent) to 1 (fully opaque). Values outside this range are clamped.",
+      "concepts": ["opacity", "opacity-values"]
+    },
+    {
+      "id": "css_ch19_q02",
+      "type": "multiple_choice",
+      "question": "What is a key difference between using opacity: 0.5 and rgba() with alpha 0.5 on a background?",
+      "choices": [
+        "There is no difference",
+        "opacity affects the element and all its children; rgba only affects the specific property",
+        "rgba affects children but opacity does not",
+        "opacity only works on background colors"
+      ],
+      "correct": 1,
+      "explanation": "The opacity property makes the entire element and all its children semi-transparent, while using rgba() on a background only makes that background semi-transparent without affecting child elements.",
+      "concepts": ["opacity", "rgba", "inheritance"]
+    },
+    {
+      "id": "css_ch19_q03",
+      "type": "multiple_choice",
+      "question": "What side effect does setting opacity to a value less than 1 have on an element?",
+      "choices": [
+        "It removes the element from the document flow",
+        "It creates a new stacking context",
+        "It disables pointer events",
+        "It forces the element to be inline"
+      ],
+      "correct": 1,
+      "explanation": "Setting opacity to any value less than 1 creates a new stacking context for the element, which can affect how z-index works for its children.",
+      "concepts": ["opacity", "stacking-context"]
+    },
+    {
+      "id": "css_ch19_q04",
+      "type": "multiple_choice",
+      "question": "If a parent element has opacity: 0.5 and a child has opacity: 1, what is the child's effective opacity?",
+      "choices": [
+        "1 (the child overrides the parent)",
+        "0.5 (the child's opacity is multiplied by the parent's)",
+        "0.75 (the values are averaged)",
+        "0 (they cancel each other out)"
+      ],
+      "correct": 1,
+      "explanation": "Opacity is multiplicative. A child with opacity: 1 inside a parent with opacity: 0.5 results in an effective opacity of 0.5 * 1 = 0.5. You cannot make a child more opaque than its parent.",
+      "concepts": ["opacity", "inheritance"]
+    },
+    {
+      "id": "css_ch19_q05",
+      "type": "fill_in_blank",
+      "question": "The CSS ___ property controls the transparency of an entire element and its children.",
+      "correct": "opacity",
+      "explanation": "The opacity property sets the transparency level for the entire element including all child content, from 0 (fully transparent) to 1 (fully opaque).",
+      "concepts": ["opacity"]
+    },
+    {
+      "id": "css_ch19_q06",
+      "type": "fill_in_blank",
+      "question": "To make only a background semi-transparent without affecting child elements, use the ___ color function instead of the opacity property.",
+      "correct": "rgba",
+      "explanation": "Using rgba() on a background-color allows you to set transparency on just the background, leaving child elements at full opacity.",
+      "concepts": ["rgba", "opacity"]
+    }
+  ]
+}

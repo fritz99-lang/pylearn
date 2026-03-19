@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 18,
+  "questions": [
+    {
+      "id": "pp_ch18_q01",
+      "type": "multiple_choice",
+      "question": "What is the key difference between the shelve module and raw dbm files for persistent storage?",
+      "choices": [
+        "shelve can only store strings, while dbm stores any object",
+        "shelve automatically pickles values so you can store arbitrary Python objects, while dbm stores only strings",
+        "dbm supports concurrent writes but shelve does not",
+        "shelve requires a SQL database backend while dbm uses flat files"
+      ],
+      "correct": 1,
+      "explanation": "shelve builds on top of dbm by using pickle to serialize values. With dbm, both keys and values must be strings (or bytes). shelve keeps string keys but lets you store any picklable Python object as a value, making it a simple persistent dictionary for complex data.",
+      "concepts": ["shelve_module", "dbm_files"]
+    },
+    {
+      "id": "pp_ch18_q02",
+      "type": "multiple_choice",
+      "question": "When using sqlite3, what must you call after INSERT, UPDATE, or DELETE statements to make changes permanent?",
+      "choices": [
+        "connection.save()",
+        "cursor.flush()",
+        "connection.commit()",
+        "cursor.persist()"
+      ],
+      "correct": 2,
+      "explanation": "SQLite operates in a transactional mode by default. Changes from INSERT, UPDATE, and DELETE are held in a transaction until connection.commit() is called. Without commit(), changes are lost when the connection closes. You can also call connection.rollback() to discard uncommitted changes.",
+      "concepts": ["sqlite3_module"]
+    },
+    {
+      "id": "pp_ch18_q03",
+      "type": "multiple_choice",
+      "question": "Which pickle protocol consideration is important when sharing pickled data between different Python versions?",
+      "choices": [
+        "All pickle protocols are backwards compatible across all Python versions",
+        "Higher protocol numbers offer better performance but may not be readable by older Python versions",
+        "Pickle protocol 0 is binary and most efficient, while higher protocols are text-based",
+        "The pickle protocol is automatically negotiated between Python versions at runtime"
+      ],
+      "correct": 1,
+      "explanation": "Each Python release may add new pickle protocols with better performance and support for new types. Protocol 0 is ASCII and most compatible; higher protocols (up to 5 in Python 3.8+) are binary and faster but require the same or newer Python version to unpickle. Use protocol=2 for broad compatibility.",
+      "concepts": ["pickle_serialization"]
+    },
+    {
+      "id": "pp_ch18_q04",
+      "type": "multiple_choice",
+      "question": "What is an ORM (Object-Relational Mapper) and why might you use one like SQLAlchemy instead of raw SQL?",
+      "choices": [
+        "An ORM converts Python objects to XML for database storage, avoiding SQL entirely",
+        "An ORM maps Python classes to database tables so you work with objects instead of writing SQL strings, providing abstraction and portability",
+        "An ORM is a type of database that stores Python objects directly without any relational tables",
+        "An ORM only works with NoSQL databases and cannot be used with SQLite"
+      ],
+      "correct": 1,
+      "explanation": "ORMs like SQLAlchemy map Python classes to database tables, letting you create, query, and modify records as Python objects. This provides database portability (switch backends without rewriting queries), reduces SQL injection risks, and integrates naturally with Python code. The trade-off is added complexity and potential performance overhead.",
+      "concepts": ["orm_concepts"]
+    },
+    {
+      "id": "pp_ch18_q05",
+      "type": "fill_in_blank",
+      "question": "To create a table in SQLite using Python, you execute a SQL statement that begins with CREATE ________ followed by the table name and column definitions.",
+      "correct": "TABLE",
+      "explanation": "The SQL CREATE TABLE statement defines a new table with column names and types. In Python's sqlite3 module, you pass this as a string to cursor.execute(). Example: cursor.execute('CREATE TABLE people (name TEXT, age INTEGER)'). Use 'IF NOT EXISTS' to avoid errors on repeated runs.",
+      "concepts": ["sql_basics"]
+    },
+    {
+      "id": "pp_ch18_q06",
+      "type": "fill_in_blank",
+      "question": "To serialize a Python object to a byte string without writing to a file, you call pickle.________( object ).",
+      "correct": "dumps",
+      "explanation": "pickle.dumps() serializes an object to a bytes object in memory, while pickle.dump() writes to a file object. The corresponding deserialization functions are pickle.loads() (from bytes) and pickle.load() (from file). The 's' suffix stands for 'string' (bytes string).",
+      "concepts": ["pickle_serialization"]
+    }
+  ]
+}

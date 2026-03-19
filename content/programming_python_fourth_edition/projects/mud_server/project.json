@@ -1,0 +1,6 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "title": "Build a MUD (Multi-User Dungeon)",
+  "description": "Build a Multi-User Dungeon \u2014 a text-based online world where multiple players connect simultaneously via TCP, explore rooms, chat, trade items, and fight monsters. Combines networking, threading, databases, OOP, and text parsing into a complete online game.",
+  "final_description": "A complete MUD with a TCP server handling concurrent players, a rich room/zone system, NPC scripting, real-time chat channels, item trading between players, monster spawning and combat, SQLite character persistence, an admin command system, and a telnet-compatible text protocol \u2014 built across 10 chapters."
+}

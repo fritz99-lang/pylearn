@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 4,
+  "questions": [
+    {
+      "id": "pp_ch04_q01",
+      "type": "multiple_choice",
+      "question": "What is the type and content of sys.argv[0]?",
+      "choices": [
+        "An integer representing the process ID",
+        "A string containing the name of the script being executed",
+        "A list of all command-line flags",
+        "A string containing the Python interpreter path"
+      ],
+      "correct": 1,
+      "explanation": "sys.argv[0] is always a string containing the script name (or '-c' if running with python -c, or '' if running interactively). The actual arguments start at sys.argv[1].",
+      "concepts": ["sys_argv", "command_line_arguments"]
+    },
+    {
+      "id": "pp_ch04_q02",
+      "type": "multiple_choice",
+      "question": "How do you access environment variables in Python?",
+      "choices": [
+        "sys.env['VAR']",
+        "os.environ['VAR']",
+        "os.getenv['VAR']",
+        "sys.environ['VAR']"
+      ],
+      "correct": 1,
+      "explanation": "os.environ is a mapping object representing the process environment. You access variables with os.environ['VAR'] (raises KeyError if missing) or os.environ.get('VAR', default).",
+      "concepts": ["os_environ", "environment_variables"]
+    },
+    {
+      "id": "pp_ch04_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following correctly redirects stdout to a file object in Python?",
+      "choices": [
+        "os.stdout = open('log.txt', 'w')",
+        "sys.stdout = open('log.txt', 'w')",
+        "sys.redirect('log.txt')",
+        "print.output = 'log.txt'"
+      ],
+      "correct": 1,
+      "explanation": "sys.stdout can be reassigned to any object with a write() method. Assigning it to an open file object causes print() and other stdout writes to go to that file.",
+      "concepts": ["standard_streams", "stdout_redirect"]
+    },
+    {
+      "id": "pp_ch04_q04",
+      "type": "multiple_choice",
+      "question": "What are the three standard streams available via the sys module?",
+      "choices": [
+        "sys.input, sys.output, sys.error",
+        "sys.stdin, sys.stdout, sys.stderr",
+        "sys.in, sys.out, sys.err",
+        "sys.read, sys.write, sys.log"
+      ],
+      "correct": 1,
+      "explanation": "Python exposes the three standard I/O streams as sys.stdin (input), sys.stdout (output), and sys.stderr (error output). These are file-like objects that can be reassigned.",
+      "concepts": ["standard_streams", "sys_module"]
+    },
+    {
+      "id": "pp_ch04_q05",
+      "type": "fill_in_blank",
+      "question": "The os.___ dictionary provides a mapping of the current process's environment variables.",
+      "correct": "environ",
+      "explanation": "os.environ is a mapping object where keys and values are strings representing the process environment. Changes to it affect the current process and any child processes spawned afterward.",
+      "concepts": ["os_environ", "environment_variables"]
+    },
+    {
+      "id": "pp_ch04_q06",
+      "type": "fill_in_blank",
+      "question": "To read from standard input in Python, you call sys.___.read() or use the built-in input() function.",
+      "correct": "stdin",
+      "explanation": "sys.stdin is the standard input stream, a file-like object. You can call sys.stdin.read() for all input, sys.stdin.readline() for one line, or use the built-in input() function for prompted input.",
+      "concepts": ["standard_streams", "stdin"]
+    }
+  ]
+}

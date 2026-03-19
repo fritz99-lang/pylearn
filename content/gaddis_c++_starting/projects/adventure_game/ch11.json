@@ -1,0 +1,24 @@
+{
+  "step_id": "cpp_adv_ch11",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 11,
+  "title": "Game World — Structs",
+  "description": "Organize the game data using structs. Define a Room struct with fields: name (string), description (string), and exits for north/south/east/west (int index, -1 if no exit). Define an Item struct with fields: name, type (weapon/potion/key), and value. Define a Player struct with fields: name, health, gold, attackPower, currentRoom (int), and an items array. Create an array of Room structs to build a small map (at least 4 rooms). Use dot notation to access struct members throughout the game. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_adv_ch10",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\n// Define your structs here:\n\n// struct Item {\n//     string name;\n//     string type;   // \"weapon\", \"potion\", \"key\"\n//     int value;\n// };\n\n// struct Room {\n//     string name;\n//     string description;\n//     int north, south, east, west;  // Room indices, -1 = no exit\n// };\n\n// struct Player {\n//     string name;\n//     int health;\n//     int gold;\n//     int attackPower;\n//     int currentRoom;\n//     Item inventory[20];\n//     int itemCount;\n// };\n\n// Function prototypes\nvoid displayRoom(Room room);\nint searchItem(Item items[], int size, string target);\nvoid showInventory(Player player);\nvoid saveGame(Player player, int turns);\nvoid parseCommand(string command, string &verb, string &object);\n\nint main() {\n    cout << \"===== TEXT ADVENTURE GAME =====\" << endl;\n\n    // Create the room map (array of Room structs)\n    Room rooms[10];\n    // Room 0: Forest Clearing\n    // Room 1: Dark Cave\n    // Room 2: Village Square\n    // Room 3: Mountain Path\n    // Set exits: rooms[0].north = 1; etc.\n\n    // Create the player using Player struct\n    Player player;\n    cout << \"Enter your name: \";\n    getline(cin, player.name);\n    player.health = 100;\n    player.gold = 50;\n    player.attackPower = 15;\n    player.currentRoom = 0;\n    player.itemCount = 0;\n\n    bool playing = true;\n    int turn = 0;\n\n    while (playing && player.health > 0) {\n        turn++;\n        displayRoom(rooms[player.currentRoom]);\n\n        cout << \"> \";\n        string command;\n        getline(cin, command);\n\n        string verb, object;\n        parseCommand(command, verb, object);\n\n        if (verb == \"go\") {\n            // Use room exits to move player\n        } else if (verb == \"quit\") {\n            playing = false;\n        }\n    }\n\n    saveGame(player, turn);\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert cpp.count('struct') >= 3, f'Define at least 3 structs (Room, Item, Player) — found {cpp.count(\"struct\")}'\nassert 'Room' in cpp, 'Define a Room struct'\nassert 'Item' in cpp, 'Define an Item struct'\nassert 'Player' in cpp, 'Define a Player struct'\nimport re\ndot_access = re.findall(r'\\w+\\.\\w+', cpp)\nassert len(dot_access) >= 5, 'Use dot notation to access struct members (e.g., player.health, rooms[0].name)'\nassert 'north' in cpp or 'exits' in cpp, 'Room struct should have exit directions (north, south, etc.)'\nassert 'name' in cpp and 'health' in cpp and 'gold' in cpp, 'Player struct should have name, health, and gold fields'",
+  "acceptance_criteria": [
+    "Room struct defined with name, description, and exit directions",
+    "Item struct defined with name, type, and value",
+    "Player struct defined with name, health, gold, attackPower, currentRoom, and inventory",
+    "An array of Room structs creates a map of at least 4 rooms",
+    "Rooms are connected via exit indices (e.g., rooms[0].north = 1)",
+    "Dot notation used throughout to access struct members"
+  ],
+  "hints": [
+    "Use -1 for exits that don't exist: rooms[0].west = -1; means no west exit",
+    "Access nested data: rooms[player.currentRoom].name gives the current room's name",
+    "When moving: if (rooms[player.currentRoom].north != -1) player.currentRoom = rooms[player.currentRoom].north;",
+    "Pass structs to functions: void displayRoom(Room room) { cout << room.name << endl; }"
+  ]
+}

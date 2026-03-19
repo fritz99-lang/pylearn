@@ -90,21 +90,65 @@ class ContentLoader:
 
     # --- Project ---
 
-    def load_project_meta(self, book_id: str) -> ProjectMeta | None:
-        """Load project metadata (title, description)."""
-        path = self._content_dir / book_id / "project" / "project.json"
-        if not path.exists():
-            return None
+    def _project_dir(self, book_id: str, project_id: str | None = None) -> Path:
+        """Return the directory for a project.
+
+        Supports two layouts:
+          - Single project: content/{book_id}/project/
+          - Multiple projects: content/{book_id}/projects/{project_id}/
+        When project_id is None, falls back to the single-project directory.
+        """
+        if project_id:
+            return self._content_dir / book_id / "projects" / project_id
+        return self._content_dir / book_id / "project"
+
+    def list_projects(self, book_id: str) -> list[ProjectMeta]:
+        """Return all available projects for a book.
+
+        Checks both content/{book_id}/project/ and content/{book_id}/projects/*/.
+        """
+        projects: list[ProjectMeta] = []
+
+        # Single-project directory
+        single = self._content_dir / book_id / "project" / "project.json"
+        if single.exists():
+            meta = self._load_meta_from(single)
+            if meta:
+                projects.append(meta)
+
+        # Multi-project directory
+        multi_dir = self._content_dir / book_id / "projects"
+        if multi_dir.exists():
+            for sub in sorted(multi_dir.iterdir()):
+                if sub.is_dir() and (sub / "project.json").exists():
+                    meta = self._load_meta_from(sub / "project.json")
+                    if meta:
+                        projects.append(meta)
+
+        return projects
+
+    def _load_meta_from(self, path: Path) -> ProjectMeta | None:
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
-            return ProjectMeta.from_dict(data)
+            meta = ProjectMeta.from_dict(data)
+            # Store the project_id for multi-project lookup
+            if "projects" in path.parts:
+                meta.project_id = path.parent.name
+            return meta
         except (json.JSONDecodeError, ValueError) as e:
-            logger.error("Failed to load project meta %s: %s", book_id, e)
+            logger.error("Failed to load project meta %s: %s", path, e)
             return None
 
-    def load_project_step(self, book_id: str, chapter_num: int) -> ProjectStep | None:
+    def load_project_meta(self, book_id: str, project_id: str | None = None) -> ProjectMeta | None:
+        """Load project metadata (title, description)."""
+        path = self._project_dir(book_id, project_id) / "project.json"
+        if not path.exists():
+            return None
+        return self._load_meta_from(path)
+
+    def load_project_step(self, book_id: str, chapter_num: int, project_id: str | None = None) -> ProjectStep | None:
         """Load a project step for a specific chapter."""
-        path = self._content_dir / book_id / "project" / f"ch{chapter_num:02d}.json"
+        path = self._project_dir(book_id, project_id) / f"ch{chapter_num:02d}.json"
         if not path.exists():
             return None
         try:
@@ -114,9 +158,9 @@ class ContentLoader:
             logger.error("Failed to load project step %s ch%d: %s", book_id, chapter_num, e)
             return None
 
-    def list_project_steps(self, book_id: str) -> list[int]:
+    def list_project_steps(self, book_id: str, project_id: str | None = None) -> list[int]:
         """Return sorted chapter numbers that have project steps."""
-        proj_dir = self._content_dir / book_id / "project"
+        proj_dir = self._project_dir(book_id, project_id)
         if not proj_dir.exists():
             return []
         chapters = []
@@ -128,8 +172,13 @@ class ContentLoader:
         return sorted(chapters)
 
     def has_project(self, book_id: str) -> bool:
-        """Check if a project exists for this book."""
-        return (self._content_dir / book_id / "project" / "project.json").exists()
+        """Check if at least one project exists for this book."""
+        if (self._content_dir / book_id / "project" / "project.json").exists():
+            return True
+        multi_dir = self._content_dir / book_id / "projects"
+        if multi_dir.exists():
+            return any((sub / "project.json").exists() for sub in multi_dir.iterdir() if sub.is_dir())
+        return False
 
     # --- Paths ---
 

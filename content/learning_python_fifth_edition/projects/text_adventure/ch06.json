@@ -1,0 +1,23 @@
+{
+  "step_id": "lp_adv_ch06",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 6,
+  "title": "Item System — Dynamic Objects",
+  "description": "Create a rich item system using dictionaries. Each item should be a dict with 'name', 'type', and 'value' keys. The 'type' field should be one of 'weapon', 'potion', or 'key'. Create at least 4 items of mixed types in a list called 'game_items'. Also create an 'inventory' list and write add_to_inventory(inventory, item) and remove_from_inventory(inventory, item_name) functions.",
+  "builds_on": "lp_adv_ch04",
+  "starter_code": "# Text Adventure — Step 3: Item System\n# Use dicts to represent items with different types.\n\n# Game world from previous steps\nrooms = {\n    'entrance': 'You stand at the entrance of a dark cave.',\n    'hallway': 'A long hallway with torches on the walls.',\n    'treasure_room': 'A glittering room full of gold and jewels.',\n}\n\nplayer_health = 100\nplayer_attack = 15\nplayer_defense = 5\nmax_health = 100\n\ndef calculate_damage(attack, defense):\n    return max(0, attack - defense)\n\ndef heal_player(current_health, heal_amount, max_health):\n    return min(current_health + heal_amount, max_health)\n\n# Create game items — each is a dict with 'name', 'type', and 'value'\n# Types: 'weapon', 'potion', 'key'\n# Value meaning: weapon=attack bonus, potion=heal amount, key=door it opens\ngame_items = [\n    # Add at least 4 items of mixed types\n]\n\n# Player inventory (list of item dicts)\ninventory = []\n\ndef add_to_inventory(inventory, item):\n    \"\"\"Add an item dict to the inventory list. Return True if added.\"\"\"\n    # Your code here\n    pass\n\ndef remove_from_inventory(inventory, item_name):\n    \"\"\"Remove item by name from inventory. Return the removed item, or None.\"\"\"\n    # Your code here\n    pass\n\n# Test it\nfor item in game_items:\n    print(f\"  {item['name']} ({item['type']}): {item['value']}\")\n",
+  "test_code": "assert isinstance(game_items, list), 'game_items should be a list'\nassert len(game_items) >= 4, f'Need at least 4 items, got {len(game_items)}'\nassert all(isinstance(i, dict) for i in game_items), 'Each item should be a dict'\nassert all('name' in i and 'type' in i and 'value' in i for i in game_items), \"Each item needs 'name', 'type', and 'value' keys\"\nitem_types = {i['type'] for i in game_items}\nassert len(item_types) >= 2, f'Need at least 2 different item types, got {item_types}'\nassert isinstance(inventory, list), 'inventory should be a list'\nassert callable(add_to_inventory), 'add_to_inventory should be a function'\nassert callable(remove_from_inventory), 'remove_from_inventory should be a function'\ntest_inv = []\ntest_item = {'name': 'test_sword', 'type': 'weapon', 'value': 10}\nadd_to_inventory(test_inv, test_item)\nassert len(test_inv) == 1, f'Inventory should have 1 item after add, got {len(test_inv)}'\nassert test_inv[0]['name'] == 'test_sword', 'Added item should be in inventory'\nremoved = remove_from_inventory(test_inv, 'test_sword')\nassert len(test_inv) == 0, 'Inventory should be empty after removing the only item'\nassert removed is not None, 'remove_from_inventory should return the removed item'\nassert removed['name'] == 'test_sword', 'Returned item should match removed item'\nnot_found = remove_from_inventory(test_inv, 'nonexistent')\nassert not_found is None, 'Removing nonexistent item should return None'",
+  "acceptance_criteria": [
+    "game_items is a list of at least 4 item dicts",
+    "Each item has 'name', 'type', and 'value' keys",
+    "At least 2 different item types are present",
+    "add_to_inventory() adds an item dict to the inventory list",
+    "remove_from_inventory() removes by name and returns the item, or None"
+  ],
+  "hints": [
+    "A weapon item: {'name': 'iron_sword', 'type': 'weapon', 'value': 10}",
+    "A potion item: {'name': 'health_potion', 'type': 'potion', 'value': 25}",
+    "For remove: loop through inventory, check item['name'], use list.pop() or list.remove()",
+    "Return None if the item isn't found — don't raise an error"
+  ]
+}

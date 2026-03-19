@@ -1,0 +1,21 @@
+{
+  "step_id": "h5_proj_ch03",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 3,
+  "title": "Section Structure \u2014 Adding Headings",
+  "description": "Organize your portfolio into sections using headings. Keep your h1 for your name, then add h2 headings for 'About Me', 'My Projects', and 'Contact'. Add a short paragraph under each h2 section to describe what that section will contain.",
+  "builds_on": "h5_proj_ch01",
+  "starter_code": "# Portfolio Website \u2014 Step 2: Section Headings\n# Add h2 headings for About Me, My Projects, and Contact.\n# Add a paragraph under each h2.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <h1>Your Name</h1>\n    <p>Welcome to my portfolio!</p>\n\n    <!-- Add h2 for About Me with a paragraph -->\n\n    <!-- Add h2 for My Projects with a paragraph -->\n\n    <!-- Add h2 for Contact with a paragraph -->\n\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<h1>' in html.lower() and '</h1>' in html.lower(), 'Must include an <h1> heading'\nassert html.lower().count('<h2>') >= 3, f'Need at least 3 <h2> headings, found {html.lower().count(\"<h2>\")}'\nassert 'about' in html.lower(), 'Must include an About Me section'\nassert 'project' in html.lower(), 'Must include a Projects section'\nassert 'contact' in html.lower(), 'Must include a Contact section'\nassert html.lower().count('<p>') >= 4, f'Need at least 4 paragraphs (1 welcome + 3 section descriptions), found {html.lower().count(\"<p>\")}'",
+  "acceptance_criteria": [
+    "h1 heading is present with your name",
+    "At least 3 h2 headings for About Me, My Projects, and Contact",
+    "Each h2 section has a descriptive paragraph below it",
+    "Heading hierarchy is correct (h1 then h2s)"
+  ],
+  "hints": [
+    "Use <h2>About Me</h2> for section headings",
+    "Put a <p> paragraph after each <h2> to describe the section",
+    "The h1 should stay at the top for your name"
+  ]
+}

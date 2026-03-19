@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 11,
+  "challenges": [
+    {
+      "id": "css_ch11_c01",
+      "title": "Setting an Outline",
+      "description": "Write CSS for a `.highlight` selector that sets an outline using the shorthand `outline` property. Use a 2px solid red outline. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.highlight' in css.lower(), 'Should target the .highlight selector'\nassert 'outline' in css.lower(), 'Should use the outline property'\nassert '2px' in css.lower(), 'Should include 2px width'\nassert 'solid' in css.lower(), 'Should use solid outline style'\nassert 'red' in css.lower(), 'Should use red color'",
+      "difficulty": "easy",
+      "concepts_new": ["outline-shorthand"],
+      "concepts_review": [],
+      "hints": [
+        "The outline shorthand works like border: width style color.",
+        "Use: outline: 2px solid red;"
+      ]
+    },
+    {
+      "id": "css_ch11_c02",
+      "title": "Outline Offset and Comparison",
+      "description": "Write CSS for a `.card` selector that sets an `outline` of 3px dashed blue with an `outline-offset` of 5px. Also set a `border` of 1px solid black so both are present on the same element. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.card' in css.lower(), 'Should target the .card selector'\nassert 'outline' in css.lower(), 'Should use the outline property'\nassert 'outline-offset' in css.lower(), 'Should use outline-offset'\nassert '5px' in css.lower(), 'Should set outline-offset to 5px'\nassert 'dashed' in css.lower(), 'Should use dashed outline style'\nassert 'border' in css.lower(), 'Should also set a border'\nassert '1px' in css.lower(), 'Should use 1px for the border width'",
+      "difficulty": "medium",
+      "concepts_new": ["outline-offset", "outline-vs-border"],
+      "concepts_review": ["outline-shorthand", "border-shorthand"],
+      "hints": [
+        "outline-offset pushes the outline away from the element's edge.",
+        "Unlike borders, outlines do not take up space in the layout.",
+        "You can have both a border and an outline on the same element."
+      ]
+    }
+  ]
+}

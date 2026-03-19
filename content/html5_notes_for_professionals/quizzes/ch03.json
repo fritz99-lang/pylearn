@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 3,
+  "questions": [
+    {
+      "id": "h5_ch03_q01",
+      "type": "multiple_choice",
+      "question": "How many levels of headings does HTML provide?",
+      "choices": ["4", "5", "6", "8"],
+      "correct": 2,
+      "explanation": "HTML provides six heading levels, from <h1> (most important) to <h6> (least important). These create a hierarchical structure for document content.",
+      "concepts": ["headings", "heading levels"]
+    },
+    {
+      "id": "h5_ch03_q02",
+      "type": "multiple_choice",
+      "question": "Which heading tag represents the highest level of importance?",
+      "choices": ["<h6>", "<h1>", "<heading>", "<h0>"],
+      "correct": 1,
+      "explanation": "The <h1> tag represents the most important heading. Heading importance decreases from <h1> to <h6>, with <h1> typically used for the main page title.",
+      "concepts": ["h1 tag", "heading hierarchy"]
+    },
+    {
+      "id": "h5_ch03_q03",
+      "type": "multiple_choice",
+      "question": "Why is it considered best practice to have only one <h1> per page?",
+      "choices": ["Browsers will not render more than one <h1>", "It improves SEO and provides a clear document structure", "The HTML specification forbids multiple <h1> tags", "It reduces page load time"],
+      "correct": 1,
+      "explanation": "Using a single <h1> per page helps search engines understand the main topic. It provides a clear hierarchy and improves accessibility for screen readers.",
+      "concepts": ["SEO", "heading best practices"]
+    },
+    {
+      "id": "h5_ch03_q04",
+      "type": "multiple_choice",
+      "question": "What is the correct practice when using heading levels?",
+      "choices": ["Always start with <h3>", "Skip levels freely for visual effect", "Use headings in sequential order without skipping levels", "Use only <h1> and <h2>"],
+      "correct": 2,
+      "explanation": "Headings should follow a logical hierarchy without skipping levels (e.g., h1 then h2, not h1 then h4). This ensures proper document structure and accessibility.",
+      "concepts": ["heading hierarchy", "accessibility"]
+    },
+    {
+      "id": "h5_ch03_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ tag is the smallest and least important heading level in HTML.",
+      "correct": "<h6>",
+      "explanation": "The <h6> tag is the lowest-level heading in HTML. It renders in the smallest default font size among headings and represents the least significant section heading.",
+      "concepts": ["h6 tag", "heading levels"]
+    },
+    {
+      "id": "h5_ch03_q06",
+      "type": "fill_in_blank",
+      "question": "Heading tags are important for ___ because screen readers use them to navigate page structure.",
+      "correct": "accessibility",
+      "explanation": "Screen readers rely on heading tags to build a navigable outline of the page. Users can jump between headings to quickly find the content they need.",
+      "concepts": ["accessibility", "semantic HTML"]
+    }
+  ]
+}

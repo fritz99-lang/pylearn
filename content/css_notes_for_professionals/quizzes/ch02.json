@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 2,
+  "questions": [
+    {
+      "id": "css_ch02_q01",
+      "type": "multiple_choice",
+      "question": "In the CSS rule `h1 { color: blue; }`, what is `h1` called?",
+      "choices": [
+        "A declaration",
+        "A property",
+        "A selector",
+        "A value"
+      ],
+      "correct": 2,
+      "explanation": "The selector is the part of a CSS rule that specifies which HTML elements the styles apply to. Here, 'h1' selects all <h1> elements.",
+      "concepts": ["selectors", "CSS rule structure"]
+    },
+    {
+      "id": "css_ch02_q02",
+      "type": "multiple_choice",
+      "question": "In the declaration `font-size: 16px;`, what is `16px`?",
+      "choices": [
+        "The property",
+        "The selector",
+        "The declaration",
+        "The value"
+      ],
+      "correct": 3,
+      "explanation": "A declaration consists of a property and a value separated by a colon. In 'font-size: 16px;', font-size is the property and 16px is the value.",
+      "concepts": ["values", "declarations"]
+    },
+    {
+      "id": "css_ch02_q03",
+      "type": "multiple_choice",
+      "question": "What character separates a CSS property from its value?",
+      "choices": [
+        "Semicolon (;)",
+        "Colon (:)",
+        "Equals sign (=)",
+        "Dash (-)"
+      ],
+      "correct": 1,
+      "explanation": "A colon separates the property name from its value in a CSS declaration, e.g., color: red;",
+      "concepts": ["properties", "values", "syntax"]
+    },
+    {
+      "id": "css_ch02_q04",
+      "type": "multiple_choice",
+      "question": "Which character must end each CSS declaration?",
+      "choices": [
+        "Colon (:)",
+        "Period (.)",
+        "Semicolon (;)",
+        "Comma (,)"
+      ],
+      "correct": 2,
+      "explanation": "Each CSS declaration must end with a semicolon to separate it from the next declaration in the rule block.",
+      "concepts": ["semicolons", "declarations"]
+    },
+    {
+      "id": "css_ch02_q05",
+      "type": "fill_in_blank",
+      "question": "CSS declarations are grouped inside ___ braces, also known as curly braces.",
+      "correct": "curly",
+      "explanation": "The declaration block of a CSS rule is enclosed in curly braces { }, e.g., p { color: red; margin: 10px; }.",
+      "concepts": ["curly braces", "CSS rule structure"]
+    },
+    {
+      "id": "css_ch02_q06",
+      "type": "fill_in_blank",
+      "question": "A CSS ___ consists of a property and a value separated by a colon.",
+      "correct": "declaration",
+      "explanation": "A declaration is a single property-value pair like 'color: red;' within a CSS rule block.",
+      "concepts": ["declarations", "CSS rule structure"]
+    }
+  ]
+}

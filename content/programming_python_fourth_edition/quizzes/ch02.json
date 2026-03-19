@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 2,
+  "questions": [
+    {
+      "id": "pp_ch02_q01",
+      "type": "multiple_choice",
+      "question": "What is the primary purpose of Chapter 2's 'sneak preview' in Programming Python?",
+      "choices": [
+        "To teach Python syntax from scratch",
+        "To demonstrate the breadth of application domains Python can address",
+        "To provide a detailed tutorial on object-oriented programming",
+        "To compare Python performance against C++"
+      ],
+      "correct": 1,
+      "explanation": "Chapter 2 provides a quick tour showing Python applied to system tools, GUIs, databases, and the web, motivating the book's scope rather than teaching syntax basics.",
+      "concepts": ["application_domains"]
+    },
+    {
+      "id": "pp_ch02_q02",
+      "type": "multiple_choice",
+      "question": "In the sneak preview, which storage mechanism is demonstrated as a way to persist Python objects between program runs?",
+      "choices": [
+        "CSV files only",
+        "shelve (dbm-based object storage)",
+        "Redis cache",
+        "XML serialization"
+      ],
+      "correct": 1,
+      "explanation": "The sneak preview demonstrates shelve, which provides a dictionary-like interface backed by dbm files, allowing Python objects to be stored and retrieved by key across program runs.",
+      "concepts": ["shelve", "persistence"]
+    },
+    {
+      "id": "pp_ch02_q03",
+      "type": "multiple_choice",
+      "question": "Which GUI toolkit does 'Programming Python' primarily use for building desktop interfaces?",
+      "choices": [
+        "PyQt",
+        "wxPython",
+        "tkinter",
+        "Kivy"
+      ],
+      "correct": 2,
+      "explanation": "The book primarily uses tkinter, Python's standard library GUI toolkit that wraps Tcl/Tk, because it ships with Python and requires no extra installation.",
+      "concepts": ["tkinter", "gui"]
+    },
+    {
+      "id": "pp_ch02_q04",
+      "type": "multiple_choice",
+      "question": "In the preview's progression from script to web application, what does the book use to serve the database records over HTTP?",
+      "choices": [
+        "Django framework",
+        "Flask framework",
+        "CGI scripts with Python's http.server",
+        "A raw socket server"
+      ],
+      "correct": 2,
+      "explanation": "The sneak preview demonstrates CGI scripts running under Python's built-in HTTP server to serve database records as web pages, showing how Python bridges system tools and the web.",
+      "concepts": ["cgi", "web_serving"]
+    },
+    {
+      "id": "pp_ch02_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ module provides a persistent dictionary-like object store backed by dbm files, used in the Chapter 2 preview to save records between runs.",
+      "correct": "shelve",
+      "explanation": "The shelve module wraps dbm databases to let you store and retrieve Python objects by string keys, functioning like a persistent dictionary.",
+      "concepts": ["shelve", "persistence"]
+    },
+    {
+      "id": "pp_ch02_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ module is Python's standard library GUI toolkit, used throughout Programming Python for building desktop interfaces.",
+      "correct": "tkinter",
+      "explanation": "tkinter ships with Python's standard library and wraps the Tcl/Tk GUI toolkit, making it the default choice for desktop GUI development in the book.",
+      "concepts": ["tkinter", "gui"]
+    }
+  ]
+}

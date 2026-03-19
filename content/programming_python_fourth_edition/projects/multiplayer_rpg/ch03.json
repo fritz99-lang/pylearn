@@ -1,0 +1,22 @@
+{
+  "step_id": "pp_rpg_ch03",
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 3,
+  "title": "World Foundation \u2014 Game Configuration",
+  "description": "Start the RPG by creating a GameConfig class that loads settings from a config dictionary (world_name, max_players, tick_rate, data_dir). Use os.makedirs to ensure data_dir exists. Then create a Room dataclass with name, description, an exits dict mapping directions to room names, and an items list.",
+  "builds_on": "",
+  "starter_code": "# Multiplayer Text RPG \u2014 Step 1: World Foundation\n# Create GameConfig and Room classes to define the game world's structure.\n\nimport os\nfrom dataclasses import dataclass, field\n\n\nclass GameConfig:\n    \"\"\"Load and access game configuration from a dict.\n\n    Required keys: world_name, max_players, tick_rate, data_dir.\n    get(key) returns the value for that key.\n    The constructor should create data_dir if it doesn't exist.\n    \"\"\"\n    def __init__(self, config: dict):\n        # Store the config and ensure data_dir exists\n        # Your code here\n        pass\n\n    def get(self, key: str):\n        \"\"\"Return the config value for the given key.\"\"\"\n        # Your code here\n        pass\n\n\n@dataclass\nclass Room:\n    \"\"\"A single room in the game world.\n\n    Attributes:\n        name: The room's unique name.\n        description: Text shown when a player enters.\n        exits: Dict mapping direction strings to room name strings.\n        items: List of item name strings found in this room.\n    \"\"\"\n    name: str = ''\n    description: str = ''\n    exits: dict = field(default_factory=dict)\n    items: list = field(default_factory=list)\n\n\n# Test it\nconfig = GameConfig({\n    'world_name': 'Dark Caverns',\n    'max_players': 4,\n    'tick_rate': 10,\n    'data_dir': 'data/rpg_test'\n})\nprint(f\"World: {config.get('world_name')}\")\nprint(f\"Max players: {config.get('max_players')}\")\n\nroom = Room(\n    name='Entrance Hall',\n    description='A grand hall with torches on the walls.',\n    exits={'north': 'Throne Room', 'east': 'Armory'},\n    items=['rusty key']\n)\nprint(f\"Room: {room.name}, Exits: {list(room.exits.keys())}\")\n",
+  "test_code": "import os\ncfg = GameConfig({'world_name': 'TestWorld', 'max_players': 2, 'tick_rate': 5, 'data_dir': 'data/_rpg_test_cfg'})\nassert cfg.get('world_name') == 'TestWorld', f\"Expected 'TestWorld', got {cfg.get('world_name')}\"\nassert cfg.get('max_players') == 2, f\"Expected 2, got {cfg.get('max_players')}\"\nassert cfg.get('tick_rate') == 5, f\"Expected 5, got {cfg.get('tick_rate')}\"\nassert cfg.get('data_dir') == 'data/_rpg_test_cfg', f\"Expected 'data/_rpg_test_cfg', got {cfg.get('data_dir')}\"\nassert os.path.isdir('data/_rpg_test_cfg'), 'GameConfig should create data_dir if it does not exist'\nroom = Room(name='Test', description='A test room', exits={'north': 'Other'}, items=['sword'])\nassert room.name == 'Test', f\"Room name should be 'Test'\"\nassert room.description == 'A test room', 'Room description mismatch'\nassert isinstance(room.exits, dict), 'exits should be a dict'\nassert room.exits.get('north') == 'Other', \"exits['north'] should be 'Other'\"\nassert isinstance(room.items, list), 'items should be a list'\nassert 'sword' in room.items, 'items should contain sword'\nimport shutil\nif os.path.isdir('data/_rpg_test_cfg'):\n    shutil.rmtree('data/_rpg_test_cfg')",
+  "acceptance_criteria": [
+    "GameConfig stores a config dict and provides get(key) access",
+    "GameConfig creates data_dir using os.makedirs if it doesn't exist",
+    "Room is a dataclass with name, description, exits (dict), and items (list)",
+    "Room fields have correct default factories for mutable types"
+  ],
+  "hints": [
+    "Store the config dict as self._config in __init__",
+    "Use os.makedirs(path, exist_ok=True) to create the directory",
+    "get() just returns self._config[key] or self._config.get(key)",
+    "dataclass field(default_factory=dict) prevents shared mutable defaults"
+  ]
+}

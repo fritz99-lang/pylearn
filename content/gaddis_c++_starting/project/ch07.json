@@ -1,0 +1,23 @@
+{
+  "step_id": "cpp_proj_ch07",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 7,
+  "title": "Class Roster — Arrays",
+  "description": "Replace single-student processing with arrays. Declare a string array for student names and a 2D double array for grades (each student has 3 grades). Use a constant MAX_STUDENTS for the array size. Loop through the arrays to enter data, calculate averages, and display all students.",
+  "builds_on": "cpp_proj_ch06",
+  "starter_code": "# Student Grade Tracker — Step 6: Arrays\n# Store multiple students using arrays.\n# Use a string array for names and a double array for grades.\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nconst int MAX_STUDENTS = 30;\nconst int NUM_GRADES = 3;\n\ndouble calculateAverage(double grades[], int size) {\n    double sum = 0;\n    for (int i = 0; i < size; i++)\n        sum += grades[i];\n    return sum / size;\n}\n\nchar getLetterGrade(double avg) {\n    if (avg >= 90) return 'A';\n    else if (avg >= 80) return 'B';\n    else if (avg >= 70) return 'C';\n    else if (avg >= 60) return 'D';\n    else return 'F';\n}\n\nvoid displayStudent(string name, double avg, char grade) {\n    cout << name << \" — Average: \" << avg << \" — Grade: \" << grade << endl;\n}\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    // Declare arrays for names and grades\n    // string names[MAX_STUDENTS];\n    // double grades[MAX_STUDENTS][NUM_GRADES];\n    int count = 0;\n\n    // Loop to fill arrays with student data\n\n    // Loop to display all students\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "assert 'string' in cpp and ('[' in cpp.split('main')[1] or 'names' in cpp), 'Must declare a string array for student names'\ncpp_after_includes = cpp.split('main')[1] if 'main' in cpp else cpp\nassert 'double' in cpp and '[' in cpp, 'Must declare a double array for grades'\nassert 'for' in cpp_after_includes or 'while' in cpp_after_includes, 'Must use loops to process the arrays'\nassert 'MAX_STUDENTS' in cpp or 'max_students' in cpp.lower() or 'MAX' in cpp, 'Should define a constant for maximum array size'\nassert cpp.count('[') >= 4, 'Must use array indexing (brackets) to access elements'",
+  "acceptance_criteria": [
+    "Declares a string array for student names",
+    "Declares a double array (or 2D array) for grades",
+    "Uses a constant for the maximum number of students",
+    "Loops through arrays to enter and display data",
+    "Calls calculateAverage and getLetterGrade for each student"
+  ],
+  "hints": [
+    "Declare arrays: string names[MAX_STUDENTS]; double grades[MAX_STUDENTS][NUM_GRADES];",
+    "Use a for loop to fill: for (int i = 0; i < count; i++) { ... }",
+    "Pass a row of grades: calculateAverage(grades[i], NUM_GRADES)",
+    "Track how many students with an int count variable"
+  ]
+}

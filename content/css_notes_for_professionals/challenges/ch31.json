@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 31,
+  "challenges": [
+    {
+      "id": "css_ch31_c01",
+      "title": "Basic Cursor Styles",
+      "description": "Style a .link element with cursor: pointer and a .disabled element with cursor: not-allowed. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Set cursor styles for link and disabled elements */\n\n\"\"\"",
+      "test_code": "assert 'cursor' in css.lower(), 'Should use the cursor property'\nassert 'pointer' in css.lower(), 'Should set cursor to pointer'\nassert 'not-allowed' in css.lower(), 'Should set cursor to not-allowed'\nassert '.link' in css.lower(), 'Should target the .link class'\nassert '.disabled' in css.lower(), 'Should target the .disabled class'",
+      "difficulty": "easy",
+      "concepts_new": ["cursor", "pointer", "not-allowed"],
+      "concepts_review": [],
+      "hints": [
+        "cursor: pointer shows a hand icon, commonly used for clickable elements.",
+        "cursor: not-allowed shows a circle with a line through it."
+      ]
+    },
+    {
+      "id": "css_ch31_c02",
+      "title": "Custom Cursor with Fallback",
+      "description": "Set a custom cursor on a .canvas element using url('custom-cursor.png') with a fallback of crosshair. Also set cursor: grab on a .draggable element. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Use a custom cursor image with fallback */\n\n\"\"\"",
+      "test_code": "assert 'cursor' in css.lower(), 'Should use the cursor property'\nassert 'url(' in css.lower(), 'Should use url() for custom cursor image'\nassert 'custom-cursor.png' in css.lower(), 'Should reference custom-cursor.png'\nassert 'crosshair' in css.lower(), 'Should use crosshair as fallback cursor'\nassert 'grab' in css.lower(), 'Should set cursor to grab on .draggable'\nassert '.canvas' in css.lower(), 'Should target the .canvas class'\nassert '.draggable' in css.lower(), 'Should target the .draggable class'",
+      "difficulty": "medium",
+      "concepts_new": ["custom cursor", "url()", "cursor fallback", "grab"],
+      "concepts_review": ["cursor"],
+      "hints": [
+        "Custom cursors need a fallback keyword: cursor: url('image.png'), crosshair.",
+        "The fallback is used when the image cannot be loaded.",
+        "cursor: grab shows an open hand, useful for drag-and-drop interfaces."
+      ]
+    }
+  ]
+}

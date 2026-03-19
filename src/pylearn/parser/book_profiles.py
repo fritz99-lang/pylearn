@@ -148,6 +148,19 @@ CPP_PRIMER = BookProfile(
     skip_pages_end=30,
 )
 
+GADDIS_CPP = BookProfile(
+    name="gaddis_cpp",
+    language="cpp",
+    heading1_min_size=24.0,
+    heading2_min_size=14.0,
+    heading3_min_size=12.0,
+    body_size=10.0,
+    code_size=8.5,
+    chapter_pattern=r".*[a-zA-Z].*\s+(\d+)\s*$",  # Gaddis titles end with number: "Loops and Files  5"
+    skip_pages_start=28,  # Front matter
+    skip_pages_end=15,  # Index
+)
+
 EFFECTIVE_CPP = BookProfile(
     name="effective_cpp",
     language="cpp",
@@ -167,6 +180,7 @@ PROFILES: dict[str, BookProfile] = {
     "python_cookbook": PYTHON_COOKBOOK,
     "programming_python": PROGRAMMING_PYTHON,
     "cpp_generic": CPP_GENERIC,
+    "gaddis_cpp": GADDIS_CPP,
     "cpp_primer": CPP_PRIMER,
     "effective_cpp": EFFECTIVE_CPP,
 }

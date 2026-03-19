@@ -1,0 +1,24 @@
+{
+  "step_id": "hc_proj_ch06",
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 6,
+  "title": "Navigation Menu",
+  "description": "Add a navigation menu to the header using a <nav> element containing a <ul> with at least 3 <li> items, each with an <a> link (e.g., Home, Recipes, Submit Recipe). Style the nav: remove bullet points with list-style, and use display: inline or display: flex to make items horizontal. Give the nav a background-color.",
+  "builds_on": "hc_proj_ch05",
+  "starter_code": "# Recipe Collection Website \u2014 Step 5: Navigation Menu\n# Add a <nav> with styled links. Style it to be horizontal.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>My Recipes</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            color: #333;\n            background-color: #f9f5f0;\n            margin: 0;\n            padding: 0;\n        }\n        h1, h2 { color: #8b4513; }\n        img { max-width: 100%; }\n\n        /* Style the nav: background-color, remove bullets, horizontal layout */\n\n        /* Style nav links */\n\n    </style>\n</head>\n<body>\n    <header>\n        <h1>My Recipe Collection</h1>\n        <!-- Add a <nav> with <ul>, at least 3 <li><a> links -->\n\n    </header>\n\n    <main>\n        <p>Welcome to my favorite recipes!</p>\n\n        <h2>Classic Pancakes</h2>\n        <p>Fluffy, golden pancakes perfect for a weekend breakfast.</p>\n\n        <h3>Ingredients</h3>\n        <ul>\n            <li>2 cups flour</li>\n            <li>2 eggs</li>\n            <li>1 cup milk</li>\n            <li>2 tbsp butter</li>\n        </ul>\n\n        <h3>Instructions</h3>\n        <ol>\n            <li>Mix dry ingredients in a bowl</li>\n            <li>Add eggs and milk, stir until smooth</li>\n            <li>Heat a pan and melt butter</li>\n            <li>Pour batter and cook until golden</li>\n        </ol>\n\n        <img src=\"pancakes.jpg\" alt=\"A stack of golden pancakes\">\n    </main>\n\n    <footer>\n        <p>&copy; 2026 My Recipe Collection</p>\n    </footer>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<nav>' in html.lower() and '</nav>' in html.lower(), 'Must include a <nav> element'\n_nav_section = html.lower().split('<nav>')[1].split('</nav>')[0] if '<nav>' in html.lower() else ''\nassert '<ul>' in _nav_section, 'Must include a <ul> inside the <nav>'\nassert _nav_section.count('<li>') >= 3, 'Must have at least 3 <li> items in the nav'\nassert '<a ' in _nav_section or '<a>' in _nav_section, 'Must include <a> links inside the nav list items'\nassert _nav_section.count('<a') >= 3, 'Must have at least 3 links in the nav'\nassert 'list-style' in html.lower() or 'display' in html.lower(), 'Must style the nav (list-style or display property)'\nassert '<style>' in html.lower(), 'Must include a <style> block'\nassert 'background-color' in html.lower(), 'Must set background-color (on body or nav)'",
+  "acceptance_criteria": [
+    "A <nav> element is present inside the header",
+    "Nav contains a <ul> with at least 3 <li> items",
+    "Each list item contains an <a> link",
+    "Nav is styled to display horizontally (list-style or display)",
+    "Nav has a background-color",
+    "All previous content is preserved"
+  ],
+  "hints": [
+    "Nav structure: <nav><ul><li><a href=\"#\">Home</a></li>...</ul></nav>",
+    "Remove bullets: nav ul { list-style: none; }",
+    "Horizontal layout: nav li { display: inline; } or nav ul { display: flex; }",
+    "Nav background: nav { background-color: #8b4513; padding: 10px; }"
+  ]
+}

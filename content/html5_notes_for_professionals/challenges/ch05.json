@@ -1,0 +1,34 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 5,
+  "challenges": [
+    {
+      "id": "h5_ch05_c01",
+      "title": "Text Emphasis",
+      "description": "Create a paragraph that uses <strong> for bold text, <em> for italic text, and <u> for underlined text. Each formatting element should wrap at least one word. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write a paragraph with bold, italic, and underlined text -->\n\n\"\"\"",
+      "test_code": "assert '<p>' in html.lower(), 'Should contain a <p> paragraph element'\nassert '</p>' in html.lower(), 'Should close the <p> element'\nassert '<strong>' in html.lower(), 'Should contain a <strong> element for bold text'\nassert '</strong>' in html.lower(), 'Should close the <strong> element'\nassert '<em>' in html.lower(), 'Should contain an <em> element for italic text'\nassert '</em>' in html.lower(), 'Should close the <em> element'\nassert '<u>' in html.lower(), 'Should contain a <u> element for underlined text'\nassert '</u>' in html.lower(), 'Should close the <u> element'",
+      "difficulty": "easy",
+      "concepts_new": ["strong element", "em element", "u element", "text formatting"],
+      "concepts_review": ["paragraph element"],
+      "hints": [
+        "<strong> is for important text (bold), <em> is for emphasized text (italic)",
+        "Wrap individual words or phrases with the formatting tags inside your paragraph"
+      ]
+    },
+    {
+      "id": "h5_ch05_c02",
+      "title": "Rich Text",
+      "description": "Create HTML that uses all five text formatting elements: <strong> for bold, <em> for italic, <mark> for highlighted text, <sub> for subscript (like H2O), and <sup> for superscript (like x2). Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write HTML using strong, em, mark, sub, and sup -->\n\n\"\"\"",
+      "test_code": "assert '<strong>' in html.lower(), 'Should contain a <strong> element'\nassert '</strong>' in html.lower(), 'Should close the <strong> element'\nassert '<em>' in html.lower(), 'Should contain an <em> element'\nassert '</em>' in html.lower(), 'Should close the <em> element'\nassert '<mark>' in html.lower(), 'Should contain a <mark> element for highlighted text'\nassert '</mark>' in html.lower(), 'Should close the <mark> element'\nassert '<sub>' in html.lower(), 'Should contain a <sub> element for subscript'\nassert '</sub>' in html.lower(), 'Should close the <sub> element'\nassert '<sup>' in html.lower(), 'Should contain a <sup> element for superscript'\nassert '</sup>' in html.lower(), 'Should close the <sup> element'",
+      "difficulty": "medium",
+      "concepts_new": ["mark element", "sub element", "sup element"],
+      "concepts_review": ["strong element", "em element"],
+      "hints": [
+        "<mark> highlights text, <sub> is for subscript (like in H<sub>2</sub>O), <sup> is for superscript (like x<sup>2</sup>)",
+        "You can put these formatting elements inside a paragraph or use multiple paragraphs"
+      ]
+    }
+  ]
+}

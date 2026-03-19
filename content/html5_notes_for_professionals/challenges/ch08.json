@@ -1,0 +1,34 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 8,
+  "challenges": [
+    {
+      "id": "h5_ch08_c01",
+      "title": "Simple Table",
+      "description": "Create a table with a <thead> containing one row of <th> header cells (at least 2 columns) and a <tbody> containing at least 3 rows of <td> data cells. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your table here -->\n\n\"\"\"",
+      "test_code": "assert '<table>' in html.lower(), 'Should contain a <table> element'\nassert '</table>' in html.lower(), 'Should close the <table> element'\nassert '<thead>' in html.lower(), 'Should contain a <thead> element'\nassert '</thead>' in html.lower(), 'Should close the <thead> element'\nassert '<tbody>' in html.lower(), 'Should contain a <tbody> element'\nassert '</tbody>' in html.lower(), 'Should close the <tbody> element'\nassert html.lower().count('<th>') >= 2, 'Should have at least 2 <th> header cells'\nassert html.lower().count('<tr>') >= 4, 'Should have at least 4 <tr> rows (1 header + 3 data)'\nassert html.lower().count('<td>') >= 6, 'Should have at least 6 <td> data cells (2 columns x 3 rows)'",
+      "difficulty": "easy",
+      "concepts_new": ["table element", "thead element", "tbody element", "tr element", "th element", "td element"],
+      "concepts_review": [],
+      "hints": [
+        "A table structure is: <table><thead><tr><th>...</th></tr></thead><tbody><tr><td>...</td></tr></tbody></table>",
+        "Use <th> for header cells in <thead> and <td> for data cells in <tbody>"
+      ]
+    },
+    {
+      "id": "h5_ch08_c02",
+      "title": "Complex Table",
+      "description": "Create a table with a <caption>, <thead>, and <tbody>. At least one cell should use the colspan attribute to span multiple columns. Include at least 2 columns and 2 data rows. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your table with caption and colspan -->\n\n\"\"\"",
+      "test_code": "assert '<table>' in html.lower(), 'Should contain a <table> element'\nassert '</table>' in html.lower(), 'Should close the <table> element'\nassert '<caption>' in html.lower(), 'Should contain a <caption> element'\nassert '</caption>' in html.lower(), 'Should close the <caption> element'\nassert '<thead>' in html.lower(), 'Should contain a <thead> element'\nassert '</thead>' in html.lower(), 'Should close the <thead> element'\nassert '<tbody>' in html.lower(), 'Should contain a <tbody> element'\nassert '</tbody>' in html.lower(), 'Should close the <tbody> element'\nassert 'colspan' in html.lower(), 'Should have at least one cell using the colspan attribute'\nassert html.lower().count('<tr>') >= 3, 'Should have at least 3 <tr> rows (1 header + 2 data)'\nassert html.lower().count('<th>') >= 2, 'Should have at least 2 <th> header cells'",
+      "difficulty": "medium",
+      "concepts_new": ["caption element", "colspan attribute"],
+      "concepts_review": ["table element", "thead element", "tbody element", "th element", "td element"],
+      "hints": [
+        "Place <caption> right after the opening <table> tag, before <thead>",
+        "Use colspan=\"2\" on a <td> or <th> to make it span 2 columns, e.g., <td colspan=\"2\">Spanning cell</td>"
+      ]
+    }
+  ]
+}

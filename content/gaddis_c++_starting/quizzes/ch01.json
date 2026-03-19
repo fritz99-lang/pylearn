@@ -1,0 +1,68 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 1,
+  "questions": [
+    {
+      "id": "cpp_ch01_q01",
+      "type": "multiple_choice",
+      "question": "Which component of a computer is responsible for executing instructions and performing calculations?",
+      "choices": ["RAM", "CPU", "Hard drive", "Motherboard"],
+      "correct": 1,
+      "explanation": "The CPU (Central Processing Unit) fetches, decodes, and executes program instructions and performs arithmetic and logical operations.",
+      "concepts": ["hardware", "CPU"]
+    },
+    {
+      "id": "cpp_ch01_q02",
+      "type": "multiple_choice",
+      "question": "What does a compiler do?",
+      "choices": [
+        "Executes a program line by line at runtime",
+        "Translates high-level source code into machine code",
+        "Connects the computer to the internet",
+        "Manages the computer's memory allocation"
+      ],
+      "correct": 1,
+      "explanation": "A compiler translates an entire high-level language program into machine code (an executable) before the program is run.",
+      "concepts": ["compiler", "machine code"]
+    },
+    {
+      "id": "cpp_ch01_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is a high-level programming language?",
+      "choices": ["Machine language", "Assembly language", "C++", "Binary"],
+      "correct": 2,
+      "explanation": "C++ is a high-level language that uses human-readable syntax. Machine language and assembly are low-level languages, and binary is a number system.",
+      "concepts": ["high-level languages", "programming languages"]
+    },
+    {
+      "id": "cpp_ch01_q04",
+      "type": "multiple_choice",
+      "question": "What is the correct order of the program development cycle?",
+      "choices": [
+        "Code, Design, Test, Debug",
+        "Design, Code, Test, Debug",
+        "Test, Code, Design, Debug",
+        "Code, Test, Design, Debug"
+      ],
+      "correct": 1,
+      "explanation": "The program development cycle follows: Design the solution, write (Code) the program, Test it for errors, and Debug any problems found.",
+      "concepts": ["program development cycle"]
+    },
+    {
+      "id": "cpp_ch01_q05",
+      "type": "fill_in_blank",
+      "question": "The type of memory that is volatile and loses its contents when the computer is powered off is called ___.",
+      "correct": "RAM",
+      "explanation": "RAM (Random Access Memory) is volatile memory used to temporarily store data and instructions while a program is running.",
+      "concepts": ["hardware", "RAM", "memory"]
+    },
+    {
+      "id": "cpp_ch01_q06",
+      "type": "fill_in_blank",
+      "question": "Software that manages the computer's hardware and provides an interface for the user is called the ___.",
+      "correct": "operating system",
+      "explanation": "The operating system (e.g., Windows, macOS, Linux) manages hardware resources and provides the environment in which application programs run.",
+      "concepts": ["software", "operating system"]
+    }
+  ]
+}

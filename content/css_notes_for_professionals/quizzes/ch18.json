@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 18,
+  "questions": [
+    {
+      "id": "css_ch18_q01",
+      "type": "multiple_choice",
+      "question": "Which of the following is a valid shorthand hex color?",
+      "choices": [
+        "#ff00ff00",
+        "#fff",
+        "#ffff",
+        "#f0f0f"
+      ],
+      "correct": 1,
+      "explanation": "Shorthand hex colors use 3 digits where each digit is doubled (e.g., #fff expands to #ffffff). #fff is valid shorthand for white.",
+      "concepts": ["hex-colors", "color-shorthand"]
+    },
+    {
+      "id": "css_ch18_q02",
+      "type": "multiple_choice",
+      "question": "What does the 'a' stand for in rgba() and hsla()?",
+      "choices": [
+        "Alignment",
+        "Alpha (opacity)",
+        "Absolute",
+        "Accent"
+      ],
+      "correct": 1,
+      "explanation": "The 'a' in rgba() and hsla() stands for alpha, which controls the opacity of the color from 0 (fully transparent) to 1 (fully opaque).",
+      "concepts": ["rgba", "hsla", "alpha"]
+    },
+    {
+      "id": "css_ch18_q03",
+      "type": "multiple_choice",
+      "question": "What does the CSS keyword currentColor refer to?",
+      "choices": [
+        "The background color of the element",
+        "The computed value of the element's color property",
+        "The default browser color",
+        "The color of the parent element's background"
+      ],
+      "correct": 1,
+      "explanation": "currentColor is a keyword that refers to the computed value of the element's own color property, making it useful for borders, shadows, and other properties that should match the text color.",
+      "concepts": ["currentColor", "color-keywords"]
+    },
+    {
+      "id": "css_ch18_q04",
+      "type": "multiple_choice",
+      "question": "In the hsl() function, what does the 'h' value represent?",
+      "choices": [
+        "Height in pixels",
+        "Hue as a degree on the color wheel (0-360)",
+        "Hex color value",
+        "Horizontal position"
+      ],
+      "correct": 1,
+      "explanation": "In hsl(), the 'h' value is the hue expressed as a degree on the color wheel from 0 to 360, where 0/360 is red, 120 is green, and 240 is blue.",
+      "concepts": ["hsl", "hue"]
+    },
+    {
+      "id": "css_ch18_q05",
+      "type": "fill_in_blank",
+      "question": "The CSS color keyword ___ makes an element's color fully see-through.",
+      "correct": "transparent",
+      "explanation": "The transparent keyword sets a color to fully transparent (equivalent to rgba(0, 0, 0, 0)).",
+      "concepts": ["transparent", "color-keywords"]
+    },
+    {
+      "id": "css_ch18_q06",
+      "type": "fill_in_blank",
+      "question": "The CSS function ___() accepts red, green, blue, and alpha values to define a color with opacity.",
+      "correct": "rgba",
+      "explanation": "The rgba() function defines a color using red, green, blue channels (0-255) and an alpha channel (0-1) for opacity.",
+      "concepts": ["rgba", "color-functions"]
+    }
+  ]
+}

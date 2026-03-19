@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 14,
+  "challenges": [
+    {
+      "id": "pp_ch14_c01",
+      "title": "URL Component Parser",
+      "description": "Write a function `parse_url(url)` that uses `urllib.parse.urlparse` to break a URL into a dictionary with keys: 'protocol' (scheme), 'host' (netloc), 'path', and 'query'. Also write `build_url(protocol, host, path='', query='')` that constructs a URL string from these components.",
+      "starter_code": "from urllib.parse import urlparse, urlencode, urlunsplit\n\ndef parse_url(url):\n    \"\"\"Parse a URL into a dict with protocol, host, path, query keys.\"\"\"\n    # Your code here\n    pass\n\ndef build_url(protocol, host, path='', query=''):\n    \"\"\"Build a URL string from components.\"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "result = parse_url('https://example.com/path/page?name=value')\nassert result['protocol'] == 'https'\nassert result['host'] == 'example.com'\nassert result['path'] == '/path/page'\nassert result['query'] == 'name=value'\nresult2 = parse_url('http://localhost:8080/')\nassert result2['protocol'] == 'http'\nassert result2['host'] == 'localhost:8080'\nassert result2['path'] == '/'\nassert result2['query'] == ''\nbuilt = build_url('https', 'example.com', '/api', 'key=123')\nassert 'https' in built\nassert 'example.com' in built\nassert '/api' in built\nassert 'key=123' in built\nsimple = build_url('http', 'localhost')\nassert 'http' in simple\nassert 'localhost' in simple",
+      "difficulty": "easy",
+      "concepts_new": ["url_parsing", "urllib"],
+      "concepts_review": ["dictionaries", "string_formatting", "functions"],
+      "hints": [
+        "urlparse returns a named tuple with .scheme, .netloc, .path, .query attributes.",
+        "For build_url, you can use an f-string like f'{protocol}://{host}{path}' and append ?query if query is not empty."
+      ]
+    },
+    {
+      "id": "pp_ch14_c02",
+      "title": "Email Message Builder",
+      "description": "Write a function `create_email(from_addr, to_addr, subject, body, date=None)` that returns a dict with keys 'From', 'To', 'Subject', 'Date', and 'Body'. If date is None, use 'Thu, 01 Jan 2026 00:00:00'. Then write `format_email(email_dict)` that returns a formatted string with headers and body separated by a blank line, like a raw email.",
+      "starter_code": "def create_email(from_addr, to_addr, subject, body, date=None):\n    \"\"\"Create an email message dict with standard headers.\"\"\"\n    # Your code here\n    pass\n\ndef format_email(email_dict):\n    \"\"\"Format an email dict as a raw email string.\n    \n    Format:\n        From: ...\n        To: ...\n        Subject: ...\n        Date: ...\n        \n        body text here\n    \"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "email = create_email('alice@example.com', 'bob@example.com', 'Hello', 'Hi Bob!')\nassert email['From'] == 'alice@example.com'\nassert email['To'] == 'bob@example.com'\nassert email['Subject'] == 'Hello'\nassert email['Body'] == 'Hi Bob!'\nassert email['Date'] == 'Thu, 01 Jan 2026 00:00:00'\nemail2 = create_email('a@b.com', 'c@d.com', 'Test', 'Body', date='Mon, 15 Mar 2026 10:30:00')\nassert email2['Date'] == 'Mon, 15 Mar 2026 10:30:00'\nformatted = format_email(email)\nassert 'From: alice@example.com' in formatted\nassert 'To: bob@example.com' in formatted\nassert 'Subject: Hello' in formatted\nassert 'Date: Thu, 01 Jan 2026 00:00:00' in formatted\nassert 'Hi Bob!' in formatted\nlines = formatted.split('\\n')\nblank_idx = lines.index('')\nassert blank_idx > 0\nassert 'Hi Bob!' in '\\n'.join(lines[blank_idx + 1:])",
+      "difficulty": "medium",
+      "concepts_new": ["email_headers", "message_formatting"],
+      "concepts_review": ["dictionaries", "default_parameters", "string_joining"],
+      "hints": [
+        "Use a default value for date: if date is None, set it to the specified default string.",
+        "In format_email, join header lines with newlines, add a blank line, then the body."
+      ]
+    }
+  ]
+}

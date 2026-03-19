@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 30,
+  "challenges": [
+    {
+      "id": "css_ch30_c01",
+      "title": "Blur and Grayscale Filters",
+      "description": "Apply blur(3px) and grayscale(50%) filters to an .image element using the filter property. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Apply blur and grayscale filters */\n\n\"\"\"",
+      "test_code": "assert 'filter' in css.lower(), 'Should use the filter property'\nassert 'blur' in css.lower(), 'Should use the blur() function'\nassert '3px' in css.lower(), 'Should set blur to 3px'\nassert 'grayscale' in css.lower(), 'Should use the grayscale() function'\nassert '50%' in css.lower(), 'Should set grayscale to 50%'",
+      "difficulty": "easy",
+      "concepts_new": ["filter", "blur", "grayscale"],
+      "concepts_review": [],
+      "hints": [
+        "Chain filters in one declaration: filter: blur(3px) grayscale(50%).",
+        "blur() takes a pixel value; grayscale() takes a percentage."
+      ]
+    },
+    {
+      "id": "css_ch30_c02",
+      "title": "Chained Filter Effects",
+      "description": "Apply brightness(1.2), contrast(1.5), and drop-shadow(4px 4px 6px rgba(0,0,0,0.5)) to a .photo element using the filter property. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Chain brightness, contrast, and drop-shadow filters */\n\n\"\"\"",
+      "test_code": "assert 'filter' in css.lower(), 'Should use the filter property'\nassert 'brightness' in css.lower(), 'Should use the brightness() function'\nassert '1.2' in css.lower(), 'Should set brightness to 1.2'\nassert 'contrast' in css.lower(), 'Should use the contrast() function'\nassert '1.5' in css.lower(), 'Should set contrast to 1.5'\nassert 'drop-shadow' in css.lower(), 'Should use the drop-shadow() function'\nassert 'rgba' in css.lower(), 'Should use rgba color for the shadow'",
+      "difficulty": "medium",
+      "concepts_new": ["brightness", "contrast", "drop-shadow"],
+      "concepts_review": ["filter"],
+      "hints": [
+        "Chain all three: filter: brightness(1.2) contrast(1.5) drop-shadow(...).",
+        "drop-shadow takes offset-x, offset-y, blur-radius, and color.",
+        "The order of filters matters — they are applied left to right."
+      ]
+    }
+  ]
+}

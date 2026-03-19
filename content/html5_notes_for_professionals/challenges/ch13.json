@@ -1,0 +1,28 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 13,
+  "challenges": [
+    {
+      "id": "h5_ch13_c01",
+      "title": "Script Tags",
+      "description": "Create HTML with two script elements: one external script tag with a src attribute, and one inline script tag containing JavaScript code. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<script') >= 2, 'Should contain at least 2 <script> elements'\nassert html.lower().count('</script>') >= 2, 'Should close both <script> elements'\nimport re\nscripts_with_src = re.findall(r'<script[^>]+src=', html.lower())\nassert len(scripts_with_src) >= 1, 'At least one script should have a src attribute'\nscripts = re.findall(r'<script(?![^>]*src=)[^>]*>(.*?)</script>', html.lower(), re.DOTALL)\nhas_inline = any(s.strip() for s in scripts)\nassert has_inline, 'At least one script should contain inline JavaScript code'",
+      "difficulty": "easy",
+      "concepts_new": ["script_element", "external_scripts", "inline_scripts"],
+      "concepts_review": [],
+      "hints": ["External: <script src=\"app.js\"></script>", "Inline: <script>console.log('Hello');</script>"]
+    },
+    {
+      "id": "h5_ch13_c02",
+      "title": "Async Loading",
+      "description": "Create HTML with three script tags: one with the async attribute, one with the defer attribute, and one regular script (no async or defer). All three should have src attributes. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<script') >= 3, 'Should contain at least 3 <script> elements'\nimport re\nassert re.search(r'<script[^>]+async', html.lower()), 'Should have a script with the async attribute'\nassert re.search(r'<script[^>]+defer', html.lower()), 'Should have a script with the defer attribute'\nassert html.lower().count('src=') >= 3, 'All three scripts should have src attributes'\nscripts = re.findall(r'<script[^>]*>', html.lower())\nhas_plain = any('src=' in s and 'async' not in s and 'defer' not in s for s in scripts)\nassert has_plain, 'Should have at least one regular script without async or defer'",
+      "difficulty": "medium",
+      "concepts_new": ["async_scripts", "defer_scripts"],
+      "concepts_review": ["script_element", "external_scripts"],
+      "hints": ["async loads and executes the script as soon as it's available", "defer waits until the page is fully parsed before executing", "A regular script blocks page rendering until it loads and executes"]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "step_id": "cpp_inv_ch16",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 16,
+  "title": "Robust System \u2014 Error Handling",
+  "description": "Add exception handling and templates to make the inventory system robust. Wrap user input in try/catch blocks to handle invalid data (e.g., non-numeric price). Create a template function that can sort products by any field (price, name, quantity). Use throw to raise custom exceptions for errors like 'product not found' or 'inventory full'. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_inv_ch14",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\n#include <vector>\n#include <stdexcept>\n#include <algorithm>\nusing namespace std;\n\nstruct Product {\n    string name;\n    double price;\n    int quantity;\n    string category;\n};\n\nostream& operator<<(ostream& os, const Product& p) {\n    os << p.name << \" [\" << p.category << \"] - $\" << p.price << \" x \" << p.quantity;\n    return os;\n}\n\n// Write a template sort function:\n// template <typename Compare>\n// void sortProducts(vector<Product>& products, Compare comp)\n// Uses std::sort with a custom comparator\n\nclass Inventory {\nprivate:\n    vector<Product> products;\n    int maxCapacity;\n\npublic:\n    Inventory(int capacity = 1000) : maxCapacity(capacity) {}\n\n    void addProduct(const Product& p) {\n        // Throw an exception if inventory is full\n        // Throw an exception if price <= 0 or quantity < 0\n        products.push_back(p);\n    }\n\n    void removeProduct(const string& name) {\n        // Throw an exception if product not found\n    }\n\n    void displayAll() const {\n        for (const auto& p : products) {\n            cout << p << endl;\n        }\n    }\n\n    int searchByName(const string& target) const {\n        for (size_t i = 0; i < products.size(); i++) {\n            if (products[i].name == target)\n                return static_cast<int>(i);\n        }\n        return -1;\n    }\n\n    // Use the template sort function\n    // sortProducts(products, [](const Product& a, const Product& b) { ... });\n\n    void saveToFile(const string& filename) const {\n        ofstream outFile(filename);\n        if (!outFile)\n            throw runtime_error(\"Cannot open file: \" + filename);\n        for (const auto& p : products) {\n            outFile << p.name << \",\" << p.category << \",\" << p.price << \",\" << p.quantity << endl;\n        }\n        outFile.close();\n    }\n\n    int getCount() const { return static_cast<int>(products.size()); }\n};\n\nint main() {\n    Inventory inventory;\n    int choice;\n\n    do {\n        cout << \"\\n===== Inventory Management System =====\" << endl;\n        cout << \"1. Add Product\" << endl;\n        cout << \"2. View Products\" << endl;\n        cout << \"3. Search Product\" << endl;\n        cout << \"4. Sort Products\" << endl;\n        cout << \"5. Save to File\" << endl;\n        cout << \"6. Remove Product\" << endl;\n        cout << \"7. Exit\" << endl;\n        cout << \"Enter your choice: \";\n\n        // Wrap input in try/catch blocks\n        // Handle invalid_argument, runtime_error, etc.\n\n    } while (choice != 7);\n\n    cout << \"Goodbye!\" << endl;\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'try' in cpp, 'Use try blocks to handle potential errors'\nassert 'catch' in cpp, 'Use catch blocks to handle exceptions'\nassert 'throw' in cpp, 'Use throw to raise exceptions for error conditions'\nassert 'template' in cpp, 'Write a template function for flexible sorting'\nassert 'runtime_error' in cpp or 'invalid_argument' in cpp or 'exception' in cpp, 'Use standard exception types (runtime_error, invalid_argument, etc.)'\nassert 'stdexcept' in cpp or 'exception' in cpp, 'Include <stdexcept> for standard exception classes'\nassert 'sort' in cpp, 'Use std::sort or a custom sort with the template function'\nassert cpp.count('catch') >= 1, 'Include at least one catch block for error handling'\nassert cpp.count('throw') >= 2, 'Throw exceptions for at least two different error conditions (e.g., full inventory, invalid input)'",
+  "acceptance_criteria": [
+    "try/catch blocks wrap user input handling in main",
+    "throw used for at least two error conditions (full inventory, invalid input, product not found)",
+    "Template function defined for sorting products by different fields",
+    "Uses std::sort or custom sort with the template comparator",
+    "Includes <stdexcept> and uses standard exception types",
+    "Program gracefully handles errors instead of crashing"
+  ],
+  "hints": [
+    "template <typename Compare> void sortProducts(vector<Product>& v, Compare comp) { sort(v.begin(), v.end(), comp); }",
+    "Call it with a lambda: sortProducts(products, [](const Product& a, const Product& b) { return a.price < b.price; })",
+    "Use throw runtime_error(\"message\") to raise exceptions",
+    "Catch with: catch (const runtime_error& e) { cout << \"Error: \" << e.what() << endl; }",
+    "Wrap cin >> in a try block and check cin.fail() to detect non-numeric input"
+  ]
+}

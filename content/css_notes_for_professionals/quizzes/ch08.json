@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 8,
+  "questions": [
+    {
+      "id": "css_ch08_q01",
+      "type": "multiple_choice",
+      "question": "What does `margin: 10px 20px` set?",
+      "choices": [
+        "10px on all sides, 20px on left only",
+        "10px top/bottom, 20px left/right",
+        "10px left/right, 20px top/bottom",
+        "10px top, 20px on all other sides"
+      ],
+      "correct": 1,
+      "explanation": "The 2-value margin shorthand sets top/bottom to the first value and left/right to the second value. So margin: 10px 20px means 10px vertical and 20px horizontal.",
+      "concepts": ["margin shorthand"]
+    },
+    {
+      "id": "css_ch08_q02",
+      "type": "multiple_choice",
+      "question": "When two vertical margins of 20px and 30px meet between adjacent block elements, what is the resulting space?",
+      "choices": [
+        "50px",
+        "30px",
+        "20px",
+        "25px"
+      ],
+      "correct": 1,
+      "explanation": "This is margin collapsing: when vertical margins of adjacent block elements overlap, only the larger margin is applied. The 30px margin wins, not 20px + 30px.",
+      "concepts": ["margin collapsing"]
+    },
+    {
+      "id": "css_ch08_q03",
+      "type": "multiple_choice",
+      "question": "What does `margin: 10px 20px 30px 40px` apply?",
+      "choices": [
+        "top: 10px, right: 20px, bottom: 30px, left: 40px",
+        "top: 10px, left: 20px, bottom: 30px, right: 40px",
+        "top: 40px, right: 30px, bottom: 20px, left: 10px",
+        "top: 10px, bottom: 20px, left: 30px, right: 40px"
+      ],
+      "correct": 0,
+      "explanation": "The 4-value shorthand follows clockwise order: top, right, bottom, left (think of a clock starting at 12). This is sometimes remembered as TRouBLe.",
+      "concepts": ["margin shorthand"]
+    },
+    {
+      "id": "css_ch08_q04",
+      "type": "multiple_choice",
+      "question": "What effect does a negative margin have on an element?",
+      "choices": [
+        "It is ignored by the browser",
+        "It causes a syntax error",
+        "It pulls the element in the direction of the negative margin",
+        "It doubles the margin on the opposite side"
+      ],
+      "correct": 2,
+      "explanation": "Negative margins pull the element toward the direction of the negative value. For example, margin-top: -10px pulls the element upward by 10px, potentially overlapping elements above it.",
+      "concepts": ["negative margins"]
+    },
+    {
+      "id": "css_ch08_q05",
+      "type": "fill_in_blank",
+      "question": "The phenomenon where adjacent vertical margins combine into a single margin is called margin ___.",
+      "correct": "collapsing",
+      "explanation": "Margin collapsing occurs when vertical margins of adjacent block-level elements overlap. The larger margin value is used rather than adding them together.",
+      "concepts": ["margin collapsing"]
+    },
+    {
+      "id": "css_ch08_q06",
+      "type": "fill_in_blank",
+      "question": "The property ___ sets only the space above an element.",
+      "correct": "margin-top",
+      "explanation": "The individual margin properties (margin-top, margin-right, margin-bottom, margin-left) set spacing on specific sides, unlike the shorthand which sets multiple sides at once.",
+      "concepts": ["margin-top"]
+    }
+  ]
+}

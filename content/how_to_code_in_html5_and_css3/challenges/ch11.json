@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 11,
+  "challenges": [
+    {
+      "id": "hc_ch11_c01",
+      "title": "Select and Radio Inputs",
+      "description": "Create a form with a <select> dropdown containing at least three <option> elements and a group of at least three radio buttons (<input type=\"radio\">) sharing the same name attribute. Include labels and a submit button. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form with select dropdown and radio buttons -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> tag'\nassert '<select' in html.lower(), 'Should contain a <select> dropdown'\nassert '</select>' in html.lower(), 'Should contain a closing </select> tag'\nassert html.lower().count('<option') >= 3, 'Should contain at least three <option> elements'\nassert 'type=\"radio\"' in html.lower() or \"type='radio'\" in html.lower(), 'Should contain radio button inputs'\nassert html.lower().count('type=\"radio\"') + html.lower().count(\"type='radio'\") >= 3, 'Should contain at least three radio buttons'\nassert 'name=' in html.lower(), 'Radio buttons should share a name attribute'\nassert 'type=\"submit\"' in html.lower() or \"type='submit'\" in html.lower(), 'Should contain a submit button'",
+      "difficulty": "easy",
+      "concepts_new": ["select tag", "option tag", "radio input", "name attribute for grouping"],
+      "concepts_review": ["form tag", "input tag", "label tag", "submit button"],
+      "hints": [
+        "A <select> contains multiple <option> tags for the dropdown choices.",
+        "Radio buttons with the same name attribute form a group where only one can be selected."
+      ]
+    },
+    {
+      "id": "hc_ch11_c02",
+      "title": "Advanced Form with Fieldset and Datalist",
+      "description": "Create a form with a <fieldset> and <legend>, at least three checkboxes, a <select> dropdown, and an <input> with a <datalist> providing autocomplete suggestions. Include a submit button. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create an advanced form with fieldset, checkboxes, select, and datalist -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> tag'\nassert '<fieldset>' in html.lower() or '<fieldset ' in html.lower(), 'Should contain a <fieldset> element'\nassert '</fieldset>' in html.lower(), 'Should contain a closing </fieldset> tag'\nassert '<legend>' in html.lower(), 'Should contain a <legend> element'\nassert '</legend>' in html.lower(), 'Should contain a closing </legend> tag'\nassert 'type=\"checkbox\"' in html.lower() or \"type='checkbox'\" in html.lower(), 'Should contain checkbox inputs'\nassert html.lower().count('type=\"checkbox\"') + html.lower().count(\"type='checkbox'\") >= 3, 'Should contain at least three checkboxes'\nassert '<select' in html.lower(), 'Should contain a <select> dropdown'\nassert '<datalist' in html.lower(), 'Should contain a <datalist> element'\nassert '</datalist>' in html.lower(), 'Should contain a closing </datalist> tag'\nassert 'list=' in html.lower(), 'Input should reference the datalist via the list attribute'\nassert 'type=\"submit\"' in html.lower() or \"type='submit'\" in html.lower(), 'Should contain a submit button'",
+      "difficulty": "medium",
+      "concepts_new": ["fieldset tag", "legend tag", "checkbox input", "datalist tag", "list attribute"],
+      "concepts_review": ["select tag", "option tag", "form tag", "label tag"],
+      "hints": [
+        "<fieldset> groups related form controls and <legend> provides a caption for the group.",
+        "Connect an <input> to a <datalist> using: <input list=\"mylist\"> and <datalist id=\"mylist\">."
+      ]
+    }
+  ]
+}

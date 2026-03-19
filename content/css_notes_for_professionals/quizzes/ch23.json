@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 23,
+  "questions": [
+    {
+      "id": "css_ch23_q01",
+      "type": "multiple_choice",
+      "question": "What is the key difference between visibility: hidden and display: none?",
+      "choices": [
+        "There is no difference",
+        "visibility: hidden hides the element but it still takes up space; display: none removes it from the flow entirely",
+        "display: none hides the element but it still takes up space; visibility: hidden removes it from the flow",
+        "visibility: hidden only works on inline elements"
+      ],
+      "correct": 1,
+      "explanation": "visibility: hidden makes the element invisible but it still occupies its space in the layout. display: none removes the element from the document flow entirely, as if it does not exist.",
+      "concepts": ["visibility", "display-none"]
+    },
+    {
+      "id": "css_ch23_q02",
+      "type": "multiple_choice",
+      "question": "Which display value makes an element behave like a block element but flow inline with text?",
+      "choices": [
+        "inline",
+        "block",
+        "inline-block",
+        "flex"
+      ],
+      "correct": 2,
+      "explanation": "inline-block elements flow inline with surrounding text like inline elements, but they accept width, height, and vertical margin/padding like block elements.",
+      "concepts": ["inline-block", "display"]
+    },
+    {
+      "id": "css_ch23_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is true about inline elements?",
+      "choices": [
+        "They always start on a new line",
+        "Width and height properties have no effect on them",
+        "They cannot contain other elements",
+        "They create a new stacking context"
+      ],
+      "correct": 1,
+      "explanation": "Inline elements do not start on a new line and only take up as much width as necessary. The width and height properties have no effect on inline elements.",
+      "concepts": ["inline", "display"]
+    },
+    {
+      "id": "css_ch23_q04",
+      "type": "multiple_choice",
+      "question": "What does display: flex do to an element?",
+      "choices": [
+        "Makes the element invisible",
+        "Makes the element an inline element",
+        "Establishes the element as a flex container for its children",
+        "Makes the element stretch to fill the viewport"
+      ],
+      "correct": 2,
+      "explanation": "display: flex turns an element into a block-level flex container, enabling flexbox layout for its direct children (flex items).",
+      "concepts": ["flex", "display"]
+    },
+    {
+      "id": "css_ch23_q05",
+      "type": "fill_in_blank",
+      "question": "Setting display: ___ removes an element from the document flow entirely, as if it does not exist.",
+      "correct": "none",
+      "explanation": "display: none removes the element from the layout completely. It takes up no space and is not rendered, though it remains in the DOM.",
+      "concepts": ["display-none", "layout"]
+    },
+    {
+      "id": "css_ch23_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ display value makes an element a block-level container that lays out children on a two-dimensional grid.",
+      "correct": "grid",
+      "explanation": "display: grid establishes a grid formatting context for the element's children, enabling two-dimensional layout with rows and columns.",
+      "concepts": ["grid", "display"]
+    }
+  ]
+}

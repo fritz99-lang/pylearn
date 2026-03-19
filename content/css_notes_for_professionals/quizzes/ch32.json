@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 32,
+  "questions": [
+    {
+      "id": "css_ch32_q01",
+      "type": "multiple_choice",
+      "question": "What is the correct order of values in the `box-shadow` shorthand property?",
+      "choices": [
+        "color blur h-offset v-offset spread",
+        "h-offset v-offset blur spread color",
+        "blur spread h-offset v-offset color",
+        "spread blur v-offset h-offset color"
+      ],
+      "correct": 1,
+      "explanation": "The `box-shadow` shorthand follows the order: horizontal offset, vertical offset, blur radius, spread radius, and color. The blur, spread, and color values are optional.",
+      "concepts": ["box-shadow", "syntax"]
+    },
+    {
+      "id": "css_ch32_q02",
+      "type": "multiple_choice",
+      "question": "What does the `inset` keyword do when added to a `box-shadow` declaration?",
+      "choices": [
+        "Moves the shadow inside the element instead of outside",
+        "Inverts the shadow color",
+        "Makes the shadow appear only on the top and left sides",
+        "Reduces the shadow size to fit inside the element's padding"
+      ],
+      "correct": 0,
+      "explanation": "The `inset` keyword changes the shadow from an outer shadow (default) to an inner shadow, making it appear inside the element's border box.",
+      "concepts": ["box-shadow", "inset"]
+    },
+    {
+      "id": "css_ch32_q03",
+      "type": "multiple_choice",
+      "question": "How do you apply multiple shadows to a single element using `box-shadow`?",
+      "choices": [
+        "Use multiple box-shadow declarations",
+        "Separate each shadow with a comma in a single box-shadow declaration",
+        "Wrap each shadow in parentheses",
+        "Use the box-shadow-multiple property"
+      ],
+      "correct": 1,
+      "explanation": "Multiple shadows are applied by listing them in a single `box-shadow` property, separated by commas. The first shadow listed appears on top.",
+      "concepts": ["box-shadow", "multiple-shadows"]
+    },
+    {
+      "id": "css_ch32_q04",
+      "type": "multiple_choice",
+      "question": "What does the spread radius value do in a `box-shadow` declaration?",
+      "choices": [
+        "Controls how blurry the shadow appears",
+        "Sets the distance of the shadow from the element",
+        "Expands or contracts the size of the shadow",
+        "Determines the opacity of the shadow"
+      ],
+      "correct": 2,
+      "explanation": "The spread radius expands (positive values) or contracts (negative values) the shadow relative to the element's size. A spread of 0 makes the shadow the same size as the element.",
+      "concepts": ["box-shadow", "spread"]
+    },
+    {
+      "id": "css_ch32_q05",
+      "type": "fill_in_blank",
+      "question": "In `box-shadow: 5px 10px 3px 0px black`, the value 3px represents the ___ radius.",
+      "correct": "blur",
+      "explanation": "The third value in the box-shadow shorthand is the blur radius. A larger blur radius creates a softer, more diffused shadow. A value of 0 produces a sharp shadow.",
+      "concepts": ["box-shadow", "blur"]
+    },
+    {
+      "id": "css_ch32_q06",
+      "type": "fill_in_blank",
+      "question": "In `box-shadow: 5px 10px 0 0 black`, the value 10px represents the ___ offset.",
+      "correct": "vertical",
+      "explanation": "The second value in the box-shadow shorthand is the vertical (Y-axis) offset. Positive values push the shadow downward, and negative values push it upward.",
+      "concepts": ["box-shadow", "v-offset"]
+    }
+  ]
+}

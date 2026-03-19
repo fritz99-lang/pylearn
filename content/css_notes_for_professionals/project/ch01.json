@@ -1,0 +1,21 @@
+{
+  "step_id": "css_proj_ch01",
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 1,
+  "title": "Blog Foundation \u2014 Basic Styles",
+  "description": "Every great blog theme starts with solid foundation styles. In this first step, set base styles for the body element (font family, size, line height, text color, and background color), then style anchor links and the main heading (h1). Use a sans-serif font stack so the blog looks clean on any system.",
+  "builds_on": "",
+  "starter_code": "css = \"\"\"\n/* Blog Theme CSS */\n/* Step 1: Basic foundation styles */\n\nbody {\n    /* TODO: Add font-family with a sans-serif stack */\n    /* TODO: Add font-size */\n    /* TODO: Add line-height */\n    /* TODO: Add color for text */\n    /* TODO: Add background-color */\n}\n\na {\n    /* TODO: Style links */\n}\n\nh1 {\n    /* TODO: Style the main heading */\n}\n\"\"\"",
+  "test_code": "assert 'body' in css.lower(), 'Missing body selector'\nassert 'font-family' in css.lower(), 'Missing font-family property'\nassert 'sans-serif' in css.lower(), 'Font stack should include sans-serif as a fallback'\nassert 'color' in css.lower(), 'Missing color property'\nassert 'background-color' in css.lower(), 'Missing background-color property'\nassert 'line-height' in css.lower(), 'Missing line-height property'\nassert css.lower().count('a') >= 1 and ('a {' in css.lower() or 'a{' in css.lower()), 'Missing a (anchor) selector'\nassert 'h1' in css.lower(), 'Missing h1 selector'",
+  "acceptance_criteria": [
+    "body rule sets font-family with a sans-serif fallback stack",
+    "body has font-size, line-height, color, and background-color",
+    "Anchor (a) elements are styled",
+    "h1 heading is styled"
+  ],
+  "hints": [
+    "A common sans-serif stack: font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;",
+    "A comfortable line-height for reading is between 1.5 and 1.8",
+    "Use a dark color like #333 for text and a light background like #f9f9f9"
+  ]
+}

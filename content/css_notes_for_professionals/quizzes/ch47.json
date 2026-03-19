@@ -1,0 +1,58 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 47,
+  "questions": [
+    {
+      "id": "css_ch47_q01",
+      "type": "multiple_choice",
+      "question": "What is the correct syntax for a CSS feature query?",
+      "choices": ["@media supports (display: grid)", "@supports (display: grid) { ... }", "@feature (display: grid) { ... }", "@if supports display: grid { ... }"],
+      "correct": 1,
+      "explanation": "The @supports at-rule tests whether the browser supports a given CSS property-value pair. The condition is enclosed in parentheses, and the styles to apply when supported go inside the curly braces.",
+      "concepts": ["@supports", "feature-queries"]
+    },
+    {
+      "id": "css_ch47_q02",
+      "type": "multiple_choice",
+      "question": "How do you combine multiple conditions in a @supports rule?",
+      "choices": ["Using commas between conditions", "Using 'and', 'or', and 'not' operators", "Using the '+' operator", "Using semicolons between conditions"],
+      "correct": 1,
+      "explanation": "Feature queries support logical operators: 'and' requires all conditions to be true, 'or' requires at least one, and 'not' negates a condition. For example: @supports (display: grid) and (gap: 1rem) { ... }.",
+      "concepts": ["@supports", "logical-operators"]
+    },
+    {
+      "id": "css_ch47_q03",
+      "type": "multiple_choice",
+      "question": "What does @supports not (display: grid) { ... } do?",
+      "choices": ["Applies styles only when display: grid is supported", "Applies styles only when display: grid is NOT supported", "Removes grid support from the page", "Disables display: grid globally"],
+      "correct": 1,
+      "explanation": "The 'not' operator negates the feature query condition. @supports not (display: grid) applies the enclosed styles only in browsers that do not support display: grid, making it useful for providing fallback styles.",
+      "concepts": ["@supports", "not-operator", "fallback"]
+    },
+    {
+      "id": "css_ch47_q04",
+      "type": "multiple_choice",
+      "question": "What is progressive enhancement in the context of feature queries?",
+      "choices": ["Gradually increasing animation speed", "Providing a baseline experience and adding features for capable browsers", "Loading CSS files one at a time", "Using only the newest CSS properties"],
+      "correct": 1,
+      "explanation": "Progressive enhancement means building a solid baseline experience that works everywhere, then using @supports to add enhanced styles for browsers that support newer features. This ensures all users get a functional experience.",
+      "concepts": ["progressive-enhancement", "feature-queries"]
+    },
+    {
+      "id": "css_ch47_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ at-rule is used to conditionally apply CSS styles based on browser support for specific properties.",
+      "correct": "@supports",
+      "explanation": "@supports is the CSS at-rule for feature queries. It tests whether the browser supports a CSS property-value pair and conditionally applies the enclosed styles only when the test passes.",
+      "concepts": ["@supports", "feature-queries"]
+    },
+    {
+      "id": "css_ch47_q06",
+      "type": "fill_in_blank",
+      "question": "When using @supports, the ___ operator lets you test that at least one of multiple conditions is met.",
+      "correct": "or",
+      "explanation": "The 'or' operator in @supports allows you to test multiple conditions where at least one must be true. For example: @supports (display: flex) or (display: grid) applies styles if either feature is supported.",
+      "concepts": ["@supports", "or-operator"]
+    }
+  ]
+}

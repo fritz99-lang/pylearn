@@ -1,0 +1,25 @@
+{
+  "step_id": "hc_proj_ch09",
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 9,
+  "title": "Submit a Recipe \u2014 Form",
+  "description": "Add a recipe submission form to your site. Include an h2 'Submit a Recipe', a form element with: a text input for recipe name (with label, required), a select dropdown for category, a textarea for the description (with label), and a submit button. Each input should have a matching label.",
+  "builds_on": "hc_proj_ch07",
+  "starter_code": "# Recipe Collection Website \u2014 Step 7: Recipe Submission Form\n# Add a form with labeled inputs: text, select, textarea, and submit button.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>My Recipes</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            color: #333;\n            background-color: #f9f5f0;\n            margin: 0;\n            padding: 20px;\n        }\n        h1, h2 { color: #8b4513; }\n        img { max-width: 100%; }\n        nav { background-color: #8b4513; padding: 10px; }\n        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }\n        nav li { margin-right: 20px; }\n        nav a { color: white; text-decoration: none; }\n        .recipe-card {\n            border: 1px solid #ddd;\n            padding: 20px;\n            margin: 15px 0;\n            border-radius: 8px;\n            background-color: white;\n        }\n        .recipe-card h2 { color: #5a3010; margin-top: 0; }\n        .recipe-card p { line-height: 1.6; }\n    </style>\n</head>\n<body>\n    <header>\n        <h1>My Recipe Collection</h1>\n        <nav>\n            <ul>\n                <li><a href=\"#\">Home</a></li>\n                <li><a href=\"#recipes\">Recipes</a></li>\n                <li><a href=\"#submit\">Submit Recipe</a></li>\n            </ul>\n        </nav>\n    </header>\n\n    <main>\n        <p>Welcome to my favorite recipes!</p>\n\n        <div class=\"recipe-card\">\n            <h2>Classic Pancakes</h2>\n            <p>Fluffy, golden pancakes perfect for a weekend breakfast.</p>\n            <h3>Ingredients</h3>\n            <ul>\n                <li>2 cups flour</li>\n                <li>2 eggs</li>\n                <li>1 cup milk</li>\n            </ul>\n            <h3>Instructions</h3>\n            <ol>\n                <li>Mix dry ingredients</li>\n                <li>Add wet ingredients and stir</li>\n                <li>Cook on a hot pan until golden</li>\n            </ol>\n            <img src=\"pancakes.jpg\" alt=\"A stack of golden pancakes\">\n        </div>\n\n        <div class=\"recipe-card\">\n            <h2>Garden Salad</h2>\n            <p>A fresh and healthy salad with seasonal vegetables.</p>\n            <h3>Ingredients</h3>\n            <ul>\n                <li>Mixed greens</li>\n                <li>Cherry tomatoes</li>\n                <li>Cucumber</li>\n            </ul>\n            <h3>Instructions</h3>\n            <ol>\n                <li>Wash and chop vegetables</li>\n                <li>Toss together in a bowl</li>\n                <li>Add dressing and serve</li>\n            </ol>\n        </div>\n\n        <!-- Add h2 \"Submit a Recipe\" -->\n        <!-- Add a <form> with labeled inputs, select, textarea, and submit button -->\n\n    </main>\n\n    <footer>\n        <p>&copy; 2026 My Recipe Collection</p>\n    </footer>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<form' in html.lower(), 'Must include a <form> element'\nassert '</form>' in html.lower(), 'Must include closing </form> tag'\nassert '<input' in html.lower(), 'Must include at least one <input> element'\nassert '<select' in html.lower() and '</select>' in html.lower(), 'Must include a <select> dropdown'\nassert '<textarea' in html.lower() and '</textarea>' in html.lower(), 'Must include a <textarea> element'\nassert '<label' in html.lower(), 'Must include <label> elements for inputs'\nassert html.lower().count('<label') >= 2, 'Must have at least 2 labels'\nassert 'submit' in html.lower() or '<button' in html.lower(), 'Must include a submit button'\nassert 'required' in html.lower(), 'Must have required attribute on the recipe name input'\nassert 'class=\"recipe-card\"' in html.lower() or \"class='recipe-card'\" in html.lower(), 'Must keep recipe cards from previous step'",
+  "acceptance_criteria": [
+    "A form element contains all input fields",
+    "Text input for recipe name with a label and required attribute",
+    "Select dropdown for recipe category",
+    "Textarea for recipe description with a label",
+    "A submit button is present",
+    "At least 2 labels are used for form fields",
+    "Recipe cards from previous step are preserved"
+  ],
+  "hints": [
+    "Label with input: <label for=\"name\">Recipe Name:</label><input type=\"text\" id=\"name\" required>",
+    "Select dropdown: <select id=\"category\"><option>Breakfast</option><option>Lunch</option></select>",
+    "Textarea: <textarea id=\"description\" rows=\"4\"></textarea>",
+    "Submit button: <button type=\"submit\">Submit Recipe</button>"
+  ]
+}

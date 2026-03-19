@@ -1,0 +1,58 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 11,
+  "questions": [
+    {
+      "id": "cpp_ch11_q01",
+      "type": "multiple_choice",
+      "question": "Which keyword is used to define a structure in C++?",
+      "choices": ["class", "struct", "type", "record"],
+      "correct": 1,
+      "explanation": "The 'struct' keyword is used to define a structure, which groups related variables of different data types under a single name.",
+      "concepts": ["struct_keyword", "defining_structures"]
+    },
+    {
+      "id": "cpp_ch11_q02",
+      "type": "multiple_choice",
+      "question": "Which operator is used to access a member of a structure variable?",
+      "choices": ["The arrow operator (->)", "The dot operator (.)", "The scope resolution operator (::)", "The address-of operator (&)"],
+      "correct": 1,
+      "explanation": "The dot operator (.) is used to access members of a structure variable. The arrow operator (->) is used when accessing members through a pointer to a structure.",
+      "concepts": ["dot_operator", "accessing_members"]
+    },
+    {
+      "id": "cpp_ch11_q03",
+      "type": "multiple_choice",
+      "question": "When a structure variable is passed to a function by value, what happens?",
+      "choices": ["The function receives a pointer to the original structure", "A copy of the entire structure is made for the function", "The function receives a reference to the original structure", "Only the first member of the structure is passed"],
+      "correct": 1,
+      "explanation": "When passed by value, a complete copy of the structure is created for the function parameter. Changes to the parameter do not affect the original structure.",
+      "concepts": ["structures_as_arguments", "pass_by_value"]
+    },
+    {
+      "id": "cpp_ch11_q04",
+      "type": "multiple_choice",
+      "question": "How do you declare an array of 50 structure variables of type Student?",
+      "choices": ["Student[50] roster;", "array<Student, 50> roster;", "Student roster[50];", "struct roster[50] Student;"],
+      "correct": 2,
+      "explanation": "An array of structures is declared the same way as any other array: the type name followed by the variable name and size in brackets — Student roster[50];",
+      "concepts": ["arrays_of_structures", "declaring_arrays"]
+    },
+    {
+      "id": "cpp_ch11_q05",
+      "type": "fill_in_blank",
+      "question": "A structure that contains another structure as one of its members is called a ___ structure.",
+      "correct": "nested",
+      "explanation": "A nested structure is a structure that contains another structure as a member. You access the inner members using multiple dot operators, e.g., employee.birthDate.year.",
+      "concepts": ["nested_structures"]
+    },
+    {
+      "id": "cpp_ch11_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ keyword is used to define a structure in C++.",
+      "correct": "struct",
+      "explanation": "The struct keyword begins a structure definition, which groups related variables (called members) of potentially different data types into a single unit.",
+      "concepts": ["struct_keyword", "defining_structures"]
+    }
+  ]
+}

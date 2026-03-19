@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 2,
+  "challenges": [
+    {
+      "id": "cpp_ch02_c01",
+      "title": "Variables and Output",
+      "description": "Write a C++ program that declares an int variable and a double variable, assigns values to them, and prints both using cout. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Declare at least one int variable\n- Declare at least one double variable\n- Assign values to both variables\n- Use cout to display the values",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'int ' in cpp, 'Should declare an int variable'\nassert 'double ' in cpp, 'Should declare a double variable'\nassert 'cout' in cpp, 'Should use cout to display the values'\nassert '=' in cpp, 'Should assign values to variables'\nassert '#include <iostream>' in cpp, 'Should include the iostream header'",
+      "difficulty": "easy",
+      "concepts_new": ["int", "double", "variable declaration", "variable assignment"],
+      "concepts_review": ["#include", "cout"],
+      "hints": [
+        "Declare an int like: int age = 25;",
+        "Declare a double like: double gpa = 3.75;"
+      ]
+    },
+    {
+      "id": "cpp_ch02_c02",
+      "title": "Input and Arithmetic",
+      "description": "Write a C++ program that uses cin to read two numbers from the user, calculates their sum and average, and displays the results. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Use cin to read input\n- Calculate a sum using the + operator\n- Calculate an average by dividing by 2\n- Display both results with cout",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'cin' in cpp, 'Should use cin to read user input'\nassert 'cout' in cpp, 'Should use cout to display results'\nassert '+' in cpp, 'Should use the + operator to calculate a sum'\nassert '/' in cpp or 'div' in cpp.lower(), 'Should divide to calculate an average'\nassert cpp.count('cin') >= 2 or '>>' in cpp, 'Should read at least two values with cin'\nassert 'double' in cpp or 'float' in cpp, 'Should use double or float for the average calculation'",
+      "difficulty": "medium",
+      "concepts_new": ["cin", "arithmetic operators", "sum", "average"],
+      "concepts_review": ["int", "double", "cout", "variable declaration"],
+      "hints": [
+        "Use cin >> variable; to read input, for example: cin >> num1;",
+        "Calculate average as a double: double avg = (num1 + num2) / 2.0;"
+      ]
+    }
+  ]
+}

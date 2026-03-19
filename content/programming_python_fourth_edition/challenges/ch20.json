@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 20,
+  "challenges": [
+    {
+      "id": "pp_ch20_c01",
+      "title": "Email Address Finder",
+      "description": "Write a function `find_emails(text)` that uses the `re` module to find all email addresses in a text string. An email matches the pattern: one or more word characters/dots/hyphens, followed by @, followed by one or more word characters/dots/hyphens. Return a list of unique email addresses found, in the order they first appear.",
+      "starter_code": "import re\n\ndef find_emails(text):\n    \"\"\"Find all unique email addresses in text, in order of first appearance.\"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "assert find_emails('Contact alice@example.com for info.') == ['alice@example.com']\nassert find_emails('No emails here!') == []\ntext = 'Send to bob@test.org and alice@example.com or bob@test.org again.'\nresult = find_emails(text)\nassert result == ['bob@test.org', 'alice@example.com']\nassert find_emails('user.name@domain.co.uk') == ['user.name@domain.co.uk']\nassert find_emails('a@b.com, c@d.com, e@f.com') == ['a@b.com', 'c@d.com', 'e@f.com']\nassert find_emails('test-user@my-domain.com') == ['test-user@my-domain.com']\nmulti = find_emails('x@y.com and x@y.com and z@w.com')\nassert multi == ['x@y.com', 'z@w.com']",
+      "difficulty": "easy",
+      "concepts_new": ["regex_email_pattern", "re_findall"],
+      "concepts_review": ["regular_expressions", "lists", "deduplication"],
+      "hints": [
+        "Use re.findall() with a pattern like r'[\\w.-]+@[\\w.-]+'.",
+        "To deduplicate while preserving order, iterate through matches and add to a result list only if not already seen (use a set for tracking)."
+      ]
+    },
+    {
+      "id": "pp_ch20_c02",
+      "title": "Config File Parser",
+      "description": "Write a function `parse_config(text)` that parses a simple config file format. Each line is either: a key=value pair, a comment (starts with #), or a blank line. Return a dict of key-value pairs. Keys and values should be stripped of whitespace. Lines without '=' (other than comments/blanks) should be ignored. Support values with '=' in them (only split on the first '=').",
+      "starter_code": "def parse_config(text):\n    \"\"\"Parse a key=value config file format.\n    \n    Rules:\n        - Lines starting with # are comments (ignored).\n        - Blank lines are ignored.\n        - key=value pairs are split on the first '='.\n        - Keys and values are stripped of whitespace.\n        - Lines without '=' (that aren't comments/blank) are ignored.\n    \"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "config = parse_config('host=localhost\\nport=8080')\nassert config == {'host': 'localhost', 'port': '8080'}\nconfig2 = parse_config('# Database config\\ndb_host = 127.0.0.1\\ndb_port = 5432\\n\\n# End')\nassert config2 == {'db_host': '127.0.0.1', 'db_port': '5432'}\nassert parse_config('') == {}\nassert parse_config('# comment only') == {}\nassert parse_config('\\n\\n\\n') == {}\nconfig3 = parse_config('key = value with = equals')\nassert config3 == {'key': 'value with = equals'}\nconfig4 = parse_config('  spaced_key  =  spaced_value  ')\nassert config4 == {'spaced_key': 'spaced_value'}\nconfig5 = parse_config('valid=yes\\ninvalid_line\\nalso_valid=true')\nassert config5 == {'valid': 'yes', 'also_valid': 'true'}",
+      "difficulty": "medium",
+      "concepts_new": ["config_parsing", "text_processing"],
+      "concepts_review": ["string_methods", "dictionaries", "iteration"],
+      "hints": [
+        "Split the text into lines with text.splitlines(). For each line, strip it and check if it starts with '#' or is empty.",
+        "Use str.split('=', 1) to split on only the first '=' sign, giving you at most two parts."
+      ]
+    }
+  ]
+}

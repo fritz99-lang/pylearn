@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 15,
+  "questions": [
+    {
+      "id": "css_ch15_q01",
+      "type": "multiple_choice",
+      "question": "What does the `font-family` property accept as a fallback mechanism?",
+      "choices": [
+        "Only one font name at a time",
+        "A comma-separated list of font names, checked in order",
+        "A semicolon-separated list of font names",
+        "A single generic font family keyword only"
+      ],
+      "correct": 1,
+      "explanation": "font-family accepts a comma-separated list of font names. The browser uses the first available font in the list.",
+      "concepts": ["font-family"]
+    },
+    {
+      "id": "css_ch15_q02",
+      "type": "multiple_choice",
+      "question": "Which CSS rule is used to load a custom font file for use on a webpage?",
+      "choices": [
+        "@import",
+        "@font-face",
+        "@font-load",
+        "@custom-font"
+      ],
+      "correct": 1,
+      "explanation": "@font-face defines a custom font by specifying its name and the URL to the font file, making it available for use in font-family declarations.",
+      "concepts": ["@font-face", "web fonts"]
+    },
+    {
+      "id": "css_ch15_q03",
+      "type": "multiple_choice",
+      "question": "What does `text-transform: uppercase` do?",
+      "choices": [
+        "Changes the font weight to bold",
+        "Converts all text to uppercase letters",
+        "Increases the font size",
+        "Adds an underline to the text"
+      ],
+      "correct": 1,
+      "explanation": "text-transform: uppercase converts all characters in the element to uppercase, regardless of how they are typed in the HTML.",
+      "concepts": ["text-transform"]
+    },
+    {
+      "id": "css_ch15_q04",
+      "type": "multiple_choice",
+      "question": "Which property controls the vertical spacing between lines of text?",
+      "choices": [
+        "letter-spacing",
+        "word-spacing",
+        "line-height",
+        "text-indent"
+      ],
+      "correct": 2,
+      "explanation": "line-height sets the height of each line box, controlling the vertical space between lines of text.",
+      "concepts": ["line-height", "typography"]
+    },
+    {
+      "id": "css_ch15_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property removes or adds decorations like underlines on text.",
+      "correct": "text-decoration",
+      "explanation": "text-decoration controls decorative lines on text, including underline, overline, line-through, and none.",
+      "concepts": ["text-decoration"]
+    },
+    {
+      "id": "css_ch15_q06",
+      "type": "fill_in_blank",
+      "question": "Setting `text-align: ___` horizontally centers text within its container.",
+      "correct": "center",
+      "explanation": "text-align: center centers inline content (including text) horizontally within a block-level container.",
+      "concepts": ["text-align"]
+    }
+  ]
+}

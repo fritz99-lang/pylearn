@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 5,
+  "questions": [
+    {
+      "id": "h5_ch05_q01",
+      "type": "multiple_choice",
+      "question": "What is the difference between <b> and <strong>?",
+      "choices": ["There is no difference", "<b> is bold styling only, <strong> conveys semantic importance", "<strong> is deprecated in HTML5", "<b> is for headings, <strong> is for paragraphs"],
+      "correct": 1,
+      "explanation": "The <b> tag applies bold styling without semantic meaning. The <strong> tag indicates that the content is of strong importance, which screen readers may emphasize.",
+      "concepts": ["strong tag", "b tag", "semantic HTML"]
+    },
+    {
+      "id": "h5_ch05_q02",
+      "type": "multiple_choice",
+      "question": "Which tag is used to semantically indicate emphasis on text?",
+      "choices": ["<i>", "<em>", "<italic>", "<emphasis>"],
+      "correct": 1,
+      "explanation": "The <em> tag provides semantic emphasis, typically rendered as italic text. Screen readers may change their tone of voice for emphasized content.",
+      "concepts": ["em tag", "emphasis", "semantic HTML"]
+    },
+    {
+      "id": "h5_ch05_q03",
+      "type": "multiple_choice",
+      "question": "Which tag is used to highlight or mark text as relevant in a specific context?",
+      "choices": ["<highlight>", "<span>", "<mark>", "<em>"],
+      "correct": 2,
+      "explanation": "The <mark> tag highlights text, typically rendering it with a yellow background. It is used to indicate text that is relevant in the current context, such as search results.",
+      "concepts": ["mark tag", "text highlighting"]
+    },
+    {
+      "id": "h5_ch05_q04",
+      "type": "multiple_choice",
+      "question": "Which pair of tags is used for subscript and superscript text?",
+      "choices": ["<down> and <up>", "<sub> and <sup>", "<lower> and <upper>", "<base> and <exp>"],
+      "correct": 1,
+      "explanation": "The <sub> tag renders text as subscript (below the baseline) and <sup> renders text as superscript (above the baseline). They are used for chemical formulas, footnotes, and mathematical expressions.",
+      "concepts": ["sub tag", "sup tag"]
+    },
+    {
+      "id": "h5_ch05_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ tag represents text that has been deleted or is no longer accurate, typically rendered with a strikethrough.",
+      "correct": "<s>",
+      "explanation": "The <s> tag indicates content that is no longer accurate or relevant, rendered with a line through it. For document edits, <del> is more semantically appropriate.",
+      "concepts": ["s tag", "strikethrough"]
+    },
+    {
+      "id": "h5_ch05_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ tag is used to represent side comments or small print, such as copyright notices.",
+      "correct": "<small>",
+      "explanation": "The <small> tag represents side comments, disclaimers, or fine print. In HTML5, it has semantic meaning beyond just reducing font size.",
+      "concepts": ["small tag", "fine print"]
+    }
+  ]
+}

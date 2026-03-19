@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 7,
+  "questions": [
+    {
+      "id": "hc_ch07_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS selector targets elements with a specific class name?",
+      "choices": [
+        "#classname",
+        ".classname",
+        "@classname",
+        "*classname"
+      ],
+      "correct": 1,
+      "explanation": "A period (.) followed by the class name is the CSS class selector. For example, .highlight targets all elements with class=\"highlight\".",
+      "concepts": ["class selectors", "CSS selectors"]
+    },
+    {
+      "id": "hc_ch07_q02",
+      "type": "multiple_choice",
+      "question": "Which CSS selector targets a single element with a unique ID?",
+      "choices": [
+        ".idname",
+        "&idname",
+        "#idname",
+        "!idname"
+      ],
+      "correct": 2,
+      "explanation": "A hash (#) followed by the ID name is the CSS ID selector. For example, #header targets the element with id=\"header\".",
+      "concepts": ["ID selectors", "CSS selectors"]
+    },
+    {
+      "id": "hc_ch07_q03",
+      "type": "multiple_choice",
+      "question": "What does the descendant selector `div p` target?",
+      "choices": [
+        "All <div> elements followed by <p> elements",
+        "All <p> elements that are inside a <div> element",
+        "All <div> and <p> elements on the page",
+        "Only <p> elements that are direct children of <div>"
+      ],
+      "correct": 1,
+      "explanation": "A descendant selector (space between selectors) targets all elements matching the second selector that are nested anywhere inside the first selector.",
+      "concepts": ["descendant selectors", "selector combinations"]
+    },
+    {
+      "id": "hc_ch07_q04",
+      "type": "multiple_choice",
+      "question": "Which has the highest specificity?",
+      "choices": [
+        "An element selector (e.g., p)",
+        "A class selector (e.g., .intro)",
+        "An ID selector (e.g., #main)",
+        "A universal selector (*)"
+      ],
+      "correct": 2,
+      "explanation": "ID selectors have the highest specificity among simple selectors. The order from lowest to highest is: universal (*), element, class, ID.",
+      "concepts": ["specificity", "CSS priority"]
+    },
+    {
+      "id": "hc_ch07_q05",
+      "type": "fill_in_blank",
+      "question": "In CSS, ___ determines which style rule is applied when multiple rules target the same element.",
+      "correct": "specificity",
+      "explanation": "Specificity is the algorithm browsers use to decide which CSS rule takes priority when multiple rules apply to the same element.",
+      "concepts": ["specificity", "CSS cascade"]
+    },
+    {
+      "id": "hc_ch07_q06",
+      "type": "fill_in_blank",
+      "question": "A CSS ___ selector targets elements by their HTML tag name, such as h1 or p.",
+      "correct": "element",
+      "explanation": "An element selector (also called a type selector) matches all instances of a given HTML tag, such as p { } or h1 { }.",
+      "concepts": ["element selectors", "CSS selectors"]
+    }
+  ]
+}

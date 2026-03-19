@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 18,
+  "challenges": [
+    {
+      "id": "cpp_ch18_c01",
+      "title": "Stack Operations",
+      "description": "Write a C++ program that demonstrates stack operations. Use the STL stack (from <stack>) to push at least 3 integer values, then pop and print each value. Your output should show the LIFO (last-in, first-out) order. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Include the <stack> header\n- Create a stack of integers\n- Use push to add at least 3 values\n- Use top and pop in a loop to print and remove values",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <stack>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert '#include <stack>' in cpp, 'Should include the <stack> header'\nassert 'stack<int>' in cpp or 'stack< int >' in cpp or 'stack <int>' in cpp, 'Should create a stack of integers'\nassert 'push' in cpp, 'Should use push to add elements to the stack'\nassert cpp.count('push') >= 3, 'Should push at least 3 values onto the stack'\nassert 'pop' in cpp, 'Should use pop to remove elements from the stack'\nassert 'top' in cpp, 'Should use top to access the top element before popping'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "easy",
+      "concepts_new": ["stack", "LIFO", "push", "pop", "top", "STL stack"],
+      "concepts_review": ["loops", "STL containers", "#include"],
+      "hints": [
+        "Create a stack: stack<int> s; then s.push(10); s.push(20); s.push(30);",
+        "Print and pop in a loop: while (!s.empty()) { cout << s.top() << endl; s.pop(); }"
+      ]
+    },
+    {
+      "id": "cpp_ch18_c02",
+      "title": "Simple Queue Implementation",
+      "description": "Write a C++ program that implements a simple integer queue using a struct or class. Your queue should support `enqueue(int value)` to add to the rear and `dequeue()` to remove from the front. Use an array internally with front and rear index variables. In main(), enqueue at least 3 values and dequeue them, printing each. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define a Queue struct or class with an internal array\n- Implement enqueue and dequeue methods\n- Track front and rear positions",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'enqueue' in cpp, 'Should implement an enqueue method'\nassert 'dequeue' in cpp, 'Should implement a dequeue method'\nassert 'Queue' in cpp, 'Should define a Queue struct or class'\nassert 'front' in cpp, 'Should track a front index or pointer'\nassert 'rear' in cpp or 'back' in cpp, 'Should track a rear index or pointer'\nassert cpp.count('enqueue') >= 4, 'Should call enqueue at least 3 times (1 definition + 3 calls)'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "medium",
+      "concepts_new": ["queue", "FIFO", "enqueue", "dequeue", "front and rear"],
+      "concepts_review": ["arrays", "structs", "member functions"],
+      "hints": [
+        "Define the queue with an array: struct Queue { int arr[100]; int front = 0; int rear = 0; };",
+        "enqueue adds at arr[rear++] and dequeue reads from arr[front++]"
+      ]
+    }
+  ]
+}

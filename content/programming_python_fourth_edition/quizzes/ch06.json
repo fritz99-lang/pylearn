@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 6,
+  "questions": [
+    {
+      "id": "pp_ch06_q01",
+      "type": "multiple_choice",
+      "question": "Which subprocess function runs a command and waits for it to complete, returning a CompletedProcess object?",
+      "choices": [
+        "subprocess.call()",
+        "subprocess.run()",
+        "subprocess.execute()",
+        "subprocess.Popen()"
+      ],
+      "correct": 1,
+      "explanation": "subprocess.run() is the recommended high-level function (added in Python 3.5). It runs the command, waits for completion, and returns a CompletedProcess with returncode, stdout, and stderr attributes.",
+      "concepts": ["subprocess", "process_execution"]
+    },
+    {
+      "id": "pp_ch06_q02",
+      "type": "multiple_choice",
+      "question": "What is the key difference between threading and multiprocessing in Python?",
+      "choices": [
+        "threading uses multiple CPUs; multiprocessing does not",
+        "threading shares memory in one process and is limited by the GIL; multiprocessing uses separate processes with separate memory",
+        "multiprocessing is only available on Unix systems",
+        "threading is always faster than multiprocessing"
+      ],
+      "correct": 1,
+      "explanation": "Threads share the same memory space and are constrained by the GIL for CPU-bound work. Multiprocessing spawns separate processes with independent memory, bypassing the GIL for true parallelism.",
+      "concepts": ["threading", "multiprocessing", "gil"]
+    },
+    {
+      "id": "pp_ch06_q03",
+      "type": "multiple_choice",
+      "question": "Which os function creates a child process by duplicating the current process (Unix only)?",
+      "choices": [
+        "os.spawn()",
+        "os.fork()",
+        "os.clone()",
+        "os.exec()"
+      ],
+      "correct": 1,
+      "explanation": "os.fork() duplicates the current process, creating a child process. It returns 0 in the child and the child's PID in the parent. It is available only on Unix-like systems, not Windows.",
+      "concepts": ["os_fork", "process_creation"]
+    },
+    {
+      "id": "pp_ch06_q04",
+      "type": "multiple_choice",
+      "question": "When using the threading module, how do you create and start a new thread?",
+      "choices": [
+        "thread = threading.Thread(target=func); thread.run()",
+        "thread = threading.Thread(target=func); thread.start()",
+        "thread = threading.create(func); thread.begin()",
+        "threading.run(target=func)"
+      ],
+      "correct": 1,
+      "explanation": "You create a Thread object with a target callable, then call start() to begin execution in a new thread. Calling run() directly would execute the function in the current thread, not a new one.",
+      "concepts": ["threading", "thread_creation"]
+    },
+    {
+      "id": "pp_ch06_q05",
+      "type": "fill_in_blank",
+      "question": "The Python Global Interpreter Lock, abbreviated ___, prevents multiple threads from executing Python bytecode simultaneously.",
+      "correct": "GIL",
+      "explanation": "The GIL (Global Interpreter Lock) is a mutex that protects access to Python objects, preventing multiple threads from executing Python bytecode at once. This limits CPU-bound thread parallelism.",
+      "concepts": ["gil", "threading"]
+    },
+    {
+      "id": "pp_ch06_q06",
+      "type": "fill_in_blank",
+      "question": "The subprocess.___ class provides fine-grained control over process creation, including access to stdin, stdout, and stderr pipes.",
+      "correct": "Popen",
+      "explanation": "subprocess.Popen is the lower-level class that subprocess.run() is built on. It allows non-blocking process management, streaming I/O through pipes, and more control over the child process lifecycle.",
+      "concepts": ["subprocess", "popen"]
+    }
+  ]
+}

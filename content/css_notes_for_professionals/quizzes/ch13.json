@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 13,
+  "questions": [
+    {
+      "id": "css_ch13_q01",
+      "type": "multiple_choice",
+      "question": "Which media query targets screens with a minimum width of 768px?",
+      "choices": [
+        "@media (max-width: 768px) { }",
+        "@media (min-width: 768px) { }",
+        "@media screen (768px) { }",
+        "@media only (width: 768px) { }"
+      ],
+      "correct": 1,
+      "explanation": "@media (min-width: 768px) applies styles when the viewport is 768px or wider.",
+      "concepts": ["media queries", "min-width"]
+    },
+    {
+      "id": "css_ch13_q02",
+      "type": "multiple_choice",
+      "question": "Which media type targets styles specifically for printed pages?",
+      "choices": [
+        "screen",
+        "all",
+        "print",
+        "paper"
+      ],
+      "correct": 2,
+      "explanation": "The print media type applies styles only when the document is being printed or shown in print preview.",
+      "concepts": ["media queries", "print"]
+    },
+    {
+      "id": "css_ch13_q03",
+      "type": "multiple_choice",
+      "question": "How do you combine two conditions in a media query so both must be true?",
+      "choices": [
+        "Using a comma between conditions",
+        "Using the 'and' keyword between conditions",
+        "Using the 'or' keyword between conditions",
+        "Nesting one @media block inside another"
+      ],
+      "correct": 1,
+      "explanation": "The 'and' keyword combines multiple media features so styles apply only when all conditions are met.",
+      "concepts": ["media queries", "syntax"]
+    },
+    {
+      "id": "css_ch13_q04",
+      "type": "multiple_choice",
+      "question": "In a mobile-first responsive design, which approach is preferred?",
+      "choices": [
+        "Use max-width queries to override desktop styles for mobile",
+        "Use min-width queries to progressively add styles for larger screens",
+        "Use only the screen media type without width queries",
+        "Write separate CSS files for each screen size"
+      ],
+      "correct": 1,
+      "explanation": "Mobile-first design starts with base styles for small screens and uses min-width media queries to add styles as the viewport grows.",
+      "concepts": ["media queries", "responsive design", "breakpoints"]
+    },
+    {
+      "id": "css_ch13_q05",
+      "type": "fill_in_blank",
+      "question": "A media query begins with the ___ keyword in CSS.",
+      "correct": "@media",
+      "explanation": "@media is the at-rule used to define media queries that conditionally apply CSS rules.",
+      "concepts": ["media queries", "syntax"]
+    },
+    {
+      "id": "css_ch13_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ media feature tests whether the viewport width is at most a given value.",
+      "correct": "max-width",
+      "explanation": "max-width applies styles when the viewport width is equal to or less than the specified value.",
+      "concepts": ["media queries", "max-width"]
+    }
+  ]
+}

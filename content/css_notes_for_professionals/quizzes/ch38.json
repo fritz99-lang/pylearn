@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 38,
+  "questions": [
+    {
+      "id": "css_ch38_q01",
+      "type": "multiple_choice",
+      "question": "How do you create a CSS triangle using border tricks?",
+      "choices": [
+        "Set clip-path to a triangle polygon",
+        "Set width and height to 0, then use colored and transparent borders",
+        "Use the triangle() shape function",
+        "Apply transform: rotate(45deg) to a square element"
+      ],
+      "correct": 1,
+      "explanation": "A CSS triangle is created by setting width and height to 0, making all borders transparent, and then giving one border a color. The colored border forms the visible triangle shape.",
+      "concepts": ["triangle", "border trick"]
+    },
+    {
+      "id": "css_ch38_q02",
+      "type": "multiple_choice",
+      "question": "Which CSS property creates a perfect circle from a square element?",
+      "choices": [
+        "border-radius: 100px",
+        "border-radius: 50%",
+        "border-style: circle",
+        "shape: circle"
+      ],
+      "correct": 1,
+      "explanation": "Setting border-radius: 50% on a square element (equal width and height) produces a perfect circle. The percentage is relative to the element's dimensions.",
+      "concepts": ["border-radius", "circle"]
+    },
+    {
+      "id": "css_ch38_q03",
+      "type": "multiple_choice",
+      "question": "Which pseudo-elements are commonly used to add extra shape components to a single HTML element?",
+      "choices": [
+        "::first-line and ::first-letter",
+        "::before and ::after",
+        "::marker and ::placeholder",
+        "::selection and ::backdrop"
+      ],
+      "correct": 1,
+      "explanation": "The ::before and ::after pseudo-elements create additional renderable boxes within a single element, giving you up to three boxes (the element plus two pseudo-elements) to compose complex shapes.",
+      "concepts": ["::before", "::after", "pseudo-elements"]
+    },
+    {
+      "id": "css_ch38_q04",
+      "type": "multiple_choice",
+      "question": "When creating a heart shape with CSS, which technique combines two rotated shapes?",
+      "choices": [
+        "Using two overlapping circles and a rotated square",
+        "Using a single gradient with two color stops",
+        "Applying border-radius to all four corners differently",
+        "Using two box-shadows at offset positions"
+      ],
+      "correct": 0,
+      "explanation": "A CSS heart shape is typically created by combining two circles (using border-radius) with a rotated square. The ::before and ::after pseudo-elements create the rounded tops while the rotated parent forms the point.",
+      "concepts": ["heart shape", "pseudo-elements", "border-radius"]
+    },
+    {
+      "id": "css_ch38_q05",
+      "type": "fill_in_blank",
+      "question": "To create a triangle pointing downward, set the ___-border to a solid color and all other borders to transparent.",
+      "correct": "top",
+      "explanation": "A downward-pointing triangle is formed by coloring only the top border while making the left, right, and bottom borders transparent. The visible top border creates the triangle pointing down.",
+      "concepts": ["triangle", "border trick"]
+    },
+    {
+      "id": "css_ch38_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property must be set (usually to empty string) on ::before and ::after pseudo-elements for them to render.",
+      "correct": "content",
+      "explanation": "Pseudo-elements ::before and ::after require the content property to be set (even to an empty string '') in order to be generated and rendered in the document.",
+      "concepts": ["content", "pseudo-elements"]
+    }
+  ]
+}

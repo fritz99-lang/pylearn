@@ -1,0 +1,6 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "title": "Build a GUI Dungeon Crawler",
+  "description": "Build a graphical dungeon crawler with tkinter where players explore a tile-based map, collect items, and fight enemies. Combines OOP design with tkinter Canvas, threading for game loop, and shelve for save games.",
+  "final_description": "A complete GUI dungeon crawler with a tile-based map rendered on tkinter Canvas, player movement with keyboard input, fog of war, item pickups, enemy AI with pathfinding, turn-based combat UI, inventory panel, shelve-based save/load, and threaded game loop — built across 10 chapters."
+}

@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 2,
+  "questions": [
+    {
+      "id": "h5_ch02_q01",
+      "type": "multiple_choice",
+      "question": "What is the correct HTML5 doctype declaration?",
+      "choices": ["<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">", "<!DOCTYPE html>", "<!DOCTYPE html5>", "<doctype html>"],
+      "correct": 1,
+      "explanation": "The HTML5 doctype is simply <!DOCTYPE html>. It is case-insensitive and much shorter than legacy doctypes used in HTML 4 and XHTML.",
+      "concepts": ["doctype", "HTML5"]
+    },
+    {
+      "id": "h5_ch02_q02",
+      "type": "multiple_choice",
+      "question": "What happens when a browser cannot find a valid doctype declaration?",
+      "choices": ["The page fails to load", "The browser enters quirks mode", "The browser uses HTML5 by default", "An error message is displayed"],
+      "correct": 1,
+      "explanation": "Without a valid doctype, browsers fall back to quirks mode, which emulates older browser behavior and can cause inconsistent rendering across browsers.",
+      "concepts": ["quirks mode", "doctype"]
+    },
+    {
+      "id": "h5_ch02_q03",
+      "type": "multiple_choice",
+      "question": "Which rendering mode does a valid HTML5 doctype trigger in browsers?",
+      "choices": ["Quirks mode", "Almost standards mode", "Standards mode", "Compatibility mode"],
+      "correct": 2,
+      "explanation": "A valid <!DOCTYPE html> declaration tells the browser to render the page in standards mode, which follows the W3C specifications for layout and rendering.",
+      "concepts": ["standards mode", "doctype"]
+    },
+    {
+      "id": "h5_ch02_q04",
+      "type": "multiple_choice",
+      "question": "Where must the doctype declaration be placed in an HTML document?",
+      "choices": ["Inside the <head> tag", "Inside the <html> tag", "Before the <html> tag, as the very first line", "After the <body> tag"],
+      "correct": 2,
+      "explanation": "The doctype declaration must appear at the very beginning of the document, before the <html> tag. It tells the browser which version of HTML to use for rendering.",
+      "concepts": ["doctype", "document structure"]
+    },
+    {
+      "id": "h5_ch02_q05",
+      "type": "fill_in_blank",
+      "question": "When no doctype is present, browsers render the page in ___ mode.",
+      "correct": "quirks",
+      "explanation": "Quirks mode causes the browser to emulate legacy behavior from older browsers, which can lead to inconsistent rendering of CSS box models and other features.",
+      "concepts": ["quirks mode", "rendering"]
+    },
+    {
+      "id": "h5_ch02_q06",
+      "type": "fill_in_blank",
+      "question": "The HTML5 doctype is ___ , meaning it works regardless of uppercase or lowercase letters.",
+      "correct": "case-insensitive",
+      "explanation": "<!DOCTYPE html>, <!doctype html>, and <!Doctype Html> are all valid. The HTML5 doctype is case-insensitive by specification.",
+      "concepts": ["doctype", "HTML5 syntax"]
+    }
+  ]
+}

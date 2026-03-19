@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 16,
+  "questions": [
+    {
+      "id": "css_ch16_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS declaration creates a flex container?",
+      "choices": [
+        "position: flex",
+        "display: flex",
+        "flex: enable",
+        "layout: flexbox"
+      ],
+      "correct": 1,
+      "explanation": "display: flex on a container element establishes a flex formatting context, making its direct children flex items.",
+      "concepts": ["display: flex", "flexbox"]
+    },
+    {
+      "id": "css_ch16_q02",
+      "type": "multiple_choice",
+      "question": "What does `justify-content: space-between` do?",
+      "choices": [
+        "Centers all items in the container",
+        "Puts equal space between items, with no space at the edges",
+        "Puts equal space around each item, including at the edges",
+        "Aligns items to the start of the container"
+      ],
+      "correct": 1,
+      "explanation": "space-between distributes items so the first is at the start, the last is at the end, and remaining space is evenly divided between items.",
+      "concepts": ["justify-content", "flexbox"]
+    },
+    {
+      "id": "css_ch16_q03",
+      "type": "multiple_choice",
+      "question": "Which property controls the direction of the main axis in a flex container?",
+      "choices": [
+        "align-items",
+        "flex-wrap",
+        "flex-direction",
+        "justify-content"
+      ],
+      "correct": 2,
+      "explanation": "flex-direction sets the main axis direction: row (horizontal) or column (vertical), plus their reverse variants.",
+      "concepts": ["flex-direction", "flexbox"]
+    },
+    {
+      "id": "css_ch16_q04",
+      "type": "multiple_choice",
+      "question": "What does `align-items: center` do in a flex container with the default flex-direction?",
+      "choices": [
+        "Centers items horizontally along the main axis",
+        "Centers items vertically along the cross axis",
+        "Centers the entire flex container on the page",
+        "Centers text inside each flex item"
+      ],
+      "correct": 1,
+      "explanation": "With the default flex-direction: row, align-items operates on the cross (vertical) axis, centering items vertically within the container.",
+      "concepts": ["align-items", "flexbox"]
+    },
+    {
+      "id": "css_ch16_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property allows flex items to wrap onto multiple lines when they exceed the container width.",
+      "correct": "flex-wrap",
+      "explanation": "flex-wrap: wrap allows items to flow onto new lines instead of being squeezed into a single line.",
+      "concepts": ["flex-wrap", "flexbox"]
+    },
+    {
+      "id": "css_ch16_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property determines how much a flex item grows relative to other items when extra space is available.",
+      "correct": "flex-grow",
+      "explanation": "flex-grow accepts a unitless number that dictates what proportion of available space a flex item should take up.",
+      "concepts": ["flex-grow", "flexbox"]
+    }
+  ]
+}

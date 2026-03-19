@@ -1,0 +1,58 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 8,
+  "questions": [
+    {
+      "id": "cpp_ch08_q01",
+      "type": "multiple_choice",
+      "question": "Which searching algorithm requires the array to be sorted before it can be used?",
+      "choices": ["Linear search", "Binary search", "Bubble search", "Sequential search"],
+      "correct": 1,
+      "explanation": "Binary search requires the array to be sorted because it repeatedly divides the search interval in half, comparing the target to the middle element.",
+      "concepts": ["binary_search", "searching_algorithms"]
+    },
+    {
+      "id": "cpp_ch08_q02",
+      "type": "multiple_choice",
+      "question": "What is the worst-case number of comparisons for a linear search on an array of 1000 elements?",
+      "choices": ["10", "100", "500", "1000"],
+      "correct": 3,
+      "explanation": "Linear search checks each element one by one. In the worst case (element not found or at the last position), it must check all 1000 elements.",
+      "concepts": ["linear_search", "algorithm_efficiency"]
+    },
+    {
+      "id": "cpp_ch08_q03",
+      "type": "multiple_choice",
+      "question": "In bubble sort, after the first complete pass through an array of N elements, which element is guaranteed to be in its correct position?",
+      "choices": ["The first element", "The middle element", "The last element (largest value)", "No element is guaranteed"],
+      "correct": 2,
+      "explanation": "Bubble sort repeatedly swaps adjacent elements if they are in the wrong order. After the first pass, the largest value has 'bubbled up' to the last position.",
+      "concepts": ["bubble_sort", "sorting_algorithms"]
+    },
+    {
+      "id": "cpp_ch08_q04",
+      "type": "multiple_choice",
+      "question": "How does selection sort find the value to place in position 0 of the array?",
+      "choices": ["It swaps adjacent elements until the smallest reaches position 0", "It scans the entire array to find the smallest value and swaps it into position 0", "It inserts each element into its correct position relative to sorted elements", "It divides the array in half and sorts each half"],
+      "correct": 1,
+      "explanation": "Selection sort scans the entire unsorted portion to find the minimum value, then swaps it into the next position in the sorted portion, starting with position 0.",
+      "concepts": ["selection_sort", "sorting_algorithms"]
+    },
+    {
+      "id": "cpp_ch08_q05",
+      "type": "fill_in_blank",
+      "question": "A ___ search steps through an array sequentially, comparing each element to the target value.",
+      "correct": "linear",
+      "explanation": "A linear search (also called sequential search) examines each element in order from the first to the last until the target is found or the array is exhausted.",
+      "concepts": ["linear_search"]
+    },
+    {
+      "id": "cpp_ch08_q06",
+      "type": "fill_in_blank",
+      "question": "The maximum number of comparisons a binary search performs on a sorted array of N elements is approximately log2(___)",
+      "correct": "N",
+      "explanation": "Binary search has a worst-case complexity of O(log2 N) because it halves the search space with each comparison.",
+      "concepts": ["binary_search", "algorithm_efficiency"]
+    }
+  ]
+}

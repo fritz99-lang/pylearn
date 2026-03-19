@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 26,
+  "challenges": [
+    {
+      "id": "css_ch26_c01",
+      "title": "Basic Hover Transition",
+      "description": "Add a transition on the color property that lasts 0.3s when hovering over an anchor element. Set the default color to blue and the hover color to red. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Add a color transition on hover for links */\n\n\"\"\"",
+      "test_code": "assert 'transition' in css.lower(), 'Should use the transition property'\nassert 'color' in css.lower(), 'Should transition the color property'\nassert '0.3s' in css.lower(), 'Should set transition duration to 0.3s'\nassert ':hover' in css.lower(), 'Should include a :hover pseudo-class'\nassert 'red' in css.lower(), 'Should change color to red on hover'",
+      "difficulty": "easy",
+      "concepts_new": ["transition", "transition-duration"],
+      "concepts_review": ["color", ":hover"],
+      "hints": [
+        "Use transition: color 0.3s on the base element, not the :hover state.",
+        "Define the hover color change in a separate a:hover rule."
+      ]
+    },
+    {
+      "id": "css_ch26_c02",
+      "title": "Multi-Property Transition",
+      "description": "Use the transition shorthand to animate both background-color (0.5s ease-in) and transform (0.3s ease-out) on a .card element. On hover, change the background-color to lightblue and apply translateY(-5px). Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Transition multiple properties with different timing functions */\n\n\"\"\"",
+      "test_code": "assert 'transition' in css.lower(), 'Should use the transition property'\nassert 'background-color' in css.lower(), 'Should transition background-color'\nassert 'transform' in css.lower(), 'Should transition transform'\nassert 'ease-in' in css.lower(), 'Should use ease-in timing function'\nassert 'ease-out' in css.lower(), 'Should use ease-out timing function'\nassert '0.5s' in css.lower(), 'Should set 0.5s duration for background-color'\nassert '0.3s' in css.lower(), 'Should set 0.3s duration for transform'\nassert 'translatey' in css.lower(), 'Should use translateY on hover'",
+      "difficulty": "medium",
+      "concepts_new": ["transition-timing-function", "multi-property transitions"],
+      "concepts_review": ["background-color", "transform", ":hover"],
+      "hints": [
+        "Separate multiple transitions with a comma: transition: background-color 0.5s ease-in, transform 0.3s ease-out.",
+        "The shorthand order is: property duration timing-function.",
+        "Use translateY(-5px) to lift the card on hover."
+      ]
+    }
+  ]
+}

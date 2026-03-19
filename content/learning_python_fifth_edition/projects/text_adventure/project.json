@@ -1,0 +1,6 @@
+{
+  "book_id": "learning_python_fifth_edition",
+  "title": "Build a Text Adventure Game",
+  "description": "Build an interactive text adventure game from scratch, adding Python features chapter by chapter. By the end, you'll have a game with rooms, items, combat, save/load, and classes — all using concepts from the book.",
+  "final_description": "A complete text adventure game with a room map, item inventory, NPC interactions, combat system, save/load via files, and an object-oriented design with inheritance — built across 10 chapters using progressively advanced Python concepts."
+}

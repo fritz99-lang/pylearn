@@ -1,0 +1,25 @@
+{
+  "step_id": "cpp_adv_ch10",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 10,
+  "title": "Text Parser — Command Processing",
+  "description": "Add a text parser that handles multi-word player commands like 'go north', 'pick up sword', or 'use health potion'. Use string methods like find() and substr() to split the command into a verb and an object. For example, 'pick up sword' should extract verb='pick up' and object='sword'. Handle at least 4 different commands (go, look, pick up/take, use). Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_adv_ch08",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\nvoid displayRoom(string roomName, string description) {\n    cout << \"=== \" << roomName << \" ===\" << endl;\n    cout << description << endl;\n}\n\nint playerAttack(int attackPower) {\n    return attackPower;\n}\n\nint searchItem(string items[], int size, string target) {\n    for (int i = 0; i < size; i++) {\n        if (items[i] == target) return i;\n    }\n    return -1;\n}\n\nvoid sortInventory(string items[], int size) {\n    for (int i = 0; i < size - 1; i++) {\n        for (int j = 0; j < size - i - 1; j++) {\n            if (items[j] > items[j + 1]) {\n                string temp = items[j];\n                items[j] = items[j + 1];\n                items[j + 1] = temp;\n            }\n        }\n    }\n}\n\nvoid showInventory(string items[], int itemCount) {\n    cout << \"=== INVENTORY ===\" << endl;\n    for (int i = 0; i < itemCount; i++) {\n        cout << i + 1 << \". \" << items[i] << endl;\n    }\n}\n\nvoid saveGame(string playerName, int health, int gold, int turns) {\n    ofstream saveFile(\"savegame.txt\");\n    saveFile << playerName << endl;\n    saveFile << health << endl;\n    saveFile << gold << endl;\n    saveFile << turns << endl;\n    saveFile.close();\n}\n\n// Write a command parser function:\n// void parseCommand(string command, string &verb, string &object)\n//   - Use find() to locate the first space\n//   - Use substr() to split into verb and object\n//   - Handle 'pick up' as a two-word verb\n\n// Write a function to process the parsed command:\n// void processCommand(string verb, string object, ...)\n//   - Handle: go, look, pick/take, use\n\nint main() {\n    cout << \"===== TEXT ADVENTURE GAME =====\" << endl;\n\n    string playerName;\n    cout << \"Enter your name: \";\n    getline(cin, playerName);\n\n    int health = 100, gold = 50, attackPower = 15;\n    bool playing = true;\n    int turn = 0;\n\n    string items[20];\n    int itemCount = 0;\n    items[0] = \"Rusty Sword\";\n    items[1] = \"Health Potion\";\n    itemCount = 2;\n\n    string currentRoom = \"Forest Clearing\";\n\n    while (playing && health > 0) {\n        turn++;\n        displayRoom(currentRoom, \"Tall trees surround you. You see a path to the north.\");\n        showInventory(items, itemCount);\n\n        cout << \"> \";\n        string command;\n        getline(cin, command);\n\n        // Parse the command into verb and object\n        // Process the command\n\n        if (command == \"quit\") {\n            playing = false;\n        }\n    }\n\n    saveGame(playerName, health, gold, turn);\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'string' in cpp, 'Use the string type for command processing'\nassert 'find' in cpp or 'find(' in cpp, 'Use string::find() to locate spaces or substrings in commands'\nassert 'substr' in cpp or 'substr(' in cpp, 'Use string::substr() to extract verb and object from commands'\nassert 'parseCommand' in cpp or 'parse_command' in cpp or 'processCommand' in cpp or 'process_command' in cpp, 'Create a function to parse or process player commands'\nimport re\ncommand_count = sum(1 for cmd in ['go', 'look', 'pick', 'take', 'use', 'get', 'examine'] if cmd in cpp.lower())\nassert command_count >= 3, f'Handle at least 3 different command verbs like go, look, pick up, use (found {command_count})'",
+  "acceptance_criteria": [
+    "Uses string::find() to locate spaces in player commands",
+    "Uses string::substr() to extract the verb and object",
+    "Handles multi-word commands like 'pick up sword'",
+    "At least 3-4 command verbs are recognized (go, look, pick/take, use)",
+    "Invalid commands show a helpful error message",
+    "Commands are processed through a parser function"
+  ],
+  "hints": [
+    "size_t spacePos = command.find(' '); to find the first space",
+    "string verb = command.substr(0, spacePos); string object = command.substr(spacePos + 1);",
+    "Check for 'pick up' specially: if (verb == \"pick\" && object starts with \"up \") then re-parse",
+    "Use string::npos to check if find() didn't find a space: if (spacePos == string::npos)",
+    "Consider converting to lowercase for comparison using tolower()"
+  ]
+}

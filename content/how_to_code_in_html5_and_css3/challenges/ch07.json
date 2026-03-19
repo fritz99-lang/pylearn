@@ -1,0 +1,34 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 7,
+  "challenges": [
+    {
+      "id": "hc_ch07_c01",
+      "title": "Class and ID Selectors",
+      "description": "Create an HTML page with a <style> block that uses both a class selector (.highlight) and an ID selector (#main-title). Apply the class to a <p> element and the ID to an <h1> element. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a page using class and ID selectors -->\n\n\"\"\"",
+      "test_code": "assert '<style>' in html.lower(), 'Should contain a <style> block'\nassert '.highlight' in html.lower(), 'Should define a .highlight class selector in CSS'\nassert '#main-title' in html.lower(), 'Should define a #main-title ID selector in CSS'\nassert 'class=\"highlight\"' in html.lower() or \"class='highlight'\" in html.lower(), 'Should apply class=\"highlight\" to an element'\nassert 'id=\"main-title\"' in html.lower() or \"id='main-title'\" in html.lower(), 'Should apply id=\"main-title\" to an element'\nassert '<h1' in html.lower(), 'Should contain an <h1> element'\nassert '<p' in html.lower(), 'Should contain a <p> element'",
+      "difficulty": "easy",
+      "concepts_new": ["class selector", "ID selector", "class attribute", "id attribute"],
+      "concepts_review": ["style tag", "CSS properties", "h1 heading", "p tag"],
+      "hints": [
+        "Class selectors start with a dot: .highlight { ... }",
+        "ID selectors start with a hash: #main-title { ... }"
+      ]
+    },
+    {
+      "id": "hc_ch07_c02",
+      "title": "Multiple Selector Types",
+      "description": "Create an HTML page demonstrating four CSS selector types: element selector (p), class selector (.intro), ID selector (#banner), and descendant selector (div p). Include matching HTML elements for each selector. Assign your code to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Demonstrate element, class, ID, and descendant selectors -->\n\n\"\"\"",
+      "test_code": "assert '<style>' in html.lower(), 'Should contain a <style> block'\nstyle_block = html.lower().split('<style>')[1].split('</style>')[0]\nassert '.intro' in style_block, 'Should define a .intro class selector'\nassert '#banner' in style_block, 'Should define a #banner ID selector'\nassert 'div p' in style_block or 'div  p' in style_block, 'Should define a descendant selector (div p)'\nassert 'class=\"intro\"' in html.lower() or \"class='intro'\" in html.lower(), 'Should apply the intro class to an element'\nassert 'id=\"banner\"' in html.lower() or \"id='banner'\" in html.lower(), 'Should apply the banner ID to an element'\nassert '<div>' in html.lower() or '<div ' in html.lower(), 'Should contain a <div> element'\nassert '<p>' in html.lower() or '<p ' in html.lower(), 'Should contain <p> elements'",
+      "difficulty": "medium",
+      "concepts_new": ["descendant selector", "selector specificity", "div tag"],
+      "concepts_review": ["class selector", "ID selector", "element selector"],
+      "hints": [
+        "A descendant selector targets elements inside others: div p { ... } styles <p> tags inside <div>.",
+        "Make sure your HTML has a <div> containing a <p> so the descendant selector applies."
+      ]
+    }
+  ]
+}

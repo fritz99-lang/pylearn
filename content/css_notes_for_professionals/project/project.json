@@ -1,0 +1,6 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "title": "Style a Complete Blog Theme",
+  "description": "Build a complete CSS theme for a blog from scratch, adding styling features chapter by chapter. By the end, you'll have a fully responsive, animated, and visually polished blog theme — all using concepts from the book.",
+  "final_description": "A complete blog theme with typography, colors, box model layout, flexbox navigation, CSS Grid content area, responsive media queries, transitions, animations, custom properties for theming, and print styles — built across 10 chapters using progressively advanced CSS concepts."
+}

@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 26,
+  "questions": [
+    {
+      "id": "css_ch26_q01",
+      "type": "multiple_choice",
+      "question": "Which shorthand property combines transition-property, transition-duration, transition-timing-function, and transition-delay?",
+      "choices": [
+        "animate",
+        "transition",
+        "transform",
+        "transition-all"
+      ],
+      "correct": 1,
+      "explanation": "The `transition` shorthand property combines all four individual transition sub-properties into a single declaration, e.g., `transition: opacity 0.3s ease 0s`.",
+      "concepts": ["transition", "shorthand"]
+    },
+    {
+      "id": "css_ch26_q02",
+      "type": "multiple_choice",
+      "question": "What does the `ease-in-out` timing function do in a CSS transition?",
+      "choices": [
+        "Starts fast and ends fast",
+        "Maintains constant speed throughout",
+        "Starts slow, speeds up, then slows down at the end",
+        "Starts fast and slows down at the end"
+      ],
+      "correct": 2,
+      "explanation": "The `ease-in-out` timing function creates a transition that starts slowly, accelerates through the middle, and decelerates at the end, producing a smooth natural motion.",
+      "concepts": ["transition-timing-function", "ease-in-out"]
+    },
+    {
+      "id": "css_ch26_q03",
+      "type": "multiple_choice",
+      "question": "What value for `transition-property` applies a transition to all animatable properties?",
+      "choices": [
+        "every",
+        "any",
+        "all",
+        "auto"
+      ],
+      "correct": 2,
+      "explanation": "Setting `transition-property: all` applies the transition effect to every CSS property that supports animation when its value changes.",
+      "concepts": ["transition-property", "transitions"]
+    },
+    {
+      "id": "css_ch26_q04",
+      "type": "multiple_choice",
+      "question": "Which timing function produces a transition with constant speed from start to finish?",
+      "choices": [
+        "ease",
+        "ease-in",
+        "ease-out",
+        "linear"
+      ],
+      "correct": 3,
+      "explanation": "The `linear` timing function produces a transition that progresses at a constant rate, with no acceleration or deceleration.",
+      "concepts": ["transition-timing-function", "linear"]
+    },
+    {
+      "id": "css_ch26_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property specifies how long to wait before a transition effect starts.",
+      "correct": "transition-delay",
+      "explanation": "The `transition-delay` property defines a waiting period (in seconds or milliseconds) before the transition begins after a property change is triggered.",
+      "concepts": ["transition-delay", "transitions"]
+    },
+    {
+      "id": "css_ch26_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property specifies the length of time a transition takes to complete.",
+      "correct": "transition-duration",
+      "explanation": "The `transition-duration` property sets how long the transition animation takes, specified in seconds (s) or milliseconds (ms).",
+      "concepts": ["transition-duration", "transitions"]
+    }
+  ]
+}

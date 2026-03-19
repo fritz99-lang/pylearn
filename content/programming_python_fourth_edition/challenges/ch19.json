@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 19,
+  "challenges": [
+    {
+      "id": "pp_ch19_c01",
+      "title": "Stack Implementation",
+      "description": "Implement a `Stack` class with methods: `push(item)` to add to the top, `pop()` to remove and return the top item (raise IndexError if empty), `peek()` to return the top item without removing it (raise IndexError if empty), `is_empty()` to return True if the stack has no items, and `__len__` to return the stack size.",
+      "starter_code": "class Stack:\n    \"\"\"A last-in, first-out (LIFO) data structure.\"\"\"\n\n    def __init__(self):\n        # Your code here\n        pass\n\n    def push(self, item):\n        \"\"\"Push an item onto the top of the stack.\"\"\"\n        # Your code here\n        pass\n\n    def pop(self):\n        \"\"\"Remove and return the top item. Raises IndexError if empty.\"\"\"\n        # Your code here\n        pass\n\n    def peek(self):\n        \"\"\"Return the top item without removing it. Raises IndexError if empty.\"\"\"\n        # Your code here\n        pass\n\n    def is_empty(self):\n        \"\"\"Return True if the stack is empty.\"\"\"\n        # Your code here\n        pass\n\n    def __len__(self):\n        \"\"\"Return the number of items in the stack.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "s = Stack()\nassert s.is_empty() is True\nassert len(s) == 0\ns.push(10)\ns.push(20)\ns.push(30)\nassert s.is_empty() is False\nassert len(s) == 3\nassert s.peek() == 30\nassert len(s) == 3\nassert s.pop() == 30\nassert s.pop() == 20\nassert len(s) == 1\nassert s.peek() == 10\nassert s.pop() == 10\nassert s.is_empty() is True\ntry:\n    s.pop()\n    assert False, 'Should have raised IndexError'\nexcept IndexError:\n    pass\ntry:\n    s.peek()\n    assert False, 'Should have raised IndexError'\nexcept IndexError:\n    pass\ns.push('a')\ns.push('b')\nassert s.pop() == 'b'\nassert s.pop() == 'a'",
+      "difficulty": "easy",
+      "concepts_new": ["stack_data_structure", "lifo"],
+      "concepts_review": ["classes", "lists", "exceptions", "dunder_methods"],
+      "hints": [
+        "Use a Python list as the internal storage. push() is list.append(), pop() is list.pop().",
+        "For peek(), return self._items[-1] but check for empty first."
+      ]
+    },
+    {
+      "id": "pp_ch19_c02",
+      "title": "Binary Search Tree",
+      "description": "Implement a `BinaryTree` class with an internal `_Node` class. Support `insert(value)` to add values maintaining BST order (left < parent < right), and `inorder_traversal()` that returns a list of values in sorted order. Also implement `__contains__(value)` for `in` operator support and `__len__` to return the total number of nodes.",
+      "starter_code": "class BinaryTree:\n    \"\"\"A binary search tree implementation.\"\"\"\n\n    class _Node:\n        def __init__(self, value):\n            self.value = value\n            self.left = None\n            self.right = None\n\n    def __init__(self):\n        # Your code here\n        pass\n\n    def insert(self, value):\n        \"\"\"Insert a value into the BST.\"\"\"\n        # Your code here\n        pass\n\n    def inorder_traversal(self):\n        \"\"\"Return a list of values in sorted (in-order) sequence.\"\"\"\n        # Your code here\n        pass\n\n    def __contains__(self, value):\n        \"\"\"Support 'value in tree' syntax.\"\"\"\n        # Your code here\n        pass\n\n    def __len__(self):\n        \"\"\"Return the number of nodes in the tree.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "tree = BinaryTree()\nassert len(tree) == 0\ntree.insert(5)\ntree.insert(3)\ntree.insert(7)\ntree.insert(1)\ntree.insert(4)\ntree.insert(6)\ntree.insert(8)\nassert tree.inorder_traversal() == [1, 3, 4, 5, 6, 7, 8]\nassert len(tree) == 7\nassert 5 in tree\nassert 3 in tree\nassert 8 in tree\nassert 99 not in tree\nassert 0 not in tree\ntree2 = BinaryTree()\ntree2.insert(10)\nassert tree2.inorder_traversal() == [10]\nassert len(tree2) == 1\nassert 10 in tree2\ntree2.insert(5)\ntree2.insert(15)\ntree2.insert(3)\nassert tree2.inorder_traversal() == [3, 5, 10, 15]\nassert len(tree2) == 4",
+      "difficulty": "medium",
+      "concepts_new": ["binary_search_tree", "tree_traversal", "recursive_structures"],
+      "concepts_review": ["classes", "recursion", "dunder_methods"],
+      "hints": [
+        "Store a _root node (initially None) and a _size counter. Insert recursively: if value < node.value, go left; else go right.",
+        "For inorder_traversal, use a helper that recursively visits left, appends value, then visits right."
+      ]
+    }
+  ]
+}

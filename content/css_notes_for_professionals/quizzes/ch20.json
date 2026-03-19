@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 20,
+  "questions": [
+    {
+      "id": "css_ch20_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS unit is relative to the font size of the root element?",
+      "choices": [
+        "em",
+        "rem",
+        "ex",
+        "ch"
+      ],
+      "correct": 1,
+      "explanation": "The rem unit is relative to the font size of the root element (html), while em is relative to the font size of the current element.",
+      "concepts": ["rem", "relative-units"]
+    },
+    {
+      "id": "css_ch20_q02",
+      "type": "multiple_choice",
+      "question": "What does the vw unit represent?",
+      "choices": [
+        "1% of the element's width",
+        "1% of the viewport width",
+        "1% of the parent's width",
+        "1 pixel of the visible window"
+      ],
+      "correct": 1,
+      "explanation": "1vw equals 1% of the viewport width. For example, on a 1000px wide viewport, 50vw equals 500px.",
+      "concepts": ["vw", "viewport-units"]
+    },
+    {
+      "id": "css_ch20_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is an absolute CSS length unit?",
+      "choices": [
+        "em",
+        "rem",
+        "px",
+        "vw"
+      ],
+      "correct": 2,
+      "explanation": "px (pixels) is an absolute unit with a fixed size. em, rem, and vw are all relative units that depend on other values.",
+      "concepts": ["px", "absolute-units"]
+    },
+    {
+      "id": "css_ch20_q04",
+      "type": "multiple_choice",
+      "question": "What does the vmin unit refer to?",
+      "choices": [
+        "The minimum font size allowed",
+        "1% of the smaller of viewport width or height",
+        "The minimum padding value",
+        "1% of the larger of viewport width or height"
+      ],
+      "correct": 1,
+      "explanation": "vmin is 1% of whichever is smaller: the viewport width or the viewport height. This is useful for responsive sizing that adapts to both orientations.",
+      "concepts": ["vmin", "viewport-units"]
+    },
+    {
+      "id": "css_ch20_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ unit is relative to the width of the '0' (zero) character of the element's font.",
+      "correct": "ch",
+      "explanation": "The ch unit is equal to the advance width of the '0' glyph in the element's font, making it useful for sizing text containers to a specific character count.",
+      "concepts": ["ch", "relative-units"]
+    },
+    {
+      "id": "css_ch20_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ unit is relative to the font size of the element itself, not the root element.",
+      "correct": "em",
+      "explanation": "The em unit is relative to the computed font-size of the element it is used on. This means em values compound when nested, unlike rem which always references the root.",
+      "concepts": ["em", "relative-units"]
+    }
+  ]
+}

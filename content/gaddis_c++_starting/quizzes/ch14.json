@@ -1,0 +1,58 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 14,
+  "questions": [
+    {
+      "id": "cpp_ch14_q01",
+      "type": "multiple_choice",
+      "question": "Which keyword is used to declare a function that can access the private members of a class without being a member of that class?",
+      "choices": ["static", "virtual", "friend", "extern"],
+      "correct": 2,
+      "explanation": "The 'friend' keyword declares a non-member function (or another class) that is granted access to the private and protected members of the class.",
+      "concepts": ["friends", "access_specifiers"]
+    },
+    {
+      "id": "cpp_ch14_q02",
+      "type": "multiple_choice",
+      "question": "What does the 'this' pointer refer to inside a member function?",
+      "choices": ["The class definition itself", "The object that called the member function", "The first parameter of the function", "The base class of the object"],
+      "correct": 1,
+      "explanation": "The 'this' pointer is an implicit pointer available in every non-static member function. It points to the object that invoked the function, allowing the object to refer to itself.",
+      "concepts": ["this_pointer", "member_functions"]
+    },
+    {
+      "id": "cpp_ch14_q03",
+      "type": "multiple_choice",
+      "question": "What is a static member variable in a class?",
+      "choices": ["A variable that cannot be changed after initialization", "A variable that is shared by all objects of the class", "A variable that is only accessible inside constructors", "A variable that is allocated on the stack"],
+      "correct": 1,
+      "explanation": "A static member variable belongs to the class itself rather than to any individual object. All objects of the class share the same copy of the static variable.",
+      "concepts": ["static_members", "class_definition"]
+    },
+    {
+      "id": "cpp_ch14_q04",
+      "type": "multiple_choice",
+      "question": "When is a copy constructor called?",
+      "choices": ["When an object is assigned to another existing object using =", "When an object is initialized with another object of the same class", "When an object is destroyed", "When a static member is accessed"],
+      "correct": 1,
+      "explanation": "A copy constructor is called when a new object is being created as a copy of an existing object — during initialization, pass by value, or return by value. Assignment to an existing object uses the assignment operator instead.",
+      "concepts": ["copy_constructors", "constructors"]
+    },
+    {
+      "id": "cpp_ch14_q05",
+      "type": "fill_in_blank",
+      "question": "To overload the + operator for a class, you define a member function named operator___.",
+      "correct": "+",
+      "explanation": "Operator overloading uses the keyword 'operator' followed by the operator symbol. For example, 'MyClass operator+(const MyClass &right)' overloads the + operator.",
+      "concepts": ["operator_overloading"]
+    },
+    {
+      "id": "cpp_ch14_q06",
+      "type": "fill_in_blank",
+      "question": "A ___ member variable is shared by all objects of a class rather than each object having its own copy.",
+      "correct": "static",
+      "explanation": "Static member variables exist as a single copy shared among all instances of the class. They must be defined outside the class declaration and exist even if no objects have been created.",
+      "concepts": ["static_members"]
+    }
+  ]
+}

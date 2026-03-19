@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 13,
+  "questions": [
+    {
+      "id": "h5_ch13_q01",
+      "type": "multiple_choice",
+      "question": "Which attribute on the <script> tag specifies the URL of an external JavaScript file?",
+      "choices": ["href", "link", "src", "url"],
+      "correct": 2,
+      "explanation": "The src attribute on the <script> tag specifies the path to an external JavaScript file, similar to how src works on <img> tags.",
+      "concepts": ["script tag", "src attribute"]
+    },
+    {
+      "id": "h5_ch13_q02",
+      "type": "multiple_choice",
+      "question": "What does the defer attribute do on a <script> tag?",
+      "choices": ["Prevents the script from running entirely", "Downloads the script in parallel and executes it after HTML parsing is complete", "Executes the script before any HTML is parsed", "Loads the script only when the user clicks a button"],
+      "correct": 1,
+      "explanation": "The defer attribute downloads the script in parallel with HTML parsing but delays execution until the HTML document has been fully parsed.",
+      "concepts": ["defer", "script loading"]
+    },
+    {
+      "id": "h5_ch13_q03",
+      "type": "multiple_choice",
+      "question": "What is the key difference between async and defer on a script tag?",
+      "choices": ["async only works with inline scripts", "defer downloads faster than async", "async executes as soon as downloaded; defer waits until HTML parsing is complete", "There is no difference"],
+      "correct": 2,
+      "explanation": "Both async and defer download scripts in parallel, but async executes immediately upon download (potentially interrupting parsing), while defer waits until parsing finishes.",
+      "concepts": ["async", "defer", "script loading"]
+    },
+    {
+      "id": "h5_ch13_q04",
+      "type": "multiple_choice",
+      "question": "Where is the recommended placement for <script> tags that don't use async or defer?",
+      "choices": ["In the <head> section", "Inside a <div> tag", "Just before the closing </body> tag", "After the </html> tag"],
+      "correct": 2,
+      "explanation": "Placing scripts just before </body> ensures the HTML content loads first, preventing the script from blocking page rendering.",
+      "concepts": ["script placement", "performance"]
+    },
+    {
+      "id": "h5_ch13_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on a script tag causes it to download in parallel and execute immediately when ready.",
+      "correct": "async",
+      "explanation": "The async attribute downloads the script without blocking HTML parsing and executes it as soon as the download completes, regardless of parsing state.",
+      "concepts": ["async", "script loading"]
+    },
+    {
+      "id": "h5_ch13_q06",
+      "type": "fill_in_blank",
+      "question": "A <script> tag with JavaScript written directly between the opening and closing tags is called an ___ script.",
+      "correct": "inline",
+      "explanation": "Inline scripts contain JavaScript code directly in the HTML file, as opposed to external scripts which reference a separate .js file via the src attribute.",
+      "concepts": ["inline scripts", "script tag"]
+    }
+  ]
+}

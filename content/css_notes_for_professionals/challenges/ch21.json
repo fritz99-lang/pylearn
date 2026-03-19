@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 21,
+  "challenges": [
+    {
+      "id": "css_ch21_c01",
+      "title": "Before and After Pseudo-Elements",
+      "description": "Write two CSS rules: (1) target `h1::before` and set `content` to `'>>> '`, (2) target `h1::after` and set `content` to `' <<<'`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* h1::before with content */\n\n/* h1::after with content */\n\n\"\"\"",
+      "test_code": "assert '::before' in css.lower(), 'Should use ::before pseudo-element'\nassert '::after' in css.lower(), 'Should use ::after pseudo-element'\nassert css.lower().count('content') >= 2, 'Should set content in both pseudo-elements'\nassert 'h1' in css.lower(), 'Should target h1 elements'",
+      "difficulty": "easy",
+      "concepts_new": ["before-pseudo-element", "after-pseudo-element", "content-property"],
+      "concepts_review": ["css-rules"],
+      "hints": [
+        "Pseudo-elements use double colons: `h1::before { content: '...'; }`",
+        "The `content` property is required for ::before and ::after to render."
+      ]
+    },
+    {
+      "id": "css_ch21_c02",
+      "title": "First-Letter, First-Line, and Before",
+      "description": "Write three CSS rules: (1) target `p::first-letter` and set `font-size` to `2em` and `font-weight` to `bold`, (2) target `p::first-line` and set `color` to `navy`, (3) target `.quote::before` and set `content` to a quote character like `'\\201C '` (left double quote) and set `font-size` to `2em`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* p::first-letter — drop-cap style */\n\n/* p::first-line — style the first line */\n\n/* .quote::before — opening quote mark */\n\n\"\"\"",
+      "test_code": "assert '::first-letter' in css.lower(), 'Should use ::first-letter pseudo-element'\nassert '::first-line' in css.lower(), 'Should use ::first-line pseudo-element'\nassert '::before' in css.lower(), 'Should use ::before pseudo-element'\nassert 'font-size' in css.lower(), 'Should set font-size'\nassert 'font-weight' in css.lower(), 'Should set font-weight'\nassert 'bold' in css.lower(), 'Should set font-weight to bold'\nassert 'content' in css.lower(), 'Should set content on ::before'\nassert 'navy' in css.lower(), 'Should set color to navy on ::first-line'",
+      "difficulty": "medium",
+      "concepts_new": ["first-letter-pseudo", "first-line-pseudo"],
+      "concepts_review": ["before-pseudo-element", "content-property", "font-size"],
+      "hints": [
+        "::first-letter targets only the first letter of an element; ::first-line targets the first rendered line.",
+        "For the quote character, you can use `content: '\\201C ';` or simply `content: '\"';`"
+      ]
+    }
+  ]
+}

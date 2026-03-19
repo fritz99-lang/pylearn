@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 19,
+  "questions": [
+    {
+      "id": "pp_ch19_q01",
+      "type": "multiple_choice",
+      "question": "When implementing a stack class in Python, which list operations give O(1) performance for push and pop?",
+      "choices": [
+        "insert(0, item) for push and pop(0) for pop",
+        "append(item) for push and pop() for pop",
+        "extend([item]) for push and remove(item) for pop",
+        "list concatenation for push and slicing for pop"
+      ],
+      "correct": 1,
+      "explanation": "list.append() and list.pop() (without an index) both operate on the end of the list in O(1) amortized time. Operating on index 0 with insert(0) or pop(0) requires shifting all elements, giving O(n) performance. For high-performance stacks, collections.deque also offers O(1) operations on both ends.",
+      "concepts": ["implementing_stacks"]
+    },
+    {
+      "id": "pp_ch19_q02",
+      "type": "multiple_choice",
+      "question": "Which collections module class is ideal for implementing an efficient FIFO queue in Python?",
+      "choices": [
+        "collections.OrderedDict",
+        "collections.deque",
+        "collections.Counter",
+        "collections.ChainMap"
+      ],
+      "correct": 1,
+      "explanation": "collections.deque (double-ended queue) provides O(1) append and popleft operations, making it ideal for FIFO queues. A regular list has O(n) for pop(0) since all remaining elements must shift. deque is implemented as a doubly-linked list of fixed-size blocks for memory efficiency.",
+      "concepts": ["implementing_queues", "collections_module"]
+    },
+    {
+      "id": "pp_ch19_q03",
+      "type": "multiple_choice",
+      "question": "In a binary search tree, what is the time complexity of search, insert, and delete operations in the average case?",
+      "choices": [
+        "O(1) for all operations",
+        "O(n) for all operations",
+        "O(log n) for all operations",
+        "O(n log n) for search, O(1) for insert"
+      ],
+      "correct": 2,
+      "explanation": "A balanced binary search tree provides O(log n) average-case complexity for search, insert, and delete because each comparison eliminates roughly half the remaining nodes. However, a degenerate (unbalanced) tree can degrade to O(n). Self-balancing trees like AVL or red-black trees guarantee O(log n) worst case.",
+      "concepts": ["binary_trees", "performance_considerations"]
+    },
+    {
+      "id": "pp_ch19_q04",
+      "type": "multiple_choice",
+      "question": "What does implementing the __iter__ and __next__ methods on a custom class allow you to do?",
+      "choices": [
+        "Use the class as a context manager in with statements",
+        "Enable the class to be compared with < and > operators",
+        "Iterate over instances of the class using for loops and other iteration contexts",
+        "Allow the class to be serialized with pickle"
+      ],
+      "correct": 2,
+      "explanation": "Implementing __iter__ (returns the iterator object) and __next__ (returns the next value or raises StopIteration) makes a class conform to the iterator protocol. This enables use in for loops, list comprehensions, unpacking, and any context that consumes iterables. A generator function is often a simpler alternative.",
+      "concepts": ["custom_iterators"]
+    },
+    {
+      "id": "pp_ch19_q05",
+      "type": "fill_in_blank",
+      "question": "A graph data structure is commonly represented in Python using a dictionary where each key is a node and its value is a ________ of adjacent nodes.",
+      "correct": "list",
+      "explanation": "An adjacency list representation uses a dictionary mapping each node to a list (or set) of its neighbors. For example: graph = {'A': ['B', 'C'], 'B': ['A'], 'C': ['A']}. This is memory-efficient for sparse graphs compared to an adjacency matrix. Sets can be used instead of lists when O(1) edge lookup is needed.",
+      "concepts": ["implementing_graphs"]
+    },
+    {
+      "id": "pp_ch19_q06",
+      "type": "fill_in_blank",
+      "question": "The collections.________ class is a dict subclass that counts hashable objects, making it useful for frequency analysis and histogram-like operations.",
+      "correct": "Counter",
+      "explanation": "collections.Counter takes an iterable and counts element occurrences, storing them as a dictionary of {element: count}. It provides useful methods like most_common(n), elements(), and supports arithmetic operations (+, -) between Counters. Example: Counter('abracadabra') yields Counter({'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1}).",
+      "concepts": ["collections_module"]
+    }
+  ]
+}

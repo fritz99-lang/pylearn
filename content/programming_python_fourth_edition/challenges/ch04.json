@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 4,
+  "challenges": [
+    {
+      "id": "pp_ch04_c01",
+      "title": "Command-Line Argument Parser",
+      "description": "Write a function called 'parse_args' that takes a list of strings (simulating sys.argv) and returns a dictionary of flag-value pairs. The first element is the script name (ignore it). Flags start with '--' and are followed by their value. For example, ['script.py', '--name', 'Alice', '--age', '30'] should return {'name': 'Alice', 'age': '30'}. If a flag has no value (it's the last item or the next item is also a flag), set its value to True.",
+      "starter_code": "def parse_args(argv):\n    \"\"\"Parse command-line style args into a dict.\n    \n    Flags start with '--'. Values follow the flag.\n    Flags without values get True.\n    \"\"\"\n    pass\n",
+      "test_code": "assert parse_args(['script.py', '--name', 'Alice', '--age', '30']) == {'name': 'Alice', 'age': '30'}\nassert parse_args(['script.py', '--verbose']) == {'verbose': True}\nassert parse_args(['script.py', '--verbose', '--name', 'Bob']) == {'verbose': True, 'name': 'Bob'}\nassert parse_args(['script.py']) == {}\nassert parse_args(['run.py', '--output', 'file.txt', '--force']) == {'output': 'file.txt', 'force': True}",
+      "difficulty": "easy",
+      "concepts_new": ["argument_parsing", "sys_argv"],
+      "concepts_review": ["dictionaries", "string_methods", "iteration"],
+      "hints": [
+        "Skip argv[0] (the script name). Loop through the rest with an index variable.",
+        "Check if the current item starts with '--'. If the next item also starts with '--' or doesn't exist, the flag's value is True; otherwise, the next item is the value."
+      ]
+    },
+    {
+      "id": "pp_ch04_c02",
+      "title": "Stdout Capture Context",
+      "description": "Write a function called 'capture_output' that takes a callable (a function that takes no arguments and prints something), calls it while redirecting sys.stdout to a StringIO object, then restores sys.stdout and returns the captured text as a string (stripped of trailing whitespace).",
+      "starter_code": "import sys\nfrom io import StringIO\n\ndef capture_output(func):\n    \"\"\"Call func() while capturing stdout. Return captured text (stripped).\"\"\"\n    pass\n",
+      "test_code": "def hello_printer():\n    print('Hello, World!')\n\ndef multi_printer():\n    print('line 1')\n    print('line 2')\n\ndef empty_printer():\n    pass\n\nassert capture_output(hello_printer) == 'Hello, World!'\nassert capture_output(multi_printer) == 'line 1\\nline 2'\nassert capture_output(empty_printer) == ''\n\n# Verify stdout is restored\nimport sys\nassert sys.stdout is not None\nassert hasattr(sys.stdout, 'write')",
+      "difficulty": "medium",
+      "concepts_new": ["stdout_redirect", "StringIO", "stream_capture"],
+      "concepts_review": ["sys_module", "context_management", "functions_as_arguments"],
+      "hints": [
+        "Save the original sys.stdout, replace it with StringIO(), call the function, then restore the original.",
+        "Use a try/finally block to ensure stdout is always restored: old = sys.stdout; sys.stdout = StringIO(); try: func(); finally: sys.stdout = old"
+      ]
+    }
+  ]
+}

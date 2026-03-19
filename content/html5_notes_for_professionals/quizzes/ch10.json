@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 10,
+  "questions": [
+    {
+      "id": "h5_ch10_q01",
+      "type": "multiple_choice",
+      "question": "How many elements on a page can share the same id attribute value?",
+      "choices": ["Unlimited", "Exactly one", "Up to ten", "Two"],
+      "correct": 1,
+      "explanation": "The id attribute must be unique within a page. Only one element should have a given id value. For shared identifiers, use the class attribute instead.",
+      "concepts": ["id attribute", "uniqueness"]
+    },
+    {
+      "id": "h5_ch10_q02",
+      "type": "multiple_choice",
+      "question": "How do you assign multiple classes to a single HTML element?",
+      "choices": ["Separate class names with commas", "Use multiple class attributes", "Separate class names with spaces inside one class attribute", "Wrap each class name in quotes"],
+      "correct": 2,
+      "explanation": "Multiple classes are assigned by separating class names with spaces within a single class attribute, e.g., class=\"btn primary large\".",
+      "concepts": ["class attribute", "multiple classes"]
+    },
+    {
+      "id": "h5_ch10_q03",
+      "type": "multiple_choice",
+      "question": "Which CSS selector targets an element with id=\"header\"?",
+      "choices": [".header", "#header", "*header", "@header"],
+      "correct": 1,
+      "explanation": "In CSS, the hash symbol (#) is used to select elements by their id. The dot (.) is used for class selectors.",
+      "concepts": ["id attribute", "CSS selectors"]
+    },
+    {
+      "id": "h5_ch10_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following is a valid class name in HTML?",
+      "choices": ["1st-item", "my-class", "my class", ".highlight"],
+      "correct": 1,
+      "explanation": "Class names should not start with a digit, cannot contain spaces (spaces separate multiple classes), and should not include the dot selector. 'my-class' follows proper naming conventions.",
+      "concepts": ["class attribute", "naming conventions"]
+    },
+    {
+      "id": "h5_ch10_q05",
+      "type": "fill_in_blank",
+      "question": "In CSS, a class selector is prefixed with a ___ symbol.",
+      "correct": "dot",
+      "explanation": "CSS class selectors use a dot (.) prefix, e.g., .my-class { color: red; }. This distinguishes them from id selectors which use #.",
+      "concepts": ["class attribute", "CSS selectors"]
+    },
+    {
+      "id": "h5_ch10_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute must have a unique value within an HTML document.",
+      "correct": "id",
+      "explanation": "The id attribute must be unique per page. Unlike classes, which can be reused across many elements, each id value should appear only once.",
+      "concepts": ["id attribute", "uniqueness"]
+    }
+  ]
+}

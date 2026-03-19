@@ -9,6 +9,7 @@ from PyQt6.Qsci import QsciLexerPython, QsciScintilla
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QColor, QFont
 from PyQt6.QtWidgets import (
+    QComboBox,
     QHBoxLayout,
     QLabel,
     QListWidget,
@@ -57,6 +58,8 @@ class ProjectPanel(QWidget):
         self._steps: list[ProjectStep] = []
         self._current_step_index: int = -1
         self._book_id: str = ""
+        self._project_id: str | None = None  # None = single project dir
+        self._available_projects: list[ProjectMeta] = []
         self._theme = "light"
         self._worker: _ProjectTestWorker | None = None
 
@@ -66,6 +69,12 @@ class ProjectPanel(QWidget):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(8, 8, 8, 8)
         layout.setSpacing(6)
+
+        # Project selector (shown when multiple projects exist)
+        self._project_selector = QComboBox()
+        self._project_selector.setVisible(False)
+        self._project_selector.currentIndexChanged.connect(self._on_project_changed)
+        layout.addWidget(self._project_selector)
 
         # Header
         self._title_label = QLabel("No Project Loaded")
@@ -163,18 +172,53 @@ class ProjectPanel(QWidget):
         editor.setWrapMode(QsciScintilla.WrapMode.WrapNone)
 
     def load_project(self, book_id: str) -> bool:
-        """Load the project for a book. Returns True if a project exists."""
+        """Load the project(s) for a book. Returns True if at least one project exists."""
         self._book_id = book_id
-        self._meta = self._content.load_project_meta(book_id)
+        self._available_projects = self._content.list_projects(book_id)
+
+        if not self._available_projects:
+            self._project_selector.setVisible(False)
+            self._show_empty_state()
+            return False
+
+        # Show selector if multiple projects
+        if len(self._available_projects) > 1:
+            self._project_selector.blockSignals(True)
+            self._project_selector.clear()
+            for meta in self._available_projects:
+                self._project_selector.addItem(meta.title, meta.project_id or "")
+            self._project_selector.blockSignals(False)
+            self._project_selector.setVisible(True)
+        else:
+            self._project_selector.setVisible(False)
+
+        # Load first project
+        first = self._available_projects[0]
+        return self._load_single_project(first.project_id or None)
+
+    def _on_project_changed(self, index: int) -> None:
+        """Handle project selector change."""
+        if index < 0 or index >= len(self._available_projects):
+            return
+        # Save current code before switching
+        if self._current_step_index >= 0:
+            self._save_current_code()
+        meta = self._available_projects[index]
+        self._load_single_project(meta.project_id or None)
+
+    def _load_single_project(self, project_id: str | None) -> bool:
+        """Load a specific project by its project_id."""
+        self._project_id = project_id
+        self._meta = self._content.load_project_meta(self._book_id, project_id)
         if not self._meta:
             self._show_empty_state()
             return False
 
         # Load all steps
-        step_chapters = self._content.list_project_steps(book_id)
+        step_chapters = self._content.list_project_steps(self._book_id, project_id)
         self._steps = []
         for ch_num in step_chapters:
-            step = self._content.load_project_step(book_id, ch_num)
+            step = self._content.load_project_step(self._book_id, ch_num, project_id)
             if step:
                 self._steps.append(step)
 
@@ -187,7 +231,7 @@ class ProjectPanel(QWidget):
 
         # Populate step list
         self._step_list.clear()
-        progress_map = {p["step_id"]: p for p in self._db.get_project_steps_progress(book_id)}
+        progress_map = {p["step_id"]: p for p in self._db.get_project_steps_progress(self._book_id)}
         for step in self._steps:
             prog = progress_map.get(step.step_id)
             done = prog and prog["completed"] if prog else False
@@ -203,6 +247,7 @@ class ProjectPanel(QWidget):
             if not prog or not prog["completed"]:
                 first_incomplete = i
                 break
+        self._current_step_index = -1  # Reset before selecting
         self._step_list.setCurrentRow(first_incomplete)
 
         return True

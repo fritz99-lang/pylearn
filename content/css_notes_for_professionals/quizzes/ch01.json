@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 1,
+  "questions": [
+    {
+      "id": "css_ch01_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML tag is used to link an external CSS stylesheet?",
+      "choices": [
+        "<link rel=\"stylesheet\" href=\"style.css\">",
+        "<style src=\"style.css\">",
+        "<css href=\"style.css\">",
+        "<script rel=\"stylesheet\" href=\"style.css\">"
+      ],
+      "correct": 0,
+      "explanation": "The <link> tag with rel=\"stylesheet\" and an href attribute is used to link an external CSS file to an HTML document.",
+      "concepts": ["linking stylesheets", "link tag"]
+    },
+    {
+      "id": "css_ch01_q02",
+      "type": "multiple_choice",
+      "question": "What is the correct CSS syntax for making all paragraph text red?",
+      "choices": [
+        "p { color: red; }",
+        "p = color: red;",
+        "#p { color: red; }",
+        "p { text-color: red; }"
+      ],
+      "correct": 0,
+      "explanation": "CSS rules follow the pattern: selector { property: value; }. The element selector 'p' targets all paragraphs, and 'color' is the property for text color.",
+      "concepts": ["basic syntax", "element selector", "color property"]
+    },
+    {
+      "id": "css_ch01_q03",
+      "type": "multiple_choice",
+      "question": "Which method of applying CSS has the highest specificity?",
+      "choices": [
+        "External stylesheet",
+        "Internal <style> tag",
+        "Inline style attribute",
+        "They all have equal specificity"
+      ],
+      "correct": 2,
+      "explanation": "Inline styles applied via the style attribute directly on an element have the highest specificity, overriding both internal and external stylesheets.",
+      "concepts": ["inline styles", "specificity"]
+    },
+    {
+      "id": "css_ch01_q04",
+      "type": "multiple_choice",
+      "question": "Where should the <style> tag be placed in an HTML document?",
+      "choices": [
+        "Inside the <body> tag only",
+        "Inside the <head> tag",
+        "After the closing </html> tag",
+        "Inside a <div> tag"
+      ],
+      "correct": 1,
+      "explanation": "The <style> tag is placed inside the <head> section of an HTML document to define internal CSS rules.",
+      "concepts": ["style tag", "HTML structure"]
+    },
+    {
+      "id": "css_ch01_q05",
+      "type": "fill_in_blank",
+      "question": "The HTML attribute used to apply inline CSS directly to an element is the ___ attribute.",
+      "correct": "style",
+      "explanation": "The style attribute is added directly to an HTML element to apply inline CSS, e.g., <p style=\"color: red;\">.",
+      "concepts": ["inline styles"]
+    },
+    {
+      "id": "css_ch01_q06",
+      "type": "fill_in_blank",
+      "question": "In the <link> tag, the ___ attribute specifies the relationship between the HTML document and the linked file.",
+      "correct": "rel",
+      "explanation": "The rel attribute in <link rel=\"stylesheet\" href=\"style.css\"> specifies the relationship as a stylesheet.",
+      "concepts": ["linking stylesheets", "link tag"]
+    }
+  ]
+}

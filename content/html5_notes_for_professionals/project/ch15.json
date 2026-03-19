@@ -1,0 +1,21 @@
+{
+  "step_id": "h5_proj_ch15",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 15,
+  "title": "Project Gallery \u2014 Adding Images",
+  "description": "Add images to the Projects section to create a visual gallery. Each project should have an img tag with both src and alt attributes. Wrap at least one image in a figure element with a figcaption describing the project.",
+  "builds_on": "h5_proj_ch08",
+  "starter_code": "# Portfolio Website \u2014 Step 6: Project Gallery with Images\n# Add img tags with src and alt. Use figure and figcaption for at least one.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <h1>Your Name</h1>\n\n    <a href=\"#about\">About Me</a> |\n    <a href=\"#projects\">Projects</a> |\n    <a href=\"#contact\">Contact</a>\n\n    <p>Welcome to my portfolio!</p>\n\n    <div id=\"about\">\n        <h2>About Me</h2>\n        <p>\n            I am a developer who is <strong>passionate</strong> about\n            building things. I am <em>constantly learning</em> and\n            <mark>love problem-solving</mark>.\n        </p>\n        <table>\n            <thead>\n                <tr><th>Skill</th><th>Level</th><th>Years</th></tr>\n            </thead>\n            <tbody>\n                <tr><td>HTML</td><td>Beginner</td><td>1</td></tr>\n                <tr><td>CSS</td><td>Beginner</td><td>1</td></tr>\n                <tr><td>Python</td><td>Intermediate</td><td>2</td></tr>\n            </tbody>\n        </table>\n    </div>\n\n    <div id=\"projects\">\n        <h2>My Projects</h2>\n        <p>Here are some of my recent projects.</p>\n\n        <!-- Add images for your projects -->\n        <!-- Wrap at least one in a <figure> with <figcaption> -->\n\n    </div>\n\n    <div id=\"contact\">\n        <h2>Contact</h2>\n        <p>Get in touch with me.</p>\n    </div>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<img ' in html.lower(), 'Must include at least one <img> element'\nassert 'src=' in html.lower(), 'Each img must have a src attribute'\nassert 'alt=' in html.lower(), 'Each img must have an alt attribute for accessibility'\nassert '<figure>' in html.lower() and '</figure>' in html.lower(), 'Must wrap at least one image in a <figure> element'\nassert '<figcaption>' in html.lower() and '</figcaption>' in html.lower(), 'Must include a <figcaption> inside the figure'",
+  "acceptance_criteria": [
+    "At least one img element with src and alt attributes",
+    "At least one image is wrapped in a figure element",
+    "A figcaption provides a description inside the figure",
+    "Images are in the Projects section"
+  ],
+  "hints": [
+    "An image tag: <img src=\"project1.png\" alt=\"My first project\">",
+    "Wrap in figure: <figure><img src=\"...\" alt=\"...\"><figcaption>Description</figcaption></figure>",
+    "The src can be any placeholder URL or filename"
+  ]
+}

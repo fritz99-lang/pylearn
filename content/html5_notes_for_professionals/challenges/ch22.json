@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 22,
+  "challenges": [
+    {
+      "id": "h5_ch22_c01",
+      "title": "Labeled Form",
+      "description": "Create a form with at least 3 input fields. Every input must have an associated label element using the for attribute that matches the input's id. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form with labeled inputs -->\n<!-- Each label should use the for attribute matching the input's id -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> element'\nassert html.lower().count('<label') >= 3, 'Should contain at least 3 label elements'\nassert html.lower().count('for=') >= 3, 'Each label should have a for attribute'\nassert html.lower().count('<input') >= 3, 'Should contain at least 3 input elements'\nassert html.lower().count('id=') >= 3, 'Each input should have an id attribute'",
+      "difficulty": "easy",
+      "concepts_new": ["label_for_attribute", "explicit_labels", "input_id"],
+      "concepts_review": ["forms", "labels", "input_types"],
+      "hints": [
+        "Use <label for=\"name\">Name:</label> with <input id=\"name\" type=\"text\">",
+        "The for attribute value must exactly match the input's id value",
+        "This explicit association lets users click the label to focus the input"
+      ]
+    },
+    {
+      "id": "h5_ch22_c02",
+      "title": "Implicit Labels",
+      "description": "Create a form with at least 4 inputs. Use explicit labels (for/id) for at least 2 inputs and implicit labels (input nested inside the label element) for at least 2 others. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form mixing explicit and implicit labels -->\n<!-- Explicit: <label for=\"x\">...</label> <input id=\"x\">\n<!-- Implicit: <label>... <input ...></label> -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> element'\nassert html.lower().count('<label') >= 4, 'Should contain at least 4 label elements'\nassert html.lower().count('<input') >= 4, 'Should contain at least 4 input elements'\nassert html.lower().count('for=') >= 2, 'Should have at least 2 explicit labels with for attribute'\nimport re\nnested_pattern = re.findall(r'<label[^>]*>(?:(?!</label>).)*<input[^>]*>(?:(?!</label>).)*</label>', html.lower(), re.DOTALL)\nassert len(nested_pattern) >= 2, 'Should have at least 2 implicit labels (input nested inside label)'",
+      "difficulty": "medium",
+      "concepts_new": ["implicit_labels", "nested_input_label"],
+      "concepts_review": ["label_for_attribute", "explicit_labels", "forms"],
+      "hints": [
+        "Explicit: <label for=\"email\">Email:</label> <input id=\"email\" type=\"email\">",
+        "Implicit: <label>Phone: <input type=\"tel\"></label>",
+        "Implicit labels don't need for/id because the input is inside the label"
+      ]
+    }
+  ]
+}

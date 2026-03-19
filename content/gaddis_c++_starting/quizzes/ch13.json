@@ -1,0 +1,58 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 13,
+  "questions": [
+    {
+      "id": "cpp_ch13_q01",
+      "type": "multiple_choice",
+      "question": "Which access specifier makes a class member accessible only to the class's own member functions?",
+      "choices": ["public", "private", "protected", "friend"],
+      "correct": 1,
+      "explanation": "The 'private' access specifier restricts access to a member so that only the class's own member functions (and friends) can access it. This enforces encapsulation.",
+      "concepts": ["access_specifiers", "private"]
+    },
+    {
+      "id": "cpp_ch13_q02",
+      "type": "multiple_choice",
+      "question": "What is a constructor in a C++ class?",
+      "choices": ["A function that deletes an object", "A special member function that is automatically called when an object is created", "A function that copies one object to another", "A function that returns the class type"],
+      "correct": 1,
+      "explanation": "A constructor is a special member function with the same name as the class. It is automatically called when an object is created and is typically used to initialize member variables.",
+      "concepts": ["constructors", "class_definition"]
+    },
+    {
+      "id": "cpp_ch13_q03",
+      "type": "multiple_choice",
+      "question": "When separating a class's specification from its implementation, which operator is used before the function name in the .cpp file?",
+      "choices": ["The dot operator (.)", "The arrow operator (->)", "The scope resolution operator (::)", "The address-of operator (&)"],
+      "correct": 2,
+      "explanation": "The scope resolution operator (::) ties a member function definition to its class. For example, void Rectangle::setWidth(double w) identifies setWidth as belonging to the Rectangle class.",
+      "concepts": ["scope_resolution", "separating_specification"]
+    },
+    {
+      "id": "cpp_ch13_q04",
+      "type": "multiple_choice",
+      "question": "What character must appear at the end of a class declaration (after the closing brace)?",
+      "choices": ["A colon (:)", "A semicolon (;)", "A comma (,)", "Nothing is required"],
+      "correct": 1,
+      "explanation": "A class declaration must end with a semicolon after the closing brace. Forgetting this semicolon is a common syntax error that often produces confusing compiler messages.",
+      "concepts": ["class_definition", "syntax"]
+    },
+    {
+      "id": "cpp_ch13_q05",
+      "type": "fill_in_blank",
+      "question": "A ___ is a special member function that is automatically called when an object is destroyed.",
+      "correct": "destructor",
+      "explanation": "A destructor has the same name as the class preceded by a tilde (~). It is automatically called when an object goes out of scope or is deleted, and is used to release resources.",
+      "concepts": ["destructors"]
+    },
+    {
+      "id": "cpp_ch13_q06",
+      "type": "fill_in_blank",
+      "question": "By default, all members of a C++ class are ___ if no access specifier is provided.",
+      "correct": "private",
+      "explanation": "Unlike structures (where members default to public), class members default to private access. You must explicitly use the 'public:' specifier to make members accessible outside the class.",
+      "concepts": ["access_specifiers", "private"]
+    }
+  ]
+}

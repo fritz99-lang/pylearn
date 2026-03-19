@@ -1,0 +1,23 @@
+{
+  "step_id": "hc_proj_ch07",
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 7,
+  "title": "Recipe Cards \u2014 Styled with Selectors",
+  "description": "Organize your recipes into styled cards. Add at least 2 div elements with class=\"recipe-card\", each containing a recipe (h2, description paragraph, etc.). Style .recipe-card with border, padding, margin, and border-radius. Use descendant selectors to style .recipe-card h2 and .recipe-card p differently from the rest of the page.",
+  "builds_on": "hc_proj_ch06",
+  "starter_code": "# Recipe Collection Website \u2014 Step 6: Recipe Cards with Selectors\n# Wrap recipes in class=\"recipe-card\" divs. Style with CSS selectors.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>My Recipes</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            color: #333;\n            background-color: #f9f5f0;\n            margin: 0;\n            padding: 0;\n        }\n        h1, h2 { color: #8b4513; }\n        img { max-width: 100%; }\n        nav { background-color: #8b4513; padding: 10px; }\n        nav ul { list-style: none; display: flex; margin: 0; padding: 0; }\n        nav li { margin-right: 20px; }\n        nav a { color: white; text-decoration: none; }\n\n        /* Style .recipe-card: border, padding, margin, border-radius */\n\n        /* Use descendant selectors: .recipe-card h2, .recipe-card p */\n\n    </style>\n</head>\n<body>\n    <header>\n        <h1>My Recipe Collection</h1>\n        <nav>\n            <ul>\n                <li><a href=\"#\">Home</a></li>\n                <li><a href=\"#recipes\">Recipes</a></li>\n                <li><a href=\"#submit\">Submit Recipe</a></li>\n            </ul>\n        </nav>\n    </header>\n\n    <main>\n        <p>Welcome to my favorite recipes!</p>\n\n        <!-- Add div class=\"recipe-card\" for first recipe -->\n\n        <!-- Add div class=\"recipe-card\" for second recipe -->\n\n    </main>\n\n    <footer>\n        <p>&copy; 2026 My Recipe Collection</p>\n    </footer>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert 'class=\"recipe-card\"' in html.lower() or \"class='recipe-card'\" in html.lower(), 'Must include at least one div with class=\"recipe-card\"'\nassert html.lower().count('recipe-card') >= 4, 'Must have at least 2 recipe-card divs (class appears in HTML and CSS)'\nassert '.recipe-card' in html.lower(), 'Must style .recipe-card in CSS'\nassert 'border' in html.lower(), 'Must set border on recipe cards'\nassert 'padding' in html.lower(), 'Must set padding on recipe cards'\nassert 'border-radius' in html.lower(), 'Must set border-radius on recipe cards'\nassert '<nav>' in html.lower(), 'Must keep nav from previous step'\nassert '<style>' in html.lower(), 'Must include a <style> block'",
+  "acceptance_criteria": [
+    "At least 2 divs with class=\"recipe-card\" wrap individual recipes",
+    ".recipe-card is styled with border, padding, margin, and border-radius",
+    "Descendant selectors (.recipe-card h2, .recipe-card p) are used",
+    "Navigation menu is preserved from previous step",
+    "All previous semantic structure is maintained"
+  ],
+  "hints": [
+    "Wrap a recipe: <div class=\"recipe-card\"><h2>Pancakes</h2><p>...</p></div>",
+    "Card style: .recipe-card { border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px; }",
+    "Descendant selector: .recipe-card h2 { color: #5a3010; margin-top: 0; }",
+    "Add a second recipe card with a different dish to meet the requirement"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 42,
+  "questions": [
+    {
+      "id": "css_ch42_q01",
+      "type": "multiple_choice",
+      "question": "Which of the following CSS properties is inherited by default?",
+      "choices": ["border", "margin", "color", "padding"],
+      "correct": 2,
+      "explanation": "The color property is inherited by default, meaning child elements will use the parent's color value unless overridden. Properties like border, margin, and padding are not inherited by default.",
+      "concepts": ["inheritance", "color"]
+    },
+    {
+      "id": "css_ch42_q02",
+      "type": "multiple_choice",
+      "question": "What does the 'inherit' keyword do when applied to a CSS property?",
+      "choices": ["Resets the property to the browser default", "Forces the property to take its parent's computed value", "Removes the property entirely", "Sets the property to its initial specification value"],
+      "correct": 1,
+      "explanation": "The inherit keyword forces a property to take the computed value from its parent element. This works for any property, even those that are not normally inherited like border or padding.",
+      "concepts": ["inherit", "inheritance"]
+    },
+    {
+      "id": "css_ch42_q03",
+      "type": "multiple_choice",
+      "question": "What does the 'unset' keyword do?",
+      "choices": ["Always resets to the initial value", "Always inherits from the parent", "Acts as inherit for inherited properties and initial for non-inherited properties", "Removes the property from the cascade"],
+      "correct": 2,
+      "explanation": "The unset keyword behaves as inherit if the property is naturally inherited (like color or font-size), and as initial if the property is not naturally inherited (like border or margin).",
+      "concepts": ["unset", "inheritance"]
+    },
+    {
+      "id": "css_ch42_q04",
+      "type": "multiple_choice",
+      "question": "What does the 'all' shorthand property affect when used with the 'initial' keyword?",
+      "choices": ["Only color and font properties", "Only the display property", "Every CSS property except direction and unicode-bidi", "Only inherited properties"],
+      "correct": 2,
+      "explanation": "The all shorthand property resets every CSS property except direction and unicode-bidi. Using all: initial sets all properties to their specification-defined initial values.",
+      "concepts": ["all", "initial", "inheritance"]
+    },
+    {
+      "id": "css_ch42_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ keyword resets a CSS property to the default value defined in the specification, ignoring inheritance.",
+      "correct": "initial",
+      "explanation": "The initial keyword sets a property to its initial value as defined by the CSS specification. For example, the initial value of display is inline, regardless of what the parent's display value is.",
+      "concepts": ["initial", "inheritance"]
+    },
+    {
+      "id": "css_ch42_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ shorthand property can be used to reset all CSS properties on an element at once.",
+      "correct": "all",
+      "explanation": "The all shorthand property represents all CSS properties except direction and unicode-bidi. It can be set to inherit, initial, unset, or revert to reset an element's styles in one declaration.",
+      "concepts": ["all", "inheritance"]
+    }
+  ]
+}

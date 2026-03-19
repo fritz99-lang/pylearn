@@ -1,0 +1,34 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 4,
+  "challenges": [
+    {
+      "id": "h5_ch04_c01",
+      "title": "Paragraph Basics",
+      "description": "Create three <p> paragraphs about any topic you like. Each paragraph should contain at least a few words of text. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your three paragraphs here -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<p>') >= 3, 'Should contain at least three <p> elements'\nassert html.lower().count('</p>') >= 3, 'Should close all three <p> elements'\nparas = html.lower().split('<p>')[1:]\nfor i, p in enumerate(paras[:3]):\n    text = p.split('</p>')[0].strip()\n    assert len(text) > 0, f'Paragraph {i+1} should contain some text'",
+      "difficulty": "easy",
+      "concepts_new": ["paragraph element", "text content"],
+      "concepts_review": [],
+      "hints": [
+        "Each paragraph is wrapped in <p>...</p> tags",
+        "Write any text you want inside each paragraph — the test just checks structure"
+      ]
+    },
+    {
+      "id": "h5_ch04_c02",
+      "title": "Preformatted Text",
+      "description": "Create a <p> paragraph with a sentence, then a <pre> element containing some formatted text or code (with indentation or line breaks preserved). Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write a paragraph and a pre element here -->\n\n\"\"\"",
+      "test_code": "assert '<p>' in html.lower(), 'Should contain a <p> paragraph element'\nassert '</p>' in html.lower(), 'Should close the <p> element'\nassert '<pre>' in html.lower(), 'Should contain a <pre> element for preformatted text'\nassert '</pre>' in html.lower(), 'Should close the <pre> element'\npre_content = html.lower().split('<pre>')[1].split('</pre>')[0]\nassert len(pre_content.strip()) > 0, 'The <pre> element should contain some text'",
+      "difficulty": "easy",
+      "concepts_new": ["pre element", "preformatted text"],
+      "concepts_review": ["paragraph element"],
+      "hints": [
+        "The <pre> element preserves whitespace and line breaks exactly as written",
+        "Use <pre> when you want to display code or text with specific formatting"
+      ]
+    }
+  ]
+}

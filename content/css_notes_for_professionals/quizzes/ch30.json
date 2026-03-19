@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 30,
+  "questions": [
+    {
+      "id": "css_ch30_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS filter function applies a Gaussian blur to an element?",
+      "choices": [
+        "smooth()",
+        "blur()",
+        "soften()",
+        "gaussian()"
+      ],
+      "correct": 1,
+      "explanation": "The `blur()` filter function applies a Gaussian blur to the element. It accepts a radius value in pixels — a larger value produces a more blurred result.",
+      "concepts": ["filter", "blur"]
+    },
+    {
+      "id": "css_ch30_q02",
+      "type": "multiple_choice",
+      "question": "What does `filter: grayscale(100%)` do to an element?",
+      "choices": [
+        "Makes the element fully transparent",
+        "Converts the element to completely black and white",
+        "Reduces the element's brightness to zero",
+        "Inverts all the colors of the element"
+      ],
+      "correct": 1,
+      "explanation": "The `grayscale(100%)` filter fully desaturates the element, converting it to black and white. A value of 0% leaves the element unchanged.",
+      "concepts": ["filter", "grayscale"]
+    },
+    {
+      "id": "css_ch30_q03",
+      "type": "multiple_choice",
+      "question": "Which filter function shifts all colors of an element by a specified angle on the color wheel?",
+      "choices": [
+        "color-shift()",
+        "saturate()",
+        "hue-rotate()",
+        "sepia()"
+      ],
+      "correct": 2,
+      "explanation": "The `hue-rotate()` function rotates the hue of all colors in the element by the specified angle (in degrees) on the color wheel. For example, `hue-rotate(180deg)` shifts all colors to their complementary hues.",
+      "concepts": ["filter", "hue-rotate"]
+    },
+    {
+      "id": "css_ch30_q04",
+      "type": "multiple_choice",
+      "question": "How does `filter: invert(100%)` affect an element's appearance?",
+      "choices": [
+        "Flips the element upside down",
+        "Mirrors the element horizontally",
+        "Reverses all colors so that white becomes black and vice versa",
+        "Removes all color, leaving only transparency"
+      ],
+      "correct": 2,
+      "explanation": "The `invert(100%)` filter completely inverts the colors of the element, making each color its opposite on the RGB spectrum (white becomes black, red becomes cyan, etc.).",
+      "concepts": ["filter", "invert"]
+    },
+    {
+      "id": "css_ch30_q05",
+      "type": "fill_in_blank",
+      "question": "The `filter: ___()` function gives an element a warm, brownish-yellow tone similar to an old photograph.",
+      "correct": "sepia",
+      "explanation": "The `sepia()` filter function applies a sepia tone to the element, simulating the warm coloring of vintage photographs. A value of 100% is fully sepia.",
+      "concepts": ["filter", "sepia"]
+    },
+    {
+      "id": "css_ch30_q06",
+      "type": "fill_in_blank",
+      "question": "The `filter: ___()` function creates a shadow effect that conforms to the shape of an image, including transparent areas.",
+      "correct": "drop-shadow",
+      "explanation": "Unlike `box-shadow`, which creates a rectangular shadow, `drop-shadow()` generates a shadow that follows the alpha channel (transparency) of the element, respecting its actual shape.",
+      "concepts": ["filter", "drop-shadow"]
+    }
+  ]
+}

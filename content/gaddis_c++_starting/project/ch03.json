@@ -1,0 +1,22 @@
+{
+  "step_id": "cpp_proj_ch03",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 3,
+  "title": "Grade Input — User Interaction",
+  "description": "Extend your program to read a student's name using getline and three numeric grades using cin. Calculate the average of the three grades and display the result. This introduces variables, expressions, and user input.",
+  "builds_on": "cpp_proj_ch02",
+  "starter_code": "# Student Grade Tracker — Step 2: Grade Input\n# Read a student name (getline) and 3 grades (cin).\n# Calculate and display the average.\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    string name;\n    double grade1, grade2, grade3;\n\n    // Read the student's name using getline\n\n    // Read 3 grades using cin\n\n    // Calculate the average\n\n    // Display the student name and average\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "assert '#include <iostream>' in cpp, 'Must include <iostream> header'\nassert '#include <string>' in cpp, 'Must include <string> header for string type'\nassert 'cin' in cpp, 'Must use cin to read input'\nassert 'getline' in cpp, 'Must use getline to read the student name'\nassert '/' in cpp.split('main')[1], 'Must calculate an average using division (/)'\nassert 'cout' in cpp, 'Must use cout to display the result'\nassert 'string' in cpp, 'Must declare a string variable for the name'",
+  "acceptance_criteria": [
+    "Program reads the student name with getline",
+    "Reads 3 numeric grades with cin",
+    "Calculates the average using division",
+    "Displays the student name and average grade"
+  ],
+  "hints": [
+    "Use: getline(cin, name); to read a full name with spaces",
+    "Declare grades as double: double grade1, grade2, grade3;",
+    "Average formula: double average = (grade1 + grade2 + grade3) / 3.0;",
+    "If mixing cin >> and getline, use cin.ignore() after cin >> to clear the newline"
+  ]
+}

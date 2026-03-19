@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 3,
+  "challenges": [
+    {
+      "id": "css_ch03_c01",
+      "title": "Commenting Your CSS",
+      "description": "Write two CSS rules: one for `h1` setting `color` to `navy` and one for `p` setting `line-height` to `1.5`. Add a comment before each rule explaining what it does. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Add a comment before each rule */\n\n\"\"\"",
+      "test_code": "assert css.count('/*') >= 2, 'Should have at least 2 comments'\nassert css.count('*/') >= 2, 'Should close all comments properly'\nassert 'h1' in css.lower(), 'Should target h1 elements'\nassert 'color' in css.lower(), 'Should set color property'\nassert 'navy' in css.lower(), 'Should set color to navy'\nassert 'p' in css, 'Should target p elements'\nassert 'line-height' in css.lower(), 'Should set line-height property'\nassert '1.5' in css, 'Should set line-height to 1.5'",
+      "difficulty": "easy",
+      "concepts_new": ["css-comments"],
+      "concepts_review": ["css-rules", "color-property"],
+      "hints": [
+        "CSS comments use /* comment text */ syntax",
+        "Place a comment on the line before each rule to describe its purpose"
+      ]
+    },
+    {
+      "id": "css_ch03_c02",
+      "title": "Multi-line Comments and Commented-Out Rules",
+      "description": "Write CSS that includes: (1) a multi-line comment at the top describing the stylesheet (at least 2 lines inside the comment), (2) a rule for `.active` setting `color` to `green`, and (3) a commented-out rule for `.inactive` with `color: gray` (the entire rule wrapped in `/* */`). Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write a multi-line comment, an active rule, and a commented-out rule */\n\n\"\"\"",
+      "test_code": "assert css.count('/*') >= 3, 'Should have at least 3 comment openings (description + starter + commented-out rule)'\nassert '.active' in css, 'Should have a .active rule'\nassert 'green' in css.lower(), 'Should set color to green for .active'\nassert '.inactive' in css, 'Should include .inactive (even if commented out)'\nassert 'gray' in css.lower(), 'Should include gray color (even if commented out)'\nlines = css.split('\\n')\ncomment_lines = [l for l in lines if '/*' in l or '*/' in l or (l.strip().startswith('*') and '/*' not in l)]\nassert len(comment_lines) >= 3, 'Should have multi-line comment content (at least 3 comment-related lines)'",
+      "difficulty": "medium",
+      "concepts_new": ["multi-line-comments", "commented-out-code"],
+      "concepts_review": ["css-comments", "class-selector"],
+      "hints": [
+        "A multi-line comment spans several lines: /* \\n line1 \\n line2 \\n */",
+        "To comment out a rule, wrap the entire rule in /* and */",
+        "The .inactive rule should still be present in the string, just inside comment markers"
+      ]
+    }
+  ]
+}

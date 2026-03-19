@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 1,
+  "challenges": [
+    {
+      "id": "css_ch01_c01",
+      "title": "Your First CSS Rule",
+      "description": "Write a CSS rule that targets all `p` elements and sets their `color` to `blue` and their `font-size` to `16px`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write a rule for p elements */\n\n\"\"\"",
+      "test_code": "assert 'p' in css, 'Should target p elements'\nassert 'color' in css.lower(), 'Should set the color property'\nassert 'blue' in css.lower(), 'Should set color to blue'\nassert 'font-size' in css.lower(), 'Should set the font-size property'\nassert '16px' in css.lower(), 'Should set font-size to 16px'\nassert '{' in css and '}' in css, 'Should have curly braces for the rule block'",
+      "difficulty": "easy",
+      "concepts_new": ["css-rules", "color-property", "font-size"],
+      "concepts_review": [],
+      "hints": [
+        "A CSS rule has the form: selector { property: value; }",
+        "Use `color: blue;` to set text color and `font-size: 16px;` to set size"
+      ]
+    },
+    {
+      "id": "css_ch01_c02",
+      "title": "Element, Class, and ID Selectors",
+      "description": "Write three CSS rules: (1) target all `h1` elements and set `color` to `red`, (2) target the class `.highlight` and set `background-color` to `yellow`, (3) target the ID `#main` and set `font-size` to `20px`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Rule for h1 elements */\n\n/* Rule for .highlight class */\n\n/* Rule for #main ID */\n\n\"\"\"",
+      "test_code": "assert 'h1' in css.lower(), 'Should target h1 elements'\nassert '.highlight' in css, 'Should target the .highlight class'\nassert '#main' in css, 'Should target the #main ID'\nassert 'color' in css.lower(), 'Should use the color property'\nassert 'red' in css.lower(), 'Should set color to red'\nassert 'background-color' in css.lower(), 'Should use background-color property'\nassert 'yellow' in css.lower(), 'Should set background-color to yellow'\nassert 'font-size' in css.lower(), 'Should use font-size property'\nassert '20px' in css.lower(), 'Should set font-size to 20px'",
+      "difficulty": "medium",
+      "concepts_new": ["class-selector", "id-selector", "element-selector"],
+      "concepts_review": ["css-rules", "color-property", "font-size"],
+      "hints": [
+        "Class selectors start with a dot: .classname { }",
+        "ID selectors start with a hash: #idname { }",
+        "Element selectors use the tag name directly: h1 { }"
+      ]
+    }
+  ]
+}

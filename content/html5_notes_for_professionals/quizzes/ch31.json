@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 31,
+  "questions": [
+    {
+      "id": "h5_ch31_q01",
+      "type": "multiple_choice",
+      "question": "Which SVG element is used to draw a circle?",
+      "choices": ["<round>", "<ellipse>", "<circle>", "<arc>"],
+      "correct": 2,
+      "explanation": "The <circle> element draws a circle and requires cx, cy (center coordinates) and r (radius) attributes. The <ellipse> element is for ovals with separate rx and ry radii.",
+      "concepts": ["SVG", "circle"]
+    },
+    {
+      "id": "h5_ch31_q02",
+      "type": "multiple_choice",
+      "question": "What does the viewBox attribute on an <svg> element define?",
+      "choices": [
+        "The background color of the SVG",
+        "The coordinate system and visible area of the SVG content",
+        "The maximum file size of the SVG",
+        "The animation speed for SVG elements"
+      ],
+      "correct": 1,
+      "explanation": "The viewBox attribute defines the position and dimensions of the SVG viewport in the format \"min-x min-y width height\". It establishes the internal coordinate system and controls how the SVG content scales.",
+      "concepts": ["SVG", "viewBox"]
+    },
+    {
+      "id": "h5_ch31_q03",
+      "type": "multiple_choice",
+      "question": "Which SVG element uses a d attribute containing drawing commands like M, L, and Z?",
+      "choices": ["<line>", "<polygon>", "<path>", "<polyline>"],
+      "correct": 2,
+      "explanation": "The <path> element uses the d (data) attribute with commands like M (move to), L (line to), C (curve to), and Z (close path) to define complex shapes and curves.",
+      "concepts": ["SVG", "path"]
+    },
+    {
+      "id": "h5_ch31_q04",
+      "type": "multiple_choice",
+      "question": "What is a key advantage of inline SVG (placed directly in HTML) over using an <img> tag to load an SVG file?",
+      "choices": [
+        "Inline SVG loads faster because it avoids an HTTP request",
+        "Inline SVG elements can be styled with CSS and manipulated with JavaScript",
+        "Inline SVG automatically scales to fill the browser window",
+        "Inline SVG supports raster image formats"
+      ],
+      "correct": 1,
+      "explanation": "When SVG is inline in the HTML, each element is part of the DOM and can be targeted with CSS selectors, event listeners, and JavaScript manipulation. An SVG loaded via <img> is treated as a single opaque image.",
+      "concepts": ["SVG", "inline SVG"]
+    },
+    {
+      "id": "h5_ch31_q05",
+      "type": "fill_in_blank",
+      "question": "The SVG element used to draw a rectangle is ___.",
+      "correct": "<rect>",
+      "explanation": "The <rect> element draws a rectangle and uses x, y, width, and height attributes to define its position and size. Optional rx and ry attributes create rounded corners.",
+      "concepts": ["SVG", "rect"]
+    },
+    {
+      "id": "h5_ch31_q06",
+      "type": "fill_in_blank",
+      "question": "The SVG <polygon> element's vertices are defined by the ___ attribute.",
+      "correct": "points",
+      "explanation": "The points attribute contains a list of x,y coordinate pairs that define each vertex of the polygon. The browser automatically closes the shape by connecting the last point to the first.",
+      "concepts": ["SVG", "polygon", "points"]
+    }
+  ]
+}

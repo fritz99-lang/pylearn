@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 21,
+  "questions": [
+    {
+      "id": "css_ch21_q01",
+      "type": "multiple_choice",
+      "question": "Which pseudo-element is used to insert generated content before an element's actual content?",
+      "choices": [
+        "::first-line",
+        "::before",
+        "::first-letter",
+        "::selection"
+      ],
+      "correct": 1,
+      "explanation": "The ::before pseudo-element creates a child at the very beginning of the selected element, and is commonly used with the content property to insert decorative or informational content.",
+      "concepts": ["::before", "pseudo-elements"]
+    },
+    {
+      "id": "css_ch21_q02",
+      "type": "multiple_choice",
+      "question": "What CSS property is required for ::before and ::after pseudo-elements to appear?",
+      "choices": [
+        "display",
+        "visibility",
+        "content",
+        "position"
+      ],
+      "correct": 2,
+      "explanation": "The content property is required for ::before and ::after to render. Without it (even if set to an empty string ''), the pseudo-element will not be generated.",
+      "concepts": ["content", "::before", "::after"]
+    },
+    {
+      "id": "css_ch21_q03",
+      "type": "multiple_choice",
+      "question": "Which pseudo-element styles only the first line of text in a block-level element?",
+      "choices": [
+        "::first-letter",
+        "::before",
+        "::first-line",
+        "::placeholder"
+      ],
+      "correct": 2,
+      "explanation": "The ::first-line pseudo-element applies styles to the first line of text in a block container. The actual content of the first line depends on the element's width and font size.",
+      "concepts": ["::first-line", "pseudo-elements"]
+    },
+    {
+      "id": "css_ch21_q04",
+      "type": "multiple_choice",
+      "question": "Which pseudo-element can be used to style the placeholder text of an input field?",
+      "choices": [
+        "::before",
+        "::selection",
+        "::first-letter",
+        "::placeholder"
+      ],
+      "correct": 3,
+      "explanation": "The ::placeholder pseudo-element targets the placeholder text displayed in input and textarea elements before the user enters a value.",
+      "concepts": ["::placeholder", "pseudo-elements"]
+    },
+    {
+      "id": "css_ch21_q05",
+      "type": "fill_in_blank",
+      "question": "The CSS ___ property must be set (even to an empty string) for ::before and ::after pseudo-elements to render.",
+      "correct": "content",
+      "explanation": "The content property is mandatory for ::before and ::after. Setting content: '' creates an empty pseudo-element that can still be styled with width, height, background, etc.",
+      "concepts": ["content", "pseudo-elements"]
+    },
+    {
+      "id": "css_ch21_q06",
+      "type": "fill_in_blank",
+      "question": "The _____ pseudo-element allows you to style the portion of text that a user has highlighted.",
+      "correct": "::selection",
+      "explanation": "The ::selection pseudo-element applies styles to the part of a document that has been highlighted by the user, typically allowing customization of background-color and color.",
+      "concepts": ["::selection", "pseudo-elements"]
+    }
+  ]
+}

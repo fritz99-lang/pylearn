@@ -1,0 +1,23 @@
+{
+  "step_id": "cpp_inv_ch05",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 5,
+  "title": "Menu Loop \u2014 Persistent Interface",
+  "description": "Wrap your menu in a do-while loop so the program keeps running until the user chooses Exit. Add file output using ofstream to save a product's data to 'inventory.txt'. The loop should repeat the menu after each action. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_inv_ch04",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\nint main() {\n    int choice;\n\n    // Wrap the menu in a do-while loop\n    // Loop until user chooses 6 (Exit)\n\n        cout << \"\\n===== Inventory Management System =====\" << endl;\n        cout << \"1. Add Product\" << endl;\n        cout << \"2. View Products\" << endl;\n        cout << \"3. Search Product\" << endl;\n        cout << \"4. Sort Products\" << endl;\n        cout << \"5. Save to File\" << endl;\n        cout << \"6. Exit\" << endl;\n        cout << \"Enter your choice: \";\n        cin >> choice;\n\n        switch (choice) {\n            case 1: {\n                string name;\n                double price;\n                int quantity;\n                cin.ignore();\n                cout << \"Enter product name: \";\n                getline(cin, name);\n                cout << \"Enter price: \";\n                cin >> price;\n                cout << \"Enter quantity: \";\n                cin >> quantity;\n\n                if (price <= 0) {\n                    cout << \"Error: Price must be greater than 0.\" << endl;\n                } else if (quantity < 0) {\n                    cout << \"Error: Quantity cannot be negative.\" << endl;\n                } else {\n                    cout << \"Product added: \" << name << \" ($\" << price << \" x \" << quantity << \")\" << endl;\n                }\n                break;\n            }\n            case 5: {\n                // Save product data to inventory.txt using ofstream\n                break;\n            }\n            case 6:\n                cout << \"Goodbye!\" << endl;\n                break;\n            default:\n                cout << \"Invalid choice. Try again.\" << endl;\n        }\n\n    // End of do-while loop\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'do' in cpp, 'Use a do-while loop to repeat the menu'\nassert 'while' in cpp, 'The do-while loop needs a while condition'\ncpp_no_space = cpp.replace(' ', '').replace('\\n', '')\nassert 'while(' in cpp_no_space or 'while (' in cpp, 'Include the while condition to check for exit'\nassert 'ofstream' in cpp, 'Use ofstream to write product data to a file'\nassert 'fstream' in cpp, 'Include <fstream> for file operations'\nassert 'inventory' in cpp.lower() or '.txt' in cpp or '.dat' in cpp or '.csv' in cpp, 'Write to an inventory data file'",
+  "acceptance_criteria": [
+    "Menu runs inside a do-while loop",
+    "Loop continues until user chooses Exit (option 6)",
+    "Includes #include <fstream> for file operations",
+    "Uses ofstream to save product data to a file",
+    "Menu redisplays after each completed action"
+  ],
+  "hints": [
+    "do { ... } while (choice != 6); keeps the menu running until exit",
+    "A do-while loop always executes at least once, which is perfect for menus",
+    "Use ofstream outFile(\"inventory.txt\"); to open a file for writing",
+    "Don't forget outFile.close(); or use it within a block scope"
+  ]
+}

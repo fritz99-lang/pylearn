@@ -1,0 +1,28 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 15,
+  "challenges": [
+    {
+      "id": "h5_ch15_c01",
+      "title": "Image Gallery",
+      "description": "Create three <img> elements, each with both a src attribute and an alt attribute. Use different image sources and descriptive alt text for each. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<img') >= 3, 'Should contain at least 3 <img> elements'\nimport re\nsrcs = re.findall(r'<img[^>]+src=', html.lower())\nassert len(srcs) >= 3, 'Each image should have a src attribute'\nalts = re.findall(r'<img[^>]+alt=', html.lower())\nassert len(alts) >= 3, 'Each image should have an alt attribute'",
+      "difficulty": "easy",
+      "concepts_new": ["img_element", "alt_attribute"],
+      "concepts_review": ["html_attributes"],
+      "hints": ["Images are self-closing: <img src=\"photo.jpg\" alt=\"Description\">", "The alt attribute provides alternative text for accessibility"]
+    },
+    {
+      "id": "h5_ch15_c02",
+      "title": "Figure Images",
+      "description": "Create at least two images, each wrapped in a <figure> element with a <figcaption> providing a caption. Each image must have src and alt attributes. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('<figure') >= 2, 'Should contain at least 2 <figure> elements'\nassert html.lower().count('</figure>') >= 2, 'Should close both <figure> elements'\nassert html.lower().count('<figcaption') >= 2, 'Should contain at least 2 <figcaption> elements'\nassert html.lower().count('</figcaption>') >= 2, 'Should close both <figcaption> elements'\nassert html.lower().count('<img') >= 2, 'Should contain at least 2 <img> elements'\nimport re\nassert len(re.findall(r'<img[^>]+alt=', html.lower())) >= 2, 'Each image should have an alt attribute'",
+      "difficulty": "medium",
+      "concepts_new": ["figure_element", "figcaption_element"],
+      "concepts_review": ["img_element", "alt_attribute"],
+      "hints": ["Wrap each image in <figure> and add <figcaption> for the caption", "Structure: <figure><img src=\"...\" alt=\"...\"><figcaption>Caption</figcaption></figure>"]
+    }
+  ]
+}

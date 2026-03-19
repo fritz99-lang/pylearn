@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 25,
+  "challenges": [
+    {
+      "id": "css_ch25_c01",
+      "title": "Table Border Collapse",
+      "description": "Style a table by setting border-collapse to collapse and adding a 1px solid border to both the table and td elements. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Style a table with border-collapse */\n\n\"\"\"",
+      "test_code": "assert 'border-collapse' in css.lower(), 'Should use border-collapse property'\nassert 'collapse' in css.lower(), 'Should set border-collapse to collapse'\nassert 'border' in css.lower(), 'Should add a border to table elements'\nassert 'solid' in css.lower(), 'Should use a solid border style'",
+      "difficulty": "easy",
+      "concepts_new": ["border-collapse"],
+      "concepts_review": ["border"],
+      "hints": [
+        "Use border-collapse: collapse on the table element.",
+        "Add border: 1px solid to both table and td selectors."
+      ]
+    },
+    {
+      "id": "css_ch25_c02",
+      "title": "Advanced Table Styling",
+      "description": "Style a table using caption-side: bottom, border-spacing: 10px, and table-layout: fixed. Also set a width of 100% on the table. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Style a table with caption-side, border-spacing, and table-layout */\n\n\"\"\"",
+      "test_code": "assert 'caption-side' in css.lower(), 'Should use caption-side property'\nassert 'bottom' in css.lower(), 'Should set caption-side to bottom'\nassert 'border-spacing' in css.lower(), 'Should use border-spacing property'\nassert '10px' in css.lower(), 'Should set border-spacing to 10px'\nassert 'table-layout' in css.lower(), 'Should use table-layout property'\nassert 'fixed' in css.lower(), 'Should set table-layout to fixed'\nassert '100%' in css.lower(), 'Should set width to 100%'",
+      "difficulty": "medium",
+      "concepts_new": ["caption-side", "border-spacing", "table-layout"],
+      "concepts_review": ["width"],
+      "hints": [
+        "caption-side controls where the <caption> element appears relative to the table.",
+        "border-spacing sets the distance between cell borders (only works when border-collapse is separate).",
+        "table-layout: fixed makes columns equal width based on the first row."
+      ]
+    }
+  ]
+}

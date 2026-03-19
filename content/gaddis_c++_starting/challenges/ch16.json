@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 16,
+  "challenges": [
+    {
+      "id": "cpp_ch16_c01",
+      "title": "Exception Handling",
+      "description": "Write a C++ program that uses exception handling. Write a function `divide(int a, int b)` that throws a runtime_error when b is zero, and returns a / b otherwise. In main(), call the function inside a try block and catch the exception, printing an error message. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Include a divide function that throws when dividing by zero\n- Use try, catch, and throw keywords\n- Print an error message when the exception is caught",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <stdexcept>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'throw' in cpp, 'Should use throw to raise an exception'\nassert 'try' in cpp, 'Should have a try block'\nassert 'catch' in cpp, 'Should have a catch block to handle the exception'\nassert 'divide' in cpp, 'Should define a divide function'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "easy",
+      "concepts_new": ["try", "catch", "throw", "exception handling", "runtime_error"],
+      "concepts_review": ["functions", "conditionals"],
+      "hints": [
+        "Use: if (b == 0) throw runtime_error(\"Division by zero\");",
+        "Wrap the call in: try { divide(10, 0); } catch (runtime_error& e) { cout << e.what(); }"
+      ]
+    },
+    {
+      "id": "cpp_ch16_c02",
+      "title": "Function Template and STL Vector",
+      "description": "Write a C++ program that defines a function template `findMax` that accepts two parameters of the same type and returns the larger value. Also create a vector of integers, add at least 3 values using push_back, and use a loop to print them. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define a function template using the template keyword\n- Use a vector from the STL with push_back\n- Call findMax with at least one pair of values",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'template' in cpp, 'Should use the template keyword to define a function template'\nassert 'findMax' in cpp, 'Should define a function called findMax'\nassert 'vector' in cpp, 'Should use an STL vector'\nassert 'push_back' in cpp, 'Should add elements to the vector using push_back'\nassert cpp.count('push_back') >= 3, 'Should push_back at least 3 values into the vector'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "medium",
+      "concepts_new": ["function templates", "template keyword", "vector", "push_back", "STL"],
+      "concepts_review": ["functions", "loops", "data types"],
+      "hints": [
+        "Define the template: template <typename T> T findMax(T a, T b) { return (a > b) ? a : b; }",
+        "Create a vector: vector<int> nums; then use nums.push_back(10);"
+      ]
+    }
+  ]
+}

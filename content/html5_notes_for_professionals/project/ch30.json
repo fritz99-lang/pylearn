@@ -1,0 +1,24 @@
+{
+  "step_id": "h5_proj_ch30",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 30,
+  "title": "Final Polish \u2014 Language and Accessibility",
+  "description": "Add the finishing touches to your portfolio for accessibility and best practices. Set the lang attribute on the html tag, add a meta viewport tag for responsive design, and add a meta description. Verify all images have alt text and all form inputs have labels.",
+  "builds_on": "h5_proj_ch25",
+  "starter_code": "# Portfolio Website \u2014 Step 10: Language and Accessibility\n# Add lang attribute, meta viewport, meta description.\n# Ensure all images have alt and all inputs have labels.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<!-- Add lang=\"en\" to the html tag -->\n<html>\n<head>\n    <title>My Portfolio</title>\n    <!-- Add meta viewport and meta description here -->\n</head>\n<body>\n    <header>\n        <h1>Your Name</h1>\n        <nav>\n            <a href=\"#about\">About Me</a> |\n            <a href=\"#projects\">Projects</a> |\n            <a href=\"#contact\">Contact</a>\n        </nav>\n    </header>\n\n    <main>\n        <section id=\"about\">\n            <h2>About Me</h2>\n            <p>\n                I am a developer who is <strong>passionate</strong> about\n                building things. I am <em>constantly learning</em> and\n                <mark>love problem-solving</mark>.\n            </p>\n            <table>\n                <thead>\n                    <tr><th>Skill</th><th>Level</th><th>Years</th></tr>\n                </thead>\n                <tbody>\n                    <tr><td>HTML</td><td>Beginner</td><td>1</td></tr>\n                    <tr><td>CSS</td><td>Beginner</td><td>1</td></tr>\n                    <tr><td>Python</td><td>Intermediate</td><td>2</td></tr>\n                </tbody>\n            </table>\n        </section>\n\n        <section id=\"projects\">\n            <h2>My Projects</h2>\n            <figure>\n                <img src=\"project1.png\" alt=\"Screenshot of project 1\">\n                <figcaption>My first web project</figcaption>\n            </figure>\n            <video controls>\n                <source src=\"demo.mp4\" type=\"video/mp4\">\n                Your browser does not support video.\n            </video>\n            <audio controls>\n                <source src=\"music.mp3\" type=\"audio/mpeg\">\n                Your browser does not support audio.\n            </audio>\n        </section>\n\n        <section id=\"contact\">\n            <h2>Contact</h2>\n            <form method=\"post\">\n                <label for=\"name\">Name:</label>\n                <input type=\"text\" id=\"name\" name=\"name\">\n                <label for=\"email\">Email:</label>\n                <input type=\"email\" id=\"email\" name=\"email\">\n                <label for=\"message\">Message:</label>\n                <textarea id=\"message\" name=\"message\"></textarea>\n                <button type=\"submit\">Send</button>\n            </form>\n        </section>\n    </main>\n\n    <footer>\n        <p>&copy; 2026 Your Name</p>\n    </footer>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert 'lang=\"en\"' in html.lower() or \"lang='en'\" in html.lower(), 'Must add lang=\"en\" attribute to the <html> tag'\nassert 'viewport' in html.lower(), 'Must include a meta viewport tag for responsive design'\nassert 'name=\"viewport\"' in html.lower() or \"name='viewport'\" in html.lower(), 'Meta viewport must have name=\"viewport\"'\nassert 'name=\"description\"' in html.lower() or \"name='description'\" in html.lower(), 'Must include a meta tag with name=\"description\"'\nassert 'content=' in html.lower(), 'Meta tags must have a content attribute'\nassert '<header>' in html.lower(), 'Must still include semantic header element'\nassert '<main>' in html.lower(), 'Must still include semantic main element'\nassert '<footer>' in html.lower(), 'Must still include semantic footer element'",
+  "acceptance_criteria": [
+    "The html tag has lang=\"en\" attribute",
+    "A meta viewport tag is in the head",
+    "A meta description tag is in the head",
+    "All images have alt attributes",
+    "All form inputs have corresponding labels",
+    "All previous features are preserved"
+  ],
+  "hints": [
+    "Set language: <html lang=\"en\">",
+    "Viewport: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+    "Description: <meta name=\"description\" content=\"Personal portfolio of Your Name\">",
+    "Check that every <img> has an alt attribute and every <input> has a <label>"
+  ]
+}

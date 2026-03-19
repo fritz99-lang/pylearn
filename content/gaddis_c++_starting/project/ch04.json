@@ -1,0 +1,22 @@
+{
+  "step_id": "cpp_proj_ch04",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 4,
+  "title": "Letter Grades — Conditional Logic",
+  "description": "Add an if/else chain that converts the numeric average into a letter grade: A (90+), B (80+), C (70+), D (60+), F (below 60). Display the letter grade alongside the numeric average.",
+  "builds_on": "cpp_proj_ch03",
+  "starter_code": "# Student Grade Tracker — Step 3: Letter Grades\n# Add if/else logic to assign a letter grade based on the average.\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    string name;\n    double grade1, grade2, grade3;\n\n    cout << \"Enter student name: \";\n    getline(cin, name);\n\n    cout << \"Enter 3 grades: \";\n    cin >> grade1 >> grade2 >> grade3;\n\n    double average = (grade1 + grade2 + grade3) / 3.0;\n\n    // Determine the letter grade using if/else\n    // A: 90+, B: 80+, C: 70+, D: 60+, F: below 60\n    char letterGrade;\n\n    // Add your if/else chain here\n\n    cout << name << \" — Average: \" << average\n         << \" — Grade: \" << letterGrade << endl;\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "assert 'if' in cpp, 'Must use if statement for grade conditions'\nassert 'else' in cpp, 'Must use else for alternative conditions'\ncpp_after_main = cpp.split('main')[1] if 'main' in cpp else cpp\nassert '>=' in cpp_after_main or '>' in cpp_after_main, 'Must use comparison operators (>= or >) for grade thresholds'\nassert 'letterGrade' in cpp or 'letter_grade' in cpp or 'letter' in cpp, 'Must store the letter grade in a variable'\nassert cpp_after_main.count('if') >= 2, 'Need at least 2 if/else if conditions for the grade scale'",
+  "acceptance_criteria": [
+    "Uses if/else chain to convert average to letter grade",
+    "Covers all grade ranges: A (90+), B (80+), C (70+), D (60+), F",
+    "Displays both the numeric average and letter grade",
+    "Uses comparison operators (>= or >) correctly"
+  ],
+  "hints": [
+    "Start with the highest grade: if (average >= 90) letterGrade = 'A';",
+    "Chain with else if: else if (average >= 80) letterGrade = 'B';",
+    "End with else for F: else letterGrade = 'F';",
+    "Use char type for a single letter: char letterGrade;"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 33,
+  "challenges": [
+    {
+      "id": "css_ch33_c01",
+      "title": "Float Shape with Circle",
+      "description": "Write CSS that uses `shape-outside: circle()` on a floated element. Create a rule for `.shaped` that floats it left and applies `shape-outside: circle(50%)`. Also set a width and height of 200px. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'shape-outside' in css.lower(), 'Should use shape-outside property'\nassert 'circle(' in css.lower(), 'Should use circle() function'\nassert 'float' in css.lower(), 'Should float the element'\nassert 'left' in css.lower(), 'Should float left'",
+      "difficulty": "easy",
+      "concepts_new": ["shape-outside", "circle()"],
+      "concepts_review": ["float"],
+      "hints": [
+        "shape-outside only works on floated elements",
+        "Use shape-outside: circle(50%) to wrap text around a circular shape"
+      ]
+    },
+    {
+      "id": "css_ch33_c02",
+      "title": "Polygon Shape with Margin",
+      "description": "Write CSS that uses `shape-outside` with `polygon()` to create a custom float shape, and adds `shape-margin` for spacing. Create a rule for `.polygon-shape` that floats right, sets a width and height of 300px, uses `shape-outside: polygon(0 0, 100% 0, 100% 100%)` to create a triangle shape, and applies `shape-margin: 15px`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'shape-outside' in css.lower(), 'Should use shape-outside property'\nassert 'polygon(' in css.lower(), 'Should use polygon() function'\nassert 'shape-margin' in css.lower(), 'Should use shape-margin for spacing'\nassert 'float' in css.lower(), 'Should float the element'\nassert 'right' in css.lower(), 'Should float right'",
+      "difficulty": "medium",
+      "concepts_new": ["polygon()", "shape-margin"],
+      "concepts_review": ["shape-outside", "float"],
+      "hints": [
+        "polygon() takes a list of x y coordinate pairs separated by commas",
+        "shape-margin adds space between the shape boundary and surrounding content"
+      ]
+    }
+  ]
+}

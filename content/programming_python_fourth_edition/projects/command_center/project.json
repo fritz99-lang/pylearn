@@ -1,0 +1,6 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "title": "Build a Personal Command Center",
+  "description": "The grand capstone project: build a complete desktop application that serves as your personal command center \u2014 combining a messaging server, task manager, file browser, and live dashboard into one system. This project demands everything from both Learning Python and Programming Python: OOP design, socket networking, threading, tkinter GUIs, SQLite databases, file operations, regex parsing, and system tools.",
+  "final_description": "A complete Personal Command Center with a TCP messaging server, threaded client connections, a tkinter dashboard with multiple panels (messages, tasks, files, system stats), SQLite task/note database with full-text search, file browser with operations, real-time server metrics, a plugin architecture using dynamic imports, and comprehensive logging \u2014 the ultimate capstone project spanning both Learning Python and Programming Python."
+}

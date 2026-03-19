@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 17,
+  "challenges": [
+    {
+      "id": "pp_ch17_c01",
+      "title": "HTML Form Builder",
+      "description": "Write a function `build_form(fields, action='/submit', method='POST')` that takes a dict of field names to field types (e.g., {'username': 'text', 'password': 'password'}) and returns an HTML form string. Each field should have a label and input element. The form should include a submit button.",
+      "starter_code": "def build_form(fields, action='/submit', method='POST'):\n    \"\"\"Generate an HTML form string from a dict of field_name: input_type.\n    \n    Returns a string containing a <form> with labeled inputs and a submit button.\n    \"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "html = build_form({'name': 'text'})\nassert '<form' in html\nassert 'action=\"/submit\"' in html\nassert 'method=\"POST\"' in html\nassert '<input' in html\nassert 'type=\"text\"' in html\nassert 'name=\"name\"' in html\nassert 'submit' in html.lower()\nhtml2 = build_form({'email': 'email', 'pw': 'password'}, action='/login', method='GET')\nassert 'action=\"/login\"' in html2\nassert 'method=\"GET\"' in html2\nassert 'type=\"email\"' in html2\nassert 'name=\"email\"' in html2\nassert 'type=\"password\"' in html2\nassert 'name=\"pw\"' in html2\nempty = build_form({})\nassert '<form' in empty\nassert 'submit' in empty.lower()",
+      "difficulty": "easy",
+      "concepts_new": ["html_generation", "form_building"],
+      "concepts_review": ["dictionaries", "string_formatting", "iteration"],
+      "hints": [
+        "Build the HTML string piece by piece: start with <form>, add <label> and <input> for each field, add a submit button, and close with </form>.",
+        "Use f-strings to insert the field name and type into the HTML elements."
+      ]
+    },
+    {
+      "id": "pp_ch17_c02",
+      "title": "Form Validator",
+      "description": "Write a `FormValidator` class that validates form data. Use `add_required(field_name)` to mark fields as required. Use `add_rule(field_name, validator_func, error_msg)` to add custom validation. The `validate(data)` method takes a dict of field values and returns a dict: {'valid': bool, 'errors': {field: [error_messages]}}.",
+      "starter_code": "class FormValidator:\n    \"\"\"Validates form data against required fields and custom rules.\"\"\"\n\n    def __init__(self):\n        # Your code here\n        pass\n\n    def add_required(self, field_name):\n        \"\"\"Mark a field as required.\"\"\"\n        # Your code here\n        pass\n\n    def add_rule(self, field_name, validator_func, error_msg):\n        \"\"\"Add a custom validation rule for a field.\n        \n        validator_func takes the field value and returns True if valid.\n        \"\"\"\n        # Your code here\n        pass\n\n    def validate(self, data):\n        \"\"\"Validate data dict. Returns {'valid': bool, 'errors': dict}.\"\"\"\n        # Your code here\n        pass\n",
+      "test_code": "v = FormValidator()\nv.add_required('username')\nv.add_required('email')\nv.add_rule('email', lambda x: '@' in x, 'Must contain @')\nv.add_rule('username', lambda x: len(x) >= 3, 'Must be at least 3 chars')\nresult = v.validate({'username': 'alice', 'email': 'alice@test.com'})\nassert result['valid'] is True\nassert result['errors'] == {}\nresult2 = v.validate({'username': 'al', 'email': 'bad'})\nassert result2['valid'] is False\nassert 'username' in result2['errors']\nassert 'email' in result2['errors']\nassert 'Must be at least 3 chars' in result2['errors']['username']\nassert 'Must contain @' in result2['errors']['email']\nresult3 = v.validate({'username': 'bob'})\nassert result3['valid'] is False\nassert 'email' in result3['errors']\nresult4 = v.validate({})\nassert result4['valid'] is False\nassert 'username' in result4['errors']\nassert 'email' in result4['errors']",
+      "difficulty": "medium",
+      "concepts_new": ["form_validation", "rule_engine"],
+      "concepts_review": ["classes", "callables", "dictionaries", "lambda"],
+      "hints": [
+        "Store required fields in a set and rules in a dict mapping field names to lists of (validator_func, error_msg) tuples.",
+        "In validate(), first check required fields exist and are non-empty, then run custom rules. Collect all errors per field."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 17,
+  "questions": [
+    {
+      "id": "css_ch17_q01",
+      "type": "multiple_choice",
+      "question": "Which of the following has the HIGHEST specificity?",
+      "choices": [
+        "A class selector (.menu)",
+        "An element selector (div)",
+        "An inline style attribute",
+        "An ID selector (#header)"
+      ],
+      "correct": 2,
+      "explanation": "Inline styles have the highest specificity (1,0,0,0), followed by ID selectors (0,1,0,0), class selectors (0,0,1,0), and element selectors (0,0,0,1).",
+      "concepts": ["specificity", "inline-styles"]
+    },
+    {
+      "id": "css_ch17_q02",
+      "type": "multiple_choice",
+      "question": "When two selectors have equal specificity, which rule is applied?",
+      "choices": [
+        "The first rule in source order",
+        "The last rule in source order",
+        "Neither rule is applied",
+        "The browser chooses at random"
+      ],
+      "correct": 1,
+      "explanation": "When specificity is equal, the cascade uses source order and the last rule declared wins.",
+      "concepts": ["cascade", "source-order"]
+    },
+    {
+      "id": "css_ch17_q03",
+      "type": "multiple_choice",
+      "question": "What does the !important declaration do?",
+      "choices": [
+        "Increases the selector's specificity by 1",
+        "Makes the declaration override all other declarations regardless of specificity",
+        "Applies the style only to the first matching element",
+        "Prevents the style from being inherited"
+      ],
+      "correct": 1,
+      "explanation": "The !important declaration overrides normal specificity rules, making that declaration take priority over all other non-!important declarations.",
+      "concepts": ["!important", "cascade"]
+    },
+    {
+      "id": "css_ch17_q04",
+      "type": "multiple_choice",
+      "question": "What is the specificity of the selector #nav .item a?",
+      "choices": [
+        "0,1,0,1",
+        "0,1,1,1",
+        "0,2,1,0",
+        "0,0,2,1"
+      ],
+      "correct": 1,
+      "explanation": "The selector has one ID (#nav = 0,1,0,0), one class (.item = 0,0,1,0), and one element (a = 0,0,0,1), totaling 0,1,1,1.",
+      "concepts": ["specificity", "specificity-calculation"]
+    },
+    {
+      "id": "css_ch17_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ declaration can override all normal specificity rules and should be used sparingly.",
+      "correct": "!important",
+      "explanation": "The !important declaration overrides normal cascade and specificity rules, which is why it should be used sparingly to avoid maintenance difficulties.",
+      "concepts": ["!important"]
+    },
+    {
+      "id": "css_ch17_q06",
+      "type": "fill_in_blank",
+      "question": "In specificity calculation, an ID selector contributes to the ___ column (first/second/third/fourth).",
+      "correct": "second",
+      "explanation": "Specificity is calculated as (inline, ID, class, element). ID selectors contribute to the second column, after inline styles.",
+      "concepts": ["specificity", "specificity-calculation"]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "step_id": "lp_adv_ch09",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 9,
+  "title": "Save and Load — File Persistence",
+  "description": "Add save and load functionality to your game using file I/O. Create save_game(filepath, player_name, health, current_room, inventory_names) that writes the game state to a text file (one value per line). Create load_game(filepath) that reads the file and returns a dictionary with 'name', 'health', 'room', and 'inventory' keys.",
+  "builds_on": "lp_adv_ch06",
+  "starter_code": "# Text Adventure — Step 4: Save and Load\n# Use file I/O to persist game state.\n\nimport os\n\n# Game state from previous steps\nrooms = {\n    'entrance': 'You stand at the entrance of a dark cave.',\n    'hallway': 'A long hallway with torches on the walls.',\n    'treasure_room': 'A glittering room full of gold and jewels.',\n}\n\ngame_items = [\n    {'name': 'iron_sword', 'type': 'weapon', 'value': 10},\n    {'name': 'health_potion', 'type': 'potion', 'value': 25},\n    {'name': 'rusty_key', 'type': 'key', 'value': 'treasure_room'},\n    {'name': 'wooden_shield', 'type': 'weapon', 'value': 5},\n]\n\ndef calculate_damage(attack, defense):\n    return max(0, attack - defense)\n\ndef heal_player(current_health, heal_amount, max_health):\n    return min(current_health + heal_amount, max_health)\n\ndef add_to_inventory(inventory, item):\n    inventory.append(item)\n    return True\n\ndef remove_from_inventory(inventory, item_name):\n    for i, item in enumerate(inventory):\n        if item['name'] == item_name:\n            return inventory.pop(i)\n    return None\n\n# File format (one value per line):\n# Line 1: player name\n# Line 2: health (as string)\n# Line 3: current room\n# Line 4: inventory item names (comma-separated, or empty)\n\ndef save_game(filepath, player_name, health, current_room, inventory_names):\n    \"\"\"Save game state to a text file.\n    inventory_names is a list of item name strings.\n    \"\"\"\n    # Your code here — write to the file\n    pass\n\ndef load_game(filepath):\n    \"\"\"Load game state from a text file.\n    Returns a dict with 'name', 'health' (int), 'room', and 'inventory' (list of str).\n    \"\"\"\n    # Your code here — read from the file\n    pass\n\n# Test it\ntest_file = 'test_save.txt'\nsave_game(test_file, 'Hero', 85, 'hallway', ['iron_sword', 'health_potion'])\nloaded = load_game(test_file)\nprint(f\"Loaded: {loaded}\")\nos.remove(test_file)  # Clean up\n",
+  "test_code": "import os\nassert callable(save_game), 'save_game should be a function'\nassert callable(load_game), 'load_game should be a function'\ntest_path = '_test_adventure_save.txt'\ntry:\n    save_game(test_path, 'TestHero', 75, 'hallway', ['iron_sword', 'health_potion'])\n    assert os.path.exists(test_path), 'save_game should create the file'\n    loaded = load_game(test_path)\n    assert isinstance(loaded, dict), 'load_game should return a dict'\n    assert loaded['name'] == 'TestHero', f\"name should be 'TestHero', got {loaded['name']}\"\n    assert loaded['health'] == 75, f\"health should be 75 (int), got {loaded['health']}\"\n    assert loaded['room'] == 'hallway', f\"room should be 'hallway', got {loaded['room']}\"\n    assert isinstance(loaded['inventory'], list), 'inventory should be a list'\n    assert 'iron_sword' in loaded['inventory'], 'inventory should contain iron_sword'\n    assert 'health_potion' in loaded['inventory'], 'inventory should contain health_potion'\n    save_game(test_path, 'EmptyPlayer', 100, 'entrance', [])\n    loaded2 = load_game(test_path)\n    assert loaded2['name'] == 'EmptyPlayer', f\"name should be 'EmptyPlayer', got {loaded2['name']}\"\n    assert loaded2['inventory'] == [] or loaded2['inventory'] == [''], f\"empty inventory should load as empty list, got {loaded2['inventory']}\"\nfinally:\n    if os.path.exists(test_path):\n        os.remove(test_path)",
+  "acceptance_criteria": [
+    "save_game() writes player name, health, room, and inventory to a file",
+    "load_game() reads the file and returns a dict with correct keys",
+    "health is returned as an integer from load_game()",
+    "inventory is returned as a list of strings",
+    "Empty inventory is handled correctly"
+  ],
+  "hints": [
+    "Use open(filepath, 'w') and write each value on its own line with \\n",
+    "For inventory, join names with commas: ','.join(inventory_names)",
+    "When loading, use .strip() on each line to remove newline characters",
+    "Convert health back to int: int(line.strip())",
+    "For empty inventory: if the line is empty, return an empty list"
+  ]
+}

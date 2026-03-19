@@ -1,0 +1,22 @@
+{
+  "step_id": "cpp_proj_ch11",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 11,
+  "title": "Student Records — Structured Data",
+  "description": "Define a Student struct with fields: name (string), grades (double array), average (double), and letterGrade (char). Replace the parallel arrays with an array of Student structs. Access members using the dot operator.",
+  "builds_on": "cpp_proj_ch07",
+  "starter_code": "# Student Grade Tracker — Step 7: Structs\n# Define a Student struct and use an array of structs.\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nconst int MAX_STUDENTS = 30;\nconst int NUM_GRADES = 3;\n\n// Define a Student struct with:\n//   string name\n//   double grades[NUM_GRADES]\n//   double average\n//   char letterGrade\n\ndouble calculateAverage(double grades[], int size) {\n    double sum = 0;\n    for (int i = 0; i < size; i++)\n        sum += grades[i];\n    return sum / size;\n}\n\nchar getLetterGrade(double avg) {\n    if (avg >= 90) return 'A';\n    else if (avg >= 80) return 'B';\n    else if (avg >= 70) return 'C';\n    else if (avg >= 60) return 'D';\n    else return 'F';\n}\n\nvoid displayStudent(Student s) {\n    cout << s.name << \" — Average: \" << s.average\n         << \" — Grade: \" << s.letterGrade << endl;\n}\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    // Declare an array of Student structs\n    // Student roster[MAX_STUDENTS];\n    int count = 0;\n\n    // Loop to fill student data\n\n    // Calculate averages and letter grades using struct members\n\n    // Display all students\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "assert 'struct' in cpp, 'Must define a struct'\nassert 'Student' in cpp, 'Struct should be named Student'\ncpp_after_struct = cpp[cpp.index('struct'):] if 'struct' in cpp else cpp\nassert '.name' in cpp or '.average' in cpp or '.letterGrade' in cpp or '.grades' in cpp, 'Must access struct members using the dot operator (.)'\nassert 'Student' in cpp.split('main')[1] if 'main' in cpp else True, 'Must use the Student struct in main'\nassert cpp.count('.') >= 3, 'Should use dot operator multiple times to access struct members'",
+  "acceptance_criteria": [
+    "Defines a Student struct with name, grades, average, and letterGrade fields",
+    "Uses an array of Student structs instead of parallel arrays",
+    "Accesses struct members using the dot operator",
+    "Functions work with the Student struct"
+  ],
+  "hints": [
+    "Define the struct above main: struct Student { string name; double grades[NUM_GRADES]; double average; char letterGrade; };",
+    "Declare an array of structs: Student roster[MAX_STUDENTS];",
+    "Access members: roster[i].name, roster[i].grades[j]",
+    "You can pass a Student to functions: void displayStudent(Student s) { ... }"
+  ]
+}

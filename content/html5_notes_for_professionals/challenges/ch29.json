@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 29,
+  "challenges": [
+    {
+      "id": "h5_ch29_c01",
+      "title": "Basic IFrame",
+      "description": "Create an iframe element with src, width, height, and title attributes. The title attribute is important for accessibility. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create an iframe with src, width, height, and title -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<iframe' in lower, 'Should contain an <iframe> element'\nassert 'src=' in lower, 'IFrame should have a src attribute'\nassert 'width=' in lower, 'IFrame should have a width attribute'\nassert 'height=' in lower, 'IFrame should have a height attribute'\nassert 'title=' in lower, 'IFrame should have a title attribute for accessibility'\nassert '</iframe>' in lower, 'Should close the <iframe> element'",
+      "difficulty": "easy",
+      "concepts_new": ["iframe", "title attribute"],
+      "concepts_review": ["src", "width", "height"],
+      "hints": [
+        "The <iframe> element embeds another page within the current page.",
+        "Always include a title attribute for screen readers.",
+        "The closing </iframe> tag is required even though the element has no visible child content."
+      ]
+    },
+    {
+      "id": "h5_ch29_c02",
+      "title": "Secure IFrame",
+      "description": "Create an iframe with the sandbox attribute to restrict what the embedded content can do. Include src, width, height, and title attributes. The sandbox attribute should allow scripts but restrict other permissions. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a sandboxed iframe -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<iframe' in lower, 'Should contain an <iframe> element'\nassert 'sandbox' in lower, 'IFrame should have a sandbox attribute'\nassert 'allow-scripts' in lower, 'Sandbox should allow scripts'\nassert 'src=' in lower, 'IFrame should have a src attribute'\nassert 'title=' in lower, 'IFrame should have a title attribute for accessibility'\nassert '</iframe>' in lower, 'Should close the <iframe> element'",
+      "difficulty": "medium",
+      "concepts_new": ["sandbox", "allow-scripts"],
+      "concepts_review": ["iframe", "title attribute", "src"],
+      "hints": [
+        "The sandbox attribute restricts all permissions by default when used without a value.",
+        "Add specific permissions like allow-scripts as the sandbox value.",
+        "Example: sandbox=\"allow-scripts\" enables JavaScript but blocks other actions."
+      ]
+    }
+  ]
+}

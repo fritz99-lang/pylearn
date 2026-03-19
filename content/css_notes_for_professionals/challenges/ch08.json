@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 8,
+  "challenges": [
+    {
+      "id": "css_ch08_c01",
+      "title": "Margin Shorthand",
+      "description": "Write two CSS rules: (1) target `.spaced` and use the 4-value margin shorthand to set top `10px`, right `20px`, bottom `30px`, left `40px`, (2) target `.even` and use the 2-value margin shorthand to set `15px` top/bottom and `25px` left/right. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* 4-value margin shorthand on .spaced */\n\n/* 2-value margin shorthand on .even */\n\n\"\"\"",
+      "test_code": "assert '.spaced' in css, 'Should target .spaced class'\nassert '.even' in css, 'Should target .even class'\nassert 'margin' in css.lower(), 'Should use margin property'\nassert '10px' in css.lower(), 'Should include 10px (top margin for .spaced)'\nassert '20px' in css.lower(), 'Should include 20px (right margin for .spaced)'\nassert '30px' in css.lower(), 'Should include 30px (bottom margin for .spaced)'\nassert '40px' in css.lower(), 'Should include 40px (left margin for .spaced)'\nassert '15px' in css.lower(), 'Should include 15px (vertical margin for .even)'\nassert '25px' in css.lower(), 'Should include 25px (horizontal margin for .even)'",
+      "difficulty": "easy",
+      "concepts_new": ["margin-shorthand", "trbl-order"],
+      "concepts_review": ["margin", "css-rules"],
+      "hints": [
+        "4-value shorthand goes clockwise: margin: top right bottom left;",
+        "2-value shorthand: margin: vertical horizontal;"
+      ]
+    },
+    {
+      "id": "css_ch08_c02",
+      "title": "Auto Centering and Negative Margins",
+      "description": "Write two CSS rules: (1) target `.centered-block` with `width: 600px` and `margin: 0 auto` to center it horizontally, (2) target `.overlap` and use a negative top margin of `-20px` to pull it upward, and set `margin-left` to `10px`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Center .centered-block with margin auto */\n\n/* Pull .overlap upward with negative margin */\n\n\"\"\"",
+      "test_code": "assert '.centered-block' in css, 'Should target .centered-block class'\nassert 'width' in css.lower(), 'Should set width property'\nassert '600px' in css.lower(), 'Should set width to 600px'\nassert 'auto' in css.lower(), 'Should use auto for horizontal centering'\nassert '.overlap' in css, 'Should target .overlap class'\nassert '-20px' in css, 'Should use negative margin of -20px'\nassert 'margin-left' in css.lower() or 'margin-top' in css.lower() or 'margin' in css.lower(), 'Should set margin properties on .overlap'\nassert '10px' in css.lower(), 'Should set margin-left to 10px'",
+      "difficulty": "medium",
+      "concepts_new": ["margin-auto", "negative-margins"],
+      "concepts_review": ["margin-shorthand", "margin-auto-centering"],
+      "hints": [
+        "margin: 0 auto; centers a block element with a defined width",
+        "Negative margins pull elements in that direction: margin-top: -20px; moves it up",
+        "You can mix margin-top and margin-left as separate properties"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 4,
+  "questions": [
+    {
+      "id": "css_ch04_q01",
+      "type": "multiple_choice",
+      "question": "Which selector targets all elements with the class 'highlight'?",
+      "choices": [
+        "#highlight",
+        ".highlight",
+        "*highlight",
+        "highlight"
+      ],
+      "correct": 1,
+      "explanation": "A period (.) before a name creates a class selector. .highlight selects all elements with class=\"highlight\".",
+      "concepts": ["class selector"]
+    },
+    {
+      "id": "css_ch04_q02",
+      "type": "multiple_choice",
+      "question": "What does the selector `div > p` target?",
+      "choices": [
+        "All <p> elements anywhere inside a <div>",
+        "Only <p> elements that are direct children of a <div>",
+        "All <div> elements followed by a <p>",
+        "All <p> elements that are siblings of a <div>"
+      ],
+      "correct": 1,
+      "explanation": "The child combinator (>) selects only direct children. div > p targets <p> elements that are immediate children of a <div>, not nested deeper.",
+      "concepts": ["child combinator"]
+    },
+    {
+      "id": "css_ch04_q03",
+      "type": "multiple_choice",
+      "question": "Which selector selects every element on the page?",
+      "choices": [
+        "all",
+        "#*",
+        ".*",
+        "*"
+      ],
+      "correct": 3,
+      "explanation": "The universal selector (*) matches every element in the document. It is often used for CSS resets.",
+      "concepts": ["universal selector"]
+    },
+    {
+      "id": "css_ch04_q04",
+      "type": "multiple_choice",
+      "question": "What does the `+` combinator select in `h2 + p`?",
+      "choices": [
+        "All <p> elements inside an <h2>",
+        "The first <p> element immediately after an <h2>",
+        "All <p> elements that come after an <h2>",
+        "All <h2> and <p> elements"
+      ],
+      "correct": 1,
+      "explanation": "The adjacent sibling combinator (+) selects the element that is immediately after the first element, at the same nesting level.",
+      "concepts": ["adjacent sibling combinator"]
+    },
+    {
+      "id": "css_ch04_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ character is used as a prefix for ID selectors in CSS.",
+      "correct": "#",
+      "explanation": "The hash symbol (#) is used to select an element by its ID, e.g., #header selects the element with id=\"header\".",
+      "concepts": ["id selector"]
+    },
+    {
+      "id": "css_ch04_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ combinator selects all subsequent siblings, written as h2 ~ p.",
+      "correct": "general sibling",
+      "explanation": "The general sibling combinator (~) selects all sibling elements that follow the first element, unlike + which only selects the immediately adjacent one.",
+      "concepts": ["general sibling combinator"]
+    }
+  ]
+}

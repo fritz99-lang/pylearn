@@ -1,0 +1,58 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 44,
+  "questions": [
+    {
+      "id": "css_ch44_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS property defines a clipping region using basic shapes like polygon, circle, or ellipse?",
+      "choices": ["mask-image", "overflow", "clip-path", "object-fit"],
+      "correct": 2,
+      "explanation": "The clip-path property creates a clipping region that defines which parts of an element are visible. It accepts basic shape functions like polygon(), circle(), ellipse(), and inset().",
+      "concepts": ["clip-path", "clipping"]
+    },
+    {
+      "id": "css_ch44_q02",
+      "type": "multiple_choice",
+      "question": "Which clip-path shape function creates a rectangular clipping region with optional rounded corners?",
+      "choices": ["polygon()", "circle()", "ellipse()", "inset()"],
+      "correct": 3,
+      "explanation": "The inset() function creates a rectangular clipping region defined by offsets from each edge of the element. It also accepts an optional 'round' keyword followed by border-radius values for rounded corners.",
+      "concepts": ["clip-path", "inset"]
+    },
+    {
+      "id": "css_ch44_q03",
+      "type": "multiple_choice",
+      "question": "What does the mask-image property do?",
+      "choices": ["Clips the element to a geometric shape", "Uses an image's alpha channel to control which parts of an element are visible", "Applies a blur filter to the element", "Changes the element's opacity uniformly"],
+      "correct": 1,
+      "explanation": "The mask-image property uses an image (typically a gradient or PNG with transparency) as a mask. The alpha channel of the mask image determines the visibility of each pixel of the masked element.",
+      "concepts": ["mask-image", "masking"]
+    },
+    {
+      "id": "css_ch44_q04",
+      "type": "multiple_choice",
+      "question": "Why is the -webkit- prefix often still needed for CSS masking properties?",
+      "choices": ["Masking is not part of any CSS specification", "WebKit/Blink browsers only support the prefixed version", "The unprefixed version has different syntax", "The prefix enables hardware acceleration"],
+      "correct": 1,
+      "explanation": "Many WebKit and Blink-based browsers (Chrome, Safari) still require the -webkit- prefix for mask properties like -webkit-mask-image. Using both the prefixed and unprefixed versions ensures broad browser support.",
+      "concepts": ["masking", "vendor-prefix"]
+    },
+    {
+      "id": "css_ch44_q05",
+      "type": "fill_in_blank",
+      "question": "The clip-path function ___ defines a shape using a series of x,y coordinate pairs.",
+      "correct": "polygon()",
+      "explanation": "The polygon() function accepts a comma-separated list of x,y coordinate pairs that define the vertices of a custom clipping shape. For example, polygon(50% 0%, 100% 100%, 0% 100%) creates a triangle.",
+      "concepts": ["clip-path", "polygon"]
+    },
+    {
+      "id": "css_ch44_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property controls whether a mask image is repeated or displayed only once.",
+      "correct": "mask-repeat",
+      "explanation": "The mask-repeat property works like background-repeat but for mask images. It controls whether the mask image tiles across the element, with values like repeat, no-repeat, repeat-x, and repeat-y.",
+      "concepts": ["mask-repeat", "masking"]
+    }
+  ]
+}

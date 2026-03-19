@@ -1,0 +1,35 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 17,
+  "challenges": [
+    {
+      "id": "h5_ch17_c01",
+      "title": "Input Types",
+      "description": "Create a form with four input fields: text, email, password, and number. Each input must have a corresponding label element using the for attribute. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form with text, email, password, and number inputs -->\n<!-- Each input should have a label -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> element'\nassert 'type=\"text\"' in html.lower(), 'Should contain an input with type=\"text\"'\nassert 'type=\"email\"' in html.lower(), 'Should contain an input with type=\"email\"'\nassert 'type=\"password\"' in html.lower(), 'Should contain an input with type=\"password\"'\nassert 'type=\"number\"' in html.lower(), 'Should contain an input with type=\"number\"'\nassert html.lower().count('<label') >= 4, 'Should contain at least 4 label elements'\nassert html.lower().count('for=') >= 4, 'Each label should use the for attribute'",
+      "difficulty": "easy",
+      "concepts_new": ["input_types", "text_input", "email_input", "password_input", "number_input"],
+      "concepts_review": ["forms", "labels"],
+      "hints": [
+        "Use <input type=\"text\">, <input type=\"email\">, etc.",
+        "Each label needs a for attribute matching the input's id attribute"
+      ]
+    },
+    {
+      "id": "h5_ch17_c02",
+      "title": "Advanced Inputs",
+      "description": "Create a form with four advanced input types: date, range, color, and checkbox. Add placeholder attributes to the date input, a required attribute to the checkbox, and min/max attributes to the range input. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a form with date, range, color, and checkbox inputs -->\n<!-- Add placeholder, required, and min/max attributes where appropriate -->\n\n\"\"\"",
+      "test_code": "assert '<form' in html.lower(), 'Should contain a <form> element'\nassert 'type=\"date\"' in html.lower(), 'Should contain an input with type=\"date\"'\nassert 'type=\"range\"' in html.lower(), 'Should contain an input with type=\"range\"'\nassert 'type=\"color\"' in html.lower(), 'Should contain an input with type=\"color\"'\nassert 'type=\"checkbox\"' in html.lower(), 'Should contain an input with type=\"checkbox\"'\nassert 'placeholder=' in html.lower(), 'Should use the placeholder attribute'\nassert 'required' in html.lower(), 'Should use the required attribute'\nassert 'min=' in html.lower(), 'Range input should have a min attribute'\nassert 'max=' in html.lower(), 'Range input should have a max attribute'",
+      "difficulty": "medium",
+      "concepts_new": ["date_input", "range_input", "color_input", "checkbox_input", "placeholder", "required"],
+      "concepts_review": ["input_types", "forms"],
+      "hints": [
+        "Use <input type=\"date\">, <input type=\"range\">, etc.",
+        "Add min=\"0\" max=\"100\" to the range input",
+        "Add required to the checkbox input"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "step_id": "css_proj_ch15",
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 15,
+  "title": "Beautiful Text \u2014 Typography",
+  "description": "Great typography elevates any design. Set a serif font family for headings to create visual contrast with the sans-serif body text. Add font-weight and letter-spacing to fine-tune the headings. Create a .post-meta class for dates and author info using font-size, color, and text-transform: uppercase. Finally, style blockquote elements with italic text, a left border accent, and padding.",
+  "builds_on": "css_proj_ch10",
+  "starter_code": "css = \"\"\"\n/* Blog Theme CSS */\n/* Step 1: Foundation */\nbody {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    font-size: 16px;\n    line-height: 1.6;\n    color: #333;\n    background-color: #f9f9f9;\n}\n\na {\n    color: #0077cc;\n    text-decoration: none;\n}\n\nh1 {\n    font-size: 2rem;\n    margin-bottom: 0.5rem;\n    border-bottom: 3px solid #0077cc;\n    padding-bottom: 0.3rem;\n}\n\n/* Step 2: Box Model */\n*, *::before, *::after {\n    box-sizing: border-box;\n}\n\n.container {\n    max-width: 1100px;\n    margin: 0 auto;\n    padding: 0 20px;\n}\n\n.post {\n    padding: 25px;\n    margin-bottom: 30px;\n    background: #fff;\n    border: 1px solid #e0e0e0;\n    border-radius: 8px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n}\n\n/* Step 3: Borders and Radius */\n.post img {\n    border-radius: 6px;\n    max-width: 100%;\n}\n\n/* Step 4: Typography */\nh1, h2, h3 {\n    /* TODO: Add serif font-family, font-weight, letter-spacing */\n}\n\n.post-meta {\n    /* TODO: Add font-size, color, text-transform: uppercase */\n}\n\nblockquote {\n    /* TODO: Add font-style: italic, border-left, padding-left */\n}\n\"\"\"",
+  "test_code": "assert 'font-weight' in css.lower(), 'Missing font-weight on headings'\nassert 'letter-spacing' in css.lower(), 'Missing letter-spacing on headings'\nassert 'text-transform' in css.lower(), 'Missing text-transform on .post-meta'\nassert 'blockquote' in css.lower(), 'Missing blockquote selector'\nassert 'font-style' in css.lower(), 'Missing font-style: italic on blockquote'\nassert 'border-left' in css.lower(), 'Missing border-left on blockquote'\nassert '.post-meta' in css.lower(), 'Missing .post-meta selector'",
+  "acceptance_criteria": [
+    "Headings use a serif font-family with font-weight and letter-spacing",
+    ".post-meta is styled with small font-size, muted color, and text-transform: uppercase",
+    "blockquote has font-style: italic, a left border accent, and padding-left"
+  ],
+  "hints": [
+    "A serif stack for headings: font-family: Georgia, 'Times New Roman', serif;",
+    "letter-spacing: 0.5px adds subtle breathing room to headings",
+    "text-transform: uppercase is great for metadata labels like dates and categories"
+  ]
+}

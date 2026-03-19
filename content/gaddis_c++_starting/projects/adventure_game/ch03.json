@@ -1,0 +1,23 @@
+{
+  "step_id": "cpp_adv_ch03",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 3,
+  "title": "Player Creation — Input",
+  "description": "Expand the game to create a player character. Use getline to read the player's name (which may contain spaces). Declare int variables for health, gold, and attackPower with initial values. Use cin to let the player choose a starting class (1=Warrior, 2=Mage, 3=Rogue) which sets different stat values. Display the player's final stats. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_adv_ch02",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    // Game title\n    cout << \"===== TEXT ADVENTURE GAME =====\" << endl;\n    cout << \"Welcome, brave adventurer!\" << endl;\n    cout << endl;\n\n    // Get player name using getline\n    string playerName;\n    // ...\n\n    // Declare stats: health, gold, attackPower\n    int health;\n    int gold;\n    int attackPower;\n\n    // Let player choose a class (1=Warrior, 2=Mage, 3=Rogue)\n    // Set stats based on choice\n\n    // Display player stats\n\n    // Describe starting room\n    cout << endl;\n    cout << \"You are standing in a dark forest clearing.\" << endl;\n    cout << \"Paths lead to the north, south, and east.\" << endl;\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert '#include <string>' in cpp, 'Must include <string> for string type'\nassert 'getline' in cpp, 'Use getline to read the player name (handles spaces)'\nassert 'cin' in cpp, 'Use cin to read the player class choice'\nassert 'int health' in cpp or 'int health;' in cpp or 'health =' in cpp, 'Declare an int variable for health'\nassert 'int gold' in cpp or 'int gold;' in cpp or 'gold =' in cpp, 'Declare an int variable for gold'\nassert 'int attackPower' in cpp or 'int attack' in cpp or 'int damage' in cpp, 'Declare an int variable for attack power'\nassert 'cout' in cpp, 'Use cout to display player stats'",
+  "acceptance_criteria": [
+    "Uses getline to read the player name",
+    "Uses cin to read a numeric class choice",
+    "Declares int variables for health, gold, and attack power",
+    "Different class choices set different stat values",
+    "Displays the final player stats using cout"
+  ],
+  "hints": [
+    "Use getline(cin, playerName) to read the full name including spaces",
+    "After cin >> choice, add cin.ignore() before getline to clear the newline from the buffer",
+    "Warrior might have 100 health, 50 gold, 15 attack; Mage might have 70 health, 80 gold, 20 attack",
+    "Don't forget to include <string> for the string type"
+  ]
+}

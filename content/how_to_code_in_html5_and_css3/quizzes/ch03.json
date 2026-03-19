@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 3,
+  "questions": [
+    {
+      "id": "hc_ch03_q01",
+      "type": "multiple_choice",
+      "question": "What does semantic HTML mean?",
+      "choices": [
+        "HTML that uses only <div> tags",
+        "HTML where tags describe the meaning of the content they contain",
+        "HTML that is written in alphabetical order",
+        "HTML that includes CSS styling inline"
+      ],
+      "correct": 1,
+      "explanation": "Semantic HTML uses tags that clearly describe the meaning and purpose of the content, such as <article>, <nav>, and <header>, rather than generic tags like <div>.",
+      "concepts": ["semantic HTML", "best practices"]
+    },
+    {
+      "id": "hc_ch03_q02",
+      "type": "multiple_choice",
+      "question": "What happens if you forget to close an HTML tag?",
+      "choices": [
+        "The browser will always display an error message",
+        "The page may render incorrectly or unexpectedly",
+        "The file will not open at all",
+        "Nothing — browsers ignore closing tags"
+      ],
+      "correct": 1,
+      "explanation": "Forgetting to close a tag can cause the browser to render content incorrectly, as it may apply the unclosed tag's effect to subsequent content.",
+      "concepts": ["closing tags", "valid HTML"]
+    },
+    {
+      "id": "hc_ch03_q03",
+      "type": "multiple_choice",
+      "question": "What is the purpose of an HTML validator?",
+      "choices": [
+        "To make web pages load faster",
+        "To check HTML code for errors and standards compliance",
+        "To convert HTML to PDF format",
+        "To add CSS styling automatically"
+      ],
+      "correct": 1,
+      "explanation": "An HTML validator checks your code against the HTML standard to find errors like missing closing tags, improper nesting, or invalid attributes.",
+      "concepts": ["HTML validators", "code quality"]
+    },
+    {
+      "id": "hc_ch03_q04",
+      "type": "multiple_choice",
+      "question": "Which of the following is an example of proper nesting?",
+      "choices": [
+        "<p><strong>text</p></strong>",
+        "<p><strong>text</strong></p>",
+        "<strong><p>text</strong></p>",
+        "<p><strong>text<p></strong>"
+      ],
+      "correct": 1,
+      "explanation": "Proper nesting means tags are closed in the reverse order they were opened. The <strong> tag opens inside <p>, so it must close before </p>.",
+      "concepts": ["nesting", "valid HTML"]
+    },
+    {
+      "id": "hc_ch03_q05",
+      "type": "fill_in_blank",
+      "question": "The <!DOCTYPE ___> declaration tells the browser which version of HTML the page uses.",
+      "correct": "html",
+      "explanation": "<!DOCTYPE html> declares that the document is an HTML5 document. It should be the very first line in an HTML file.",
+      "concepts": ["doctype", "HTML5"]
+    },
+    {
+      "id": "hc_ch03_q06",
+      "type": "fill_in_blank",
+      "question": "Using ___ (adding spaces or tabs) makes HTML code easier to read and maintain.",
+      "correct": "indentation",
+      "explanation": "Indentation visually shows the nesting structure of HTML elements, making the code much easier to read and debug.",
+      "concepts": ["indentation", "code readability"]
+    }
+  ]
+}

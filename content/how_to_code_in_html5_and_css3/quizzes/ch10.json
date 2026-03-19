@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 10,
+  "questions": [
+    {
+      "id": "hc_ch10_q01",
+      "type": "multiple_choice",
+      "question": "What is the default display behavior of a <div> element?",
+      "choices": [
+        "inline",
+        "block",
+        "inline-block",
+        "flex"
+      ],
+      "correct": 1,
+      "explanation": "A <div> is a block-level element by default, meaning it takes up the full width available and starts on a new line.",
+      "concepts": ["block elements", "div"]
+    },
+    {
+      "id": "hc_ch10_q02",
+      "type": "multiple_choice",
+      "question": "What is the default display behavior of a <span> element?",
+      "choices": [
+        "block",
+        "flex",
+        "inline",
+        "none"
+      ],
+      "correct": 2,
+      "explanation": "A <span> is an inline element by default, meaning it only takes up as much width as its content and does not start on a new line.",
+      "concepts": ["inline elements", "span"]
+    },
+    {
+      "id": "hc_ch10_q03",
+      "type": "multiple_choice",
+      "question": "When should you use a <div> instead of a <span>?",
+      "choices": [
+        "When you need to style a single word within a paragraph",
+        "When you need to group block-level content together",
+        "When you want to make text bold",
+        "When you need an inline container"
+      ],
+      "correct": 1,
+      "explanation": "Use <div> to group block-level content (sections, layouts, containers). Use <span> for inline content like styling a word within a sentence.",
+      "concepts": ["div vs span", "grouping elements"]
+    },
+    {
+      "id": "hc_ch10_q04",
+      "type": "multiple_choice",
+      "question": "Which CSS property can change an inline element to behave like a block element?",
+      "choices": [
+        "position",
+        "visibility",
+        "display",
+        "float"
+      ],
+      "correct": 2,
+      "explanation": "The display property controls how an element is rendered. Setting display: block on an inline element makes it behave like a block element.",
+      "concepts": ["display property", "CSS layout"]
+    },
+    {
+      "id": "hc_ch10_q05",
+      "type": "fill_in_blank",
+      "question": "A ___ element takes up the full width available and starts on a new line.",
+      "correct": "block",
+      "explanation": "Block-level elements (like <div>, <p>, <h1>) take up the full width of their parent container and always start on a new line.",
+      "concepts": ["block elements", "display model"]
+    },
+    {
+      "id": "hc_ch10_q06",
+      "type": "fill_in_blank",
+      "question": "An ___ element only takes up as much width as its content needs.",
+      "correct": "inline",
+      "explanation": "Inline elements (like <span>, <a>, <strong>) flow within text and only occupy the width of their content, without forcing a new line.",
+      "concepts": ["inline elements", "display model"]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "step_id": "css_proj_ch10",
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 10,
+  "title": "Visual Polish \u2014 Borders and Radius",
+  "description": "Give your blog cards a polished, modern look. Add border-radius to round the corners of .post cards, a border-bottom accent to h1 headings, and a subtle box-shadow to make posts float above the background. Also style .post img elements with border-radius and max-width: 100% so images look great and never overflow.",
+  "builds_on": "css_proj_ch07",
+  "starter_code": "css = \"\"\"\n/* Blog Theme CSS */\n/* Step 1: Foundation */\nbody {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    font-size: 16px;\n    line-height: 1.6;\n    color: #333;\n    background-color: #f9f9f9;\n}\n\na {\n    color: #0077cc;\n    text-decoration: none;\n}\n\nh1 {\n    font-size: 2rem;\n    margin-bottom: 0.5rem;\n    /* TODO: Add border-bottom accent */\n}\n\n/* Step 2: Box Model */\n*, *::before, *::after {\n    box-sizing: border-box;\n}\n\n.container {\n    max-width: 1100px;\n    margin: 0 auto;\n    padding: 0 20px;\n}\n\n.post {\n    padding: 25px;\n    margin-bottom: 30px;\n    background: #fff;\n    border: 1px solid #e0e0e0;\n    /* TODO: Add border-radius */\n    /* TODO: Add box-shadow */\n}\n\n/* Step 3: Borders and Radius */\n.post img {\n    /* TODO: Add border-radius and max-width: 100% */\n}\n\"\"\"",
+  "test_code": "assert 'border-radius' in css.lower(), 'Missing border-radius property'\nassert 'border-bottom' in css.lower(), 'Missing border-bottom on h1'\nassert 'box-shadow' in css.lower(), 'Missing box-shadow on .post'\nassert 'max-width' in css.lower() and '100%' in css, 'Images should have max-width: 100%'\nassert '.post' in css.lower(), 'Missing .post selector'",
+  "acceptance_criteria": [
+    ".post has border-radius for rounded corners",
+    "h1 has a border-bottom accent line",
+    ".post has a subtle box-shadow",
+    ".post img has border-radius and max-width: 100%"
+  ],
+  "hints": [
+    "A subtle border-radius like 8px gives a modern card look",
+    "Try box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) for a soft shadow",
+    "border-bottom: 3px solid #0077cc makes a nice heading accent"
+  ]
+}

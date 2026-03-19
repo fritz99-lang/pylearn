@@ -1,0 +1,6 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "title": "Build a Student Grade Tracker",
+  "description": "Build a complete student grade tracking system from scratch, adding C++ features chapter by chapter. By the end, you'll have a program with data structures, file I/O, classes, and sorting — all using concepts from the book.",
+  "final_description": "A complete student grade tracker with structs, dynamic arrays, file persistence, a class hierarchy with inheritance, sorting algorithms, and exception handling — built across 10 chapters using progressively advanced C++ concepts."
+}

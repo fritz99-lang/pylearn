@@ -379,6 +379,7 @@ class ProjectMeta:
     title: str
     description: str
     final_description: str = ""
+    project_id: str = ""  # Set for multi-project books (directory name)
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> ProjectMeta:

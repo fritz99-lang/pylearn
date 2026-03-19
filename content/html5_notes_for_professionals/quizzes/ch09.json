@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 9,
+  "questions": [
+    {
+      "id": "h5_ch09_q01",
+      "type": "multiple_choice",
+      "question": "What is the correct syntax for an HTML comment?",
+      "choices": ["// comment", "/* comment */", "<!-- comment -->", "# comment"],
+      "correct": 2,
+      "explanation": "HTML comments use the <!-- --> syntax. The other formats are used in JavaScript, CSS, and Python respectively.",
+      "concepts": ["comments", "syntax"]
+    },
+    {
+      "id": "h5_ch09_q02",
+      "type": "multiple_choice",
+      "question": "What happens to HTML comments when a page is rendered in the browser?",
+      "choices": ["They are displayed as plain text", "They are hidden from view but remain in the source code", "They are completely removed from the DOM", "They cause a syntax error"],
+      "correct": 1,
+      "explanation": "HTML comments are not rendered visually in the browser, but they remain in the page source code and can be viewed by inspecting the source.",
+      "concepts": ["comments", "rendering"]
+    },
+    {
+      "id": "h5_ch09_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is a valid use case for conditional comments in HTML?",
+      "choices": ["Targeting specific versions of Internet Explorer", "Hiding code from all browsers", "Making comments visible on screen", "Encrypting source code"],
+      "correct": 0,
+      "explanation": "Conditional comments were used to target specific versions of Internet Explorer, allowing developers to include IE-specific CSS or HTML.",
+      "concepts": ["conditional comments", "Internet Explorer"]
+    },
+    {
+      "id": "h5_ch09_q04",
+      "type": "multiple_choice",
+      "question": "Which sequence of characters is NOT allowed inside an HTML comment?",
+      "choices": ["Single hyphens", "Spaces", "Double hyphens (--)", "Letters and numbers"],
+      "correct": 2,
+      "explanation": "The double hyphen (--) sequence is not allowed inside HTML comments because it can be misinterpreted by the parser as the end of the comment.",
+      "concepts": ["comments", "syntax rules"]
+    },
+    {
+      "id": "h5_ch09_q05",
+      "type": "fill_in_blank",
+      "question": "An HTML comment begins with <!-- and ends with ___.",
+      "correct": "-->",
+      "explanation": "HTML comments are enclosed between <!-- and -->. Both the opening and closing delimiters are required for a valid comment.",
+      "concepts": ["comments", "syntax"]
+    },
+    {
+      "id": "h5_ch09_q06",
+      "type": "fill_in_blank",
+      "question": "Conditional comments were primarily used to target the ___ browser.",
+      "correct": "Internet Explorer",
+      "explanation": "Conditional comments were a feature recognized only by Internet Explorer, allowing developers to serve IE-specific content.",
+      "concepts": ["conditional comments", "browser compatibility"]
+    }
+  ]
+}

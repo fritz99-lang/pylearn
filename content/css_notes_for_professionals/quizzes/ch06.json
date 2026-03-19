@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 6,
+  "questions": [
+    {
+      "id": "css_ch06_q01",
+      "type": "multiple_choice",
+      "question": "Which property is used to center text horizontally within its container?",
+      "choices": [
+        "font-align: center",
+        "text-align: center",
+        "horizontal-align: center",
+        "align: center"
+      ],
+      "correct": 1,
+      "explanation": "The text-align: center property centers inline content (text, images) horizontally within a block-level container.",
+      "concepts": ["text-align", "centering text"]
+    },
+    {
+      "id": "css_ch06_q02",
+      "type": "multiple_choice",
+      "question": "How do you horizontally center a block element with a fixed width?",
+      "choices": [
+        "text-align: center on the element",
+        "float: center",
+        "margin: 0 auto",
+        "position: center"
+      ],
+      "correct": 2,
+      "explanation": "Setting margin: 0 auto on a block element with a defined width centers it horizontally. The 'auto' value distributes the remaining space equally on left and right.",
+      "concepts": ["margin auto", "centering block elements"]
+    },
+    {
+      "id": "css_ch06_q03",
+      "type": "multiple_choice",
+      "question": "Which flexbox property combination centers an item both horizontally and vertically?",
+      "choices": [
+        "flex-direction: center; flex-wrap: center",
+        "justify-content: center; align-items: center",
+        "flex-align: center; flex-justify: center",
+        "align-content: center; justify-items: center"
+      ],
+      "correct": 1,
+      "explanation": "On a flex container, justify-content: center centers items along the main axis and align-items: center centers them along the cross axis, achieving full centering.",
+      "concepts": ["flexbox centering", "justify-content", "align-items"]
+    },
+    {
+      "id": "css_ch06_q04",
+      "type": "multiple_choice",
+      "question": "To use flexbox centering, which property must first be set on the parent container?",
+      "choices": [
+        "position: flex",
+        "display: flex",
+        "flex: enabled",
+        "layout: flexbox"
+      ],
+      "correct": 1,
+      "explanation": "The parent container must have display: flex to activate flexbox layout. Only then do properties like justify-content and align-items take effect.",
+      "concepts": ["flexbox centering", "display flex"]
+    },
+    {
+      "id": "css_ch06_q05",
+      "type": "fill_in_blank",
+      "question": "Setting margin-left and margin-right to ___ horizontally centers a block element with a defined width.",
+      "correct": "auto",
+      "explanation": "When both horizontal margins are set to auto, the browser distributes remaining space equally, centering the element within its parent.",
+      "concepts": ["margin auto", "centering block elements"]
+    },
+    {
+      "id": "css_ch06_q06",
+      "type": "fill_in_blank",
+      "question": "The flexbox property ___ controls alignment along the main axis (horizontal by default).",
+      "correct": "justify-content",
+      "explanation": "justify-content aligns flex items along the main axis. Common values include center, flex-start, flex-end, space-between, and space-around.",
+      "concepts": ["justify-content", "flexbox centering"]
+    }
+  ]
+}

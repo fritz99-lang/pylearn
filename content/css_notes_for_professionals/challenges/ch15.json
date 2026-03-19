@@ -1,0 +1,36 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 15,
+  "challenges": [
+    {
+      "id": "css_ch15_c01",
+      "title": "Basic Typography",
+      "description": "Write CSS for a `body` selector that sets `font-family` to a sans-serif stack (Arial, Helvetica, sans-serif), `font-size` to 16px, and `line-height` to 1.5. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert 'body' in css.lower(), 'Should target the body selector'\nassert 'font-family' in css.lower(), 'Should use font-family'\nassert 'sans-serif' in css.lower(), 'Should include sans-serif in the font stack'\nassert 'font-size' in css.lower(), 'Should use font-size'\nassert '16px' in css.lower(), 'Should set font-size to 16px'\nassert 'line-height' in css.lower(), 'Should use line-height'\nassert '1.5' in css.lower(), 'Should set line-height to 1.5'",
+      "difficulty": "easy",
+      "concepts_new": ["font-family", "font-size", "line-height"],
+      "concepts_review": [],
+      "hints": [
+        "Font stacks list fonts in order of preference, ending with a generic family.",
+        "line-height without a unit (like 1.5) is a multiplier of the font-size.",
+        "Use: font-family: Arial, Helvetica, sans-serif;"
+      ]
+    },
+    {
+      "id": "css_ch15_c02",
+      "title": "Font Face and Text Transform",
+      "description": "Write CSS that declares a `@font-face` rule with `font-family` set to 'CustomFont' and `src` using a `url('custom.woff2')` with `format('woff2')`. Then write a rule for `.heading` that uses `font-family: 'CustomFont', serif`, sets `text-transform` to `uppercase`, and `letter-spacing` to 2px. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '@font-face' in css.lower(), 'Should include a @font-face rule'\nassert 'font-family' in css.lower(), 'Should set font-family in @font-face'\nassert 'src' in css.lower(), 'Should include src in @font-face'\nassert 'url(' in css.lower(), 'Should use url() for the font source'\nassert 'woff2' in css.lower(), 'Should reference a woff2 font file'\nassert '.heading' in css.lower(), 'Should target the .heading selector'\nassert 'text-transform' in css.lower(), 'Should use text-transform'\nassert 'uppercase' in css.lower(), 'Should set text-transform to uppercase'\nassert 'letter-spacing' in css.lower(), 'Should use letter-spacing'\nassert '2px' in css.lower(), 'Should set letter-spacing to 2px'",
+      "difficulty": "medium",
+      "concepts_new": ["font-face", "text-transform", "letter-spacing"],
+      "concepts_review": ["font-family"],
+      "hints": [
+        "@font-face lets you load custom fonts: @font-face { font-family: 'Name'; src: url('file.woff2') format('woff2'); }",
+        "text-transform: uppercase converts all text to capital letters.",
+        "letter-spacing adds space between characters."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 10,
+  "challenges": [
+    {
+      "id": "cpp_ch10_c01",
+      "title": "Char Arrays and String Class",
+      "description": "Write a C++ program that declares a char array (C-string) initialized with a name and a `string` class variable initialized with a greeting. Concatenate them together into a new `string` variable and print the result. Also print the length of the final string using `.length()` or `.size()`. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'char ' in cpp and '[' in cpp, 'Declare a char array (C-string) for the name'\nassert 'string ' in cpp, 'Use the string class for at least one variable'\nassert '.length()' in cpp or '.size()' in cpp, 'Use .length() or .size() to get the string length'\nassert '+' in cpp or 'append' in cpp or 'strcat' in cpp, 'Concatenate the strings together using + or append'\nassert 'cout' in cpp, 'Print the result using cout'",
+      "difficulty": "easy",
+      "concepts_new": ["char_arrays", "string_class", "string_length"],
+      "concepts_review": ["arrays", "variables", "cout"],
+      "hints": [
+        "Declare a C-string with: char name[] = \"Alice\";",
+        "The string class supports + for concatenation: string result = greeting + name;"
+      ]
+    },
+    {
+      "id": "cpp_ch10_c02",
+      "title": "C-String Functions and String Methods",
+      "description": "Write a C++ program that demonstrates both C-string functions and string class methods. Use `strlen` to get the length of a char array, `strcpy` to copy one C-string to another, and use the string class methods `.find()` and `.substr()` on a string object. Print all results. Include `<cstring>` for the C-string functions. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <cstring>\n#include <string>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'strlen' in cpp, 'Use strlen() to get the length of a C-string'\nassert 'strcpy' in cpp, 'Use strcpy() to copy one C-string to another'\nassert '.find(' in cpp, 'Use the string class .find() method'\nassert '.substr(' in cpp, 'Use the string class .substr() method'\nassert 'cstring' in cpp or 'string.h' in cpp, 'Include <cstring> or <string.h> for C-string functions'\nassert 'cout' in cpp, 'Print the results using cout'",
+      "difficulty": "medium",
+      "concepts_new": ["cstring_functions", "strlen", "strcpy", "string_find", "string_substr"],
+      "concepts_review": ["char_arrays", "string_class", "include_headers"],
+      "hints": [
+        "strlen(str) returns the length; strcpy(dest, src) copies src into dest",
+        "string::find() returns the position of a substring; substr(pos, len) extracts a portion"
+      ]
+    }
+  ]
+}

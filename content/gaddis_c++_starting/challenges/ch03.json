@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 3,
+  "challenges": [
+    {
+      "id": "cpp_ch03_c01",
+      "title": "Interactive Input with getline",
+      "description": "Write a C++ program that uses getline to read the user's full name (a string with spaces) and cin to read their birth year (an int). Display a formatted greeting. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Include the string header\n- Declare a string variable for the name\n- Use getline to read the full name\n- Use cin to read the birth year\n- Display a formatted message with cout",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert '#include <string>' in cpp, 'Should include the string header'\nassert 'getline' in cpp, 'Should use getline to read a full line of input'\nassert 'cin' in cpp, 'Should use cin for numeric input'\nassert 'string ' in cpp, 'Should declare a string variable'\nassert 'cout' in cpp, 'Should display output with cout'",
+      "difficulty": "easy",
+      "concepts_new": ["getline", "string type", "#include <string>"],
+      "concepts_review": ["cin", "cout", "int"],
+      "hints": [
+        "Use: getline(cin, name); to read a full line including spaces",
+        "If you use cin before getline, call cin.ignore() first to clear the newline"
+      ]
+    },
+    {
+      "id": "cpp_ch03_c02",
+      "title": "Constants, Casting, and Expressions",
+      "description": "Write a C++ program that defines a const for the tax rate (e.g., 0.08), reads a purchase price, uses static_cast to convert between types, and calculates the total with tax. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define at least one const variable\n- Use static_cast for a type conversion\n- Calculate a result using an arithmetic expression\n- Display the result with cout",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'const ' in cpp, 'Should define a const variable'\nassert 'static_cast' in cpp, 'Should use static_cast for type conversion'\nassert '*' in cpp or '+' in cpp, 'Should use arithmetic expressions'\nassert 'cout' in cpp, 'Should display the result'\nassert 'double' in cpp or 'float' in cpp, 'Should use a floating-point type for the calculation'",
+      "difficulty": "medium",
+      "concepts_new": ["const", "static_cast", "operator precedence"],
+      "concepts_review": ["cin", "cout", "double", "arithmetic operators"],
+      "hints": [
+        "Define a constant like: const double TAX_RATE = 0.08;",
+        "Use static_cast<double>(intVar) to convert an int to a double"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 16,
+  "questions": [
+    {
+      "id": "cpp_ch16_q01",
+      "type": "multiple_choice",
+      "question": "Which block of code is used to handle an exception that has been thrown?",
+      "choices": ["try block", "catch block", "throw block", "finally block"],
+      "correct": 1,
+      "explanation": "The catch block handles exceptions. When an exception is thrown inside a try block, program control transfers to the matching catch block that handles that exception type.",
+      "concepts": ["catch", "exception handling"]
+    },
+    {
+      "id": "cpp_ch16_q02",
+      "type": "multiple_choice",
+      "question": "What is the primary advantage of using function templates?",
+      "choices": [
+        "They run faster than regular functions",
+        "They allow writing a single function that works with multiple data types",
+        "They use less memory than regular functions",
+        "They eliminate the need for function prototypes"
+      ],
+      "correct": 1,
+      "explanation": "Function templates allow you to write a generic function that works with any data type. The compiler generates the appropriate type-specific version when the template is used, avoiding code duplication.",
+      "concepts": ["function templates", "generic programming"]
+    },
+    {
+      "id": "cpp_ch16_q03",
+      "type": "multiple_choice",
+      "question": "Which STL container stores key-value pairs and allows fast lookup by key?",
+      "choices": ["vector", "list", "map", "deque"],
+      "correct": 2,
+      "explanation": "The std::map container stores elements as key-value pairs and keeps them sorted by key. It provides fast O(log n) lookup, insertion, and deletion by key.",
+      "concepts": ["STL containers", "map"]
+    },
+    {
+      "id": "cpp_ch16_q04",
+      "type": "multiple_choice",
+      "question": "What does an STL iterator provide?",
+      "choices": [
+        "Automatic memory management for containers",
+        "A way to access elements in a container sequentially",
+        "A method to sort container elements",
+        "A mechanism to resize containers dynamically"
+      ],
+      "correct": 1,
+      "explanation": "An iterator is an object that acts like a pointer, providing a uniform way to access and traverse elements in any STL container sequentially, regardless of the container's internal structure.",
+      "concepts": ["iterators", "STL"]
+    },
+    {
+      "id": "cpp_ch16_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ keyword is used to signal that an error condition has occurred, sending an exception to be handled by a catch block.",
+      "correct": "throw",
+      "explanation": "The throw keyword is used to throw an exception. For example: throw runtime_error(\"Something went wrong\"); This transfers control to the nearest matching catch block.",
+      "concepts": ["throw", "exception handling"]
+    },
+    {
+      "id": "cpp_ch16_q06",
+      "type": "fill_in_blank",
+      "question": "The keyword ___ is used before a function or class definition to declare it as a template with a generic type parameter.",
+      "correct": "template",
+      "explanation": "The template keyword introduces a template definition. For example: template <class T> T getMax(T a, T b) { return (a > b) ? a : b; }",
+      "concepts": ["template", "generic programming"]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "step_id": "h5_proj_ch18",
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 18,
+  "title": "Contact Form \u2014 Getting in Touch",
+  "description": "Add a contact form to the Contact section. The form should use method=\"post\" and include labeled inputs for name and email, a textarea for the message, and a submit button. Each input must have a corresponding label element.",
+  "builds_on": "h5_proj_ch15",
+  "starter_code": "# Portfolio Website \u2014 Step 7: Contact Form\n# Add a form with name, email, message fields, labels, and submit button.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Portfolio</title>\n</head>\n<body>\n    <h1>Your Name</h1>\n\n    <a href=\"#about\">About Me</a> |\n    <a href=\"#projects\">Projects</a> |\n    <a href=\"#contact\">Contact</a>\n\n    <p>Welcome to my portfolio!</p>\n\n    <div id=\"about\">\n        <h2>About Me</h2>\n        <p>\n            I am a developer who is <strong>passionate</strong> about\n            building things. I am <em>constantly learning</em> and\n            <mark>love problem-solving</mark>.\n        </p>\n        <table>\n            <thead>\n                <tr><th>Skill</th><th>Level</th><th>Years</th></tr>\n            </thead>\n            <tbody>\n                <tr><td>HTML</td><td>Beginner</td><td>1</td></tr>\n                <tr><td>CSS</td><td>Beginner</td><td>1</td></tr>\n                <tr><td>Python</td><td>Intermediate</td><td>2</td></tr>\n            </tbody>\n        </table>\n    </div>\n\n    <div id=\"projects\">\n        <h2>My Projects</h2>\n        <figure>\n            <img src=\"project1.png\" alt=\"Screenshot of project 1\">\n            <figcaption>My first web project</figcaption>\n        </figure>\n    </div>\n\n    <div id=\"contact\">\n        <h2>Contact</h2>\n        <p>Get in touch with me.</p>\n\n        <!-- Add a contact form here -->\n        <!-- Use method=\"post\", labels, inputs for name/email, textarea, submit -->\n\n    </div>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<form' in html.lower() and '</form>' in html.lower(), 'Must include a <form> element'\nassert 'method=\"post\"' in html.lower() or \"method='post'\" in html.lower(), 'Form must have method=\"post\"'\nassert '<input' in html.lower(), 'Must include <input> elements for name and email'\nassert '<textarea' in html.lower() and '</textarea>' in html.lower(), 'Must include a <textarea> for the message'\nassert '<label' in html.lower(), 'Must include <label> elements for form fields'\nassert html.lower().count('<label') >= 2, f'Need at least 2 labels, found {html.lower().count(\"<label\")}'\n_has_submit = 'type=\"submit\"' in html.lower() or \"type='submit'\" in html.lower() or '<button' in html.lower()\nassert _has_submit, 'Must include a submit button (input type=\"submit\" or <button>)'",
+  "acceptance_criteria": [
+    "A form element with method=\"post\"",
+    "Input fields for name and email",
+    "A textarea for the message",
+    "Label elements for each input field",
+    "A submit button"
+  ],
+  "hints": [
+    "Start with: <form method=\"post\">",
+    "Label and input pair: <label for=\"name\">Name:</label><input type=\"text\" id=\"name\" name=\"name\">",
+    "Textarea: <textarea id=\"message\" name=\"message\"></textarea>",
+    "Submit button: <button type=\"submit\">Send</button>"
+  ]
+}

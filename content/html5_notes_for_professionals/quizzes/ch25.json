@@ -1,0 +1,63 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 25,
+  "questions": [
+    {
+      "id": "h5_ch25_q01",
+      "type": "multiple_choice",
+      "question": "Which attribute on the <video> tag displays a thumbnail image before the video plays?",
+      "choices": ["thumbnail", "poster", "preview", "cover"],
+      "correct": 1,
+      "explanation": "The poster attribute specifies an image URL to display as a placeholder before the user plays the video.",
+      "concepts": ["video", "poster"]
+    },
+    {
+      "id": "h5_ch25_q02",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the <source> element inside an <audio> or <video> tag?",
+      "choices": [
+        "It defines the volume level of the media",
+        "It provides fallback text for unsupported browsers",
+        "It specifies multiple media files so the browser can choose a supported format",
+        "It adds subtitles to the media"
+      ],
+      "correct": 2,
+      "explanation": "The <source> element lets you list multiple media files in different formats (e.g., mp3, ogg). The browser picks the first format it supports.",
+      "concepts": ["source", "media formats"]
+    },
+    {
+      "id": "h5_ch25_q03",
+      "type": "multiple_choice",
+      "question": "Which attribute causes a video to start playing automatically when the page loads?",
+      "choices": ["auto", "autostart", "autoplay", "play"],
+      "correct": 2,
+      "explanation": "The autoplay attribute tells the browser to begin playing the media as soon as enough data has loaded. Many browsers now block autoplay unless the video is also muted.",
+      "concepts": ["autoplay", "video"]
+    },
+    {
+      "id": "h5_ch25_q04",
+      "type": "multiple_choice",
+      "question": "Which value for the preload attribute tells the browser not to preload any media data?",
+      "choices": ["auto", "metadata", "none", "lazy"],
+      "correct": 2,
+      "explanation": "Setting preload=\"none\" instructs the browser not to download any part of the media file until the user initiates playback. The value \"metadata\" loads only metadata, and \"auto\" lets the browser decide.",
+      "concepts": ["preload", "media elements"]
+    },
+    {
+      "id": "h5_ch25_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on a media element causes the audio or video to restart from the beginning after it finishes playing.",
+      "correct": "loop",
+      "explanation": "The loop attribute is a boolean attribute that makes the media replay continuously from the start each time it ends.",
+      "concepts": ["loop", "media elements"]
+    },
+    {
+      "id": "h5_ch25_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on a media element shows the browser's built-in play, pause, and volume buttons.",
+      "correct": "controls",
+      "explanation": "Adding the controls attribute displays the browser's default media playback controls, allowing users to play, pause, adjust volume, and seek.",
+      "concepts": ["controls", "media elements"]
+    }
+  ]
+}

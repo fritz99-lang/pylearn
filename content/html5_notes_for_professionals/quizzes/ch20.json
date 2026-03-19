@@ -1,0 +1,68 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 20,
+  "questions": [
+    {
+      "id": "h5_ch20_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML5 element represents a standalone piece of content that could be distributed independently, such as a blog post or news article?",
+      "choices": ["<section>", "<article>", "<aside>", "<div>"],
+      "correct": 1,
+      "explanation": "The <article> element represents a self-contained composition that could be independently distributed or reused, such as a blog post, news article, forum post, or comment.",
+      "concepts": ["article element", "semantic HTML"]
+    },
+    {
+      "id": "h5_ch20_q02",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the <aside> element?",
+      "choices": [
+        "To define the main navigation links",
+        "To contain content tangentially related to the surrounding content",
+        "To mark the footer of a section",
+        "To define the primary content of the page"
+      ],
+      "correct": 1,
+      "explanation": "The <aside> element represents content that is tangentially related to the content around it. Common uses include sidebars, pull quotes, advertising, and groups of related links.",
+      "concepts": ["aside element", "semantic HTML"]
+    },
+    {
+      "id": "h5_ch20_q03",
+      "type": "multiple_choice",
+      "question": "Which element should be used to wrap the dominant content of the <body>, excluding headers, footers, and navigation?",
+      "choices": ["<section>", "<article>", "<main>", "<div>"],
+      "correct": 2,
+      "explanation": "The <main> element represents the dominant content of the <body>. It should not include content that is repeated across pages like site navigation, headers, or footers. There should be only one <main> element per page.",
+      "concepts": ["main element", "page structure"]
+    },
+    {
+      "id": "h5_ch20_q04",
+      "type": "multiple_choice",
+      "question": "How does the <section> element differ from the <div> element?",
+      "choices": [
+        "There is no difference; they are interchangeable",
+        "<section> is inline while <div> is block-level",
+        "<section> represents a thematic grouping of content and typically has a heading",
+        "<section> can only contain text, while <div> can contain any elements"
+      ],
+      "correct": 2,
+      "explanation": "The <section> element represents a thematic grouping of content, typically with a heading. Unlike <div>, which is a generic container with no semantic meaning, <section> conveys that its contents are related and form a distinct part of the document.",
+      "concepts": ["section element", "semantic HTML", "section vs div"]
+    },
+    {
+      "id": "h5_ch20_q05",
+      "type": "fill_in_blank",
+      "question": "The <___> element defines a set of navigation links for a website.",
+      "correct": "nav",
+      "explanation": "The <nav> element is used to define a section of navigation links. It is intended for major navigation blocks, not every group of links on a page.",
+      "concepts": ["nav element", "navigation"]
+    },
+    {
+      "id": "h5_ch20_q06",
+      "type": "fill_in_blank",
+      "question": "The <header> and <___> elements can appear at the top and bottom of a <section> or <article>.",
+      "correct": "footer",
+      "explanation": "The <header> and <footer> elements can be used within <section>, <article>, or the <body> itself. <header> typically contains introductory content or navigation, while <footer> contains information about the section such as authorship, copyright, or related links.",
+      "concepts": ["header element", "footer element", "sectioning"]
+    }
+  ]
+}

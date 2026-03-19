@@ -1,0 +1,68 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 7,
+  "questions": [
+    {
+      "id": "cpp_ch07_q01",
+      "type": "multiple_choice",
+      "question": "What is the index of the first element in a C++ array?",
+      "choices": ["1", "0", "-1", "It depends on the array size"],
+      "correct": 1,
+      "explanation": "C++ arrays are zero-indexed, meaning the first element is at index 0, the second at index 1, and so on.",
+      "concepts": ["arrays", "array indexing"]
+    },
+    {
+      "id": "cpp_ch07_q02",
+      "type": "multiple_choice",
+      "question": "Which declaration correctly creates an array of 5 integers?",
+      "choices": [
+        "array int numbers[5];",
+        "int numbers[5];",
+        "int[5] numbers;",
+        "int numbers = new int[5];"
+      ],
+      "correct": 1,
+      "explanation": "In C++, the correct syntax for declaring an array is: type name[size]; So int numbers[5]; creates an array of 5 integers.",
+      "concepts": ["array declaration", "arrays"]
+    },
+    {
+      "id": "cpp_ch07_q03",
+      "type": "multiple_choice",
+      "question": "When an array is passed to a function in C++, what is actually passed?",
+      "choices": [
+        "A copy of the entire array",
+        "The memory address of the first element",
+        "The size of the array",
+        "Nothing; arrays cannot be passed to functions"
+      ],
+      "correct": 1,
+      "explanation": "When an array is passed to a function, the memory address of the first element is passed. This means the function can modify the original array elements.",
+      "concepts": ["arrays as function arguments", "pass by reference"]
+    },
+    {
+      "id": "cpp_ch07_q04",
+      "type": "multiple_choice",
+      "question": "How do you access the element in row 2, column 3 of a two-dimensional array called grid?",
+      "choices": ["grid[2,3]", "grid[2][3]", "grid(2)(3)", "grid{2}{3}"],
+      "correct": 1,
+      "explanation": "In C++, two-dimensional array elements are accessed using two sets of brackets: array[row][column]. So grid[2][3] accesses row 2, column 3.",
+      "concepts": ["two-dimensional arrays", "array indexing"]
+    },
+    {
+      "id": "cpp_ch07_q05",
+      "type": "fill_in_blank",
+      "question": "An array initialization like int scores[] = {90, 85, 77}; creates an array with ___ elements.",
+      "correct": "3",
+      "explanation": "When you omit the size in an array declaration and provide an initializer list, the compiler automatically sets the size based on the number of values. Here, three values create a 3-element array.",
+      "concepts": ["array initialization", "implicit sizing"]
+    },
+    {
+      "id": "cpp_ch07_q06",
+      "type": "fill_in_blank",
+      "question": "The C++ Standard Library container that works like a resizable array is called a ___.",
+      "correct": "vector",
+      "explanation": "The vector class (from <vector>) is a dynamic array that can grow and shrink in size at runtime, unlike fixed-size C++ arrays.",
+      "concepts": ["vectors", "STL containers"]
+    }
+  ]
+}

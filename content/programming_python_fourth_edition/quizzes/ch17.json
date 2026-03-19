@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 17,
+  "questions": [
+    {
+      "id": "pp_ch17_q01",
+      "type": "multiple_choice",
+      "question": "In the PyMailCGI case study, why is storing email passwords on the server in plain text considered a serious security risk?",
+      "choices": [
+        "It slows down the authentication process significantly",
+        "Anyone with server access or a directory traversal exploit could read the credentials",
+        "Plain text passwords cannot be used with the SMTP protocol",
+        "The CGI standard requires Base64 encoding for all stored data"
+      ],
+      "correct": 1,
+      "explanation": "Storing passwords in plain text on the server means any compromise of the server filesystem exposes user credentials. The book discusses this as a fundamental limitation of CGI-based email systems and explores alternatives like encryption and session tokens.",
+      "concepts": ["security_considerations"]
+    },
+    {
+      "id": "pp_ch17_q02",
+      "type": "multiple_choice",
+      "question": "In a CGI-based web email client, what technique does PyMailCGI use to maintain user state across multiple page requests?",
+      "choices": [
+        "Server-side session files with unique session IDs",
+        "Hidden form fields that carry state data between pages",
+        "WebSocket connections that persist across requests",
+        "Browser localStorage accessed via JavaScript callbacks"
+      ],
+      "correct": 1,
+      "explanation": "Since HTTP is stateless, PyMailCGI passes state between pages using hidden HTML form fields (type=\"hidden\"). Each page embeds the necessary context (like mail list data or user info) in hidden fields so the next CGI script can reconstruct state. This is a classic CGI pattern, though it has security implications.",
+      "concepts": ["server_side_state"]
+    },
+    {
+      "id": "pp_ch17_q03",
+      "type": "multiple_choice",
+      "question": "Which Python standard library module does PyMailCGI use to fetch email messages from a remote mail server?",
+      "choices": [
+        "imaplib",
+        "poplib",
+        "smtplib",
+        "email.message"
+      ],
+      "correct": 1,
+      "explanation": "PyMailCGI uses the poplib module to connect to POP3 mail servers and retrieve messages. The poplib module provides POP3 and POP3_SSL classes for downloading email. smtplib is used for sending mail, while the email package is used for parsing message content.",
+      "concepts": ["server_side_email_access"]
+    },
+    {
+      "id": "pp_ch17_q04",
+      "type": "multiple_choice",
+      "question": "What is a key disadvantage of using CGI scripts compared to modern web frameworks like Django or Flask?",
+      "choices": [
+        "CGI scripts cannot generate dynamic HTML content",
+        "CGI scripts do not support HTTP cookies",
+        "Each CGI request spawns a new process, causing significant performance overhead",
+        "CGI scripts are limited to the GET method only"
+      ],
+      "correct": 2,
+      "explanation": "CGI's fundamental limitation is that every request starts a new Python interpreter process, including importing modules and initializing state. Modern frameworks use long-running server processes (WSGI/ASGI) that handle many requests without restart overhead. This is why CGI has been largely replaced in production.",
+      "concepts": ["cgi_scripts"]
+    },
+    {
+      "id": "pp_ch17_q05",
+      "type": "fill_in_blank",
+      "question": "To send an email programmatically in Python, you create an SMTP connection using smtplib.________(host, port).",
+      "correct": "SMTP",
+      "explanation": "smtplib.SMTP(host, port) creates a connection to an SMTP mail server. For encrypted connections, smtplib.SMTP_SSL is used instead. After connecting, you typically call .login() for authentication and .sendmail() to transmit the message.",
+      "concepts": ["server_side_email_access"]
+    },
+    {
+      "id": "pp_ch17_q06",
+      "type": "fill_in_blank",
+      "question": "In HTML forms, a field defined as <input type=\"________\" name=\"data\" value=\"secret\"> is sent with the form but not displayed to the user.",
+      "correct": "hidden",
+      "explanation": "Hidden form fields (type=\"hidden\") embed data in the HTML form that gets submitted with the request but is not rendered visibly on the page. PyMailCGI uses hidden fields extensively to carry state across CGI requests, though users can still see them by viewing page source.",
+      "concepts": ["html_form_generation"]
+    }
+  ]
+}

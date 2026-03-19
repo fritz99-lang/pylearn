@@ -1,0 +1,63 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 5,
+  "questions": [
+    {
+      "id": "cpp_ch05_q01",
+      "type": "multiple_choice",
+      "question": "Which loop is guaranteed to execute its body at least once?",
+      "choices": ["while", "for", "do-while", "foreach"],
+      "correct": 2,
+      "explanation": "The do-while loop tests its condition after executing the loop body, so the body always runs at least once regardless of the condition.",
+      "concepts": ["do-while loop", "loop types"]
+    },
+    {
+      "id": "cpp_ch05_q02",
+      "type": "multiple_choice",
+      "question": "What is the output of the following code?\nfor (int i = 0; i < 3; i++)\n    cout << i << \" \";",
+      "choices": ["1 2 3 ", "0 1 2 ", "0 1 2 3 ", "1 2 "],
+      "correct": 1,
+      "explanation": "The for loop starts with i = 0, runs while i < 3, and increments i after each iteration. So it prints 0, 1, and 2 separated by spaces.",
+      "concepts": ["for loop", "loop control"]
+    },
+    {
+      "id": "cpp_ch05_q03",
+      "type": "multiple_choice",
+      "question": "Which C++ class is used to open a file for reading?",
+      "choices": ["ofstream", "ifstream", "fstream", "iostream"],
+      "correct": 1,
+      "explanation": "ifstream (input file stream) is used to open and read from files. ofstream is for writing, fstream supports both, and iostream is for console I/O.",
+      "concepts": ["file I/O", "ifstream"]
+    },
+    {
+      "id": "cpp_ch05_q04",
+      "type": "multiple_choice",
+      "question": "What does the continue statement do inside a loop?",
+      "choices": [
+        "Exits the loop entirely",
+        "Skips the rest of the current iteration and jumps to the next iteration",
+        "Restarts the loop from the beginning with the initial values",
+        "Pauses the loop for one second"
+      ],
+      "correct": 1,
+      "explanation": "The continue statement skips the remaining statements in the current loop iteration and jumps back to the loop's condition check (or update expression in a for loop).",
+      "concepts": ["continue", "loop control"]
+    },
+    {
+      "id": "cpp_ch05_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ statement is used to immediately exit a loop before its condition becomes false.",
+      "correct": "break",
+      "explanation": "The break statement causes immediate termination of the loop it is contained in. Execution continues with the first statement after the loop.",
+      "concepts": ["break", "loop control"]
+    },
+    {
+      "id": "cpp_ch05_q06",
+      "type": "fill_in_blank",
+      "question": "The C++ class used to open a file for writing output is called ___.",
+      "correct": "ofstream",
+      "explanation": "ofstream (output file stream) is used to create and write data to files. You must include the <fstream> header to use it.",
+      "concepts": ["file I/O", "ofstream"]
+    }
+  ]
+}

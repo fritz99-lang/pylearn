@@ -1,0 +1,78 @@
+{
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 9,
+  "questions": [
+    {
+      "id": "hc_ch09_q01",
+      "type": "multiple_choice",
+      "question": "Which attribute on the <form> tag specifies where the form data is sent?",
+      "choices": [
+        "method",
+        "target",
+        "action",
+        "submit"
+      ],
+      "correct": 2,
+      "explanation": "The action attribute specifies the URL where the form data should be sent when the form is submitted.",
+      "concepts": ["form tag", "action attribute"]
+    },
+    {
+      "id": "hc_ch09_q02",
+      "type": "multiple_choice",
+      "question": "Which input type creates a password field that hides typed characters?",
+      "choices": [
+        "<input type=\"hidden\">",
+        "<input type=\"secret\">",
+        "<input type=\"password\">",
+        "<input type=\"secure\">"
+      ],
+      "correct": 2,
+      "explanation": "The type=\"password\" attribute on an <input> element masks the characters as dots or asterisks for security.",
+      "concepts": ["input types", "password field"]
+    },
+    {
+      "id": "hc_ch09_q03",
+      "type": "multiple_choice",
+      "question": "What does the `required` attribute do on a form input?",
+      "choices": [
+        "It makes the input read-only",
+        "It prevents the form from submitting if the field is empty",
+        "It highlights the field in red",
+        "It automatically fills in a default value"
+      ],
+      "correct": 1,
+      "explanation": "The required attribute tells the browser that the field must be filled in before the form can be submitted. The browser shows a validation message if it is empty.",
+      "concepts": ["required attribute", "form validation"]
+    },
+    {
+      "id": "hc_ch09_q04",
+      "type": "multiple_choice",
+      "question": "Which HTML element creates a multi-line text input?",
+      "choices": [
+        "<input type=\"text\">",
+        "<textfield>",
+        "<textarea>",
+        "<input type=\"multiline\">"
+      ],
+      "correct": 2,
+      "explanation": "The <textarea> element creates a multi-line text input area. Unlike <input>, it has a closing tag and can be resized.",
+      "concepts": ["textarea", "form elements"]
+    },
+    {
+      "id": "hc_ch09_q05",
+      "type": "fill_in_blank",
+      "question": "The <___> tag associates descriptive text with a specific form input.",
+      "correct": "label",
+      "explanation": "The <label> tag provides a text description for a form control. Using the for attribute, it links to the input's id for accessibility and usability.",
+      "concepts": ["label tag", "accessibility"]
+    },
+    {
+      "id": "hc_ch09_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on an input displays hint text inside the field before the user types.",
+      "correct": "placeholder",
+      "explanation": "The placeholder attribute shows light gray hint text inside an input field that disappears when the user starts typing.",
+      "concepts": ["placeholder", "form UX"]
+    }
+  ]
+}

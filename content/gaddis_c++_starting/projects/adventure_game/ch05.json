@@ -1,0 +1,25 @@
+{
+  "step_id": "cpp_adv_ch05",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 5,
+  "title": "Game Loop — Main Loop and Save",
+  "description": "Wrap the game in a main loop so the player can keep exploring until they choose to quit or die. Use a while loop or do-while loop that continues as long as the player is alive and hasn't quit. When the player quits, save their stats to a file using ofstream. Include a loop counter or turn number that increments each turn. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_adv_ch04",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\nint main() {\n    cout << \"===== TEXT ADVENTURE GAME =====\" << endl;\n\n    string playerName;\n    cout << \"Enter your name: \";\n    getline(cin, playerName);\n\n    int health = 100;\n    int gold = 50;\n    int attackPower = 15;\n    bool playing = true;\n    int turn = 0;\n\n    // Main game loop: while player is alive and still playing\n    // Each iteration:\n    //   1. Increment turn counter\n    //   2. Display current room and stats\n    //   3. Get player choice (direction or quit)\n    //   4. Use if/else for direction, switch for actions\n    //   5. Check if health <= 0 (game over)\n\n    // After loop ends, save game to file using ofstream\n    // Save: playerName, health, gold, attackPower, turns played\n\n    cout << \"Thanks for playing!\" << endl;\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'while' in cpp or 'do' in cpp, 'Use a while or do-while loop for the main game loop'\nassert 'ofstream' in cpp, 'Use ofstream to save game data to a file'\nassert '#include <fstream>' in cpp, 'Must include <fstream> for file output'\nimport re\nloop_match = re.search(r'while\\s*\\(', cpp)\nassert loop_match, 'Must have a while loop condition (e.g., while (playing && health > 0))'\nassert 'playing' in cpp or 'gameOver' in cpp or 'quit' in cpp or 'running' in cpp, 'Use a boolean variable to control the game loop'\nassert '<<' in cpp and ('save' in cpp.lower() or 'ofstream' in cpp), 'Write player data to the save file using <<'",
+  "acceptance_criteria": [
+    "Game runs in a while or do-while loop",
+    "Loop continues while player is alive and hasn't quit",
+    "A turn counter increments each iteration",
+    "Player can quit the game to exit the loop",
+    "Game stats are saved to a file using ofstream when quitting",
+    "Save file includes player name, health, gold, and turns played"
+  ],
+  "hints": [
+    "while (playing && health > 0) { ... } is a good loop condition",
+    "Use turn++ at the start of each loop iteration",
+    "ofstream saveFile(\"savegame.txt\"); saveFile << playerName << endl; saveFile << health << endl;",
+    "Don't forget to close the file or let the destructor handle it",
+    "Check if the player typed 'quit' to set playing = false"
+  ]
+}

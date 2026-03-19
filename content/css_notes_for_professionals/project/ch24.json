@@ -1,0 +1,20 @@
+{
+  "step_id": "css_proj_ch24",
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 24,
+  "title": "Page Layout \u2014 CSS Grid",
+  "description": "Create a two-column page layout using CSS Grid. Add a .page-grid class with display: grid and grid-template-columns to define a main content area and a sidebar. Style the .sidebar with padding and a background color. Use grid-gap (or gap) to add spacing between the columns.",
+  "builds_on": "css_proj_ch18",
+  "starter_code": "css = \"\"\"\n/* Blog Theme CSS */\n\n/* Step 6: CSS Custom Properties */\n:root {\n    --primary-color: #0077cc;\n    --text-color: #333;\n    --bg-color: #f9f9f9;\n    --accent-color: #005fa3;\n}\n\n/* Step 1: Foundation */\nbody {\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n    font-size: 16px;\n    line-height: 1.6;\n    color: var(--text-color);\n    background-color: var(--bg-color);\n}\n\na {\n    color: var(--primary-color);\n    text-decoration: none;\n}\n\nh1 {\n    font-size: 2rem;\n    margin-bottom: 0.5rem;\n    border-bottom: 3px solid var(--primary-color);\n    padding-bottom: 0.3rem;\n}\n\n/* Step 2: Box Model */\n*, *::before, *::after {\n    box-sizing: border-box;\n}\n\n.container {\n    max-width: 1100px;\n    margin: 0 auto;\n    padding: 0 20px;\n}\n\n.post {\n    padding: 25px;\n    margin-bottom: 30px;\n    background: #fff;\n    border: 1px solid #e0e0e0;\n    border-radius: 8px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);\n}\n\n/* Step 3: Borders and Radius */\n.post img {\n    border-radius: 6px;\n    max-width: 100%;\n}\n\n/* Step 4: Typography */\nh1, h2, h3 {\n    font-family: Georgia, 'Times New Roman', serif;\n    font-weight: 700;\n    letter-spacing: 0.5px;\n}\n\n.post-meta {\n    font-size: 0.85rem;\n    color: #888;\n    text-transform: uppercase;\n}\n\nblockquote {\n    font-style: italic;\n    border-left: 4px solid var(--accent-color);\n    padding-left: 1rem;\n    margin: 1rem 0;\n    color: #555;\n}\n\n/* Step 5: Flexbox Navigation */\n.nav {\n    display: flex;\n    justify-content: space-around;\n    align-items: center;\n    background-color: var(--primary-color);\n    padding: 0;\n}\n\n.nav a {\n    padding: 15px 20px;\n    color: #fff;\n    text-decoration: none;\n}\n\n.nav a:hover {\n    background-color: rgba(255, 255, 255, 0.15);\n}\n\n/* Step 7: CSS Grid Layout */\n.page-grid {\n    /* TODO: Add display: grid, grid-template-columns, grid-gap */\n}\n\n.sidebar {\n    /* TODO: Add padding, background */\n}\n\"\"\"",
+  "test_code": "assert 'display' in css.lower() and 'grid' in css.lower(), 'Missing display: grid on .page-grid'\nassert 'grid-template-columns' in css.lower(), 'Missing grid-template-columns'\nassert '.sidebar' in css.lower(), 'Missing .sidebar selector'\nassert 'grid-gap' in css.lower() or 'gap' in css.lower(), 'Missing grid-gap or gap for spacing between columns'\nassert '.page-grid' in css.lower(), 'Missing .page-grid selector'",
+  "acceptance_criteria": [
+    ".page-grid uses display: grid with grid-template-columns for a two-column layout",
+    ".sidebar has padding and a background color",
+    "grid-gap or gap adds spacing between the columns"
+  ],
+  "hints": [
+    "grid-template-columns: 2fr 1fr creates a main area twice as wide as the sidebar",
+    "grid-gap: 30px adds consistent spacing between grid cells",
+    "The sidebar could have a light background like #f0f0f0 to visually separate it"
+  ]
+}

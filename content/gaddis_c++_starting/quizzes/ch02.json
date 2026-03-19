@@ -1,0 +1,68 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 2,
+  "questions": [
+    {
+      "id": "cpp_ch02_q01",
+      "type": "multiple_choice",
+      "question": "Which preprocessor directive is used to include the iostream header file?",
+      "choices": [
+        "#define iostream",
+        "#include <iostream>",
+        "#import <iostream>",
+        "#using iostream"
+      ],
+      "correct": 1,
+      "explanation": "The #include <iostream> directive tells the preprocessor to include the iostream header, which provides cout and cin for input/output.",
+      "concepts": ["#include", "preprocessor directives", "iostream"]
+    },
+    {
+      "id": "cpp_ch02_q02",
+      "type": "multiple_choice",
+      "question": "What is the correct way to output the text \"Hello\" to the screen in C++?",
+      "choices": [
+        "print(\"Hello\");",
+        "cout << \"Hello\";",
+        "System.out.println(\"Hello\");",
+        "printf \"Hello\";"
+      ],
+      "correct": 1,
+      "explanation": "In C++, cout (character output) with the stream insertion operator << is used to display output to the screen.",
+      "concepts": ["cout", "stream insertion operator"]
+    },
+    {
+      "id": "cpp_ch02_q03",
+      "type": "multiple_choice",
+      "question": "Which data type would you use to store a number with a decimal point, such as 3.14?",
+      "choices": ["int", "char", "double", "string"],
+      "correct": 2,
+      "explanation": "The double data type stores floating-point numbers (numbers with decimal points). int stores whole numbers, char stores single characters, and string stores text.",
+      "concepts": ["data types", "double", "floating-point"]
+    },
+    {
+      "id": "cpp_ch02_q04",
+      "type": "multiple_choice",
+      "question": "What does the following code output?\nint x = 10;\nint y = 3;\ncout << x / y;",
+      "choices": ["3.33", "3", "3.0", "4"],
+      "correct": 1,
+      "explanation": "When both operands are integers, C++ performs integer division, which truncates the decimal portion. 10 / 3 = 3 (not 3.33).",
+      "concepts": ["integer division", "arithmetic operators"]
+    },
+    {
+      "id": "cpp_ch02_q05",
+      "type": "fill_in_blank",
+      "question": "Every C++ program must have a function called ___.",
+      "correct": "main",
+      "explanation": "The main() function is the entry point of every C++ program. Execution begins at the first statement inside main().",
+      "concepts": ["main function", "program structure"]
+    },
+    {
+      "id": "cpp_ch02_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ object is used to read input from the keyboard in C++.",
+      "correct": "cin",
+      "explanation": "cin (character input) with the stream extraction operator >> reads data from the keyboard and stores it in a variable.",
+      "concepts": ["cin", "input"]
+    }
+  ]
+}

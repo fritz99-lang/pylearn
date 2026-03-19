@@ -1,0 +1,37 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 32,
+  "challenges": [
+    {
+      "id": "h5_ch32_c01",
+      "title": "Canvas Setup",
+      "description": "Create a canvas element with an id, width, and height attribute, plus fallback text for unsupported browsers. Add a script element that gets the canvas by its id and obtains the 2d rendering context. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a canvas element with a script to get the 2d context -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<canvas' in lower, 'Should contain a <canvas> element'\nassert 'id=' in lower, 'Canvas should have an id attribute'\nassert 'width=' in lower, 'Canvas should have a width attribute'\nassert 'height=' in lower, 'Canvas should have a height attribute'\nassert '</canvas>' in lower, 'Should close the <canvas> element'\nassert '<script' in lower, 'Should contain a <script> element'\nassert 'getcontext' in lower or 'getcontext' in html.lower().replace(' ', ''), 'Script should call getContext'\nassert '2d' in lower, 'Should get the 2d rendering context'",
+      "difficulty": "easy",
+      "concepts_new": ["canvas", "getContext", "2d context"],
+      "concepts_review": ["id", "script"],
+      "hints": [
+        "The <canvas> element needs id, width, and height attributes.",
+        "Fallback text goes between the opening and closing <canvas> tags.",
+        "Use document.getElementById() to get the canvas, then call .getContext('2d')."
+      ]
+    },
+    {
+      "id": "h5_ch32_c02",
+      "title": "Canvas Drawing",
+      "description": "Create a canvas element with a script that draws a filled rectangle using fillRect and a stroked circle using arc and stroke. Use fillStyle and strokeStyle to set colors. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a canvas with rectangle and circle drawing -->\n\n\"\"\"",
+      "test_code": "lower = html.lower()\nassert '<canvas' in lower, 'Should contain a <canvas> element'\nassert '</canvas>' in lower, 'Should close the <canvas> element'\nassert '<script' in lower, 'Should contain a <script> element'\nassert 'fillrect' in lower, 'Should use fillRect to draw a rectangle'\nassert 'arc(' in lower or 'arc (' in lower, 'Should use arc() to draw a circle'\nassert 'stroke' in lower, 'Should call stroke() to render the circle'\nassert 'fillstyle' in lower, 'Should set fillStyle for the rectangle color'\nassert 'strokestyle' in lower, 'Should set strokeStyle for the circle color'",
+      "difficulty": "medium",
+      "concepts_new": ["fillRect", "arc", "stroke", "fillStyle", "strokeStyle"],
+      "concepts_review": ["canvas", "getContext", "2d context"],
+      "hints": [
+        "Set ctx.fillStyle before calling ctx.fillRect(x, y, width, height).",
+        "To draw a circle, use ctx.arc(x, y, radius, 0, Math.PI * 2) followed by ctx.stroke().",
+        "Call ctx.beginPath() before drawing the arc to start a new path.",
+        "Set ctx.strokeStyle before calling ctx.stroke() to set the circle outline color."
+      ]
+    }
+  ]
+}

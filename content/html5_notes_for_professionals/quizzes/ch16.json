@@ -1,0 +1,58 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 16,
+  "questions": [
+    {
+      "id": "h5_ch16_q01",
+      "type": "multiple_choice",
+      "question": "Which HTML element defines clickable areas within an image map?",
+      "choices": ["<map>", "<area>", "<region>", "<zone>"],
+      "correct": 1,
+      "explanation": "The <area> element defines individual clickable regions within an image map. Each <area> specifies a shape, coordinates, and a link destination.",
+      "concepts": ["area tag", "image maps"]
+    },
+    {
+      "id": "h5_ch16_q02",
+      "type": "multiple_choice",
+      "question": "Which attribute on the <img> tag associates it with an image map?",
+      "choices": ["map", "usemap", "mapref", "imagemap"],
+      "correct": 1,
+      "explanation": "The usemap attribute on <img> links the image to a <map> element by referencing its name with a hash prefix, e.g., usemap=\"#mymap\".",
+      "concepts": ["usemap attribute", "image maps"]
+    },
+    {
+      "id": "h5_ch16_q03",
+      "type": "multiple_choice",
+      "question": "Which of the following is NOT a valid shape value for the <area> tag?",
+      "choices": ["rect", "circle", "poly", "triangle"],
+      "correct": 3,
+      "explanation": "The valid shape values for <area> are rect (rectangle), circle, poly (polygon), and default (entire image). Triangle is not a valid value; use poly with three coordinate pairs instead.",
+      "concepts": ["area tag", "shape attribute"]
+    },
+    {
+      "id": "h5_ch16_q04",
+      "type": "multiple_choice",
+      "question": "How are coordinates specified for a circular area in an image map?",
+      "choices": ["x1,y1,x2,y2", "x,y,radius", "centerX,centerY,width,height", "top,right,bottom,left"],
+      "correct": 1,
+      "explanation": "A circle shape in an image map uses coords=\"x,y,radius\" where x,y is the center point and radius is the circle's radius in pixels.",
+      "concepts": ["coordinates", "circle shape"]
+    },
+    {
+      "id": "h5_ch16_q05",
+      "type": "fill_in_blank",
+      "question": "The <map> element's ___ attribute is used to match it with the usemap attribute on an <img> tag.",
+      "correct": "name",
+      "explanation": "The name attribute on <map> provides the identifier that the <img> tag's usemap attribute references, e.g., <map name=\"mymap\"> matched by usemap=\"#mymap\".",
+      "concepts": ["map tag", "name attribute"]
+    },
+    {
+      "id": "h5_ch16_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on the <area> tag defines the pixel coordinates of the clickable region.",
+      "correct": "coords",
+      "explanation": "The coords attribute specifies the coordinates that define the clickable area's shape. The format depends on the shape: rect uses x1,y1,x2,y2; circle uses x,y,r; poly uses pairs of x,y points.",
+      "concepts": ["coords attribute", "area tag"]
+    }
+  ]
+}

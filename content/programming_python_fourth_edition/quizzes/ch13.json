@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 13,
+  "questions": [
+    {
+      "id": "pp_ch13_q01",
+      "type": "multiple_choice",
+      "question": "When creating a TCP socket in Python, which arguments do you pass to socket.socket() to specify an IPv4 TCP connection?",
+      "choices": [
+        "socket.AF_INET, socket.SOCK_DGRAM",
+        "socket.AF_INET, socket.SOCK_STREAM",
+        "socket.AF_INET6, socket.SOCK_STREAM",
+        "socket.AF_UNIX, socket.SOCK_STREAM"
+      ],
+      "correct": 1,
+      "explanation": "AF_INET selects IPv4 addressing and SOCK_STREAM selects TCP (a reliable, connection-oriented, byte-stream protocol). SOCK_DGRAM would create a UDP socket, AF_INET6 is for IPv6, and AF_UNIX is for local Unix domain sockets.",
+      "concepts": ["socket.socket", "AF_INET", "SOCK_STREAM"]
+    },
+    {
+      "id": "pp_ch13_q02",
+      "type": "multiple_choice",
+      "question": "In a TCP server, what is the correct sequence of socket calls to accept incoming client connections?",
+      "choices": [
+        "socket() -> connect() -> listen() -> recv()",
+        "socket() -> bind() -> listen() -> accept()",
+        "socket() -> listen() -> bind() -> accept()",
+        "socket() -> accept() -> bind() -> listen()"
+      ],
+      "correct": 1,
+      "explanation": "A TCP server creates a socket, binds it to an address/port with bind(), starts listening for connections with listen(), then calls accept() in a loop to wait for and accept incoming client connections. accept() returns a new socket for each client.",
+      "concepts": ["TCP server", "bind", "listen", "accept"]
+    },
+    {
+      "id": "pp_ch13_q03",
+      "type": "multiple_choice",
+      "question": "What does the socket accept() method return?",
+      "choices": [
+        "A bytes object containing the client's first message",
+        "A tuple of (new_socket, client_address) for the connected client",
+        "The port number the client connected from",
+        "A boolean indicating whether the connection was successful"
+      ],
+      "correct": 1,
+      "explanation": "accept() blocks until a client connects, then returns a 2-tuple: a new socket object dedicated to that specific client connection, and the client's address (host, port). The original listening socket remains open for more connections.",
+      "concepts": ["accept", "client-server model"]
+    },
+    {
+      "id": "pp_ch13_q04",
+      "type": "multiple_choice",
+      "question": "What is the key difference between TCP (SOCK_STREAM) and UDP (SOCK_DGRAM) at the socket level?",
+      "choices": [
+        "TCP is faster but unreliable; UDP is slower but guarantees delivery",
+        "TCP provides a reliable, ordered byte stream with connection setup; UDP sends independent datagrams with no delivery guarantee",
+        "TCP only works on localhost; UDP works over networks",
+        "TCP is for text data; UDP is for binary data"
+      ],
+      "correct": 1,
+      "explanation": "TCP establishes a connection and provides reliable, ordered delivery of a byte stream with retransmission of lost packets. UDP sends discrete datagrams with no connection setup, no delivery guarantee, and no ordering. UDP is lighter-weight but requires the application to handle reliability if needed.",
+      "concepts": ["TCP", "UDP"]
+    },
+    {
+      "id": "pp_ch13_q05",
+      "type": "fill_in_blank",
+      "question": "The special hostname '______' (or '127.0.0.1') refers to the local machine and is commonly used for testing client-server programs on a single computer.",
+      "correct": "localhost",
+      "explanation": "localhost (IP address 127.0.0.1) is the loopback address that always refers to the current machine. It allows testing networked programs without a real network by having both client and server run on the same host.",
+      "concepts": ["localhost", "loopback"]
+    },
+    {
+      "id": "pp_ch13_q06",
+      "type": "fill_in_blank",
+      "question": "A port number identifies a specific application or service on a host. Well-known ports (0-1023) are reserved for standard services, while ports above ______ are typically available for custom applications.",
+      "correct": "1023",
+      "explanation": "Port numbers 0-1023 are well-known ports reserved for standard services (HTTP on 80, FTP on 21, SMTP on 25, etc.). Ports 1024-65535 are available for user applications, with 1024-49151 being registered ports and 49152-65535 being dynamic/ephemeral ports.",
+      "concepts": ["port numbers"]
+    }
+  ]
+}

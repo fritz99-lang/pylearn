@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 29,
+  "questions": [
+    {
+      "id": "css_ch29_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS property defines the distance between the viewer and the z=0 plane for 3D-transformed elements?",
+      "choices": [
+        "depth",
+        "z-index",
+        "perspective",
+        "view-distance"
+      ],
+      "correct": 2,
+      "explanation": "The `perspective` property sets the distance from the user to the z=0 plane, creating the illusion of depth for child elements with 3D transforms. A smaller value produces a more pronounced 3D effect.",
+      "concepts": ["perspective", "3d-transforms"]
+    },
+    {
+      "id": "css_ch29_q02",
+      "type": "multiple_choice",
+      "question": "What does `backface-visibility: hidden` do?",
+      "choices": [
+        "Hides the element when it overlaps another element",
+        "Makes the back side of a rotated element invisible",
+        "Prevents the element from being flipped",
+        "Disables all 3D transforms on the element"
+      ],
+      "correct": 1,
+      "explanation": "When an element is rotated in 3D so its back face would be visible to the user, `backface-visibility: hidden` makes the element invisible rather than showing a mirrored version of its front face.",
+      "concepts": ["backface-visibility", "3d-transforms"]
+    },
+    {
+      "id": "css_ch29_q03",
+      "type": "multiple_choice",
+      "question": "Which `transform-style` value allows child elements to maintain their own 3D positioning?",
+      "choices": [
+        "flat",
+        "inherit",
+        "preserve-3d",
+        "perspective"
+      ],
+      "correct": 2,
+      "explanation": "Setting `transform-style: preserve-3d` on a parent element allows its children to be positioned in 3D space rather than being flattened onto the parent's plane.",
+      "concepts": ["transform-style", "preserve-3d"]
+    },
+    {
+      "id": "css_ch29_q04",
+      "type": "multiple_choice",
+      "question": "Which function rotates an element around the Y axis in 3D space?",
+      "choices": [
+        "rotate()",
+        "rotateX()",
+        "rotateY()",
+        "rotateZ()"
+      ],
+      "correct": 2,
+      "explanation": "The `rotateY()` function rotates an element around the vertical (Y) axis, creating a turning or flipping effect in 3D space.",
+      "concepts": ["rotateY", "3d-transforms"]
+    },
+    {
+      "id": "css_ch29_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ function moves an element along the Z axis, making it appear closer to or farther from the viewer.",
+      "correct": "translateZ",
+      "explanation": "The `translateZ()` function moves an element forward (positive values) or backward (negative values) along the Z axis in 3D space, requiring a perspective to be set on a parent element for the effect to be visible.",
+      "concepts": ["translateZ", "3d-transforms"]
+    },
+    {
+      "id": "css_ch29_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ function rotates an element around the X axis, creating a tilting effect toward or away from the viewer.",
+      "correct": "rotateX",
+      "explanation": "The `rotateX()` function rotates an element around the horizontal (X) axis, making the top tilt away from or toward the viewer depending on the angle.",
+      "concepts": ["rotateX", "3d-transforms"]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 18,
+  "questions": [
+    {
+      "id": "h5_ch18_q01",
+      "type": "multiple_choice",
+      "question": "Which attribute on the <form> tag specifies where to send the form data when submitted?",
+      "choices": ["method", "action", "enctype", "target"],
+      "correct": 1,
+      "explanation": "The 'action' attribute specifies the URL where the form data will be sent when the form is submitted. If omitted, the form submits to the current page URL.",
+      "concepts": ["form tag", "action attribute"]
+    },
+    {
+      "id": "h5_ch18_q02",
+      "type": "multiple_choice",
+      "question": "What is the key difference between the GET and POST form methods?",
+      "choices": [
+        "GET sends data in the request body, POST appends data to the URL",
+        "GET appends data to the URL as query parameters, POST sends data in the request body",
+        "GET is more secure than POST",
+        "POST can only send text data, GET can send any data type"
+      ],
+      "correct": 1,
+      "explanation": "GET appends form data to the URL as query string parameters, making it visible in the address bar. POST sends data in the HTTP request body, keeping it out of the URL. POST is preferred for sensitive or large amounts of data.",
+      "concepts": ["GET method", "POST method", "form submission"]
+    },
+    {
+      "id": "h5_ch18_q03",
+      "type": "multiple_choice",
+      "question": "Which enctype value must be used when a form includes file uploads?",
+      "choices": [
+        "application/x-www-form-urlencoded",
+        "text/plain",
+        "multipart/form-data",
+        "application/json"
+      ],
+      "correct": 2,
+      "explanation": "The 'multipart/form-data' enctype is required for forms that include file uploads via <input type=\"file\">. It encodes the form data as a series of parts, each with its own content type.",
+      "concepts": ["enctype", "file upload", "form encoding"]
+    },
+    {
+      "id": "h5_ch18_q04",
+      "type": "multiple_choice",
+      "question": "What is the purpose of the <fieldset> and <legend> elements in a form?",
+      "choices": [
+        "They create a submit button with a label",
+        "They group related form controls and provide a caption for the group",
+        "They validate form inputs before submission",
+        "They define hidden fields for storing metadata"
+      ],
+      "correct": 1,
+      "explanation": "The <fieldset> element groups related form controls together, visually drawing a box around them. The <legend> element provides a caption or title for the fieldset group, improving both visual organization and accessibility.",
+      "concepts": ["fieldset", "legend", "form structure"]
+    },
+    {
+      "id": "h5_ch18_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ attribute on the <form> tag specifies whether to use GET or POST when sending form data.",
+      "correct": "method",
+      "explanation": "The 'method' attribute on a <form> element specifies the HTTP method (GET or POST) used to submit the form data to the server.",
+      "concepts": ["method attribute", "form submission"]
+    },
+    {
+      "id": "h5_ch18_q06",
+      "type": "fill_in_blank",
+      "question": "A button with type=\"___\" triggers form submission when clicked.",
+      "correct": "submit",
+      "explanation": "A <button type=\"submit\"> or <input type=\"submit\"> triggers form submission. This is also the default button type inside a form, so omitting the type attribute has the same effect.",
+      "concepts": ["submit button", "form submission"]
+    }
+  ]
+}

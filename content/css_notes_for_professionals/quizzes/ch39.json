@@ -1,0 +1,68 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 39,
+  "questions": [
+    {
+      "id": "css_ch39_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS property specifies the number of columns content should be divided into?",
+      "choices": ["columns", "column-count", "column-number", "multi-column"],
+      "correct": 1,
+      "explanation": "The column-count property sets the exact number of columns for multi-column layout. The browser divides the content evenly across that many columns.",
+      "concepts": ["column-count", "multi-column"]
+    },
+    {
+      "id": "css_ch39_q02",
+      "type": "multiple_choice",
+      "question": "What does the column-gap property control?",
+      "choices": [
+        "The space between the column content and the container edge",
+        "The space between adjacent columns",
+        "The space between column rules and column content",
+        "The vertical spacing between rows of columns"
+      ],
+      "correct": 1,
+      "explanation": "The column-gap property sets the size of the gap between adjacent columns in a multi-column layout. The default value is normal, which is typically 1em.",
+      "concepts": ["column-gap", "spacing"]
+    },
+    {
+      "id": "css_ch39_q03",
+      "type": "multiple_choice",
+      "question": "Which property draws a line between columns, similar to a border?",
+      "choices": ["column-border", "column-divider", "column-rule", "column-separator"],
+      "correct": 2,
+      "explanation": "The column-rule property is a shorthand for column-rule-width, column-rule-style, and column-rule-color. It draws a line in the gap between columns.",
+      "concepts": ["column-rule", "multi-column"]
+    },
+    {
+      "id": "css_ch39_q04",
+      "type": "multiple_choice",
+      "question": "What does column-span: all do?",
+      "choices": [
+        "Makes all columns the same width",
+        "Makes an element span across all columns",
+        "Distributes content evenly across all columns",
+        "Applies the rule to all columns simultaneously"
+      ],
+      "correct": 1,
+      "explanation": "Setting column-span: all on an element inside a multi-column container makes that element span across all columns, breaking the column flow. This is useful for headings.",
+      "concepts": ["column-span", "multi-column"]
+    },
+    {
+      "id": "css_ch39_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property specifies the ideal minimum width for each column, letting the browser determine the column count.",
+      "correct": "column-width",
+      "explanation": "The column-width property sets a suggested optimal width for columns. The browser creates as many columns of at least that width as will fit in the container.",
+      "concepts": ["column-width", "multi-column"]
+    },
+    {
+      "id": "css_ch39_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ shorthand property sets both column-width and column-count in a single declaration.",
+      "correct": "columns",
+      "explanation": "The columns shorthand accepts a column-width and/or column-count value. For example, columns: 200px 3 sets a preferred width of 200px with a maximum of 3 columns.",
+      "concepts": ["columns", "shorthand"]
+    }
+  ]
+}

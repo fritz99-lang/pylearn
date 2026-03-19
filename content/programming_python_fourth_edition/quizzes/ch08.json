@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 8,
+  "questions": [
+    {
+      "id": "pp_ch08_q01",
+      "type": "multiple_choice",
+      "question": "What function must be called to start the tkinter event loop and display the GUI?",
+      "choices": [
+        "root.start()",
+        "root.mainloop()",
+        "tkinter.run()",
+        "root.eventloop()"
+      ],
+      "correct": 1,
+      "explanation": "mainloop() starts the Tk event loop, which waits for events (clicks, key presses, etc.) and dispatches them to handlers. The GUI is not displayed and interactive until mainloop() is called.",
+      "concepts": ["tkinter", "event_loop"]
+    },
+    {
+      "id": "pp_ch08_q02",
+      "type": "multiple_choice",
+      "question": "Which tkinter geometry manager positions widgets by specifying row and column indices?",
+      "choices": [
+        "pack",
+        "place",
+        "grid",
+        "layout"
+      ],
+      "correct": 2,
+      "explanation": "The grid geometry manager arranges widgets in a table-like structure using row and column indices (e.g., widget.grid(row=0, column=1)). pack uses relative positioning and place uses absolute coordinates.",
+      "concepts": ["tkinter", "geometry_managers"]
+    },
+    {
+      "id": "pp_ch08_q03",
+      "type": "multiple_choice",
+      "question": "How do you attach a callback function to a tkinter Button widget?",
+      "choices": [
+        "Button(root, text='Click', onClick=my_func)",
+        "Button(root, text='Click', command=my_func)",
+        "Button(root, text='Click').bind(my_func)",
+        "Button(root, text='Click', handler=my_func)"
+      ],
+      "correct": 1,
+      "explanation": "The command parameter accepts a callable that is invoked when the button is clicked. Note that you pass the function object (my_func), not a call (my_func()), to avoid immediate execution.",
+      "concepts": ["tkinter", "event_handling"]
+    },
+    {
+      "id": "pp_ch08_q04",
+      "type": "multiple_choice",
+      "question": "Which tkinter widget provides a single-line text input field?",
+      "choices": [
+        "Text",
+        "Entry",
+        "Input",
+        "TextField"
+      ],
+      "correct": 1,
+      "explanation": "The Entry widget provides a single-line text input field. The Text widget is for multi-line text editing. There are no standard Input or TextField widgets in tkinter.",
+      "concepts": ["tkinter", "widgets"]
+    },
+    {
+      "id": "pp_ch08_q05",
+      "type": "fill_in_blank",
+      "question": "The tkinter ___ geometry manager positions widgets by packing them against the sides of their parent (TOP, BOTTOM, LEFT, RIGHT).",
+      "correct": "pack",
+      "explanation": "The pack geometry manager arranges widgets by packing them in order against a specified side of the parent widget using the side parameter (e.g., widget.pack(side=LEFT)).",
+      "concepts": ["tkinter", "geometry_managers"]
+    },
+    {
+      "id": "pp_ch08_q06",
+      "type": "fill_in_blank",
+      "question": "In tkinter, the ___ widget displays a short text string or image and is often used for static labels in a GUI.",
+      "correct": "Label",
+      "explanation": "The Label widget displays text or an image. It is a non-interactive display widget commonly used for titles, descriptions, and status messages in tkinter GUIs.",
+      "concepts": ["tkinter", "widgets"]
+    }
+  ]
+}

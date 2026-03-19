@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 5,
+  "questions": [
+    {
+      "id": "pp_ch05_q01",
+      "type": "multiple_choice",
+      "question": "Which function from os.path constructs a path string by joining components with the correct platform separator?",
+      "choices": [
+        "os.path.combine()",
+        "os.path.join()",
+        "os.path.concat()",
+        "os.path.merge()"
+      ],
+      "correct": 1,
+      "explanation": "os.path.join() intelligently joins path components using the correct separator for the current OS (/ on Unix, \\ on Windows) and handles edge cases like absolute paths.",
+      "concepts": ["os_path", "path_construction"]
+    },
+    {
+      "id": "pp_ch05_q02",
+      "type": "multiple_choice",
+      "question": "What does os.walk() yield for each directory it visits?",
+      "choices": [
+        "A list of all file paths",
+        "A tuple of (dirpath, dirnames, filenames)",
+        "A tuple of (dirpath, file_count)",
+        "A DirEntry object for each item"
+      ],
+      "correct": 1,
+      "explanation": "os.walk() generates a 3-tuple (dirpath, dirnames, filenames) for each directory in the tree. dirpath is the path string, dirnames is a list of subdirectory names, and filenames is a list of file names.",
+      "concepts": ["os_walk", "directory_traversal"]
+    },
+    {
+      "id": "pp_ch05_q03",
+      "type": "multiple_choice",
+      "question": "Which module provides high-level file operations like copying and moving files and directory trees?",
+      "choices": [
+        "os",
+        "pathlib",
+        "shutil",
+        "filecmp"
+      ],
+      "correct": 2,
+      "explanation": "The shutil (shell utilities) module provides high-level operations like shutil.copy(), shutil.move(), shutil.copytree(), and shutil.rmtree() that go beyond what os provides.",
+      "concepts": ["shutil", "file_operations"]
+    },
+    {
+      "id": "pp_ch05_q04",
+      "type": "multiple_choice",
+      "question": "When opening a file in binary mode, what type does the read() method return?",
+      "choices": [
+        "str",
+        "bytes",
+        "bytearray",
+        "list of int"
+      ],
+      "correct": 1,
+      "explanation": "In binary mode (e.g., open('file', 'rb')), read() returns a bytes object. In text mode (the default), read() returns a str with platform line-ending translation applied.",
+      "concepts": ["file_objects", "binary_mode"]
+    },
+    {
+      "id": "pp_ch05_q05",
+      "type": "fill_in_blank",
+      "question": "The os.path.___ function returns True if the given path refers to an existing file or directory.",
+      "correct": "exists",
+      "explanation": "os.path.exists(path) returns True if the path refers to an existing file or directory, and False otherwise. It follows symbolic links, so it can return False for broken symlinks.",
+      "concepts": ["os_path", "file_testing"]
+    },
+    {
+      "id": "pp_ch05_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ module can create temporary files and directories that are automatically cleaned up, useful for intermediate processing.",
+      "correct": "tempfile",
+      "explanation": "The tempfile module provides functions like TemporaryFile(), NamedTemporaryFile(), and TemporaryDirectory() for creating temporary files and directories with automatic cleanup.",
+      "concepts": ["tempfile", "temporary_files"]
+    }
+  ]
+}

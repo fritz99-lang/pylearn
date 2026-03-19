@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 20,
+  "questions": [
+    {
+      "id": "pp_ch20_q01",
+      "type": "multiple_choice",
+      "question": "Which re module function searches for a pattern match anywhere in the string, not just at the beginning?",
+      "choices": [
+        "re.match()",
+        "re.search()",
+        "re.find()",
+        "re.scan()"
+      ],
+      "correct": 1,
+      "explanation": "re.search() scans through the entire string looking for the first location where the pattern matches. re.match() only checks at the beginning of the string (or at the start of each line with MULTILINE). Use re.findall() or re.finditer() to find all non-overlapping matches.",
+      "concepts": ["re_module", "pattern_matching"]
+    },
+    {
+      "id": "pp_ch20_q02",
+      "type": "multiple_choice",
+      "question": "What does the regex pattern r'(\\d{3})-(\\d{4})' capture when matched against '555-1234'?",
+      "choices": [
+        "A single group containing '555-1234'",
+        "Two groups: '555' and '1234'",
+        "Three groups: '555', '-', and '1234'",
+        "No groups; parentheses are literal in raw strings"
+      ],
+      "correct": 1,
+      "explanation": "Parentheses in regex create capture groups. \\d{3} matches exactly 3 digits and \\d{4} matches 4 digits. The match object's .group(1) returns '555' and .group(2) returns '1234'. The hyphen is matched but not captured since it is outside the parentheses. Use .groups() to get all captured groups as a tuple.",
+      "concepts": ["regular_expressions", "pattern_matching"]
+    },
+    {
+      "id": "pp_ch20_q03",
+      "type": "multiple_choice",
+      "question": "Which XML parsing approach in Python's standard library uses a tree-based API and is generally recommended for most use cases?",
+      "choices": [
+        "xml.sax (SAX parser)",
+        "xml.dom.minidom (DOM parser)",
+        "xml.etree.ElementTree",
+        "xml.parsers.expat"
+      ],
+      "correct": 2,
+      "explanation": "xml.etree.ElementTree provides a simple, Pythonic tree-based API that balances ease of use with memory efficiency. SAX is event-driven and memory-efficient for huge files but harder to use. DOM loads the entire document into memory as a detailed node tree. ElementTree is the recommended choice for most XML tasks in Python.",
+      "concepts": ["xml_parsing"]
+    },
+    {
+      "id": "pp_ch20_q04",
+      "type": "multiple_choice",
+      "question": "What is the primary advantage of using json.loads() over eval() to parse a JSON string received from an external source?",
+      "choices": [
+        "json.loads() is faster because it uses C-level parsing",
+        "json.loads() safely parses only JSON data, while eval() executes arbitrary Python code, creating a severe security vulnerability",
+        "json.loads() supports more data types than eval()",
+        "eval() cannot parse strings containing nested dictionaries"
+      ],
+      "correct": 1,
+      "explanation": "eval() executes any Python expression, meaning malicious input like '__import__(\"os\").system(\"rm -rf /\")' would run destructive commands. json.loads() only parses valid JSON syntax and cannot execute code. Never use eval() on untrusted input. This is a critical security principle for any data received over a network.",
+      "concepts": ["json", "text_processing"]
+    },
+    {
+      "id": "pp_ch20_q05",
+      "type": "fill_in_blank",
+      "question": "To find all non-overlapping matches of a regex pattern in a string and return them as a list, you call re.________(pattern, string).",
+      "correct": "findall",
+      "explanation": "re.findall() returns a list of all non-overlapping matches of the pattern in the string. If the pattern contains groups, it returns a list of groups (or tuples of groups). For match objects instead of strings, use re.finditer() which returns an iterator of match objects, enabling access to .start(), .end(), and .span().",
+      "concepts": ["re_module"]
+    },
+    {
+      "id": "pp_ch20_q06",
+      "type": "fill_in_blank",
+      "question": "In ElementTree, to find all child elements with a specific tag name anywhere in the tree, you call root.________(tag).",
+      "correct": "iter",
+      "explanation": "Element.iter(tag) recursively iterates over all subelements matching the given tag at any depth. Element.find(tag) returns only the first direct child match, and Element.findall(tag) returns all direct children matching the tag. For XPath-like queries across depths, you can also use findall('.//tag') syntax.",
+      "concepts": ["xml_parsing"]
+    }
+  ]
+}

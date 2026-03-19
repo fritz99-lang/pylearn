@@ -1,0 +1,23 @@
+{
+  "step_id": "hc_proj_ch05",
+  "book_id": "how_to_code_in_html5_and_css3",
+  "chapter_num": 5,
+  "title": "Adding Style",
+  "description": "Add a <style> block inside the head to style your recipe page. Set body font-family, color, and background-color. Style h1 and h2 with a different color. Set img max-width to 100% so images don't overflow. Add basic margin or padding for spacing.",
+  "builds_on": "hc_proj_ch04",
+  "starter_code": "# Recipe Collection Website \u2014 Step 4: Adding Style\n# Add a <style> block with CSS for body, headings, and images.\n\nhtml = \"\"\"\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>My Recipes</title>\n    <style>\n        /* Style the body: font-family, color, background-color */\n\n        /* Style h1 and h2 with a color */\n\n        /* Set img max-width: 100% */\n\n    </style>\n</head>\n<body>\n    <header>\n        <h1>My Recipe Collection</h1>\n    </header>\n\n    <main>\n        <p>Welcome to my favorite recipes!</p>\n\n        <h2>Classic Pancakes</h2>\n        <p>Fluffy, golden pancakes perfect for a weekend breakfast.</p>\n\n        <h3>Ingredients</h3>\n        <ul>\n            <li>2 cups flour</li>\n            <li>2 eggs</li>\n            <li>1 cup milk</li>\n            <li>2 tbsp butter</li>\n        </ul>\n\n        <h3>Instructions</h3>\n        <ol>\n            <li>Mix dry ingredients in a bowl</li>\n            <li>Add eggs and milk, stir until smooth</li>\n            <li>Heat a pan and melt butter</li>\n            <li>Pour batter and cook until golden</li>\n        </ol>\n\n        <img src=\"pancakes.jpg\" alt=\"A stack of golden pancakes\">\n    </main>\n\n    <footer>\n        <p>&copy; 2026 My Recipe Collection</p>\n    </footer>\n</body>\n</html>\n\"\"\"\n\nprint(html)\n",
+  "test_code": "assert '<style>' in html.lower() and '</style>' in html.lower(), 'Must include a <style> block in the head'\nassert 'font-family' in html.lower(), 'Must set font-family on the body'\nassert 'background-color' in html.lower(), 'Must set background-color on the body'\nassert 'color' in html.lower(), 'Must set a text color'\nassert 'max-width' in html.lower(), 'Must set max-width on images (e.g., max-width: 100%)'\nassert '<header>' in html.lower() and '<main>' in html.lower(), 'Must keep semantic structure'\nassert '<h2>' in html.lower() and '<ul>' in html.lower() and '<ol>' in html.lower(), 'Must keep recipe content from previous step'",
+  "acceptance_criteria": [
+    "A <style> block is present inside the <head>",
+    "Body has font-family, color, and background-color set",
+    "Headings (h1/h2) have a styled color",
+    "Images have max-width: 100% to prevent overflow",
+    "All previous recipe content is preserved"
+  ],
+  "hints": [
+    "Add the style block inside <head>: <style>body { font-family: Arial, sans-serif; }</style>",
+    "Set background: body { background-color: #f9f5f0; color: #333; }",
+    "Style headings: h1, h2 { color: #8b4513; }",
+    "Constrain images: img { max-width: 100%; }"
+  ]
+}

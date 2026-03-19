@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 27,
+  "questions": [
+    {
+      "id": "css_ch27_q01",
+      "type": "multiple_choice",
+      "question": "Which at-rule is used to define the stages of a CSS animation?",
+      "choices": [
+        "@animation",
+        "@keyframes",
+        "@stages",
+        "@sequence"
+      ],
+      "correct": 1,
+      "explanation": "The `@keyframes` at-rule defines the sequence of styles that an element transitions through during a CSS animation, using percentage values or the `from`/`to` keywords.",
+      "concepts": ["@keyframes", "animations"]
+    },
+    {
+      "id": "css_ch27_q02",
+      "type": "multiple_choice",
+      "question": "What does `animation-fill-mode: forwards` do?",
+      "choices": [
+        "Plays the animation in the forward direction only",
+        "Retains the styles from the last keyframe after the animation ends",
+        "Starts the animation from the beginning each time",
+        "Applies the first keyframe styles before the animation starts"
+      ],
+      "correct": 1,
+      "explanation": "With `animation-fill-mode: forwards`, the element retains the computed style values from the last keyframe after the animation completes, rather than reverting to its original state.",
+      "concepts": ["animation-fill-mode", "animations"]
+    },
+    {
+      "id": "css_ch27_q03",
+      "type": "multiple_choice",
+      "question": "What value of `animation-iteration-count` makes an animation repeat forever?",
+      "choices": [
+        "forever",
+        "loop",
+        "infinite",
+        "repeat"
+      ],
+      "correct": 2,
+      "explanation": "Setting `animation-iteration-count: infinite` causes the animation to repeat indefinitely without stopping.",
+      "concepts": ["animation-iteration-count", "animations"]
+    },
+    {
+      "id": "css_ch27_q04",
+      "type": "multiple_choice",
+      "question": "What does `animation-direction: alternate` do?",
+      "choices": [
+        "Skips every other keyframe",
+        "Plays the animation forward on odd iterations and backward on even iterations",
+        "Randomly selects the direction each iteration",
+        "Plays the animation backward only"
+      ],
+      "correct": 1,
+      "explanation": "With `animation-direction: alternate`, the animation plays forward on odd-numbered iterations and in reverse on even-numbered iterations, creating a back-and-forth effect.",
+      "concepts": ["animation-direction", "animations"]
+    },
+    {
+      "id": "css_ch27_q05",
+      "type": "fill_in_blank",
+      "question": "In a @keyframes rule, the keyword ___ is equivalent to 0% and defines the starting state of the animation.",
+      "correct": "from",
+      "explanation": "The `from` keyword in a @keyframes rule is an alias for the 0% keyframe, defining the initial state of the animation.",
+      "concepts": ["@keyframes", "from"]
+    },
+    {
+      "id": "css_ch27_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ property specifies the name of the @keyframes animation to apply to an element.",
+      "correct": "animation-name",
+      "explanation": "The `animation-name` property links an element to a defined @keyframes rule by referencing its name.",
+      "concepts": ["animation-name", "animations"]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "step_id": "cpp_inv_ch14",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 14,
+  "title": "Inventory Class \u2014 OOP Design",
+  "description": "Refactor the inventory system into an object-oriented design. Create an Inventory class with a private vector<Product> to store products. Add public methods: addProduct, removeProduct, displayAll, and searchByName. Overload the << operator to display a Product. Keep the Product struct. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_inv_ch11",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\n#include <vector>\nusing namespace std;\n\nstruct Product {\n    string name;\n    double price;\n    int quantity;\n    string category;\n};\n\n// Overload << operator for Product\nostream& operator<<(ostream& os, const Product& p) {\n    os << p.name << \" [\" << p.category << \"] - $\" << p.price << \" x \" << p.quantity;\n    return os;\n}\n\nclass Inventory {\nprivate:\n    vector<Product> products;\n\npublic:\n    // addProduct - add a Product to the vector\n    // removeProduct - remove by name\n    // displayAll - print all products using <<\n    // searchByName - find and return product index or -1\n    // sortByPrice - sort products by price\n    // saveToFile - write all products to a file\n    // getCount - return number of products\n};\n\nint main() {\n    Inventory inventory;\n    int choice;\n\n    do {\n        cout << \"\\n===== Inventory Management System =====\" << endl;\n        cout << \"1. Add Product\" << endl;\n        cout << \"2. View Products\" << endl;\n        cout << \"3. Search Product\" << endl;\n        cout << \"4. Sort Products\" << endl;\n        cout << \"5. Save to File\" << endl;\n        cout << \"6. Remove Product\" << endl;\n        cout << \"7. Exit\" << endl;\n        cout << \"Enter your choice: \";\n        cin >> choice;\n\n        // Use inventory.addProduct(), inventory.displayAll(), etc.\n\n    } while (choice != 7);\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'class Inventory' in cpp or 'class inventory' in cpp, 'Define an Inventory class'\nassert 'private' in cpp, 'Inventory class should have a private section'\nassert 'public' in cpp, 'Inventory class should have a public section'\nassert 'vector<Product>' in cpp or 'vector <Product>' in cpp, 'Use a vector<Product> to store products in the class'\nassert 'addProduct' in cpp or 'add_product' in cpp, 'Inventory class needs an addProduct method'\nassert 'removeProduct' in cpp or 'remove_product' in cpp, 'Inventory class needs a removeProduct method'\nassert 'displayAll' in cpp or 'display_all' in cpp or 'display' in cpp, 'Inventory class needs a displayAll method'\nassert 'searchByName' in cpp or 'search_by_name' in cpp or 'search' in cpp, 'Inventory class needs a search method'\nassert 'operator<<' in cpp or 'operator <<' in cpp, 'Overload the << operator for Product'\nassert 'Inventory inventory' in cpp or 'Inventory inv' in cpp, 'Create an Inventory object in main'",
+  "acceptance_criteria": [
+    "Inventory class defined with private vector<Product> member",
+    "Public methods: addProduct, removeProduct, displayAll, searchByName",
+    "operator<< overloaded for Product to enable cout << product",
+    "Menu creates an Inventory object and calls its methods",
+    "Remove Product option added to the menu",
+    "Includes #include <vector>"
+  ],
+  "hints": [
+    "Use products.push_back(p) to add and products.erase(products.begin() + i) to remove",
+    "The << overload is a friend or free function: ostream& operator<<(ostream& os, const Product& p)",
+    "In displayAll, loop through the vector and use cout << products[i] with your overloaded <<",
+    "vector<Product> grows automatically, so no need for capacity limits anymore"
+  ]
+}

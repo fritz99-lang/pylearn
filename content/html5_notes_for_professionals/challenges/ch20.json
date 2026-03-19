@@ -1,0 +1,36 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 20,
+  "challenges": [
+    {
+      "id": "h5_ch20_c01",
+      "title": "Semantic Layout",
+      "description": "Create a page layout using semantic HTML5 elements: header, nav, main, and footer. The header should contain an h1, the nav should contain a list of links, the main should contain a paragraph, and the footer should contain a paragraph. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a semantic page layout -->\n<!-- Use header, nav, main, and footer elements -->\n\n\"\"\"",
+      "test_code": "assert '<header' in html.lower(), 'Should contain a <header> element'\nassert '</header>' in html.lower(), 'Should close the <header> element'\nassert '<nav' in html.lower(), 'Should contain a <nav> element'\nassert '</nav>' in html.lower(), 'Should close the <nav> element'\nassert '<main' in html.lower(), 'Should contain a <main> element'\nassert '</main>' in html.lower(), 'Should close the <main> element'\nassert '<footer' in html.lower(), 'Should contain a <footer> element'\nassert '</footer>' in html.lower(), 'Should close the <footer> element'\nassert '<h1' in html.lower(), 'Header should contain an h1 element'",
+      "difficulty": "easy",
+      "concepts_new": ["semantic_elements", "header_element", "nav_element", "main_element", "footer_element"],
+      "concepts_review": ["html_structure", "headings"],
+      "hints": [
+        "Use <header>, <nav>, <main>, and <footer> instead of generic divs",
+        "These semantic elements describe the purpose of each section",
+        "Place an <h1> inside the <header> and navigation links inside <nav>"
+      ]
+    },
+    {
+      "id": "h5_ch20_c02",
+      "title": "Article Page",
+      "description": "Create a full page layout with header, nav, main (containing two article elements each with at least one section), an aside, and a footer. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Create a full semantic page -->\n<!-- Include header, nav, main with articles/sections, aside, and footer -->\n\n\"\"\"",
+      "test_code": "assert '<header' in html.lower(), 'Should contain a <header> element'\nassert '<nav' in html.lower(), 'Should contain a <nav> element'\nassert '<main' in html.lower(), 'Should contain a <main> element'\nassert html.lower().count('<article') >= 2, 'Should contain at least 2 article elements'\nassert html.lower().count('</article>') >= 2, 'Should close all article elements'\nassert html.lower().count('<section') >= 2, 'Should contain at least 2 section elements'\nassert html.lower().count('</section>') >= 2, 'Should close all section elements'\nassert '<aside' in html.lower(), 'Should contain an <aside> element'\nassert '</aside>' in html.lower(), 'Should close the <aside> element'\nassert '<footer' in html.lower(), 'Should contain a <footer> element'\nassert '</footer>' in html.lower(), 'Should close the <footer> element'",
+      "difficulty": "medium",
+      "concepts_new": ["article_element", "section_element", "aside_element"],
+      "concepts_review": ["semantic_elements", "header_element", "nav_element", "main_element", "footer_element"],
+      "hints": [
+        "Place <article> elements inside <main> to represent self-contained content",
+        "Use <section> inside each <article> to divide it into themed groups",
+        "The <aside> element is for content tangentially related to the main content"
+      ]
+    }
+  ]
+}

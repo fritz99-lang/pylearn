@@ -1,0 +1,78 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 6,
+  "questions": [
+    {
+      "id": "cpp_ch06_q01",
+      "type": "multiple_choice",
+      "question": "What is a function prototype in C++?",
+      "choices": [
+        "The complete function with its body",
+        "A declaration that specifies the function's return type, name, and parameter types before its definition",
+        "A comment describing what the function does",
+        "A function that has no return value"
+      ],
+      "correct": 1,
+      "explanation": "A function prototype declares the function's return type, name, and parameter types so the compiler knows about the function before it is defined. It ends with a semicolon.",
+      "concepts": ["function prototypes", "declarations"]
+    },
+    {
+      "id": "cpp_ch06_q02",
+      "type": "multiple_choice",
+      "question": "What happens to the value of a local variable when the function it is defined in finishes executing?",
+      "choices": [
+        "It is saved for the next function call",
+        "It is destroyed and its memory is released",
+        "It becomes a global variable",
+        "It is returned to the calling function automatically"
+      ],
+      "correct": 1,
+      "explanation": "Local variables exist only during the execution of the function in which they are defined. When the function ends, local variables are destroyed.",
+      "concepts": ["local variables", "variable scope"]
+    },
+    {
+      "id": "cpp_ch06_q03",
+      "type": "multiple_choice",
+      "question": "What is function overloading in C++?",
+      "choices": [
+        "Calling a function too many times",
+        "Having two or more functions with the same name but different parameter lists",
+        "A function that calls itself",
+        "Passing too many arguments to a function"
+      ],
+      "correct": 1,
+      "explanation": "Function overloading allows multiple functions to share the same name as long as they have different parameter lists (different number or types of parameters).",
+      "concepts": ["function overloading"]
+    },
+    {
+      "id": "cpp_ch06_q04",
+      "type": "multiple_choice",
+      "question": "In pass by value, what happens when a variable is passed as an argument to a function?",
+      "choices": [
+        "The function receives the memory address of the variable",
+        "A copy of the variable's value is passed to the function's parameter",
+        "The original variable is modified directly",
+        "The variable is deleted after the function call"
+      ],
+      "correct": 1,
+      "explanation": "Pass by value means a copy of the argument's value is made and assigned to the function's parameter. Changes to the parameter inside the function do not affect the original argument.",
+      "concepts": ["pass by value", "parameters"]
+    },
+    {
+      "id": "cpp_ch06_q05",
+      "type": "fill_in_blank",
+      "question": "A function that does not return a value has a return type of ___.",
+      "correct": "void",
+      "explanation": "The void keyword indicates that a function does not return a value. Void functions perform actions but do not send a value back to the calling code.",
+      "concepts": ["void functions", "return types"]
+    },
+    {
+      "id": "cpp_ch06_q06",
+      "type": "fill_in_blank",
+      "question": "A variable defined outside all functions is called a ___ variable.",
+      "correct": "global",
+      "explanation": "Global variables are defined outside of all functions and are accessible from any function in the program. Their use is generally discouraged because they make programs harder to debug.",
+      "concepts": ["global variables", "variable scope"]
+    }
+  ]
+}

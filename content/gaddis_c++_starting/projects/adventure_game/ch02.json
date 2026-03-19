@@ -1,0 +1,24 @@
+{
+  "step_id": "cpp_adv_ch02",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 2,
+  "title": "Welcome Screen — Basic Output",
+  "description": "Write a C++ program that displays a welcome screen for a text adventure game. Show the game title, a short intro paragraph, and a description of the starting room (e.g., 'You are standing in a dark forest clearing.'). Use cout with formatting like endl, \\t, and \\n to make the output readable. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\nusing namespace std;\n\nint main() {\n    // Display the game title\n    // Display an intro paragraph\n    // Describe the starting room\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert '#include <iostream>' in cpp, 'Must include <iostream> for input/output'\nassert 'cout' in cpp, 'Use cout to display the welcome screen and room description'\nassert 'endl' in cpp or '\\\\n' in cpp, 'Use endl or \\\\n to format output across multiple lines'\nassert cpp.count('cout') >= 3, 'Use at least 3 cout statements (title, intro, room description)'\nassert 'return 0' in cpp, 'Program should return 0 from main'\nassert 'main()' in cpp or 'main ()' in cpp, 'Program needs a main function'",
+  "acceptance_criteria": [
+    "Program includes #include <iostream>",
+    "Game title is displayed using cout",
+    "An intro paragraph describes the game premise",
+    "A starting room description is printed",
+    "Output uses endl or \\n for line breaks",
+    "At least 3 cout statements for distinct sections"
+  ],
+  "hints": [
+    "Use cout << \"==============================\" << endl; to create visual separators",
+    "Use \\t for tab indentation to make descriptions stand out",
+    "Think of a theme: dark forest, haunted castle, space station, etc.",
+    "The room description should mention what the player can see and possible directions to go"
+  ]
+}

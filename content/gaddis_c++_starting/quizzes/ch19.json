@@ -1,0 +1,73 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 19,
+  "questions": [
+    {
+      "id": "cpp_ch19_q01",
+      "type": "multiple_choice",
+      "question": "What is the base case in a recursive function?",
+      "choices": [
+        "The first call to the recursive function",
+        "The condition that causes the function to stop calling itself",
+        "The largest problem the function can solve",
+        "The recursive call within the function"
+      ],
+      "correct": 1,
+      "explanation": "The base case is the condition under which the recursive function stops calling itself and returns a result directly. Without a base case, the function would recurse infinitely and cause a stack overflow.",
+      "concepts": ["base case", "recursion"]
+    },
+    {
+      "id": "cpp_ch19_q02",
+      "type": "multiple_choice",
+      "question": "What happens if a recursive function does not have a proper base case?",
+      "choices": [
+        "It returns 0",
+        "It runs once and stops",
+        "It causes infinite recursion and likely a stack overflow",
+        "The compiler will not allow it to compile"
+      ],
+      "correct": 2,
+      "explanation": "Without a base case, the function keeps calling itself with no stopping condition. Each call uses stack memory, and eventually the program runs out of stack space, resulting in a stack overflow crash.",
+      "concepts": ["stack overflow", "infinite recursion"]
+    },
+    {
+      "id": "cpp_ch19_q03",
+      "type": "multiple_choice",
+      "question": "In the recursive factorial function, what is the base case value for factorial(0)?",
+      "choices": ["0", "1", "-1", "undefined"],
+      "correct": 1,
+      "explanation": "By mathematical definition, 0! = 1. In the recursive factorial function, when n equals 0 the function returns 1 without making another recursive call. This is the base case that terminates the recursion.",
+      "concepts": ["factorial", "base case"]
+    },
+    {
+      "id": "cpp_ch19_q04",
+      "type": "multiple_choice",
+      "question": "Which statement about recursion vs iteration is true?",
+      "choices": [
+        "Recursive solutions are always faster than iterative ones",
+        "Iterative solutions always use less memory than recursive ones",
+        "Every recursive solution can be rewritten as an iterative one",
+        "Recursive functions cannot accept parameters"
+      ],
+      "correct": 2,
+      "explanation": "Any problem that can be solved recursively can also be solved iteratively, and vice versa. Iterative solutions often use less memory since they avoid the overhead of multiple function call stack frames, but recursive solutions can be more elegant for certain problems.",
+      "concepts": ["recursion vs iteration"]
+    },
+    {
+      "id": "cpp_ch19_q05",
+      "type": "fill_in_blank",
+      "question": "The part of a recursive function where the function calls itself with a smaller or simpler problem is called the ___ case.",
+      "correct": "recursive",
+      "explanation": "The recursive case is where the function calls itself with a modified argument that moves closer to the base case. For example, in factorial: return n * factorial(n - 1); the call factorial(n - 1) is the recursive case.",
+      "concepts": ["recursive case", "recursion"]
+    },
+    {
+      "id": "cpp_ch19_q06",
+      "type": "fill_in_blank",
+      "question": "A type of recursion where the recursive call is the very last operation in the function is called ___ recursion.",
+      "correct": "tail",
+      "explanation": "Tail recursion occurs when the recursive call is the final action of the function with no pending operations after it returns. Some compilers can optimize tail recursion into iteration, eliminating extra stack frame overhead.",
+      "concepts": ["tail recursion", "optimization"]
+    }
+  ]
+}

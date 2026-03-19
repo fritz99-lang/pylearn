@@ -1,0 +1,6 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "title": "Build an Inventory Management System",
+  "description": "Build a complete inventory management system from scratch, adding C++ features chapter by chapter. By the end, you'll have a program with product tracking, file storage, search/sort, and an OOP design with inheritance.",
+  "final_description": "A complete inventory system with product structs, dynamic arrays, file persistence, search and sort algorithms, a class hierarchy with inheritance, templates, and exception handling \u2014 built across 10 chapters using progressively advanced C++ concepts."
+}

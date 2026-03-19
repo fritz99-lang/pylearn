@@ -1,0 +1,78 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 21,
+  "questions": [
+    {
+      "id": "pp_ch21_q01",
+      "type": "multiple_choice",
+      "question": "What is the primary reason to extend Python with C code?",
+      "choices": [
+        "C code is required for any Python program that uses file I/O",
+        "To improve performance of CPU-bound operations that are bottlenecks in pure Python",
+        "Python cannot call operating system APIs without C extensions",
+        "C extensions are needed to use multithreading in Python"
+      ],
+      "correct": 1,
+      "explanation": "C extensions are primarily used to speed up computationally intensive code that has been profiled and identified as a bottleneck. Python's dynamic nature adds overhead that C avoids. Libraries like NumPy use C extensions for fast array operations. However, premature optimization should be avoided — always profile first.",
+      "concepts": ["when_to_use_c_integration"]
+    },
+    {
+      "id": "pp_ch21_q02",
+      "type": "multiple_choice",
+      "question": "Which tool allows Python code to call functions in shared C libraries (.dll/.so) without writing any C wrapper code?",
+      "choices": [
+        "SWIG",
+        "Cython",
+        "ctypes",
+        "distutils"
+      ],
+      "correct": 2,
+      "explanation": "ctypes is a standard library module that provides C-compatible data types and allows calling functions in DLLs or shared libraries directly from Python. No compilation step is needed — you load the library at runtime and call functions, specifying argument and return types. SWIG and Cython both require a compilation step.",
+      "concepts": ["ctypes"]
+    },
+    {
+      "id": "pp_ch21_q03",
+      "type": "multiple_choice",
+      "question": "What is the difference between 'extending' and 'embedding' in the context of Python/C integration?",
+      "choices": [
+        "Extending adds C libraries to Python; embedding runs Python code from within a C program",
+        "Extending means writing Python wrappers; embedding means compiling Python to C",
+        "They are synonymous terms for writing C extensions",
+        "Extending uses ctypes; embedding uses SWIG exclusively"
+      ],
+      "correct": 0,
+      "explanation": "Extending means writing C code that Python can call (adding new modules/functions to Python). Embedding means putting a Python interpreter inside a C/C++ application so the C program can execute Python scripts. Extending is far more common — most C integration is about making C libraries available to Python.",
+      "concepts": ["c_extensions", "embedding_python"]
+    },
+    {
+      "id": "pp_ch21_q04",
+      "type": "multiple_choice",
+      "question": "What does SWIG (Simplified Wrapper and Interface Generator) automate in the Python/C integration workflow?",
+      "choices": [
+        "Compiling Python source code to machine code",
+        "Generating Python wrapper code from C/C++ header files",
+        "Converting Python objects to JSON for C interop",
+        "Managing memory allocation in the Python garbage collector"
+      ],
+      "correct": 1,
+      "explanation": "SWIG reads C/C++ header files (or interface files) and automatically generates the boilerplate wrapper code needed to call those C functions from Python. This eliminates the tedious manual work of writing conversion code between Python objects and C types. SWIG also supports other target languages like Java and Ruby.",
+      "concepts": ["swig"]
+    },
+    {
+      "id": "pp_ch21_q05",
+      "type": "fill_in_blank",
+      "question": "In ctypes, to load a shared library on Linux you call ctypes.________(\"libexample.so\").",
+      "correct": "CDLL",
+      "explanation": "ctypes.CDLL loads a shared library using the platform's standard calling convention (cdecl on Linux/macOS). On Windows, ctypes.WinDLL is used for stdcall convention. After loading, you access functions as attributes of the returned object and must set argtypes and restype for type safety.",
+      "concepts": ["ctypes"]
+    },
+    {
+      "id": "pp_ch21_q06",
+      "type": "fill_in_blank",
+      "question": "Cython allows you to write Python-like code with optional C type declarations and compiles it to ________ code, which is then compiled to a shared library.",
+      "correct": "C",
+      "explanation": "Cython translates .pyx files (Python-like syntax with optional C type annotations) into C source code, which is then compiled by a C compiler into a shared library (.so or .pyd). Adding type declarations like 'cdef int x' removes Python overhead for those variables, often yielding 10-100x speedups for numerical code.",
+      "concepts": ["cython"]
+    }
+  ]
+}

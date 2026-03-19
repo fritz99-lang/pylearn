@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 14,
+  "challenges": [
+    {
+      "id": "cpp_ch14_c01",
+      "title": "Operator Overloading",
+      "description": "Write a C++ program that defines a class called `Vector2D` with double members `x` and `y`. Overload the `+` operator to add two `Vector2D` objects (adding their x and y components). Also overload the `<<` operator (as a friend function) to print a `Vector2D` in the format \"(x, y)\". In `main`, create two vectors, add them, and print all three using `cout`. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'class' in cpp and 'Vector2D' in cpp, 'Define a class called Vector2D'\nassert 'operator+' in cpp.replace(' ', ''), 'Overload the + operator with operator+'\nassert 'operator<<' in cpp.replace(' ', ''), 'Overload the << operator with operator<<'\nassert 'friend' in cpp, 'The << operator overload should be a friend function'\nassert 'ostream' in cpp, 'The << operator should take an ostream& parameter'\nassert 'cout' in cpp, 'Print the vectors using cout and your overloaded << operator'",
+      "difficulty": "easy",
+      "concepts_new": ["operator_overloading", "friend_functions", "ostream_operator"],
+      "concepts_review": ["classes", "constructors", "cout"],
+      "hints": [
+        "Overload + as a member: Vector2D operator+(const Vector2D& other) { return Vector2D(x + other.x, y + other.y); }",
+        "Overload << as a friend: friend ostream& operator<<(ostream& os, const Vector2D& v) { os << \"(\" << v.x << \", \" << v.y << \")\"; return os; }"
+      ]
+    },
+    {
+      "id": "cpp_ch14_c02",
+      "title": "Static Members and the this Pointer",
+      "description": "Write a C++ program that defines a class called `Counter` with a private int member `value` and a private static int member `instanceCount` that tracks how many `Counter` objects have been created. The constructor should increment `instanceCount` and accept an initial value. Include a method `add` that adds to `value` and returns `*this` (reference to the current object) for method chaining. Include a static method `getInstanceCount`. In `main`, create at least 2 `Counter` objects, demonstrate method chaining with `add`, and print the instance count. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'class' in cpp and 'Counter' in cpp, 'Define a class called Counter'\nassert 'static' in cpp, 'Use a static member to track instance count'\nassert 'instanceCount' in cpp or 'instance_count' in cpp, 'Name the static member instanceCount or instance_count'\nassert '*this' in cpp or '* this' in cpp, 'Use *this to return a reference to the current object'\nassert 'getInstanceCount' in cpp or 'get_instance_count' in cpp, 'Define a static method to get the instance count'\nassert '.add(' in cpp, 'Demonstrate calling the add method'\nassert cpp.count('.add(') >= 2 or '.add(' in cpp and ').add(' in cpp, 'Demonstrate method chaining by calling add at least twice'",
+      "difficulty": "medium",
+      "concepts_new": ["static_members", "this_pointer", "method_chaining"],
+      "concepts_review": ["classes", "constructors", "encapsulation", "references"],
+      "hints": [
+        "Declare static member: static int instanceCount; and initialize outside the class: int Counter::instanceCount = 0;",
+        "Return *this for chaining: Counter& add(int n) { value += n; return *this; }"
+      ]
+    }
+  ]
+}

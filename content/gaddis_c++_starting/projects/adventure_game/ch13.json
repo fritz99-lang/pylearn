@@ -1,0 +1,25 @@
+{
+  "step_id": "cpp_adv_ch13",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 13,
+  "title": "Game Objects — Classes",
+  "description": "Convert the Player struct to a GameCharacter class with proper encapsulation. Make health and name private members. Add a constructor that takes name and health as parameters. Add public methods: attack() that returns damage dealt, takeDamage(int amount) that reduces health, getHealth() and getName() that return the private values, and isAlive() that returns whether health > 0. Create at least one GameCharacter object for the player and one for an enemy NPC. Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_adv_ch11",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\nstruct Room {\n    string name;\n    string description;\n    int north, south, east, west;\n};\n\nstruct Item {\n    string name;\n    string type;\n    int value;\n};\n\n// Convert to a class with encapsulation:\n// class GameCharacter {\n// private:\n//     string name;\n//     int health;\n//     int attackPower;\n// public:\n//     GameCharacter(string n, int h, int ap);  // constructor\n//     int attack();\n//     void takeDamage(int amount);\n//     int getHealth() const;\n//     string getName() const;\n//     bool isAlive() const;\n// };\n\nvoid displayRoom(Room room) {\n    cout << \"=== \" << room.name << \" ===\" << endl;\n    cout << room.description << endl;\n}\n\nint main() {\n    cout << \"===== TEXT ADVENTURE GAME =====\" << endl;\n\n    // Set up rooms\n    Room rooms[10];\n    rooms[0] = {\"Forest Clearing\", \"Tall trees surround you.\", 1, -1, 2, -1};\n    rooms[1] = {\"Dark Cave\", \"A damp cave. You hear growling.\", -1, 0, -1, 3};\n    rooms[2] = {\"Village Square\", \"A quiet village with a shop.\", 3, -1, -1, 0};\n    rooms[3] = {\"Mountain Path\", \"A narrow path along the cliff.\", -1, 2, -1, 1};\n\n    // Create player using GameCharacter class\n    string playerName;\n    cout << \"Enter your name: \";\n    getline(cin, playerName);\n    // GameCharacter player(playerName, 100, 15);\n\n    // Create an enemy NPC\n    // GameCharacter goblin(\"Goblin\", 30, 8);\n\n    int currentRoom = 0;\n    bool playing = true;\n    int turn = 0;\n\n    while (playing && true /* player.isAlive() */) {\n        turn++;\n        displayRoom(rooms[currentRoom]);\n\n        // Show health using getter: player.getHealth()\n\n        cout << \"> \";\n        string command;\n        getline(cin, command);\n\n        if (command == \"attack\") {\n            // int damage = player.attack();\n            // goblin.takeDamage(damage);\n            // if (!goblin.isAlive()) cout << \"Enemy defeated!\";\n        } else if (command == \"quit\") {\n            playing = false;\n        }\n    }\n\n    return 0;\n}\n\"\"\"",
+  "test_code": "assert 'class' in cpp, 'Define a class (e.g., class GameCharacter)'\nassert 'private' in cpp, 'Use private access specifier to encapsulate data members'\nassert 'public' in cpp, 'Use public access specifier for methods'\nimport re\nconstructor = re.search(r'GameCharacter\\s*\\(', cpp)\nassert constructor, 'Define a constructor for GameCharacter (e.g., GameCharacter(string n, int h, int ap))'\nassert 'getHealth' in cpp or 'get_health' in cpp, 'Add a getter method for health'\nassert 'getName' in cpp or 'get_name' in cpp, 'Add a getter method for name'\nassert 'takeDamage' in cpp or 'take_damage' in cpp, 'Add a takeDamage method'\nassert 'attack' in cpp, 'Add an attack method'\nassert 'isAlive' in cpp or 'is_alive' in cpp, 'Add an isAlive method that checks if health > 0'",
+  "acceptance_criteria": [
+    "GameCharacter class defined with private name, health, and attackPower",
+    "Constructor takes parameters to initialize the character",
+    "Public methods: attack(), takeDamage(), getHealth(), getName(), isAlive()",
+    "Getter methods provide access to private members",
+    "At least one player and one enemy GameCharacter created",
+    "Combat uses attack() and takeDamage() methods"
+  ],
+  "hints": [
+    "GameCharacter::GameCharacter(string n, int h, int ap) : name(n), health(h), attackPower(ap) {}",
+    "int GameCharacter::attack() { return attackPower + (rand() % 5); }",
+    "void GameCharacter::takeDamage(int amount) { health -= amount; if (health < 0) health = 0; }",
+    "bool GameCharacter::isAlive() const { return health > 0; }",
+    "Use const after method declarations that don't modify the object: int getHealth() const;"
+  ]
+}

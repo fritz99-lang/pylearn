@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 27,
+  "challenges": [
+    {
+      "id": "css_ch27_c01",
+      "title": "Basic Keyframe Animation",
+      "description": "Create a @keyframes animation called 'fadeIn' that goes from opacity 0 to opacity 1. Apply it to a .banner element with a duration of 1s. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Create a fadeIn keyframe animation */\n\n\"\"\"",
+      "test_code": "assert '@keyframes' in css.lower(), 'Should define a @keyframes rule'\nassert 'fadein' in css.lower(), 'Should name the animation fadeIn'\nassert 'from' in css.lower(), 'Should use from keyword in keyframes'\nassert 'to' in css.lower(), 'Should use to keyword in keyframes'\nassert 'opacity' in css.lower(), 'Should animate the opacity property'\nassert 'animation' in css.lower(), 'Should apply the animation to an element'\nassert '1s' in css.lower(), 'Should set animation duration to 1s'",
+      "difficulty": "easy",
+      "concepts_new": ["@keyframes", "animation", "from/to"],
+      "concepts_review": ["opacity"],
+      "hints": [
+        "Define keyframes with @keyframes fadeIn { from { ... } to { ... } }.",
+        "Apply with animation: fadeIn 1s on the .banner element."
+      ]
+    },
+    {
+      "id": "css_ch27_c02",
+      "title": "Multi-Step Keyframe Animation",
+      "description": "Create a @keyframes animation called 'pulse' with three steps: at 0% scale(1), at 50% scale(1.2), and at 100% scale(1). Apply it to a .button element using the animation shorthand with a duration of 0.6s, ease-in-out timing, and infinite iteration. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Create a multi-step pulse animation */\n\n\"\"\"",
+      "test_code": "assert '@keyframes' in css.lower(), 'Should define a @keyframes rule'\nassert 'pulse' in css.lower(), 'Should name the animation pulse'\nassert '0%' in css.lower(), 'Should have a 0% keyframe step'\nassert '50%' in css.lower(), 'Should have a 50% keyframe step'\nassert '100%' in css.lower(), 'Should have a 100% keyframe step'\nassert 'scale' in css.lower(), 'Should use scale transform in keyframes'\nassert 'ease-in-out' in css.lower(), 'Should use ease-in-out timing function'\nassert 'infinite' in css.lower(), 'Should set animation-iteration-count to infinite'\nassert '0.6s' in css.lower(), 'Should set animation duration to 0.6s'",
+      "difficulty": "medium",
+      "concepts_new": ["percentage keyframes", "animation-iteration-count", "animation shorthand"],
+      "concepts_review": ["@keyframes", "transform", "scale"],
+      "hints": [
+        "Use percentage stops: @keyframes pulse { 0% { ... } 50% { ... } 100% { ... } }.",
+        "The animation shorthand is: animation: pulse 0.6s ease-in-out infinite.",
+        "scale(1.2) makes the element 20% larger."
+      ]
+    }
+  ]
+}

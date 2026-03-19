@@ -1,0 +1,21 @@
+{
+  "step_id": "lp_adv_ch04",
+  "book_id": "learning_python_fifth_edition",
+  "chapter_num": 4,
+  "title": "Health and Stats — Numbers",
+  "description": "Add numeric stats to your game. Define player_health, player_attack, and player_defense as integers. Create a calculate_damage(attack, defense) function that returns the damage dealt: max(0, attack - defense). Also create a heal_player(current_health, heal_amount, max_health) function that heals without exceeding max_health.",
+  "builds_on": "lp_adv_ch02",
+  "starter_code": "# Text Adventure — Step 2: Health and Stats\n# Use numeric types for game mechanics.\n\n# Game world from Step 1\nrooms = {\n    'entrance': 'You stand at the entrance of a dark cave.',\n    'hallway': 'A long hallway with torches on the walls.',\n    'treasure_room': 'A glittering room full of gold and jewels.',\n}\n\nitems = ['torch', 'sword', 'potion']\n\nplayer = {\n    'name': 'Hero',\n    'health': 100,\n    'inventory': [],\n}\n\n# Define numeric stats\nplayer_health = 100\nplayer_attack = 15\nplayer_defense = 5\nmax_health = 100\n\ndef calculate_damage(attack, defense):\n    \"\"\"Calculate damage dealt. Minimum damage is 0.\"\"\"\n    # Your code here — return max(0, attack - defense)\n    pass\n\ndef heal_player(current_health, heal_amount, max_health):\n    \"\"\"Heal the player without exceeding max_health.\"\"\"\n    # Your code here — return the new health value\n    pass\n\n# Test your functions\nprint(f\"Damage (20 atk vs 8 def): {calculate_damage(20, 8)}\")\nprint(f\"Damage (5 atk vs 10 def): {calculate_damage(5, 10)}\")\nprint(f\"Heal (80 hp + 30, max 100): {heal_player(80, 30, 100)}\")\n",
+  "test_code": "assert isinstance(player_health, (int, float)), 'player_health should be a number'\nassert isinstance(player_attack, (int, float)), 'player_attack should be a number'\nassert isinstance(player_defense, (int, float)), 'player_defense should be a number'\nassert callable(calculate_damage), 'calculate_damage should be a function'\nassert calculate_damage(20, 8) == 12, f'calculate_damage(20, 8) should be 12, got {calculate_damage(20, 8)}'\nassert calculate_damage(5, 10) == 0, f'calculate_damage(5, 10) should be 0 (not negative), got {calculate_damage(5, 10)}'\nassert calculate_damage(10, 10) == 0, f'calculate_damage(10, 10) should be 0, got {calculate_damage(10, 10)}'\nassert callable(heal_player), 'heal_player should be a function'\nassert heal_player(80, 30, 100) == 100, f'heal_player(80, 30, 100) should be 100, got {heal_player(80, 30, 100)}'\nassert heal_player(50, 20, 100) == 70, f'heal_player(50, 20, 100) should be 70, got {heal_player(50, 20, 100)}'\nassert heal_player(100, 10, 100) == 100, f'heal_player(100, 10, 100) should be 100, got {heal_player(100, 10, 100)}'",
+  "acceptance_criteria": [
+    "player_health, player_attack, player_defense are numeric variables",
+    "calculate_damage(attack, defense) returns max(0, attack - defense)",
+    "heal_player() heals without exceeding max_health",
+    "Negative damage is clamped to 0"
+  ],
+  "hints": [
+    "Use the built-in max() function: max(0, attack - defense)",
+    "For healing: min(current_health + heal_amount, max_health) caps at the maximum",
+    "Test edge cases: what if attack equals defense? What if health is already full?"
+  ]
+}

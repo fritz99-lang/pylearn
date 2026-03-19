@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 6,
+  "challenges": [
+    {
+      "id": "cpp_ch06_c01",
+      "title": "Function with Return Value",
+      "description": "Write a C++ program that defines a function called 'add' which takes two int parameters and returns their sum. Call the function from main and display the result. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define a function named 'add' that takes two int parameters\n- The function must return an int value\n- Call the function from main\n- Display the returned result with cout",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\n// Define your function here\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'int add' in cpp, 'Should define a function named add that returns int'\nassert 'return' in cpp, 'The function should return a value'\nassert 'add(' in cpp, 'Should call the add function'\nassert 'cout' in cpp, 'Should display the result with cout'\nassert cpp.count('int') >= 3, 'Should have int return type and at least two int parameters'",
+      "difficulty": "easy",
+      "concepts_new": ["function definition", "parameters", "return value"],
+      "concepts_review": ["int", "cout", "main function"],
+      "hints": [
+        "Define the function before main: int add(int a, int b) { return a + b; }",
+        "Call it from main: int result = add(5, 3);"
+      ]
+    },
+    {
+      "id": "cpp_ch06_c02",
+      "title": "Overloaded and Void Functions",
+      "description": "Write a C++ program that demonstrates function overloading by writing two functions with the same name 'display' but different parameter lists: one that takes an int and one that takes a string. Also write a void function called 'printLine' that prints a line of dashes. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define two overloaded functions named 'display' (one takes int, one takes string)\n- Define a void function named 'printLine'\n- Call all three functions from main",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\n#include <string>\nusing namespace std;\n\n// Define your functions here\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert cpp.count('display') >= 4, 'Should define two overloaded display functions and call them'\nassert 'void printLine' in cpp or 'void printline' in cpp, 'Should define a void function named printLine'\nassert 'void' in cpp, 'Should have at least one void function'\nassert 'string' in cpp, 'One overload should take a string parameter'\nassert 'int' in cpp, 'One overload should take an int parameter'\nassert 'printLine(' in cpp or 'printline(' in cpp, 'Should call the printLine function'",
+      "difficulty": "medium",
+      "concepts_new": ["function overloading", "void functions", "multiple function definitions"],
+      "concepts_review": ["function definition", "parameters", "return value", "string type"],
+      "hints": [
+        "Overloading means same name, different parameters: void display(int n) and void display(string s)",
+        "A void function does not return a value: void printLine() { cout << \"----------\" << endl; }"
+      ]
+    }
+  ]
+}

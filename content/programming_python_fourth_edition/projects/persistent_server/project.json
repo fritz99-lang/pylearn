@@ -1,0 +1,6 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "title": "Build a Persistent Multi-Service Server",
+  "description": "Build a production-ready server that can run permanently, handling multiple clients, persisting data, logging activity, and surviving restarts. By the end, you'll have a multi-threaded TCP server with request routing, a database backend, health monitoring, and graceful shutdown \u2014 all using concepts from the book.",
+  "final_description": "A complete persistent server with TCP socket handling, multi-threaded client processing, request routing, SQLite database backend, structured logging, signal-based graceful shutdown, health monitoring, and a command-line management interface \u2014 built across 10 chapters using progressively advanced Python application concepts."
+}

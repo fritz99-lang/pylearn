@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 12,
+  "challenges": [
+    {
+      "id": "css_ch12_c01",
+      "title": "Overflow Hidden",
+      "description": "Write CSS for a `.container` selector that sets `overflow` to `hidden` and gives it a fixed `height` of 200px and `width` of 300px. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.container' in css.lower(), 'Should target the .container selector'\nassert 'overflow' in css.lower(), 'Should use the overflow property'\nassert 'hidden' in css.lower(), 'Should set overflow to hidden'\nassert '200px' in css.lower(), 'Should set height to 200px'\nassert '300px' in css.lower(), 'Should set width to 300px'",
+      "difficulty": "easy",
+      "concepts_new": ["overflow-hidden"],
+      "concepts_review": [],
+      "hints": [
+        "overflow: hidden clips any content that extends beyond the element's box.",
+        "You need a fixed height for overflow to have a visible effect."
+      ]
+    },
+    {
+      "id": "css_ch12_c02",
+      "title": "Axis Overflow and Text Ellipsis",
+      "description": "Write CSS for a `.truncate` selector that uses `overflow-x` set to `hidden`, `overflow-y` set to `auto`, `white-space` set to `nowrap`, and `text-overflow` set to `ellipsis`. Also set a `width` of 200px. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Write your CSS here */\n\n\"\"\"",
+      "test_code": "assert '.truncate' in css.lower(), 'Should target the .truncate selector'\nassert 'overflow-x' in css.lower(), 'Should use overflow-x'\nassert 'overflow-y' in css.lower(), 'Should use overflow-y'\nassert 'hidden' in css.lower(), 'Should set overflow-x to hidden'\nassert 'auto' in css.lower(), 'Should set overflow-y to auto'\nassert 'text-overflow' in css.lower(), 'Should use text-overflow'\nassert 'ellipsis' in css.lower(), 'Should set text-overflow to ellipsis'\nassert 'white-space' in css.lower(), 'Should use white-space'\nassert 'nowrap' in css.lower(), 'Should set white-space to nowrap'",
+      "difficulty": "medium",
+      "concepts_new": ["overflow-x", "overflow-y", "text-overflow", "white-space"],
+      "concepts_review": ["overflow-hidden"],
+      "hints": [
+        "overflow-x and overflow-y control overflow on each axis independently.",
+        "text-overflow: ellipsis shows '...' when text is clipped.",
+        "For ellipsis to work, you also need overflow: hidden and white-space: nowrap."
+      ]
+    }
+  ]
+}

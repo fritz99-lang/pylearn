@@ -1,0 +1,23 @@
+{
+  "step_id": "cpp_proj_ch05",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 5,
+  "title": "Multiple Students — Loop Processing",
+  "description": "Wrap the student entry in a loop so the user can enter multiple students. After each student, ask 'Add another student? (y/n)' and continue based on the response. Also keep a running count of how many students were entered.",
+  "builds_on": "cpp_proj_ch04",
+  "starter_code": "# Student Grade Tracker — Step 4: Multiple Students\n# Use a loop to process multiple students.\n# Ask the user if they want to add another after each one.\n\ncpp = \"\"\"\n#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    cout << \"=== Student Grade Tracker ===\" << endl;\n\n    char choice;\n    int studentCount = 0;\n\n    // Add a loop here (while or do-while)\n    // Inside the loop:\n    //   - Read student name and 3 grades\n    //   - Calculate average and letter grade\n    //   - Display results\n    //   - Ask \"Add another student? (y/n)\"\n    //   - Increment studentCount\n\n    cout << \"Total students entered: \" << studentCount << endl;\n\n    return 0;\n}\n\"\"\"\n\nprint(cpp)\n",
+  "test_code": "cpp_lower = cpp.lower()\nassert 'while' in cpp_lower or 'for' in cpp.split('main')[1], 'Must use a while or for loop to process multiple students'\nassert 'cin' in cpp, 'Must use cin to read user input'\nassert 'y' in cpp_lower and 'n' in cpp_lower, 'Must check for y/n response to continue or stop'\nassert 'getline' in cpp, 'Must use getline to read student names'\nassert 'if' in cpp and 'else' in cpp, 'Must still include if/else for letter grade logic'\nassert 'count' in cpp_lower or '++' in cpp, 'Must track the number of students entered'",
+  "acceptance_criteria": [
+    "Uses a while or do-while loop for repeated entry",
+    "Reads student name and grades inside the loop",
+    "Calculates average and letter grade for each student",
+    "Asks 'Add another?' and checks for y/n",
+    "Displays total student count at the end"
+  ],
+  "hints": [
+    "A do-while loop runs at least once: do { ... } while (choice == 'y');",
+    "After cin >>, use cin.ignore() before the next getline",
+    "Ask: cout << \"Add another student? (y/n): \"; cin >> choice;",
+    "Increment count: studentCount++;"
+  ]
+}

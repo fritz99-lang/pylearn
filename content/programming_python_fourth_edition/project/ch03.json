@@ -1,0 +1,22 @@
+{
+  "step_id": "pp_proj_ch03",
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 3,
+  "title": "Foundation — System Information",
+  "description": "Start the file manager by writing a function that gathers basic system information. Use the os and sys modules to report the current working directory, platform, Python version, and current user.",
+  "builds_on": "",
+  "starter_code": "# File Manager CLI — Step 1: System Information\n# Use os and sys to gather system details.\n\nimport os\nimport sys\n\ndef get_system_info():\n    \"\"\"Return a dict with system information:\n    {\n        'cwd': current working directory,\n        'platform': the platform string (sys.platform),\n        'python_version': Python version string (sys.version),\n        'user': current user from environment variables\n    }\n    \"\"\"\n    # Your code here\n    return {}\n\n# Test it\ninfo = get_system_info()\nfor key, value in info.items():\n    print(f\"{key}: {value}\")\n",
+  "test_code": "info = get_system_info()\nassert isinstance(info, dict), 'get_system_info should return a dict'\nassert 'cwd' in info, \"Result must have 'cwd' key\"\nassert 'platform' in info, \"Result must have 'platform' key\"\nassert 'python_version' in info, \"Result must have 'python_version' key\"\nassert 'user' in info, \"Result must have 'user' key\"\nassert isinstance(info['cwd'], str) and len(info['cwd']) > 0, 'cwd should be a non-empty string'\nassert isinstance(info['platform'], str) and len(info['platform']) > 0, 'platform should be a non-empty string'\nassert isinstance(info['python_version'], str) and len(info['python_version']) > 0, 'python_version should be a non-empty string'\nassert isinstance(info['user'], str), 'user should be a string'",
+  "acceptance_criteria": [
+    "get_system_info() returns a dict",
+    "Dict has keys: cwd, platform, python_version, user",
+    "All values are non-empty strings (user may be empty if env var missing)",
+    "Uses os and sys modules"
+  ],
+  "hints": [
+    "Current directory: os.getcwd()",
+    "Platform: sys.platform",
+    "Python version: sys.version",
+    "User: os.environ.get('USER') or os.environ.get('USERNAME', '')"
+  ]
+}

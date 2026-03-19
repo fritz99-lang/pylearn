@@ -1,0 +1,24 @@
+{
+  "step_id": "pp_proj_ch06",
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 6,
+  "title": "Parallel Search — Threading",
+  "description": "Add a file search function that uses threading to search multiple subdirectories in parallel. The function takes a filename pattern and root path, walks the directory tree, and returns matching file paths. Use the threading module to speed up searches across subdirectories.",
+  "builds_on": "pp_proj_ch05",
+  "starter_code": "# File Manager CLI — Step 4: Parallel Search\n# Search for files using threads for parallel directory scanning.\n\nimport os\nimport sys\nimport fnmatch\nimport threading\n\ndef get_system_info():\n    \"\"\"Return system information dict.\"\"\"\n    return {\n        'cwd': os.getcwd(),\n        'platform': sys.platform,\n        'python_version': sys.version,\n        'user': os.environ.get('USER', os.environ.get('USERNAME', '')),\n    }\n\nVALID_COMMANDS = ['list', 'search', 'info', 'help', 'copy', 'move', 'delete']\n\ndef parse_command(args_list):\n    \"\"\"Parse a list of argument strings into a command dict.\"\"\"\n    if not args_list:\n        return {'command': 'help', 'args': []}\n    return {'command': args_list[0], 'args': args_list[1:]}\n\ndef list_directory(path='.'):\n    \"\"\"List contents of a directory with details.\"\"\"\n    entries = []\n    for name in os.listdir(path):\n        full_path = os.path.join(path, name)\n        is_dir = os.path.isdir(full_path)\n        size = 0 if is_dir else os.path.getsize(full_path)\n        ext = '' if is_dir else os.path.splitext(name)[1]\n        entries.append({'name': name, 'size': size, 'is_dir': is_dir, 'extension': ext})\n    return entries\n\ndef search_files(pattern, root_path='.'):\n    \"\"\"Search for files matching a pattern using threads.\n\n    Uses fnmatch for pattern matching (e.g., '*.py', 'test_*').\n    Spawns a thread for each top-level subdirectory to search in parallel.\n\n    Args:\n        pattern: Filename pattern (glob-style, e.g. '*.py').\n        root_path: Root directory to start the search.\n\n    Returns:\n        List of full file paths that match the pattern.\n    \"\"\"\n    # Your code here\n    # Hint: use a lock to safely append results from multiple threads\n    return []\n\n# Test it\nresults = search_files('*.py', '.')\nprint(f\"Found {len(results)} matching files\")\nfor path in results[:10]:\n    print(f\"  {path}\")\n",
+  "test_code": "assert callable(search_files), 'search_files must be a callable function'\nimport inspect\nsrc = inspect.getsource(search_files)\nassert 'threading' in src or 'Thread' in src, 'search_files should use the threading module'\nresults = search_files('*.py', '.')\nassert isinstance(results, list), 'search_files should return a list'\nfor path in results:\n    assert isinstance(path, str), f'Each result should be a string, got {type(path)}'\nassert 'threading' in dir() or 'threading' in sys.modules, 'threading module should be imported'",
+  "acceptance_criteria": [
+    "search_files() returns a list of file path strings",
+    "Uses fnmatch.fnmatch for pattern matching",
+    "Uses threading.Thread to search subdirectories in parallel",
+    "Uses a threading.Lock to safely collect results",
+    "Handles the root directory itself (not just subdirs)"
+  ],
+  "hints": [
+    "Get top-level subdirs: [d for d in os.listdir(root_path) if os.path.isdir(os.path.join(root_path, d))]",
+    "Create a shared list and a Lock: results = [], lock = threading.Lock()",
+    "Each thread function walks one subdirectory with os.walk()",
+    "Use fnmatch.fnmatch(filename, pattern) to check matches",
+    "Don't forget to search the root_path itself for matching files"
+  ]
+}

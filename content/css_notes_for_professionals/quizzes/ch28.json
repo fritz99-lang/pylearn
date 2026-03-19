@@ -1,0 +1,78 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 28,
+  "questions": [
+    {
+      "id": "css_ch28_q01",
+      "type": "multiple_choice",
+      "question": "Which CSS function moves an element horizontally and vertically without affecting the document flow?",
+      "choices": [
+        "move()",
+        "position()",
+        "translate()",
+        "shift()"
+      ],
+      "correct": 2,
+      "explanation": "The `translate()` function repositions an element along the X and Y axes. It does not affect the flow of other elements, unlike changes to margin or position.",
+      "concepts": ["translate", "2d-transforms"]
+    },
+    {
+      "id": "css_ch28_q02",
+      "type": "multiple_choice",
+      "question": "What does `transform: rotate(45deg)` do to an element?",
+      "choices": [
+        "Rotates the element 45 degrees counterclockwise",
+        "Rotates the element 45 degrees clockwise",
+        "Skews the element by 45 degrees",
+        "Scales the element by 45 percent"
+      ],
+      "correct": 1,
+      "explanation": "A positive angle value in the `rotate()` function rotates the element clockwise by the specified number of degrees.",
+      "concepts": ["rotate", "2d-transforms"]
+    },
+    {
+      "id": "css_ch28_q03",
+      "type": "multiple_choice",
+      "question": "What does `transform: scale(2, 0.5)` do?",
+      "choices": [
+        "Doubles the width and halves the height",
+        "Halves the width and doubles the height",
+        "Scales both dimensions by 2.5",
+        "Scales the element to 2px by 0.5px"
+      ],
+      "correct": 0,
+      "explanation": "The `scale()` function takes X and Y scale factors. `scale(2, 0.5)` doubles the element's width (2x) and halves its height (0.5x).",
+      "concepts": ["scale", "2d-transforms"]
+    },
+    {
+      "id": "css_ch28_q04",
+      "type": "multiple_choice",
+      "question": "Which function tilts an element along the X and/or Y axis?",
+      "choices": [
+        "tilt()",
+        "lean()",
+        "skew()",
+        "slant()"
+      ],
+      "correct": 2,
+      "explanation": "The `skew()` function applies a 2D skew transformation, tilting the element along the X and/or Y axis by the specified angles.",
+      "concepts": ["skew", "2d-transforms"]
+    },
+    {
+      "id": "css_ch28_q05",
+      "type": "fill_in_blank",
+      "question": "The ___ property sets the point around which a CSS transform is applied, defaulting to the center of the element.",
+      "correct": "transform-origin",
+      "explanation": "The `transform-origin` property defines the pivot point for transformations. By default it is set to `50% 50%` (the center of the element).",
+      "concepts": ["transform-origin", "2d-transforms"]
+    },
+    {
+      "id": "css_ch28_q06",
+      "type": "fill_in_blank",
+      "question": "The ___ CSS property is used to apply 2D (and 3D) transformation functions like translate, rotate, and scale to an element.",
+      "correct": "transform",
+      "explanation": "The `transform` property accepts one or more transformation functions that modify the element's coordinate space for rendering.",
+      "concepts": ["transform", "2d-transforms"]
+    }
+  ]
+}

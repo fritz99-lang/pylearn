@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 8,
+  "challenges": [
+    {
+      "id": "cpp_ch08_c01",
+      "title": "Linear Search Function",
+      "description": "Write a C++ program that defines a function called `linearSearch` which takes an int array, its size, and a target value as parameters. The function should return the index of the target if found, or -1 if not found. In `main`, create an array of at least 5 integers, call `linearSearch` to find a value, and print the result. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'linearSearch' in cpp, 'You must define a function called linearSearch'\nassert 'int ' in cpp and '[]' in cpp or 'int*' in cpp or 'int *' in cpp, 'linearSearch should accept an int array parameter'\nassert 'return -1' in cpp or 'return(-1)' in cpp, 'Function should return -1 when the target is not found'\nassert 'for' in cpp or 'while' in cpp, 'Use a loop to search through the array'\nassert cpp.count('return') >= 2, 'Function needs at least two return statements (found index and not-found case)'",
+      "difficulty": "easy",
+      "concepts_new": ["linear_search", "search_algorithms"],
+      "concepts_review": ["arrays", "functions", "loops"],
+      "hints": [
+        "The function signature should be: int linearSearch(int arr[], int size, int target)",
+        "Loop through the array comparing each element to the target value"
+      ]
+    },
+    {
+      "id": "cpp_ch08_c02",
+      "title": "Bubble Sort with Nested Loops",
+      "description": "Write a C++ program that defines a `bubbleSort` function to sort an int array in ascending order using nested loops. The function should take an int array and its size as parameters. In `main`, create an array of at least 5 unsorted integers, call `bubbleSort`, then print the sorted array. Assign your C++ code to the variable `cpp`.",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'bubbleSort' in cpp, 'You must define a function called bubbleSort'\nassert cpp.count('for') >= 2 or (cpp.count('while') >= 2) or ('for' in cpp and 'while' in cpp), 'Bubble sort requires nested loops (two loops)'\nassert 'swap' in cpp or 'temp' in cpp or 'tmp' in cpp, 'You need a swap mechanism (use a temp variable or std::swap)'\nassert 'void' in cpp, 'bubbleSort should return void since it modifies the array in place'\nassert 'cout' in cpp, 'Print the sorted array to verify the result'",
+      "difficulty": "medium",
+      "concepts_new": ["bubble_sort", "sorting_algorithms", "nested_loops_for_sorting"],
+      "concepts_review": ["arrays", "functions", "nested_loops"],
+      "hints": [
+        "The outer loop controls the number of passes; the inner loop compares adjacent elements",
+        "To swap two values, use a temporary variable: int temp = arr[i]; arr[i] = arr[j]; arr[j] = temp;"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 4,
+  "challenges": [
+    {
+      "id": "css_ch04_c01",
+      "title": "Basic Selectors",
+      "description": "Write three CSS rules: (1) target all `div` elements and set `padding` to `10px`, (2) target the class `.error` and set `color` to `red`, (3) target the ID `#header` and set `background-color` to `black`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Element selector for div */\n\n/* Class selector for .error */\n\n/* ID selector for #header */\n\n\"\"\"",
+      "test_code": "assert 'div' in css.lower(), 'Should target div elements'\nassert 'padding' in css.lower(), 'Should set padding property'\nassert '10px' in css.lower(), 'Should set padding to 10px'\nassert '.error' in css, 'Should target the .error class'\nassert 'color' in css.lower(), 'Should set color property'\nassert 'red' in css.lower(), 'Should set color to red'\nassert '#header' in css, 'Should target the #header ID'\nassert 'background-color' in css.lower(), 'Should set background-color property'\nassert 'black' in css.lower(), 'Should set background-color to black'",
+      "difficulty": "easy",
+      "concepts_new": ["selector-types"],
+      "concepts_review": ["element-selector", "class-selector", "id-selector"],
+      "hints": [
+        "Element selectors: tagname { }",
+        "Class selectors: .classname { }",
+        "ID selectors: #idname { }"
+      ]
+    },
+    {
+      "id": "css_ch04_c02",
+      "title": "Attribute Selectors and Pseudo-Classes",
+      "description": "Write CSS rules that: (1) target `input` elements with `type=\"text\"` using an attribute selector and set `border` to `1px solid gray`, (2) target `a:hover` and set `color` to `red`, (3) target `li:first-child` and set `font-weight` to `bold`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Attribute selector: input[type=\"text\"] */\n\n/* Pseudo-class: a:hover */\n\n/* Pseudo-class: li:first-child */\n\n\"\"\"",
+      "test_code": "assert 'input' in css.lower(), 'Should target input elements'\nassert 'type' in css.lower() and 'text' in css.lower(), 'Should use attribute selector for type=text'\nassert '[' in css and ']' in css, 'Should use square brackets for attribute selector'\nassert 'border' in css.lower(), 'Should set border property'\nassert ':hover' in css.lower(), 'Should use :hover pseudo-class'\nassert 'a' in css.lower(), 'Should target a elements with :hover'\nassert 'red' in css.lower(), 'Should set hover color to red'\nassert ':first-child' in css.lower(), 'Should use :first-child pseudo-class'\nassert 'font-weight' in css.lower(), 'Should set font-weight property'\nassert 'bold' in css.lower(), 'Should set font-weight to bold'",
+      "difficulty": "medium",
+      "concepts_new": ["attribute-selector", "pseudo-class-hover", "pseudo-class-first-child"],
+      "concepts_review": ["selector-types", "element-selector"],
+      "hints": [
+        "Attribute selectors use brackets: input[type=\"text\"] { }",
+        "Pseudo-classes are appended with a colon: a:hover { }",
+        "The :first-child pseudo-class targets the first child of its parent"
+      ]
+    }
+  ]
+}

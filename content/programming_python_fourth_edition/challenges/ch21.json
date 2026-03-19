@@ -1,0 +1,34 @@
+{
+  "book_id": "programming_python_fourth_edition",
+  "chapter_num": 21,
+  "challenges": [
+    {
+      "id": "pp_ch21_c01",
+      "title": "ctypes Math Library",
+      "description": "Write a function `c_sqrt(value)` that uses the `ctypes` module to load the system math library and call the C `sqrt` function. Also write a pure Python `py_sqrt(value)` using `math.sqrt` for comparison. Both should return a float. Handle negative inputs by raising ValueError.",
+      "starter_code": "import ctypes\nimport ctypes.util\nimport math\nimport sys\n\ndef py_sqrt(value):\n    \"\"\"Pure Python square root using math.sqrt.\n    \n    Raises:\n        ValueError: If value is negative.\n    \"\"\"\n    # Your code here\n    pass\n\ndef c_sqrt(value):\n    \"\"\"Square root using ctypes to call C math library.\n    \n    Raises:\n        ValueError: If value is negative.\n    \"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "import math\nassert py_sqrt(4.0) == 2.0\nassert py_sqrt(9.0) == 3.0\nassert py_sqrt(0.0) == 0.0\nassert abs(py_sqrt(2.0) - 1.4142135623730951) < 1e-10\ntry:\n    py_sqrt(-1.0)\n    assert False, 'Should have raised ValueError'\nexcept ValueError:\n    pass\nassert c_sqrt(4.0) == 2.0\nassert c_sqrt(9.0) == 3.0\nassert c_sqrt(0.0) == 0.0\nassert abs(c_sqrt(2.0) - 1.4142135623730951) < 1e-10\ntry:\n    c_sqrt(-1.0)\n    assert False, 'Should have raised ValueError'\nexcept ValueError:\n    pass\nassert abs(c_sqrt(100.0) - py_sqrt(100.0)) < 1e-10\nassert abs(c_sqrt(12345.6789) - py_sqrt(12345.6789)) < 1e-6",
+      "difficulty": "easy",
+      "concepts_new": ["ctypes", "c_library_loading", "foreign_functions"],
+      "concepts_review": ["math_module", "exceptions", "functions"],
+      "hints": [
+        "For py_sqrt: check if value < 0 and raise ValueError, otherwise return math.sqrt(value).",
+        "For c_sqrt: use ctypes.util.find_library('m') on Linux or ctypes.cdll.msvcrt on Windows. Set the sqrt function's restype to ctypes.c_double and argtypes to [ctypes.c_double]."
+      ]
+    },
+    {
+      "id": "pp_ch21_c02",
+      "title": "Performance Benchmark Comparison",
+      "description": "Write two functions that compute the sum of squares from 1 to n: `sum_squares_loop(n)` using a plain for-loop, and `sum_squares_optimized(n)` using the mathematical formula n*(n+1)*(2*n+1)//6. Then write `benchmark(func, *args, iterations=1000)` that runs the function the given number of times and returns a dict with 'result' (the function's return value) and 'avg_time_ms' (average time per call in milliseconds).",
+      "starter_code": "import time\n\ndef sum_squares_loop(n):\n    \"\"\"Sum of squares from 1 to n using a loop.\"\"\"\n    # Your code here\n    pass\n\ndef sum_squares_optimized(n):\n    \"\"\"Sum of squares from 1 to n using the closed-form formula.\"\"\"\n    # Your code here\n    pass\n\ndef benchmark(func, *args, iterations=1000):\n    \"\"\"Benchmark a function over multiple iterations.\n    \n    Returns:\n        dict with 'result' and 'avg_time_ms' keys.\n    \"\"\"\n    # Your code here\n    pass\n",
+      "test_code": "assert sum_squares_loop(1) == 1\nassert sum_squares_loop(5) == 55\nassert sum_squares_loop(10) == 385\nassert sum_squares_loop(100) == 338350\nassert sum_squares_optimized(1) == 1\nassert sum_squares_optimized(5) == 55\nassert sum_squares_optimized(10) == 385\nassert sum_squares_optimized(100) == 338350\nassert sum_squares_loop(0) == 0\nassert sum_squares_optimized(0) == 0\nfor n in [1, 10, 50, 200]:\n    assert sum_squares_loop(n) == sum_squares_optimized(n)\nresult = benchmark(sum_squares_loop, 100, iterations=10)\nassert result['result'] == 338350\nassert 'avg_time_ms' in result\nassert isinstance(result['avg_time_ms'], float)\nassert result['avg_time_ms'] >= 0\nresult2 = benchmark(sum_squares_optimized, 100, iterations=10)\nassert result2['result'] == 338350\nassert result2['avg_time_ms'] >= 0",
+      "difficulty": "medium",
+      "concepts_new": ["benchmarking", "performance_comparison", "c_extension_concepts"],
+      "concepts_review": ["functions", "loops", "time_module", "dictionaries"],
+      "hints": [
+        "sum_squares_loop: use a for loop accumulating i*i. sum_squares_optimized: return n*(n+1)*(2*n+1)//6.",
+        "In benchmark: record time.perf_counter() before and after the loop, compute average. Call func(*args) once before the loop to get the result to return."
+      ]
+    }
+  ]
+}

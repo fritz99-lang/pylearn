@@ -1,0 +1,28 @@
+{
+  "book_id": "html5_notes_for_professionals",
+  "chapter_num": 14,
+  "challenges": [
+    {
+      "id": "h5_ch14_c01",
+      "title": "Inline Styles",
+      "description": "Create at least two HTML elements with inline style attributes. One element should set a color property, and another should set a font-size property. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert html.lower().count('style=') >= 2, 'Should have at least 2 elements with style attributes'\nassert 'color:' in html.lower() or 'color :' in html.lower(), 'Should set a color property in an inline style'\nassert 'font-size:' in html.lower() or 'font-size :' in html.lower(), 'Should set a font-size property in an inline style'",
+      "difficulty": "easy",
+      "concepts_new": ["inline_styles"],
+      "concepts_review": ["html_attributes"],
+      "hints": ["Inline styles use the style attribute: <p style=\"color: red;\">", "Font size example: style=\"font-size: 16px;\""]
+    },
+    {
+      "id": "h5_ch14_c02",
+      "title": "Style Block",
+      "description": "Create an HTML page with a <style> element inside the <head> containing at least 2 CSS rules, and a <body> with elements that match those rules. Assign your HTML to the variable `html`.",
+      "starter_code": "html = \"\"\"\n<!-- Write your HTML here -->\n\n\"\"\"",
+      "test_code": "assert '<head' in html.lower(), 'Should contain a <head> element'\nassert '<style' in html.lower(), 'Should contain a <style> element'\nassert '</style>' in html.lower(), 'Should close the <style> element'\nassert '<body' in html.lower(), 'Should contain a <body> element'\nassert '</body>' in html.lower(), 'Should close the <body> element'\nimport re\nstyle_content = re.search(r'<style[^>]*>(.*?)</style>', html.lower(), re.DOTALL)\nassert style_content, 'Style element should contain CSS rules'\nrules = re.findall(r'\\{[^}]+\\}', style_content.group(1))\nassert len(rules) >= 2, 'Should have at least 2 CSS rules in the style block'",
+      "difficulty": "medium",
+      "concepts_new": ["style_element", "internal_css"],
+      "concepts_review": ["head_element", "inline_styles"],
+      "hints": ["Place the <style> element inside <head>", "CSS rules follow the pattern: selector { property: value; }", "Make sure your body contains elements that match your CSS selectors"]
+    }
+  ]
+}

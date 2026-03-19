@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 43,
+  "challenges": [
+    {
+      "id": "css_ch43_c01",
+      "title": "Basic Image Sprite",
+      "description": "Write CSS that targets an element with class 'icon' and uses a background image called 'sprites.png'. Set the width to 32px, height to 32px, and use background-position to show only the portion at 0px -64px. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Show a single icon from a sprite sheet */\n\n\"\"\"",
+      "test_code": "assert '.icon' in css.lower(), 'Should target the .icon class'\nassert 'background' in css.lower(), 'Should use a background property'\nassert 'sprites.png' in css.lower(), 'Should reference sprites.png'\nassert 'background-position' in css.lower(), 'Should use background-position'\nassert '-64px' in css.replace(' ', ''), 'Should offset to -64px'\nassert 'width' in css.lower(), 'Should set width'\nassert 'height' in css.lower(), 'Should set height'\nassert '32px' in css, 'Should use 32px for dimensions'",
+      "difficulty": "easy",
+      "concepts_new": ["image sprites", "background-position"],
+      "concepts_review": ["background-image", "width", "height"],
+      "hints": [
+        "An image sprite is a single image containing multiple icons; you show one at a time using background-position.",
+        "Use negative values in background-position to shift the sprite image up or left within the element."
+      ]
+    },
+    {
+      "id": "css_ch43_c02",
+      "title": "Sprite-Based Icon Set",
+      "description": "Write CSS that defines a base '.sprite' class with background-image set to url('icons.png') and display set to inline-block. Then create three icon classes: '.sprite-home' with background-position 0 0 and size 24px by 24px, '.sprite-search' with background-position -24px 0 and same size, and '.sprite-settings' with background-position -48px 0 and same size. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Create a reusable sprite icon system */\n\n\"\"\"",
+      "test_code": "assert '.sprite' in css.lower(), 'Should define a .sprite base class'\nassert 'icons.png' in css.lower(), 'Should reference icons.png'\nassert 'inline-block' in css.lower(), 'Should use display: inline-block'\nassert '.sprite-home' in css.lower(), 'Should define .sprite-home'\nassert '.sprite-search' in css.lower(), 'Should define .sprite-search'\nassert '.sprite-settings' in css.lower(), 'Should define .sprite-settings'\nassert '-24px' in css.replace(' ', ''), 'Should use -24px offset for search icon'\nassert '-48px' in css.replace(' ', ''), 'Should use -48px offset for settings icon'\nassert 'background-position' in css.lower(), 'Should use background-position'\nassert '24px' in css, 'Should use 24px for icon dimensions'",
+      "difficulty": "medium",
+      "concepts_new": ["sprite icon system", "reusable sprite classes"],
+      "concepts_review": ["background-position", "background-image", "inline-block"],
+      "hints": [
+        "Define shared properties (background-image, display) on the base .sprite class.",
+        "Each icon class only needs to set its unique background-position and dimensions.",
+        "Icons are laid out horizontally in the sprite, so offset the x value by -24px increments."
+      ]
+    }
+  ]
+}

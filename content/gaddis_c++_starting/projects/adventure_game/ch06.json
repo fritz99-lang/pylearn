@@ -1,0 +1,25 @@
+{
+  "step_id": "cpp_adv_ch06",
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 6,
+  "title": "Game Functions — Modular Code",
+  "description": "Refactor the game into functions for cleaner, modular code. Create at least 4 functions: displayRoom() to show the current room description, playerAttack() to calculate and return attack damage, showInventory() to list the player's items, and saveGame() to write stats to a file. Each function should have a proper return type, parameters, and a function body with braces. Call these functions from main(). Assign your C++ code to the variable `cpp`.",
+  "builds_on": "cpp_adv_ch05",
+  "starter_code": "cpp = \"\"\"\n#include <iostream>\n#include <string>\n#include <fstream>\nusing namespace std;\n\n// Define your functions here:\n\n// void displayRoom(string roomName, string description)\n//   - Print the room name and description\n\n// int playerAttack(int attackPower)\n//   - Calculate damage (maybe add some randomness later)\n//   - Return the damage dealt\n\n// void showInventory(string items[], int itemCount)\n//   - Loop through items array and display each one\n\n// void saveGame(string playerName, int health, int gold, int turns)\n//   - Open a file and write all stats\n\nint main() {\n    cout << \"===== TEXT ADVENTURE GAME =====\" << endl;\n\n    string playerName;\n    cout << \"Enter your name: \";\n    getline(cin, playerName);\n\n    int health = 100;\n    int gold = 50;\n    int attackPower = 15;\n    bool playing = true;\n    int turn = 0;\n\n    string items[10];\n    int itemCount = 0;\n    items[0] = \"Rusty Sword\";\n    items[1] = \"Health Potion\";\n    itemCount = 2;\n\n    // Call displayRoom() for the starting room\n    // Use playerAttack() during combat encounters\n    // Call showInventory() when player checks items\n    // Call saveGame() when quitting\n\n    while (playing && health > 0) {\n        turn++;\n        // Game loop: use your functions here\n\n        string choice;\n        cout << \"What do you do? (explore/attack/inventory/save/quit): \";\n        cin >> choice;\n\n        if (choice == \"quit\") {\n            playing = false;\n        }\n    }\n\n    // Save game on exit\n    cout << \"Thanks for playing!\" << endl;\n    return 0;\n}\n\"\"\"",
+  "test_code": "import re\nfunc_pattern = re.findall(r'(?:void|int|string|bool|double|float)\\s+\\w+\\s*\\([^)]*\\)\\s*\\{', cpp)\nassert len(func_pattern) >= 4, f'Define at least 4 functions with return types, names, parameters, and bodies (found {len(func_pattern)})'\nassert 'displayRoom' in cpp or 'display_room' in cpp or 'showRoom' in cpp, 'Create a function to display room info (e.g., displayRoom)'\nassert 'playerAttack' in cpp or 'player_attack' in cpp or 'attack' in cpp.lower(), 'Create a function for player attacks (e.g., playerAttack)'\nassert 'showInventory' in cpp or 'show_inventory' in cpp or 'displayInventory' in cpp, 'Create a function to show inventory (e.g., showInventory)'\nassert 'saveGame' in cpp or 'save_game' in cpp or 'saveToFile' in cpp, 'Create a function to save the game (e.g., saveGame)'",
+  "acceptance_criteria": [
+    "At least 4 functions defined with proper return types and parameters",
+    "displayRoom function prints room name and description",
+    "playerAttack function calculates and returns damage",
+    "showInventory function displays the player's items",
+    "saveGame function writes stats to a file",
+    "Functions are called from main()"
+  ],
+  "hints": [
+    "void displayRoom(string name, string desc) { cout << \"=== \" << name << \" ===\" << endl; cout << desc << endl; }",
+    "int playerAttack(int attackPower) { int damage = attackPower + (rand() % 5); return damage; }",
+    "void showInventory(string items[], int count) { for (int i = 0; i < count; i++) cout << i+1 << \". \" << items[i] << endl; }",
+    "Pass arrays to functions as: void func(string arr[], int size)",
+    "Add #include <cstdlib> if you want to use rand() for random damage"
+  ]
+}

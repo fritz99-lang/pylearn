@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 7,
+  "challenges": [
+    {
+      "id": "css_ch07_c01",
+      "title": "Box Model Properties",
+      "description": "Write a CSS rule for `.card` that sets `width` to `300px`, `padding` to `20px`, `border` to `1px solid #ccc`, and `margin` to `10px`. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Set box model properties on .card */\n\n\"\"\"",
+      "test_code": "assert '.card' in css, 'Should target .card class'\nassert 'width' in css.lower(), 'Should set width property'\nassert '300px' in css.lower(), 'Should set width to 300px'\nassert 'padding' in css.lower(), 'Should set padding property'\nassert '20px' in css.lower(), 'Should set padding to 20px'\nassert 'border' in css.lower(), 'Should set border property'\nassert 'solid' in css.lower(), 'Should use solid border style'\nassert '#ccc' in css.lower(), 'Should set border color to #ccc'\nassert 'margin' in css.lower(), 'Should set margin property'\nassert '10px' in css.lower(), 'Should set margin to 10px'",
+      "difficulty": "easy",
+      "concepts_new": ["box-model", "width", "border-shorthand"],
+      "concepts_review": ["padding", "margin"],
+      "hints": [
+        "The box model consists of content (width/height), padding, border, and margin",
+        "border shorthand: border: 1px solid #ccc;"
+      ]
+    },
+    {
+      "id": "css_ch07_c02",
+      "title": "Border-Box Sizing",
+      "description": "Write CSS with two rules: (1) a universal selector (`*`) that sets `box-sizing` to `border-box`, (2) a `.container` rule that sets `width` to `500px`, `padding` to `30px`, and `border` to `5px solid black`. With border-box, the total width stays 500px. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Universal box-sizing reset */\n\n/* Container with border-box sizing */\n\n\"\"\"",
+      "test_code": "assert '*' in css, 'Should use the universal selector (*)'\nassert 'box-sizing' in css.lower(), 'Should set box-sizing property'\nassert 'border-box' in css.lower(), 'Should set box-sizing to border-box'\nassert '.container' in css, 'Should target .container class'\nassert 'width' in css.lower(), 'Should set width property'\nassert '500px' in css.lower(), 'Should set width to 500px'\nassert 'padding' in css.lower(), 'Should set padding property'\nassert '30px' in css.lower(), 'Should set padding to 30px'\nassert 'border' in css.lower(), 'Should set border property'\nassert 'black' in css.lower(), 'Should set border color to black'",
+      "difficulty": "medium",
+      "concepts_new": ["box-sizing", "border-box", "universal-selector"],
+      "concepts_review": ["box-model", "width", "padding", "border-shorthand"],
+      "hints": [
+        "The universal selector * targets all elements",
+        "box-sizing: border-box; makes width include padding and border",
+        "This is a common CSS reset pattern used in most modern projects"
+      ]
+    }
+  ]
+}

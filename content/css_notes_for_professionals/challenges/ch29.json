@@ -1,0 +1,35 @@
+{
+  "book_id": "css_notes_for_professionals",
+  "chapter_num": 29,
+  "challenges": [
+    {
+      "id": "css_ch29_c01",
+      "title": "Perspective and RotateY",
+      "description": "Set perspective: 800px on a .container element and apply rotateY(30deg) to a .panel child element using the transform property. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Use perspective and rotateY for 3D effect */\n\n\"\"\"",
+      "test_code": "assert 'perspective' in css.lower(), 'Should use the perspective property'\nassert '800px' in css.lower(), 'Should set perspective to 800px'\nassert 'rotatey' in css.lower(), 'Should use the rotateY() function'\nassert '30deg' in css.lower(), 'Should rotate by 30 degrees on the Y axis'\nassert 'transform' in css.lower(), 'Should use the transform property'",
+      "difficulty": "easy",
+      "concepts_new": ["perspective", "rotateY"],
+      "concepts_review": ["transform"],
+      "hints": [
+        "Set perspective on the parent container, not the element being rotated.",
+        "Lower perspective values create a more dramatic 3D effect."
+      ]
+    },
+    {
+      "id": "css_ch29_c02",
+      "title": "3D Transform Preserve and Backface",
+      "description": "On a .scene element, set perspective: 600px and transform-style: preserve-3d. On a .face child, apply rotateY(180deg) and set backface-visibility: hidden. Assign your CSS to the variable `css`.",
+      "starter_code": "css = \"\"\"\n/* Build a 3D card flip with preserve-3d and backface-visibility */\n\n\"\"\"",
+      "test_code": "assert 'perspective' in css.lower(), 'Should use the perspective property'\nassert '600px' in css.lower(), 'Should set perspective to 600px'\nassert 'transform-style' in css.lower(), 'Should use the transform-style property'\nassert 'preserve-3d' in css.lower(), 'Should set transform-style to preserve-3d'\nassert 'rotatey' in css.lower(), 'Should use rotateY() transform'\nassert '180deg' in css.lower(), 'Should rotate 180 degrees'\nassert 'backface-visibility' in css.lower(), 'Should use the backface-visibility property'\nassert 'hidden' in css.lower(), 'Should set backface-visibility to hidden'",
+      "difficulty": "medium",
+      "concepts_new": ["transform-style", "preserve-3d", "backface-visibility"],
+      "concepts_review": ["perspective", "rotateY"],
+      "hints": [
+        "transform-style: preserve-3d on the parent allows children to exist in 3D space.",
+        "backface-visibility: hidden hides an element when it faces away from the viewer.",
+        "This pattern is commonly used for card flip animations."
+      ]
+    }
+  ]
+}

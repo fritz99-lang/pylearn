@@ -1,0 +1,34 @@
+{
+  "book_id": "gaddis_c++_starting",
+  "chapter_num": 19,
+  "challenges": [
+    {
+      "id": "cpp_ch19_c01",
+      "title": "Recursive Factorial",
+      "description": "Write a C++ program that defines a recursive function `factorial(int n)` which returns the factorial of n. The function must have a base case (n <= 1 returns 1) and a recursive case (n * factorial(n-1)). In main(), call factorial with a value like 5 and print the result. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define a recursive factorial function\n- Include a base case for n <= 1\n- Call factorial from main and print the result",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'factorial' in cpp, 'Should define a function called factorial'\nassert cpp.count('factorial') >= 3, 'factorial should call itself recursively (at least definition + recursive call + main call)'\nassert 'if' in cpp, 'Should have a base case using an if statement'\nassert 'return 1' in cpp or 'return  1' in cpp, 'Base case should return 1'\nassert 'cout' in cpp, 'Should print the result in main'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "easy",
+      "concepts_new": ["recursion", "base case", "recursive case", "factorial"],
+      "concepts_review": ["functions", "return values", "conditionals"],
+      "hints": [
+        "Base case: if (n <= 1) return 1;",
+        "Recursive case: return n * factorial(n - 1);"
+      ]
+    },
+    {
+      "id": "cpp_ch19_c02",
+      "title": "Recursive Fibonacci and Array Sum",
+      "description": "Write a C++ program with two recursive functions: `fibonacci(int n)` that returns the nth Fibonacci number (fib(0)=0, fib(1)=1), and `arraySum(int arr[], int size)` that returns the sum of an array using recursion. In main(), print the first 7 Fibonacci numbers and the sum of a small array. Assign your C++ code to the variable `cpp`.\n\nYour program must:\n- Define a recursive fibonacci function with base cases for 0 and 1\n- Define a recursive arraySum function that reduces the size each call\n- Call both functions from main and print results",
+      "starter_code": "cpp = \"\"\"\n// Write your C++ code here\n#include <iostream>\nusing namespace std;\n\nint main() {\n\n    return 0;\n}\n\"\"\"",
+      "test_code": "assert 'fibonacci' in cpp or 'fib' in cpp, 'Should define a Fibonacci function'\nassert 'arraySum' in cpp or 'arrSum' in cpp or 'array_sum' in cpp, 'Should define a recursive array sum function'\nassert 'if' in cpp, 'Should have base case conditions'\nassert cpp.count('fibonacci') >= 3 or cpp.count('fib') >= 3, 'Fibonacci should call itself recursively'\nassert 'arraySum' in cpp or 'arrSum' in cpp or 'array_sum' in cpp, 'Should have the array sum function'\nassert 'size' in cpp or 'len' in cpp or 'n' in cpp, 'Array sum should use a size parameter that decreases'\nassert 'main()' in cpp or 'main ()' in cpp, 'Should have a main function'\nassert 'return 0' in cpp, 'main should return 0'",
+      "difficulty": "medium",
+      "concepts_new": ["Fibonacci sequence", "recursive array processing", "multiple base cases"],
+      "concepts_review": ["recursion", "base case", "arrays", "functions"],
+      "hints": [
+        "Fibonacci base cases: if (n == 0) return 0; if (n == 1) return 1;",
+        "Array sum base case: if (size == 0) return 0; Recursive: return arr[size-1] + arraySum(arr, size-1);"
+      ]
+    }
+  ]
+}
