@@ -1,7 +1,7 @@
 # PyLearn - Interactive Python Learning App
 
 **Version:** Latest
-**Last Updated:** 2026-03-19
+**Last Updated:** 2026-03-20
 **Context Status:** Token-optimized (~8KB)
 
 ---
@@ -145,8 +145,8 @@ PyLearn/
 - **Caching:** Parse once → JSON cache → fast loads
 - **Code Execution:** Subprocess with 30s timeout, cross-platform `CREATE_NO_WINDOW`
 - **Database Access:** Context manager pattern for SQLite connections
-- **Builds:** `pylearn.spec` with platform conditionals; macOS BUNDLE for `.app`
-- **Learning Content:** JSON files in `content/{book_id}/` — loaded by `ContentLoader`
+- **Builds:** `pylearn.spec` with platform conditionals; macOS BUNDLE for `.app`. Content JSON bundled via `datas`; PDFs are NOT bundled (user-supplied)
+- **Learning Content:** JSON files in `content/{book_id}/` — loaded by `ContentLoader`. In frozen (exe) mode, resolved from `sys._MEIPASS` bundle path
 - **Test Runner:** Concatenates user code + assert statements, wraps each in try/except for individual pass/fail
 - **Right Panel Tabs:** Editor | Quiz | Challenge | Project — all theme-aware
 
@@ -179,4 +179,4 @@ PyLearn/
 
 ---
 
-**Updated Session 117 — Added 6th book (Programming Python 4th Ed, 22 chapters). Content for all 6 books: 1078 quiz questions, 323 challenges, 13 projects (128 steps). Multi-project support: ContentLoader + ProjectPanel with dropdown selector. Fixed C++ book parsing (1→21 chapters). Created gaddis_cpp profile. Improved font-size detection in structure_detector.py.**
+**Updated Session 118 — Fixed PyInstaller build: bundled content/ directory in pylearn.spec, added frozen-mode content path resolution in content_loader.py. Exe build tested and verified working (quizzes, challenges, projects all load). PDFs configured separately via books.json in %LOCALAPPDATA%\pylearn\config\.**

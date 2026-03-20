@@ -33,6 +33,7 @@ a = Analysis(
         (str(ROOT / "config" / "books.json.example"), "config"),
         (str(ROOT / "config" / "app_config.json.example"), "config"),
         (str(ROOT / "config" / "editor_config.json.example"), "config"),
+        (str(ROOT / "content"), "content"),
     ],
     hiddenimports=[
         # PyMuPDF

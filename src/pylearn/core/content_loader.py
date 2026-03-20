@@ -7,12 +7,24 @@ import json
 import logging
 from pathlib import Path
 
-from pylearn.core.constants import APP_DIR
+from pylearn.core.constants import APP_DIR, IS_FROZEN
 from pylearn.core.models import ChallengeSet, ProjectMeta, ProjectStep, QuizSet
 
 logger = logging.getLogger("pylearn.content")
 
-CONTENT_DIR = APP_DIR / "content"
+
+def _resolve_content_dir() -> Path:
+    """Return content directory, checking the PyInstaller bundle first."""
+    if IS_FROZEN:
+        import sys
+
+        bundle_content = Path(sys._MEIPASS) / "content"  # type: ignore[attr-defined]
+        if bundle_content.exists():
+            return bundle_content
+    return APP_DIR / "content"
+
+
+CONTENT_DIR = _resolve_content_dir()
 
 
 class ContentLoader:
