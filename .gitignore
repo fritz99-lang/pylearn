@@ -15,6 +15,7 @@ env/
 *.swp
 *.swo
 *~
+data/cache/
 
 # User-specific config (defaults committed as *.json.example)
 config/*.json
