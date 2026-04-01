@@ -47,3 +47,8 @@ drafts/
 .claude/
 src/data/
 desktop.ini
+
+# Secrets
+.env
+.env.*
+.secrets

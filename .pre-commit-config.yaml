@@ -24,3 +24,12 @@ repos:
         args: [--config-file=pyproject.toml, src/pylearn/]
         pass_filenames: false
         files: ^src/pylearn/
+
+  - repo: local
+    hooks:
+      - id: secret-scan
+        name: Secret scanning
+        entry: bash /c/Users/tritl/scripts/secret-scan-hook.sh
+        language: system
+        pass_filenames: false
+        always_run: true
